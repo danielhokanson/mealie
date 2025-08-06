@@ -1,12 +1,12 @@
-<section class="page-container">
-  <div class="flex justify-between items-center mb-md">
-    <h2 class="text-xl font-medium mb-md">Label Management</h2>
-    <p class="text-secondary mb-sm">Manage shopping list labels for better organization</p>
+<div class="label-management-container">
+  <div class="header">
+    <h2>Label Management</h2>
+    <p>Manage shopping list labels for better organization</p>
   </div>
 
   <div class="actions-bar">
     <div class="search-section">
-      <mat-form-field appearance="outline" class="search-field w-full">
+      <mat-form-field appearance="outline" class="search-field">
         <mat-label>Search labels</mat-label>
         <input matInput [(ngModel)]="searchTerm" placeholder="Search by name or description...">
         <mat-icon matSuffix>search</mat-icon>
@@ -14,19 +14,20 @@
     </div>
 
     <div class="action-buttons">
-      <button mat-raised-button class="btn btn-primary" (click)="onAddLabel()" [disabled]="loading">
+      <button mat-raised-button color="primary" (click)="onAddLabel()" [disabled]="loading">
         <mat-icon>add</mat-icon>
         Add Label
       </button>
-      <button mat-raised-button class="btn btn-error" (click)="onBulkDelete()" [disabled]="!canDelete()">
+      <button mat-raised-button color="warn" (click)="onBulkDelete()" [disabled]="!canDelete()">
         <mat-icon>delete</mat-icon>
         Delete Selected
       </button>
     </div>
+  </div>
 
-  <div class="flex-1" *ngIf="!loading; else loadingTemplate">
+  <div class="content" *ngIf="!loading; else loadingTemplate">
     <div class="labels-table" *ngIf="getFilteredLabels().length > 0; else emptyTemplate">
-      <table mat-table class="w-full" [dataSource]="getFilteredLabels()" class="mat-elevation-z1">
+      <table mat-table [dataSource]="getFilteredLabels()" class="mat-elevation-z1">
         <!-- Checkbox Column -->
         <ng-container matColumnDef="select">
           <th mat-header-cell *matHeaderCellDef>
@@ -34,16 +35,16 @@
               (change)="onSelectAll()"
               [checked]="selectedLabels.length === getFilteredLabels().length"
               [indeterminate]="selectedLabels.length > 0 && selectedLabels.length < getFilteredLabels().length">
-            </th>
-          </ng-container>
+            </mat-checkbox>
+          </th>
           <td mat-cell *matCellDef="let label">
             <mat-checkbox
               (click)="$event.stopPropagation()"
               (change)="onSelectLabel(label.id)"
               [checked]="isSelected(label.id)">
-            </td>
-          </table>
-        </div>
+            </mat-checkbox>
+          </td>
+        </ng-container>
 
         <!-- Name Column -->
         <ng-container matColumnDef="name">
@@ -107,26 +108,26 @@
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </div>
+      </table>
     </div>
 
     <ng-template #emptyTemplate>
       <div class="empty-state">
         <mat-icon class="empty-icon">label</mat-icon>
-        <h3 class="text-lg font-medium mb-sm">No labels found</h3>
-        <p class="text-secondary mb-sm">Create your first label to start organizing your shopping lists</p>
-        <button mat-raised-button class="btn btn-primary" (click)="onAddLabel()">
+        <h3>No labels found</h3>
+        <p>Create your first label to start organizing your shopping lists</p>
+        <button mat-raised-button color="primary" (click)="onAddLabel()">
           <mat-icon>add</mat-icon>
           Create First Label
         </button>
       </div>
     </ng-template>
-  </section>
+  </div>
 
   <ng-template #loadingTemplate>
-    <div class="flex items-center justify-center py-xl">
+    <div class="loading-container">
       <mat-spinner diameter="40"></mat-spinner>
-      <p class="text-secondary mb-sm">Loading labels...</p>
+      <p>Loading labels...</p>
     </div>
   </ng-template>
 
@@ -134,7 +135,7 @@
   <div class="dialog-overlay" *ngIf="showAddLabel" (click)="onCancel()">
     <div class="dialog-content" (click)="$event.stopPropagation()">
       <div class="dialog-header">
-        <h3 class="text-lg font-medium mb-sm">{{ editingLabel ? 'Edit Label' : 'Add New Label' }}</h3>
+        <h3>{{ editingLabel ? 'Edit Label' : 'Add New Label' }}</h3>
         <button mat-icon-button (click)="onCancel()">
           <mat-icon>close</mat-icon>
         </button>
@@ -142,7 +143,7 @@
 
       <form [formGroup]="labelForm" (ngSubmit)="onSaveLabel()" class="dialog-form">
         <div class="form-section">
-          <mat-form-field appearance="outline" class="full-width w-full">
+          <mat-form-field appearance="outline" class="full-width">
             <mat-label>Label Name</mat-label>
             <input matInput formControlName="name" placeholder="Enter label name">
             <mat-error *ngIf="labelForm.get('name')?.hasError('required')">
@@ -153,7 +154,7 @@
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field appearance="outline" class="full-width w-full">
+          <mat-form-field appearance="outline" class="full-width">
             <mat-label>Color</mat-label>
             <input matInput formControlName="color" placeholder="#1976d2" type="color">
             <mat-error *ngIf="labelForm.get('color')?.hasError('required')">
@@ -164,7 +165,7 @@
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field appearance="outline" class="full-width w-full">
+          <mat-form-field appearance="outline" class="full-width">
             <mat-label>Description (Optional)</mat-label>
             <textarea matInput formControlName="description" placeholder="Enter description" rows="3"></textarea>
             <mat-hint align="end">{{ getDescriptionLength() }}/{{ getMaxDescriptionLength() }}</mat-hint>
@@ -179,19 +180,19 @@
               <div class="preview-color" [style.background-color]="labelForm.get('color')?.value"></div>
               <span class="preview-name">{{ labelForm.get('name')?.value || 'Label Name' }}</span>
             </div>
+          </div>
         </div>
 
         <div class="dialog-actions">
           <button mat-button type="button" (click)="onCancel()" [disabled]="loading">
             Cancel
           </button>
-          <button mat-raised-button class="btn btn-primary" type="submit" [disabled]="!canSave()">
+          <button mat-raised-button color="primary" type="submit" [disabled]="!canSave()">
             <mat-spinner diameter="20" *ngIf="loading"></mat-spinner>
             <span>{{ editingLabel ? 'Update' : 'Create' }}</span>
           </button>
         </div>
-      </div>
-    </form>
-
-</div>
-</div>
+      </form>
+    </div>
+  </div>
+</div> 

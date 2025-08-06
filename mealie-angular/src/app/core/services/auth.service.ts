@@ -65,14 +65,10 @@ export class AuthService {
         );
     }
 
-    logout(): Observable<void> {
-        return new Observable(observer => {
-            localStorage.removeItem('accessToken');
-            localStorage.removeItem('refreshToken');
-            this.currentUserSubject.next(null);
-            observer.next();
-            observer.complete();
-        });
+    logout(): void {
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+        this.currentUserSubject.next(null);
     }
 
     refreshToken(): Observable<AuthResponse> {

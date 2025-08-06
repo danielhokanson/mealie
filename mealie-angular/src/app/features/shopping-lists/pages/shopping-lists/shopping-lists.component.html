@@ -1,32 +1,32 @@
-<section class="page-container">
+<div class="shopping-lists-container">
   <!-- Header -->
   <div class="shopping-lists-header">
-    
-      <h1 class="text-2xl font-medium mb-md">Shopping Lists</h1>
-      <p class="text-secondary mb-sm">Manage your shopping lists and track your grocery items</p>
-    
+    <div class="header-content">
+      <h1>Shopping Lists</h1>
+      <p>Manage your shopping lists and track your grocery items</p>
+    </div>
     <button 
       mat-raised-button 
-      class="btn btn-primary"
+      color="primary"
       (click)="onCreateList()"
       class="create-button">
       <mat-icon>add</mat-icon>
       Create List
-    </div>
-  </section>
+    </button>
+  </div>
 
   <!-- Loading State -->
-  <div *ngIf="loading" class="flex items-center justify-center py-xl">
+  <div *ngIf="loading" class="loading-container">
     <mat-spinner diameter="50"></mat-spinner>
-    <p class="text-secondary mb-sm">Loading shopping lists...</p>
+    <p>Loading shopping lists...</p>
   </div>
 
   <!-- Error State -->
   <div *ngIf="error && !loading" class="error-container">
     <mat-icon class="error-icon">error</mat-icon>
-    <h3 class="text-lg font-medium mb-sm">Error Loading Shopping Lists</h3>
-    <p class="text-secondary mb-sm">Unable to load your shopping lists. Please try again.</p>
-    <button mat-raised-button class="btn btn-primary" (click)="loadShoppingLists()">
+    <h3>Error Loading Shopping Lists</h3>
+    <p>Unable to load your shopping lists. Please try again.</p>
+    <button mat-raised-button color="primary" (click)="loadShoppingLists()">
       Retry
     </button>
   </div>
@@ -36,25 +36,25 @@
     <!-- Empty State -->
     <div *ngIf="shoppingLists.length === 0" class="empty-state">
       <mat-icon class="empty-icon">shopping_cart</mat-icon>
-      <h3 class="text-lg font-medium mb-sm">No Shopping Lists Yet</h3>
-      <p class="text-secondary mb-sm">Create your first shopping list to get started</p>
+      <h3>No Shopping Lists Yet</h3>
+      <p>Create your first shopping list to get started</p>
       <button 
         mat-raised-button 
-        class="btn btn-primary"
+        color="primary"
         (click)="onCreateList()">
         Create Your First List
-      </div>
+      </button>
     </div>
 
     <!-- Shopping List Cards -->
     <mat-card 
       *ngFor="let list of shoppingLists"
       class="shopping-list-card"
-      (click)="onViewList(list)" class="card">
+      (click)="onViewList(list)">
       
-      <mat-card-header class="card">
-        <mat-card-title class="card">{{ list.name }}</mat-card-title>
-        <mat-card-subtitle class="card">
+      <mat-card-header>
+        <mat-card-title>{{ list.name }}</mat-card-title>
+        <mat-card-subtitle>
           Created {{ getFormattedDate(list.createdAt) }}
           <span *ngIf="list.updatedAt && list.updatedAt !== list.createdAt">
             • Updated {{ getFormattedDate(list.updatedAt) }}
@@ -68,7 +68,7 @@
           (click)="$event.stopPropagation()"
           class="menu-button">
           <mat-icon>more_vert</mat-icon>
-        </mat-card-header>
+        </button>
 
         <mat-menu #listMenu="matMenu">
           <button mat-menu-item (click)="onEditList(list)">
@@ -89,8 +89,9 @@
             <span>Delete List</span>
           </button>
         </mat-menu>
+      </mat-card-header>
 
-      <mat-card-content class="card">
+      <mat-card-content>
         <!-- Progress Bar -->
         <div class="progress-section">
           <div class="progress-info">
@@ -104,8 +105,8 @@
           <mat-progress-bar 
             [value]="getProgressPercentage(list)"
             [color]="getProgressPercentage(list) === 100 ? 'accent' : 'primary'">
-          </div>
-        </mat-card-content>
+          </mat-progress-bar>
+        </div>
 
         <!-- Items Preview -->
         <div *ngIf="list.items && list.items.length > 0" class="items-preview">
@@ -118,18 +119,21 @@
               
               <mat-icon class="item-icon">
                 {{ item.checked ? 'check_circle' : 'radio_button_unchecked' }}
-
+              </mat-icon>
+              
               <span class="item-name">{{ item.title }}</span>
               
               <span *ngIf="item.quantity" class="item-quantity">
                 {{ item.quantity }}
                 <span *ngIf="item.unit">{{ item.unit }}</span>
               </span>
-
+            </div>
+            
             <div *ngIf="list.items.length > 5" class="more-items">
               +{{ list.items.length - 5 }} more items
             </div>
-        </mat-icon>
+          </div>
+        </div>
 
         <!-- Labels -->
         <div *ngIf="hasLabels(list)" class="labels-section">
@@ -140,21 +144,25 @@
               [style.background-color]="label.color"
               class="label-chip">
               {{ label.name }}
-            </div>
+            </mat-chip>
           </div>
-      </div>
+        </div>
+      </mat-card-content>
 
-      <mat-card-actions class="card">
+      <mat-card-actions>
         <button 
           mat-button 
-          class="btn btn-primary"
+          color="primary"
           (click)="onViewList(list); $event.stopPropagation()">
           View Details
-        </mat-card-actions>
+        </button>
         <button 
           mat-button 
-          class="btn btn-secondary"
+          color="accent"
           (click)="onEditList(list); $event.stopPropagation()">
           Edit
-
-</div>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div> 

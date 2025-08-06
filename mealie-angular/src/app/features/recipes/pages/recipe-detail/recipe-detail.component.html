@@ -1,16 +1,16 @@
-<section class="page-container">
+<div class="recipe-detail-container">
   <!-- Loading State -->
-  <div *ngIf="loading" class="flex items-center justify-center py-xl">
+  <div *ngIf="loading" class="loading-container">
     <mat-spinner diameter="50"></mat-spinner>
-    <p class="text-secondary mb-sm">Loading recipe...</p>
+    <p>Loading recipe...</p>
   </div>
 
   <!-- Error State -->
   <div *ngIf="error && !loading" class="error-container">
     <mat-icon class="error-icon">error</mat-icon>
-    <h3 class="text-lg font-medium mb-sm">Error Loading Recipe</h3>
-    <p class="text-secondary mb-sm">Unable to load the recipe. Please try again.</p>
-    <button mat-raised-button class="btn btn-primary" (click)="loadRecipe(recipe?.id || '')">
+    <h3>Error Loading Recipe</h3>
+    <p>Unable to load the recipe. Please try again.</p>
+    <button mat-raised-button color="primary" (click)="loadRecipe(recipe?.id || '')">
       Retry
     </button>
   </div>
@@ -18,10 +18,10 @@
   <!-- Recipe Content -->
   <div *ngIf="recipe && !loading" class="recipe-content">
     <!-- Recipe Header -->
-    <article class="card">
-      <article class="card">
-        <h1 class="recipe-title text-2xl font-medium mb-md">{{ recipe.name }}</h1>
-        <article class="card">
+    <div class="recipe-header">
+      <div class="recipe-title-section">
+        <h1 class="recipe-title">{{ recipe.name }}</h1>
+        <div class="recipe-meta">
           <div class="meta-item">
             <mat-icon>schedule</mat-icon>
             <span>{{ getFormattedTime() }}</span>
@@ -34,17 +34,18 @@
             <mat-icon>star</mat-icon>
             <span>{{ recipe.rating }}/5</span>
           </div>
-      </article>
+        </div>
+      </div>
 
       <!-- Action Buttons -->
-      <article class="card">
+      <div class="recipe-actions">
         <button 
           mat-icon-button 
           [class.favorited]="recipe.favorite"
           (click)="onToggleFavorite()"
           matTooltip="{{ recipe.favorite ? 'Remove from favorites' : 'Add to favorites' }}">
           <mat-icon>{{ recipe.favorite ? 'favorite' : 'favorite_border' }}</mat-icon>
-        </article>
+        </button>
 
         <button mat-icon-button (click)="onShareRecipe()" matTooltip="Share recipe">
           <mat-icon>share</mat-icon>
@@ -68,7 +69,8 @@
             <span>Delete Recipe</span>
           </button>
         </mat-menu>
-      </article>
+      </div>
+    </div>
 
     <!-- Recipe Image -->
     <div *ngIf="recipe.image" class="recipe-image">
@@ -77,12 +79,12 @@
 
     <!-- Recipe Description -->
     <div *ngIf="recipe.description" class="recipe-description">
-      <p class="text-secondary mb-sm">{{ recipe.description }}</p>
+      <p>{{ recipe.description }}</p>
     </div>
 
     <!-- Recipe Rating -->
     <div *ngIf="recipe.rating !== undefined" class="recipe-rating">
-      <h3 class="text-lg font-medium mb-sm">Rating</h3>
+      <h3>Rating</h3>
       <div class="rating-stars">
         <button 
           *ngFor="let star of getRatingStars(); let i = index"
@@ -90,36 +92,38 @@
           (click)="onRateRecipe(i + 1)"
           class="star-button">
           <mat-icon [class.filled]="star === 1">{{ star === 1 ? 'star' : 'star_border' }}</mat-icon>
-        </div>
+        </button>
       </div>
+    </div>
 
     <!-- Recipe Categories and Tags -->
-    <article class="card">
+    <div class="recipe-tags">
       <div *ngIf="recipe.categories.length > 0" class="categories">
-        <h3 class="text-lg font-medium mb-sm">Categories</h3>
+        <h3>Categories</h3>
         <mat-chip-listbox>
           <mat-chip 
             *ngFor="let category of recipe.categories"
             [style.background-color]="category.color">
             {{ category.name }}
-          </mat-chip-listbox>
-        </div>
-      </article>
+          </mat-chip>
+        </mat-chip-listbox>
+      </div>
 
       <div *ngIf="recipe.tags.length > 0" class="tags">
-        <h3 class="text-lg font-medium mb-sm">Tags</h3>
+        <h3>Tags</h3>
         <mat-chip-listbox>
           <mat-chip 
             *ngFor="let tag of recipe.tags"
             [style.background-color]="tag.color">
             {{ tag.name }}
-          </mat-chip-listbox>
-        </div>
-      </article>
+          </mat-chip>
+        </mat-chip-listbox>
+      </div>
+    </div>
 
     <!-- Recipe Scaling -->
-    <article class="card">
-      <h3 class="text-lg font-medium mb-sm">Scale Recipe</h3>
+    <div class="recipe-scaling">
+      <h3>Scale Recipe</h3>
       <div class="scale-controls">
         <mat-slider 
           [min]="0.25" 
@@ -127,17 +131,18 @@
           [step]="0.25"
           [(ngModel)]="currentScale"
           (valueChange)="onScaleChange($event)">
-        </div>
+        </mat-slider>
         <span class="scale-value">{{ currentScale }}x</span>
-      </article>
+      </div>
+    </div>
 
     <!-- Recipe Tabs -->
     <mat-tab-group [(selectedIndex)]="selectedTab" class="recipe-tabs">
       <!-- Ingredients Tab -->
       <mat-tab label="Ingredients">
-        
-          <h3 class="text-lg font-medium mb-sm">Ingredients</h3>
-          <mat-list class="flex flex-col gap-sm">
+        <div class="ingredients-content">
+          <h3>Ingredients</h3>
+          <mat-list>
             <mat-list-item *ngFor="let ingredient of recipe.ingredients; let i = index">
               <div class="ingredient-item">
                 <span class="ingredient-quantity">
@@ -148,120 +153,125 @@
                   {{ ingredient.food || ingredient.title }}
                   <span *ngIf="ingredient.note" class="ingredient-note">({{ ingredient.note }})</span>
                 </span>
-              
-            </div>
-          </mat-list-item>
-        </mat-list>
+              </div>
+            </mat-list-item>
+          </mat-list>
+        </div>
       </mat-tab>
 
       <!-- Instructions Tab -->
       <mat-tab label="Instructions">
-        
-          <h3 class="text-lg font-medium mb-sm">Instructions</h3>
-          <mat-list class="flex flex-col gap-sm">
+        <div class="instructions-content">
+          <h3>Instructions</h3>
+          <mat-list>
             <mat-list-item *ngFor="let instruction of recipe.instructions; let i = index">
               <div class="instruction-item">
                 <span class="instruction-number">{{ i + 1 }}.</span>
                 <span class="instruction-text">{{ instruction.text }}</span>
-              
-            </div>
-          </mat-list-item>
-        </mat-list>
+              </div>
+            </mat-list-item>
+          </mat-list>
+        </div>
       </mat-tab>
 
       <!-- Notes Tab -->
       <mat-tab label="Notes">
-        
+        <div class="notes-content">
           <div class="notes-header">
-            <h3 class="text-lg font-medium mb-sm">Notes</h3>
+            <h3>Notes</h3>
             <button 
               mat-raised-button 
-              class="btn btn-primary"
+              color="primary"
               (click)="showAddNote = !showAddNote">
               <mat-icon>add</mat-icon>
               Add Note
-            </div>
+            </button>
+          </div>
 
           <!-- Add Note Form -->
           <div *ngIf="showAddNote" class="add-note-form">
-            <mat-form-field appearance="outline" class="note-input w-full">
+            <mat-form-field appearance="outline" class="note-input">
               <mat-label>New Note</mat-label>
               <textarea 
                 matInput 
                 [(ngModel)]="newNote"
                 placeholder="Enter your note..."
                 rows="3">
-              </mat-form-field>
-            </div>
+              </textarea>
+            </mat-form-field>
             <div class="note-actions">
               <button 
                 mat-raised-button 
-                class="btn btn-primary"
+                color="primary"
                 (click)="onAddNote()"
                 [disabled]="!newNote.trim()">
                 Add Note
-              </div>
+              </button>
               <button 
                 mat-button 
                 (click)="showAddNote = false; newNote = ''">
                 Cancel
-              </mat-tab>
-            </mat-tab-group>
+              </button>
+            </div>
+          </div>
 
           <!-- Notes List -->
           <mat-list *ngIf="recipe.notes.length > 0">
             <mat-list-item *ngFor="let note of recipe.notes">
               <div class="note-item">
                 <h4>{{ note.title }}</h4>
-                <p class="text-secondary mb-sm">{{ note.text }}</p>
+                <p>{{ note.text }}</p>
                 <span class="note-date">{{ note.createdAt | date:'short' }}</span>
               </div>
             </mat-list-item>
           </mat-list>
 
           <div *ngIf="recipe.notes.length === 0" class="no-notes">
-            <p class="text-secondary mb-sm">No notes yet. Add your first note!</p>
+            <p>No notes yet. Add your first note!</p>
           </div>
-      </div>
+        </div>
+      </mat-tab>
 
       <!-- Comments Tab -->
       <mat-tab label="Comments">
-        
+        <div class="comments-content">
           <div class="comments-header">
-            <h3 class="text-lg font-medium mb-sm">Comments</h3>
+            <h3>Comments</h3>
             <button 
               mat-raised-button 
-              class="btn btn-primary"
+              color="primary"
               (click)="showAddComment = !showAddComment">
               <mat-icon>add</mat-icon>
               Add Comment
-            </div>
+            </button>
+          </div>
 
           <!-- Add Comment Form -->
           <div *ngIf="showAddComment" class="add-comment-form">
-            <mat-form-field appearance="outline" class="comment-input w-full">
+            <mat-form-field appearance="outline" class="comment-input">
               <mat-label>New Comment</mat-label>
               <textarea 
                 matInput 
                 [(ngModel)]="newComment"
                 placeholder="Enter your comment..."
                 rows="3">
-              </mat-form-field>
-            </div>
+              </textarea>
+            </mat-form-field>
             <div class="comment-actions">
               <button 
                 mat-raised-button 
-                class="btn btn-primary"
+                color="primary"
                 (click)="onAddComment()"
                 [disabled]="!newComment.trim()">
                 Add Comment
-              </div>
+              </button>
               <button 
                 mat-button 
                 (click)="showAddComment = false; newComment = ''">
                 Cancel
-              </mat-tab>
-            </section>
+              </button>
+            </div>
+          </div>
 
           <!-- Comments List -->
           <mat-list *ngIf="recipe.comments && recipe.comments.length > 0">
@@ -271,11 +281,16 @@
                   <span class="comment-author">{{ comment.user.fullName }}</span>
                   <span class="comment-date">{{ comment.createdAt | date:'short' }}</span>
                 </div>
-                <p class="comment-text text-secondary mb-sm">{{ comment.text }}</p>
+                <p class="comment-text">{{ comment.text }}</p>
               </div>
             </mat-list-item>
           </mat-list>
 
           <div *ngIf="!recipe.comments || recipe.comments.length === 0" class="no-comments">
-            <p class="text-secondary mb-sm">No comments yet. Be the first to comment!</p>
+            <p>No comments yet. Be the first to comment!</p>
           </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div> 

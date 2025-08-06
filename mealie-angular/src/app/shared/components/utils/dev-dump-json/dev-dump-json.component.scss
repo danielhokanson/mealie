@@ -1,6 +1,12 @@
-// Component styles - using utility classes in template
-// Only custom styles that can't be achieved with utilities should be added here
-
-:host {
-  display: block;
-}
+.dev-dump-json {
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 16px;
+  margin: 8px 0;
+  font-family: monospace;
+  font-size: 12px;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+} 

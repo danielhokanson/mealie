@@ -2,11 +2,12 @@
   <!-- Total Time -->
   <div *ngIf="totalTimeInfo" class="time-card-section">
     <div class="time-card-item">
-      <mat-icon class="time-icon btn btn-primary">schedule</mat-icon>
+      <mat-icon class="time-icon" color="primary">schedule</mat-icon>
       <div class="time-text">
         <span class="time-label">{{ totalTimeInfo.name }}</span>
         <span class="time-value">{{ totalTimeInfo.value }}</span>
       </div>
+    </div>
   </div>
   
   <mat-divider *ngIf="totalTimeInfo && (prepTimeInfo || performTimeInfo)" class="time-divider"></mat-divider>
@@ -15,24 +16,22 @@
   <div *ngIf="prepTimeInfo || performTimeInfo" class="time-card-section">
     <div class="time-cards-row">
       <div *ngIf="prepTimeInfo" class="time-card-item">
-        <mat-icon class="time-icon btn btn-primary">restaurant</mat-icon>
+        <mat-icon class="time-icon" color="primary">restaurant</mat-icon>
         <div class="time-text">
           <span class="time-label">{{ prepTimeInfo.name }}</span>
           <span class="time-value">{{ prepTimeInfo.value }}</span>
         </div>
+      </div>
       
       <mat-divider *ngIf="prepTimeInfo && performTimeInfo" vertical class="time-divider-vertical"></mat-divider>
       
       <div *ngIf="performTimeInfo" class="time-card-item">
-        <mat-icon class="time-icon btn btn-primary">local_dining</mat-icon>
+        <mat-icon class="time-icon" color="primary">local_dining</mat-icon>
         <div class="time-text">
           <span class="time-label">{{ performTimeInfo.name }}</span>
           <span class="time-value">{{ performTimeInfo.value }}</span>
         </div>
+      </div>
     </div>
-
-</div>
-</div>
-</div>
-</div>
-</div>
+  </div>
+</div> 

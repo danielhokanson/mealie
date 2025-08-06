@@ -5,10 +5,10 @@
   <!-- Search Dialog -->
   <div *ngIf="dialog" class="dialog-overlay" (click)="closeDialog()">
     <div class="dialog-content" (click)="$event.stopPropagation()">
-      <mat-card class="search-dialog card">
+      <mat-card class="search-dialog">
         <!-- Search Header -->
-        <mat-toolbar class="btn btn-primary search-header">
-          <mat-form-field appearance="outline" class="search-input w-full">
+        <mat-toolbar color="primary" class="search-header">
+          <mat-form-field appearance="outline" class="search-input">
             <mat-label>Search</mat-label>
             <input matInput
                    id="arrow-search"
@@ -24,8 +24,8 @@
                   (click)="closeDialog()"
                   class="close-button">
             <mat-icon>close</mat-icon>
-          </mat-toolbar>
-        </mat-card>
+          </button>
+        </mat-toolbar>
 
         <!-- Search Results -->
         <div class="search-results" [class.loading]="loading">
@@ -33,7 +33,7 @@
             <span class="results-count">Results</span>
           </div>
 
-          <section class="page-container">
+          <div class="results-container">
             <app-recipe-card-mobile
               *ngFor="let recipe of searchResults; let index = index"
               [name]="recipe.name"
@@ -46,14 +46,15 @@
               class="arrow-nav"
               [class.selected]="selected && index === selectedIndex"
               (click)="handleSelect(recipe)">
-            </section>
+            </app-recipe-card-mobile>
 
-            <div *ngIf="searchResults.length === 0 && !loading" class="flex flex-col items-center justify-center py-xl text-center">
+            <div *ngIf="searchResults.length === 0 && !loading" class="no-results">
               <mat-icon class="no-results-icon">search_off</mat-icon>
-              <p class="no-results-text text-secondary mb-sm">No recipes found</p>
+              <p class="no-results-text">No recipes found</p>
             </div>
+          </div>
         </div>
-      </div>
+      </mat-card>
     </div>
-
-</div>
+  </div>
+</div> 

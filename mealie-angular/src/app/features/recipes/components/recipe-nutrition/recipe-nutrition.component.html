@@ -1,13 +1,13 @@
-<mat-card class="nutrition-card card">
-  <mat-card-header class="card">
-    <mat-card-title class="card">Nutrition Information</mat-card-title>
+<mat-card class="nutrition-card">
+  <mat-card-header>
+    <mat-card-title>Nutrition Information</mat-card-title>
   </mat-card-header>
   
   <mat-divider></mat-divider>
   
-  <mat-card-content class="card">
+  <mat-card-content>
     <div class="nutrition-grid">
-      <mat-form-field *ngIf="edit" class="nutrition-input w-full">
+      <mat-form-field *ngIf="edit" class="nutrition-input">
         <mat-label>Calories</mat-label>
         <input matInput type="number" [(ngModel)]="nutrition.calories" />
       </mat-form-field>
@@ -16,7 +16,7 @@
         <span class="nutrition-value">{{ nutrition.calories }}</span>
       </div>
       
-      <mat-form-field *ngIf="edit" class="nutrition-input w-full">
+      <mat-form-field *ngIf="edit" class="nutrition-input">
         <mat-label>Protein (g)</mat-label>
         <input matInput type="number" [(ngModel)]="nutrition.protein" />
       </mat-form-field>
@@ -25,7 +25,7 @@
         <span class="nutrition-value">{{ nutrition.protein }}g</span>
       </div>
       
-      <mat-form-field *ngIf="edit" class="nutrition-input w-full">
+      <mat-form-field *ngIf="edit" class="nutrition-input">
         <mat-label>Fat (g)</mat-label>
         <input matInput type="number" [(ngModel)]="nutrition.fat" />
       </mat-form-field>
@@ -34,7 +34,7 @@
         <span class="nutrition-value">{{ nutrition.fat }}g</span>
       </div>
       
-      <mat-form-field *ngIf="edit" class="nutrition-input w-full">
+      <mat-form-field *ngIf="edit" class="nutrition-input">
         <mat-label>Carbohydrates (g)</mat-label>
         <input matInput type="number" [(ngModel)]="nutrition.carbohydrates" />
       </mat-form-field>
@@ -43,7 +43,7 @@
         <span class="nutrition-value">{{ nutrition.carbohydrates }}g</span>
       </div>
       
-      <mat-form-field *ngIf="edit" class="nutrition-input w-full">
+      <mat-form-field *ngIf="edit" class="nutrition-input">
         <mat-label>Fiber (g)</mat-label>
         <input matInput type="number" [(ngModel)]="nutrition.fiber" />
       </mat-form-field>
@@ -52,7 +52,7 @@
         <span class="nutrition-value">{{ nutrition.fiber }}g</span>
       </div>
       
-      <mat-form-field *ngIf="edit" class="nutrition-input w-full">
+      <mat-form-field *ngIf="edit" class="nutrition-input">
         <mat-label>Sugar (g)</mat-label>
         <input matInput type="number" [(ngModel)]="nutrition.sugar" />
       </mat-form-field>
@@ -61,7 +61,7 @@
         <span class="nutrition-value">{{ nutrition.sugar }}g</span>
       </div>
       
-      <mat-form-field *ngIf="edit" class="nutrition-input w-full">
+      <mat-form-field *ngIf="edit" class="nutrition-input">
         <mat-label>Sodium (mg)</mat-label>
         <input matInput type="number" [(ngModel)]="nutrition.sodium" />
       </mat-form-field>
@@ -69,7 +69,6 @@
         <span class="nutrition-label">Sodium:</span>
         <span class="nutrition-value">{{ nutrition.sodium }}mg</span>
       </div>
-  </div>
-</mat-card-content>
-
-</mat-card>
+    </div>
+  </mat-card-content>
+</mat-card> 

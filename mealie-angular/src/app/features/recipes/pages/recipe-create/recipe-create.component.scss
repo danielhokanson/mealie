@@ -1,6 +1,41 @@
-// Component styles - using utility classes in template
-// Only custom styles that can't be achieved with utilities should be added here
+.recipe-create-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
 
-:host {
-  display: block;
-}
+  .create-header {
+    text-align: center;
+    margin-bottom: 32px;
+
+    h1 {
+      font-size: 32px;
+      font-weight: 600;
+      margin: 0 0 8px 0;
+    }
+  }
+
+  .recipe-form {
+    .form-section {
+      margin-bottom: 24px;
+
+      .form-row {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 16px;
+
+        .form-field {
+          flex: 1;
+        }
+      }
+    }
+  }
+
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid #e0e0e0;
+  }
+} 

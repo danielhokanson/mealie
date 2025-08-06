@@ -1,64 +1,68 @@
-<article class="card">
+<div class="recipe-page-organizers">
   <!-- Recipe Categories -->
-  <mat-card *ngIf="recipe.recipeCategory.length  class="card"> 0 || isEditForm" class="organizer-card">
-    <mat-card-header class="card">
-      <mat-card-title class="card">Categories</mat-card-title>
+  <mat-card *ngIf="recipe.recipeCategory.length > 0 || isEditForm" class="organizer-card">
+    <mat-card-header>
+      <mat-card-title>Categories</mat-card-title>
     </mat-card-header>
     
     <mat-divider></mat-divider>
     
-    <mat-card-content class="card">
+    <mat-card-content>
       <app-recipe-organizer-selector
         *ngIf="isEditForm"
         [(ngModel)]="recipe.recipeCategory"
         [returnObject]="true"
         [showAdd]="true"
         selectorType="categories">
-      </mat-card-content>
+      </app-recipe-organizer-selector>
       
       <app-recipe-chips
         *ngIf="!isEditForm"
         [items]="recipe.recipeCategory">
-      </mat-card>
-    </article>
+      </app-recipe-chips>
+    </mat-card-content>
+  </mat-card>
 
   <!-- Recipe Tags -->
-  <mat-card *ngIf="recipe.tags.length  class="card"> 0 || isEditForm" class="organizer-card">
-    <mat-card-header class="card">
-      <mat-card-title class="card">Tags</mat-card-title>
+  <mat-card *ngIf="recipe.tags.length > 0 || isEditForm" class="organizer-card">
+    <mat-card-header>
+      <mat-card-title>Tags</mat-card-title>
     </mat-card-header>
     
     <mat-divider></mat-divider>
     
-    <mat-card-content class="card">
+    <mat-card-content>
       <app-recipe-organizer-selector
         *ngIf="isEditForm"
         [(ngModel)]="recipe.tags"
         [returnObject]="true"
         [showAdd]="true"
         selectorType="tags">
-      </mat-card-content>
+      </app-recipe-organizer-selector>
       
       <app-recipe-chips
         *ngIf="!isEditForm"
         [items]="recipe.tags"
         urlPrefix="tags">
-      </mat-card>
+      </app-recipe-chips>
+    </mat-card-content>
+  </mat-card>
 
   <!-- Recipe Tools -->
-  <mat-card *ngIf="isEditForm" class="organizer-card card">
-    <mat-card-header class="card">
-      <mat-card-title class="card">Required Tools</mat-card-title>
+  <mat-card *ngIf="isEditForm" class="organizer-card">
+    <mat-card-header>
+      <mat-card-title>Required Tools</mat-card-title>
     </mat-card-header>
     
     <mat-divider></mat-divider>
     
-    <mat-card-content class="card">
+    <mat-card-content>
       <app-recipe-organizer-selector
         [(ngModel)]="recipe.tools"
         selectorType="tools">
-      </mat-card-content>
-    </mat-card>
+      </app-recipe-organizer-selector>
+    </mat-card-content>
+  </mat-card>
 
   <!-- Recipe Nutrition -->
   <app-recipe-nutrition
@@ -66,6 +70,7 @@
     [(ngModel)]="recipe.nutrition"
     [edit]="isEditForm"
     class="nutrition-section">
+  </app-recipe-nutrition>
 
   <!-- Recipe Assets -->
   <app-recipe-assets
@@ -75,3 +80,5 @@
     [slug]="recipe.slug"
     [recipeId]="recipe.id"
     class="assets-section">
+  </app-recipe-assets>
+</div> 

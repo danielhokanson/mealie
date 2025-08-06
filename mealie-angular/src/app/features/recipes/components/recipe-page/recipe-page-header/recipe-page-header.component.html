@@ -1,9 +1,9 @@
-<article class="card">
+<div class="recipe-page-header">
   <app-recipe-page-info-card
     [recipe]="recipe"
     [recipeScale]="recipeScale"
     [landscape]="landscape">
-  </article>
+  </app-recipe-page-info-card>
   
   <mat-divider></mat-divider>
   
@@ -23,3 +23,5 @@
     (save)="onSave()"
     (delete)="onDelete()"
     (print)="printRecipe()">
+  </app-recipe-action-menu>
+</div> 

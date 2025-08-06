@@ -1,6 +1,33 @@
-// Component styles - using utility classes in template
-// Only custom styles that can't be achieved with utilities should be added here
-
-:host {
-  display: block;
+.page-title-container {
+  margin-top: 1rem;
 }
+
+.title-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin: 1rem 0 0.5rem 0;
+  text-align: center;
+}
+
+.subtitle {
+  font-size: 1rem;
+  font-weight: normal;
+  color: rgba(0, 0, 0, 0.6);
+  margin: 0;
+  text-align: center;
+}
+
+.content-section {
+  display: flex;
+  margin-top: 1rem;
+}
+
+.title-divider {
+  margin: 1rem 0;
+} 

@@ -1,5 +1,5 @@
 <div *ngIf="notes.length > 0 || edit" class="recipe-notes">
-  <h2 class="notes-title text-xl font-medium mb-md">Notes</h2>
+  <h2 class="notes-title">Notes</h2>
   
   <form [formGroup]="notesForm" class="notes-form">
     <div formArrayName="notes">
@@ -8,10 +8,10 @@
            class="note-item">
         
         <!-- Edit Mode -->
-        <mat-card *ngIf="edit" class="note-card card">
-          <mat-card-content class="card">
+        <mat-card *ngIf="edit" class="note-card">
+          <mat-card-content>
             <div class="note-header">
-              <mat-form-field appearance="outline" class="note-title-field w-full">
+              <mat-form-field appearance="outline" class="note-title-field">
                 <mat-label>Title</mat-label>
                 <input 
                   matInput 
@@ -26,14 +26,15 @@
               <button 
                 type="button"
                 mat-icon-button 
-                class="btn btn-error remove-note-btn"
+                color="warn"
+                class="remove-note-btn"
                 [matTooltip]="'Remove note'"
                 (click)="removeNote(i)">
                 <mat-icon>delete</mat-icon>
-              </div>
-            </mat-card-content>
+              </button>
+            </div>
             
-            <mat-form-field appearance="outline" class="note-text-field w-full">
+            <mat-form-field appearance="outline" class="note-text-field">
               <mat-label>Note</mat-label>
               <textarea 
                 matInput 
@@ -44,22 +45,24 @@
                 cdkTextareaAutosize
                 cdkAutosizeMinRows="3"
                 cdkAutosizeMaxRows="10">
-              </mat-form-field>
+              </textarea>
               <mat-error *ngFor="let error of getFormErrors(getNoteTextControl(i))">
                 {{ error }}
               </mat-error>
-            </mat-card>
-          </div>
-        </form>
+            </mat-form-field>
+          </mat-card-content>
+        </mat-card>
 
         <!-- View Mode -->
         <div *ngIf="!edit" class="note-view">
-          <h3 class="note-title text-lg font-medium mb-sm">{{ note.title }}</h3>
-          
+          <h3 class="note-title">{{ note.title }}</h3>
+          <div class="note-content">
             <app-safe-markdown [source]="note.text"></app-safe-markdown>
-          
+          </div>
+        </div>
       </div>
-  </div>
+    </div>
+  </form>
 
   <!-- Add Note Button -->
   <div *ngIf="edit" class="add-note-section">
@@ -68,4 +71,6 @@
       (click)="addNote()">
       <mat-icon>add</mat-icon>
       Add Note
-    </div>
+    </app-base-button>
+  </div>
+</div> 

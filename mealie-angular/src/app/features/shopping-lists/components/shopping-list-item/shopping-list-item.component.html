@@ -6,7 +6,7 @@
           [checked]="modelValue.checked"
           (change)="onCheckedChange($event.checked)"
           class="item-checkbox">
-        </div>
+        </mat-checkbox>
         
         <div 
           class="item-text"
@@ -19,6 +19,7 @@
             {{ modelValue.notes }}
           </span>
         </div>
+      </div>
     </div>
     
     <div class="item-spacer"></div>
@@ -27,7 +28,7 @@
       <app-multi-purpose-label
         [label]="label"
         size="small">
-      </div>
+      </app-multi-purpose-label>
     </div>
     
     <div class="item-actions" *ngIf="!modelValue.checked">
@@ -40,7 +41,7 @@
           [matTooltip]="'Toggle Recipes'"
           (click)="displayRecipeRefs = !displayRecipeRefs">
           <mat-icon>restaurant</mat-icon>
-        </div>
+        </button>
         
         <button 
           *ngIf="!recipeList.length"
@@ -48,7 +49,7 @@
           size="small"
           class="dummy-btn"
           disabled>
-        </div>
+        </button>
         
         <button 
           mat-icon-button
@@ -56,6 +57,7 @@
           class="drag-handle"
           [matMenuTriggerFor]="contextMenu">
           <mat-icon>drag_indicator</mat-icon>
+        </button>
         
         <button 
           mat-icon-button
@@ -63,16 +65,21 @@
           class="edit-btn"
           (click)="toggleEdit(true)">
           <mat-icon>edit</mat-icon>
+        </button>
+      </div>
       
       <mat-menu #contextMenu="matMenu">
-        <mat-list class="flex flex-col gap-sm">
+        <mat-list>
           <mat-list-item 
             *ngFor="let action of contextMenu"
             (click)="onContextHandler(action.event)"
             class="context-menu-item">
             {{ action.text }}
-          </mat-list>
-        </mat-menu>
+          </mat-list-item>
+        </mat-list>
+      </mat-menu>
+    </div>
+  </div>
   
   <!-- Recipe References -->
   <div 
@@ -83,6 +90,8 @@
       [listItem]="modelValue"
       [small]="true"
       [tile]="true">
+    </app-recipe-list>
+  </div>
   
   <!-- Completion Info -->
   <div 
@@ -91,6 +100,8 @@
     <span class="completion-text">
       Completed on {{ modelValue.updatedAt | date:'shortDate' }}
     </span>
+  </div>
+</div>
 
 <!-- Edit Mode -->
 <div *ngIf="edit" class="edit-mode">
@@ -102,4 +113,5 @@
     (save)="onSave()"
     (cancel)="onCancel()"
     (delete)="delete.emit()">
-  </div>
+  </app-shopping-list-item-editor>
+</div> 

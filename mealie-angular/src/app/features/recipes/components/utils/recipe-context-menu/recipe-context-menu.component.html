@@ -4,12 +4,13 @@
     [(open)]="shareDialog" 
     [recipeId]="recipeId" 
     [name]="name">
-  </div>
+  </app-recipe-dialog-share>
 
   <!-- Recipe Print Preferences Dialog -->
   <app-recipe-dialog-print-preferences 
     [(open)]="printPreferencesDialog" 
     [recipe]="recipeRef || undefined">
+  </app-recipe-dialog-print-preferences>
 
   <!-- Recipe Delete Dialog -->
   <app-base-dialog
@@ -19,44 +20,46 @@
     icon="warning"
     [canConfirm]="true"
     (confirm)="deleteRecipe()">
-    
-      <p *ngIf="isAdminAndNotOwner" class="text-secondary mb-sm">
+    <div class="dialog-content">
+      <p *ngIf="isAdminAndNotOwner">
         Are you sure you want to delete this recipe? This action cannot be undone.
       </p>
-      <p *ngIf="!isAdminAndNotOwner" class="text-secondary mb-sm">
+      <p *ngIf="!isAdminAndNotOwner">
         Are you sure you want to delete this recipe? This action cannot be undone.
       </p>
-    
+    </div>
+  </app-base-dialog>
 
   <!-- Recipe Duplicate Dialog -->
   <app-base-dialog
     [(modelValue)]="recipeDuplicateDialog"
     title="Duplicate Recipe"
-    class="btn btn-primary"
+    color="primary"
     icon="content_copy"
     [canConfirm]="true"
     (confirm)="duplicateRecipe()">
-    
-      <mat-form-field appearance="outline" class="full-width w-full">
+    <div class="dialog-content">
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label>Recipe Name</mat-label>
         <input matInput
                [(ngModel)]="recipeName"
                (keyup.enter)="duplicateRecipe()"
                autofocus>
       </mat-form-field>
-    
+    </div>
+  </app-base-dialog>
 
   <!-- Meal Planner Dialog -->
   <app-base-dialog
     [(modelValue)]="mealplannerDialog"
     title="Add Recipe to Meal Plan"
-    class="btn btn-primary"
+    color="primary"
     icon="calendar_today"
     [canConfirm]="true"
     (confirm)="addRecipeToPlan()">
-    
+    <div class="dialog-content">
       <!-- Date Picker -->
-      <mat-form-field appearance="outline" class="full-width w-full">
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label>Date</mat-label>
         <input matInput
                [value]="newMealdateString"
@@ -70,17 +73,21 @@
         <mat-calendar
           [(selected)]="newMealdate"
           (selectedChange)="pickerMenu = false">
-        </div>
+        </mat-calendar>
+      </div>
 
       <!-- Meal Type Selector -->
-      <mat-form-field appearance="outline" class="full-width w-full">
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label>Entry Type</mat-label>
         <mat-select [(ngModel)]="newMealType">
           <mat-option *ngFor="let option of planTypeOptions" 
                       [value]="option.value">
             {{ option.text }}
-          </mat-select>
-        </mat-form-field>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </app-base-dialog>
 
   <!-- Shopping List Dialog -->
   <app-recipe-dialog-add-to-shopping-list
@@ -88,6 +95,7 @@
     [(open)]="shoppingListDialog"
     [recipes]="recipeRefWithScale ? [recipeRefWithScale] : []"
     [shoppingLists]="shoppingLists">
+  </app-recipe-dialog-add-to-shopping-list>
 
   <!-- Context Menu -->
   <button mat-icon-button
@@ -97,21 +105,23 @@
           [matMenuTriggerFor]="contextMenu"
           (click)="$event.preventDefault()">
     <mat-icon [class.fab-icon]="fab">{{ icon }}</mat-icon>
+  </button>
 
   <mat-menu #contextMenu="matMenu" 
             [hasBackdrop]="true"
             [class.menu-top]="menuTop"
             [class.menu-bottom]="!menuTop">
     
-    <mat-list class="flex flex-col gap-sm">
+    <mat-list>
       <!-- Menu Items -->
       <mat-list-item *ngFor="let item of menuItems; let index = index"
                      (click)="contextMenuEventHandler(item.event)"
                      class="menu-item">
         <mat-icon matListItemIcon [color]="item.color">
           {{ item.icon }}
-
+        </mat-icon>
         <span matListItemTitle>{{ item.title }}</span>
+      </mat-list-item>
 
       <!-- Recipe Actions Divider -->
       <mat-divider *ngIf="useItems.recipeActions && recipeActions && recipeActions.length">
@@ -123,6 +133,7 @@
                      class="menu-item">
         <mat-icon matListItemIcon>add_link</mat-icon>
         <span matListItemTitle>{{ action.title }}</span>
-      </mat-icon>
-
-</mat-list>
+      </mat-list-item>
+    </mat-list>
+  </mat-menu>
+</div> 

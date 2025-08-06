@@ -1,21 +1,21 @@
-<section class="page-container">
+<div class="drop-zone-container">
     <mat-card 
         class="drop-zone-card"
         [class.drag-over]="isDragOver"
         [class.disabled]="disabled"
-        (click)="onBrowseClick()" class="card">
+        (click)="onBrowseClick()">
         
-        <mat-card-content class="drop-zone-content card">
+        <mat-card-content class="drop-zone-content">
             <div class="drop-zone-icon">
                 <mat-icon>cloud_upload</mat-icon>
             </div>
             
             <div class="drop-zone-text">
-                <h3 class="text-lg font-medium mb-sm">{{ text }}</h3>
-                <p *ngIf="config.accept && config.accept !== '*/*'" class="text-secondary mb-sm">
+                <h3>{{ text }}</h3>
+                <p *ngIf="config.accept && config.accept !== '*/*'">
                     Accepted types: {{ config.accept }}
                 </p>
-                <p *ngIf="config.maxSize" class="text-secondary mb-sm">
+                <p *ngIf="config.maxSize">
                     Maximum size: {{ formatFileSize(config.maxSize) }}
                 </p>
             </div>
@@ -34,26 +34,30 @@
             <div *ngIf="isUploading" class="upload-progress">
                 <mat-progress-bar
                     [value]="uploadProgress"
-                    class="btn btn-primary">
-                </div>
-                <p class="progress-text text-secondary mb-sm">Uploading... {{ uploadProgress | number:'1.0-0' }}%</p>
-            </mat-card-content>
-        </section>
+                    color="primary">
+                </mat-progress-bar>
+                <p class="progress-text">Uploading... {{ uploadProgress | number:'1.0-0' }}%</p>
+            </div>
+        </mat-card-content>
         
-        <mat-card-actions class="drop-zone-actions card">
+        <mat-card-actions class="drop-zone-actions">
             <button
                 mat-button
-                class="btn btn-primary"
+                color="primary"
                 (click)="onBrowseClick(); $event.stopPropagation()"
                 [disabled]="disabled">
                 <mat-icon>folder_open</mat-icon>
                 Browse Files
-            </mat-card-actions>
+            </button>
             
             <button
                 *ngIf="selectedFiles.length > 0"
                 mat-button
-                class="btn btn-error"
+                color="warn"
                 (click)="clearFiles(); $event.stopPropagation()">
                 <mat-icon>clear</mat-icon>
                 Clear
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</div> 

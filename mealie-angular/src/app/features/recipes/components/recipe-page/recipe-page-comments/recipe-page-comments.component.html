@@ -1,7 +1,7 @@
-<article class="card">
-  <mat-card class="card">
-    <mat-card-header class="card">
-      <mat-card-title class="comments-title card">
+<div class="recipe-comments">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title class="comments-title">
         <mat-icon class="title-icon">comment</mat-icon>
         <span>Comments</span>
       </mat-card-title>
@@ -9,19 +9,19 @@
 
     <mat-divider></mat-divider>
 
-    <mat-card-content class="card">
+    <mat-card-content>
       <!-- Comment Form -->
       <div *ngIf="currentUser?.id" class="comment-form">
-        <section class="page-container">
+        <div class="comment-input-container">
           <app-user-avatar 
             [userId]="currentUser.id" 
             [user]="currentUser"
             [size]="40"
             [tooltip]="false">
-          </section>
+          </app-user-avatar>
 
           <form [formGroup]="commentForm" class="comment-form-content">
-            <mat-form-field appearance="outline" class="comment-textarea w-full">
+            <mat-form-field appearance="outline" class="comment-textarea">
               <mat-label>Join the conversation</mat-label>
               <textarea 
                 matInput 
@@ -31,11 +31,11 @@
                 cdkTextareaAutosize
                 cdkAutosizeMinRows="2"
                 cdkAutosizeMaxRows="6">
-              </mat-form-field>
+              </textarea>
               <mat-error *ngFor="let error of getFormErrors()">
                 {{ error }}
               </mat-error>
-            </form>
+            </mat-form-field>
 
             <div class="comment-actions">
               <app-base-button 
@@ -45,10 +45,11 @@
                 (click)="submitComment()">
                 <mat-icon>check</mat-icon>
                 Submit
-              </div>
+              </app-base-button>
             </div>
-          </mat-card-content>
-        </mat-card>
+          </form>
+        </div>
+      </div>
 
       <!-- Comments List -->
       <div class="comments-list">
@@ -59,10 +60,10 @@
             [user]="comment.user"
             [size]="40"
             [tooltip]="false">
-          </div>
+          </app-user-avatar>
 
-          <mat-card class="comment-card card">
-            <mat-card-content class="comment-content card">
+          <mat-card class="comment-card">
+            <mat-card-content class="comment-content">
               <div class="comment-header">
                 <span class="comment-author">{{ comment.user.fullName }}</span>
                 <span class="comment-date">{{ formatDate(comment.createdAt) }}</span>
@@ -73,19 +74,25 @@
               </div>
             </mat-card-content>
 
-            <mat-card-actions class="comment-actions" *ngIf="canDeleteComment(comment)" class="card">
+            <mat-card-actions class="comment-actions" *ngIf="canDeleteComment(comment)">
               <button 
                 mat-button 
-                class="btn btn-error delete-comment-btn"
+                color="warn" 
+                class="delete-comment-btn"
                 (click)="deleteComment(comment.id)">
                 <mat-icon>delete</mat-icon>
                 Delete
-              </mat-card-actions>
-            </mat-card>
-          </article>
+              </button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </div>
 
       <!-- Empty State -->
       <div *ngIf="recipe.comments.length === 0" class="empty-state">
         <mat-icon class="empty-icon">comment</mat-icon>
-        <p class="empty-text text-secondary mb-sm">No comments yet. Be the first to comment!</p>
+        <p class="empty-text">No comments yet. Be the first to comment!</p>
       </div>
+    </mat-card-content>
+  </mat-card>
+</div> 

@@ -1,13 +1,15 @@
 <div [style.width]="width" style="height: 100%;">
-  <mat-card class="card">
-    <mat-toolbar
-        class="btn btn-primary wizard-toolbar">
+  <mat-card>
+    <div>
+      <mat-toolbar
+        color="primary"
+        class="wizard-toolbar">
         <mat-toolbar-row>
           <span class="wizard-title">Mealie</span>
         </mat-toolbar-row>
-      </mat-card>
+      </mat-toolbar>
 
-      <section class="page-container">
+      <div class="icon-container">
         <mat-divider class="icon-divider"></mat-divider>
         <div
           class="icon-avatar"
@@ -19,22 +21,27 @@
             <path
               fill="white"
               d="M8.1,13.34L3.91,9.16C2.35,7.59 2.35,5.06 3.91,3.5L10.93,10.5L8.1,13.34M13.41,13L20.29,19.88L18.88,21.29L12,14.41L5.12,21.29L3.71,19.88L13.36,10.22L13.16,10C12.38,9.23 12.38,7.97 13.16,7.19L17.5,2.82L18.43,3.74L15.19,7L16.15,7.94L19.39,4.69L20.31,5.61L17.06,8.85L18,9.81L21.26,6.56L22.18,7.5L17.81,11.84C17.03,12.62 15.77,12.62 15,11.84L14.78,11.64L13.41,13Z"
-            / class="text-secondary mb-sm">
-          </section>
+            />
+          </svg>
         </div>
-
+      </div>
+    </div>
+    
+    <div class="wizard-content">
       <ng-content [attr.data-width]="pageWidth"></ng-content>
-
+    </div>
+    
     <div class="wizard-progress" *ngIf="wizardPage > 0">
       <mat-progress-bar
         [value]="progressValue"
         mode="determinate"
         class="progress-bar">
-      </div>
+      </mat-progress-bar>
+    </div>
     
     <mat-divider class="wizard-divider"></mat-divider>
     
-    <mat-card-actions class="wizard-actions card">
+    <mat-card-actions class="wizard-actions">
       <button
         *ngIf="prevButtonShow"
         mat-button
@@ -44,8 +51,10 @@
         class="prev-button">
         <mat-icon *ngIf="prevButtonIconRef">{{ prevButtonIconRef }}</mat-icon>
         {{ prevButtonTextRef }}
-      </mat-card-actions>
-
+      </button>
+      
+      <div class="spacer"></div>
+      
       <button
         *ngIf="nextButtonShow"
         mat-raised-button
@@ -63,13 +72,18 @@
           {{ nextButtonTextRef }}
           <mat-icon *ngIf="nextButtonIconRef && nextButtonIconAfter">{{ nextButtonIconRef }}</mat-icon>
         </div>
+      </button>
+    </mat-card-actions>
     
-    <mat-card-actions class="language-actions card">
+    <mat-card-actions class="language-actions">
       <button
         mat-raised-button
-        class="btn btn-primary"
+        color="primary"
         (click)="langDialog = true"
         class="language-button">
         <mat-icon>translate</mat-icon>
         Choose Language
-      </mat-card-actions>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div> 

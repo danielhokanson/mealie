@@ -1,6 +1,60 @@
-// Component styles - using utility classes in template
-// Only custom styles that can't be achieved with utilities should be added here
-
-:host {
-  display: block;
+.settings-switches {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
+
+.setting-toggle {
+  margin: 0;
+  padding: 4px 0;
+
+  ::ng-deep .mdc-form-field {
+    width: 100%;
+  }
+
+  ::ng-deep .mdc-form-field > label {
+    font-size: 14px;
+    color: #333;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  ::ng-deep .mdc-slide-toggle {
+    margin-right: 8px;
+  }
+
+  &:disabled {
+    ::ng-deep .mdc-form-field > label {
+      color: #999;
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .settings-switches {
+    gap: 10px;
+  }
+
+  .setting-toggle {
+    padding: 3px 0;
+
+    ::ng-deep .mdc-form-field > label {
+      font-size: 13px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .settings-switches {
+    gap: 8px;
+  }
+
+  .setting-toggle {
+    padding: 2px 0;
+
+    ::ng-deep .mdc-form-field > label {
+      font-size: 12px;
+    }
+  }
+} 

@@ -15,7 +15,7 @@
       (click)="onRecipeClick(recipe)"
       (delete)="onRecipeDelete($event)"
       class="recipe-card-item">
-    </div>
+    </app-recipe-card>
   </div>
 
   <!-- List Layout -->
@@ -27,7 +27,9 @@
       class="recipe-list-item">
       
       <div matListItemAvatar class="recipe-avatar" style="width: 40px; height: 40px; border-radius: 50%; background-color: var(--mat-primary-color, #1976d2); display: flex; align-items: center; justify-content: center;">
-        <mat-icon [class.small]="small" style="color: white;">restaurant</mat-icon>
+        <mat-icon [class.small]="small" style="color: white;">
+          restaurant
+        </mat-icon>
       </div>
       
       <div matListItemTitle class="recipe-title">
@@ -39,17 +41,21 @@
         matListItemLine 
         class="recipe-description">
         {{ recipe.description }}
-      </mat-list>
+      </div>
       
       <div 
         *ngIf="listItemDescriptions[recipes.indexOf(recipe)]"
         matListItemLine 
         class="recipe-quantity"
         [innerHTML]="listItemDescriptions[recipes.indexOf(recipe)]">
+      </div>
       
       <div matListItemMeta class="recipe-actions">
         <ng-content 
           [attr.slot]="'actions-' + recipe.id"
           [attr.data-recipe]="recipe">
-
+        </ng-content>
       </div>
+    </mat-list-item>
+  </mat-list>
+</div> 

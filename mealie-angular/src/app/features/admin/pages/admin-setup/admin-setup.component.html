@@ -1,42 +1,42 @@
-<section class="page-container">
+<div class="admin-setup-container">
   <!-- Setup Complete State -->
   <div *ngIf="setupComplete" class="setup-complete">
-    <mat-card class="complete-card card">
-      <mat-card-content class="card">
+    <mat-card class="complete-card">
+      <mat-card-content>
         <div class="complete-icon">
           <mat-icon>check_circle</mat-icon>
         </div>
-        <h2 class="text-xl font-medium mb-md">Setup Complete!</h2>
-        <p class="text-secondary mb-sm">Your Mealie application has been successfully configured and is ready to use.</p>
+        <h2>Setup Complete!</h2>
+        <p>Your Mealie application has been successfully configured and is ready to use.</p>
         <div class="complete-actions">
           <button 
             mat-raised-button 
-            class="btn btn-primary"
+            color="primary"
             (click)="onGoToDashboard()">
             Go to Dashboard
-          </div>
-        </mat-card-content>
-      </mat-card>
-    </div>
-  </section>
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
 
   <!-- Setup Form -->
   <div *ngIf="!setupComplete" class="setup-form">
     <div class="setup-header">
-      <h1 class="text-2xl font-medium mb-md">Admin Setup</h1>
-      <p class="text-secondary mb-sm">Configure your Mealie application</p>
+      <h1>Admin Setup</h1>
+      <p>Configure your Mealie application</p>
     </div>
 
     <mat-stepper [linear]="true" #stepper class="setup-stepper">
       <!-- Step 1: Database Configuration -->
       <mat-step [stepControl]="setupForm" label="Database">
-        
-          <h3 class="text-lg font-medium mb-sm">{{ getStepTitle(0) }}</h3>
-          <p class="text-secondary mb-sm">{{ getStepDescription(0) }}</p>
+        <div class="step-content">
+          <h3>{{ getStepTitle(0) }}</h3>
+          <p>{{ getStepDescription(0) }}</p>
 
           <div class="form-section">
             <div class="form-row">
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="form-field">
                 <mat-label>Database Type</mat-label>
                 <mat-select formControlName="databaseType">
                   <mat-option value="postgresql">PostgreSQL</mat-option>
@@ -44,9 +44,10 @@
                   <mat-option value="sqlite">SQLite</mat-option>
                 </mat-select>
               </mat-form-field>
+            </div>
 
             <div class="form-row">
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="form-field">
                 <mat-label>Database Host</mat-label>
                 <input 
                   matInput 
@@ -57,7 +58,7 @@
                 </mat-error>
               </mat-form-field>
 
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="form-field">
                 <mat-label>Database Port</mat-label>
                 <input 
                   matInput 
@@ -71,7 +72,7 @@
             </div>
 
             <div class="form-row">
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="form-field">
                 <mat-label>Database Name</mat-label>
                 <input 
                   matInput 
@@ -84,7 +85,7 @@
             </div>
 
             <div class="form-row">
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="form-field">
                 <mat-label>Database Username</mat-label>
                 <input 
                   matInput 
@@ -95,7 +96,7 @@
                 </mat-error>
               </mat-form-field>
 
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="form-field">
                 <mat-label>Database Password</mat-label>
                 <input 
                   matInput 
@@ -108,22 +109,23 @@
               </mat-form-field>
             </div>
 
-            <div class="flex justify-end gap-sm mt-lg">
+            <div class="form-actions">
               <button 
                 mat-raised-button 
-                class="btn btn-primary"
+                color="primary"
                 (click)="onTestDatabaseConnection()"
                 [disabled]="loading">
                 <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner>
                 <span *ngIf="!loading">Test Connection</span>
-              </div>
+              </button>
             </div>
+          </div>
         </div>
 
         <div class="step-actions">
           <button 
             mat-raised-button 
-            class="btn btn-primary"
+            color="primary"
             (click)="onNextStep()"
             [disabled]="setupForm.get('databaseType')?.invalid || 
                        setupForm.get('databaseHost')?.invalid || 
@@ -132,19 +134,19 @@
                        setupForm.get('databaseUsername')?.invalid || 
                        setupForm.get('databasePassword')?.invalid">
             Next
-          </div>
-        </mat-step>
-      </mat-stepper>
+          </button>
+        </div>
+      </mat-step>
 
       <!-- Step 2: Application Settings -->
       <mat-step [stepControl]="setupForm" label="Application">
-        
-          <h3 class="text-lg font-medium mb-sm">{{ getStepTitle(1) }}</h3>
-          <p class="text-secondary mb-sm">{{ getStepDescription(1) }}</p>
+        <div class="step-content">
+          <h3>{{ getStepTitle(1) }}</h3>
+          <p>{{ getStepDescription(1) }}</p>
 
           <div class="form-section">
             <div class="form-row">
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="form-field">
                 <mat-label>Application Name</mat-label>
                 <input 
                   matInput 
@@ -155,7 +157,7 @@
                 </mat-error>
               </mat-form-field>
 
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="form-field">
                 <mat-label>Application URL</mat-label>
                 <input 
                   matInput 
@@ -165,9 +167,10 @@
                   {{ getErrorMessage('appUrl') }}
                 </mat-error>
               </mat-form-field>
+            </div>
 
             <div class="form-row">
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="form-field">
                 <mat-label>Admin Email</mat-label>
                 <input 
                   matInput 
@@ -181,7 +184,7 @@
             </div>
 
             <div class="form-row">
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="form-field">
                 <mat-label>Admin Username</mat-label>
                 <input 
                   matInput 
@@ -194,7 +197,7 @@
             </div>
 
             <div class="form-row">
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="form-field">
                 <mat-label>Admin Password</mat-label>
                 <input 
                   matInput 
@@ -206,7 +209,7 @@
                 </mat-error>
               </mat-form-field>
 
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="form-field">
                 <mat-label>Confirm Password</mat-label>
                 <input 
                   matInput 
@@ -218,13 +221,14 @@
                 </mat-error>
               </mat-form-field>
             </div>
+          </div>
         </div>
 
         <div class="step-actions">
           <button mat-button (click)="onPreviousStep()">Previous</button>
           <button 
             mat-raised-button 
-            class="btn btn-primary"
+            color="primary"
             (click)="onNextStep()"
             [disabled]="setupForm.get('appName')?.invalid || 
                        setupForm.get('appUrl')?.invalid || 
@@ -233,24 +237,25 @@
                        setupForm.get('adminPassword')?.invalid || 
                        setupForm.get('adminConfirmPassword')?.invalid">
             Next
-          </div>
+          </button>
         </div>
       </mat-step>
 
       <!-- Step 3: Email Configuration -->
       <mat-step [stepControl]="setupForm" label="Email">
-        
-          <h3 class="text-lg font-medium mb-sm">{{ getStepTitle(2) }}</h3>
-          <p class="text-secondary mb-sm">{{ getStepDescription(2) }}</p>
+        <div class="step-content">
+          <h3>{{ getStepTitle(2) }}</h3>
+          <p>{{ getStepDescription(2) }}</p>
 
           <div class="form-section">
             <div class="form-row">
               <mat-checkbox formControlName="smtpEnabled">
                 Enable SMTP Email
               </mat-checkbox>
+            </div>
 
             <div class="form-row" *ngIf="setupForm.get('smtpEnabled')?.value">
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="form-field">
                 <mat-label>SMTP Host</mat-label>
                 <input 
                   matInput 
@@ -258,7 +263,7 @@
                   placeholder="smtp.gmail.com">
               </mat-form-field>
 
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="form-field">
                 <mat-label>SMTP Port</mat-label>
                 <input 
                   matInput 
@@ -269,7 +274,7 @@
             </div>
 
             <div class="form-row" *ngIf="setupForm.get('smtpEnabled')?.value">
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="form-field">
                 <mat-label>SMTP Username</mat-label>
                 <input 
                   matInput 
@@ -277,7 +282,7 @@
                   placeholder="your-email@gmail.com">
               </mat-form-field>
 
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="form-field">
                 <mat-label>SMTP Password</mat-label>
                 <input 
                   matInput 
@@ -288,7 +293,7 @@
             </div>
 
             <div class="form-row" *ngIf="setupForm.get('smtpEnabled')?.value">
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="form-field">
                 <mat-label>From Email</mat-label>
                 <input 
                   matInput 
@@ -297,7 +302,7 @@
                   placeholder="noreply@example.com">
               </mat-form-field>
 
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="form-field">
                 <mat-label>From Name</mat-label>
                 <input 
                   matInput 
@@ -305,28 +310,29 @@
                   placeholder="Mealie">
               </mat-form-field>
             </div>
+          </div>
         </div>
 
         <div class="step-actions">
           <button mat-button (click)="onPreviousStep()">Previous</button>
           <button 
             mat-raised-button 
-            class="btn btn-primary"
+            color="primary"
             (click)="onNextStep()">
             Next
-          </div>
+          </button>
         </div>
       </mat-step>
 
       <!-- Step 4: Security Settings -->
       <mat-step [stepControl]="setupForm" label="Security">
-        
-          <h3 class="text-lg font-medium mb-sm">{{ getStepTitle(3) }}</h3>
-          <p class="text-secondary mb-sm">{{ getStepDescription(3) }}</p>
+        <div class="step-content">
+          <h3>{{ getStepTitle(3) }}</h3>
+          <p>{{ getStepDescription(3) }}</p>
 
           <div class="form-section">
             <div class="form-row">
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="form-field">
                 <mat-label>JWT Secret</mat-label>
                 <input 
                   matInput 
@@ -338,13 +344,14 @@
               </mat-form-field>
               <button 
                 mat-button 
-                class="btn btn-primary"
+                color="primary"
                 (click)="onGenerateJwtSecret()">
                 Generate
-              </div>
+              </button>
+            </div>
 
             <div class="form-row">
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="form-field">
                 <mat-label>Session Timeout (hours)</mat-label>
                 <input 
                   matInput 
@@ -356,7 +363,7 @@
                 </mat-error>
               </mat-form-field>
 
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="form-field">
                 <mat-label>Max Login Attempts</mat-label>
                 <input 
                   matInput 
@@ -370,7 +377,7 @@
             </div>
 
             <div class="form-row">
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="form-field">
                 <mat-label>Minimum Password Length</mat-label>
                 <input 
                   matInput 
@@ -394,17 +401,21 @@
                 Allow User Registration
               </mat-checkbox>
             </div>
+          </div>
         </div>
 
         <div class="step-actions">
           <button mat-button (click)="onPreviousStep()">Previous</button>
           <button 
             mat-raised-button 
-            class="btn btn-primary"
+            color="primary"
             (click)="onCompleteSetup()"
             [disabled]="loading || setupForm.invalid">
             <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner>
             <span *ngIf="!loading">Complete Setup</span>
-          </div>
-        </mat-step>
-      </div>
+          </button>
+        </div>
+      </mat-step>
+    </mat-stepper>
+  </div>
+</div> 

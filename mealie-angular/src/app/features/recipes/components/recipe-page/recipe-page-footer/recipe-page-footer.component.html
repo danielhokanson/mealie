@@ -1,7 +1,7 @@
-<article class="card">
+<div class="recipe-page-footer">
   <!-- Original URL Section -->
   <div class="url-section">
-    <mat-form-field *ngIf="isEditForm" class="url-input w-full">
+    <mat-form-field *ngIf="isEditForm" class="url-input">
       <mat-label>Original URL</mat-label>
       <input matInput [(ngModel)]="recipe.orgURL" />
     </mat-form-field>
@@ -11,53 +11,57 @@
       [href]="recipe.orgURL"
       target="_blank"
       mat-stroked-button
-      class="btn btn-secondary url-button">
+      color="accent"
+      class="url-button">
       Original URL
-    </div>
-  </article>
+    </a>
+  </div>
 
   <!-- API Extras Section (Advanced Only) -->
   <div *ngIf="isEditForm && isAdvancedUser" class="api-extras-section">
-    <mat-card class="extras-card card">
-      <mat-card-header class="card">
-        <mat-card-title class="card">API Extras</mat-card-title>
+    <mat-card class="extras-card">
+      <mat-card-header>
+        <mat-card-title>API Extras</mat-card-title>
       </mat-card-header>
       
       <mat-divider></mat-divider>
       
-      <mat-card-content class="card">
-        <p class="extras-description text-secondary mb-sm">
+      <mat-card-content>
+        <p class="extras-description">
           Additional API data that can be used for integrations and custom functionality.
         </p>
         
         <div *ngFor="let extra of extrasArray" class="extra-item">
-          <mat-form-field class="extra-input w-full">
+          <mat-form-field class="extra-input">
             <mat-label>{{ extra.key }}</mat-label>
             <input matInput [(ngModel)]="extra.value" />
             <button
               matSuffix
               mat-icon-button
-              class="btn btn-error"
+              color="warn"
               (click)="removeApiExtra(extra.key)"
               [matTooltip]="'Remove extra'">
               <mat-icon>delete</mat-icon>
-            </mat-form-field>
-          </div>
-        </mat-card-content>
-      </mat-card>
+            </button>
+          </mat-form-field>
+        </div>
+      </mat-card-content>
       
-      <mat-card-actions class="add-extra-section card">
-        <mat-form-field class="new-key-input w-full">
+      <mat-card-actions class="add-extra-section">
+        <mat-form-field class="new-key-input">
           <mat-label>Message Key</mat-label>
           <input matInput [(ngModel)]="apiNewKey" />
         </mat-form-field>
         
         <button
           mat-raised-button
-          class="btn btn-primary"
+          color="primary"
           (click)="createApiExtra()"
           [disabled]="!apiNewKey || hasDuplicateKey()">
           <mat-icon>add</mat-icon>
           Add Extra
-        </mat-card-actions>
-      </div>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div> 

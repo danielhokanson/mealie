@@ -1,16 +1,16 @@
-<section class="page-container">
+<div class="user-profile-container">
   <!-- Loading State -->
-  <div *ngIf="loading" class="flex items-center justify-center py-xl">
+  <div *ngIf="loading" class="loading-container">
     <mat-spinner diameter="50"></mat-spinner>
-    <p class="text-secondary mb-sm">Loading profile...</p>
+    <p>Loading profile...</p>
   </div>
 
   <!-- Error State -->
-  <div *ngIf="error && !loading" class="flex flex-col items-center justify-center py-xl text-center">
+  <div *ngIf="error && !loading" class="error-container">
     <mat-icon class="error-icon">error</mat-icon>
-    <h3 class="text-lg font-medium mb-sm">Error Loading Profile</h3>
-    <p class="text-secondary mb-sm">Unable to load your profile. Please try again.</p>
-    <button mat-raised-button class="btn btn-primary" (click)="loadUserData()">
+    <h3>Error Loading Profile</h3>
+    <p>Unable to load your profile. Please try again.</p>
+    <button mat-raised-button color="primary" (click)="loadUserData()">
       Retry
     </button>
   </div>
@@ -20,19 +20,21 @@
     <!-- Header -->
     <div class="profile-header">
       <div class="profile-avatar">
-        <section class="page-container">
+        <div class="avatar-container">
           <img 
             *ngIf="imagePreview || userProfile?.avatar" 
             [src]="imagePreview || userProfile?.avatar" 
             alt="Profile Avatar"
             class="avatar-image">
-          <mat-icon *ngIf="!imagePreview && !userProfile?.avatar" class="avatar-placeholder">person</mat-icon>
+          <mat-icon *ngIf="!imagePreview && !userProfile?.avatar" class="avatar-placeholder">
+            person
+          </mat-icon>
           <button 
             mat-icon-button 
             class="avatar-edit"
             (click)="avatarInput.click()">
             <mat-icon>edit</mat-icon>
-          </section>
+          </button>
           <input 
             #avatarInput
             id="avatar-input"
@@ -41,10 +43,11 @@
             (change)="onImageSelected($event)"
             style="display: none;">
         </div>
+      </div>
       <div class="profile-info">
-        <h1 class="text-2xl font-medium mb-md">{{ currentUser.fullName }}</h1>
-        <p class="username text-secondary mb-sm">{{ currentUser.username }}</p>
-        <p class="bio" *ngIf="userProfile?.bio" class="text-secondary mb-sm">{{ userProfile?.bio }}</p>
+        <h1>{{ currentUser.fullName }}</h1>
+        <p class="username">{{ currentUser.username }}</p>
+        <p class="bio" *ngIf="userProfile?.bio">{{ userProfile?.bio }}</p>
         <div class="profile-stats">
           <div class="stat">
             <span class="stat-number">42</span>
@@ -58,20 +61,22 @@
             <span class="stat-number">8</span>
             <span class="stat-label">Favorites</span>
           </div>
+        </div>
       </div>
+    </div>
 
     <!-- Tabs -->
-    <mat-card class="tabs-card card">
+    <mat-card class="tabs-card">
       <mat-tab-group [(selectedIndex)]="selectedTab">
         <!-- Profile Tab -->
         <mat-tab label="Profile">
-          
+          <div class="tab-content">
             <form [formGroup]="profileForm" (ngSubmit)="onSaveProfile()" class="profile-form">
               <div class="form-section">
-                <h3 class="text-lg font-medium mb-sm">Basic Information</h3>
+                <h3>Basic Information</h3>
                 
                 <div class="form-row">
-                  <mat-form-field appearance="outline" class="w-full">
+                  <mat-form-field appearance="outline" class="form-field">
                     <mat-label>Username</mat-label>
                     <input 
                       matInput 
@@ -82,7 +87,7 @@
                     </mat-error>
                   </mat-form-field>
 
-                  <mat-form-field appearance="outline" class="w-full">
+                  <mat-form-field appearance="outline" class="form-field">
                     <mat-label>Full Name</mat-label>
                     <input 
                       matInput 
@@ -92,9 +97,10 @@
                       {{ getErrorMessage('fullName') }}
                     </mat-error>
                   </mat-form-field>
+                </div>
 
                 <div class="form-row">
-                  <mat-form-field appearance="outline" class="w-full">
+                  <mat-form-field appearance="outline" class="form-field">
                     <mat-label>Email</mat-label>
                     <input 
                       matInput 
@@ -106,7 +112,7 @@
                     </mat-error>
                   </mat-form-field>
 
-                  <mat-form-field appearance="outline" class="w-full">
+                  <mat-form-field appearance="outline" class="form-field">
                     <mat-label>Phone</mat-label>
                     <input 
                       matInput 
@@ -116,7 +122,7 @@
                 </div>
 
                 <div class="form-row">
-                  <mat-form-field appearance="outline" class="w-full">
+                  <mat-form-field appearance="outline" class="form-field">
                     <mat-label>Location</mat-label>
                     <input 
                       matInput 
@@ -124,7 +130,7 @@
                       placeholder="Enter location">
                   </mat-form-field>
 
-                  <mat-form-field appearance="outline" class="w-full">
+                  <mat-form-field appearance="outline" class="form-field">
                     <mat-label>Website</mat-label>
                     <input 
                       matInput 
@@ -134,50 +140,54 @@
                 </div>
 
                 <div class="form-row">
-                  <mat-form-field appearance="outline" class="w-full">
+                  <mat-form-field appearance="outline" class="form-field">
                     <mat-label>Bio</mat-label>
                     <textarea 
                       matInput 
                       formControlName="bio"
                       placeholder="Tell us about yourself"
                       rows="3">
-                    </mat-form-field>
-                  </div>
+                    </textarea>
+                  </mat-form-field>
                 </div>
+              </div>
 
               <div class="form-section" *ngIf="userProfile">
-                <h3 class="text-lg font-medium mb-sm">Preferences</h3>
+                <h3>Preferences</h3>
                 
                 <div class="preferences-grid">
                   <div class="preference-group">
                     <h4>Dietary Restrictions</h4>
-                    <section class="page-container">
+                    <div class="chips-container">
                       <mat-chip 
                         *ngFor="let restriction of userProfile.preferences.dietaryRestrictions"
                         [style.background-color]="getCookingSkillColor('intermediate')">
                         {{ restriction }}
-                      </section>
+                      </mat-chip>
                     </div>
+                  </div>
 
                   <div class="preference-group">
                     <h4>Allergies</h4>
-                    <section class="page-container">
+                    <div class="chips-container">
                       <mat-chip 
                         *ngFor="let allergy of userProfile.preferences.allergies"
                         [style.background-color]="getCookingSkillColor('beginner')">
                         {{ allergy }}
-                      </section>
+                      </mat-chip>
                     </div>
+                  </div>
 
                   <div class="preference-group">
                     <h4>Cuisine Preferences</h4>
-                    <section class="page-container">
+                    <div class="chips-container">
                       <mat-chip 
                         *ngFor="let cuisine of userProfile.preferences.cuisinePreferences"
                         [style.background-color]="getCookingSkillColor('advanced')">
                         {{ cuisine }}
-                      </section>
+                      </mat-chip>
                     </div>
+                  </div>
 
                   <div class="preference-group">
                     <h4>Cooking Skill</h4>
@@ -185,31 +195,32 @@
                       {{ userProfile.preferences.cookingSkill }}
                     </mat-chip>
                   </div>
+                </div>
               </div>
 
-              <div class="flex justify-end gap-sm mt-lg">
+              <div class="form-actions">
                 <button 
                   mat-raised-button 
-                  class="btn btn-primary"
+                  color="primary"
                   type="submit"
                   [disabled]="saving || profileForm.invalid">
                   <mat-spinner *ngIf="saving" diameter="20" class="spinner"></mat-spinner>
                   <span *ngIf="!saving">Save Profile</span>
-                </div>
+                </button>
               </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </mat-tab>
 
         <!-- Preferences Tab -->
         <mat-tab label="Preferences">
-          
+          <div class="tab-content">
             <form [formGroup]="preferencesForm" (ngSubmit)="onSavePreferences()" class="preferences-form">
               <div class="form-section">
-                <h3 class="text-lg font-medium mb-sm">App Settings</h3>
+                <h3>App Settings</h3>
                 
                 <div class="form-row">
-                  <mat-form-field appearance="outline" class="w-full">
+                  <mat-form-field appearance="outline" class="form-field">
                     <mat-label>Theme</mat-label>
                     <mat-select formControlName="theme">
                       <mat-option value="light">Light</mat-option>
@@ -218,7 +229,7 @@
                     </mat-select>
                   </mat-form-field>
 
-                  <mat-form-field appearance="outline" class="w-full">
+                  <mat-form-field appearance="outline" class="form-field">
                     <mat-label>Language</mat-label>
                     <mat-select formControlName="language">
                       <mat-option value="en">English</mat-option>
@@ -227,9 +238,10 @@
                       <mat-option value="de">German</mat-option>
                     </mat-select>
                   </mat-form-field>
+                </div>
 
                 <div class="form-row">
-                  <mat-form-field appearance="outline" class="w-full">
+                  <mat-form-field appearance="outline" class="form-field">
                     <mat-label>Timezone</mat-label>
                     <mat-select formControlName="timezone">
                       <mat-option value="UTC">UTC</mat-option>
@@ -240,9 +252,10 @@
                     </mat-select>
                   </mat-form-field>
                 </div>
+              </div>
 
               <div class="form-section">
-                <h3 class="text-lg font-medium mb-sm">Notifications</h3>
+                <h3>Notifications</h3>
                 
                 <div class="checkbox-group">
                   <mat-checkbox formControlName="emailNotifications">
@@ -265,9 +278,10 @@
                     Weekly Reports
                   </mat-checkbox>
                 </div>
+              </div>
 
               <div class="form-section">
-                <h3 class="text-lg font-medium mb-sm">Recipe Settings</h3>
+                <h3>Recipe Settings</h3>
                 
                 <div class="checkbox-group">
                   <mat-checkbox formControlName="autoSave">
@@ -288,7 +302,7 @@
                 </div>
 
                 <div class="form-row">
-                  <mat-form-field appearance="outline" class="w-full">
+                  <mat-form-field appearance="outline" class="form-field">
                     <mat-label>Default Servings</mat-label>
                     <input 
                       matInput 
@@ -297,7 +311,7 @@
                       min="1">
                   </mat-form-field>
 
-                  <mat-form-field appearance="outline" class="w-full">
+                  <mat-form-field appearance="outline" class="form-field">
                     <mat-label>Default Prep Time (minutes)</mat-label>
                     <input 
                       matInput 
@@ -306,7 +320,7 @@
                       min="0">
                   </mat-form-field>
 
-                  <mat-form-field appearance="outline" class="w-full">
+                  <mat-form-field appearance="outline" class="form-field">
                     <mat-label>Default Cook Time (minutes)</mat-label>
                     <input 
                       matInput 
@@ -315,29 +329,30 @@
                       min="0">
                   </mat-form-field>
                 </div>
+              </div>
 
-              <div class="flex justify-end gap-sm mt-lg">
+              <div class="form-actions">
                 <button 
                   mat-raised-button 
-                  class="btn btn-primary"
+                  color="primary"
                   type="submit"
                   [disabled]="saving || preferencesForm.invalid">
                   <mat-spinner *ngIf="saving" diameter="20" class="spinner"></mat-spinner>
                   <span *ngIf="!saving">Save Preferences</span>
-                </div>
+                </button>
               </div>
-            </div>
+            </form>
           </div>
-        </div>
+        </mat-tab>
 
         <!-- Security Tab -->
         <mat-tab label="Security">
-          
+          <div class="tab-content">
             <div class="security-section">
-              <h3 class="text-lg font-medium mb-sm">Change Password</h3>
+              <h3>Change Password</h3>
               <form [formGroup]="passwordForm" (ngSubmit)="onChangePassword()" class="password-form">
                 <div class="form-row">
-                  <mat-form-field appearance="outline" class="w-full">
+                  <mat-form-field appearance="outline" class="form-field">
                     <mat-label>Current Password</mat-label>
                     <input 
                       matInput 
@@ -348,9 +363,10 @@
                       {{ getPasswordErrorMessage('currentPassword') }}
                     </mat-error>
                   </mat-form-field>
+                </div>
 
                 <div class="form-row">
-                  <mat-form-field appearance="outline" class="w-full">
+                  <mat-form-field appearance="outline" class="form-field">
                     <mat-label>New Password</mat-label>
                     <input 
                       matInput 
@@ -362,7 +378,7 @@
                     </mat-error>
                   </mat-form-field>
 
-                  <mat-form-field appearance="outline" class="w-full">
+                  <mat-form-field appearance="outline" class="form-field">
                     <mat-label>Confirm New Password</mat-label>
                     <input 
                       matInput 
@@ -375,15 +391,15 @@
                   </mat-form-field>
                 </div>
 
-                <div class="flex justify-end gap-sm mt-lg">
+                <div class="form-actions">
                   <button 
                     mat-raised-button 
-                    class="btn btn-primary"
+                    color="primary"
                     type="submit"
                     [disabled]="saving || passwordForm.invalid">
                     <mat-spinner *ngIf="saving" diameter="20" class="spinner"></mat-spinner>
                     <span *ngIf="!saving">Change Password</span>
-                  </div>
+                  </button>
                 </div>
               </form>
             </div>
@@ -391,31 +407,29 @@
             <mat-divider></mat-divider>
 
             <div class="security-section">
-              <h3 class="text-lg font-medium mb-sm">Account Actions</h3>
+              <h3>Account Actions</h3>
               
               <div class="action-buttons">
                 <button 
                   mat-raised-button 
-                  class="btn btn-secondary"
+                  color="accent"
                   (click)="onExportData()">
                   <mat-icon>download</mat-icon>
                   Export Data
-                </div>
+                </button>
                 
                 <button 
                   mat-raised-button 
-                  class="btn btn-error"
+                  color="warn"
                   (click)="onDeleteAccount()">
                   <mat-icon>delete_forever</mat-icon>
                   Delete Account
-                </div>
-              </mat-tab>
-          </form>
+                </button>
+              </div>
+            </div>
+          </div>
         </mat-tab>
       </mat-tab-group>
     </mat-card>
   </div>
-
-</div>
-</div>
-</section>
+</div> 

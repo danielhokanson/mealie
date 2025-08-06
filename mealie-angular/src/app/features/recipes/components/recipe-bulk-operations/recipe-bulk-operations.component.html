@@ -1,36 +1,38 @@
-<section class="page-container">
+<div class="recipe-bulk-operations-container">
   <!-- Header -->
   <div class="bulk-header">
-    <h2 class="text-xl font-medium mb-md">Bulk Operations</h2>
-    <p class="text-secondary mb-sm">{{ selectedRecipes.length }} recipe(s) selected</p>
+    <h2>Bulk Operations</h2>
+    <p>{{ selectedRecipes.length }} recipe(s) selected</p>
   </div>
 
   <!-- Selection Actions -->
   <div class="selection-actions">
     <button 
       mat-button 
-      class="btn btn-primary"
+      color="primary"
       (click)="onSelectAll()">
       <mat-icon>select_all</mat-icon>
       Select All
-    </div>
+    </button>
     <button 
       mat-button 
-      class="btn btn-primary"
+      color="primary"
       (click)="onInvertSelection()">
       <mat-icon>swap_horiz</mat-icon>
       Invert Selection
-    </section>
+    </button>
     <button 
       mat-button 
-      class="btn btn-error"
+      color="warn"
       (click)="onClearSelection()">
       <mat-icon>clear</mat-icon>
       Clear Selection
+    </button>
+  </div>
 
   <!-- Operation Type Selection -->
   <div class="operation-selection">
-    <h3 class="text-lg font-medium mb-sm">Operation Type</h3>
+    <h3>Operation Type</h3>
     <div class="operation-buttons">
       <button 
         mat-button 
@@ -38,40 +40,45 @@
         (click)="onOperationTypeChange('category')">
         <mat-icon>category</mat-icon>
         Update Categories
-      </div>
+      </button>
       <button 
         mat-button 
         [class.active]="operationType === 'tag'"
         (click)="onOperationTypeChange('tag')">
         <mat-icon>label</mat-icon>
         Update Tags
-      </div>
+      </button>
       <button 
         mat-button 
         [class.active]="operationType === 'delete'"
         (click)="onOperationTypeChange('delete')">
         <mat-icon>delete</mat-icon>
         Delete Recipes
+      </button>
       <button 
         mat-button 
         [class.active]="operationType === 'export'"
         (click)="onOperationTypeChange('export')">
         <mat-icon>download</mat-icon>
         Export Recipes
+      </button>
       <button 
         mat-button 
         [class.active]="operationType === 'share'"
         (click)="onOperationTypeChange('share')">
         <mat-icon>share</mat-icon>
         Share Recipes
+      </button>
+    </div>
+  </div>
 
   <!-- Operation Configuration -->
   <div class="operation-config">
     <form [formGroup]="bulkForm">
       <!-- Category Operation -->
       <div *ngIf="operationType === 'category'" class="operation-section">
-        <h3 class="text-lg font-medium mb-sm">Update Categories</h3>
-        <p class="text-secondary mb-sm">Select categories to add to the selected recipes:</p>
+        <h3>Update Categories</h3>
+        <p>Select categories to add to the selected recipes:</p>
         
         <div class="categories-grid">
           <div 
@@ -81,17 +88,18 @@
             (click)="onCategoryToggle(category.id)">
             <mat-checkbox 
               [checked]="isCategorySelected(category.id)"
-              class="btn btn-primary">
+              color="primary">
               <div class="category-info">
                 <span class="category-name">{{ category.name }}</span>
                 <span class="category-description" *ngIf="category.description">{{ category.description }}</span>
               </div>
-            </div>
+            </mat-checkbox>
             <div 
               class="category-color"
               [style.background-color]="getCategoryColor(category)">
             </div>
-        </form>
+          </div>
+        </div>
 
         <div class="selected-summary" *ngIf="selectedCategories.length > 0">
           <h4>Selected Categories:</h4>
@@ -100,14 +108,15 @@
               *ngFor="let categoryName of getSelectedCategoryNames()"
               [style.background-color]="getCategoryColor(availableCategories.find(c => c.name === categoryName)!)">
               {{ categoryName }}
-            </div>
+            </mat-chip>
           </div>
+        </div>
       </div>
 
       <!-- Tag Operation -->
       <div *ngIf="operationType === 'tag'" class="operation-section">
-        <h3 class="text-lg font-medium mb-sm">Update Tags</h3>
-        <p class="text-secondary mb-sm">Select tags to add to the selected recipes:</p>
+        <h3>Update Tags</h3>
+        <p>Select tags to add to the selected recipes:</p>
         
         <div class="tags-grid">
           <div 
@@ -117,16 +126,18 @@
             (click)="onTagToggle(tag.id)">
             <mat-checkbox 
               [checked]="isTagSelected(tag.id)"
-              class="btn btn-primary">
+              color="primary">
               <div class="tag-info">
                 <span class="tag-name">{{ tag.name }}</span>
                 <span class="tag-description" *ngIf="tag.description">{{ tag.description }}</span>
               </div>
-            </div>
+            </mat-checkbox>
             <div 
               class="tag-color"
               [style.background-color]="getTagColor(tag)">
             </div>
+          </div>
+        </div>
 
         <div class="selected-summary" *ngIf="selectedTags.length > 0">
           <h4>Selected Tags:</h4>
@@ -135,29 +146,31 @@
               *ngFor="let tagName of getSelectedTagNames()"
               [style.background-color]="getTagColor(availableTags.find(t => t.name === tagName)!)">
               {{ tagName }}
-            </div>
+            </mat-chip>
           </div>
+        </div>
+      </div>
 
       <!-- Delete Operation -->
       <div *ngIf="operationType === 'delete'" class="operation-section">
-        <h3 class="text-lg font-medium mb-sm">Delete Recipes</h3>
+        <h3>Delete Recipes</h3>
         <div class="delete-warning">
           <mat-icon class="warning-icon">warning</mat-icon>
-          <p class="text-secondary mb-sm">This action will permanently delete {{ selectedRecipes.length }} recipe(s). This action cannot be undone.</p>
+          <p>This action will permanently delete {{ selectedRecipes.length }} recipe(s). This action cannot be undone.</p>
         </div>
         
         <div class="delete-confirmation">
           <mat-checkbox 
             [(ngModel)]="confirmDelete"
             (change)="onConfirmDeleteChange()"
-            class="btn btn-error">
+            color="warn">
             I understand that this action cannot be undone
-          </div>
+          </mat-checkbox>
         </div>
 
         <div class="recipes-to-delete">
           <h4>Recipes to be deleted:</h4>
-          <mat-list class="flex flex-col gap-sm">
+          <mat-list>
             <mat-list-item *ngFor="let recipe of selectedRecipes" class="recipe-item">
               <mat-icon matListItemIcon>restaurant</mat-icon>
               <div matListItemTitle>{{ recipe.name }}</div>
@@ -165,112 +178,117 @@
             </mat-list-item>
           </mat-list>
         </div>
+      </div>
 
       <!-- Export Operation -->
       <div *ngIf="operationType === 'export'" class="operation-section">
-        <h3 class="text-lg font-medium mb-sm">Export Recipes</h3>
-        <p class="text-secondary mb-sm">Export {{ selectedRecipes.length }} recipe(s) in various formats:</p>
+        <h3>Export Recipes</h3>
+        <p>Export {{ selectedRecipes.length }} recipe(s) in various formats:</p>
         
         <div class="export-options">
           <div class="export-option">
-            <mat-checkbox class="btn btn-primary" checked>
+            <mat-checkbox color="primary" checked>
               Include recipe images
             </mat-checkbox>
           </div>
           <div class="export-option">
-            <mat-checkbox class="btn btn-primary" checked>
+            <mat-checkbox color="primary" checked>
               Include nutrition information
             </mat-checkbox>
           </div>
           <div class="export-option">
-            <mat-checkbox class="btn btn-primary" checked>
+            <mat-checkbox color="primary" checked>
               Include notes and comments
             </mat-checkbox>
           </div>
           <div class="export-option">
-            <mat-checkbox class="btn btn-primary">
+            <mat-checkbox color="primary">
               Include timeline data
             </mat-checkbox>
           </div>
+        </div>
 
         <div class="export-formats">
           <h4>Export Formats:</h4>
           <div class="format-buttons">
-            <button mat-button class="btn btn-primary">
+            <button mat-button color="primary">
               <mat-icon>description</mat-icon>
               JSON
             </button>
-            <button mat-button class="btn btn-primary">
+            <button mat-button color="primary">
               <mat-icon>table_chart</mat-icon>
               CSV
             </button>
-            <button mat-button class="btn btn-primary">
+            <button mat-button color="primary">
               <mat-icon>picture_as_pdf</mat-icon>
               PDF
             </button>
-            <button mat-button class="btn btn-primary">
+            <button mat-button color="primary">
               <mat-icon>code</mat-icon>
               XML
             </button>
           </div>
+        </div>
       </div>
 
       <!-- Share Operation -->
       <div *ngIf="operationType === 'share'" class="operation-section">
-        <h3 class="text-lg font-medium mb-sm">Share Recipes</h3>
-        <p class="text-secondary mb-sm">Share {{ selectedRecipes.length }} recipe(s) with others:</p>
+        <h3>Share Recipes</h3>
+        <p>Share {{ selectedRecipes.length }} recipe(s) with others:</p>
         
         <div class="share-options">
           <div class="share-option">
-            <mat-checkbox class="btn btn-primary" checked>
+            <mat-checkbox color="primary" checked>
               Include recipe images
             </mat-checkbox>
           </div>
           <div class="share-option">
-            <mat-checkbox class="btn btn-primary" checked>
+            <mat-checkbox color="primary" checked>
               Include nutrition information
             </mat-checkbox>
           </div>
           <div class="share-option">
-            <mat-checkbox class="btn btn-primary">
+            <mat-checkbox color="primary">
               Include notes and comments
             </mat-checkbox>
           </div>
           <div class="share-option">
-            <mat-checkbox class="btn btn-primary">
+            <mat-checkbox color="primary">
               Include timeline data
             </mat-checkbox>
           </div>
+        </div>
 
         <div class="share-methods">
           <h4>Share Methods:</h4>
           <div class="method-buttons">
-            <button mat-button class="btn btn-primary">
+            <button mat-button color="primary">
               <mat-icon>email</mat-icon>
               Email
             </button>
-            <button mat-button class="btn btn-primary">
+            <button mat-button color="primary">
               <mat-icon>link</mat-icon>
               Generate Links
             </button>
-            <button mat-button class="btn btn-primary">
+            <button mat-button color="primary">
               <mat-icon>qr_code</mat-icon>
               QR Codes
             </button>
-            <button mat-button class="btn btn-primary">
+            <button mat-button color="primary">
               <mat-icon>share</mat-icon>
               Social Media
             </button>
           </div>
+        </div>
       </div>
-    </div>
+    </form>
   </div>
 
   <!-- Execute Button -->
   <div class="execute-section">
     <button 
       mat-raised-button 
-      class="btn btn-primary"
+      color="primary"
       (click)="onExecuteOperation()"
       [disabled]="loading || selectedRecipes.length === 0 || (operationType === 'delete' && !confirmDelete)">
       <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner>
@@ -282,7 +300,6 @@
         <mat-icon *ngIf="operationType === 'share'">share</mat-icon>
         {{ getOperationButtonText() }}
       </span>
-    </div>
+    </button>
   </div>
-
-</div>
+</div> 

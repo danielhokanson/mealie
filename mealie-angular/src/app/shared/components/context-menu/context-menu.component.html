@@ -8,8 +8,8 @@
       class="context-menu-trigger"
       (click)="$event.preventDefault()">
       <mat-icon>more_vert</mat-icon>
-    </ng-template>
-  </mat-menu>
+    </button>
+  </ng-template>
   
   <mat-list class="context-menu-list">
     <button
@@ -21,5 +21,8 @@
         matListItemIcon
         [color]="item.color || undefined">
         {{ item.icon }}
+      </mat-icon>
       <span matListItemTitle>{{ item.title }}</span>
-    </mat-list>
+    </button>
+  </mat-list>
+</mat-menu> 

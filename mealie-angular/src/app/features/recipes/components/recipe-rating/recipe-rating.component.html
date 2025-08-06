@@ -4,7 +4,7 @@
        class="rating-container"
        (mouseenter)="isHovering = true"
        (mouseleave)="isHovering = false">
-    <section class="page-container">
+    <div class="stars-container">
       <button 
         *ngFor="let star of [1,2,3,4,5]; let i = index"
         type="button"
@@ -16,7 +16,7 @@
         (mouseenter)="hoverRating = star"
         (mouseleave)="hoverRating = 0">
         <mat-icon>{{ getStarIcon(star) }}</mat-icon>
-      </section>
+      </button>
     </div>
     <button 
       *ngIf="userRating"
@@ -26,19 +26,23 @@
       [matTooltip]="'Clear rating'"
       (click)="clearRating()">
       <mat-icon>clear</mat-icon>
+    </button>
+  </div>
 
   <!-- Group Rating (read-only) -->
   <div *ngIf="!canRate || (!userRating && !isHovering && ratingsLoaded)" 
        class="rating-container group-rating">
-    <section class="page-container">
+    <div class="stars-container">
       <mat-icon 
         *ngFor="let star of [1,2,3,4,5]; let i = index"
         class="star-icon"
         [class.active]="groupRating >= star"
         [class.half]="groupRating >= star - 0.5 && groupRating < star">
         {{ getStarIcon(star) }}
-
-    </section>
+      </mat-icon>
+    </div>
     <span *ngIf="groupRating > 0" class="rating-text">
       {{ groupRating.toFixed(1) }}
     </span>
+  </div>
+</div> 

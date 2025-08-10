@@ -25,6 +25,109 @@ dotenv:
   - .env
   - .dev.env
 tasks:
+  # ==========================================
+  # New Angular + .NET Tasks
+  # ==========================================
+  
+  angular:setup:
+    desc: setup Angular frontend dependencies
+    dir: mealie-angular
+    run: once
+    cmds:
+      - npm install
+    sources:
+      - package.json
+      - package-lock.json
+    generates:
+      - node_modules/**
+
+  angular:build:
+    desc: builds the Angular frontend for production
+    dir: mealie-angular
+    deps:
+      - angular:setup
+    cmds:
+      - npm run build -- --configuration production
+
+  angular:dev:
+    desc: runs the Angular frontend in development mode
+    dir: mealie-angular
+    deps:
+      - angular:setup
+    cmds:
+      - npm run start
+
+  angular:test:
+    desc: runs Angular frontend tests
+    dir: mealie-angular
+    cmds:
+      - npm run test
+
+  angular:lint:
+    desc: runs Angular frontend linter
+    dir: mealie-angular
+    cmds:
+      - npm run lint
+
+  dotnet:restore:
+    desc: restore .NET dependencies
+    dir: MealieApi
+    cmds:
+      - dotnet restore
+
+  dotnet:build:
+    desc: builds the .NET backend
+    dir: MealieApi
+    deps:
+      - dotnet:restore
+    cmds:
+      - dotnet build -c Release
+
+  dotnet:test:
+    desc: runs .NET backend tests
+    dir: MealieApi
+    cmds:
+      - dotnet test
+
+  dotnet:run:
+    desc: runs the .NET backend
+    dir: MealieApi/src/MealieApi.WebApi
+    deps:
+      - dotnet:restore
+    cmds:
+      - dotnet run
+
+  dotnet:publish:
+    desc: publishes the .NET backend for production
+    dir: MealieApi
+    deps:
+      - dotnet:restore
+    cmds:
+      - dotnet publish src/MealieApi.WebApi/MealieApi.WebApi.csproj -c Release -o publish
+
+  new:dev:
+    desc: runs both Angular frontend and .NET backend in development mode
+    deps:
+      - angular:dev
+      - dotnet:run
+
+  new:build:
+    desc: builds both Angular frontend and .NET backend for production
+    deps:
+      - angular:build
+      - dotnet:publish
+
+  docker:new:
+    desc: builds and runs the new Angular + .NET docker image
+    dir: docker
+    cmds:
+      - docker build -f Dockerfile -t mealie-next:latest ..
+      - docker run -p 80:80 mealie-next:latest
+
+  # ==========================================
+  # Legacy Vue + Python Tasks (DEPRECATED)
+  # ==========================================
+  
   docs:gen:
     desc: runs the API documentation generator
     cmds:
@@ -39,8 +142,8 @@ tasks:
       - poetry run python -m mkdocs serve
 
   setup:ui:
-    desc: setup frontend dependencies
-    dir: frontend
+    desc: setup frontend dependencies (DEPRECATED - use angular:setup)
+    dir: frontend-deprecated
     run: once
     cmds:
       - yarn install
@@ -91,9 +194,9 @@ tasks:
       - rm -f ./dev/data/.secret
 
   py:mypy:
-    desc: runs python type checking
+    desc: runs python type checking (DEPRECATED)
     cmds:
-      - poetry run mypy mealie
+      - poetry run mypy mealie-deprecated
 
   py:test:
     desc: runs python tests (support args after '--')
@@ -106,9 +209,9 @@ tasks:
       - poetry run ruff format .
 
   py:lint:
-    desc: runs python linter
+    desc: runs python linter (DEPRECATED)
     cmds:
-      - poetry run ruff check mealie
+      - poetry run ruff check mealie-deprecated
 
   py:check:
     desc: runs all linters, type checkers, and formatters
@@ -128,17 +231,17 @@ tasks:
       - open htmlcov/index.html
 
   py:package:copy-frontend:
-    desc: copy the frontend files into the Python package
+    desc: copy the frontend files into the Python package (DEPRECATED)
     internal: true
     deps:
       - ui:generate
     cmds:
-      - rm -rf mealie/frontend
-      - cp -a frontend/dist mealie/frontend
+      - rm -rf mealie-deprecated/frontend
+      - cp -a frontend-deprecated/dist mealie-deprecated/frontend
     sources:
-      - frontend/dist/**
+      - frontend-deprecated/dist/**
     generates:
-      - mealie/frontend/**
+      - mealie-deprecated/frontend/**
 
   py:package:generate-requirements:
     desc: Generate requirements file to pin all packages, effectively a "pip freeze" before installation begins
@@ -185,12 +288,12 @@ tasks:
       - task: py:package:generate-requirements
 
   py:
-    desc: runs the backend server
+    desc: runs the backend server (DEPRECATED - use dotnet:run)
     cmds:
-      - poetry run python mealie/app.py
+      - poetry run python mealie-deprecated/app.py
 
   py:postgres:
-    desc: runs the backend server configured for containerized postgres
+    desc: runs the backend server configured for containerized postgres (DEPRECATED - use dotnet:run)
     env:
       DB_ENGINE: postgres
       POSTGRES_USER: mealie
@@ -199,37 +302,37 @@ tasks:
       POSTGRES_PORT: 5432
       POSTGRES_DB: mealie
     cmds:
-      - poetry run python mealie/app.py
+      - poetry run python mealie-deprecated/app.py
 
   py:migrate:
-    desc: generates a new database migration file e.g. task py:migrate -- "add new column"
+    desc: generates a new database migration file e.g. task py:migrate -- "add new column" (DEPRECATED)
     cmds:
-      - poetry run alembic --config mealie/alembic/alembic.ini revision --autogenerate -m "{{ .CLI_ARGS }}"
+      - poetry run alembic --config mealie-deprecated/alembic/alembic.ini revision --autogenerate -m "{{ .CLI_ARGS }}"
       - task: py:format
 
   ui:build:
-    desc: builds the frontend in frontend/dist
-    dir: frontend
+    desc: builds the frontend in frontend/dist (DEPRECATED - use angular:build)
+    dir: frontend-deprecated
     cmds:
       - yarn build
 
   ui:generate:
-    desc: generates a static version of the frontend in frontend/dist
-    dir: frontend
+    desc: generates a static version of the frontend in frontend/dist (DEPRECATED)
+    dir: frontend-deprecated
     deps:
       - setup:ui
     cmds:
       - yarn generate
 
   ui:lint:
-    desc: runs the frontend linter
-    dir: frontend
+    desc: runs the frontend linter (DEPRECATED - use angular:lint)
+    dir: frontend-deprecated
     cmds:
       - yarn lint
 
   ui:test:
-    desc: runs the frontend tests
-    dir: frontend
+    desc: runs the frontend tests (DEPRECATED - use angular:test)
+    dir: frontend-deprecated
     cmds:
       - yarn test
 
@@ -240,8 +343,8 @@ tasks:
       - ui:test
 
   ui:
-    desc: runs the frontend server
-    dir: frontend
+    desc: runs the frontend server (DEPRECATED - use angular:dev)
+    dir: frontend-deprecated
     cmds:
       - yarn run dev --no-fork
 

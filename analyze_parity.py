@@ -14,7 +14,7 @@ from typing import Dict, List, Set, Tuple
 class ParityAnalyzer:
     def __init__(self, workspace_path: str):
         self.workspace_path = Path(workspace_path)
-        self.frontend_path = self.workspace_path / "frontend"
+        self.frontend_path = self.workspace_path / "frontend-deprecated"
         self.angular_path = self.workspace_path / "mealie-angular"
         
         # Track analysis results
@@ -213,7 +213,7 @@ class ParityAnalyzer:
         return report
 
 def main():
-    workspace_path = "/home/dhokanson/Dev/mealie"
+    workspace_path = "/workspace"
     analyzer = ParityAnalyzer(workspace_path)
     
     try:

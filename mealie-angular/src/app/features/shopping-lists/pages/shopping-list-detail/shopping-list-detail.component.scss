@@ -1,0 +1,339 @@
+.shopping-list-detail-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+
+  .loading-container,
+  .error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    text-align: center;
+
+    p {
+      margin-top: 16px;
+      color: var(--mat-text-color-secondary, #666);
+    }
+  }
+
+  .error-container {
+    .error-icon {
+      font-size: 64px;
+      width: 64px;
+      height: 64px;
+      color: #f44336;
+      margin-bottom: 16px;
+    }
+
+    h3 {
+      margin: 0 0 8px 0;
+      color: var(--mat-text-color-primary, #333);
+    }
+  }
+
+  .shopping-list-content {
+    .list-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 24px;
+      gap: 20px;
+
+      .list-title-section {
+        flex: 1;
+
+        h1 {
+          font-size: 32px;
+          font-weight: 600;
+          color: var(--mat-text-color-primary, #333);
+          margin: 0 0 8px 0;
+          line-height: 1.2;
+        }
+
+        .list-meta {
+          font-size: 14px;
+          color: var(--mat-text-color-secondary, #666);
+
+          span {
+            margin-right: 8px;
+          }
+        }
+      }
+
+      .list-actions {
+        display: flex;
+        gap: 8px;
+        flex-shrink: 0;
+      }
+    }
+
+    .progress-section {
+      margin-bottom: 24px;
+
+      .progress-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+
+        .progress-text {
+          font-size: 14px;
+          color: var(--mat-text-color-secondary, #666);
+        }
+
+        .progress-percentage {
+          font-size: 14px;
+          font-weight: 500;
+          color: var(--mat-primary-color, #1976d2);
+        }
+      }
+
+      mat-progress-bar {
+        height: 6px;
+        border-radius: 3px;
+      }
+    }
+
+    .add-item-section {
+      margin-bottom: 24px;
+
+      mat-card-header {
+        margin-bottom: 16px;
+
+        mat-card-title {
+          font-size: 20px;
+          font-weight: 500;
+          margin: 0;
+        }
+      }
+
+      .add-item-form {
+        .form-row {
+          display: flex;
+          gap: 16px;
+          margin-bottom: 16px;
+
+          .title-field {
+            flex: 2;
+          }
+
+          .quantity-field {
+            width: 120px;
+          }
+
+          .unit-field {
+            width: 120px;
+          }
+
+          .note-field {
+            flex: 1;
+          }
+        }
+
+        .labels-section {
+          margin-bottom: 16px;
+
+          h4 {
+            font-size: 16px;
+            font-weight: 500;
+            margin: 0 0 12px 0;
+            color: var(--mat-text-color-primary, #333);
+          }
+
+          .labels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 8px;
+
+            mat-checkbox {
+              font-size: 14px;
+            }
+          }
+        }
+
+        .form-actions {
+          display: flex;
+          justify-content: flex-end;
+        }
+      }
+    }
+
+    .items-section {
+      mat-card-header {
+        margin-bottom: 16px;
+
+        mat-card-title {
+          font-size: 20px;
+          font-weight: 500;
+          margin: 0;
+        }
+
+        mat-card-subtitle {
+          font-size: 14px;
+          color: var(--mat-text-color-secondary, #666);
+          margin: 4px 0 0 0;
+        }
+      }
+
+      .label-panel,
+      .unlabeled-panel {
+        margin-bottom: 16px;
+
+        .label-header {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+
+          .label-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            flex-shrink: 0;
+          }
+
+          mat-badge {
+            margin-left: auto;
+          }
+        }
+      }
+
+      .item-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 8px 0;
+
+        .item-checkbox {
+          flex-shrink: 0;
+        }
+
+        .item-content {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+
+          &.checked {
+            opacity: 0.6;
+            text-decoration: line-through;
+          }
+
+          .item-title {
+            font-weight: 500;
+            color: var(--mat-text-color-primary, #333);
+          }
+
+          .item-quantity {
+            font-size: 14px;
+            color: var(--mat-text-color-secondary, #666);
+          }
+
+          .item-note {
+            font-size: 14px;
+            color: var(--mat-text-color-secondary, #666);
+            font-style: italic;
+          }
+        }
+
+        .delete-button {
+          flex-shrink: 0;
+        }
+      }
+
+      .empty-items {
+        text-align: center;
+        padding: 40px 20px;
+
+        .empty-icon {
+          font-size: 64px;
+          width: 64px;
+          height: 64px;
+          color: var(--mat-text-color-secondary, #ccc);
+          margin-bottom: 16px;
+        }
+
+        h3 {
+          font-size: 20px;
+          font-weight: 500;
+          color: var(--mat-text-color-primary, #333);
+          margin: 0 0 8px 0;
+        }
+
+        p {
+          font-size: 14px;
+          color: var(--mat-text-color-secondary, #666);
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+
+// Delete action styling
+.delete-action {
+  color: #f44336;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .shopping-list-detail-container {
+    padding: 16px;
+
+    .shopping-list-content {
+      .list-header {
+        flex-direction: column;
+        gap: 16px;
+
+        .list-title-section {
+          h1 {
+            font-size: 24px;
+          }
+
+          .list-meta {
+            font-size: 12px;
+          }
+        }
+
+        .list-actions {
+          align-self: flex-end;
+        }
+      }
+
+      .add-item-section {
+        .add-item-form {
+          .form-row {
+            flex-direction: column;
+            gap: 12px;
+
+            .quantity-field,
+            .unit-field {
+              width: 100%;
+            }
+          }
+
+          .labels-section {
+            .labels-grid {
+              grid-template-columns: 1fr;
+            }
+          }
+        }
+      }
+
+      .items-section {
+        .item-row {
+          flex-direction: column;
+          align-items: stretch;
+          gap: 8px;
+
+          .item-content {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 4px;
+          }
+        }
+      }
+    }
+  }
+} 

@@ -1,0 +1,144 @@
+.image-upload-container {
+  text-align: center;
+}
+
+.upload-button {
+  .upload-icon {
+    margin-right: 8px;
+  }
+}
+
+.image-menu {
+  .menu-card {
+    width: 400px;
+    padding: 0;
+
+    .menu-title {
+      padding: 16px 16px 8px 16px;
+      margin: 0;
+
+      .title-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+
+        span {
+          font-size: 18px;
+          font-weight: 500;
+          color: #333;
+        }
+
+        .upload-component {
+          margin-left: auto;
+        }
+      }
+    }
+
+    .menu-content {
+      padding: 16px;
+      margin-top: -20px;
+      padding-top: 24px;
+
+      .url-section {
+        display: flex;
+        align-items: flex-end;
+        gap: 12px;
+
+        .url-input {
+          flex: 1;
+          margin: 0;
+
+          .url-input-field {
+            font-size: 14px;
+          }
+        }
+
+        .get-button {
+          flex-shrink: 0;
+          height: 40px;
+          min-width: 80px;
+        }
+      }
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .image-menu {
+    .menu-card {
+      width: 350px;
+
+      .menu-title {
+        padding: 12px 12px 6px 12px;
+
+        .title-content {
+          span {
+            font-size: 16px;
+          }
+        }
+      }
+
+      .menu-content {
+        padding: 12px;
+        margin-top: -16px;
+        padding-top: 20px;
+
+        .url-section {
+          gap: 8px;
+
+          .url-input {
+            .url-input-field {
+              font-size: 13px;
+            }
+          }
+
+          .get-button {
+            height: 36px;
+            min-width: 70px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .image-menu {
+    .menu-card {
+      width: 300px;
+
+      .menu-title {
+        padding: 10px 10px 4px 10px;
+
+        .title-content {
+          span {
+            font-size: 15px;
+          }
+        }
+      }
+
+      .menu-content {
+        padding: 10px;
+        margin-top: -12px;
+        padding-top: 16px;
+
+        .url-section {
+          gap: 6px;
+
+          .url-input {
+            .url-input-field {
+              font-size: 12px;
+            }
+          }
+
+          .get-button {
+            height: 32px;
+            min-width: 60px;
+          }
+        }
+      }
+    }
+  }
+} 

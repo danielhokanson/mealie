@@ -1,0 +1,116 @@
+.recipe-time-card {
+  text-align: center;
+  font-size: 14px;
+}
+
+.time-card-section {
+  margin-bottom: 16px;
+}
+
+.time-card-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.time-icon {
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+  color: #1976d2;
+}
+
+.time-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+}
+
+.time-label {
+  font-weight: 600;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.time-value {
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+}
+
+.time-divider {
+  margin: 12px 0;
+}
+
+.time-cards-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.time-divider-vertical {
+  height: 40px;
+  margin: 0 12px;
+}
+
+// Small variant
+.recipe-time-card.small {
+  font-size: 12px;
+
+  .time-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
+
+  .time-label {
+    font-size: 10px;
+  }
+
+  .time-value {
+    font-size: 12px;
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .time-cards-row {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .time-divider-vertical {
+    display: none;
+  }
+
+  .time-card-item {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .recipe-time-card {
+    font-size: 12px;
+  }
+
+  .time-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
+
+  .time-label {
+    font-size: 10px;
+  }
+
+  .time-value {
+    font-size: 12px;
+  }
+} 

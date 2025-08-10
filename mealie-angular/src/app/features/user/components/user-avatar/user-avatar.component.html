@@ -1,0 +1,21 @@
+<div 
+  class="user-avatar"
+  [class.list-avatar]="list"
+  [style.width.px]="avatarSize"
+  [style.height.px]="avatarSize"
+  [matTooltip]="tooltip && user ? user.fullName : ''"
+  [matTooltipDisabled]="!user || !tooltip"
+  matTooltipPosition="end">
+  
+  <img
+    [src]="imageURL"
+    [alt]="userId"
+    [class.error]="error"
+    (load)="error = false"
+    (error)="error = true"
+    class="avatar-image">
+  
+  <div *ngIf="error || !imageURL" class="avatar-fallback">
+    <span class="fallback-text">{{ userInitials }}</span>
+  </div>
+</div> 

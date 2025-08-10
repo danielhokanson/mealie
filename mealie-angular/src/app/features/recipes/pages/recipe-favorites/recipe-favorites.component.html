@@ -1,0 +1,260 @@
+<div class="recipe-favorites-container">
+  <!-- Header -->
+  <div class="favorites-header">
+    <div class="header-content">
+      <h1>Favorite Recipes</h1>
+      <p>Your saved and favorite recipes</p>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-container">
+    <mat-spinner diameter="50"></mat-spinner>
+    <p>Loading favorite recipes...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error && !loading" class="error-container">
+    <mat-icon class="error-icon">error</mat-icon>
+    <h3>Error Loading Favorite Recipes</h3>
+    <p>Unable to load your favorite recipes. Please try again.</p>
+    <button mat-raised-button color="primary" (click)="loadFavoriteRecipes()">
+      Retry
+    </button>
+  </div>
+
+  <!-- Content -->
+  <div *ngIf="!loading && !error" class="favorites-content">
+    <!-- Search and Filters -->
+    <mat-card class="search-filters-card">
+      <mat-card-content>
+        <div class="search-section">
+          <mat-form-field appearance="outline" class="search-field">
+            <mat-label>Search favorites</mat-label>
+            <input 
+              matInput 
+              [(ngModel)]="searchQuery"
+              placeholder="Search your favorite recipes..."
+              (keyup.enter)="onSearch()">
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+          
+          <button 
+            mat-raised-button 
+            color="primary"
+            (click)="onSearch()">
+            Search
+          </button>
+          
+          <button 
+            mat-button 
+            (click)="onClearSearch()">
+            Clear
+          </button>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <div class="filters-section">
+          <button 
+            mat-button 
+            (click)="showFilters = !showFilters"
+            class="filters-toggle">
+            <mat-icon>{{ showFilters ? 'expand_less' : 'expand_more' }}</mat-icon>
+            Filters
+          </button>
+
+          <div *ngIf="showFilters" class="filters-content">
+            <div class="filter-group">
+              <h4>Categories</h4>
+              <div class="filter-options">
+                <mat-checkbox 
+                  *ngFor="let category of categories"
+                  [checked]="selectedCategories.includes(category.id)"
+                  (change)="onCategoryToggle(category.id)"
+                  [style.color]="category.color">
+                  {{ category.name }}
+                </mat-checkbox>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <h4>Tags</h4>
+              <div class="filter-options">
+                <mat-checkbox 
+                  *ngFor="let tag of tags"
+                  [checked]="selectedTags.includes(tag.id)"
+                  (change)="onTagToggle(tag.id)"
+                  [style.color]="tag.color">
+                  {{ tag.name }}
+                </mat-checkbox>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <h4>Tools</h4>
+              <div class="filter-options">
+                <mat-checkbox 
+                  *ngFor="let tool of tools"
+                  [checked]="selectedTools.includes(tool.id)"
+                  (change)="onToolToggle(tool.id)">
+                  {{ tool.name }}
+                </mat-checkbox>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <h4>Foods</h4>
+              <div class="filter-options">
+                <mat-checkbox 
+                  *ngFor="let food of foods"
+                  [checked]="selectedFoods.includes(food.id)"
+                  (change)="onFoodToggle(food.id)">
+                  {{ food.name }}
+                </mat-checkbox>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <h4>Sort By</h4>
+              <mat-form-field appearance="outline" class="sort-field">
+                <mat-label>Sort by</mat-label>
+                <mat-select [(ngModel)]="orderBy" (selectionChange)="onSortChange()">
+                  <mat-option value="name">Name</mat-option>
+                  <mat-option value="rating">Rating</mat-option>
+                  <mat-option value="totalTime">Time</mat-option>
+                  <mat-option value="createdAt">Date Added</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <button 
+                mat-icon-button 
+                (click)="orderDirection = orderDirection === 'asc' ? 'desc' : 'asc'; onSortChange()"
+                [matTooltip]="orderDirection === 'asc' ? 'Ascending' : 'Descending'">
+                <mat-icon>{{ orderDirection === 'asc' ? 'arrow_upward' : 'arrow_downward' }}</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Results -->
+    <div class="results-section">
+      <div class="results-header">
+        <h3>{{ favoriteRecipes.length }} Favorite Recipe{{ favoriteRecipes.length !== 1 ? 's' : '' }}</h3>
+      </div>
+
+      <!-- Empty State -->
+      <div *ngIf="favoriteRecipes.length === 0" class="empty-state">
+        <mat-icon class="empty-icon">favorite_border</mat-icon>
+        <h3>No Favorite Recipes Yet</h3>
+        <p>Start adding recipes to your favorites to see them here</p>
+        <button 
+          mat-raised-button 
+          color="primary"
+          (click)="router.navigate(['/recipes'])">
+          Browse Recipes
+        </button>
+      </div>
+
+      <!-- Recipe Grid -->
+      <div *ngIf="favoriteRecipes.length > 0" class="recipe-grid">
+        <mat-card 
+          *ngFor="let recipe of favoriteRecipes"
+          class="recipe-card"
+          (click)="onViewRecipe(recipe)">
+          
+          <div class="recipe-image" *ngIf="recipe.image">
+            <img [src]="recipe.image" [alt]="recipe.name" loading="lazy">
+            <div class="recipe-overlay">
+              <button 
+                mat-icon-button 
+                [class.favorited]="recipe.favorite"
+                (click)="onRemoveFavorite(recipe); $event.stopPropagation()"
+                matTooltip="Remove from favorites">
+                <mat-icon>favorite</mat-icon>
+              </button>
+            </div>
+          </div>
+
+          <mat-card-content>
+            <h3 class="recipe-title">{{ recipe.name }}</h3>
+            
+            <p *ngIf="recipe.description" class="recipe-description">
+              {{ recipe.description }}
+            </p>
+
+            <div class="recipe-meta">
+              <div class="meta-item">
+                <mat-icon>schedule</mat-icon>
+                <span>{{ getFormattedTime(recipe.totalTime) }}</span>
+              </div>
+              <div class="meta-item">
+                <mat-icon>people</mat-icon>
+                <span>{{ recipe.servings }} servings</span>
+              </div>
+              <div class="meta-item" *ngIf="recipe.rating">
+                <mat-icon>star</mat-icon>
+                <span>{{ recipe.rating }}/5</span>
+              </div>
+            </div>
+
+            <!-- Categories -->
+            <div *ngIf="recipe.categories.length > 0" class="recipe-categories">
+              <mat-chip-listbox>
+                <mat-chip 
+                  *ngFor="let category of recipe.categories"
+                  [style.background-color]="getCategoryColor(category.id)">
+                  {{ category.name }}
+                </mat-chip>
+              </mat-chip-listbox>
+            </div>
+
+            <!-- Tags -->
+            <div *ngIf="recipe.tags.length > 0" class="recipe-tags">
+              <mat-chip-listbox>
+                <mat-chip 
+                  *ngFor="let tag of recipe.tags"
+                  [style.background-color]="getTagColor(tag.id)">
+                  {{ tag.name }}
+                </mat-chip>
+              </mat-chip-listbox>
+            </div>
+          </mat-card-content>
+
+          <mat-card-actions>
+            <button 
+              mat-button 
+              color="primary"
+              (click)="onViewRecipe(recipe); $event.stopPropagation()">
+              View Recipe
+            </button>
+            <button 
+              mat-icon-button 
+              [matMenuTriggerFor]="recipeMenu"
+              (click)="$event.stopPropagation()">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+
+            <mat-menu #recipeMenu="matMenu">
+              <button mat-menu-item (click)="onShareRecipe(recipe)">
+                <mat-icon>share</mat-icon>
+                <span>Share Recipe</span>
+              </button>
+              <button mat-menu-item (click)="onPrintRecipe(recipe)">
+                <mat-icon>print</mat-icon>
+                <span>Print Recipe</span>
+              </button>
+              <mat-divider></mat-divider>
+              <button mat-menu-item (click)="onRemoveFavorite(recipe)" class="delete-action">
+                <mat-icon>favorite_border</mat-icon>
+                <span>Remove from Favorites</span>
+              </button>
+            </mat-menu>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div> 

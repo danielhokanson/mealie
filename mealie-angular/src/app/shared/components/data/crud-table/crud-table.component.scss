@@ -1,0 +1,71 @@
+.crud-table-container {
+    width: 100%;
+}
+
+.table-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.search-container {
+    margin: 0 8px 16px 8px;
+}
+
+.search-field {
+    width: 100%;
+}
+
+.data-table {
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.column-checkbox {
+    display: block;
+    margin: 8px 0;
+}
+
+.table-paginator {
+    margin-top: 16px;
+}
+
+.bottom-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.selected {
+    background-color: rgba(25, 118, 210, 0.1);
+}
+
+// Table row hover effect
+.mat-mdc-row:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+    cursor: pointer;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+    .table-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .search-container {
+        margin: 0 0 16px 0;
+    }
+    
+    .data-table {
+        font-size: 0.875rem;
+    }
+    
+    .bottom-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+} 

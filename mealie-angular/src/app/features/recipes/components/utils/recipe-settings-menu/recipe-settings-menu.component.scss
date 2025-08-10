@@ -1,0 +1,80 @@
+.settings-menu-container {
+  text-align: center;
+}
+
+.settings-button {
+  .settings-icon {
+    margin-right: 8px;
+  }
+}
+
+.settings-menu {
+  .menu-content {
+    min-width: 300px;
+    padding: 0;
+
+    .menu-title {
+      padding: 16px 16px 8px 16px;
+      font-size: 18px;
+      font-weight: 500;
+      color: #333;
+    }
+
+    .menu-divider {
+      margin: 0 16px;
+    }
+
+    .menu-content {
+      padding: 16px;
+      margin-top: -20px;
+      padding-top: 24px;
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .settings-menu {
+    .menu-content {
+      min-width: 280px;
+
+      .menu-title {
+        padding: 12px 12px 6px 12px;
+        font-size: 16px;
+      }
+
+      .menu-divider {
+        margin: 0 12px;
+      }
+
+      .menu-content {
+        padding: 12px;
+        margin-top: -16px;
+        padding-top: 20px;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .settings-menu {
+    .menu-content {
+      min-width: 260px;
+
+      .menu-title {
+        padding: 10px 10px 4px 10px;
+        font-size: 15px;
+      }
+
+      .menu-divider {
+        margin: 0 10px;
+      }
+
+      .menu-content {
+        padding: 10px;
+        margin-top: -12px;
+        padding-top: 16px;
+      }
+    }
+  }
+} 

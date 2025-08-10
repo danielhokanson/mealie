@@ -1,0 +1,27 @@
+<mat-card
+  [style.min-width]="minWidth"
+  [class.clickable]="isClickable"
+  (click)="navigateTo()"
+  class="stats-card">
+  
+  <div class="card-content">
+    <div
+      class="stats-avatar"
+      style="width: 36px; height: 36px; border-radius: 50%; background-color: var(--mat-primary-color, #1976d2); display: flex; align-items: center; justify-content: center;">
+      <mat-icon
+        style="color: white; font-size: 20px;"
+        class="stats-icon">
+        {{ activeIcon }}
+      </mat-icon>
+    </div>
+    
+    <div class="stats-info">
+      <div class="stats-title">
+        <ng-content select="[slot=title]"></ng-content>
+      </div>
+      <div class="stats-value">
+        <ng-content select="[slot=value]"></ng-content>
+      </div>
+    </div>
+  </div>
+</mat-card> 

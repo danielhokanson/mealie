@@ -1,0 +1,14 @@
+.app-toolbar {
+  background-color: transparent;
+  box-shadow: none;
+  padding: 0;
+  min-height: 48px;
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 20px;
+  margin-right: 16px;
+} 

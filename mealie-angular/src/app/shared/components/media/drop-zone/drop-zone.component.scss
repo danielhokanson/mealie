@@ -1,0 +1,154 @@
+.drop-zone-container {
+    width: 100%;
+}
+
+.drop-zone-card {
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    
+    &:hover {
+        border-color: #1976d2;
+        background-color: rgba(25, 118, 210, 0.04);
+    }
+    
+    &.drag-over {
+        border-color: #1976d2;
+        background-color: rgba(25, 118, 210, 0.08);
+        transform: scale(1.02);
+    }
+    
+    &.disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        
+        &:hover {
+            border-color: #ccc;
+            background-color: transparent;
+            transform: none;
+        }
+    }
+}
+
+.drop-zone-content {
+    text-align: center;
+    padding: 32px 16px;
+}
+
+.drop-zone-icon {
+    margin-bottom: 16px;
+    
+    mat-icon {
+        font-size: 48px;
+        width: 48px;
+        height: 48px;
+        color: #1976d2;
+    }
+}
+
+.drop-zone-text {
+    margin-bottom: 16px;
+    
+    h3 {
+        margin: 0 0 8px 0;
+        font-size: 18px;
+        font-weight: 500;
+        color: #333;
+    }
+    
+    p {
+        margin: 4px 0;
+        font-size: 14px;
+        color: #666;
+    }
+}
+
+.selected-files {
+    margin-top: 16px;
+    text-align: left;
+    
+    h4 {
+        margin: 0 0 8px 0;
+        font-size: 16px;
+        font-weight: 500;
+        color: #333;
+    }
+}
+
+.file-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+    
+    &:last-child {
+        border-bottom: none;
+    }
+    
+    mat-icon {
+        font-size: 20px;
+        width: 20px;
+        height: 20px;
+        color: #666;
+    }
+    
+    .file-name {
+        flex: 1;
+        font-size: 14px;
+        color: #333;
+    }
+    
+    .file-size {
+        font-size: 12px;
+        color: #666;
+    }
+}
+
+.upload-progress {
+    margin-top: 16px;
+    
+    .progress-text {
+        margin: 8px 0 0 0;
+        font-size: 14px;
+        color: #666;
+        text-align: center;
+    }
+}
+
+.drop-zone-actions {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px;
+    border-top: 1px solid #eee;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+    .drop-zone-content {
+        padding: 24px 12px;
+    }
+    
+    .drop-zone-icon mat-icon {
+        font-size: 36px;
+        width: 36px;
+        height: 36px;
+    }
+    
+    .drop-zone-text h3 {
+        font-size: 16px;
+    }
+    
+    .drop-zone-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+} 

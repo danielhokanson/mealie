@@ -1,0 +1,28 @@
+<mat-menu #menu="matMenu" [class.menu-top]="menuTop" [class.menu-bottom]="!menuTop">
+  <ng-template matMenuTrigger>
+    <button
+      mat-icon-button
+      [class.fab]="fab"
+      [class.small]="fab"
+      [color]="color"
+      class="context-menu-trigger"
+      (click)="$event.preventDefault()">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+  </ng-template>
+  
+  <mat-list class="context-menu-list">
+    <button
+      mat-list-item
+      *ngFor="let item of items"
+      (click)="onItemClick(item.event)"
+      class="context-menu-item">
+      <mat-icon
+        matListItemIcon
+        [color]="item.color || undefined">
+        {{ item.icon }}
+      </mat-icon>
+      <span matListItemTitle>{{ item.title }}</span>
+    </button>
+  </mat-list>
+</mat-menu> 

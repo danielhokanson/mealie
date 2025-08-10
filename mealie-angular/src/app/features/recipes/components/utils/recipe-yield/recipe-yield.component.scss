@@ -1,0 +1,98 @@
+.recipe-yield {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+.yield-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.yield-icon {
+  font-size: 32px;
+  width: 32px;
+  height: 32px;
+  color: #1976d2;
+}
+
+.yield-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  opacity: 0.8;
+}
+
+.yield-label {
+  font-weight: 600;
+  font-size: 14px;
+  color: #333;
+}
+
+.yield-value {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.4;
+
+  ::ng-deep {
+    strong {
+      font-weight: 600;
+    }
+
+    sup {
+      font-size: 0.8em;
+      vertical-align: super;
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .recipe-yield {
+    font-size: 14px;
+  }
+
+  .yield-content {
+    gap: 8px;
+  }
+
+  .yield-icon {
+    font-size: 28px;
+    width: 28px;
+    height: 28px;
+  }
+
+  .yield-label {
+    font-size: 12px;
+  }
+
+  .yield-value {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .recipe-yield {
+    font-size: 12px;
+  }
+
+  .yield-content {
+    gap: 6px;
+  }
+
+  .yield-icon {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+  }
+
+  .yield-label {
+    font-size: 11px;
+  }
+
+  .yield-value {
+    font-size: 12px;
+  }
+} 

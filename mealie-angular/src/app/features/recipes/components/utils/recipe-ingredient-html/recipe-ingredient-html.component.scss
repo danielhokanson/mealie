@@ -1,0 +1,14 @@
+:host {
+  display: inline;
+}
+
+::ng-deep {
+  strong {
+    font-weight: 600;
+  }
+
+  sup {
+    font-size: 0.8em;
+    vertical-align: super;
+  }
+} 

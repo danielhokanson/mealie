@@ -1,0 +1,64 @@
+<div class="shopping-lists-page">
+  <div class="page-header">
+    <h1>Shopping Lists</h1>
+    <button 
+      mat-raised-button 
+      color="primary"
+      (click)="createNewList()">
+      <mat-icon>add</mat-icon>
+      New List
+    </button>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-container">
+    <mat-spinner diameter="40"></mat-spinner>
+    <p>Loading shopping lists...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error && !loading" class="error-container">
+    <mat-icon class="error-icon">error</mat-icon>
+    <p class="error-text">{{ error }}</p>
+    <button 
+      mat-raised-button 
+      color="primary"
+      (click)="loadData()">
+      Retry
+    </button>
+  </div>
+
+  <!-- Content -->
+  <div *ngIf="!loading && !error" class="content">
+    <!-- Empty State -->
+    <div *ngIf="shoppingLists.length === 0" class="empty-state">
+      <mat-icon class="empty-icon">shopping_cart</mat-icon>
+      <h2>No Shopping Lists</h2>
+      <p>Create your first shopping list to get started</p>
+      <button 
+        mat-raised-button 
+        color="primary"
+        (click)="createNewList()">
+        <mat-icon>add</mat-icon>
+        Create First List
+      </button>
+    </div>
+
+    <!-- Shopping Lists -->
+    <div *ngIf="shoppingLists.length > 0" class="lists-container">
+      <app-shopping-list
+        *ngFor="let list of shoppingLists; trackBy: trackByListId"
+        [shoppingList]="list"
+        [labels]="labels"
+        [units]="units"
+        [foods]="foods"
+        [recipes]="recipes"
+        [showLabels]="true"
+        (itemChecked)="onItemChecked($event)"
+        (itemUpdated)="onItemUpdated($event)"
+        (itemDeleted)="onItemDeleted($event)"
+        (listDeleted)="onListDeleted($event)">
+      </app-shopping-list>
+    </div>
+  </div>
+</div> 

@@ -1,0 +1,105 @@
+<div class="search-container">
+  <!-- Search Bar -->
+  <div class="search-bar-container">
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-icon matPrefix>search</mat-icon>
+      <input 
+        matInput 
+        [(ngModel)]="searchQuery"
+        placeholder="Search..."
+        (keyup.enter)="onSearch()">
+      <button 
+        *ngIf="searchQuery" 
+        matSuffix 
+        mat-icon-button 
+        (click)="clearSearch()"
+        aria-label="Clear search">
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+
+  <!-- Filter Buttons -->
+  <div class="filter-buttons">
+    <button 
+      mat-raised-button 
+      [color]="activeFilter === 'categories' ? 'accent' : 'primary'"
+      class="filter-button"
+      (click)="onFilterClick('categories')">
+      <mat-icon>category</mat-icon>
+      Categories
+    </button>
+    
+    <button 
+      mat-raised-button 
+      [color]="activeFilter === 'tags' ? 'accent' : 'primary'"
+      class="filter-button"
+      (click)="onFilterClick('tags')">
+      <mat-icon>local_offer</mat-icon>
+      Tags
+    </button>
+    
+    <button 
+      mat-raised-button 
+      [color]="activeFilter === 'tools' ? 'accent' : 'primary'"
+      class="filter-button"
+      (click)="onFilterClick('tools')">
+      <mat-icon>build</mat-icon>
+      Tools
+    </button>
+    
+    <button 
+      mat-raised-button 
+      [color]="activeFilter === 'foods' ? 'accent' : 'primary'"
+      class="filter-button"
+      (click)="onFilterClick('foods')">
+      <mat-icon>restaurant</mat-icon>
+      Foods
+    </button>
+    
+    <button 
+      mat-raised-button 
+      [color]="activeFilter === 'created' ? 'accent' : 'primary'"
+      class="filter-button"
+      (click)="onFilterClick('created')">
+      <mat-icon>sort</mat-icon>
+      Created
+    </button>
+    
+    <button 
+      mat-icon-button 
+      [color]="activeFilter === 'settings' ? 'accent' : 'primary'"
+      class="settings-button"
+      (click)="onFilterClick('settings')">
+      <mat-icon>settings</mat-icon>
+    </button>
+  </div>
+
+  <!-- Active Filter Display -->
+  <div *ngIf="activeFilter" class="active-filter">
+    <mat-chip color="accent" selected>
+      <mat-icon>filter_list</mat-icon>
+      {{ activeFilter | titlecase }} filter active
+    </mat-chip>
+  </div>
+
+  <!-- Search Results Area -->
+  <div class="search-results" *ngIf="searchResults.length > 0">
+    <h3>Search Results</h3>
+    <div class="results-list">
+      <div 
+        *ngFor="let result of searchResults" 
+        class="result-item"
+        (click)="onResultClick(result)">
+        <mat-icon>restaurant</mat-icon>
+        <span>{{ result.name }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div class="empty-state" *ngIf="!searchResults.length && !searchQuery">
+    <mat-icon>search</mat-icon>
+    <p>Start typing to search for recipes</p>
+  </div>
+</div> 

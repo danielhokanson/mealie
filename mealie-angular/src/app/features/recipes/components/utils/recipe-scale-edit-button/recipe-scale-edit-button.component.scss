@@ -1,0 +1,187 @@
+.scale-edit-container {
+  .scale-edit-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .scale-display {
+    .scale-card {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      background-color: #1976d2;
+      color: white;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+
+      &.editable {
+        cursor: pointer;
+
+        &:hover {
+          background-color: #1565c0;
+        }
+      }
+
+      &.disabled {
+        cursor: default;
+        opacity: 0.8;
+      }
+
+      .edit-icon {
+        font-size: 16px;
+        width: 16px;
+        height: 16px;
+        margin-right: 8px;
+      }
+    }
+  }
+
+  .scale-menu {
+    .menu-card {
+      min-width: 300px;
+      padding: 0;
+
+      .menu-title {
+        padding: 16px 16px 8px 16px;
+        font-size: 18px;
+        font-weight: 500;
+        color: #333;
+        margin: 0;
+      }
+
+      .menu-content {
+        padding: 16px;
+        margin-top: -20px;
+        padding-top: 24px;
+
+        .input-section {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+
+          .yield-input {
+            flex: 1;
+            margin: 0;
+
+            .yield-input-field {
+              font-size: 16px;
+            }
+          }
+
+          .reset-button {
+            flex-shrink: 0;
+            color: #666;
+
+            &:hover {
+              color: #333;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .scale-edit-container {
+    .scale-edit-content {
+      gap: 6px;
+    }
+
+    .scale-display {
+      .scale-card {
+        padding: 6px 10px;
+        font-size: 13px;
+
+        .edit-icon {
+          font-size: 14px;
+          width: 14px;
+          height: 14px;
+          margin-right: 6px;
+        }
+      }
+    }
+
+    .scale-menu {
+      .menu-card {
+        min-width: 280px;
+
+        .menu-title {
+          padding: 12px 12px 6px 12px;
+          font-size: 16px;
+        }
+
+        .menu-content {
+          padding: 12px;
+          margin-top: -16px;
+          padding-top: 20px;
+
+          .input-section {
+            gap: 6px;
+
+            .yield-input {
+              .yield-input-field {
+                font-size: 15px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .scale-edit-container {
+    .scale-edit-content {
+      gap: 4px;
+    }
+
+    .scale-display {
+      .scale-card {
+        padding: 4px 8px;
+        font-size: 12px;
+
+        .edit-icon {
+          font-size: 12px;
+          width: 12px;
+          height: 12px;
+          margin-right: 4px;
+        }
+      }
+    }
+
+    .scale-menu {
+      .menu-card {
+        min-width: 260px;
+
+        .menu-title {
+          padding: 10px 10px 4px 10px;
+          font-size: 15px;
+        }
+
+        .menu-content {
+          padding: 10px;
+          margin-top: -12px;
+          padding-top: 16px;
+
+          .input-section {
+            gap: 4px;
+
+            .yield-input {
+              .yield-input-field {
+                font-size: 14px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+} 

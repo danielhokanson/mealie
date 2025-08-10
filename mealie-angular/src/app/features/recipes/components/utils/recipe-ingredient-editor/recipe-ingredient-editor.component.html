@@ -1,0 +1,112 @@
+<div class="ingredient-editor">
+  <!-- Title Field -->
+  <mat-form-field *ngIf="value.title || showTitle" 
+                  appearance="outline" 
+                  class="title-field">
+    <mat-label>Section Title</mat-label>
+    <input matInput
+           [(ngModel)]="value.title"
+           (input)="onTitleChange()"
+           (click)="onFieldClick('title')"
+           placeholder="Section Title">
+  </mat-form-field>
+
+  <!-- Ingredient Row -->
+  <div class="ingredient-row" [class.md-and-up]="isMdAndUp">
+    <!-- Quantity Field -->
+    <div *ngIf="!disableAmount" class="quantity-field">
+      <mat-form-field appearance="outline">
+        <mat-label>Quantity</mat-label>
+        <input matInput
+               type="number"
+               [(ngModel)]="value.quantity"
+               (input)="onQuantityChange()"
+               (keypress)="quantityFilter($event)"
+               placeholder="Quantity">
+        <mat-icon matPrefix class="handle-icon">unfold_more</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <!-- Unit Field -->
+    <div *ngIf="!disableAmount" class="unit-field">
+      <mat-form-field appearance="outline">
+        <mat-label>Unit</mat-label>
+        <input matInput
+               [(ngModel)]="unitSearch"
+               (input)="onUnitSearchChange($event)"
+               (keyup.enter)="onUnitEnter()"
+               [matAutocomplete]="unitAuto"
+               placeholder="Choose unit">
+        <mat-autocomplete #unitAuto="matAutocomplete" 
+                         (optionSelected)="onUnitChange()">
+          <mat-option *ngFor="let unit of units" [value]="unit">
+            {{ unit.name }}
+          </mat-option>
+          <mat-option *ngIf="unitSearch && !units.find(u => u.name.includes(unitSearch))">
+            Press Enter to create "{{ unitSearch }}"
+          </mat-option>
+        </mat-autocomplete>
+        <mat-icon matPrefix *ngIf="unitError" 
+                  [matTooltip]="unitErrorTooltip"
+                  matTooltipPosition="below"
+                  color="primary">warning</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <!-- Food Field -->
+    <div *ngIf="!disableAmount" class="food-field">
+      <mat-form-field appearance="outline">
+        <mat-label>Food</mat-label>
+        <input matInput
+               [(ngModel)]="foodSearch"
+               (input)="onFoodSearchChange($event)"
+               (keyup.enter)="onFoodEnter()"
+               [matAutocomplete]="foodAuto"
+               placeholder="Choose food">
+        <mat-autocomplete #foodAuto="matAutocomplete" 
+                         (optionSelected)="onFoodChange()">
+          <mat-option *ngFor="let food of foods" [value]="food">
+            {{ food.name }}
+          </mat-option>
+          <mat-option *ngIf="foodSearch && !foods.find(f => f.name.includes(foodSearch))">
+            Press Enter to create "{{ foodSearch }}"
+          </mat-option>
+        </mat-autocomplete>
+        <mat-icon matPrefix *ngIf="foodError" 
+                  [matTooltip]="foodErrorTooltip"
+                  matTooltipPosition="below"
+                  color="primary">warning</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <!-- Note Field -->
+    <div class="note-field">
+      <div class="note-input-group">
+        <mat-form-field appearance="outline" class="note-input">
+          <mat-label>Notes</mat-label>
+          <input matInput
+                 [(ngModel)]="value.note"
+                 (input)="onNoteChange()"
+                 (click)="onFieldClick('note')"
+                 placeholder="Notes">
+          <mat-icon matPrefix *ngIf="disableAmount" class="handle-icon">unfold_more</mat-icon>
+        </mat-form-field>
+        
+        <app-base-button-group
+          [buttons]="buttons"
+          [large]="false"
+          (buttonClick)="onButtonClick($event)"
+          class="action-buttons">
+        </app-base-button-group>
+      </div>
+    </div>
+  </div>
+
+  <!-- Original Text -->
+  <p *ngIf="showOriginalText" class="original-text">
+    Original text: {{ value.originalText }}
+  </p>
+
+  <!-- Divider for mobile -->
+  <mat-divider *ngIf="!isMdAndUp" class="mobile-divider"></mat-divider>
+</div> 

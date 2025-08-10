@@ -1,0 +1,16 @@
+<a
+  [href]="href"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="doc-link">
+  <button
+    mat-button
+    [color]="color"
+    [class.text-button]="variant === 'text'"
+    [class.outlined-button]="variant === 'outlined'"
+    [class.raised-button]="variant === 'raised'"
+    class="doc-button">
+    <mat-icon>open_in_new</mat-icon>
+    {{ text }}
+  </button>
+</a> 

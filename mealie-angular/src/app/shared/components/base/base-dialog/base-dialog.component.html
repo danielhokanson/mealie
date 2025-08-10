@@ -1,0 +1,97 @@
+<div>
+  <!-- Activator slot -->
+  <ng-content select="[slot=activator]"></ng-content>
+  
+  <!-- Dialog -->
+  <div 
+    *ngIf="dialog()"
+    class="dialog-overlay"
+    (click)="onCancel()"
+    (keydown)="onKeyDown($event)"
+    tabindex="0">
+    
+    <div 
+      class="dialog-container"
+      [style.width]="dialogWidth"
+      [style.max-width]="dialogMaxWidth"
+      [class]="dialogClass"
+      (click)="$event.stopPropagation()">
+      
+      <mat-card class="dialog-card">
+        <!-- Toolbar -->
+        <mat-toolbar 
+          [color]="color"
+          class="dialog-toolbar">
+          <mat-icon *ngIf="icon" class="toolbar-icon">
+            {{ icon }}
+          </mat-icon>
+          <span class="toolbar-title">
+            {{ title }}
+          </span>
+        </mat-toolbar>
+        
+        <!-- Progress bar -->
+        <mat-progress-bar 
+          *ngIf="loading"
+          mode="indeterminate"
+          [color]="color"
+          class="dialog-progress">
+        </mat-progress-bar>
+        
+        <!-- Content -->
+        <div class="dialog-content">
+          <ng-content></ng-content>
+        </div>
+        
+        <!-- Divider -->
+        <mat-divider class="dialog-divider"></mat-divider>
+        
+        <!-- Actions -->
+        <div class="dialog-actions">
+          <ng-content select="[slot=card-actions]">
+            <!-- Default actions -->
+            <button 
+              mat-button
+              color="basic"
+              (click)="onCancel()">
+              Cancel
+            </button>
+            
+            <div class="spacer"></div>
+            
+            <ng-content select="[slot=custom-card-action]"></ng-content>
+            
+            <app-base-button
+              *ngIf="canDelete"
+              [delete]="true"
+              [secondary]="true"
+              (click)="onDelete()">
+            </app-base-button>
+            
+            <app-base-button
+              *ngIf="canConfirm"
+              [color]="color"
+              [disabled]="submitDisabled"
+              (click)="onConfirm()">
+              <mat-icon>check</mat-icon>
+              Confirm
+            </app-base-button>
+            
+            <app-base-button
+              *ngIf="canSubmit"
+              [disabled]="submitDisabled || loading"
+              (click)="onSubmit()">
+              <mat-icon *ngIf="submitIcon">{{ submitIcon }}</mat-icon>
+              {{ submitText }}
+            </app-base-button>
+          </ng-content>
+        </div>
+        
+        <!-- Below actions -->
+        <div *ngIf="hasBelowActionsSlot" class="below-actions">
+          <ng-content select="[slot=below-actions]"></ng-content>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div> 

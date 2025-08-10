@@ -1,0 +1,89 @@
+.recipe-last-made {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.last-made-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.last-made-icon {
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+  color: #1976d2;
+}
+
+.last-made-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  opacity: 0.8;
+}
+
+.last-made-label {
+  font-weight: 600;
+  font-size: 12px;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.last-made-date {
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .recipe-last-made {
+    font-size: 12px;
+  }
+
+  .last-made-content {
+    gap: 8px;
+  }
+
+  .last-made-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
+
+  .last-made-label {
+    font-size: 10px;
+  }
+
+  .last-made-date {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .recipe-last-made {
+    font-size: 11px;
+  }
+
+  .last-made-content {
+    gap: 6px;
+  }
+
+  .last-made-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
+
+  .last-made-label {
+    font-size: 9px;
+  }
+
+  .last-made-date {
+    font-size: 11px;
+  }
+} 

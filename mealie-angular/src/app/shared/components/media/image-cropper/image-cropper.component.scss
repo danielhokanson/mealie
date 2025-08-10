@@ -1,0 +1,72 @@
+.image-cropper-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.cropper-card {
+    padding: 16px;
+}
+
+.cropper-canvas {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+    cursor: crosshair;
+}
+
+.cropper-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin-top: 16px;
+    padding: 0;
+}
+
+.control-group {
+    display: flex;
+    gap: 8px;
+}
+
+.control-button {
+    width: 40px;
+    height: 40px;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+    padding: 0;
+}
+
+.delete-button,
+.save-button {
+    min-width: 100px;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+    .cropper-controls {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .control-group {
+        justify-content: center;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .delete-button,
+    .save-button {
+        width: 100%;
+    }
+} 

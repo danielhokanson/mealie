@@ -1,0 +1,262 @@
+.recipe-create-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+
+  .recipe-create-header {
+    text-align: center;
+    margin-bottom: 32px;
+
+    h1 {
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--mat-text-color-primary, #333);
+      margin: 0 0 8px 0;
+    }
+
+    p {
+      font-size: 16px;
+      color: var(--mat-text-color-secondary, #666);
+      margin: 0;
+    }
+  }
+
+  .recipe-form {
+    .form-section {
+      margin-bottom: 24px;
+
+      mat-card-header {
+        margin-bottom: 16px;
+
+        mat-card-title {
+          font-size: 20px;
+          font-weight: 500;
+          margin: 0;
+        }
+
+        mat-card-subtitle {
+          font-size: 14px;
+          color: var(--mat-text-color-secondary, #666);
+          margin: 4px 0 0 0;
+        }
+      }
+
+      .form-row {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 16px;
+
+        &.time-inputs {
+          .form-field {
+            flex: 1;
+          }
+        }
+
+        .form-field {
+          flex: 1;
+        }
+      }
+
+      .time-summary {
+        margin-top: 16px;
+        padding: 12px;
+        background: var(--mat-card-background-color, #f5f5f5);
+        border-radius: 4px;
+
+        p {
+          margin: 0;
+          font-size: 14px;
+          color: var(--mat-text-color-primary, #333);
+        }
+      }
+
+      .categories-section,
+      .tags-section,
+      .tools-section,
+      .foods-section {
+        margin-bottom: 24px;
+
+        h3 {
+          font-size: 16px;
+          font-weight: 500;
+          margin: 0 0 12px 0;
+          color: var(--mat-text-color-primary, #333);
+        }
+
+        .selection-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+          gap: 8px;
+
+          mat-checkbox {
+            font-size: 14px;
+          }
+        }
+      }
+
+      .ingredients-list,
+      .instructions-list {
+        .ingredient-item,
+        .instruction-item {
+          margin-bottom: 16px;
+          padding: 16px;
+          border: 1px solid var(--mat-divider-color, #e0e0e0);
+          border-radius: 8px;
+          background: var(--mat-card-background-color, #fafafa);
+
+          .ingredient-row,
+          .instruction-row {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            margin-bottom: 12px;
+
+            &:last-child {
+              margin-bottom: 0;
+            }
+
+            .quantity-field {
+              width: 120px;
+            }
+
+            .unit-field {
+              width: 120px;
+            }
+
+            .food-field {
+              flex: 1;
+            }
+
+            .title-field {
+              flex: 1;
+            }
+
+            .note-field {
+              flex: 1;
+            }
+
+            .instruction-field {
+              flex: 1;
+            }
+
+            .step-number {
+              font-weight: 500;
+              color: var(--mat-primary-color, #1976d2);
+              min-width: 30px;
+              padding-top: 16px;
+            }
+
+            .remove-button {
+              flex-shrink: 0;
+            }
+          }
+
+          mat-checkbox {
+            margin-top: 8px;
+          }
+        }
+
+        .add-button {
+          margin-top: 16px;
+        }
+      }
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--mat-divider-color, #e0e0e0);
+
+      .cancel-button {
+        color: var(--mat-text-color-secondary, #666);
+      }
+
+      .submit-button {
+        position: relative;
+
+        .spinner {
+          margin-right: 8px;
+        }
+
+        &:disabled {
+          opacity: 0.7;
+        }
+      }
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .recipe-create-container {
+    padding: 16px;
+
+    .recipe-create-header {
+      h1 {
+        font-size: 24px;
+      }
+
+      p {
+        font-size: 14px;
+      }
+    }
+
+    .recipe-form {
+      .form-section {
+        .form-row {
+          flex-direction: column;
+          gap: 12px;
+
+          &.time-inputs {
+            .form-field {
+              flex: none;
+            }
+          }
+        }
+
+        .categories-section,
+        .tags-section,
+        .tools-section,
+        .foods-section {
+          .selection-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+
+        .ingredients-list,
+        .instructions-list {
+          .ingredient-item,
+          .instruction-item {
+            .ingredient-row,
+            .instruction-row {
+              flex-direction: column;
+              gap: 8px;
+
+              .quantity-field,
+              .unit-field {
+                width: 100%;
+              }
+
+              .step-number {
+                padding-top: 0;
+                min-width: auto;
+              }
+            }
+          }
+        }
+      }
+
+      .form-actions {
+        flex-direction: column-reverse;
+        gap: 8px;
+
+        button {
+          width: 100%;
+        }
+      }
+    }
+  }
+} 

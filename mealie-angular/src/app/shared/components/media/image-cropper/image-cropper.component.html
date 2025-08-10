@@ -1,0 +1,51 @@
+<div class="image-cropper-container">
+    <mat-card class="cropper-card">
+        <mat-card-content>
+            <!-- Hidden image for loading -->
+            <img #cropperImage [src]="img" style="display: none;">
+            
+            <!-- Canvas for image manipulation -->
+            <canvas #cropperCanvas 
+                    [style.width]="cropperWidth" 
+                    [style.height]="cropperHeight"
+                    class="cropper-canvas">
+            </canvas>
+        </mat-card-content>
+
+        <!-- Control buttons -->
+        <mat-card-actions class="cropper-controls">
+            <div class="control-group" *ngFor="let group of controls">
+                <button
+                    *ngFor="let control of group"
+                    mat-icon-button
+                    [color]="control.color"
+                    (click)="control.callback()"
+                    class="control-button">
+                    <mat-icon>{{ control.icon }}</mat-icon>
+                </button>
+            </div>
+        </mat-card-actions>
+
+        <!-- Action buttons -->
+        <mat-card-actions class="action-buttons">
+            <button
+                mat-raised-button
+                color="warn"
+                (click)="onDelete()"
+                class="delete-button">
+                <mat-icon>delete</mat-icon>
+                Delete
+            </button>
+            
+            <button
+                mat-raised-button
+                color="primary"
+                [disabled]="submitted"
+                (click)="onSave()"
+                class="save-button">
+                <mat-icon>save</mat-icon>
+                Save
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</div> 

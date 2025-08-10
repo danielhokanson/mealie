@@ -1,0 +1,27 @@
+.print-container {
+  display: none;
+}
+
+// Print media query
+@media print {
+  body,
+  html {
+    margin-top: 0 !important;
+  }
+
+  .print-container {
+    display: block !important;
+  }
+
+  .mat-sidenav-container {
+    display: block;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .mat-sidenav-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+} 

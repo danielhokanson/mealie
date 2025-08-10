@@ -1,0 +1,15 @@
+.report-table {
+  width: 100%;
+}
+
+.table-row {
+  cursor: pointer;
+  
+  &.clickable:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+}
+
+.delete-button {
+  margin-left: 8px;
+} 

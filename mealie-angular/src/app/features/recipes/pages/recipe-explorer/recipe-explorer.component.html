@@ -1,0 +1,219 @@
+<div class="recipe-explorer">
+  <!-- Search Container -->
+  <div class="search-container">
+    <form class="search-form" (ngSubmit)="onSearch()">
+      <!-- Search Bar -->
+      <div class="search-bar">
+        <mat-form-field appearance="outline" class="search-field">
+          <mat-icon matPrefix>search</mat-icon>
+          <input 
+            matInput 
+            [(ngModel)]="searchQuery"
+            name="searchQuery"
+            placeholder="Search recipes..."
+            (input)="onSearchQueryChange($event.target.value)">
+          <button 
+            *ngIf="searchQuery" 
+            matSuffix 
+            mat-icon-button 
+            type="button"
+            (click)="searchQuery = ''; onSearchQueryChange('')"
+            aria-label="Clear search">
+            <mat-icon>clear</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+
+      <!-- Filter Row -->
+      <div class="filter-row">
+        <!-- Categories Filter -->
+        <app-search-filter
+          *ngIf="categories.length > 0"
+          [items]="categories"
+          [(selectedItems)]="selectedCategories"
+          [(requireAll)]="requireAllCategories"
+          (selectionChange)="onFilterChange()"
+          label="Categories"
+          icon="category">
+        </app-search-filter>
+
+        <!-- Tags Filter -->
+        <app-search-filter
+          *ngIf="tags.length > 0"
+          [items]="tags"
+          [(selectedItems)]="selectedTags"
+          [(requireAll)]="requireAllTags"
+          (selectionChange)="onFilterChange()"
+          label="Tags"
+          icon="local_offer">
+        </app-search-filter>
+
+        <!-- Tools Filter -->
+        <app-search-filter
+          *ngIf="tools.length > 0"
+          [items]="tools"
+          [(selectedItems)]="selectedTools"
+          [(requireAll)]="requireAllTools"
+          (selectionChange)="onFilterChange()"
+          label="Tools"
+          icon="build">
+        </app-search-filter>
+
+        <!-- Foods Filter -->
+        <app-search-filter
+          *ngIf="foods.length > 0"
+          [items]="foods"
+          [(selectedItems)]="selectedFoods"
+          [(requireAll)]="requireAllFoods"
+          (selectionChange)="onFilterChange()"
+          label="Foods"
+          icon="restaurant">
+        </app-search-filter>
+
+        <!-- Sort Options -->
+        <mat-menu #sortMenu="matMenu">
+          <ng-template matMenuContent>
+            <button mat-menu-item (click)="onSortChange('name')">
+              <mat-icon>sort_by_alpha</mat-icon>
+              <span>Name</span>
+            </button>
+            <button mat-menu-item (click)="onSortChange('createdAt')">
+              <mat-icon>schedule</mat-icon>
+              <span>Created Date</span>
+            </button>
+            <button mat-menu-item (click)="onSortChange('updatedAt')">
+              <mat-icon>update</mat-icon>
+              <span>Updated Date</span>
+            </button>
+            <button mat-menu-item (click)="onSortChange('rating')">
+              <mat-icon>star</mat-icon>
+              <span>Rating</span>
+            </button>
+            <button mat-menu-item (click)="onSortChange('totalTime')">
+              <mat-icon>timer</mat-icon>
+              <span>Total Time</span>
+            </button>
+            <mat-divider></mat-divider>
+            <button mat-menu-item (click)="onOrderDirectionChange()">
+              <mat-icon>{{ orderDirection === 'asc' ? 'arrow_downward' : 'arrow_upward' }}</mat-icon>
+              <span>{{ orderDirection === 'asc' ? 'Descending' : 'Ascending' }}</span>
+            </button>
+          </ng-template>
+        </mat-menu>
+
+        <button 
+          mat-raised-button 
+          [matMenuTriggerFor]="sortMenu"
+          class="sort-button">
+          <mat-icon>{{ orderDirection === 'asc' ? 'arrow_upward' : 'arrow_downward' }}</mat-icon>
+          Sort
+        </button>
+
+        <!-- Settings Menu -->
+        <mat-menu #settingsMenu="matMenu">
+          <ng-template matMenuContent>
+            <div class="settings-content">
+              <mat-slide-toggle 
+                [(ngModel)]="autoSearch"
+                name="autoSearch">
+                Auto Search
+              </mat-slide-toggle>
+              <button 
+                mat-raised-button 
+                color="primary"
+                (click)="onReset()"
+                class="reset-button">
+                Reset Filters
+              </button>
+            </div>
+          </ng-template>
+        </mat-menu>
+
+        <button 
+          mat-icon-button 
+          [matMenuTriggerFor]="settingsMenu"
+          class="settings-button">
+          <mat-icon>settings</mat-icon>
+        </button>
+      </div>
+
+      <!-- Search Button (when auto-search is disabled) -->
+      <div *ngIf="!autoSearch" class="search-button-container">
+        <button 
+          mat-raised-button 
+          color="primary"
+          type="submit"
+          class="search-button">
+          <mat-icon>search</mat-icon>
+          Search
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Active Filters Display -->
+  <div *ngIf="selectedCategories.length > 0 || selectedTags.length > 0 || selectedTools.length > 0 || selectedFoods.length > 0" 
+       class="active-filters">
+    <mat-chip-listbox>
+      <mat-chip 
+        *ngFor="let category of selectedCategories"
+        (removed)="removeCategory(category)"
+        removable>
+        {{ getCategoryName(category) }}
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+      <mat-chip 
+        *ngFor="let tag of selectedTags"
+        (removed)="removeTag(tag)"
+        removable>
+        {{ getTagName(tag) }}
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+      <mat-chip 
+        *ngFor="let tool of selectedTools"
+        (removed)="removeTool(tool)"
+        removable>
+        {{ getToolName(tool) }}
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+      <mat-chip 
+        *ngFor="let food of selectedFoods"
+        (removed)="removeFood(food)"
+        removable>
+        {{ getFoodName(food) }}
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+    </mat-chip-listbox>
+  </div>
+
+  <!-- Loading Spinner -->
+  <div *ngIf="loading" class="loading-container">
+    <mat-spinner></mat-spinner>
+    <p>Loading recipes...</p>
+  </div>
+
+  <!-- Recipe Grid -->
+  <div *ngIf="!loading" class="recipe-grid">
+    <div *ngIf="recipes.length === 0" class="no-results">
+      <mat-icon>search_off</mat-icon>
+      <h3>No recipes found</h3>
+      <p>Try adjusting your search criteria or filters.</p>
+    </div>
+
+    <app-recipe-card 
+      *ngFor="let recipe of recipes"
+      [recipe]="recipe"
+      class="recipe-card">
+    </app-recipe-card>
+  </div>
+
+  <!-- Pagination -->
+  <mat-paginator 
+    *ngIf="totalRecipes > pageSize"
+    [length]="totalRecipes"
+    [pageSize]="pageSize"
+    [pageIndex]="currentPage - 1"
+    [pageSizeOptions]="[10, 20, 50, 100]"
+    (page)="onPageChange($event.pageIndex + 1)">
+  </mat-paginator>
+</div> 

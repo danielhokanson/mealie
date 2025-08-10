@@ -1,0 +1,162 @@
+.dialog-content {
+  padding: 24px;
+}
+
+.print-config {
+  margin-bottom: 12px;
+
+  .config-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .image-position-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+
+    .section-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: #333;
+      text-align: center;
+    }
+
+    .image-position-toggle {
+      width: fit-content;
+
+      mat-button-toggle {
+        min-width: 48px;
+        height: 48px;
+
+        mat-icon {
+          font-size: 18px;
+          width: 18px;
+          height: 18px;
+        }
+      }
+    }
+  }
+
+  .content-options,
+  .nutrition-options {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    .option-group {
+      mat-slide-toggle {
+        font-size: 14px;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+.print-preview {
+  height: fit-content;
+  max-height: 40vh;
+  width: 100%;
+  overflow-y: auto;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .dialog-content {
+    padding: 16px;
+  }
+
+  .print-config {
+    .config-row {
+      flex-direction: column;
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .image-position-section {
+      align-items: center;
+
+      .image-position-toggle {
+        width: 100%;
+        justify-content: center;
+
+        mat-button-toggle {
+          min-width: 40px;
+          height: 40px;
+
+          mat-icon {
+            font-size: 16px;
+            width: 16px;
+            height: 16px;
+          }
+        }
+      }
+    }
+
+    .content-options,
+    .nutrition-options {
+      gap: 12px;
+
+      .option-group {
+        mat-slide-toggle {
+          font-size: 13px;
+        }
+      }
+    }
+  }
+
+  .print-preview {
+    max-height: 35vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .dialog-content {
+    padding: 12px;
+  }
+
+  .print-config {
+    .config-row {
+      gap: 12px;
+    }
+
+    .image-position-section {
+      .section-title {
+        font-size: 13px;
+      }
+
+      .image-position-toggle {
+        mat-button-toggle {
+          min-width: 36px;
+          height: 36px;
+
+          mat-icon {
+            font-size: 14px;
+            width: 14px;
+            height: 14px;
+          }
+        }
+      }
+    }
+
+    .content-options,
+    .nutrition-options {
+      gap: 8px;
+
+      .option-group {
+        mat-slide-toggle {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+
+  .print-preview {
+    max-height: 30vh;
+  }
+} 

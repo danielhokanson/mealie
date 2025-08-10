@@ -1,20 +1,78 @@
+version: "3.8"
+
 services:
-  mailpit:
-    image: axllent/mailpit:latest
-    container_name: mealie_dev_mailpit
-    restart: no
-    environment:
-      - "MP_SMTP_AUTH_ACCEPT_ANY=true"
-      - "MP_SMTP_AUTH_ALLOW_INSECURE=true"
-    ports:
-      - "8025:8025"
-      - "1025:1025"
+  # PostgreSQL Database for Development
   postgres:
     container_name: mealie_dev_postgres
-    image: postgres:15
-    restart: no
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: mealie_dev
+      POSTGRES_USER: mealie_dev
+      POSTGRES_PASSWORD: dev_password
+    volumes:
+      - postgres_dev_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    networks:
+      - mealie-dev-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mealie_dev -d mealie_dev"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # .NET Backend API (Development)
+  mealie-api:
+    container_name: mealie_dev_api
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile.dev
+      target: dotnet-dev
+    restart: unless-stopped
     environment:
-      POSTGRES_PASSWORD: mealie
-      POSTGRES_USER: mealie
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5000
+      - ConnectionStrings__DefaultConnection=Host=postgres;Database=mealie_dev;Username=mealie_dev;Password=dev_password
+      - JWT__SecretKey=development-jwt-key-not-for-production
+      - CORS__AllowedOrigins=http://localhost:4200,http://localhost:3000
+    ports:
+      - "5000:5000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - mealie-dev-network
+    volumes:
+      - ../MealieApi:/app
+      - dotnet_packages:/root/.nuget/packages
+
+  # Angular Frontend (Development)
+  mealie-frontend:
+    container_name: mealie_dev_frontend
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile.dev
+      target: angular-dev
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=development
+    ports:
+      - "4200:4200"
+    networks:
+      - mealie-dev-network
+    volumes:
+      - ../mealie-angular:/app
+      - node_modules:/app/node_modules
+
+volumes:
+  postgres_dev_data:
+    driver: local
+  dotnet_packages:
+    driver: local
+  node_modules:
+    driver: local
+
+networks:
+  mealie-dev-network:
+    driver: bridge

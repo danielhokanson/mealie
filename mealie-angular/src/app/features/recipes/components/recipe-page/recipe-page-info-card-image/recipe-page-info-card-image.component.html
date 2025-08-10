@@ -1,0 +1,17 @@
+<div class="recipe-image-container" [style.max-width]="maxWidth">
+  <img
+    *ngIf="!hideImage && recipeImageUrl"
+    [src]="recipeImageUrl"
+    [alt]="recipe.name"
+    class="recipe-image"
+    [style.height.px]="imageHeight"
+    (error)="hideImage = true"
+    (load)="hideImage = false">
+  
+  <div *ngIf="hideImage || !recipeImageUrl" class="image-placeholder">
+    <div class="placeholder-content">
+      <mat-icon class="placeholder-icon">restaurant</mat-icon>
+      <span class="placeholder-text">{{ recipe.name }}</span>
+    </div>
+  </div>
+</div> 

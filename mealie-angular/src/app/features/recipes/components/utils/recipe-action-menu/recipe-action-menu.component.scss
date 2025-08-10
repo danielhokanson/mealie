@@ -1,0 +1,40 @@
+.recipe-action-menu {
+  position: relative;
+}
+
+.action-button {
+  color: #666;
+  
+  &:hover {
+    color: #1976d2;
+  }
+}
+
+.action-menu {
+  min-width: 200px;
+}
+
+.delete-action {
+  color: #f44336;
+  
+  mat-icon {
+    color: #f44336;
+  }
+  
+  &:hover {
+    background-color: rgba(244, 67, 54, 0.1);
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .action-menu {
+    min-width: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .action-menu {
+    min-width: 160px;
+  }
+} 

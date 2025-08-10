@@ -1,0 +1,260 @@
+<div class="recipe-share-container">
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-container">
+    <mat-spinner diameter="50"></mat-spinner>
+    <p>Sharing recipe...</p>
+  </div>
+
+  <!-- Share Content -->
+  <div *ngIf="!loading && recipe" class="share-content">
+    <!-- Header -->
+    <div class="share-header">
+      <h2>Share Recipe</h2>
+      <p>{{ recipe.name }}</p>
+    </div>
+
+    <!-- Share Type Selection -->
+    <div class="share-type-selection">
+      <h3>Share Method</h3>
+      <div class="share-type-buttons">
+        <button 
+          mat-button 
+          [class.active]="shareType === 'link'"
+          (click)="onShareTypeChange('link')">
+          <mat-icon>link</mat-icon>
+          Link
+        </button>
+        <button 
+          mat-button 
+          [class.active]="shareType === 'email'"
+          (click)="onShareTypeChange('email')">
+          <mat-icon>email</mat-icon>
+          Email
+        </button>
+        <button 
+          mat-button 
+          [class.active]="shareType === 'social'"
+          (click)="onShareTypeChange('social')">
+          <mat-icon>share</mat-icon>
+          Social
+        </button>
+      </div>
+    </div>
+
+    <!-- Link Sharing -->
+    <div *ngIf="shareType === 'link'" class="share-section">
+      <h3>Share Link</h3>
+      <div class="link-container">
+        <mat-form-field appearance="outline" class="link-field">
+          <mat-label>Recipe URL</mat-label>
+          <input 
+            matInput 
+            [value]="getShareUrl()"
+            readonly>
+          <button 
+            mat-icon-button 
+            matSuffix
+            (click)="onCopyLink()"
+            matTooltip="Copy link">
+            <mat-icon>content_copy</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+      
+      <div class="link-actions">
+        <button 
+          mat-raised-button 
+          color="primary"
+          (click)="onCopyLink()">
+          <mat-icon>content_copy</mat-icon>
+          Copy Link
+        </button>
+        <button 
+          mat-raised-button 
+          color="accent"
+          (click)="onGenerateQRCode()">
+          <mat-icon>qr_code</mat-icon>
+          Generate QR Code
+        </button>
+      </div>
+    </div>
+
+    <!-- Email Sharing -->
+    <div *ngIf="shareType === 'email'" class="share-section">
+      <h3>Share via Email</h3>
+      <form [formGroup]="shareForm" class="email-form">
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Message (Optional)</mat-label>
+            <textarea 
+              matInput 
+              formControlName="message"
+              placeholder="Add a personal message..."
+              rows="3">
+            </textarea>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <h4>Select Recipients</h4>
+          <div class="recipients-list">
+            <mat-list>
+              <mat-list-item *ngFor="let user of availableUsers" class="recipient-item">
+                <mat-checkbox 
+                  [checked]="isUserSelected(user.id)"
+                  (change)="onToggleUser(user.id)"
+                  color="primary">
+                  <div class="recipient-info">
+                    <span class="recipient-name">{{ user.fullName }}</span>
+                    <span class="recipient-email">{{ user.email }}</span>
+                  </div>
+                </mat-checkbox>
+              </mat-list-item>
+            </mat-list>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <h4>Include Options</h4>
+          <div class="include-options">
+            <div class="option-item">
+              <mat-checkbox 
+                [(ngModel)]="shareOptions.includeImage"
+                (change)="onToggleOption('includeImage')"
+                color="primary">
+                Include Recipe Image
+              </mat-checkbox>
+            </div>
+            <div class="option-item">
+              <mat-checkbox 
+                [(ngModel)]="shareOptions.includeNutrition"
+                (change)="onToggleOption('includeNutrition')"
+                color="primary">
+                Include Nutrition Information
+              </mat-checkbox>
+            </div>
+            <div class="option-item">
+              <mat-checkbox 
+                [(ngModel)]="shareOptions.includeNotes"
+                (change)="onToggleOption('includeNotes')"
+                color="primary">
+                Include Notes
+              </mat-checkbox>
+            </div>
+            <div class="option-item">
+              <mat-checkbox 
+                [(ngModel)]="shareOptions.includeComments"
+                (change)="onToggleOption('includeComments')"
+                color="primary">
+                Include Comments
+              </mat-checkbox>
+            </div>
+            <div class="option-item">
+              <mat-checkbox 
+                [(ngModel)]="shareOptions.includeTimeline"
+                (change)="onToggleOption('includeTimeline')"
+                color="primary">
+                Include Timeline
+              </mat-checkbox>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button 
+            mat-raised-button 
+            color="primary"
+            (click)="onShareViaEmail()"
+            [disabled]="selectedUsers.length === 0">
+            <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner>
+            <span *ngIf="!loading">Send Email</span>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Social Sharing -->
+    <div *ngIf="shareType === 'social'" class="share-section">
+      <h3>Share on Social Media</h3>
+      <div class="social-buttons">
+        <button 
+          mat-raised-button 
+          color="primary"
+          (click)="onShareViaSocial('twitter')"
+          class="social-button twitter">
+          <mat-icon>twitter</mat-icon>
+          Twitter
+        </button>
+        <button 
+          mat-raised-button 
+          color="primary"
+          (click)="onShareViaSocial('facebook')"
+          class="social-button facebook">
+          <mat-icon>facebook</mat-icon>
+          Facebook
+        </button>
+        <button 
+          mat-raised-button 
+          color="primary"
+          (click)="onShareViaSocial('pinterest')"
+          class="social-button pinterest">
+          <mat-icon>pinterest</mat-icon>
+          Pinterest
+        </button>
+        <button 
+          mat-raised-button 
+          color="primary"
+          (click)="onShareViaSocial('whatsapp')"
+          class="social-button whatsapp">
+          <mat-icon>whatsapp</mat-icon>
+          WhatsApp
+        </button>
+        <button 
+          mat-raised-button 
+          color="primary"
+          (click)="onShareViaSocial('email')"
+          class="social-button email">
+          <mat-icon>email</mat-icon>
+          Email
+        </button>
+      </div>
+    </div>
+
+    <!-- Additional Actions -->
+    <div class="additional-actions">
+      <mat-divider></mat-divider>
+      <div class="action-buttons">
+        <button 
+          mat-raised-button 
+          color="accent"
+          (click)="onExportRecipe()">
+          <mat-icon>download</mat-icon>
+          Export Recipe
+        </button>
+        <button 
+          mat-raised-button 
+          color="primary"
+          (click)="onGenerateQRCode()">
+          <mat-icon>qr_code</mat-icon>
+          QR Code
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- No Recipe State -->
+  <div *ngIf="!loading && !recipe" class="no-recipe">
+    <mat-icon class="no-recipe-icon">restaurant</mat-icon>
+    <h3>No Recipe Selected</h3>
+    <p>Please select a recipe to share.</p>
+  </div>
+
+  <!-- Dialog Actions -->
+  <div class="dialog-actions" *ngIf="dialogRef">
+    <button 
+      mat-button 
+      (click)="onClose()">
+      Close
+    </button>
+  </div>
+</div> 

@@ -1,0 +1,118 @@
+<div>
+  <!-- Toolbar -->
+  <mat-toolbar *ngIf="!disableToolbar" class="section-toolbar">
+    <!-- Title Section -->
+    <ng-content select="[title]">
+      <div class="title-section" *ngIf="title">
+        <mat-icon class="title-icon">{{ displayTitleIcon }}</mat-icon>
+        <span class="title-text">{{ title }}</span>
+      </div>
+    </ng-content>
+
+    <span class="spacer"></span>
+
+    <!-- Random Button -->
+    <button mat-icon-button
+            [disabled]="recipes.length === 0"
+            (click)="navigateRandom()"
+            class="random-button">
+      <mat-icon>casino</mat-icon>
+      <span class="button-text">Random</span>
+    </button>
+
+    <!-- Sort Menu -->
+    <button mat-icon-button
+            *ngIf="!disableSort"
+            [matMenuTriggerFor]="sortMenu"
+            [disabled]="sortLoading"
+            class="sort-button">
+      <mat-icon>{{ preferences.sortIcon }}</mat-icon>
+      <span class="button-text">Sort</span>
+    </button>
+
+    <mat-menu #sortMenu="matMenu">
+      <mat-list>
+        <mat-list-item *ngFor="let item of sortMenuItems"
+                       (click)="sortRecipes(item.event)"
+                       class="sort-menu-item">
+          <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+          <span matListItemTitle>{{ item.title }}</span>
+        </mat-list-item>
+      </mat-list>
+    </mat-menu>
+
+    <!-- Context Menu -->
+    <button mat-icon-button
+            *ngIf="!isMobile"
+            [matMenuTriggerFor]="contextMenu"
+            class="context-button">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+
+    <mat-menu #contextMenu="matMenu">
+      <mat-list>
+        <mat-list-item *ngFor="let item of contextMenuItems"
+                       (click)="onContextMenuClick(item.event)"
+                       class="context-menu-item">
+          <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+          <span matListItemTitle>{{ item.title }}</span>
+        </mat-list-item>
+      </mat-list>
+    </mat-menu>
+  </mat-toolbar>
+
+  <!-- Recipe Cards -->
+  <div *ngIf="recipes && ready" class="recipe-cards-container">
+    <div class="recipe-grid">
+      <!-- Desktop Cards -->
+      <div *ngIf="!useMobileCards" class="desktop-cards">
+        <div class="recipe-card-wrapper"
+             *ngFor="let recipe of recipes; trackBy: trackByRecipeId"
+             [class.single-column]="singleColumn">
+          <app-recipe-card
+            [name]="recipe.name"
+            [description]="recipe.description"
+            [slug]="recipe.slug"
+            [rating]="recipe.rating"
+            [image]="recipe.image"
+            [tags]="recipe.tags"
+            [recipeId]="recipe.id">
+          </app-recipe-card>
+        </div>
+      </div>
+
+      <!-- Mobile Cards -->
+      <div *ngIf="useMobileCards" class="mobile-cards">
+        <div class="recipe-card-wrapper"
+             *ngFor="let recipe of recipes; trackBy: trackByRecipeId"
+             [class.single-column]="singleColumn">
+          <app-recipe-card-mobile
+            [name]="recipe.name"
+            [description]="recipe.description"
+            [slug]="recipe.slug"
+            [rating]="recipe.rating"
+            [image]="recipe.image"
+            [tags]="recipe.tags"
+            [recipeId]="recipe.id">
+          </app-recipe-card-mobile>
+        </div>
+      </div>
+    </div>
+
+    <!-- Infinite Scroll Trigger -->
+    <div class="scroll-trigger" (intersection)="handleInfiniteScroll()"></div>
+
+    <!-- Loading Spinner -->
+    <div *ngIf="loading" class="loading-container">
+      <mat-spinner diameter="40"></mat-spinner>
+      <p class="loading-text">Loading more recipes...</p>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="recipes.length === 0 && ready" class="empty-state">
+    <mat-icon class="empty-icon">restaurant</mat-icon>
+    <p class="empty-text">No recipes found</p>
+    <p class="empty-subtext">Try adjusting your search criteria</p>
+  </div>
+</div> 

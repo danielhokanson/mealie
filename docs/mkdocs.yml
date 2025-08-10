@@ -64,18 +64,21 @@ nav:
       - Features: "documentation/getting-started/features.md"
       - Updating: "documentation/getting-started/updating.md"
       - Version 1 Migration: "documentation/getting-started/migrating-to-mealie-v1.md"
+      - Python to Angular/.NET Migration: "documentation/getting-started/migrating-python-to-angular-dotnet.md"
       - FAQ: "documentation/getting-started/faq.md"
       - API: "documentation/getting-started/api-usage.md"
       - Road Map: "documentation/getting-started/roadmap.md"
 
       - Installation:
           - Installation Checklist: "documentation/getting-started/installation/installation-checklist.md"
-          - SQLite (Recommended): "documentation/getting-started/installation/sqlite.md"
+          - Docker Installation: "documentation/getting-started/installation/docker-install.md"
+          - Backend Configuration: "documentation/getting-started/installation/dotnet-backend-config.md"
           - PostgreSQL: "documentation/getting-started/installation/postgres.md"
-          - Backend Configuration: "documentation/getting-started/installation/backend-config.md"
           - Security: "documentation/getting-started/installation/security.md"
           - Logs: "documentation/getting-started/installation/logs.md"
           - OpenAI: "documentation/getting-started/installation/open-ai.md"
+          - Legacy Python Config: "documentation/getting-started/installation/backend-config.md"
+          - SQLite (Legacy): "documentation/getting-started/installation/sqlite.md"
       - Usage:
           - Backup and Restoring: "documentation/getting-started/usage/backups-and-restoring.md"
           - Permissions and Public Access: "documentation/getting-started/usage/permissions-and-public-access.md"
@@ -99,12 +102,13 @@ nav:
       - Non-Code: "contributors/non-coders.md"
       - Translating: "contributors/translating.md"
       - Developers Guide:
+          - Development Setup: "contributors/developers-guide/angular-dotnet-dev-setup.md"
           - Building Packages: "contributors/developers-guide/building-packages.md"
           - Code Contributions: "contributors/developers-guide/code-contributions.md"
-          - Dev Getting Started: "contributors/developers-guide/starting-dev-server.md"
           - Database Changes: "contributors/developers-guide/database-changes.md"
           - Maintainers Guide: "contributors/developers-guide/maintainers.md"
           - Migration Guide: "contributors/developers-guide/migration-guide.md"
+          - Legacy Python Setup: "contributors/developers-guide/starting-dev-server.md"
       - Guides:
           - Improving Ingredient Parser: "contributors/guides/ingredient-parser.md"
 

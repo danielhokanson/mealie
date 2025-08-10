@@ -1,0 +1,182 @@
+<section class="recipe-instructions">
+  <!-- Ingredient Link Dialog -->
+  <div *ngIf="showLinkDialog" class="link-dialog-overlay">
+    <mat-card class="link-dialog">
+      <div class="dialog-header">
+        <mat-icon>link</mat-icon>
+        <h2>Ingredient Linker</h2>
+      </div>
+      
+      <mat-card-content>
+        <p>{{ activeText }}</p>
+        <mat-divider></mat-divider>
+        
+        <div class="ingredient-checkboxes">
+          <mat-checkbox
+            *ngFor="let ing of unusedIngredients"
+            [(ngModel)]="activeRefs"
+            [value]="ing.referenceId">
+            <app-recipe-ingredient-html [markup]="parseIngredientText(ing)"></app-recipe-ingredient-html>
+          </mat-checkbox>
+        </div>
+        
+        <div *ngIf="usedIngredients.length > 0" class="used-ingredients">
+          <h4>Linked to Other Step</h4>
+          <mat-checkbox
+            *ngFor="let ing of usedIngredients"
+            [(ngModel)]="activeRefs"
+            [value]="ing.referenceId">
+            <app-recipe-ingredient-html [markup]="parseIngredientText(ing)"></app-recipe-ingredient-html>
+          </mat-checkbox>
+        </div>
+      </mat-card-content>
+      
+      <mat-card-actions>
+        <button mat-button (click)="closeLinkDialog()">Cancel</button>
+        <button mat-button color="primary" (click)="autoSetReferences()">Auto</button>
+        <button mat-raised-button color="primary" (click)="setIngredientIds()">Save</button>
+        <button *ngIf="availableNextStep" mat-button (click)="saveAndOpenNextLinkIngredients()">Next Step</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <!-- Instructions Header -->
+  <div class="instructions-header">
+    <h2 *ngIf="!isCookMode" class="instructions-title">Instructions</h2>
+    <button
+      *ngIf="!isEditForm && !isCookMode"
+      mat-raised-button
+      color="primary"
+      (click)="toggleCookMode()">
+      <mat-icon>restaurant</mat-icon>
+      Cook Mode
+    </button>
+  </div>
+
+  <!-- Instructions List -->
+  <div cdkDropList (cdkDropListDropped)="onDrop($event)" class="instructions-list">
+    <div
+      *ngFor="let step of instructionList; let index = index"
+      cdkDrag
+      class="instruction-item"
+      [class.checked]="isChecked(index)"
+      [class.disabled]="disabledSteps.includes(index)">
+      
+      <!-- Section Title -->
+      <div *ngIf="step.title && showTitleEditor[step.id]" class="section-title">
+        <div *ngIf="isEditForm" class="title-editor">
+          <mat-form-field>
+            <input matInput [(ngModel)]="step.title" placeholder="Section Title">
+          </mat-form-field>
+        </div>
+        <div *ngIf="!isEditForm" class="title-display">
+          {{ step.title }}
+        </div>
+      </div>
+
+      <!-- Instruction Card -->
+      <mat-card class="instruction-card" (click)="toggleDisabled(index)">
+        <mat-card-header>
+          <div class="card-header-content">
+            <div *ngIf="isEditForm" class="summary-editor">
+              <mat-form-field>
+                <input matInput [(ngModel)]="step.summary" [placeholder]="'Step ' + (index + 1)">
+              </mat-form-field>
+            </div>
+            <div *ngIf="!isEditForm" class="summary-display">
+              {{ step.summary || 'Step ' + (index + 1) }}
+            </div>
+            
+            <div *ngIf="isEditForm" class="action-buttons">
+              <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="deleteStep(index)">
+                  <mat-icon>delete</mat-icon>
+                  Delete
+                </button>
+                <button mat-menu-item (click)="toggleSection(step.id)">
+                  <mat-icon>expand_more</mat-icon>
+                  Toggle Section
+                </button>
+                <button mat-menu-item (click)="openLinkDialog(index, step.text, step.ingredientReferences)">
+                  <mat-icon>link</mat-icon>
+                  Link Ingredients
+                </button>
+                <button mat-menu-item (click)="uploadImage(index)">
+                  <mat-icon>upload</mat-icon>
+                  Upload Image
+                </button>
+                <button mat-menu-item (click)="togglePreview(index)">
+                  <mat-icon>{{ previewStates[index] ? 'edit' : 'visibility' }}</mat-icon>
+                  {{ previewStates[index] ? 'Edit' : 'Preview' }}
+                </button>
+                <mat-divider></mat-divider>
+                <button mat-menu-item (click)="mergeAbove(index)">
+                  <mat-icon>merge</mat-icon>
+                  Merge Above
+                </button>
+                <button mat-menu-item (click)="moveToTop(index)">
+                  <mat-icon>keyboard_arrow_up</mat-icon>
+                  Move to Top
+                </button>
+                <button mat-menu-item (click)="moveToBottom(index)">
+                  <mat-icon>keyboard_arrow_down</mat-icon>
+                  Move to Bottom
+                </button>
+                <button mat-menu-item (click)="insertAbove(index)">
+                  <mat-icon>add</mat-icon>
+                  Insert Above
+                </button>
+                <button mat-menu-item (click)="insertBelow(index)">
+                  <mat-icon>add</mat-icon>
+                  Insert Below
+                </button>
+              </mat-menu>
+            </div>
+            
+            <mat-icon *ngIf="isChecked(index)" class="check-icon" color="primary">
+              check_circle
+            </mat-icon>
+          </div>
+        </mat-card-header>
+
+        <!-- Progress Bar -->
+        <mat-progress-bar *ngIf="isEditForm && loadingStates[index]" mode="indeterminate"></mat-progress-bar>
+
+        <!-- Edit Mode Content -->
+        <mat-card-content *ngIf="isEditForm" class="edit-content">
+          <app-markdown-editor
+            [(ngModel)]="step.text"
+            [preview]="previewStates[index]"
+            (previewChange)="previewStates[index] = $event">
+          </app-markdown-editor>
+          
+          <app-recipe-ingredient-html
+            *ngFor="let ing of step.ingredientReferences"
+            [markup]="getIngredientByRefId(ing.referenceId)">
+          </app-recipe-ingredient-html>
+        </mat-card-content>
+
+        <!-- View Mode Content -->
+        <mat-card-content *ngIf="!isChecked(index) && !isEditForm" class="view-content">
+          <div class="content-layout">
+            <div *ngIf="isCookMode && step.ingredientReferences?.length > 0" class="ingredients-panel">
+              <app-recipe-ingredients
+                [value]="getStepIngredients(step)"
+                [scale]="scale"
+                [disableAmount]="recipe.settings?.disableAmount"
+                [isCookMode]="isCookMode">
+              </app-recipe-ingredients>
+            </div>
+            
+            <div class="markdown-content">
+              <app-safe-markdown [source]="step.text"></app-safe-markdown>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</section> 

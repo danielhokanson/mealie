@@ -1,0 +1,291 @@
+<div class="admin-maintenance-container">
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-container">
+    <mat-spinner diameter="50"></mat-spinner>
+    <p>Loading system information...</p>
+  </div>
+
+  <!-- Maintenance Content -->
+  <div *ngIf="!loading" class="maintenance-content">
+    <!-- Header -->
+    <div class="maintenance-header">
+      <h2>System Maintenance</h2>
+      <p>Monitor system health and perform maintenance tasks</p>
+    </div>
+
+    <!-- System Health -->
+    <div class="system-health-section">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>System Health</mat-card-title>
+          <mat-card-subtitle>Current system status and performance</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          <div class="health-grid">
+            <!-- Database Health -->
+            <div class="health-item">
+              <div class="health-header">
+                <mat-icon [style.color]="getHealthStatusColor(systemHealth?.database?.status)">
+                  {{ getHealthStatusIcon(systemHealth?.database?.status) }}
+                </mat-icon>
+                <span class="health-title">Database</span>
+              </div>
+              <div class="health-details">
+                <div class="health-metric">
+                  <span class="metric-label">Size:</span>
+                  <span class="metric-value">{{ getFileSize(systemHealth?.database?.size || 0) }}</span>
+                </div>
+                <div class="health-metric">
+                  <span class="metric-label">Connections:</span>
+                  <span class="metric-value">{{ systemHealth?.database?.connections || 0 }}</span>
+                </div>
+                <div class="health-metric">
+                  <span class="metric-label">Performance:</span>
+                  <span class="metric-value">{{ systemHealth?.database?.performance || 0 }}%</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Storage Health -->
+            <div class="health-item">
+              <div class="health-header">
+                <mat-icon [style.color]="getHealthStatusColor(systemHealth?.storage?.status)">
+                  {{ getHealthStatusIcon(systemHealth?.storage?.status) }}
+                </mat-icon>
+                <span class="health-title">Storage</span>
+              </div>
+              <div class="health-details">
+                <div class="health-metric">
+                  <span class="metric-label">Used:</span>
+                  <span class="metric-value">{{ getFileSize(systemHealth?.storage?.used || 0) }}</span>
+                </div>
+                <div class="health-metric">
+                  <span class="metric-label">Total:</span>
+                  <span class="metric-value">{{ getFileSize(systemHealth?.storage?.total || 0) }}</span>
+                </div>
+                <div class="health-metric">
+                  <span class="metric-label">Usage:</span>
+                  <span class="metric-value">{{ getStoragePercentage() }}%</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Memory Health -->
+            <div class="health-item">
+              <div class="health-header">
+                <mat-icon [style.color]="getHealthStatusColor(systemHealth?.memory?.status)">
+                  {{ getHealthStatusIcon(systemHealth?.memory?.status) }}
+                </mat-icon>
+                <span class="health-title">Memory</span>
+              </div>
+              <div class="health-details">
+                <div class="health-metric">
+                  <span class="metric-label">Used:</span>
+                  <span class="metric-value">{{ getFileSize(systemHealth?.memory?.used || 0) }}</span>
+                </div>
+                <div class="health-metric">
+                  <span class="metric-label">Total:</span>
+                  <span class="metric-value">{{ getFileSize(systemHealth?.memory?.total || 0) }}</span>
+                </div>
+                <div class="health-metric">
+                  <span class="metric-label">Usage:</span>
+                  <span class="metric-value">{{ getMemoryPercentage() }}%</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- CPU Health -->
+            <div class="health-item">
+              <div class="health-header">
+                <mat-icon [style.color]="getHealthStatusColor(systemHealth?.cpu?.status)">
+                  {{ getHealthStatusIcon(systemHealth?.cpu?.status) }}
+                </mat-icon>
+                <span class="health-title">CPU</span>
+              </div>
+              <div class="health-details">
+                <div class="health-metric">
+                  <span class="metric-label">Usage:</span>
+                  <span class="metric-value">{{ systemHealth?.cpu?.usage || 0 }}%</span>
+                </div>
+                <div class="health-metric">
+                  <span class="metric-label">Performance:</span>
+                  <span class="metric-value">{{ systemHealth?.cpu?.performance || 0 }}%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Overall Health Status -->
+          <div class="overall-health">
+            <div class="health-status" [style.color]="getHealthStatusColor(getOverallHealthStatus())">
+              <mat-icon>{{ getHealthStatusIcon(getOverallHealthStatus()) }}</mat-icon>
+              <span class="status-text">
+                System Status: {{ getOverallHealthStatus() === 'healthy' ? 'Healthy' : 
+                                getOverallHealthStatus() === 'warning' ? 'Warning' : 'Error' }}
+              </span>
+            </div>
+            <button 
+              mat-button 
+              color="primary"
+              (click)="onRefreshHealth()">
+              <mat-icon>refresh</mat-icon>
+              Refresh
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!-- Maintenance Tasks -->
+    <div class="maintenance-tasks-section">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Maintenance Tasks</mat-card-title>
+          <mat-card-subtitle>System maintenance and optimization tasks</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          <table mat-table [dataSource]="maintenanceTasks" class="maintenance-table">
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef>Task</th>
+              <td mat-cell *matCellDef="let task">
+                <div class="task-info">
+                  <mat-icon [style.color]="getTaskTypeColor(task.type)">
+                    {{ getTaskTypeIcon(task.type) }}
+                  </mat-icon>
+                  <div class="task-details">
+                    <span class="task-name">{{ task.name }}</span>
+                    <span class="task-description">{{ task.description }}</span>
+                  </div>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Type Column -->
+            <ng-container matColumnDef="type">
+              <th mat-header-cell *matHeaderCellDef>Type</th>
+              <td mat-cell *matCellDef="let task">
+                <mat-chip [color]="task.type === 'cleanup' ? 'primary' : 
+                           task.type === 'optimization' ? 'accent' : 
+                           task.type === 'repair' ? 'warn' : 'default'">
+                  {{ task.type }}
+                </mat-chip>
+              </td>
+            </ng-container>
+
+            <!-- Status Column -->
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef>Status</th>
+              <td mat-cell *matCellDef="let task">
+                <div class="status-indicator">
+                  <mat-icon [style.color]="getTaskStatusColor(task.status)">
+                    {{ getTaskStatusIcon(task.status) }}
+                  </mat-icon>
+                  <span [style.color]="getTaskStatusColor(task.status)">
+                    {{ task.status }}
+                  </span>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Last Run Column -->
+            <ng-container matColumnDef="lastRun">
+              <th mat-header-cell *matHeaderCellDef>Last Run</th>
+              <td mat-cell *matCellDef="let task">
+                {{ task.lastRun ? getFormattedDate(task.lastRun) : 'Never' }}
+              </td>
+            </ng-container>
+
+            <!-- Actions Column -->
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef>Actions</th>
+              <td mat-cell *matCellDef="let task">
+                <div class="task-actions">
+                  <button 
+                    mat-icon-button 
+                    [matMenuTriggerFor]="menu"
+                    [disabled]="!canRunTask(task)">
+                    <mat-icon>more_vert</mat-icon>
+                  </button>
+                  
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="onRunTask(task)">
+                      <mat-icon>play_arrow</mat-icon>
+                      <span>Run Now</span>
+                    </button>
+                    <button mat-menu-item (click)="onScheduleTask(task)">
+                      <mat-icon>schedule</mat-icon>
+                      <span>Schedule</span>
+                    </button>
+                    <button mat-menu-item (click)="onViewTaskDetails(task)">
+                      <mat-icon>info</mat-icon>
+                      <span>View Details</span>
+                    </button>
+                  </mat-menu>
+                </div>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+
+          <!-- Empty State -->
+          <div *ngIf="maintenanceTasks.length === 0" class="empty-tasks">
+            <mat-icon class="empty-icon">build</mat-icon>
+            <h3>No Maintenance Tasks</h3>
+            <p>No maintenance tasks are currently configured</p>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!-- Emergency Actions -->
+    <div class="emergency-actions-section">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Emergency Actions</mat-card-title>
+          <mat-card-subtitle>Critical system operations</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          <div class="emergency-actions">
+            <button 
+              mat-raised-button 
+              color="warn"
+              (click)="onEmergencyMaintenance()"
+              [disabled]="loading">
+              <mat-icon>warning</mat-icon>
+              Emergency Maintenance
+            </button>
+            <p class="emergency-note">
+              Use emergency maintenance only when the system is experiencing critical issues.
+              This may temporarily affect system performance.
+            </p>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <!-- Progress Overlay -->
+  <div *ngIf="runningTask" class="progress-overlay">
+    <mat-card class="progress-card">
+      <mat-card-content>
+        <h3>Running: {{ runningTask.name }}</h3>
+        <p>{{ runningTask.description }}</p>
+        <mat-progress-bar 
+          mode="determinate" 
+          [value]="taskProgress"
+          color="primary">
+        </mat-progress-bar>
+        <span class="progress-text">{{ taskProgress }}%</span>
+        <p class="estimated-time">
+          Estimated time: {{ getEstimatedTimeDisplay(runningTask.estimatedTime) }}
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div> 

@@ -1,0 +1,18 @@
+# =================================================================
+# Mealie Configuration
+# =================================================================
+
+# General Settings
+TZ=America/New_York
+HTTP_PORT=9091
+
+# Database
+POSTGRES_DB=mealie
+POSTGRES_USER=mealie
+POSTGRES_PASSWORD=change_this_secure_password
+
+# JWT Security
+JWT_SECRET_KEY=change-this-super-secret-jwt-key-in-production
+
+# Application
+ALLOW_SIGNUP=false

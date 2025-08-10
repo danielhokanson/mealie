@@ -1,162 +1,107 @@
-###############################################
-# Frontend Build
-###############################################
-FROM node:20 AS frontend-builder
+# =================================================================
+# Dockerfile for Mealie Angular + .NET Backend
+# =================================================================
 
-WORKDIR /frontend
+# =================================================================
+# Stage 1: Angular Frontend Build
+# =================================================================
+FROM node:20-alpine AS angular-builder
 
-COPY frontend .
+WORKDIR /app
 
-RUN yarn install \
-    --prefer-offline \
-    --frozen-lockfile \
-    --non-interactive \
-    --production=false \
-    # https://github.com/docker/build-push-action/issues/471
-    --network-timeout 1000000
+# Copy package files for better caching
+COPY mealie-angular/package*.json ./
+COPY mealie-angular/angular.json ./
+COPY mealie-angular/tsconfig*.json ./
 
-RUN yarn generate
+# Install dependencies
+RUN npm ci --only=production
 
-###############################################
-# Base Image - Python
-###############################################
-FROM python:3.12-slim AS python-base
+# Copy source code
+COPY mealie-angular/src ./src/
+COPY mealie-angular/public ./public/
 
-ENV MEALIE_HOME="/app"
+# Build Angular application for production
+RUN npm run build -- --configuration production
 
-ENV PYTHONUNBUFFERED=1 \
-    PYTHONDONTWRITEBYTECODE=1 \
-    PIP_NO_CACHE_DIR=off \
-    PIP_DISABLE_PIP_VERSION_CHECK=on \
-    PIP_DEFAULT_TIMEOUT=100 \
-    VENV_PATH="/opt/mealie"
+# =================================================================
+# Stage 2: .NET Backend Build
+# =================================================================
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS dotnet-builder
 
-# prepend venv to path
-ENV PATH="$VENV_PATH/bin:$PATH"
+WORKDIR /app
 
-# create user account
-RUN useradd -u 911 -U -d $MEALIE_HOME -s /bin/bash abc \
-    && usermod -G users abc \
-    && mkdir $MEALIE_HOME
+# Copy solution and project files for better caching
+COPY MealieApi/MealieApi.sln ./
+COPY MealieApi/src/MealieApi.Domain/MealieApi.Domain.csproj ./src/MealieApi.Domain/
+COPY MealieApi/src/MealieApi.Application/MealieApi.Application.csproj ./src/MealieApi.Application/
+COPY MealieApi/src/MealieApi.Infrastructure/MealieApi.Infrastructure.csproj ./src/MealieApi.Infrastructure/
+COPY MealieApi/src/MealieApi.WebApi/MealieApi.WebApi.csproj ./src/MealieApi.WebApi/
+COPY MealieApi/src/MealieApi.Shared/MealieApi.Shared.csproj ./src/MealieApi.Shared/
 
-###############################################
-# Backend Package Build
-###############################################
-FROM python-base AS backend-builder
-RUN apt-get update \
-    && apt-get install --no-install-recommends -y \
+# Restore dependencies
+RUN dotnet restore
+
+# Copy source code
+COPY MealieApi/src ./src/
+
+# Build and publish the application
+RUN dotnet publish src/MealieApi.WebApi/MealieApi.WebApi.csproj \
+    -c Release \
+    -o /app/publish \
+    --no-restore \
+    --self-contained false
+
+# =================================================================
+# Stage 3: Production Runtime (All-in-One)
+# =================================================================
+FROM nginx:alpine AS production
+
+# Install .NET runtime and supervisor
+RUN apk add --no-cache \
+    supervisor \
     curl \
-    && rm -rf /var/lib/apt/lists/*
+    ca-certificates \
+    icu-libs \
+    krb5-libs \
+    libgcc \
+    libintl \
+    libssl3 \
+    libstdc++ \
+    zlib
 
-ENV POETRY_HOME="/opt/poetry" \
-    POETRY_NO_INTERACTION=1
+# Install .NET runtime
+ENV DOTNET_RUNNING_IN_CONTAINER=true
+ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
+RUN wget -qO- https://dot.net/v1/dotnet-install.sh | bash -s -- --channel 9.0 --runtime aspnetcore --install-dir /usr/share/dotnet \
+    && ln -s /usr/share/dotnet/dotnet /usr/bin/dotnet
 
-# prepend poetry to path
-ENV PATH="$POETRY_HOME/bin:$PATH"
+WORKDIR /app
 
-# install poetry - respects $POETRY_VERSION & $POETRY_HOME
-ENV POETRY_VERSION=2.0.1
-RUN curl -sSL https://install.python-poetry.org | python3 -
+# Copy Angular build output
+COPY --from=angular-builder /app/dist/mealie-angular ./frontend/
 
-# install poetry plugins needed to build the package
-RUN poetry self add "poetry-plugin-export>=1.9"
+# Copy .NET application
+COPY --from=dotnet-builder /app/publish ./backend/
 
-WORKDIR /mealie
+# Copy nginx configuration
+COPY docker/nginx/default.conf /etc/nginx/conf.d/default.conf
 
-# copy project files here to ensure they will be cached.
-COPY poetry.lock pyproject.toml ./
-COPY mealie ./mealie
+# Copy supervisor configuration
+COPY docker/supervisor/supervisord.conf /etc/supervisord.conf
 
-# Copy frontend to package it into the wheel
-COPY --from=frontend-builder /frontend/dist ./mealie/frontend
+# Create app user and directories
+RUN addgroup -g 911 -S mealie \
+    && adduser -u 911 -D -S -G mealie mealie \
+    && mkdir -p /app/data /var/log/supervisor \
+    && chown -R mealie:mealie /app
 
-# Build the source and binary package
-RUN poetry build --output=dist
+EXPOSE 80
 
-# Create the requirements file, which is used to install the built package and
-# its pinned dependencies later. mealie is included to ensure the built one is
-# what's installed.
-RUN export MEALIE_VERSION=$(poetry version --short) \
-    && poetry export --only=main --extras=pgsql --output=dist/requirements.txt \
-    && echo "mealie[pgsql]==$MEALIE_VERSION \\" >> dist/requirements.txt \
-    && poetry run pip hash dist/mealie-$MEALIE_VERSION-py3-none-any.whl | tail -n1 | tr -d '\n' >> dist/requirements.txt \
-    && echo " \\" >> dist/requirements.txt \
-    && poetry run pip hash dist/mealie-$MEALIE_VERSION.tar.gz | tail -n1 >> dist/requirements.txt
+VOLUME ["/app/data"]
 
-###############################################
-# Package Container
-# Only role is to hold the packages, or be overriden by a --build-context flag.
-###############################################
-FROM scratch AS packages
-COPY --from=backend-builder /mealie/dist /
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+    CMD curl -f http://localhost/health || exit 1
 
-###############################################
-# Python Virtual Environment Build
-###############################################
-# Install packages required to build the venv, in parallel to building the wheel
-FROM python-base AS venv-builder-base
-RUN apt-get update \
-    && apt-get install --no-install-recommends -y \
-    build-essential \
-    libpq-dev \
-    libwebp-dev \
-    # LDAP Dependencies
-    libsasl2-dev libldap2-dev libssl-dev \
-    gnupg gnupg2 gnupg1 \
-    && rm -rf /var/lib/apt/lists/*
-RUN python3 -m venv --upgrade-deps $VENV_PATH
-
-# Install the wheel and all dependencies into the venv
-FROM venv-builder-base AS venv-builder
-
-# Copy built package (wheel) and its dependency requirements
-COPY --from=packages * /dist/
-
-# Install the wheel with exact versions of dependencies into the venv
-RUN . $VENV_PATH/bin/activate \
-    && pip install --require-hashes -r /dist/requirements.txt --find-links /dist
-
-###############################################
-# Production Image
-###############################################
-FROM python-base AS production
-LABEL org.opencontainers.image.source="https://github.com/mealie-recipes/mealie"
-ENV PRODUCTION=true
-ENV TESTING=false
-
-ARG COMMIT
-ENV GIT_COMMIT_HASH=$COMMIT
-
-RUN apt-get update \
-    && apt-get install --no-install-recommends -y \
-    gosu \
-    iproute2 \
-    libldap-common \
-    libldap-2.5 \
-    && rm -rf /var/lib/apt/lists/*
-
-# create directory used for Docker Secrets
-RUN mkdir -p /run/secrets
-
-# Copy venv into image. It contains a fully-installed mealie backend and frontend.
-COPY --from=venv-builder $VENV_PATH $VENV_PATH
-
-# install nltk data for the ingredient parser
-ENV NLTK_DATA="/nltk_data/"
-RUN mkdir -p $NLTK_DATA
-RUN python -m nltk.downloader -d $NLTK_DATA averaged_perceptron_tagger_eng
-
-VOLUME [ "$MEALIE_HOME/data/" ]
-ENV APP_PORT=9000
-
-EXPOSE ${APP_PORT}
-
-HEALTHCHECK CMD python -m mealie.scripts.healthcheck || exit 1
-
-ENV HOST 0.0.0.0
-
-EXPOSE ${APP_PORT}
-COPY ./docker/entry.sh $MEALIE_HOME/run.sh
-
-RUN chmod +x $MEALIE_HOME/run.sh
-ENTRYPOINT ["/app/run.sh"]
+# Use supervisor to run both nginx and .NET application
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]

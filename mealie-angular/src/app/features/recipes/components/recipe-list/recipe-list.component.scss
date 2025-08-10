@@ -1,0 +1,126 @@
+.recipe-list {
+  width: 100%;
+  
+  &.tile-layout {
+    .recipe-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      padding: 16px;
+    }
+  }
+}
+
+.recipe-list-items {
+  background: transparent;
+  
+  .recipe-list-item {
+    margin-bottom: 8px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.04);
+    }
+    
+    &.disabled {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+  }
+}
+
+.recipe-avatar {
+  margin-right: 16px;
+  
+  mat-icon {
+    color: white;
+    
+    &.small {
+      font-size: 16px;
+      width: 16px;
+      height: 16px;
+    }
+  }
+}
+
+.recipe-title {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.2;
+  margin-bottom: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.recipe-description {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 14px;
+  line-height: 1.4;
+  margin-bottom: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.recipe-quantity {
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 12px;
+  font-weight: 500;
+  
+  ::ng-deep {
+    sup, sub {
+      font-size: 10px;
+    }
+  }
+}
+
+.recipe-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.recipe-card-item {
+  transition: transform 0.2s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .recipe-list.tile-layout .recipe-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 12px;
+    padding: 12px;
+  }
+  
+  .recipe-title {
+    font-size: 14px;
+  }
+  
+  .recipe-description {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .recipe-list.tile-layout .recipe-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 8px;
+  }
+  
+  .recipe-avatar {
+    margin-right: 12px;
+  }
+  
+  .recipe-title {
+    font-size: 13px;
+  }
+} 

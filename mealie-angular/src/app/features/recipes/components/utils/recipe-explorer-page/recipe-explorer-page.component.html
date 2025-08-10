@@ -1,0 +1,210 @@
+<div class="recipe-explorer-container">
+  <!-- Search Container -->
+  <div class="search-container">
+    <form class="search-box" (ngSubmit)="search()">
+      <!-- Search Input -->
+      <div class="search-input-container">
+        <mat-form-field appearance="outline" class="search-input">
+          <mat-label>Search recipes...</mat-label>
+          <input matInput
+                 #searchInput
+                 [(ngModel)]="state.search"
+                 name="search"
+                 (keyup.enter)="hideKeyboard()"
+                 (input)="onSearchChange()"
+                 placeholder="Search recipes...">
+          <mat-icon matPrefix>search</mat-icon>
+          <button *ngIf="state.search" 
+                  matSuffix 
+                  mat-icon-button 
+                  type="button"
+                  (click)="state.search = ''; onSearchChange()">
+            <mat-icon>clear</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+
+      <!-- Filter Row -->
+      <div class="search-row">
+        <!-- Category Filter -->
+        <div class="filter-section" *ngIf="categories.length > 0">
+          <mat-form-field appearance="outline" class="filter-input">
+            <mat-label>Categories</mat-label>
+            <mat-select [(ngModel)]="selectedCategories" 
+                       name="categories"
+                       multiple
+                       (selectionChange)="onFilterChange()">
+              <mat-option *ngFor="let category of categories" [value]="category">
+                {{ category.name }}
+              </mat-option>
+            </mat-select>
+            <mat-icon matPrefix>category</mat-icon>
+          </mat-form-field>
+          <mat-slide-toggle [(ngModel)]="state.requireAllCategories"
+                           name="requireAllCategories"
+                           (change)="onFilterChange()">
+            Require All
+          </mat-slide-toggle>
+        </div>
+
+        <!-- Tag Filter -->
+        <div class="filter-section" *ngIf="tags.length > 0">
+          <mat-form-field appearance="outline" class="filter-input">
+            <mat-label>Tags</mat-label>
+            <mat-select [(ngModel)]="selectedTags" 
+                       name="tags"
+                       multiple
+                       (selectionChange)="onFilterChange()">
+              <mat-option *ngFor="let tag of tags" [value]="tag">
+                {{ tag.name }}
+              </mat-option>
+            </mat-select>
+            <mat-icon matPrefix>local_offer</mat-icon>
+          </mat-form-field>
+          <mat-slide-toggle [(ngModel)]="state.requireAllTags"
+                           name="requireAllTags"
+                           (change)="onFilterChange()">
+            Require All
+          </mat-slide-toggle>
+        </div>
+
+        <!-- Tool Filter -->
+        <div class="filter-section" *ngIf="tools.length > 0">
+          <mat-form-field appearance="outline" class="filter-input">
+            <mat-label>Tools</mat-label>
+            <mat-select [(ngModel)]="selectedTools" 
+                       name="tools"
+                       multiple
+                       (selectionChange)="onFilterChange()">
+              <mat-option *ngFor="let tool of tools" [value]="tool">
+                {{ tool.name }}
+              </mat-option>
+            </mat-select>
+            <mat-icon matPrefix>restaurant</mat-icon>
+          </mat-form-field>
+          <mat-slide-toggle [(ngModel)]="state.requireAllTools"
+                           name="requireAllTools"
+                           (change)="onFilterChange()">
+            Require All
+          </mat-slide-toggle>
+        </div>
+
+        <!-- Food Filter -->
+        <div class="filter-section" *ngIf="foods.length > 0">
+          <mat-form-field appearance="outline" class="filter-input">
+            <mat-label>Foods</mat-label>
+            <mat-select [(ngModel)]="selectedFoods" 
+                       name="foods"
+                       multiple
+                       (selectionChange)="onFilterChange()">
+              <mat-option *ngFor="let food of foods" [value]="food">
+                {{ food.name }}
+              </mat-option>
+            </mat-select>
+            <mat-icon matPrefix>restaurant_menu</mat-icon>
+          </mat-form-field>
+          <mat-slide-toggle [(ngModel)]="state.requireAllFoods"
+                           name="requireAllFoods"
+                           (change)="onFilterChange()">
+            Require All
+          </mat-slide-toggle>
+        </div>
+
+        <!-- Household Filter -->
+        <div class="filter-section" *ngIf="households.length > 1">
+          <mat-form-field appearance="outline" class="filter-input">
+            <mat-label>Households</mat-label>
+            <mat-select [(ngModel)]="selectedHouseholds" 
+                       name="households"
+                       multiple
+                       (selectionChange)="onFilterChange()">
+              <mat-option *ngFor="let household of households" [value]="household">
+                {{ household.name }}
+              </mat-option>
+            </mat-select>
+            <mat-icon matPrefix>home</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <!-- Sort Options -->
+        <button mat-icon-button
+                [matMenuTriggerFor]="sortMenu"
+                class="sort-button">
+          <mat-icon>{{ state.orderDirection === 'asc' ? 'sort_ascending' : 'sort_descending' }}</mat-icon>
+          <span class="button-text">{{ sortText }}</span>
+        </button>
+
+        <mat-menu #sortMenu="matMenu">
+          <mat-list>
+            <mat-list-item (click)="toggleOrderDirection()">
+              <mat-icon matListItemIcon>
+                {{ state.orderDirection === 'asc' ? 'sort_descending' : 'sort_ascending' }}
+              </mat-icon>
+              <span matListItemTitle>
+                {{ state.orderDirection === 'asc' ? 'Sort Descending' : 'Sort Ascending' }}
+              </span>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item *ngFor="let option of sortable"
+                          [class.active]="state.orderBy === option.value"
+                          (click)="onOrderByChange(option.value)">
+              <mat-icon matListItemIcon>{{ option.icon }}</mat-icon>
+              <span matListItemTitle>{{ option.name }}</span>
+            </mat-list-item>
+          </mat-list>
+        </mat-menu>
+
+        <!-- Settings -->
+        <button mat-icon-button
+                [matMenuTriggerFor]="settingsMenu"
+                class="settings-button">
+          <mat-icon>settings</mat-icon>
+        </button>
+
+        <mat-menu #settingsMenu="matMenu">
+          <mat-card>
+            <mat-card-content>
+              <mat-slide-toggle [(ngModel)]="state.auto">
+                Auto Search
+              </mat-slide-toggle>
+              <button mat-raised-button
+                      color="primary"
+                      (click)="reset()"
+                      class="reset-button">
+                Reset
+              </button>
+            </mat-card-content>
+          </mat-card>
+        </mat-menu>
+      </div>
+
+      <!-- Search Button -->
+      <div class="search-button-container" *ngIf="!state.auto">
+        <button mat-raised-button
+                color="primary"
+                type="submit"
+                class="search-button">
+          <mat-icon>search</mat-icon>
+          Search
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <!-- Recipe Cards Section -->
+  <div class="recipe-section-container">
+    <app-recipe-card-section
+      *ngIf="state.ready"
+      [icon]="'restaurant'"
+      [title]="'Recipes'"
+      [recipes]="recipes"
+      [query]="passedQueryWithSeed"
+      [disableSort]="true"
+      (itemSelected)="filterItems()"
+      (replaceRecipes)="replaceRecipes($event)"
+      (appendRecipes)="appendRecipes($event)">
+    </app-recipe-card-section>
+  </div>
+</div> 

@@ -1,0 +1,84 @@
+<div class="recipe-page-organizers">
+  <!-- Recipe Categories -->
+  <mat-card *ngIf="recipe.recipeCategory.length > 0 || isEditForm" class="organizer-card">
+    <mat-card-header>
+      <mat-card-title>Categories</mat-card-title>
+    </mat-card-header>
+    
+    <mat-divider></mat-divider>
+    
+    <mat-card-content>
+      <app-recipe-organizer-selector
+        *ngIf="isEditForm"
+        [(ngModel)]="recipe.recipeCategory"
+        [returnObject]="true"
+        [showAdd]="true"
+        selectorType="categories">
+      </app-recipe-organizer-selector>
+      
+      <app-recipe-chips
+        *ngIf="!isEditForm"
+        [items]="recipe.recipeCategory">
+      </app-recipe-chips>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Recipe Tags -->
+  <mat-card *ngIf="recipe.tags.length > 0 || isEditForm" class="organizer-card">
+    <mat-card-header>
+      <mat-card-title>Tags</mat-card-title>
+    </mat-card-header>
+    
+    <mat-divider></mat-divider>
+    
+    <mat-card-content>
+      <app-recipe-organizer-selector
+        *ngIf="isEditForm"
+        [(ngModel)]="recipe.tags"
+        [returnObject]="true"
+        [showAdd]="true"
+        selectorType="tags">
+      </app-recipe-organizer-selector>
+      
+      <app-recipe-chips
+        *ngIf="!isEditForm"
+        [items]="recipe.tags"
+        urlPrefix="tags">
+      </app-recipe-chips>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Recipe Tools -->
+  <mat-card *ngIf="isEditForm" class="organizer-card">
+    <mat-card-header>
+      <mat-card-title>Required Tools</mat-card-title>
+    </mat-card-header>
+    
+    <mat-divider></mat-divider>
+    
+    <mat-card-content>
+      <app-recipe-organizer-selector
+        [(ngModel)]="recipe.tools"
+        selectorType="tools">
+      </app-recipe-organizer-selector>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Recipe Nutrition -->
+  <app-recipe-nutrition
+    *ngIf="recipe.settings?.showNutrition"
+    [(ngModel)]="recipe.nutrition"
+    [edit]="isEditForm"
+    class="nutrition-section">
+  </app-recipe-nutrition>
+
+  <!-- Recipe Assets -->
+  <app-recipe-assets
+    *ngIf="recipe.settings?.showAssets"
+    [(ngModel)]="recipe.assets"
+    [edit]="isEditForm"
+    [slug]="recipe.slug"
+    [recipeId]="recipe.id"
+    class="assets-section">
+  </app-recipe-assets>
+</div> 

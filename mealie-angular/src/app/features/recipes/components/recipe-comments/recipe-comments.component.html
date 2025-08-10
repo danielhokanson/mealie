@@ -1,0 +1,226 @@
+<div class="recipe-comments-container">
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-container">
+    <mat-spinner diameter="50"></mat-spinner>
+    <p>Loading comments...</p>
+  </div>
+
+  <!-- Comments Content -->
+  <div *ngIf="!loading && recipe" class="comments-content">
+    <!-- Header -->
+    <div class="comments-header">
+      <h2>Recipe Comments</h2>
+      <p>Share your thoughts about {{ recipe.name }}</p>
+      
+      <!-- Rating Summary -->
+      <div class="rating-summary">
+        <div class="average-rating">
+          <span class="rating-value">{{ getAverageRating() }}</span>
+          <div class="rating-stars">
+            <mat-icon 
+              *ngFor="let star of getRatingStars(getAverageRating())"
+              [style.color]="star ? '#ffc107' : '#e0e0e0'">
+              {{ star ? 'star' : 'star_border' }}
+            </mat-icon>
+          </div>
+          <span class="rating-count">({{ comments.length }} reviews)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="comments-controls">
+      <div class="control-group">
+        <button 
+          mat-raised-button 
+          color="primary"
+          (click)="onAddComment()">
+          <mat-icon>add</mat-icon>
+          Add Comment
+        </button>
+      </div>
+
+      <div class="control-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Sort by</mat-label>
+          <mat-select [(ngModel)]="sortBy" (selectionChange)="onSortChange($event.value)">
+            <mat-option value="newest">Newest First</mat-option>
+            <mat-option value="oldest">Oldest First</mat-option>
+            <mat-option value="rating">Highest Rated</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Filter by rating</mat-label>
+          <mat-select [(ngModel)]="filterRating" (selectionChange)="onFilterRating($event.value)">
+            <mat-option [value]="null">All Ratings</mat-option>
+            <mat-option [value]="5">5 Stars</mat-option>
+            <mat-option [value]="4">4 Stars</mat-option>
+            <mat-option [value]="3">3 Stars</mat-option>
+            <mat-option [value]="2">2 Stars</mat-option>
+            <mat-option [value]="1">1 Star</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Comments List -->
+    <div class="comments-list" *ngIf="getFilteredComments().length > 0">
+      <div 
+        *ngFor="let comment of getFilteredComments()" 
+        class="comment-item">
+        
+        <!-- Comment Header -->
+        <div class="comment-header">
+          <div class="comment-user">
+            <mat-icon class="user-avatar">person</mat-icon>
+            <div class="user-info">
+              <span class="user-name">{{ comment.user.fullName }}</span>
+              <span class="comment-date">{{ getRelativeDate(comment.createdAt) }}</span>
+            </div>
+          </div>
+
+          <div class="comment-rating">
+            <div class="rating-stars">
+              <mat-icon 
+                *ngFor="let star of getRatingStars(comment.rating)"
+                [style.color]="star ? '#ffc107' : '#e0e0e0'">
+                {{ star ? 'star' : 'star_border' }}
+              </mat-icon>
+            </div>
+            <span class="rating-value" [style.color]="getRatingColor(comment.rating)">
+              {{ comment.rating }}/5
+            </span>
+          </div>
+
+          <div class="comment-actions" *ngIf="canEditComment(comment) || canDeleteComment(comment)">
+            <button 
+              mat-icon-button 
+              [matMenuTriggerFor]="commentMenu"
+              matTooltip="More options">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #commentMenu="matMenu">
+              <button 
+                mat-menu-item 
+                (click)="onEditComment(comment)"
+                *ngIf="canEditComment(comment)">
+                <mat-icon>edit</mat-icon>
+                <span>Edit Comment</span>
+              </button>
+              <button 
+                mat-menu-item 
+                (click)="onDeleteComment(comment)"
+                *ngIf="canDeleteComment(comment)">
+                <mat-icon>delete</mat-icon>
+                <span>Delete Comment</span>
+              </button>
+            </mat-menu>
+          </div>
+        </div>
+
+        <!-- Comment Content -->
+        <div class="comment-content">
+          <p class="comment-text">{{ comment.text }}</p>
+          
+          <div class="comment-meta">
+            <mat-chip 
+              *ngIf="!comment.isPublic"
+              class="private-chip">
+              Private
+            </mat-chip>
+            <span class="comment-time">{{ getFormattedDate(comment.createdAt) }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="!loading && getFilteredComments().length === 0" class="empty-comments">
+      <mat-icon class="empty-icon">comment</mat-icon>
+      <h3>No Comments Yet</h3>
+      <p>Be the first to share your thoughts about this recipe!</p>
+      <button 
+        mat-raised-button 
+        color="primary"
+        (click)="onAddComment()">
+        <mat-icon>add</mat-icon>
+        Add First Comment
+      </button>
+    </div>
+  </div>
+
+  <!-- No Recipe State -->
+  <div *ngIf="!loading && !recipe" class="no-recipe">
+    <mat-icon class="no-recipe-icon">restaurant</mat-icon>
+    <h3>No Recipe Selected</h3>
+    <p>Please select a recipe to view its comments.</p>
+  </div>
+
+  <!-- Add/Edit Comment Dialog -->
+  <div *ngIf="showAddComment" class="dialog-overlay">
+    <mat-card class="dialog-card">
+      <mat-card-header>
+        <mat-card-title>{{ editingComment ? 'Edit Comment' : 'Add Comment' }}</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <form [formGroup]="commentForm" class="comment-form">
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Your Comment</mat-label>
+              <textarea 
+                matInput 
+                formControlName="text"
+                placeholder="Share your thoughts about this recipe..."
+                rows="4">
+              </textarea>
+              <mat-error *ngIf="commentForm.get('text')?.invalid && commentForm.get('text')?.touched">
+                {{ getErrorMessage('text') }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <div class="rating-input">
+              <label>Rating</label>
+              <div class="rating-stars-input">
+                <button 
+                  *ngFor="let star of [1, 2, 3, 4, 5]"
+                  type="button"
+                  mat-icon-button
+                  (click)="commentForm.patchValue({ rating: star })"
+                  [style.color]="star <= commentForm.get('rating')?.value ? '#ffc107' : '#e0e0e0'">
+                  <mat-icon>{{ star <= commentForm.get('rating')?.value ? 'star' : 'star_border' }}</mat-icon>
+                </button>
+              </div>
+              <span class="rating-text">{{ commentForm.get('rating')?.value }}/5</span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <mat-checkbox formControlName="isPublic" color="primary">
+              Make this comment public
+            </mat-checkbox>
+          </div>
+        </form>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button 
+          mat-button 
+          (click)="onCancel()">
+          Cancel
+        </button>
+        <button 
+          mat-raised-button 
+          color="primary"
+          (click)="onSaveComment()"
+          [disabled]="loading || commentForm.invalid">
+          <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner>
+          <span *ngIf="!loading">{{ editingComment ? 'Update' : 'Add' }} Comment</span>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div> 

@@ -1,6 +1,8 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "enabledManagers": [
+    "npm",
+    "nuget",
     "poetry"
   ],
   "extends": [
@@ -11,5 +13,23 @@
   ],
   "ignoreDeps": [
     "python"
+  ],
+  "packageRules": [
+    {
+      "matchManagers": ["npm"],
+      "matchPaths": ["mealie-angular/**"],
+      "addLabels": ["angular", "frontend"]
+    },
+    {
+      "matchManagers": ["nuget"],
+      "matchPaths": ["MealieApi/**"],
+      "addLabels": ["dotnet", "backend"]
+    },
+    {
+      "matchManagers": ["poetry"],
+      "matchPaths": ["mealie/**", "pyproject.toml"],
+      "addLabels": ["python", "legacy"],
+      "enabled": false
+    }
   ]
 }

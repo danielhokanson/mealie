@@ -1,0 +1,31 @@
+<mat-card [class]="cardClass">
+  <div class="card-content">
+    <!-- Image Section -->
+    <div *ngIf="hasImage" class="image-section">
+      <img
+        [src]="image"
+        [alt]="name"
+        class="recipe-image"
+        loading="lazy">
+    </div>
+    
+    <!-- Content Section -->
+    <div class="content-section">
+      <!-- Recipe Name -->
+      <h3 class="recipe-name">{{ name }}</h3>
+      
+      <!-- Description -->
+      <p *ngIf="description" class="recipe-description">
+        {{ description }}
+      </p>
+      
+      <!-- Rating -->
+      <div *ngIf="displayRating > 0" class="rating-section">
+        <mat-chip color="primary" class="rating-chip">
+          <mat-icon>star</mat-icon>
+          {{ displayRating.toFixed(1) }}
+        </mat-chip>
+      </div>
+    </div>
+  </div>
+</mat-card> 

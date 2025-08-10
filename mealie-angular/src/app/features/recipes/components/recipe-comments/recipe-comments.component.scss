@@ -1,0 +1,452 @@
+.recipe-comments-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+
+  .loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    text-align: center;
+
+    p {
+      margin-top: 16px;
+      color: var(--mat-text-color-secondary, #666);
+    }
+  }
+
+  .no-recipe {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    text-align: center;
+
+    .no-recipe-icon {
+      font-size: 64px;
+      width: 64px;
+      height: 64px;
+      color: var(--mat-text-color-secondary, #666);
+      margin-bottom: 16px;
+    }
+
+    h3 {
+      margin: 0 0 8px 0;
+      color: var(--mat-text-color-primary, #333);
+    }
+
+    p {
+      color: var(--mat-text-color-secondary, #666);
+    }
+  }
+
+  .comments-content {
+    .comments-header {
+      text-align: center;
+      margin-bottom: 24px;
+
+      h2 {
+        font-size: 24px;
+        font-weight: 600;
+        color: var(--mat-text-color-primary, #333);
+        margin: 0 0 8px 0;
+      }
+
+      p {
+        font-size: 16px;
+        color: var(--mat-text-color-secondary, #666);
+        margin: 0 0 16px 0;
+      }
+
+      .rating-summary {
+        .average-rating {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 12px;
+
+          .rating-value {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--mat-text-color-primary, #333);
+          }
+
+          .rating-stars {
+            display: flex;
+            gap: 2px;
+
+            mat-icon {
+              font-size: 20px;
+              width: 20px;
+              height: 20px;
+            }
+          }
+
+          .rating-count {
+            font-size: 14px;
+            color: var(--mat-text-color-secondary, #666);
+          }
+        }
+      }
+    }
+
+    .comments-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 16px;
+
+      .control-group {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+
+        mat-form-field {
+          min-width: 150px;
+        }
+      }
+    }
+
+    .comments-list {
+      .comment-item {
+        background: var(--mat-card-background-color, #fff);
+        border-radius: 8px;
+        padding: 16px;
+        margin-bottom: 16px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        border-left: 4px solid var(--mat-primary-color, #1976d2);
+
+        .comment-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          margin-bottom: 12px;
+
+          .comment-user {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            .user-avatar {
+              font-size: 32px;
+              width: 32px;
+              height: 32px;
+              color: var(--mat-text-color-secondary, #666);
+              background: var(--mat-card-background-color, #fafafa);
+              border-radius: 50%;
+              padding: 4px;
+            }
+
+            .user-info {
+              display: flex;
+              flex-direction: column;
+
+              .user-name {
+                font-weight: 500;
+                color: var(--mat-text-color-primary, #333);
+                font-size: 14px;
+              }
+
+              .comment-date {
+                font-size: 12px;
+                color: var(--mat-text-color-secondary, #666);
+              }
+            }
+          }
+
+          .comment-rating {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            .rating-stars {
+              display: flex;
+              gap: 1px;
+
+              mat-icon {
+                font-size: 16px;
+                width: 16px;
+                height: 16px;
+              }
+            }
+
+            .rating-value {
+              font-size: 12px;
+              font-weight: 500;
+            }
+          }
+
+          .comment-actions {
+            opacity: 0;
+            transition: opacity 0.2s ease;
+          }
+
+          &:hover {
+            .comment-actions {
+              opacity: 1;
+            }
+          }
+        }
+
+        .comment-content {
+          .comment-text {
+            color: var(--mat-text-color-primary, #333);
+            line-height: 1.5;
+            margin: 0 0 12px 0;
+            font-size: 14px;
+          }
+
+          .comment-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 12px;
+
+            .private-chip {
+              background-color: var(--mat-warn-color, #f44336);
+              color: white;
+              font-size: 10px;
+              height: 20px;
+            }
+
+            .comment-time {
+              color: var(--mat-text-color-secondary, #666);
+            }
+          }
+        }
+      }
+    }
+
+    .empty-comments {
+      text-align: center;
+      padding: 60px 20px;
+
+      .empty-icon {
+        font-size: 64px;
+        width: 64px;
+        height: 64px;
+        color: var(--mat-text-color-secondary, #666);
+        margin-bottom: 16px;
+      }
+
+      h3 {
+        font-size: 20px;
+        font-weight: 500;
+        color: var(--mat-text-color-primary, #333);
+        margin: 0 0 8px 0;
+      }
+
+      p {
+        color: var(--mat-text-color-secondary, #666);
+        margin: 0 0 24px 0;
+      }
+
+      button {
+        min-width: 160px;
+      }
+    }
+  }
+
+  .dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+
+    .dialog-card {
+      max-width: 500px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+
+      mat-card-header {
+        margin-bottom: 16px;
+
+        mat-card-title {
+          font-size: 20px;
+          font-weight: 500;
+          margin: 0;
+        }
+      }
+
+      .comment-form {
+        .form-row {
+          margin-bottom: 16px;
+
+          .form-field {
+            width: 100%;
+          }
+
+          .rating-input {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            label {
+              font-size: 14px;
+              font-weight: 500;
+              color: var(--mat-text-color-primary, #333);
+              min-width: 60px;
+            }
+
+            .rating-stars-input {
+              display: flex;
+              gap: 4px;
+
+              button {
+                padding: 4px;
+                min-width: 32px;
+                height: 32px;
+                line-height: 32px;
+
+                mat-icon {
+                  font-size: 20px;
+                  width: 20px;
+                  height: 20px;
+                }
+              }
+            }
+
+            .rating-text {
+              font-size: 14px;
+              font-weight: 500;
+              color: var(--mat-text-color-primary, #333);
+              min-width: 40px;
+            }
+          }
+
+          mat-checkbox {
+            font-size: 14px;
+          }
+        }
+      }
+
+      mat-card-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+        padding: 16px 0 0 0;
+        margin: 0;
+
+        button {
+          min-width: 100px;
+          position: relative;
+
+          .spinner {
+            margin-right: 8px;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .recipe-comments-container {
+    padding: 16px;
+
+    .comments-content {
+      .comments-controls {
+        flex-direction: column;
+        align-items: stretch;
+
+        .control-group {
+          justify-content: center;
+          flex-wrap: wrap;
+
+          mat-form-field {
+            min-width: 120px;
+          }
+        }
+      }
+
+      .comments-list {
+        .comment-item {
+          padding: 12px;
+
+          .comment-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 8px;
+
+            .comment-user {
+              width: 100%;
+            }
+
+            .comment-rating {
+              align-self: flex-end;
+            }
+
+            .comment-actions {
+              opacity: 1;
+              align-self: flex-end;
+            }
+          }
+        }
+      }
+
+      .empty-comments {
+        padding: 40px 16px;
+
+        .empty-icon {
+          font-size: 48px;
+          width: 48px;
+          height: 48px;
+        }
+
+        h3 {
+          font-size: 18px;
+        }
+      }
+    }
+
+    .dialog-overlay {
+      padding: 16px;
+
+      .dialog-card {
+        .comment-form {
+          .form-row {
+            margin-bottom: 12px;
+
+            .rating-input {
+              flex-direction: column;
+              align-items: flex-start;
+              gap: 8px;
+
+              label {
+                min-width: auto;
+              }
+
+              .rating-stars-input {
+                justify-content: center;
+              }
+            }
+          }
+        }
+
+        mat-card-actions {
+          flex-direction: column-reverse;
+          gap: 8px;
+
+          button {
+            width: 100%;
+            min-width: auto;
+          }
+        }
+      }
+    }
+  }
+} 

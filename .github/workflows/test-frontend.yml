@@ -1,47 +1,44 @@
-name: Frontend Lint and Test
+name: Angular Frontend Lint and Test
 
 on:
   workflow_call:
 
 jobs:
-  lint:
+  lint-and-test:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout 🛎
         uses: actions/checkout@v4
 
-      - name: Setup node env 🏗
-        uses: actions/setup-node@v4.0.0
+      - name: Setup Node.js 🏗
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-          check-latest: true
-
-      - name: Get yarn cache directory path 🛠
-        id: yarn-cache-dir-path
-        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
-
-      - name: Cache node_modules 📦
-        uses: actions/cache@v4
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
+          cache: 'npm'
+          cache-dependency-path: mealie-angular/package-lock.json
 
       - name: Install dependencies 👨🏻‍💻
-        run: yarn
-        working-directory: "frontend"
-
-      - name: Prepare nuxt 🚀
-        run: yarn nuxt prepare
-        working-directory: "frontend"
+        run: npm ci
+        working-directory: mealie-angular
 
       - name: Run linter 👀
-        run: yarn lint
-        working-directory: "frontend"
+        run: npm run lint
+        working-directory: mealie-angular
 
       - name: Run tests 🧪
-        run: yarn test:ci
-        working-directory: "frontend"
+        run: npm run test -- --watch=false --browsers=ChromeHeadless --code-coverage
+        working-directory: mealie-angular
+
+      - name: Build for production 🏗️
+        run: npm run build -- --configuration production
+        working-directory: mealie-angular
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          directory: ./mealie-angular/coverage
+          flags: frontend
+          name: frontend-coverage
+          fail_ci_if_error: false

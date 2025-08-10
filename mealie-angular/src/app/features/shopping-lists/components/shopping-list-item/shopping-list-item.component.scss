@@ -1,0 +1,212 @@
+.shopping-list-item {
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+  
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.item-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 48px;
+}
+
+.item-content {
+  flex: 1;
+  min-width: 0;
+  
+  &.cols-auto {
+    flex: 0 0 auto;
+  }
+  
+  &.cols-4 {
+    flex: 0 0 33.333%;
+  }
+  
+  &.cols-6 {
+    flex: 0 0 50%;
+  }
+}
+
+.item-main {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.item-checkbox {
+  flex-shrink: 0;
+  
+  ::ng-deep .mat-mdc-checkbox {
+    margin: 0;
+  }
+}
+
+.item-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  
+  &.strike-through {
+    text-decoration: line-through;
+    color: rgba(0, 0, 0, 0.6);
+  }
+}
+
+.item-quantity {
+  font-weight: 600;
+  color: #1976d2;
+  margin-right: 4px;
+}
+
+.item-name {
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.item-notes {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.6);
+  font-style: italic;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.item-spacer {
+  flex: 1;
+}
+
+.item-label {
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+
+.item-actions {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 72px;
+}
+
+.action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.recipe-toggle-btn,
+.drag-handle,
+.edit-btn {
+  min-width: 32px;
+  width: 32px;
+  height: 32px;
+  
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.dummy-btn {
+  min-width: 32px;
+  width: 32px;
+  height: 32px;
+  opacity: 0;
+}
+
+.context-menu-item {
+  cursor: pointer;
+  
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+}
+
+.recipe-references {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  padding-left: 40px;
+}
+
+.completion-info {
+  margin-top: 4px;
+  padding-left: 40px;
+  
+  .completion-text {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.6);
+    font-style: italic;
+  }
+}
+
+.edit-mode {
+  margin-top: 24px;
+  margin-bottom: 4px;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .item-content {
+    &.cols-4,
+    &.cols-6 {
+      flex: 1;
+    }
+  }
+  
+  .item-actions {
+    min-width: 60px;
+  }
+  
+  .action-buttons {
+    gap: 2px;
+  }
+  
+  .recipe-toggle-btn,
+  .drag-handle,
+  .edit-btn {
+    min-width: 28px;
+    width: 28px;
+    height: 28px;
+    
+    mat-icon {
+      font-size: 16px;
+      width: 16px;
+      height: 16px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .item-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  
+  .item-content {
+    width: 100%;
+  }
+  
+  .item-actions {
+    align-self: flex-end;
+  }
+  
+  .recipe-references {
+    padding-left: 16px;
+  }
+  
+  .completion-info {
+    padding-left: 16px;
+  }
+} 

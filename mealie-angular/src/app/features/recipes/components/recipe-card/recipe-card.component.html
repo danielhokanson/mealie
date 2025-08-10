@@ -1,0 +1,79 @@
+<div>
+  <mat-card
+    [class.on-hover]="isHovering"
+    [style.cursor]="cursor"
+    [style.min-height.px]="imageHeight + 75"
+    (click)="onCardClick()"
+    class="recipe-card">
+    
+    <!-- Recipe Card Image -->
+    <div class="recipe-image-container" [style.height.px]="imageHeight">
+      <img 
+        [src]="image" 
+        [alt]="name"
+        class="recipe-image"
+        [style.height.px]="imageHeight">
+      
+      <!-- Description Overlay on Hover -->
+      <div *ngIf="description && isHovering"
+           class="description-overlay">
+        <div class="description-content">
+          <div class="description-wrapper">
+            <app-safe-markdown [markdown]="description || ''"></app-safe-markdown>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recipe Title -->
+    <mat-card-title class="recipe-title">
+      <div class="header-class">
+        {{ name }}
+      </div>
+    </mat-card-title>
+
+    <!-- Recipe Actions -->
+    <div class="recipe-actions" *ngIf="showRecipeContent">
+      <!-- Favorite Badge -->
+      <app-recipe-favorite-badge
+        *ngIf="isOwnGroup"
+        class="favorite-badge"
+        [recipeId]="recipeId"
+        [showAlways]="true">
+      </app-recipe-favorite-badge>
+      
+      <div *ngIf="!isOwnGroup" class="spacer"></div>
+
+      <!-- Recipe Rating -->
+      <app-recipe-rating
+        class="recipe-rating"
+        [modelValue]="rating"
+        [recipeId]="recipeId"
+        [slug]="slug"
+        [small]="true">
+      </app-recipe-rating>
+
+      <div class="spacer"></div>
+
+      <!-- Recipe Tags -->
+      <app-recipe-chips
+        [items]="tags"
+        urlPrefix="tags">
+      </app-recipe-chips>
+
+      <!-- Context Menu -->
+      <app-recipe-context-menu
+        *ngIf="isOwnGroup"
+        color="grey-darken-2"
+        [slug]="slug"
+        [name]="name"
+        [recipeId]="recipeId"
+        [useItems]="contextMenuItems"
+        (delete)="onDelete($event)">
+      </app-recipe-context-menu>
+    </div>
+
+    <!-- Additional Content Slot -->
+    <ng-content></ng-content>
+  </mat-card>
+</div> 

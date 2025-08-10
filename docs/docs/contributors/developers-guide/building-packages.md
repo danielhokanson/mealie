@@ -2,39 +2,132 @@
 
 Released packages are [built and published via GitHub actions](maintainers.md#drafting-releases).
 
-## Python packages
+## .NET Packages
 
-To build Python packages locally for testing, use [`task`](starting-dev-server.md#without-dev-containers). After installing `task`, run `task py:package` to perform all the steps needed to build the package and a requirements file. To do it manually, run:
-```sh
-pushd frontend
-yarnpkg install
-yarnpkg generate
-popd
-rm -r mealie/frontend
-cp -a frontend/dist mealie/frontend
-poetry build
-poetry export -n --only=main --extras=pgsql --output=dist/requirements.txt
-MEALIE_VERSION=$(poetry version --short)
-echo "mealie[pgsql]==${MEALIE_VERSION} \\" >> dist/requirements.txt
-poetry run pip hash dist/mealie-${MEALIE_VERSION}-py3-none-any.whl | tail -n1 | tr -d '\n' >> dist/requirements.txt
-echo " \\" >> dist/requirements.txt
-poetry run pip hash dist/mealie-${MEALIE_VERSION}.tar.gz | tail -n1 >> dist/requirements.txt
+The Mealie .NET backend can be built and packaged using standard .NET tooling.
+
+### Building the Backend
+
+To build the .NET backend locally:
+
+```bash
+cd MealieApi
+dotnet restore
+dotnet build --configuration Release
 ```
 
-The Python package can be installed with all of its dependencies pinned to the versions tested by the developers with:
-```sh
-pip3 install -r dist/requirements.txt --find-links dist
+### Publishing the Backend
+
+To create a self-contained deployment:
+
+```bash
+cd MealieApi
+dotnet publish src/MealieApi.WebApi/MealieApi.WebApi.csproj \
+    --configuration Release \
+    --output ./dist/backend \
+    --self-contained false
 ```
 
-To install with the latest but still compatible dependency versions, instead run `pip3 install dist/mealie-$VERSION-py3-none-any.whl` (where `$VERSION` is the version of mealie to install).
+For a framework-dependent deployment (smaller size):
 
-## Docker image
-One way to build the Docker image is to run the following command in the project root directory:
-```sh
-docker build --tag mealie:dev --file docker/Dockerfile --build-arg COMMIT=$(git rev-parse HEAD) .
+```bash
+dotnet publish src/MealieApi.WebApi/MealieApi.WebApi.csproj \
+    --configuration Release \
+    --output ./dist/backend \
+    --self-contained false \
+    --runtime linux-x64
 ```
 
-The Docker image can be built from the pre-built Python packages with the task command `task docker:build-from-package`. This is equivalent to:
-```sh
-docker build --tag mealie:dev --file docker/Dockerfile --build-arg COMMIT=$(git rev-parse HEAD) --build-context packages=dist .
+## Angular Frontend
+
+### Building the Frontend
+
+To build the Angular frontend:
+
+```bash
+cd mealie-angular
+npm install
+ng build --configuration production
+```
+
+The built files will be in `mealie-angular/dist/mealie-angular/`.
+
+### Building with Specific Configuration
+
+For different environments:
+
+```bash
+# Development build
+ng build --configuration development
+
+# Production build (optimized)
+ng build --configuration production
+
+# Build with specific base href
+ng build --base-href /mealie/
+```
+
+## Docker Image
+
+### Building the Complete Application
+
+To build the Docker image with both Angular frontend and .NET backend:
+
+```bash
+cd docker
+docker build --tag mealie:dev --file Dockerfile ..
+```
+
+### Development Docker Setup
+
+For development with hot reload:
+
+```bash
+cd docker
+docker-compose -f docker-compose.dev.yml up --build
+```
+
+This creates separate containers for:
+
+- Angular development server (port 4200)
+- .NET API with hot reload (port 5000)
+- PostgreSQL database (port 5432)
+
+### Production Docker Setup
+
+For production deployment:
+
+```bash
+cd docker
+docker-compose up --build -d
+```
+
+This creates a single optimized container with:
+
+- Nginx serving the Angular frontend
+- .NET backend API
+- PostgreSQL database
+
+### Custom Build Arguments
+
+You can customize the build with build arguments:
+
+```bash
+docker build \
+  --tag mealie:custom \
+  --build-arg ASPNETCORE_ENVIRONMENT=Production \
+  --file docker/Dockerfile \
+  ..
+```
+
+### Multi-Architecture Builds
+
+For building images that support multiple architectures:
+
+```bash
+docker buildx build \
+  --platform linux/amd64,linux/arm64 \
+  --tag mealie:multi-arch \
+  --file docker/Dockerfile \
+  ..
 ```

@@ -1,0 +1,28 @@
+.recipe-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip-item {
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: #1976d2;
+    color: white;
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .recipe-chips {
+    gap: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .recipe-chips {
+    gap: 4px;
+  }
+} 

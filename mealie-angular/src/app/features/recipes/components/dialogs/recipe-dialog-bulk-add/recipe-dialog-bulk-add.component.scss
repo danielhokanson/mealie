@@ -1,0 +1,196 @@
+.text-center {
+  text-align: center;
+}
+
+.dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dialog-content {
+  width: 800px;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: hidden;
+}
+
+.dialog-card {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.dialog-header {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  min-height: 64px;
+
+  .header-icon {
+    margin-right: 12px;
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+  }
+
+  .header-title {
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  .spacer {
+    flex: 1;
+  }
+}
+
+.dialog-body {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.text-input {
+  width: 100%;
+  margin-bottom: 16px;
+
+  textarea {
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+}
+
+.section-divider {
+  margin: 16px 0;
+}
+
+.utilities-section {
+  .utility-item {
+    .utility-list-item {
+      padding: 8px 0;
+      min-height: auto;
+
+      .utility-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        gap: 16px;
+
+        .utility-description {
+          flex: 1;
+          font-size: 14px;
+          color: #666;
+          word-wrap: break-word;
+        }
+
+        .utility-button {
+          flex-shrink: 0;
+        }
+      }
+    }
+
+    .utility-divider {
+      margin: 0 16px;
+    }
+  }
+}
+
+.action-divider {
+  margin: 0;
+}
+
+.dialog-actions {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  gap: 8px;
+
+  .spacer {
+    flex: 1;
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .dialog-content {
+    width: 95vw;
+    max-height: 95vh;
+  }
+
+  .dialog-header {
+    padding: 0 12px;
+    min-height: 56px;
+
+    .header-title {
+      font-size: 18px;
+    }
+  }
+
+  .dialog-body {
+    padding: 12px;
+  }
+
+  .utilities-section {
+    .utility-item {
+      .utility-list-item {
+        .utility-content {
+          flex-direction: column;
+          align-items: stretch;
+          gap: 8px;
+
+          .utility-description {
+            text-align: center;
+          }
+
+          .utility-button {
+            align-self: center;
+          }
+        }
+      }
+    }
+  }
+
+  .dialog-actions {
+    padding: 12px;
+    flex-direction: column;
+    gap: 8px;
+
+    .spacer {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .dialog-content {
+    width: 98vw;
+    max-height: 98vh;
+  }
+
+  .dialog-header {
+    padding: 0 8px;
+    min-height: 48px;
+
+    .header-title {
+      font-size: 16px;
+    }
+  }
+
+  .dialog-body {
+    padding: 8px;
+  }
+
+  .dialog-actions {
+    padding: 8px;
+  }
+} 

@@ -1,0 +1,130 @@
+.shopping-list-create-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+
+  .shopping-list-create-header {
+    text-align: center;
+    margin-bottom: 32px;
+
+    h1 {
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--mat-text-color-primary, #333);
+      margin: 0 0 8px 0;
+    }
+
+    p {
+      font-size: 16px;
+      color: var(--mat-text-color-secondary, #666);
+      margin: 0;
+    }
+  }
+
+  .shopping-list-form {
+    .form-section {
+      margin-bottom: 24px;
+
+      mat-card-header {
+        margin-bottom: 16px;
+
+        mat-card-title {
+          font-size: 20px;
+          font-weight: 500;
+          margin: 0;
+        }
+
+        mat-card-subtitle {
+          font-size: 14px;
+          color: var(--mat-text-color-secondary, #666);
+          margin: 4px 0 0 0;
+        }
+      }
+
+      .form-row {
+        margin-bottom: 16px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        .form-field {
+          width: 100%;
+        }
+
+        mat-checkbox {
+          font-size: 14px;
+        }
+      }
+
+      .labels-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 12px;
+
+        mat-checkbox {
+          font-size: 14px;
+        }
+      }
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--mat-divider-color, #e0e0e0);
+
+      .cancel-button {
+        color: var(--mat-text-color-secondary, #666);
+      }
+
+      .submit-button {
+        position: relative;
+
+        .spinner {
+          margin-right: 8px;
+        }
+
+        &:disabled {
+          opacity: 0.7;
+        }
+      }
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .shopping-list-create-container {
+    padding: 16px;
+
+    .shopping-list-create-header {
+      h1 {
+        font-size: 24px;
+      }
+
+      p {
+        font-size: 14px;
+      }
+    }
+
+    .shopping-list-form {
+      .form-section {
+        .labels-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .form-actions {
+        flex-direction: column-reverse;
+        gap: 8px;
+
+        button {
+          width: 100%;
+        }
+      }
+    }
+  }
+} 

@@ -1,0 +1,337 @@
+.recipe-nutrition-editor-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+
+  .loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    text-align: center;
+
+    p {
+      margin-top: 16px;
+      color: var(--mat-text-color-secondary, #666);
+    }
+  }
+
+  .no-recipe {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    text-align: center;
+
+    .no-recipe-icon {
+      font-size: 64px;
+      width: 64px;
+      height: 64px;
+      color: var(--mat-text-color-secondary, #666);
+      margin-bottom: 16px;
+    }
+
+    h3 {
+      margin: 0 0 8px 0;
+      color: var(--mat-text-color-primary, #333);
+    }
+
+    p {
+      color: var(--mat-text-color-secondary, #666);
+    }
+  }
+
+  .nutrition-content {
+    .nutrition-header {
+      text-align: center;
+      margin-bottom: 24px;
+
+      h2 {
+        font-size: 24px;
+        font-weight: 600;
+        color: var(--mat-text-color-primary, #333);
+        margin: 0 0 8px 0;
+      }
+
+      p {
+        font-size: 16px;
+        color: var(--mat-text-color-secondary, #666);
+        margin: 0;
+      }
+    }
+
+    .nutrition-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 16px;
+
+      .control-group {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+
+        button {
+          &.active {
+            background-color: var(--mat-accent-color, #ff4081);
+            color: white;
+          }
+        }
+      }
+    }
+
+    .nutrition-summary {
+      margin-bottom: 32px;
+
+      h3 {
+        font-size: 18px;
+        font-weight: 500;
+        color: var(--mat-text-color-primary, #333);
+        margin: 0 0 16px 0;
+      }
+
+      .summary-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 16px;
+
+        .summary-item {
+          background: var(--mat-card-background-color, #fafafa);
+          border-radius: 8px;
+          padding: 16px;
+          text-align: center;
+          border: 1px solid var(--mat-divider-color, #e0e0e0);
+
+          .summary-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--mat-text-color-secondary, #666);
+            text-transform: uppercase;
+            margin-bottom: 4px;
+          }
+
+          .summary-value {
+            display: block;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--mat-text-color-primary, #333);
+          }
+        }
+      }
+    }
+
+    .nutrition-form {
+      .nutrition-section {
+        margin-bottom: 32px;
+
+        h3 {
+          font-size: 18px;
+          font-weight: 500;
+          color: var(--mat-text-color-primary, #333);
+          margin: 0 0 16px 0;
+        }
+
+        .nutrition-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 20px;
+
+          .nutrition-field {
+            .field-label {
+              display: block;
+              font-size: 14px;
+              font-weight: 500;
+              color: var(--mat-text-color-primary, #333);
+              margin-bottom: 8px;
+            }
+
+            .field-input {
+              margin-bottom: 8px;
+
+              mat-form-field {
+                width: 100%;
+              }
+            }
+
+            .field-progress {
+              display: flex;
+              align-items: center;
+              gap: 8px;
+
+              .progress-bar {
+                flex: 1;
+                height: 6px;
+                background-color: var(--mat-divider-color, #e0e0e0);
+                border-radius: 3px;
+                overflow: hidden;
+
+                .progress-fill {
+                  height: 100%;
+                  border-radius: 3px;
+                  transition: width 0.3s ease, background-color 0.3s ease;
+                }
+              }
+
+              .progress-text {
+                font-size: 11px;
+                color: var(--mat-text-color-secondary, #666);
+                min-width: 50px;
+                text-align: right;
+              }
+            }
+          }
+        }
+      }
+
+      .advanced-nutrition {
+        margin-bottom: 32px;
+
+        mat-expansion-panel-header {
+          mat-panel-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            mat-icon {
+              color: var(--mat-primary-color, #1976d2);
+            }
+          }
+        }
+
+        .nutrition-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 20px;
+
+          .nutrition-field {
+            .field-label {
+              display: block;
+              font-size: 14px;
+              font-weight: 500;
+              color: var(--mat-text-color-primary, #333);
+              margin-bottom: 8px;
+            }
+
+            .field-input {
+              margin-bottom: 8px;
+
+              mat-form-field {
+                width: 100%;
+              }
+            }
+
+            .field-progress {
+              display: flex;
+              align-items: center;
+              gap: 8px;
+
+              .progress-bar {
+                flex: 1;
+                height: 6px;
+                background-color: var(--mat-divider-color, #e0e0e0);
+                border-radius: 3px;
+                overflow: hidden;
+
+                .progress-fill {
+                  height: 100%;
+                  border-radius: 3px;
+                  transition: width 0.3s ease, background-color 0.3s ease;
+                }
+              }
+
+              .progress-text {
+                font-size: 11px;
+                color: var(--mat-text-color-secondary, #666);
+                min-width: 50px;
+                text-align: right;
+              }
+            }
+          }
+        }
+      }
+
+      .form-actions {
+        display: flex;
+        justify-content: center;
+        margin-top: 32px;
+        padding-top: 24px;
+        border-top: 1px solid var(--mat-divider-color, #e0e0e0);
+
+        button {
+          min-width: 160px;
+          height: 48px;
+          font-size: 16px;
+          font-weight: 500;
+          position: relative;
+
+          .spinner {
+            margin-right: 8px;
+          }
+
+          &:disabled {
+            opacity: 0.7;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .recipe-nutrition-editor-container {
+    padding: 16px;
+
+    .nutrition-content {
+      .nutrition-controls {
+        flex-direction: column;
+        align-items: stretch;
+
+        .control-group {
+          justify-content: center;
+        }
+      }
+
+      .nutrition-summary {
+        .summary-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 12px;
+
+          .summary-item {
+            padding: 12px;
+
+            .summary-label {
+              font-size: 11px;
+            }
+
+            .summary-value {
+              font-size: 16px;
+            }
+          }
+        }
+      }
+
+      .nutrition-form {
+        .nutrition-section,
+        .advanced-nutrition {
+          .nutrition-grid {
+            grid-template-columns: 1fr;
+            gap: 16px;
+          }
+        }
+
+        .form-actions {
+          button {
+            width: 100%;
+            min-width: auto;
+          }
+        }
+      }
+    }
+  }
+} 

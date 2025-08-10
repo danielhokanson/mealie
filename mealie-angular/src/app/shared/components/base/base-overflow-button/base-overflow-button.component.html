@@ -1,0 +1,75 @@
+<mat-menu #menu="matMenu">
+  <ng-template matMenuTrigger>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="disabled"
+      [class]="btnClass"
+      class="overflow-button">
+      
+      <mat-icon *ngIf="activeObj.icon" class="start-icon">
+        {{ activeObj.icon }}
+      </mat-icon>
+      
+      {{ displayText }}
+      
+      <mat-icon class="end-icon">
+        expand_more
+      </mat-icon>
+    </button>
+  </ng-template>
+  
+  <!-- Model Mode -->
+  <mat-list *ngIf="mode === MODES.MODEL" class="overflow-list">
+    <ng-container *ngFor="let item of items; let index = index">
+      <div *ngIf="!item.hide">
+        <button
+          mat-list-item
+          (click)="setValue(item)"
+          class="overflow-item">
+          <mat-icon *ngIf="item.icon" matListItemIcon>
+            {{ item.icon }}
+          </mat-icon>
+          <span matListItemTitle>{{ item.text }}</span>
+        </button>
+        <mat-divider *ngIf="item.divider" class="my-1"></mat-divider>
+      </div>
+    </ng-container>
+  </mat-list>
+  
+  <!-- Link Mode -->
+  <mat-list *ngIf="mode === MODES.LINK" class="overflow-list">
+    <ng-container *ngFor="let item of items; let index = index">
+      <div *ngIf="!item.hide">
+        <button
+          mat-list-item
+          (click)="navigateTo(item)"
+          class="overflow-item">
+          <mat-icon *ngIf="item.icon" matListItemIcon>
+            {{ item.icon }}
+          </mat-icon>
+          <span matListItemTitle>{{ item.text }}</span>
+        </button>
+        <mat-divider *ngIf="item.divider" class="my-1"></mat-divider>
+      </div>
+    </ng-container>
+  </mat-list>
+  
+  <!-- Event Mode -->
+  <mat-list *ngIf="mode === MODES.EVENT" class="overflow-list">
+    <ng-container *ngFor="let item of items; let index = index">
+      <div *ngIf="!item.hide">
+        <button
+          mat-list-item
+          (click)="onItemClick(item)"
+          class="overflow-item">
+          <mat-icon *ngIf="item.icon" matListItemIcon>
+            {{ item.icon }}
+          </mat-icon>
+          <span matListItemTitle>{{ item.text }}</span>
+        </button>
+        <mat-divider *ngIf="item.divider" class="my-1"></mat-divider>
+      </div>
+    </ng-container>
+  </mat-list>
+</mat-menu> 

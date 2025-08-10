@@ -1,8 +1,11 @@
-# Development: Getting Started
+# Legacy Python Development Setup
+
+!!! warning "Legacy Documentation"
+This documentation is for the legacy Python/Vue.js development setup. For the current Angular/.NET development environment, see [Development Setup](./angular-dotnet-dev-setup.md).
 
 !!! warning
-    Be sure to use the [Nightly version](https://nightly.mealie.io/) of the docs to ensure you're up to date with
-    the latest changes.
+Be sure to use the [Nightly version](https://nightly.mealie.io/) of the docs to ensure you're up to date with
+the latest changes.
 
 After reading through the [Code Contributions Guide](../developers-guide/code-contributions.md) and forking the repo you can start working. This project is developed with :whale: docker and as such you will be greatly aided by using docker for development. It's not necessary but it is helpful.
 
@@ -22,7 +25,7 @@ First ensure that docker is running. Then when you clone the repo and open with 
 Make sure the VSCode Dev Containers extension is installed, then select "Dev Containers: Clone Repository in Container Volume..." in the command palette (F1). Select your forked repo and choose the `mealie-next` branch, which contains the latest changes. This mounts your repository directly in WSL2, which [greatly improves the performance of the container](https://code.visualstudio.com/docs/devcontainers/containers#_quick-start-open-a-git-repository-or-github-pr-in-an-isolated-container-volume), and enables hot-reloading for the frontend. Running the container on a mounted volume may not work correctly on Windows due to WSL permission mapping issues.
 
 !!! tip
-    For slow terminal checkout the solution in this [GitHub Issue](https://github.com/microsoft/vscode/issues/133215)
+For slow terminal checkout the solution in this [GitHub Issue](https://github.com/microsoft/vscode/issues/133215)
 
     ```bash
     git config oh-my-zsh.hide-info 1

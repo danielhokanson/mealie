@@ -1,0 +1,55 @@
+.organizer-selector {
+  width: 100%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.add-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.add-input {
+  flex: 1;
+}
+
+.selected-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+// Chip styling
+::ng-deep .mat-mdc-chip {
+  background-color: #e3f2fd;
+  color: #1976d2;
+  font-weight: 500;
+}
+
+::ng-deep .mat-mdc-chip.mat-mdc-chip-removable {
+  padding-right: 8px;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .add-section {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .add-input {
+    flex: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .selected-chips {
+    gap: 6px;
+  }
+} 

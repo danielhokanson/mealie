@@ -1,0 +1,10 @@
+<button
+  mat-button
+  [color]="color"
+  [class.text-button]="variant === 'text'"
+  [class.outlined-button]="variant === 'outlined'"
+  [class.raised-button]="variant === 'raised'"
+  (click)="navigate()"
+  class="button-link">
+  <ng-content></ng-content>
+</button> 

@@ -1,0 +1,168 @@
+<div class="shopping-lists-container">
+  <!-- Header -->
+  <div class="shopping-lists-header">
+    <div class="header-content">
+      <h1>Shopping Lists</h1>
+      <p>Manage your shopping lists and track your grocery items</p>
+    </div>
+    <button 
+      mat-raised-button 
+      color="primary"
+      (click)="onCreateList()"
+      class="create-button">
+      <mat-icon>add</mat-icon>
+      Create List
+    </button>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-container">
+    <mat-spinner diameter="50"></mat-spinner>
+    <p>Loading shopping lists...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error && !loading" class="error-container">
+    <mat-icon class="error-icon">error</mat-icon>
+    <h3>Error Loading Shopping Lists</h3>
+    <p>Unable to load your shopping lists. Please try again.</p>
+    <button mat-raised-button color="primary" (click)="loadShoppingLists()">
+      Retry
+    </button>
+  </div>
+
+  <!-- Shopping Lists Grid -->
+  <div *ngIf="!loading && !error" class="shopping-lists-grid">
+    <!-- Empty State -->
+    <div *ngIf="shoppingLists.length === 0" class="empty-state">
+      <mat-icon class="empty-icon">shopping_cart</mat-icon>
+      <h3>No Shopping Lists Yet</h3>
+      <p>Create your first shopping list to get started</p>
+      <button 
+        mat-raised-button 
+        color="primary"
+        (click)="onCreateList()">
+        Create Your First List
+      </button>
+    </div>
+
+    <!-- Shopping List Cards -->
+    <mat-card 
+      *ngFor="let list of shoppingLists"
+      class="shopping-list-card"
+      (click)="onViewList(list)">
+      
+      <mat-card-header>
+        <mat-card-title>{{ list.name }}</mat-card-title>
+        <mat-card-subtitle>
+          Created {{ getFormattedDate(list.createdAt) }}
+          <span *ngIf="list.updatedAt && list.updatedAt !== list.createdAt">
+            • Updated {{ getFormattedDate(list.updatedAt) }}
+          </span>
+        </mat-card-subtitle>
+        
+        <!-- Action Menu -->
+        <button 
+          mat-icon-button 
+          [matMenuTriggerFor]="listMenu"
+          (click)="$event.stopPropagation()"
+          class="menu-button">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+
+        <mat-menu #listMenu="matMenu">
+          <button mat-menu-item (click)="onEditList(list)">
+            <mat-icon>edit</mat-icon>
+            <span>Edit List</span>
+          </button>
+          <button mat-menu-item (click)="onShareList(list)">
+            <mat-icon>share</mat-icon>
+            <span>Share List</span>
+          </button>
+          <button mat-menu-item (click)="onPrintList(list)">
+            <mat-icon>print</mat-icon>
+            <span>Print List</span>
+          </button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item (click)="onDeleteList(list)" class="delete-action">
+            <mat-icon>delete</mat-icon>
+            <span>Delete List</span>
+          </button>
+        </mat-menu>
+      </mat-card-header>
+
+      <mat-card-content>
+        <!-- Progress Bar -->
+        <div class="progress-section">
+          <div class="progress-info">
+            <span class="progress-text">
+              {{ getCompletedItemsCount(list) }} of {{ getTotalItemsCount(list) }} items
+            </span>
+            <span class="progress-percentage">
+              {{ getProgressPercentage(list) | number:'1.0-0' }}%
+            </span>
+          </div>
+          <mat-progress-bar 
+            [value]="getProgressPercentage(list)"
+            [color]="getProgressPercentage(list) === 100 ? 'accent' : 'primary'">
+          </mat-progress-bar>
+        </div>
+
+        <!-- Items Preview -->
+        <div *ngIf="list.items && list.items.length > 0" class="items-preview">
+          <h4>Items</h4>
+          <div class="items-list">
+            <div 
+              *ngFor="let item of list.items.slice(0, 5)"
+              class="item-preview"
+              [class.checked]="item.checked">
+              
+              <mat-icon class="item-icon">
+                {{ item.checked ? 'check_circle' : 'radio_button_unchecked' }}
+              </mat-icon>
+              
+              <span class="item-name">{{ item.title }}</span>
+              
+              <span *ngIf="item.quantity" class="item-quantity">
+                {{ item.quantity }}
+                <span *ngIf="item.unit">{{ item.unit }}</span>
+              </span>
+            </div>
+            
+            <div *ngIf="list.items.length > 5" class="more-items">
+              +{{ list.items.length - 5 }} more items
+            </div>
+          </div>
+        </div>
+
+        <!-- Labels -->
+        <div *ngIf="list.items && list.items.some(item => item.labels && item.labels.length > 0)" class="labels-section">
+          <h4>Labels</h4>
+          <div class="labels-list">
+            <mat-chip 
+              *ngFor="let label of getUniqueLabels(list)"
+              [style.background-color]="label.color"
+              class="label-chip">
+              {{ label.name }}
+            </mat-chip>
+          </div>
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button 
+          mat-button 
+          color="primary"
+          (click)="onViewList(list); $event.stopPropagation()">
+          View Details
+        </button>
+        <button 
+          mat-button 
+          color="accent"
+          (click)="onEditList(list); $event.stopPropagation()">
+          Edit
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div> 

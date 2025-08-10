@@ -1,0 +1,25 @@
+<button 
+  mat-raised-button
+  [color]="buttonColor"
+  [disabled]="disabled"
+  [class.mat-button-small]="buttonSize === 'small'"
+  [class.mat-button-large]="buttonSize === 'large'"
+  [class.mat-button-outlined]="btnStyle.outlined"
+  [class.mat-button-text]="btnStyle.text"
+  (click)="onButtonClick()"
+  class="base-button">
+  
+  <mat-icon *ngIf="!iconRight && buttonIcon" class="button-icon-start">
+    {{ buttonIcon }}
+  </mat-icon>
+  
+  <span class="button-text">
+    <ng-content></ng-content>
+  </span>
+  
+  <mat-icon *ngIf="iconRight && buttonIcon" class="button-icon-end">
+    {{ buttonIcon }}
+  </mat-icon>
+  
+  <mat-spinner *ngIf="loading" diameter="20" class="button-spinner"></mat-spinner>
+</button> 

@@ -1,0 +1,129 @@
+<div class="registration-form">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title class="form-title">
+        <mat-icon class="title-icon">person</mat-icon>
+        <span>Account Details</span>
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-divider></mat-divider>
+
+    <mat-card-content>
+      <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="form-content">
+        
+        <!-- Username Field -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Username</mat-label>
+          <input 
+            matInput 
+            formControlName="username"
+            placeholder="Enter username"
+            (blur)="onUsernameBlur()"
+            autocomplete="username">
+          <mat-icon matPrefix>person</mat-icon>
+          <mat-error *ngFor="let error of getFormErrors('username')">
+            {{ error }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Full Name Field -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Full Name</mat-label>
+          <input 
+            matInput 
+            formControlName="fullName"
+            placeholder="Enter your full name"
+            autocomplete="name">
+          <mat-icon matPrefix>person</mat-icon>
+          <mat-error *ngFor="let error of getFormErrors('fullName')">
+            {{ error }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Email Field -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Email</mat-label>
+          <input 
+            matInput 
+            formControlName="email"
+            type="email"
+            placeholder="Enter your email"
+            (blur)="onEmailBlur()"
+            autocomplete="email">
+          <mat-icon matPrefix>email</mat-icon>
+          <mat-error *ngFor="let error of getFormErrors('email')">
+            {{ error }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Password Field -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Password</mat-label>
+          <input 
+            matInput 
+            formControlName="password"
+            [type]="getPasswordInputType()"
+            placeholder="Enter password"
+            autocomplete="new-password">
+          <mat-icon matPrefix>lock</mat-icon>
+          <button 
+            mat-icon-button 
+            matSuffix 
+            type="button"
+            (click)="togglePasswordVisibility()"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="showPassword">
+            <mat-icon>{{ getPasswordIcon() }}</mat-icon>
+          </button>
+          <mat-error *ngFor="let error of getFormErrors('password')">
+            {{ error }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Password Strength -->
+        <app-user-password-strength 
+          [password]="registrationForm.get('password')?.value">
+        </app-user-password-strength>
+
+        <!-- Confirm Password Field -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Confirm Password</mat-label>
+          <input 
+            matInput 
+            formControlName="confirmPassword"
+            [type]="getConfirmPasswordInputType()"
+            placeholder="Confirm your password"
+            autocomplete="new-password">
+          <mat-icon matPrefix>lock</mat-icon>
+          <button 
+            mat-icon-button 
+            matSuffix 
+            type="button"
+            (click)="toggleConfirmPasswordVisibility()"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="showConfirmPassword">
+            <mat-icon>{{ getConfirmPasswordIcon() }}</mat-icon>
+          </button>
+          <mat-error *ngFor="let error of getFormErrors('confirmPassword')">
+            {{ error }}
+          </mat-error>
+          <mat-error *ngIf="getPasswordMatchError()">
+            {{ getPasswordMatchError() }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Advanced Options -->
+        <div class="advanced-options">
+          <mat-checkbox formControlName="advancedOptions" class="advanced-checkbox">
+            Enable Advanced Content
+          </mat-checkbox>
+          <p class="advanced-description">
+            Enable advanced features and content that may not be suitable for all users.
+          </p>
+        </div>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div> 

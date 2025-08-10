@@ -1,38 +1,68 @@
+version: "3.8"
+
 services:
+  # Main Mealie Application (Angular + .NET)
   mealie:
     container_name: mealie
-    image: mealie:dev
     build:
       context: ../
-      target: production
-      dockerfile: ./docker/Dockerfile
-    restart: always
-    volumes:
-      - mealie-data:/app/data/
-    ports:
-      - 9091:9000
+      dockerfile: docker/Dockerfile
+    restart: unless-stopped
     environment:
-      ALLOW_SIGNUP: "false"
-      LOG_LEVEL: "DEBUG"
+      # Database Configuration
+      - ConnectionStrings__DefaultConnection=Host=postgres;Database=mealie;Username=mealie;Password=${POSTGRES_PASSWORD:-mealie_password}
 
-      DB_ENGINE: sqlite # Optional: 'sqlite', 'postgres'
-      # =====================================
-      # Postgres Config
-      POSTGRES_USER: mealie
-      POSTGRES_PASSWORD: mealie
-      POSTGRES_SERVER: postgres
-      POSTGRES_PORT: 5432
-      POSTGRES_DB: mealie
-      # =====================================
-      # Email Configuration
-      # SMTP_HOST=
-      # SMTP_PORT=587
-      # SMTP_FROM_NAME=Mealie
-      # SMTP_AUTH_STRATEGY=TLS # Options: 'TLS', 'SSL', 'NONE'
-      # SMTP_FROM_EMAIL=
-      # SMTP_USER=
-      # SMTP_PASSWORD=
+      # JWT Configuration
+      - JWT__SecretKey=${JWT_SECRET_KEY:-change-this-super-secret-jwt-key-in-production}
+      - JWT__Issuer=MealieApi
+      - JWT__Audience=MealieAngular
+      - JWT__ExpirationMinutes=60
+
+      # Application Settings
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://127.0.0.1:5000
+      - TZ=${TZ:-UTC}
+      - ALLOW_SIGNUP=${ALLOW_SIGNUP:-false}
+
+    ports:
+      - "${HTTP_PORT:-9091}:80"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - mealie-network
+    volumes:
+      - mealie_data:/app/data
+
+  # PostgreSQL Database
+  postgres:
+    container_name: mealie_postgres
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-mealie}
+      POSTGRES_USER: ${POSTGRES_USER:-mealie}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-mealie_password}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - mealie-network
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U ${POSTGRES_USER:-mealie} -d ${POSTGRES_DB:-mealie}",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 volumes:
-  mealie-data:
+  mealie_data:
     driver: local
+  postgres_data:
+    driver: local
+
+networks:
+  mealie-network:
+    driver: bridge

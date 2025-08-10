@@ -1,0 +1,25 @@
+<button
+  mat-icon-button
+  [matMenuTriggerFor]="contextMenu"
+  class="context-menu-button"
+  [style.color]="color">
+  <mat-icon>{{ menuIcon }}</mat-icon>
+</button>
+
+<mat-menu #contextMenu="matMenu" class="context-menu">
+  <button
+    *ngIf="useItems.edit"
+    mat-menu-item
+    (click)="onUpdate()">
+    <mat-icon>edit</mat-icon>
+    <span>Edit</span>
+  </button>
+  
+  <button
+    *ngIf="useItems.delete"
+    mat-menu-item
+    (click)="onDelete()">
+    <mat-icon>delete</mat-icon>
+    <span>Delete</span>
+  </button>
+</mat-menu> 

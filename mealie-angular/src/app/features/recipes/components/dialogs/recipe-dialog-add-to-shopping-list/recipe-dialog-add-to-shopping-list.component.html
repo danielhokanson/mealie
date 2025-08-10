@@ -1,0 +1,141 @@
+<div *ngIf="open">
+  <!-- Shopping List Selection Dialog -->
+  <app-base-dialog
+    *ngIf="shoppingListDialog && ready"
+    [(modelValue)]="open"
+    title="Add to List"
+    icon="shopping_cart_checkout"
+    (modelValueChange)="onDialogChange($event)">
+    
+    <div *ngIf="!shoppingListChoices.length" class="no-lists-container">
+      <app-base-page-title>
+        <ng-container title>
+          No shopping lists found
+        </ng-container>
+      </app-base-page-title>
+    </div>
+
+    <div class="shopping-lists-container">
+      <mat-card
+        *ngFor="let list of shoppingListChoices"
+        
+        class="shopping-list-card"
+        (click)="openShoppingListIngredientDialog(list)">
+        <mat-card-title class="card-title">
+          {{ list.name }}
+        </mat-card-title>
+      </mat-card>
+    </div>
+
+    <div class="dialog-actions">
+      <button mat-button
+              color="grey"
+              (click)="closeDialog()">
+        Cancel
+      </button>
+      
+      <div class="show-all-container">
+        <mat-checkbox
+          [(ngModel)]="preferences.viewAllLists"
+          (change)="setShowAllToggled()"
+          color="primary">
+          Show All
+        </mat-checkbox>
+      </div>
+    </div>
+  </app-base-dialog>
+
+  <!-- Shopping List Ingredients Dialog -->
+  <app-base-dialog
+    *ngIf="shoppingListIngredientDialog"
+    [(modelValue)]="open"
+    [title]="selectedShoppingList?.name || 'Add to List'"
+    icon="shopping_cart_checkout"
+    width="70%"
+    submitText="Add to List"
+    [canSubmit]="true"
+    (submit)="addRecipesToList()"
+    (modelValueChange)="onDialogChange($event)">
+    
+    <div class="ingredients-container">
+      <mat-card
+        *ngFor="let recipeSection of recipeIngredientSections; let recipeSectionIndex = index"
+        
+        class="recipe-section-card">
+        
+        <mat-divider *ngIf="recipeSectionIndex > 0" class="section-divider"></mat-divider>
+        
+        <!-- Recipe Title -->
+        <mat-card-title *ngIf="recipeIngredientSections.length > 1" class="recipe-title">
+          <div class="recipe-title-content">
+            <div class="recipe-name">
+              {{ recipeSection.recipeName }}
+            </div>
+            <div *ngIf="recipeSection.recipeScale > 1" class="recipe-scale">
+              (Quantity: {{ recipeSection.recipeScale }})
+            </div>
+          </div>
+        </mat-card-title>
+
+        <!-- Ingredient Sections -->
+        <div class="ingredient-sections">
+          <div
+            *ngFor="let ingredientSection of recipeSection.ingredientSections; let ingredientSectionIndex = index"
+            
+            class="ingredient-section">
+            
+            <!-- Section Title -->
+            <mat-card-title *ngIf="ingredientSection.sectionName" class="ingredient-title">
+              {{ ingredientSection.sectionName }}
+            </mat-card-title>
+
+            <!-- Ingredients Grid -->
+            <div class="ingredient-grid"
+                 [style.grid-template-rows]="'repeat(' + (ingredientSection.ingredients.length / 2) + ', min-content)'">
+              
+              <mat-list-item
+                *ngFor="let ingredientData of ingredientSection.ingredients; let i = index"
+                
+                class="ingredient-item"
+                (click)="ingredientData.checked = !ingredientData.checked">
+                
+                <mat-checkbox
+                  [checked]="ingredientData.checked"
+                  color="accent"
+                  class="ingredient-checkbox">
+                </mat-checkbox>
+                
+                <div class="ingredient-content">
+                  <app-recipe-ingredient-list-item
+                    [ingredient]="ingredientData.ingredient"
+                    [disableAmount]="ingredientData.disableAmount"
+                    [scale]="recipeSection.recipeScale">
+                  </app-recipe-ingredient-list-item>
+                </div>
+              </mat-list-item>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+
+    <!-- Bulk Actions -->
+    <div class="bulk-actions">
+      <app-base-button-group
+        [buttons]="[
+          {
+            icon: 'check_box_outline_blank',
+            text: 'Uncheck All Items',
+            event: 'uncheck'
+          },
+          {
+            icon: 'check_box',
+            text: 'Check All Items',
+            event: 'check'
+          }
+        ]"
+        (buttonClick)="bulkCheckIngredients($event)">
+      </app-base-button-group>
+    </div>
+  </app-base-dialog>
+</div> 

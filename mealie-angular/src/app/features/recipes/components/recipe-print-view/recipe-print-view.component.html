@@ -1,0 +1,118 @@
+<div [class]="dense ? 'wrapper' : 'wrapper pa-3'">
+  <!-- Recipe Header Section -->
+  <section>
+    <div class="recipe-header">
+      <div class="header-content">
+        <!-- Recipe Image -->
+        <div *ngIf="(preferences || defaultPreferences).imagePosition !== 'hidden' && recipeImageUrl" 
+             class="image-section"
+             [class]="(preferences || defaultPreferences).imagePosition === 'left' ? 'image-left' : 'image-right'">
+          <img [src]="recipeImageUrl" 
+               [alt]="recipe.name"
+               class="recipe-image">
+        </div>
+        
+        <!-- Recipe Info -->
+        <div class="recipe-info">
+          <h1 class="recipe-title">
+            <mat-icon class="title-icon">restaurant</mat-icon>
+            {{ recipe.name }}
+          </h1>
+          
+          <!-- Recipe Yield -->
+          <div *ngIf="recipeYield" class="recipe-yield">
+            <mat-icon>restaurant_menu</mat-icon>
+            <span [innerHTML]="recipeYield"></span>
+          </div>
+          
+          <!-- Time Information -->
+          <div class="time-section">
+            <app-recipe-time-card
+              [prepTime]="getNumber(recipe.prepTime)"
+              [totalTime]="getNumber(recipe.totalTime)"
+              [performTime]="getNumber(recipe.performTime)"
+              [small]="true"
+              color="white">
+            </app-recipe-time-card>
+          </div>
+          
+          <!-- Description -->
+          <div *ngIf="(preferences || defaultPreferences).showDescription && recipe.description" class="description-section">
+            <app-safe-markdown [markdown]="recipe.description || ''"></app-safe-markdown>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ingredients Section -->
+  <section>
+    <h2 class="section-title">Ingredients</h2>
+    <div *ngFor="let ingredientSection of ingredientSections; let sectionIndex = index" 
+         class="print-section">
+      <h4 *ngIf="ingredientSection.ingredients[0].title" 
+          class="ingredient-title">
+        {{ ingredientSection.ingredients[0].title }}
+      </h4>
+      <div class="ingredient-grid"
+           [style.grid-template-rows]="'repeat(' + (ingredientSection.ingredients.length / 2) + ', min-content)'">
+        <p *ngFor="let ingredient of ingredientSection.ingredients; let ingredientIndex = index"
+           class="ingredient-body"
+           [innerHTML]="parseIngredientText(ingredient)">
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Instructions Section -->
+  <section>
+    <div *ngFor="let instructionSection of instructionSections; let sectionIndex = index"
+         [class]="instructionSection.sectionName ? 'print-section' : ''">
+      <h2 *ngIf="!sectionIndex" class="section-title">Instructions</h2>
+      <div *ngFor="let step of instructionSection.instructions; let stepIndex = index" 
+           class="print-section">
+        <h4 *ngIf="step.title" class="instruction-title">
+          {{ step.title }}
+        </h4>
+        <h5 class="step-title">
+          {{ step.summary || 'Step ' + (stepIndex + instructionSection.stepOffset + 1) }}
+        </h5>
+        <div class="recipe-step-body">
+          <app-safe-markdown [markdown]="step.text || ''"></app-safe-markdown>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Notes Section -->
+  <div *ngIf="(preferences || defaultPreferences).showNotes">
+    <mat-divider *ngIf="hasNotes" class="notes-divider"></mat-divider>
+    
+    <section>
+      <div *ngFor="let note of recipe.notes; let index = index" class="print-section">
+        <h4 class="note-title">{{ note.title }}</h4>
+        <div class="note-body">
+          <app-safe-markdown [markdown]="note.text || ''"></app-safe-markdown>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Nutrition Section -->
+  <div *ngIf="(preferences || defaultPreferences).showNutrition && recipe.nutrition">
+    <h2 class="section-title">Nutrition</h2>
+    
+    <section>
+      <div class="print-section">
+        <table class="nutrition-table">
+          <tbody>
+            <tr *ngFor="let nutrition of recipe.nutrition | keyvalue">
+              <td *ngIf="nutrition.value">{{ getNutritionLabel(nutrition.key) }}</td>
+              <td *ngIf="nutrition.value">{{ getNutritionValue(nutrition.key, nutrition.value) }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</div> 

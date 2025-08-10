@@ -1,0 +1,170 @@
+// Custom theme variables
+$dark-background: #303030;
+$dark-background-lighter: #424242;
+$dark-text-primary: #ffffff;
+$dark-text-secondary: #e0e0e0;
+$accent-color: #ff9800;
+
+// Global dark theme overrides
+.mat-mdc-menu-panel {
+  background-color: $dark-background-lighter !important;
+
+  .mat-mdc-menu-item {
+    color: $dark-text-primary !important;
+
+    .mat-icon {
+      color: $dark-text-primary !important;
+    }
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1) !important;
+    }
+
+    &.active {
+      background-color: rgba(255, 152, 0, 0.2) !important;
+      color: $accent-color !important;
+
+      .mat-icon {
+        color: $accent-color !important;
+      }
+    }
+  }
+}
+
+// Sidenav styles
+.mat-sidenav {
+  background-color: $dark-background-lighter !important;
+
+  .mat-toolbar {
+    background-color: $dark-background-lighter !important;
+    color: $dark-text-primary !important;
+  }
+
+  .mat-nav-list {
+    .mat-list-item {
+      color: $dark-text-primary !important;
+
+      .mat-icon {
+        color: $dark-text-primary !important;
+      }
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.1) !important;
+        color: $accent-color !important;
+
+        .mat-icon {
+          color: $accent-color !important;
+        }
+      }
+
+      &.active {
+        background-color: rgba(255, 152, 0, 0.2) !important;
+        color: $accent-color !important;
+
+        .mat-icon {
+          color: $accent-color !important;
+        }
+      }
+    }
+  }
+}
+
+// Form field styles
+.mat-mdc-form-field {
+  .mat-mdc-form-field-flex {
+    background-color: $dark-background-lighter !important;
+  }
+
+  .mat-mdc-text-field-wrapper {
+    background-color: $dark-background-lighter !important;
+  }
+
+  .mat-mdc-form-field-label {
+    color: $dark-text-secondary !important;
+  }
+
+  .mat-mdc-input-element {
+    color: $dark-text-primary !important;
+  }
+
+  .mat-mdc-form-field-icon-prefix,
+  .mat-mdc-form-field-icon-suffix {
+    color: $dark-text-secondary !important;
+  }
+}
+
+// Button styles
+.mat-mdc-button,
+.mat-mdc-raised-button,
+.mat-mdc-outlined-button {
+  &:not([color="primary"]):not([color="accent"]):not([color="warn"]) {
+    color: $dark-text-primary !important;
+  }
+
+  &.mat-primary {
+    background-color: $accent-color !important;
+    color: $dark-text-primary !important;
+  }
+
+  &:disabled {
+    color: rgba(255, 255, 255, 0.3) !important;
+  }
+}
+
+// Card styles
+.mat-mdc-card {
+  background-color: $dark-background-lighter !important;
+  color: $dark-text-primary !important;
+
+  .mat-mdc-card-title {
+    color: $dark-text-primary !important;
+  }
+
+  .mat-mdc-card-subtitle {
+    color: $dark-text-secondary !important;
+  }
+}
+
+// Dialog styles
+.mat-mdc-dialog-container {
+  background-color: $dark-background-lighter !important;
+  color: $dark-text-primary !important;
+}
+
+// Select styles
+.mat-mdc-select-panel {
+  background-color: $dark-background-lighter !important;
+
+  .mat-mdc-option {
+    color: $dark-text-primary !important;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1) !important;
+    }
+
+    &.mat-selected {
+      color: $accent-color !important;
+    }
+  }
+}
+
+// Checkbox styles
+.mat-mdc-checkbox {
+  .mdc-checkbox__background {
+    background-color: $dark-background-lighter !important;
+  }
+
+  .mdc-checkbox__native-control:enabled:not(:checked):not(:indeterminate):not([data-indeterminate=true])~.mdc-checkbox__background {
+    border-color: $dark-text-secondary !important;
+  }
+
+  .mdc-form-field {
+    color: $dark-text-primary !important;
+  }
+}
+
+// Tooltip styles
+.mat-mdc-tooltip {
+  background-color: $dark-background-lighter !important;
+  color: $dark-text-primary !important;
+}

@@ -1,0 +1,59 @@
+<div class="recipe-info-card">
+  <div class="info-card-layout" [class.landscape]="landscape">
+    <app-recipe-page-info-card-image
+      *ngIf="landscape"
+      [recipe]="recipe">
+    </app-recipe-page-info-card-image>
+    
+    <mat-card class="info-card" [class.full-width]="landscape">
+      <mat-card-content class="info-content">
+        <div class="recipe-title-section">
+          <h1 class="recipe-title">{{ recipe.name }}</h1>
+          <app-recipe-rating
+            [recipeId]="recipe.id"
+            [slug]="recipe.id"
+            [modelValue]="recipe.rating || 0">
+          </app-recipe-rating>
+        </div>
+        
+        <mat-divider class="title-divider"></mat-divider>
+        
+        <div *ngIf="recipe.description" class="recipe-description">
+          <app-safe-markdown [source]="recipe.description"></app-safe-markdown>
+        </div>
+        
+        <mat-divider *ngIf="recipe.description" class="description-divider"></mat-divider>
+        
+        <div class="recipe-details">
+          <div class="details-section">
+            <div *ngIf="recipe.recipeYieldQuantity || recipe.recipeYield" class="yield-section">
+              <app-recipe-yield
+                [yieldQuantity]="recipe.recipeYieldQuantity"
+                [yieldText]="recipe.recipeYield"
+                [scale]="recipeScale">
+              </app-recipe-yield>
+            </div>
+            
+            <div *ngIf="isOwnGroup" class="last-made-section">
+              <app-recipe-last-made [recipe]="recipe"></app-recipe-last-made>
+            </div>
+          </div>
+          
+          <div *ngIf="recipe.prepTime || recipe.totalTime" class="time-section">
+            <app-recipe-time-card
+              [prepTime]="recipe.prepTime"
+              [totalTime]="recipe.totalTime"
+              [performTime]="recipe.totalTime">
+            </app-recipe-time-card>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    
+    <app-recipe-page-info-card-image
+      *ngIf="!landscape"
+      [recipe]="recipe"
+      class="recipe-image">
+    </app-recipe-page-info-card-image>
+  </div>
+</div> 

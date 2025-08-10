@@ -1,0 +1,161 @@
+.shopping-lists-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  
+  h1 {
+    font-size: 32px;
+    font-weight: 600;
+    margin: 0;
+    color: #333;
+  }
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 24px;
+  text-align: center;
+  
+  p {
+    margin-top: 16px;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 16px;
+  }
+}
+
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 24px;
+  text-align: center;
+  
+  .error-icon {
+    font-size: 64px;
+    width: 64px;
+    height: 64px;
+    color: #f44336;
+    margin-bottom: 16px;
+  }
+  
+  .error-text {
+    margin-bottom: 24px;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 16px;
+  }
+}
+
+.content {
+  min-height: 400px;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 24px;
+  text-align: center;
+  
+  .empty-icon {
+    font-size: 64px;
+    width: 64px;
+    height: 64px;
+    color: #ccc;
+    margin-bottom: 16px;
+  }
+  
+  h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+    color: #333;
+  }
+  
+  p {
+    margin: 0 0 24px 0;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 16px;
+  }
+}
+
+.lists-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .shopping-lists-page {
+    padding: 16px;
+  }
+  
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+    
+    h1 {
+      font-size: 24px;
+    }
+  }
+  
+  .loading-container,
+  .error-container,
+  .empty-state {
+    padding: 48px 16px;
+  }
+  
+  .empty-state {
+    .empty-icon {
+      font-size: 48px;
+      width: 48px;
+      height: 48px;
+    }
+    
+    h2 {
+      font-size: 20px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .shopping-lists-page {
+    padding: 12px;
+  }
+  
+  .page-header h1 {
+    font-size: 20px;
+  }
+  
+  .loading-container,
+  .error-container,
+  .empty-state {
+    padding: 32px 12px;
+  }
+  
+  .empty-state {
+    .empty-icon {
+      font-size: 40px;
+      width: 40px;
+      height: 40px;
+    }
+    
+    h2 {
+      font-size: 18px;
+    }
+  }
+} 

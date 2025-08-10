@@ -1,0 +1,98 @@
+# =================================================================
+# Development Dockerfile for Mealie Angular + .NET Backend
+# =================================================================
+
+# =================================================================
+# Stage 1: .NET Development Environment
+# =================================================================
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS dotnet-dev
+
+WORKDIR /app
+
+# Install development tools
+RUN dotnet tool install --global dotnet-ef
+ENV PATH="${PATH}:/root/.dotnet/tools"
+
+# Install curl for health checks
+RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+
+# Copy solution and project files
+COPY MealieApi/MealieApi.sln ./
+COPY MealieApi/src/MealieApi.Domain/MealieApi.Domain.csproj ./src/MealieApi.Domain/
+COPY MealieApi/src/MealieApi.Application/MealieApi.Application.csproj ./src/MealieApi.Application/
+COPY MealieApi/src/MealieApi.Infrastructure/MealieApi.Infrastructure.csproj ./src/MealieApi.Infrastructure/
+COPY MealieApi/src/MealieApi.WebApi/MealieApi.WebApi.csproj ./src/MealieApi.WebApi/
+COPY MealieApi/src/MealieApi.Shared/MealieApi.Shared.csproj ./src/MealieApi.Shared/
+
+# Restore dependencies
+RUN dotnet restore
+
+# Copy source code
+COPY MealieApi/src ./src/
+
+EXPOSE 5000
+
+# Default command for development
+CMD ["dotnet", "watch", "run", "--project", "src/MealieApi.WebApi/MealieApi.WebApi.csproj", "--urls", "http://0.0.0.0:5000"]
+
+# =================================================================
+# Stage 2: Angular Development Environment
+# =================================================================
+FROM node:20-alpine AS angular-dev
+
+WORKDIR /app
+
+# Install Angular CLI globally
+RUN npm install -g @angular/cli@latest
+
+# Copy package files
+COPY mealie-angular/package*.json ./
+
+# Install dependencies
+RUN npm ci
+
+# Copy source code
+COPY mealie-angular/ ./
+
+EXPOSE 4200
+
+# Default command for development
+CMD ["ng", "serve", "--host", "0.0.0.0", "--port", "4200", "--poll", "2000"]
+
+# =================================================================
+# Stage 3: Combined Development Environment (for single container dev)
+# =================================================================
+FROM node:20 AS combined-dev
+
+# Install .NET SDK
+RUN curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --channel 9.0
+ENV PATH="${PATH}:/root/.dotnet"
+
+# Install Angular CLI
+RUN npm install -g @angular/cli@latest
+
+# Install supervisor for process management
+RUN apt-get update && apt-get install -y supervisor curl && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Copy and setup .NET backend
+COPY MealieApi/ ./backend/
+WORKDIR /app/backend
+RUN dotnet restore
+RUN dotnet tool install --global dotnet-ef
+ENV PATH="${PATH}:/root/.dotnet/tools"
+
+# Copy and setup Angular frontend
+WORKDIR /app/frontend
+COPY mealie-angular/ ./
+RUN npm ci
+
+# Copy supervisor configuration for development
+COPY docker/supervisor/dev-supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+WORKDIR /app
+
+EXPOSE 4200 5000
+
+CMD ["/usr/bin/supervisord", "-n"]

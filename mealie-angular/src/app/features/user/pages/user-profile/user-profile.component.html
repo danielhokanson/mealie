@@ -1,0 +1,435 @@
+<div class="user-profile-container">
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-container">
+    <mat-spinner diameter="50"></mat-spinner>
+    <p>Loading profile...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error && !loading" class="error-container">
+    <mat-icon class="error-icon">error</mat-icon>
+    <h3>Error Loading Profile</h3>
+    <p>Unable to load your profile. Please try again.</p>
+    <button mat-raised-button color="primary" (click)="loadUserData()">
+      Retry
+    </button>
+  </div>
+
+  <!-- Profile Content -->
+  <div *ngIf="!loading && !error && currentUser" class="profile-content">
+    <!-- Header -->
+    <div class="profile-header">
+      <div class="profile-avatar">
+        <div class="avatar-container">
+          <img 
+            *ngIf="imagePreview || userProfile?.avatar" 
+            [src]="imagePreview || userProfile?.avatar" 
+            alt="Profile Avatar"
+            class="avatar-image">
+          <mat-icon *ngIf="!imagePreview && !userProfile?.avatar" class="avatar-placeholder">
+            person
+          </mat-icon>
+          <button 
+            mat-icon-button 
+            class="avatar-edit"
+            (click)="document.getElementById('avatar-input')?.click()">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <input 
+            #avatarInput
+            id="avatar-input"
+            type="file" 
+            accept="image/*"
+            (change)="onImageSelected($event)"
+            style="display: none;">
+        </div>
+      </div>
+      <div class="profile-info">
+        <h1>{{ currentUser.fullName }}</h1>
+        <p class="username">@{{ currentUser.username }}</p>
+        <p class="bio" *ngIf="userProfile?.bio">{{ userProfile.bio }}</p>
+        <div class="profile-stats">
+          <div class="stat">
+            <span class="stat-number">42</span>
+            <span class="stat-label">Recipes</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">15</span>
+            <span class="stat-label">Lists</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">8</span>
+            <span class="stat-label">Favorites</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <mat-card class="tabs-card">
+      <mat-tab-group [(selectedIndex)]="selectedTab">
+        <!-- Profile Tab -->
+        <mat-tab label="Profile">
+          <div class="tab-content">
+            <form [formGroup]="profileForm" (ngSubmit)="onSaveProfile()" class="profile-form">
+              <div class="form-section">
+                <h3>Basic Information</h3>
+                
+                <div class="form-row">
+                  <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Username</mat-label>
+                    <input 
+                      matInput 
+                      formControlName="username"
+                      placeholder="Enter username">
+                    <mat-error *ngIf="profileForm.get('username')?.invalid && profileForm.get('username')?.touched">
+                      {{ getErrorMessage('username') }}
+                    </mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Full Name</mat-label>
+                    <input 
+                      matInput 
+                      formControlName="fullName"
+                      placeholder="Enter full name">
+                    <mat-error *ngIf="profileForm.get('fullName')?.invalid && profileForm.get('fullName')?.touched">
+                      {{ getErrorMessage('fullName') }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="form-row">
+                  <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Email</mat-label>
+                    <input 
+                      matInput 
+                      type="email"
+                      formControlName="email"
+                      placeholder="Enter email">
+                    <mat-error *ngIf="profileForm.get('email')?.invalid && profileForm.get('email')?.touched">
+                      {{ getErrorMessage('email') }}
+                    </mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Phone</mat-label>
+                    <input 
+                      matInput 
+                      formControlName="phone"
+                      placeholder="Enter phone number">
+                  </mat-form-field>
+                </div>
+
+                <div class="form-row">
+                  <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Location</mat-label>
+                    <input 
+                      matInput 
+                      formControlName="location"
+                      placeholder="Enter location">
+                  </mat-form-field>
+
+                  <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Website</mat-label>
+                    <input 
+                      matInput 
+                      formControlName="website"
+                      placeholder="Enter website URL">
+                  </mat-form-field>
+                </div>
+
+                <div class="form-row">
+                  <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Bio</mat-label>
+                    <textarea 
+                      matInput 
+                      formControlName="bio"
+                      placeholder="Tell us about yourself"
+                      rows="3">
+                    </textarea>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="form-section" *ngIf="userProfile">
+                <h3>Preferences</h3>
+                
+                <div class="preferences-grid">
+                  <div class="preference-group">
+                    <h4>Dietary Restrictions</h4>
+                    <div class="chips-container">
+                      <mat-chip 
+                        *ngFor="let restriction of userProfile.preferences.dietaryRestrictions"
+                        [style.background-color]="getCookingSkillColor('intermediate')">
+                        {{ restriction }}
+                      </mat-chip>
+                    </div>
+                  </div>
+
+                  <div class="preference-group">
+                    <h4>Allergies</h4>
+                    <div class="chips-container">
+                      <mat-chip 
+                        *ngFor="let allergy of userProfile.preferences.allergies"
+                        [style.background-color]="getCookingSkillColor('beginner')">
+                        {{ allergy }}
+                      </mat-chip>
+                    </div>
+                  </div>
+
+                  <div class="preference-group">
+                    <h4>Cuisine Preferences</h4>
+                    <div class="chips-container">
+                      <mat-chip 
+                        *ngFor="let cuisine of userProfile.preferences.cuisinePreferences"
+                        [style.background-color]="getCookingSkillColor('advanced')">
+                        {{ cuisine }}
+                      </mat-chip>
+                    </div>
+                  </div>
+
+                  <div class="preference-group">
+                    <h4>Cooking Skill</h4>
+                    <mat-chip [style.background-color]="getCookingSkillColor(userProfile.preferences.cookingSkill)">
+                      {{ userProfile.preferences.cookingSkill }}
+                    </mat-chip>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <button 
+                  mat-raised-button 
+                  color="primary"
+                  type="submit"
+                  [disabled]="saving || profileForm.invalid">
+                  <mat-spinner *ngIf="saving" diameter="20" class="spinner"></mat-spinner>
+                  <span *ngIf="!saving">Save Profile</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </mat-tab>
+
+        <!-- Preferences Tab -->
+        <mat-tab label="Preferences">
+          <div class="tab-content">
+            <form [formGroup]="preferencesForm" (ngSubmit)="onSavePreferences()" class="preferences-form">
+              <div class="form-section">
+                <h3>App Settings</h3>
+                
+                <div class="form-row">
+                  <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Theme</mat-label>
+                    <mat-select formControlName="theme">
+                      <mat-option value="light">Light</mat-option>
+                      <mat-option value="dark">Dark</mat-option>
+                      <mat-option value="auto">Auto</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Language</mat-label>
+                    <mat-select formControlName="language">
+                      <mat-option value="en">English</mat-option>
+                      <mat-option value="es">Spanish</mat-option>
+                      <mat-option value="fr">French</mat-option>
+                      <mat-option value="de">German</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="form-row">
+                  <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Timezone</mat-label>
+                    <mat-select formControlName="timezone">
+                      <mat-option value="UTC">UTC</mat-option>
+                      <mat-option value="America/New_York">Eastern Time</mat-option>
+                      <mat-option value="America/Chicago">Central Time</mat-option>
+                      <mat-option value="America/Denver">Mountain Time</mat-option>
+                      <mat-option value="America/Los_Angeles">Pacific Time</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="form-section">
+                <h3>Notifications</h3>
+                
+                <div class="checkbox-group">
+                  <mat-checkbox formControlName="emailNotifications">
+                    Email Notifications
+                  </mat-checkbox>
+                  
+                  <mat-checkbox formControlName="pushNotifications">
+                    Push Notifications
+                  </mat-checkbox>
+                  
+                  <mat-checkbox formControlName="recipeNotifications">
+                    Recipe Notifications
+                  </mat-checkbox>
+                  
+                  <mat-checkbox formControlName="shoppingListNotifications">
+                    Shopping List Notifications
+                  </mat-checkbox>
+                  
+                  <mat-checkbox formControlName="weeklyReports">
+                    Weekly Reports
+                  </mat-checkbox>
+                </div>
+              </div>
+
+              <div class="form-section">
+                <h3>Recipe Settings</h3>
+                
+                <div class="checkbox-group">
+                  <mat-checkbox formControlName="autoSave">
+                    Auto Save
+                  </mat-checkbox>
+                  
+                  <mat-checkbox formControlName="showNutritionInfo">
+                    Show Nutrition Information
+                  </mat-checkbox>
+                  
+                  <mat-checkbox formControlName="showIngredients">
+                    Show Ingredients
+                  </mat-checkbox>
+                  
+                  <mat-checkbox formControlName="showInstructions">
+                    Show Instructions
+                  </mat-checkbox>
+                </div>
+
+                <div class="form-row">
+                  <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Default Servings</mat-label>
+                    <input 
+                      matInput 
+                      type="number"
+                      formControlName="defaultServings"
+                      min="1">
+                  </mat-form-field>
+
+                  <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Default Prep Time (minutes)</mat-label>
+                    <input 
+                      matInput 
+                      type="number"
+                      formControlName="defaultPrepTime"
+                      min="0">
+                  </mat-form-field>
+
+                  <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Default Cook Time (minutes)</mat-label>
+                    <input 
+                      matInput 
+                      type="number"
+                      formControlName="defaultCookTime"
+                      min="0">
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <button 
+                  mat-raised-button 
+                  color="primary"
+                  type="submit"
+                  [disabled]="saving || preferencesForm.invalid">
+                  <mat-spinner *ngIf="saving" diameter="20" class="spinner"></mat-spinner>
+                  <span *ngIf="!saving">Save Preferences</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </mat-tab>
+
+        <!-- Security Tab -->
+        <mat-tab label="Security">
+          <div class="tab-content">
+            <div class="security-section">
+              <h3>Change Password</h3>
+              <form [formGroup]="passwordForm" (ngSubmit)="onChangePassword()" class="password-form">
+                <div class="form-row">
+                  <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Current Password</mat-label>
+                    <input 
+                      matInput 
+                      type="password"
+                      formControlName="currentPassword"
+                      placeholder="Enter current password">
+                    <mat-error *ngIf="passwordForm.get('currentPassword')?.invalid && passwordForm.get('currentPassword')?.touched">
+                      {{ getPasswordErrorMessage('currentPassword') }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="form-row">
+                  <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>New Password</mat-label>
+                    <input 
+                      matInput 
+                      type="password"
+                      formControlName="newPassword"
+                      placeholder="Enter new password">
+                    <mat-error *ngIf="passwordForm.get('newPassword')?.invalid && passwordForm.get('newPassword')?.touched">
+                      {{ getPasswordErrorMessage('newPassword') }}
+                    </mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Confirm New Password</mat-label>
+                    <input 
+                      matInput 
+                      type="password"
+                      formControlName="confirmPassword"
+                      placeholder="Confirm new password">
+                    <mat-error *ngIf="passwordForm.get('confirmPassword')?.invalid && passwordForm.get('confirmPassword')?.touched">
+                      {{ getPasswordErrorMessage('confirmPassword') }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="form-actions">
+                  <button 
+                    mat-raised-button 
+                    color="primary"
+                    type="submit"
+                    [disabled]="saving || passwordForm.invalid">
+                    <mat-spinner *ngIf="saving" diameter="20" class="spinner"></mat-spinner>
+                    <span *ngIf="!saving">Change Password</span>
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <mat-divider></mat-divider>
+
+            <div class="security-section">
+              <h3>Account Actions</h3>
+              
+              <div class="action-buttons">
+                <button 
+                  mat-raised-button 
+                  color="accent"
+                  (click)="onExportData()">
+                  <mat-icon>download</mat-icon>
+                  Export Data
+                </button>
+                
+                <button 
+                  mat-raised-button 
+                  color="warn"
+                  (click)="onDeleteAccount()">
+                  <mat-icon>delete_forever</mat-icon>
+                  Delete Account
+                </button>
+              </div>
+            </div>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card>
+  </div>
+</div> 

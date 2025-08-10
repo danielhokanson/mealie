@@ -1,0 +1,77 @@
+<div class="text-center">
+  <!-- Dialog Trigger Button -->
+  <app-base-button
+    (click)="openDialog()">
+    Bulk Add
+  </app-base-button>
+
+  <!-- Dialog -->
+  <div *ngIf="dialog" class="dialog-overlay" (click)="closeDialog()">
+    <div class="dialog-content" (click)="$event.stopPropagation()">
+      <mat-card class="dialog-card">
+        <!-- Dialog Header -->
+        <mat-toolbar color="primary" class="dialog-header">
+          <mat-icon class="header-icon">add_circle</mat-icon>
+          <span class="header-title">Bulk Add</span>
+          <span class="spacer"></span>
+        </mat-toolbar>
+
+        <!-- Dialog Body -->
+        <div class="dialog-body">
+          <!-- Text Input Area -->
+          <mat-form-field appearance="outline" class="text-input">
+            <mat-label>Recipe Data</mat-label>
+            <textarea matInput
+                      [(ngModel)]="inputText"
+                      rows="12"
+                      placeholder="Paste in your recipe data. Each line will be treated as an item in a list">
+            </textarea>
+          </mat-form-field>
+
+          <mat-divider class="section-divider"></mat-divider>
+
+          <!-- Utilities Section -->
+          <div class="utilities-section">
+            <div *ngFor="let util of utilities; let last = last" class="utility-item">
+              <mat-list-item class="utility-list-item">
+                <div class="utility-content">
+                  <div class="utility-description">
+                    {{ util.description }}
+                  </div>
+                  <app-base-button
+                    size="small"
+                    color="accent"
+                    (click)="util.action()"
+                    class="utility-button">
+                    <mat-icon>smart_toy</mat-icon>
+                    Run
+                  </app-base-button>
+                </div>
+              </mat-list-item>
+              <mat-divider *ngIf="!last" class="utility-divider"></mat-divider>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dialog Actions -->
+        <mat-divider class="action-divider"></mat-divider>
+        <div class="dialog-actions">
+          <app-base-button
+            cancel
+            (click)="closeDialog()">
+            Cancel
+          </app-base-button>
+          
+          <div class="spacer"></div>
+          
+          <app-base-button
+            save
+            color="success"
+            (click)="save()">
+            Save
+          </app-base-button>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div> 

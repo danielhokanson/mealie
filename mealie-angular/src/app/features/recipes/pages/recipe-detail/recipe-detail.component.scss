@@ -1,0 +1,411 @@
+.recipe-detail-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+
+  .loading-container,
+  .error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    text-align: center;
+
+    p {
+      margin-top: 16px;
+      color: var(--mat-text-color-secondary, #666);
+    }
+  }
+
+  .error-container {
+    .error-icon {
+      font-size: 64px;
+      width: 64px;
+      height: 64px;
+      color: #f44336;
+      margin-bottom: 16px;
+    }
+
+    h3 {
+      margin: 0 0 8px 0;
+      color: var(--mat-text-color-primary, #333);
+    }
+  }
+
+  .recipe-content {
+    .recipe-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 24px;
+      gap: 20px;
+
+      .recipe-title-section {
+        flex: 1;
+
+        .recipe-title {
+          font-size: 32px;
+          font-weight: 600;
+          color: var(--mat-text-color-primary, #333);
+          margin: 0 0 16px 0;
+          line-height: 1.2;
+        }
+
+        .recipe-meta {
+          display: flex;
+          gap: 24px;
+          flex-wrap: wrap;
+
+          .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--mat-text-color-secondary, #666);
+
+            mat-icon {
+              font-size: 20px;
+              width: 20px;
+              height: 20px;
+            }
+          }
+        }
+      }
+
+      .recipe-actions {
+        display: flex;
+        gap: 8px;
+        flex-shrink: 0;
+
+        button {
+          &.favorited {
+            color: #f44336;
+          }
+        }
+      }
+    }
+
+    .recipe-image {
+      margin-bottom: 24px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+      img {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+      }
+    }
+
+    .recipe-description {
+      margin-bottom: 24px;
+      padding: 16px;
+      background: var(--mat-card-background-color, #f5f5f5);
+      border-radius: 8px;
+
+      p {
+        margin: 0;
+        font-size: 16px;
+        line-height: 1.6;
+        color: var(--mat-text-color-primary, #333);
+      }
+    }
+
+    .recipe-rating {
+      margin-bottom: 24px;
+
+      h3 {
+        margin: 0 0 12px 0;
+        font-size: 18px;
+        font-weight: 500;
+      }
+
+      .rating-stars {
+        display: flex;
+        gap: 4px;
+
+        .star-button {
+          mat-icon {
+            font-size: 24px;
+            width: 24px;
+            height: 24px;
+            color: #ffc107;
+
+            &.filled {
+              color: #ffc107;
+            }
+          }
+        }
+      }
+    }
+
+    .recipe-tags {
+      margin-bottom: 24px;
+
+      .categories,
+      .tags {
+        margin-bottom: 16px;
+
+        h3 {
+          margin: 0 0 8px 0;
+          font-size: 16px;
+          font-weight: 500;
+        }
+
+        mat-chip-listbox {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+
+          mat-chip {
+            color: white;
+            font-weight: 500;
+          }
+        }
+      }
+    }
+
+    .recipe-scaling {
+      margin-bottom: 24px;
+
+      h3 {
+        margin: 0 0 12px 0;
+        font-size: 18px;
+        font-weight: 500;
+      }
+
+      .scale-controls {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+
+        mat-slider {
+          flex: 1;
+        }
+
+        .scale-value {
+          font-size: 18px;
+          font-weight: 500;
+          color: var(--mat-primary-color, #1976d2);
+          min-width: 40px;
+        }
+      }
+    }
+
+    .recipe-tabs {
+      mat-tab-group {
+        .mat-mdc-tab-body-content {
+          padding: 24px 0;
+        }
+      }
+
+      .ingredients-content,
+      .instructions-content,
+      .notes-content,
+      .comments-content {
+        h3 {
+          margin: 0 0 16px 0;
+          font-size: 20px;
+          font-weight: 500;
+        }
+
+        mat-list {
+          .ingredient-item,
+          .instruction-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+
+            .ingredient-quantity,
+            .instruction-number {
+              font-weight: 500;
+              color: var(--mat-primary-color, #1976d2);
+              min-width: 60px;
+            }
+
+            .ingredient-name,
+            .instruction-text {
+              flex: 1;
+              line-height: 1.5;
+            }
+
+            .ingredient-note {
+              color: var(--mat-text-color-secondary, #666);
+              font-style: italic;
+            }
+          }
+        }
+      }
+
+      .notes-content,
+      .comments-content {
+        .notes-header,
+        .comments-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 16px;
+
+          h3 {
+            margin: 0;
+          }
+        }
+
+        .add-note-form,
+        .add-comment-form {
+          margin-bottom: 24px;
+          padding: 16px;
+          background: var(--mat-card-background-color, #f5f5f5);
+          border-radius: 8px;
+
+          .note-input,
+          .comment-input {
+            width: 100%;
+            margin-bottom: 12px;
+          }
+
+          .note-actions,
+          .comment-actions {
+            display: flex;
+            gap: 8px;
+          }
+        }
+
+        .note-item,
+        .comment-item {
+          padding: 16px;
+          margin-bottom: 12px;
+          background: var(--mat-card-background-color, #f5f5f5);
+          border-radius: 8px;
+
+          h4 {
+            margin: 0 0 8px 0;
+            font-size: 16px;
+            font-weight: 500;
+          }
+
+          p {
+            margin: 0 0 8px 0;
+            line-height: 1.5;
+          }
+
+          .note-date,
+          .comment-date {
+            font-size: 12px;
+            color: var(--mat-text-color-secondary, #666);
+          }
+
+          .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+
+            .comment-author {
+              font-weight: 500;
+              color: var(--mat-primary-color, #1976d2);
+            }
+
+            .comment-date {
+              font-size: 12px;
+              color: var(--mat-text-color-secondary, #666);
+            }
+          }
+
+          .comment-text {
+            margin: 0;
+            line-height: 1.5;
+          }
+        }
+
+        .no-notes,
+        .no-comments {
+          text-align: center;
+          padding: 40px 20px;
+          color: var(--mat-text-color-secondary, #666);
+
+          p {
+            margin: 0;
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Delete action styling
+.delete-action {
+  color: #f44336;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .recipe-detail-container {
+    padding: 16px;
+
+    .recipe-content {
+      .recipe-header {
+        flex-direction: column;
+        gap: 16px;
+
+        .recipe-title-section {
+          .recipe-title {
+            font-size: 24px;
+          }
+
+          .recipe-meta {
+            gap: 16px;
+
+            .meta-item {
+              font-size: 14px;
+            }
+          }
+        }
+
+        .recipe-actions {
+          align-self: flex-end;
+        }
+      }
+
+      .recipe-image {
+        img {
+          height: 250px;
+        }
+      }
+
+      .recipe-tabs {
+        .ingredients-content,
+        .instructions-content,
+        .notes-content,
+        .comments-content {
+          .ingredient-item,
+          .instruction-item {
+            flex-direction: column;
+            gap: 4px;
+
+            .ingredient-quantity,
+            .instruction-number {
+              min-width: auto;
+            }
+          }
+        }
+
+        .notes-content,
+        .comments-content {
+          .notes-header,
+          .comments-header {
+            flex-direction: column;
+            gap: 12px;
+            align-items: stretch;
+
+            button {
+              align-self: flex-start;
+            }
+          }
+        }
+      }
+    }
+  }
+} 

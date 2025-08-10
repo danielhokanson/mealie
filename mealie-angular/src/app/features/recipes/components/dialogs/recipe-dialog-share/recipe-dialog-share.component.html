@@ -1,0 +1,89 @@
+<app-base-dialog
+  [(modelValue)]="open"
+  title="Share Recipe"
+  icon="link"
+  (modelValueChange)="onDialogChange($event)">
+  
+  <div class="dialog-content">
+    <!-- Expiration Date Picker -->
+    <div class="date-picker-section">
+      <mat-form-field appearance="outline" class="date-input">
+        <mat-label>Expiration Date</mat-label>
+        <input matInput
+               [value]="expirationDateString"
+               readonly
+               (click)="datePickerMenu = true"
+               placeholder="Select expiration date">
+        <mat-icon matPrefix>calendar_today</mat-icon>
+        <mat-hint>Default: 30 days</mat-hint>
+      </mat-form-field>
+
+      <!-- Date Picker Menu -->
+      <div class="date-picker-menu" *ngIf="datePickerMenu">
+        <mat-calendar
+          [(selected)]="expirationDate"
+          (selectedChange)="onDateChange()">
+        </mat-calendar>
+      </div>
+    </div>
+
+    <!-- Create New Token Button -->
+    <div class="actions-section">
+      <app-base-button
+        size="small"
+        (click)="createNewToken()">
+        New
+      </app-base-button>
+    </div>
+
+    <!-- Token List -->
+    <div class="tokens-section">
+      <mat-list>
+        <mat-list-item
+          *ngFor="let token of tokens"
+          class="token-item"
+          (click)="shareRecipe(token.token)">
+          
+          <div class="token-content">
+            <!-- Token Avatar -->
+            <div class="token-avatar">
+              <mat-icon>link</mat-icon>
+            </div>
+
+            <!-- Token Details -->
+            <div class="token-details">
+              <div class="token-title">
+                Expires at
+              </div>
+              <div class="token-subtitle">
+                {{ formatDate(token.expiresAt) }}
+              </div>
+            </div>
+
+            <!-- Token Actions -->
+            <div class="token-actions">
+              <button mat-icon-button
+                      (click)="deleteToken(token.id); $event.stopPropagation()"
+                      class="delete-button">
+                <mat-icon color="warn">delete</mat-icon>
+              </button>
+              
+              <button mat-icon-button
+                      (click)="copyTokenLink(token.token); $event.stopPropagation()"
+                      class="copy-button">
+                <mat-icon color="primary">content_copy</mat-icon>
+              </button>
+            </div>
+          </div>
+        </mat-list-item>
+      </mat-list>
+
+      <!-- Empty State -->
+      <div *ngIf="tokens.length === 0" class="empty-state">
+        <mat-icon class="empty-icon">link_off</mat-icon>
+        <p class="empty-text">No share tokens created yet</p>
+        <p class="empty-subtext">Create a new token to share this recipe</p>
+      </div>
+    </div>
+  </div>
+</app-base-dialog> 

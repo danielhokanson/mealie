@@ -1,0 +1,135 @@
+<div class="recipe-page">
+  <mat-card class="recipe-card">
+    <!-- Recipe Header -->
+    <div class="recipe-header">
+      <div class="recipe-title-section">
+        <h1 class="recipe-title">{{ recipe.name }}</h1>
+        <div class="recipe-meta">
+          <span class="recipe-rating">
+            <mat-icon *ngFor="let star of [1,2,3,4,5]" 
+                      [color]="star <= recipe.rating ? 'accent' : 'basic'">
+              {{ star <= recipe.rating ? 'star' : 'star_border' }}
+            </mat-icon>
+            <span class="rating-text">{{ recipe.rating }}/5</span>
+          </span>
+          <span class="recipe-servings">
+            <mat-icon>people</mat-icon>
+            {{ recipe.servings }} servings
+          </span>
+          <span class="recipe-time">
+            <mat-icon>schedule</mat-icon>
+            {{ totalTime }} min
+          </span>
+        </div>
+      </div>
+      
+      <div class="recipe-actions">
+        <app-base-button 
+          [edit]="true" 
+          (click)="toggleEditMode()"
+          *ngIf="!isEditForm">
+          Edit
+        </app-base-button>
+        <app-base-button 
+          [save]="true" 
+          (click)="onSave()"
+          *ngIf="isEditForm">
+          Save
+        </app-base-button>
+        <app-base-button 
+          [delete]="true" 
+          (click)="onDelete()"
+          *ngIf="isEditForm">
+          Delete
+        </app-base-button>
+      </div>
+    </div>
+
+    <!-- Recipe Image -->
+    <div *ngIf="recipe.image" class="recipe-image-container">
+      <img [src]="recipe.image" [alt]="recipe.name" class="recipe-image">
+    </div>
+
+    <!-- Recipe Description -->
+    <div *ngIf="recipe.description" class="recipe-description">
+      <app-safe-markdown [markdown]="recipe.description"></app-safe-markdown>
+    </div>
+
+    <!-- Recipe Scale -->
+    <div class="recipe-scale">
+      <label for="scale-input">Scale:</label>
+      <input 
+        id="scale-input"
+        type="range" 
+        [value]="scale" 
+        min="0.25" 
+        max="4" 
+        step="0.25"
+        (input)="onScaleChange($event)"
+        class="scale-slider">
+      <span class="scale-text">{{ scale }}x</span>
+    </div>
+
+    <!-- Recipe Content -->
+    <div class="recipe-content">
+      <div class="recipe-ingredients">
+        <h2>Ingredients</h2>
+        <div class="ingredients-list">
+          <div *ngFor="let ingredient of scaledIngredients; trackBy: trackByIngredientId" 
+               class="ingredient-item">
+            <div class="ingredient-quantity">
+              {{ ingredient.quantity }}
+              <span *ngIf="ingredient.unit">{{ ingredient.unit }}</span>
+            </div>
+            <div class="ingredient-name">{{ ingredient.name }}</div>
+            <div *ngIf="ingredient.notes" class="ingredient-notes">
+              {{ ingredient.notes }}
+            </div>
+          </div>
+        </div>
+        
+        <app-base-button 
+          *ngIf="isEditForm"
+          [create]="true" 
+          (click)="addIngredient()">
+          Add Ingredient
+        </app-base-button>
+      </div>
+
+      <mat-divider vertical class="recipe-divider"></mat-divider>
+
+      <div class="recipe-instructions">
+        <h2>Instructions</h2>
+        <div class="instructions-list">
+          <div *ngFor="let instruction of recipe.instructionsList; trackBy: trackByInstructionId" 
+               class="instruction-item">
+            <div class="instruction-number">{{ instruction.order }}</div>
+            <div class="instruction-text">{{ instruction.text }}</div>
+          </div>
+        </div>
+        
+        <app-base-button 
+          *ngIf="isEditForm"
+          [create]="true" 
+          (click)="addInstruction()">
+          Add Step
+        </app-base-button>
+      </div>
+    </div>
+
+    <!-- Recipe Notes -->
+    <div *ngIf="recipe.notes" class="recipe-notes">
+      <h3>Notes</h3>
+      <app-safe-markdown [markdown]="recipe.notes"></app-safe-markdown>
+    </div>
+
+    <!-- Recipe Tags -->
+    <div *ngIf="recipe.tags.length > 0" class="recipe-tags">
+      <mat-chip-set>
+        <mat-chip *ngFor="let tag of recipe.tags" [color]="tag.color || 'primary'">
+          {{ tag.name }}
+        </mat-chip>
+      </mat-chip-set>
+    </div>
+  </mat-card>
+</div> 

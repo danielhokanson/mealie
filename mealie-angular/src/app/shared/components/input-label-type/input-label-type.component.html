@@ -1,0 +1,26 @@
+<mat-form-field class="input-label-type">
+  <mat-icon *ngIf="icon" matPrefix>{{ icon }}</mat-icon>
+  <mat-icon *ngIf="!icon" matPrefix>label</mat-icon>
+  
+  <input
+    type="text"
+    matInput
+    [(ngModel)]="searchInput"
+    [matAutocomplete]="auto"
+    [value]="itemValue?.name || ''"
+    (input)="onInputChange($event)"
+    (keyup.enter)="emitCreate()"
+    placeholder="Search..."
+    class="autocomplete-input">
+  
+  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+    <mat-option *ngFor="let item of items" [value]="item">
+      {{ item.name }}
+    </mat-option>
+    
+    <mat-option *ngIf="create && searchInput && items && !hasExistingItem()" 
+                (click)="emitCreate()">
+      Create "{{ searchInput }}"
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field> 

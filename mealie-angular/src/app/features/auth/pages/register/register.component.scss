@@ -1,0 +1,191 @@
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+
+  .register-card {
+    width: 100%;
+    max-width: 450px;
+
+    mat-card {
+      padding: 32px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+
+      mat-card-header {
+        text-align: center;
+        margin-bottom: 24px;
+
+        mat-card-title {
+          font-size: 28px;
+          font-weight: 600;
+          color: var(--mat-text-color-primary, #333);
+          margin-bottom: 8px;
+        }
+
+        mat-card-subtitle {
+          font-size: 16px;
+          color: var(--mat-text-color-secondary, #666);
+        }
+      }
+
+      mat-card-content {
+        .register-form {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+
+          .form-field {
+            width: 100%;
+
+            mat-icon[matPrefix] {
+              color: var(--mat-text-color-secondary, #666);
+            }
+          }
+
+          .password-strength {
+            margin-top: -8px;
+            margin-bottom: 8px;
+
+            .strength-bar {
+              height: 4px;
+              background-color: #e0e0e0;
+              border-radius: 2px;
+              overflow: hidden;
+              margin-bottom: 4px;
+
+              .strength-fill {
+                height: 100%;
+                transition: width 0.3s ease, background-color 0.3s ease;
+              }
+            }
+
+            .strength-text {
+              font-size: 12px;
+              font-weight: 500;
+              text-transform: capitalize;
+            }
+          }
+
+          .terms-checkbox {
+            margin-top: 8px;
+
+            mat-checkbox {
+              font-size: 14px;
+              line-height: 1.4;
+
+              .terms-link,
+              .privacy-link {
+                color: var(--mat-primary-color, #1976d2);
+                text-decoration: none;
+
+                &:hover {
+                  text-decoration: underline;
+                }
+              }
+            }
+
+            .terms-error {
+              font-size: 12px;
+              color: var(--mat-error-color, #f44336);
+              margin-top: 4px;
+            }
+          }
+
+          .submit-button {
+            height: 48px;
+            font-size: 16px;
+            font-weight: 500;
+            margin-top: 8px;
+            position: relative;
+
+            .spinner {
+              margin-right: 8px;
+            }
+
+            &:disabled {
+              opacity: 0.7;
+            }
+          }
+        }
+      }
+
+      mat-card-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        padding: 0;
+        margin-top: 24px;
+
+        .login-link {
+          font-size: 14px;
+          text-decoration: none;
+          border: none;
+          background: none;
+          cursor: pointer;
+          transition: color 0.2s ease;
+          color: var(--mat-accent-color, #ff4081);
+          align-self: center;
+
+          &:hover {
+            color: var(--mat-accent-color, #ff4081);
+            opacity: 0.8;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 480px) {
+  .register-container {
+    padding: 16px;
+
+    .register-card {
+      mat-card {
+        padding: 24px;
+
+        mat-card-header {
+          mat-card-title {
+            font-size: 24px;
+          }
+
+          mat-card-subtitle {
+            font-size: 14px;
+          }
+        }
+
+        mat-card-content {
+          .register-form {
+            gap: 16px;
+
+            .submit-button {
+              height: 44px;
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Dark mode support
+@media (prefers-color-scheme: dark) {
+  .register-container {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+
+    .register-card {
+      mat-card {
+        background: rgba(30, 30, 30, 0.95);
+        color: var(--mat-text-color-primary, #fff);
+      }
+    }
+  }
+} 

@@ -1,0 +1,123 @@
+.recipe-scale {
+  padding: 16px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.scale-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.scale-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 120px;
+}
+
+.scale-label {
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+}
+
+.scale-value {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1976d2;
+  background-color: #e3f2fd;
+  padding: 4px 8px;
+  border-radius: 4px;
+  min-width: 40px;
+  text-align: center;
+}
+
+.scale-slider {
+  flex: 1;
+  min-width: 200px;
+  max-width: 300px;
+
+  ::ng-deep .mat-mdc-slider {
+    width: 100%;
+  }
+}
+
+.scale-input {
+  min-width: 120px;
+}
+
+.scale-input-field {
+  width: 100px;
+
+  ::ng-deep .mat-mdc-form-field {
+    width: 100%;
+  }
+
+  .scale-number-input {
+    text-align: center;
+  }
+}
+
+.scale-reset {
+  flex-shrink: 0;
+}
+
+.scale-summary {
+  margin-top: 8px;
+}
+
+.summary-text {
+  font-size: 14px;
+  color: #666;
+  font-style: italic;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .scale-controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .scale-info {
+    justify-content: center;
+  }
+
+  .scale-slider {
+    max-width: none;
+  }
+
+  .scale-input {
+    align-self: center;
+  }
+
+  .scale-reset {
+    align-self: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .recipe-scale {
+    padding: 12px 0;
+  }
+
+  .scale-controls {
+    gap: 8px;
+  }
+
+  .scale-info {
+    min-width: auto;
+  }
+
+  .scale-input-field {
+    width: 80px;
+  }
+
+  .summary-text {
+    font-size: 12px;
+  }
+} 

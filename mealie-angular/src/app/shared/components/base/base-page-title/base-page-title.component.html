@@ -1,0 +1,21 @@
+<div class="page-title-container">
+  <section class="title-section">
+    <ng-content select="[slot=header]"></ng-content>
+    
+    <h2 class="title">
+      <ng-content select="[slot=title]">
+        👋 Here's a Title
+      </ng-content>
+    </h2>
+    
+    <h3 class="subtitle">
+      <ng-content></ng-content>
+    </h3>
+  </section>
+  
+  <section class="content-section">
+    <ng-content select="[slot=content]"></ng-content>
+  </section>
+  
+  <mat-divider *ngIf="divider" class="title-divider"></mat-divider>
+</div> 

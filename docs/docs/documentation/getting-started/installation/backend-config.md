@@ -1,27 +1,36 @@
-# Backend Configuration
+# Legacy Python Backend Configuration
 
-## API Environment Variables
+!!! warning "Legacy Documentation"
+This documentation is for the legacy Python backend. For the current Angular/.NET implementation, see [Backend Configuration](./dotnet-backend-config.md).
+
+## Legacy Python API Environment Variables
 
 ### General
 
-| Variables                     |        Default        | Description                                                                                        |
-| ----------------------------- | :-------------------: | -------------------------------------------------------------------------------------------------- |
-| PUID                          |          911          | UserID permissions between host OS and container                                                   |
-| PGID                          |          911          | GroupID permissions between host OS and container                                                  |
-| DEFAULT_GROUP                 |         Home          | The default group for users                                                                        |
-| DEFAULT_HOUSEHOLD             |        Family         | The default household for users in each group                                                      |
-| BASE_URL                      | http://localhost:8080 | Used for Notifications                                                                             |
-| TOKEN_TIME                    |          48           | The time in hours that a login/auth token is valid                                                 |
-| API_PORT                      |         9000          | The port exposed by backend API. **Do not change this if you're running in Docker**                |
-| API_DOCS                      |         True          | Turns on/off access to the API documentation locally                                               |
-| TZ                            |          UTC          | Must be set to get correct date/time on the server                                                 |
-| ALLOW_SIGNUP<super>\*</super> |         false         | Allow user sign-up without token                                                                   |
+| Variables                     |        Default        | Description                                                                                                       |
+| ----------------------------- | :-------------------: | ----------------------------------------------------------------------------------------------------------------- |
+| PUID                          |          911          | UserID permissions between host OS and container                                                                  |
+| PGID                          |          911          | GroupID permissions between host OS and container                                                                 |
+| DEFAULT_GROUP                 |         Home          | The default group for users                                                                                       |
+| DEFAULT_HOUSEHOLD             |        Family         | The default household for users in each group                                                                     |
+| BASE_URL                      | http://localhost:9091 | Used for Notifications and CORS configuration                                                                     |
+| TZ                            |          UTC          | Must be set to get correct date/time on the server                                                                |
+| ALLOW_SIGNUP<super>\*</super> |         false         | Allow user sign-up without token                                                                                  |
 | ALLOW_PASSWORD_LOGIN          |         true          | Whether or not to display the username+password input fields. Keep set to true unless you use OIDC authentication |
-| LOG_CONFIG_OVERRIDE           |                       | Override the config for logging with a custom path                                                 |
-| LOG_LEVEL                     |         info          | Logging level (e.g. critical, error, warning, info, debug)                                         |
-| DAILY_SCHEDULE_TIME           |         23:45         | The time of day to run daily server tasks, in HH:MM format. Use the server's local time, *not* UTC |
+| ASPNETCORE_ENVIRONMENT        |      Production       | .NET Core environment (Development, Staging, Production)                                                          |
+| ASPNETCORE_URLS               | http://127.0.0.1:5000 | URLs that the .NET Core application listens on                                                                    |
+| LOG_LEVEL                     |         info          | Logging level (Trace, Debug, Information, Warning, Error, Critical)                                               |
 
 <super>\*</super> Starting in v1.4.0 this was changed to default to `false` as part of a security review of the application.
+
+### JWT Authentication
+
+| Variables                |                    Default                     | Description                                              |
+| ------------------------ | :--------------------------------------------: | -------------------------------------------------------- |
+| JWT\_\_SecretKey         | change-this-super-secret-jwt-key-in-production | Secret key for JWT token signing (change in production!) |
+| JWT\_\_Issuer            |                   MealieApi                    | JWT token issuer                                         |
+| JWT\_\_Audience          |                 MealieAngular                  | JWT token audience                                       |
+| JWT\_\_ExpirationMinutes |                       60                       | JWT token expiration time in minutes                     |
 
 ### Security
 
@@ -32,15 +41,15 @@
 
 ### Database
 
- | Variables                                               | Default  | Description                                                             |
- | ------------------------------------------------------- | :------: | ----------------------------------------------------------------------- |
- | DB_ENGINE                                               |  sqlite  | Optional: 'sqlite', 'postgres'                                          |
- | POSTGRES_USER<super>[&dagger;][secrets]</super>         |  mealie  | Postgres database user                                                  |
- | POSTGRES_PASSWORD<super>[&dagger;][secrets]</super>     |  mealie  | Postgres database password                                              |
- | POSTGRES_SERVER<super>[&dagger;][secrets]</super>       | postgres | Postgres database server address                                        |
- | POSTGRES_PORT<super>[&dagger;][secrets]</super>         |   5432   | Postgres database port                                                  |
- | POSTGRES_DB<super>[&dagger;][secrets]</super>           |  mealie  | Postgres database name                                                  |
- | POSTGRES_URL_OVERRIDE<super>[&dagger;][secrets]</super> |   None   | Optional Postgres URL override to use instead of POSTGRES\_\* variables |
+| Variables                                               | Default  | Description                                                             |
+| ------------------------------------------------------- | :------: | ----------------------------------------------------------------------- |
+| DB_ENGINE                                               |  sqlite  | Optional: 'sqlite', 'postgres'                                          |
+| POSTGRES_USER<super>[&dagger;][secrets]</super>         |  mealie  | Postgres database user                                                  |
+| POSTGRES_PASSWORD<super>[&dagger;][secrets]</super>     |  mealie  | Postgres database password                                              |
+| POSTGRES_SERVER<super>[&dagger;][secrets]</super>       | postgres | Postgres database server address                                        |
+| POSTGRES_PORT<super>[&dagger;][secrets]</super>         |   5432   | Postgres database port                                                  |
+| POSTGRES_DB<super>[&dagger;][secrets]</super>           |  mealie  | Postgres database name                                                  |
+| POSTGRES_URL_OVERRIDE<super>[&dagger;][secrets]</super> |   None   | Optional Postgres URL override to use instead of POSTGRES\_\* variables |
 
 ### Email
 
@@ -158,10 +167,10 @@ Setting the following environmental variables will change the theme of the front
 
 > <super>&dagger;</super> Starting in version `2.4.2`, any environment variable in the preceding lists with a dagger
 > symbol next to them support the Docker Compose secrets pattern, below.
-[Docker Compose secrets][docker-secrets] can be used to secure sensitive information regarding the Mealie implementation
-by managing control of each secret independently from the single `.env` file. This is helpful for users that may need
-different levels of access for various, sensitive environment variables, such as differentiating between hardening
-operations (e.g., server endpoints and ports) and user access control (e.g., usernames, passwords, and API keys).
+> [Docker Compose secrets][docker-secrets] can be used to secure sensitive information regarding the Mealie implementation
+> by managing control of each secret independently from the single `.env` file. This is helpful for users that may need
+> different levels of access for various, sensitive environment variables, such as differentiating between hardening
+> operations (e.g., server endpoints and ports) and user access control (e.g., usernames, passwords, and API keys).
 
 To convert any of these environment variables to a Docker Compose secret, append `_FILE` to the environment variable and
 connect it with a Docker Compose secret, per the [Docker documentation][docker-secrets].
@@ -171,7 +180,6 @@ take precedence.
 
 For example, a user that wishes to harden their operations by only giving some access to their database URL, but who
 wish to place additional security around their user access control, may have a Docker Compose configuration similar to:
-
 
 ```yaml
 services:
@@ -207,7 +215,9 @@ secrets:
   postgres-password:
     file: ./secrets/sensitive/postgres-password.txt
 ```
+
 In the example above, a directory organization and access pattern may look like the following:
+
 ```text
 .
 ├── docker-compose.yml

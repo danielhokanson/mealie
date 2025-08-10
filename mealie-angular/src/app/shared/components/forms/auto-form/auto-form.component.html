@@ -1,0 +1,243 @@
+<mat-card [class]="'auto-form-card ' + (dark ? 'dark' : '')" [style.width]="width">
+    <div class="form-row">
+        <div class="form-col" *ngFor="let inputField of items; let index = index">
+            
+            <!-- Section Divider -->
+            <mat-divider *ngIf="inputField.section" class="section-divider"></mat-divider>
+            
+            <!-- Section Title -->
+            <h3 *ngIf="inputField.section" class="section-title">
+                {{ inputField.section }}
+            </h3>
+            
+            <!-- Section Details -->
+            <p *ngIf="inputField.sectionDetails" class="section-details">
+                {{ inputField.sectionDetails }}
+            </p>
+
+            <!-- Checkbox Field -->
+            <mat-checkbox
+                *ngIf="inputField.type === fieldTypes.BOOLEAN"
+                [(ngModel)]="modelValue[inputField.varName]"
+                [disabled]="isFieldDisabled(inputField)"
+                (change)="onFieldChange(inputField.varName, $event.checked)"
+                (blur)="onFieldBlur()"
+                class="form-checkbox">
+                {{ inputField.label }}
+            </mat-checkbox>
+
+            <!-- Text Field -->
+            <mat-form-field
+                *ngIf="inputField.type === fieldTypes.TEXT || inputField.type === fieldTypes.PASSWORD"
+                class="form-field">
+                <mat-label>{{ inputField.label }}</mat-label>
+                <input
+                    matInput
+                    [type]="inputField.type === fieldTypes.PASSWORD ? 'password' : 'text'"
+                    [(ngModel)]="modelValue[inputField.varName]"
+                    [readonly]="isFieldReadonly(inputField)"
+                    [disabled]="isFieldDisabled(inputField)"
+                    [attr.autofocus]="index === 0"
+                    (ngModelChange)="onFieldChange(inputField.varName, $event)"
+                    (blur)="onFieldBlur()">
+                <mat-hint *ngIf="inputField.hint">{{ inputField.hint }}</mat-hint>
+            </mat-form-field>
+
+            <!-- Text Area -->
+            <mat-form-field
+                *ngIf="inputField.type === fieldTypes.TEXT_AREA"
+                class="form-field">
+                <mat-label>{{ inputField.label }}</mat-label>
+                <textarea
+                    matInput
+                    [(ngModel)]="modelValue[inputField.varName]"
+                    [readonly]="isFieldReadonly(inputField)"
+                    [disabled]="isFieldDisabled(inputField)"
+                    rows="3"
+                    (ngModelChange)="onFieldChange(inputField.varName, $event)"
+                    (blur)="onFieldBlur()"></textarea>
+                <mat-hint *ngIf="inputField.hint">{{ inputField.hint }}</mat-hint>
+            </mat-form-field>
+
+            <!-- Select Field -->
+            <mat-form-field
+                *ngIf="inputField.type === fieldTypes.SELECT"
+                class="form-field">
+                <mat-label>{{ inputField.label }}</mat-label>
+                <mat-select
+                    [(ngModel)]="modelValue[inputField.varName]"
+                    [disabled]="isFieldDisabled(inputField)"
+                    (ngModelChange)="onFieldChange(inputField.varName, $event)"
+                    (blur)="onFieldBlur()">
+                    <mat-option *ngFor="let option of inputField.options" [value]="option.value">
+                        {{ option.label }}
+                    </mat-option>
+                </mat-select>
+                <mat-hint *ngIf="inputField.hint">{{ inputField.hint }}</mat-hint>
+            </mat-form-field>
+
+            <!-- Multi Select Field -->
+            <mat-form-field
+                *ngIf="inputField.type === fieldTypes.MULTI_SELECT"
+                class="form-field">
+                <mat-label>{{ inputField.label }}</mat-label>
+                <mat-select
+                    [(ngModel)]="modelValue[inputField.varName]"
+                    [disabled]="isFieldDisabled(inputField)"
+                    multiple
+                    (ngModelChange)="onFieldChange(inputField.varName, $event)"
+                    (blur)="onFieldBlur()">
+                    <mat-option *ngFor="let option of inputField.options" [value]="option.value">
+                        {{ option.label }}
+                    </mat-option>
+                </mat-select>
+                <mat-hint *ngIf="inputField.hint">{{ inputField.hint }}</mat-hint>
+            </mat-form-field>
+
+            <!-- Number Field -->
+            <mat-form-field
+                *ngIf="inputField.type === fieldTypes.NUMBER"
+                class="form-field">
+                <mat-label>{{ inputField.label }}</mat-label>
+                <input
+                    matInput
+                    type="number"
+                    [(ngModel)]="modelValue[inputField.varName]"
+                    [readonly]="isFieldReadonly(inputField)"
+                    [disabled]="isFieldDisabled(inputField)"
+                    [min]="inputField.min || null"
+                    [max]="inputField.max || null"
+                    [step]="inputField.step || null"
+                    (ngModelChange)="onFieldChange(inputField.varName, $event)"
+                    (blur)="onFieldBlur()">
+                <mat-hint *ngIf="inputField.hint">{{ inputField.hint }}</mat-hint>
+            </mat-form-field>
+
+            <!-- Slider Field -->
+            <div *ngIf="inputField.type === fieldTypes.SLIDER" class="slider-container">
+                <label>{{ inputField.label }}</label>
+                <mat-slider
+                    [(ngModel)]="modelValue[inputField.varName]"
+                    [disabled]="isFieldDisabled(inputField)"
+                    (ngModelChange)="onFieldChange(inputField.varName, $event)"
+                    (blur)="onFieldBlur()">
+                </mat-slider>
+                <span class="slider-value">{{ modelValue[inputField.varName] }}</span>
+            </div>
+
+            <!-- Color Field -->
+            <div *ngIf="inputField.type === fieldTypes.COLOR" class="color-container">
+                <label>{{ inputField.label }}</label>
+                <button
+                    mat-button
+                    [style.background-color]="modelValue[inputField.varName] || '#7417BE'"
+                    [disabled]="isFieldDisabled(inputField)"
+                    [matMenuTriggerFor]="colorMenu"
+                    class="color-button">
+                    {{ inputField.label }}
+                </button>
+                <mat-menu #colorMenu="matMenu">
+                    <div class="color-picker">
+                        <input
+                            type="color"
+                            [(ngModel)]="modelValue[inputField.varName]"
+                            (ngModelChange)="onFieldChange(inputField.varName, $event)"
+                            (blur)="onFieldBlur()"
+                            class="color-input">
+                    </div>
+                </mat-menu>
+            </div>
+
+            <!-- Object Field -->
+            <div *ngIf="inputField.type === fieldTypes.OBJECT" class="object-container">
+                <app-auto-form
+                    [items]="inputField.items || []"
+                    [color]="color"
+                    (blur)="onFieldBlur()">
+                </app-auto-form>
+            </div>
+
+            <!-- List Field -->
+            <div *ngIf="inputField.type === fieldTypes.LIST" class="list-container">
+                <label>{{ inputField.label }}</label>
+                <div *ngFor="let item of modelValue[inputField.varName]; let i = index; trackBy: trackByIndex" class="list-item">
+                    <mat-form-field class="list-input">
+                        <mat-label>Item {{ i + 1 }}</mat-label>
+                        <input
+                            matInput
+                            [(ngModel)]="modelValue[inputField.varName][i]"
+                            [disabled]="isFieldDisabled(inputField)"
+                            (ngModelChange)="onFieldChange(inputField.varName, modelValue[inputField.varName])"
+                            (blur)="onFieldBlur()">
+                    </mat-form-field>
+                    <button
+                        mat-icon-button
+                        color="warn"
+                        (click)="removeByIndex(modelValue[inputField.varName], i)"
+                        class="remove-button">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+                <button
+                    mat-button
+                    color="primary"
+                    (click)="addListItem(inputField)"
+                    class="add-button">
+                    <mat-icon>add</mat-icon>
+                    Add Item
+                </button>
+            </div>
+
+            <!-- Date Field -->
+            <mat-form-field
+                *ngIf="inputField.type === fieldTypes.DATE"
+                class="form-field">
+                <mat-label>{{ inputField.label }}</mat-label>
+                <input
+                    matInput
+                    [matDatepicker]="datePicker"
+                    [(ngModel)]="modelValue[inputField.varName]"
+                    [readonly]="isFieldReadonly(inputField)"
+                    [disabled]="isFieldDisabled(inputField)"
+                    (ngModelChange)="onFieldChange(inputField.varName, $event)"
+                    (blur)="onFieldBlur()">
+                <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+                <mat-datepicker #datePicker></mat-datepicker>
+                <mat-hint *ngIf="inputField.hint">{{ inputField.hint }}</mat-hint>
+            </mat-form-field>
+
+            <!-- Time Field -->
+            <mat-form-field
+                *ngIf="inputField.type === fieldTypes.TIME"
+                class="form-field">
+                <mat-label>{{ inputField.label }}</mat-label>
+                <input
+                    matInput
+                    type="time"
+                    [(ngModel)]="modelValue[inputField.varName]"
+                    [readonly]="isFieldReadonly(inputField)"
+                    [disabled]="isFieldDisabled(inputField)"
+                    (ngModelChange)="onFieldChange(inputField.varName, $event)"
+                    (blur)="onFieldBlur()">
+                <mat-hint *ngIf="inputField.hint">{{ inputField.hint }}</mat-hint>
+            </mat-form-field>
+
+            <!-- DateTime Field -->
+            <mat-form-field
+                *ngIf="inputField.type === fieldTypes.DATETIME"
+                class="form-field">
+                <mat-label>{{ inputField.label }}</mat-label>
+                <input
+                    matInput
+                    type="datetime-local"
+                    [(ngModel)]="modelValue[inputField.varName]"
+                    [readonly]="isFieldReadonly(inputField)"
+                    [disabled]="isFieldDisabled(inputField)"
+                    (ngModelChange)="onFieldChange(inputField.varName, $event)"
+                    (blur)="onFieldBlur()">
+                <mat-hint *ngIf="inputField.hint">{{ inputField.hint }}</mat-hint>
+            </mat-form-field>
+
+        </div>
+    </div>
+</mat-card> 

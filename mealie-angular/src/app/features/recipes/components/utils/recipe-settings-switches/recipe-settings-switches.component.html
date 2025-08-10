@@ -1,0 +1,11 @@
+<div class="settings-switches">
+  <mat-slide-toggle
+    *ngFor="let key of settingsKeys"
+    [checked]="value[key]"
+    (change)="onSettingChange(key, $event.checked)"
+    [disabled]="isDisabled(key)"
+    color="primary"
+    class="setting-toggle">
+    {{ labels[key] }}
+  </mat-slide-toggle>
+</div> 

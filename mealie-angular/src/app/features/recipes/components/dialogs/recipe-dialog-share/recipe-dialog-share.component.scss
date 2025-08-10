@@ -1,0 +1,302 @@
+.dialog-content {
+  padding: 16px;
+}
+
+.date-picker-section {
+  position: relative;
+  margin-bottom: 16px;
+
+  .date-input {
+    width: 100%;
+  }
+
+  .date-picker-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    margin-top: 4px;
+  }
+}
+
+.actions-section {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 16px;
+}
+
+.tokens-section {
+  .token-item {
+    padding: 8px 0;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.04);
+    }
+
+    .token-content {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      gap: 12px;
+
+      .token-avatar {
+        flex-shrink: 0;
+        width: 40px;
+        height: 40px;
+        background-color: #f5f5f5;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        mat-icon {
+          font-size: 20px;
+          width: 20px;
+          height: 20px;
+          color: #666;
+        }
+      }
+
+      .token-details {
+        flex: 1;
+        min-width: 0;
+
+        .token-title {
+          font-size: 14px;
+          font-weight: 500;
+          color: #333;
+          margin-bottom: 2px;
+        }
+
+        .token-subtitle {
+          font-size: 12px;
+          color: #666;
+        }
+      }
+
+      .token-actions {
+        display: flex;
+        gap: 4px;
+        flex-shrink: 0;
+
+        .delete-button,
+        .copy-button {
+          width: 32px;
+          height: 32px;
+          min-width: 32px;
+
+          mat-icon {
+            font-size: 18px;
+            width: 18px;
+            height: 18px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 16px;
+  text-align: center;
+
+  .empty-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    color: #ccc;
+    margin-bottom: 16px;
+  }
+
+  .empty-text {
+    font-size: 16px;
+    font-weight: 500;
+    color: #666;
+    margin: 0 0 8px 0;
+  }
+
+  .empty-subtext {
+    font-size: 14px;
+    color: #999;
+    margin: 0;
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .dialog-content {
+    padding: 12px;
+  }
+
+  .date-picker-section {
+    margin-bottom: 12px;
+
+    .date-picker-menu {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90vw;
+      max-width: 320px;
+    }
+  }
+
+  .actions-section {
+    margin-bottom: 12px;
+  }
+
+  .tokens-section {
+    .token-item {
+      padding: 6px 0;
+
+      .token-content {
+        gap: 8px;
+
+        .token-avatar {
+          width: 36px;
+          height: 36px;
+
+          mat-icon {
+            font-size: 18px;
+            width: 18px;
+            height: 18px;
+          }
+        }
+
+        .token-details {
+          .token-title {
+            font-size: 13px;
+          }
+
+          .token-subtitle {
+            font-size: 11px;
+          }
+        }
+
+        .token-actions {
+          gap: 2px;
+
+          .delete-button,
+          .copy-button {
+            width: 28px;
+            height: 28px;
+            min-width: 28px;
+
+            mat-icon {
+              font-size: 16px;
+              width: 16px;
+              height: 16px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .empty-state {
+    padding: 32px 12px;
+
+    .empty-icon {
+      font-size: 36px;
+      width: 36px;
+      height: 36px;
+    }
+
+    .empty-text {
+      font-size: 14px;
+    }
+
+    .empty-subtext {
+      font-size: 12px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .dialog-content {
+    padding: 8px;
+  }
+
+  .date-picker-section {
+    margin-bottom: 8px;
+  }
+
+  .actions-section {
+    margin-bottom: 8px;
+  }
+
+  .tokens-section {
+    .token-item {
+      padding: 4px 0;
+
+      .token-content {
+        gap: 6px;
+
+        .token-avatar {
+          width: 32px;
+          height: 32px;
+
+          mat-icon {
+            font-size: 16px;
+            width: 16px;
+            height: 16px;
+          }
+        }
+
+        .token-details {
+          .token-title {
+            font-size: 12px;
+          }
+
+          .token-subtitle {
+            font-size: 10px;
+          }
+        }
+
+        .token-actions {
+          .delete-button,
+          .copy-button {
+            width: 24px;
+            height: 24px;
+            min-width: 24px;
+
+            mat-icon {
+              font-size: 14px;
+              width: 14px;
+              height: 14px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .empty-state {
+    padding: 24px 8px;
+
+    .empty-icon {
+      font-size: 32px;
+      width: 32px;
+      height: 32px;
+    }
+
+    .empty-text {
+      font-size: 13px;
+    }
+
+    .empty-subtext {
+      font-size: 11px;
+    }
+  }
+} 

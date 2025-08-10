@@ -1,0 +1,48 @@
+<div class="recipe-rating" (click)="$event.preventDefault()">
+  <!-- User Rating (if user can rate) -->
+  <div *ngIf="canRate && (userRating || isHovering || !ratingsLoaded)" 
+       class="rating-container"
+       (mouseenter)="isHovering = true"
+       (mouseleave)="isHovering = false">
+    <div class="stars-container">
+      <button 
+        *ngFor="let star of [1,2,3,4,5]; let i = index"
+        type="button"
+        class="star-button"
+        [class.active]="(userRating || hoverRating) >= star"
+        [class.hover]="isHovering && hoverRating >= star"
+        [matTooltip]="'Rate ' + star + ' stars'"
+        (click)="updateRating(star)"
+        (mouseenter)="hoverRating = star"
+        (mouseleave)="hoverRating = 0">
+        <mat-icon>{{ getStarIcon(star) }}</mat-icon>
+      </button>
+    </div>
+    <button 
+      *ngIf="userRating"
+      type="button"
+      class="clear-rating"
+      mat-icon-button
+      [matTooltip]="'Clear rating'"
+      (click)="clearRating()">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </div>
+
+  <!-- Group Rating (read-only) -->
+  <div *ngIf="!canRate || (!userRating && !isHovering && ratingsLoaded)" 
+       class="rating-container group-rating">
+    <div class="stars-container">
+      <mat-icon 
+        *ngFor="let star of [1,2,3,4,5]; let i = index"
+        class="star-icon"
+        [class.active]="groupRating >= star"
+        [class.half]="groupRating >= star - 0.5 && groupRating < star">
+        {{ getStarIcon(star) }}
+      </mat-icon>
+    </div>
+    <span *ngIf="groupRating > 0" class="rating-text">
+      {{ groupRating.toFixed(1) }}
+    </span>
+  </div>
+</div> 

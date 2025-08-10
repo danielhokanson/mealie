@@ -1,6 +1,6 @@
 # About The Project
 
-Mealie is a self hosted recipe manager and meal planner with a RestAPI backend and a reactive frontend application built in Vue for a pleasant user experience for the whole family. Easily add recipes into your database by providing the url and Mealie will automatically import the relevant data or add a family recipe with the UI editor. Mealie also provides an API for interactions from 3rd party applications.
+Mealie is a self hosted recipe manager and meal planner with a modern .NET Core backend API and a reactive Angular frontend application for a pleasant user experience for the whole family. Easily add recipes into your database by providing the url and Mealie will automatically import the relevant data or add a family recipe with the UI editor. Mealie also provides a comprehensive RESTful API for interactions from 3rd party applications.
 
 [Remember to join the Discord](https://discord.gg/QuStdQGSGK)
 
@@ -17,10 +17,11 @@ Mealie is a self hosted recipe manager and meal planner with a RestAPI backend a
 - 🎨 Customize your interface with color themed layouts
 - 🌍 localized in many languages
 - ➕ Plus tons more!
-  - Flexible API
+  - Flexible RESTful API
     - Custom key/value pairs for recipes
     - Webhook support
-    - Interactive API Documentation thanks to [FastAPI](https://fastapi.tiangolo.com/) and [Swagger](https://petstore.swagger.io/)
+    - Interactive API Documentation with OpenAPI/Swagger
+    - JWT-based authentication
   - Raw JSON Recipe Editor
   - Migration from other platforms
     - Chowdown
@@ -37,10 +38,15 @@ See the [Frequently Asked Questions page](./faq.md)
 
 ## Built With
 
-- [Vue.js](https://vuejs.org/)
-- [Vuetify](https://vuetifyjs.com/en/)
-- [FastAPI](https://fastapi.tiangolo.com/)
-- [Docker](https://www.docker.com/)
+- [Angular](https://angular.io/) - Modern TypeScript frontend framework
+- [Angular Material](https://material.angular.io/) - Material Design components for Angular
+- [.NET Core](https://dotnet.microsoft.com/) - Cross-platform backend framework
+- [Entity Framework Core](https://docs.microsoft.com/en-us/ef/core/) - Modern object-database mapper
+- [PostgreSQL](https://www.postgresql.org/) - Advanced open source relational database
+- [Docker](https://www.docker.com/) - Containerization platform
+
+!!! note "Architecture Evolution"
+Mealie has evolved from its original Vue.js/Python (FastAPI) architecture to the current Angular/.NET Core implementation for improved performance, maintainability, and modern development practices.
 
 <!-- CONTRIBUTING -->
 

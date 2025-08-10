@@ -1,0 +1,67 @@
+<div class="recipe-page-footer">
+  <!-- Original URL Section -->
+  <div class="url-section">
+    <mat-form-field *ngIf="isEditForm" class="url-input">
+      <mat-label>Original URL</mat-label>
+      <input matInput [(ngModel)]="recipe.orgURL" />
+    </mat-form-field>
+    
+    <a
+      *ngIf="recipe.orgURL && !isEditForm && !isCookMode"
+      [href]="recipe.orgURL"
+      target="_blank"
+      mat-stroked-button
+      color="accent"
+      class="url-button">
+      Original URL
+    </a>
+  </div>
+
+  <!-- API Extras Section (Advanced Only) -->
+  <div *ngIf="isEditForm && isAdvancedUser" class="api-extras-section">
+    <mat-card class="extras-card">
+      <mat-card-header>
+        <mat-card-title>API Extras</mat-card-title>
+      </mat-card-header>
+      
+      <mat-divider></mat-divider>
+      
+      <mat-card-content>
+        <p class="extras-description">
+          Additional API data that can be used for integrations and custom functionality.
+        </p>
+        
+        <div *ngFor="let extra of extrasArray" class="extra-item">
+          <mat-form-field class="extra-input">
+            <mat-label>{{ extra.key }}</mat-label>
+            <input matInput [(ngModel)]="extra.value" />
+            <button
+              matSuffix
+              mat-icon-button
+              color="warn"
+              (click)="removeApiExtra(extra.key)"
+              [matTooltip]="'Remove extra'">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+      
+      <mat-card-actions class="add-extra-section">
+        <mat-form-field class="new-key-input">
+          <mat-label>Message Key</mat-label>
+          <input matInput [(ngModel)]="apiNewKey" />
+        </mat-form-field>
+        
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="createApiExtra()"
+          [disabled]="!apiNewKey || hasDuplicateKey()">
+          <mat-icon>add</mat-icon>
+          Add Extra
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div> 

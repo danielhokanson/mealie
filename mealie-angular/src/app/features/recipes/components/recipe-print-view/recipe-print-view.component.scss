@@ -1,0 +1,298 @@
+// Print-specific styles
+.wrapper {
+  background-color: white;
+  color: black;
+  font-family: 'Times New Roman', serif;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+
+  &.pa-3 {
+    padding: 12px;
+  }
+
+  // Makes all text solid black for printing
+  * {
+    opacity: 1 !important;
+    color: black !important;
+  }
+}
+
+// Recipe Header
+.recipe-header {
+  margin-bottom: 30px;
+
+  .header-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .image-section {
+    flex-shrink: 0;
+    width: 200px;
+
+    &.image-left {
+      order: -1;
+    }
+
+    &.image-right {
+      order: 1;
+    }
+
+    .recipe-image {
+      width: 100%;
+      height: auto;
+      max-height: 300px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+  }
+
+  .recipe-info {
+    flex: 1;
+    min-width: 0;
+
+    .recipe-title {
+      font-size: 28px;
+      font-weight: bold;
+      margin: 0 0 16px 0;
+      color: #333;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      .title-icon {
+        color: #1976d2;
+        font-size: 24px;
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+    .recipe-yield {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      font-size: 16px;
+      color: #666;
+
+      mat-icon {
+        font-size: 18px;
+        width: 18px;
+        height: 18px;
+      }
+    }
+
+    .time-section {
+      margin-bottom: 16px;
+    }
+
+    .description-section {
+      margin-top: 16px;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+  }
+}
+
+// Section Titles
+.section-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 30px 0 16px 0;
+  color: #333;
+  border-bottom: 2px solid #1976d2;
+  padding-bottom: 8px;
+}
+
+// Print sections - prevents page breaks
+.print-section {
+  page-break-inside: avoid;
+  margin-bottom: 16px;
+}
+
+// Ingredients
+.ingredient-title,
+.instruction-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 16px 0 8px 0;
+  color: #333;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.ingredient-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-flow: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.ingredient-body {
+  font-size: 14px;
+  margin: 0;
+  padding: 4px 0;
+  line-height: 1.4;
+}
+
+// Instructions
+.step-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 16px 0 8px 0;
+  color: #333;
+}
+
+.recipe-step-body {
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+// Notes
+.notes-divider {
+  margin: 30px 0;
+  border-color: #ccc;
+}
+
+.note-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 16px 0 8px 0;
+  color: #333;
+}
+
+.note-body {
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+// Nutrition Table
+.nutrition-table {
+  width: 100%;
+  max-width: 80%;
+  border-collapse: collapse;
+  margin: 16px 0;
+
+  th,
+  td {
+    padding: 6px 10px;
+    text-align: left;
+    vertical-align: top;
+    font-size: 14px;
+    border-bottom: 1px solid #eee;
+  }
+
+  th {
+    font-weight: bold;
+    padding-bottom: 10px;
+    color: #333;
+  }
+
+  td:first-child {
+    width: 70%;
+    font-weight: bold;
+    color: #333;
+  }
+
+  td:last-child {
+    width: 30%;
+    text-align: right;
+    color: #666;
+  }
+}
+
+// General text styles
+p {
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+ul {
+  padding-left: 1rem;
+  margin: 8px 0;
+}
+
+li {
+  list-style-type: none;
+  margin-bottom: 0.25rem;
+  font-size: 14px;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .wrapper {
+    padding: 16px;
+  }
+
+  .recipe-header {
+    .header-content {
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .image-section {
+      width: 100%;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+
+    .recipe-title {
+      font-size: 24px;
+    }
+  }
+
+  .ingredient-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nutrition-table {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .wrapper {
+    padding: 12px;
+  }
+
+  .recipe-title {
+    font-size: 20px;
+  }
+
+  .section-title {
+    font-size: 20px;
+  }
+}
+
+// Print media query
+@media print {
+  .wrapper {
+    padding: 0;
+    max-width: none;
+  }
+
+  .recipe-header {
+    .header-content {
+      flex-direction: row;
+    }
+
+    .image-section {
+      width: 150px;
+    }
+  }
+
+  .ingredient-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .nutrition-table {
+    max-width: 60%;
+  }
+} 

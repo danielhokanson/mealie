@@ -1,0 +1,35 @@
+<form>
+  <input
+    #fileInput
+    class="file-input"
+    type="file"
+    [accept]="accept"
+    [multiple]="multiple"
+    (change)="onFileChanged($event)"
+  >
+  
+  <button
+    mat-button
+    [color]="color"
+    [disabled]="disabled"
+    [class.small]="small"
+    [class.text-button]="textBtn"
+    [class.elevated-button]="!textBtn"
+    (click)="onButtonClick()"
+    class="upload-button">
+    
+    <mat-spinner
+      *ngIf="isSelecting"
+      diameter="20"
+      class="spinner">
+    </mat-spinner>
+    
+    <mat-icon
+      *ngIf="!isSelecting"
+      class="upload-icon">
+      {{ effIcon }}
+    </mat-icon>
+    
+    <span class="button-text">{{ displayText }}</span>
+  </button>
+</form> 

@@ -1,0 +1,83 @@
+.recipe-page-organizers {
+  margin-top: 32px;
+}
+
+.organizer-card {
+  margin-bottom: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.nutrition-section {
+  margin-top: 16px;
+}
+
+.assets-section {
+  margin-top: 16px;
+}
+
+// Card header styling
+::ng-deep .mat-mdc-card-header {
+  padding: 16px 16px 8px 16px;
+}
+
+::ng-deep .mat-mdc-card-title {
+  font-size: 18px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.8);
+  margin: 0;
+}
+
+// Card content styling
+::ng-deep .mat-mdc-card-content {
+  padding: 16px;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .recipe-page-organizers {
+    margin-top: 24px;
+  }
+
+  .organizer-card {
+    margin-bottom: 12px;
+  }
+
+  ::ng-deep .mat-mdc-card-header {
+    padding: 12px 12px 6px 12px;
+  }
+
+  ::ng-deep .mat-mdc-card-title {
+    font-size: 16px;
+  }
+
+  ::ng-deep .mat-mdc-card-content {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .recipe-page-organizers {
+    margin-top: 16px;
+  }
+
+  .organizer-card {
+    margin-bottom: 8px;
+  }
+
+  ::ng-deep .mat-mdc-card-header {
+    padding: 8px 8px 4px 8px;
+  }
+
+  ::ng-deep .mat-mdc-card-title {
+    font-size: 14px;
+  }
+
+  ::ng-deep .mat-mdc-card-content {
+    padding: 8px;
+  }
+} 

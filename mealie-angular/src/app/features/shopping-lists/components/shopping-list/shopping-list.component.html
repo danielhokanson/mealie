@@ -1,0 +1,96 @@
+<mat-card class="shopping-list-card">
+  <mat-card-header>
+    <mat-card-title class="list-title">
+      {{ shoppingList.name }}
+    </mat-card-title>
+    <mat-card-subtitle *ngIf="shoppingList.description">
+      {{ shoppingList.description }}
+    </mat-card-subtitle>
+    
+    <div class="list-actions">
+      <button 
+        mat-icon-button
+        [matMenuTriggerFor]="listMenu"
+        class="list-menu-btn">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      
+      <mat-menu #listMenu="matMenu">
+        <button mat-menu-item (click)="addItem()">
+          <mat-icon>add</mat-icon>
+          <span>Add Item</span>
+        </button>
+        <button mat-menu-item (click)="clearCompleted()" [disabled]="checkedItems.length === 0">
+          <mat-icon>clear_all</mat-icon>
+          <span>Clear Completed</span>
+        </button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item (click)="onDeleteList()">
+          <mat-icon color="warn">delete</mat-icon>
+          <span>Delete List</span>
+        </button>
+      </mat-menu>
+    </div>
+  </mat-card-header>
+
+  <mat-card-content>
+    <!-- Progress Bar -->
+    <div class="progress-container" *ngIf="shoppingList.items.length > 0">
+      <div class="progress-bar">
+        <div class="progress-fill" [style.width.%]="progressPercentage"></div>
+      </div>
+      <span class="progress-text">
+        {{ checkedItems.length }} of {{ shoppingList.items.length }} completed
+      </span>
+    </div>
+
+    <!-- Unchecked Items -->
+    <div class="items-section" *ngIf="uncheckedItems.length > 0">
+      <h3 class="section-title">To Buy</h3>
+      <div class="items-list">
+        <app-shopping-list-item
+          *ngFor="let item of uncheckedItems; trackBy: trackByItemId"
+          [modelValue]="item"
+          [showLabel]="showLabels"
+          [labels]="labels"
+          [units]="units"
+          [foods]="foods"
+          [recipes]="recipes"
+          (checked)="onItemChecked($event)"
+          (save)="onItemUpdated($event)"
+          (delete)="onItemDeleted($event)">
+        </app-shopping-list-item>
+      </div>
+    </div>
+
+    <!-- Checked Items -->
+    <div class="items-section" *ngIf="checkedItems.length > 0">
+      <mat-divider></mat-divider>
+      <h3 class="section-title">Completed</h3>
+      <div class="items-list completed">
+        <app-shopping-list-item
+          *ngFor="let item of checkedItems; trackBy: trackByItemId"
+          [modelValue]="item"
+          [showLabel]="showLabels"
+          [labels]="labels"
+          [units]="units"
+          [foods]="foods"
+          [recipes]="recipes"
+          (checked)="onItemChecked($event)"
+          (save)="onItemUpdated($event)"
+          (delete)="onItemDeleted($event)">
+        </app-shopping-list-item>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-state" *ngIf="shoppingList.items.length === 0">
+      <mat-icon class="empty-icon">shopping_cart</mat-icon>
+      <p class="empty-text">No items in this shopping list</p>
+      <button mat-raised-button color="primary" (click)="addItem()">
+        <mat-icon>add</mat-icon>
+        Add First Item
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card> 

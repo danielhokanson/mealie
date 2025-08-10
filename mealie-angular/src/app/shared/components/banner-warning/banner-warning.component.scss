@@ -1,0 +1,21 @@
+.banner-warning {
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  margin: 8px 0;
+}
+
+.banner-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+}
+
+.banner-icon {
+  color: #721c24;
+}
+
+.banner-text {
+  color: #721c24;
+  font-weight: 500;
+} 

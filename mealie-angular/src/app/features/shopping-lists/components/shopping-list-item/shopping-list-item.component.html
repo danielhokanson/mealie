@@ -1,0 +1,117 @@
+<div *ngIf="!edit" class="shopping-list-item">
+  <div class="item-row">
+    <div class="item-content" [class]="'cols-' + itemLabelCols">
+      <div class="item-main">
+        <mat-checkbox
+          [checked]="modelValue.checked"
+          (change)="onCheckedChange($event.checked)"
+          class="item-checkbox">
+        </mat-checkbox>
+        
+        <div 
+          class="item-text"
+          [class.strike-through]="modelValue.checked">
+          <span class="item-quantity" *ngIf="getQuantityDisplay()">
+            {{ getQuantityDisplay() }}
+          </span>
+          <span class="item-name">{{ modelValue.name }}</span>
+          <span class="item-notes" *ngIf="modelValue.notes">
+            {{ modelValue.notes }}
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="item-spacer"></div>
+    
+    <div class="item-label" *ngIf="label && showLabel">
+      <app-multi-purpose-label
+        [label]="label"
+        size="small">
+      </app-multi-purpose-label>
+    </div>
+    
+    <div class="item-actions" *ngIf="!modelValue.checked">
+      <div class="action-buttons">
+        <button 
+          *ngIf="recipeList.length > 0"
+          mat-icon-button
+          size="small"
+          class="recipe-toggle-btn"
+          [matTooltip]="'Toggle Recipes'"
+          (click)="displayRecipeRefs = !displayRecipeRefs">
+          <mat-icon>restaurant</mat-icon>
+        </button>
+        
+        <button 
+          *ngIf="!recipeList.length"
+          mat-icon-button
+          size="small"
+          class="dummy-btn"
+          disabled>
+        </button>
+        
+        <button 
+          mat-icon-button
+          size="small"
+          class="drag-handle"
+          [matMenuTriggerFor]="contextMenu">
+          <mat-icon>drag_indicator</mat-icon>
+        </button>
+        
+        <button 
+          mat-icon-button
+          size="small"
+          class="edit-btn"
+          (click)="toggleEdit(true)">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </div>
+      
+      <mat-menu #contextMenu="matMenu">
+        <mat-list>
+          <mat-list-item 
+            *ngFor="let action of contextMenu"
+            (click)="onContextHandler(action.event)"
+            class="context-menu-item">
+            {{ action.text }}
+          </mat-list-item>
+        </mat-list>
+      </mat-menu>
+    </div>
+  </div>
+  
+  <!-- Recipe References -->
+  <div 
+    *ngIf="!modelValue.checked && recipeList.length && displayRecipeRefs"
+    class="recipe-references">
+    <app-recipe-list
+      [recipes]="recipeList"
+      [listItem]="modelValue"
+      [small]="true"
+      [tile]="true">
+    </app-recipe-list>
+  </div>
+  
+  <!-- Completion Info -->
+  <div 
+    *ngIf="modelValue.checked"
+    class="completion-info">
+    <span class="completion-text">
+      Completed on {{ modelValue.updatedAt | date:'shortDate' }}
+    </span>
+  </div>
+</div>
+
+<!-- Edit Mode -->
+<div *ngIf="edit" class="edit-mode">
+  <app-shopping-list-item-editor
+    [(modelValue)]="localListItem"
+    [labels]="labels"
+    [units]="units"
+    [foods]="foods"
+    (save)="onSave()"
+    (cancel)="onCancel()"
+    (delete)="delete.emit()">
+  </app-shopping-list-item-editor>
+</div> 

@@ -139,48 +139,8 @@ export class AdminBackupsComponent implements OnInit, OnDestroy {
                     console.error('Error loading backups:', error);
                     this.snackBar.open('Error loading backups', 'Close', { duration: 3000 });
                     this.loading = false;
-                    // Fallback to sample data for development
-                    setTimeout(() => {
-                        this.backups = [
-                            {
-                                id: '1',
-                                name: 'Full Backup - 2024-01-15',
-                                type: 'manual',
-                                size: 1024 * 1024 * 50, // 50MB
-                                createdAt: new Date('2024-01-15T10:30:00'),
-                                status: 'completed',
-                                description: 'Complete system backup including all recipes and images',
-                                location: '/backups/full-backup-2024-01-15.zip',
-                                compressionRatio: 0.75,
-                                encryptionEnabled: false
-                            },
-                            {
-                                id: '2',
-                                name: 'Database Backup - 2024-01-14',
-                                type: 'scheduled',
-                                size: 1024 * 1024 * 5, // 5MB
-                                createdAt: new Date('2024-01-14T02:00:00'),
-                                status: 'completed',
-                                description: 'Daily database backup',
-                                location: '/backups/db-backup-2024-01-14.sql',
-                                compressionRatio: 0.85,
-                                encryptionEnabled: true
-                            },
-                            {
-                                id: '3',
-                                name: 'Auto Backup - 2024-01-13',
-                                type: 'auto',
-                                size: 1024 * 1024 * 25, // 25MB
-                                createdAt: new Date('2024-01-13T15:45:00'),
-                                status: 'completed',
-                                description: 'Automatic weekly backup',
-                                location: '/backups/auto-backup-2024-01-13.zip',
-                                compressionRatio: 0.70,
-                                encryptionEnabled: false
-                            }
-                        ];
-                        this.loading = false;
-                    }, 500);
+                    // Initialize with empty array for production
+                    this.backups = [];
                 }
             });
     }

@@ -8,6 +8,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -26,6 +27,7 @@ import { HouseholdService } from '../../../../core/services/household.service';
         MatProgressSpinnerModule,
         MatInputModule,
         MatSelectModule,
+        MatSlideToggleModule,
         FormsModule,
         ReactiveFormsModule
     ],

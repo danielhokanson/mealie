@@ -235,7 +235,7 @@ namespace MealieApi.WebApi.Controllers
     {
         var groupId = GetGroupId();
         var recipes = await _context.Recipes
-            .Where(r => r.OwnerId != null) // Filter for recipes with owners
+            .Where(r => r.UserId != null) // Filter for recipes with owners
             .OrderBy(r => Guid.NewGuid()) // Random order
             .Take(count)
             .Select(r => new

@@ -135,12 +135,29 @@ export class AdminMaintenanceComponent implements OnInit, OnDestroy {
                 console.error('Error loading system health:', error);
                 // Set default values on error
                 this.systemHealth = {
-                    status: 'unknown',
-                    uptime: 0,
-                    cpuUsage: 0,
-                    memoryUsage: 0,
-                    diskUsage: 0,
-                    services: []
+                    database: {
+                        status: 'error',
+                        size: 0,
+                        connections: 0,
+                        performance: 0
+                    },
+                    storage: {
+                        status: 'error',
+                        used: 0,
+                        total: 0,
+                        performance: 0
+                    },
+                    memory: {
+                        status: 'error',
+                        used: 0,
+                        total: 0,
+                        performance: 0
+                    },
+                    cpu: {
+                        status: 'error',
+                        usage: 0,
+                        performance: 0
+                    }
                 };
             }
         });

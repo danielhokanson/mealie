@@ -11,7 +11,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
@@ -112,7 +112,8 @@ export class AdminMaintenanceComponent implements OnInit, OnDestroy {
     constructor(
         private fb: FormBuilder,
         private snackBar: MatSnackBar,
-        private adminService: AdminService
+        private adminService: AdminService,
+        private dialog: MatDialog
     ) { }
 
     ngOnInit(): void {
@@ -126,72 +127,35 @@ export class AdminMaintenanceComponent implements OnInit, OnDestroy {
     }
 
     private loadSystemHealth(): void {
-        // TODO: Implement system health loading
-        this.systemHealth = {
-            database: {
-                status: 'healthy',
-                size: 1024 * 1024 * 1024, // 1GB
-                connections: 25,
-                performance: 95
+        this.adminService.getSystemHealth().subscribe({
+            next: (health) => {
+                this.systemHealth = health;
             },
-            storage: {
-                status: 'healthy',
-                used: 50 * 1024 * 1024 * 1024, // 50GB
-                total: 100 * 1024 * 1024 * 1024, // 100GB
-                performance: 85
-            },
-            memory: {
-                status: 'healthy',
-                used: 4 * 1024 * 1024 * 1024, // 4GB
-                total: 8 * 1024 * 1024 * 1024, // 8GB
-                performance: 90
-            },
-            cpu: {
-                status: 'healthy',
-                usage: 45,
-                performance: 88
+            error: (error) => {
+                console.error('Error loading system health:', error);
+                // Set default values on error
+                this.systemHealth = {
+                    status: 'unknown',
+                    uptime: 0,
+                    cpuUsage: 0,
+                    memoryUsage: 0,
+                    diskUsage: 0,
+                    services: []
+                };
             }
-        };
+        });
     }
 
     private loadMaintenanceTasks(): void {
-        // TODO: Implement maintenance tasks loading
-        this.maintenanceTasks = [
-            {
-                id: '1',
-                name: 'Database Cleanup',
-                description: 'Remove old logs and temporary data',
-                type: 'cleanup',
-                status: 'pending',
-                progress: 0,
-                estimatedTime: 300,
-                canRun: true,
-                requiresConfirmation: false
+        this.adminService.getMaintenanceTasks().subscribe({
+            next: (tasks) => {
+                this.maintenanceTasks = tasks;
             },
-            {
-                id: '2',
-                name: 'Index Optimization',
-                description: 'Rebuild database indexes for better performance',
-                type: 'optimization',
-                status: 'pending',
-                progress: 0,
-                estimatedTime: 600,
-                canRun: true,
-                requiresConfirmation: true
-            },
-            {
-                id: '3',
-                name: 'File System Cleanup',
-                description: 'Remove orphaned files and temporary uploads',
-                type: 'cleanup',
-                status: 'completed',
-                progress: 100,
-                estimatedTime: 180,
-                lastRun: new Date(Date.now() - 24 * 60 * 60 * 1000),
-                canRun: false,
-                requiresConfirmation: false
+            error: (error) => {
+                console.error('Error loading maintenance tasks:', error);
+                this.maintenanceTasks = [];
             }
-        ];
+        });
     }
 
     onRunTask(task: MaintenanceTask): void {
@@ -232,13 +196,33 @@ export class AdminMaintenanceComponent implements OnInit, OnDestroy {
     }
 
     onScheduleTask(task: MaintenanceTask): void {
-        // TODO: Implement task scheduling
-        this.snackBar.open(`Task "${task.name}" scheduled`, 'Close', { duration: 2000 });
+        const schedule = prompt('Enter cron expression for scheduling (e.g., "0 2 * * *" for daily at 2 AM):');
+        if (schedule) {
+            this.adminService.runMaintenanceTask(task.id, { schedule }).subscribe({
+                next: () => {
+                    this.snackBar.open(`Task "${task.name}" scheduled successfully`, 'Close', { duration: 3000 });
+                    this.loadMaintenanceTasks();
+                },
+                error: (error) => {
+                    console.error('Error scheduling task:', error);
+                    this.snackBar.open(`Failed to schedule task "${task.name}"`, 'Close', { duration: 3000 });
+                }
+            });
+        }
     }
 
     onViewTaskDetails(task: MaintenanceTask): void {
-        // TODO: Implement task details view
-        this.snackBar.open(`Viewing details for "${task.name}"`, 'Close', { duration: 2000 });
+        // For now, show task details in an alert
+        const details = `
+Task: ${task.name}
+Description: ${task.description}
+Type: ${task.type}
+Status: ${task.status}
+Progress: ${task.progress}%
+Estimated Time: ${task.estimatedTime} seconds
+Last Run: ${task.lastRun ? new Date(task.lastRun).toLocaleString() : 'Never'}
+        `;
+        alert(details);
     }
 
     onEmergencyMaintenance(): void {

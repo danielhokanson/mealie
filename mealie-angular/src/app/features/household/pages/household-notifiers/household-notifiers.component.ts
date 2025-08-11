@@ -5,10 +5,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatChipsModule } from '@angular/material/chips';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { HouseholdService } from '../../../../core/services/household.service';
 
 @Component({
     selector: 'app-household-notifiers',
@@ -20,20 +23,24 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         MatIconModule,
         MatListModule,
         MatChipsModule,
-        MatSlideToggleModule,
-        MatFormFieldModule,
+        MatProgressSpinnerModule,
         MatInputModule,
+        MatSelectModule,
         FormsModule,
         ReactiveFormsModule
     ],
     templateUrl: './household-notifiers.component.html',
-    styleUrl: './household-notifiers.component.css'
+    styleUrls: ['./household-notifiers.component.scss']
 })
 export class HouseholdNotifiersComponent implements OnInit {
     notifiers: any[] = [];
     loading = false;
 
-    constructor() { }
+    constructor(
+        private householdService: HouseholdService,
+        private snackBar: MatSnackBar,
+        private router: Router
+    ) { }
 
     ngOnInit(): void {
         this.loadNotifiers();
@@ -41,43 +48,53 @@ export class HouseholdNotifiersComponent implements OnInit {
 
     loadNotifiers(): void {
         this.loading = true;
-        // TODO: Implement notifiers loading logic
-        setTimeout(() => {
-            this.loading = false;
-            this.notifiers = [
-                {
-                    id: '1',
-                    name: 'Meal Plan Reminders',
-                    type: 'email',
-                    enabled: true,
-                    schedule: 'daily'
-                },
-                {
-                    id: '2',
-                    name: 'Shopping List Updates',
-                    type: 'push',
-                    enabled: false,
-                    schedule: 'weekly'
-                }
-            ];
-        }, 1000);
+        this.householdService.getNotifiers().subscribe({
+            next: (notifiers) => {
+                this.notifiers = notifiers;
+                this.loading = false;
+            },
+            error: (error) => {
+                console.error('Error loading notifiers:', error);
+                this.notifiers = [];
+                this.loading = false;
+            }
+        });
     }
 
     toggleNotifier(notifier: any): void {
         notifier.enabled = !notifier.enabled;
-        // TODO: Implement toggle logic
+        this.householdService.updateNotifier(notifier.id, { enabled: notifier.enabled }).subscribe({
+            next: () => {
+                this.snackBar.open(`Notifier ${notifier.enabled ? 'enabled' : 'disabled'}`, 'Close', { duration: 2000 });
+            },
+            error: (error) => {
+                console.error('Error updating notifier:', error);
+                notifier.enabled = !notifier.enabled; // Revert on error
+                this.snackBar.open('Failed to update notifier', 'Close', { duration: 3000 });
+            }
+        });
     }
 
     editNotifier(notifier: any): void {
-        // TODO: Implement edit logic
+        this.router.navigate(['/household/notifiers', notifier.id, 'edit']);
     }
 
     deleteNotifier(notifierId: string): void {
-        // TODO: Implement delete logic
-        this.notifiers = this.notifiers.filter(n => n.id !== notifierId);
+        if (confirm('Are you sure you want to delete this notifier?')) {
+            this.householdService.deleteNotifier(notifierId).subscribe({
+                next: () => {
+                    this.notifiers = this.notifiers.filter(n => n.id !== notifierId);
+                    this.snackBar.open('Notifier deleted successfully', 'Close', { duration: 3000 });
+                },
+                error: (error) => {
+                    console.error('Error deleting notifier:', error);
+                    this.snackBar.open('Failed to delete notifier', 'Close', { duration: 3000 });
+                }
+            });
+        }
     }
 
     addNotifier(): void {
-        // TODO: Implement add logic
+        this.router.navigate(['/household/notifiers/create']);
     }
 }

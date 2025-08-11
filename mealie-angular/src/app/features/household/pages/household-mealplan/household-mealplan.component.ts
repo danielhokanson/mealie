@@ -5,11 +5,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatChipsModule } from '@angular/material/chips';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { MealPlanService } from '../../../../core/services/meal-plan.service';
 
 @Component({
     selector: 'app-household-mealplan',
@@ -21,41 +20,56 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         MatIconModule,
         MatListModule,
         MatChipsModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        MatFormFieldModule,
-        MatInputModule,
-        FormsModule,
-        ReactiveFormsModule
+        MatProgressSpinnerModule
     ],
     templateUrl: './household-mealplan.component.html',
-    styleUrl: './household-mealplan.component.css'
+    styleUrls: ['./household-mealplan.component.scss']
 })
 export class HouseholdMealplanComponent implements OnInit {
     mealPlan: any[] = [];
-    selectedDate: Date = new Date();
+    loading = false;
 
-    constructor() { }
+    constructor(
+        private mealPlanService: MealPlanService,
+        private snackBar: MatSnackBar,
+        private router: Router
+    ) { }
 
     ngOnInit(): void {
         this.loadMealPlan();
     }
 
     loadMealPlan(): void {
-        // TODO: Implement meal plan loading logic
-        this.mealPlan = [];
-    }
-
-    onDateChange(date: Date): void {
-        this.selectedDate = date;
-        this.loadMealPlan();
+        this.loading = true;
+        this.mealPlanService.getWeeklyMealPlans(0).subscribe({
+            next: (mealPlans) => {
+                this.mealPlan = mealPlans;
+                this.loading = false;
+            },
+            error: (error) => {
+                console.error('Error loading meal plan:', error);
+                this.mealPlan = [];
+                this.loading = false;
+            }
+        });
     }
 
     addMeal(): void {
-        // TODO: Implement add meal logic
+        this.router.navigate(['/meal-plans']);
     }
 
     removeMeal(mealId: string): void {
-        // TODO: Implement remove meal logic
+        if (confirm('Are you sure you want to remove this meal from the plan?')) {
+            this.mealPlanService.deleteMealPlan(mealId).subscribe({
+                next: () => {
+                    this.mealPlan = this.mealPlan.filter(m => m.id !== mealId);
+                    this.snackBar.open('Meal removed from plan', 'Close', { duration: 2000 });
+                },
+                error: (error) => {
+                    console.error('Error removing meal:', error);
+                    this.snackBar.open('Failed to remove meal', 'Close', { duration: 3000 });
+                }
+            });
+        }
     }
 }

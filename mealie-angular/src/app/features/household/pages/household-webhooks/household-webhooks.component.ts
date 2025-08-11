@@ -10,6 +10,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { HouseholdService } from '../../../../core/services/household.service';
 
 @Component({
     selector: 'app-household-webhooks',
@@ -35,7 +38,11 @@ export class HouseholdWebhooksComponent implements OnInit {
     webhooks: any[] = [];
     loading = false;
 
-    constructor() { }
+    constructor(
+        private householdService: HouseholdService,
+        private snackBar: MatSnackBar,
+        private router: Router
+    ) { }
 
     ngOnInit(): void {
         this.loadWebhooks();
@@ -43,49 +50,66 @@ export class HouseholdWebhooksComponent implements OnInit {
 
     loadWebhooks(): void {
         this.loading = true;
-        // TODO: Implement webhooks loading logic
-        setTimeout(() => {
-            this.loading = false;
-            this.webhooks = [
-                {
-                    id: '1',
-                    name: 'Slack Integration',
-                    url: 'https://hooks.slack.com/services/...',
-                    type: 'slack',
-                    enabled: true,
-                    events: ['recipe_created', 'meal_plan_updated']
-                },
-                {
-                    id: '2',
-                    name: 'Discord Webhook',
-                    url: 'https://discord.com/api/webhooks/...',
-                    type: 'discord',
-                    enabled: false,
-                    events: ['shopping_list_updated']
-                }
-            ];
-        }, 1000);
+        this.householdService.getWebhooks().subscribe({
+            next: (webhooks) => {
+                this.webhooks = webhooks;
+                this.loading = false;
+            },
+            error: (error) => {
+                console.error('Error loading webhooks:', error);
+                this.webhooks = [];
+                this.loading = false;
+            }
+        });
     }
 
     toggleWebhook(webhook: any): void {
         webhook.enabled = !webhook.enabled;
-        // TODO: Implement toggle logic
+        this.householdService.updateWebhook(webhook.id, { enabled: webhook.enabled }).subscribe({
+            next: () => {
+                this.snackBar.open(`Webhook ${webhook.enabled ? 'enabled' : 'disabled'}`, 'Close', { duration: 2000 });
+            },
+            error: (error) => {
+                console.error('Error updating webhook:', error);
+                webhook.enabled = !webhook.enabled; // Revert on error
+                this.snackBar.open('Failed to update webhook', 'Close', { duration: 3000 });
+            }
+        });
     }
 
     editWebhook(webhook: any): void {
-        // TODO: Implement edit logic
+        // For now, navigate to edit page
+        this.router.navigate(['/household/webhooks', webhook.id, 'edit']);
     }
 
     deleteWebhook(webhookId: string): void {
-        // TODO: Implement delete logic
-        this.webhooks = this.webhooks.filter(w => w.id !== webhookId);
+        if (confirm('Are you sure you want to delete this webhook?')) {
+            this.householdService.deleteWebhook(webhookId).subscribe({
+                next: () => {
+                    this.webhooks = this.webhooks.filter(w => w.id !== webhookId);
+                    this.snackBar.open('Webhook deleted successfully', 'Close', { duration: 3000 });
+                },
+                error: (error) => {
+                    console.error('Error deleting webhook:', error);
+                    this.snackBar.open('Failed to delete webhook', 'Close', { duration: 3000 });
+                }
+            });
+        }
     }
 
     addWebhook(): void {
-        // TODO: Implement add logic
+        this.router.navigate(['/household/webhooks/create']);
     }
 
     testWebhook(webhook: any): void {
-        // TODO: Implement test logic
+        this.householdService.testWebhook(webhook.id).subscribe({
+            next: (result) => {
+                this.snackBar.open(`Webhook test ${result.success ? 'successful' : 'failed'}`, 'Close', { duration: 3000 });
+            },
+            error: (error) => {
+                console.error('Error testing webhook:', error);
+                this.snackBar.open('Failed to test webhook', 'Close', { duration: 3000 });
+            }
+        });
     }
 }

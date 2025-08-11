@@ -17,6 +17,7 @@ import { UserService } from '../../../../core/services/user.service';
 import { User } from '../../../../core/models/user.model';
 import { Household } from '../../../../core/models/household.model';
 import { PaginationData } from '../../../../core/models/pagination.model';
+import { AuthService } from '../../../../core/services/auth.service';
 
 @Component({
     selector: 'app-household-members',
@@ -49,7 +50,8 @@ export class HouseholdMembersComponent implements OnInit {
     constructor(
         private householdService: HouseholdService,
         private userService: UserService,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private authService: AuthService
     ) {
         this.inviteForm = this.fb.group({
             email: ['', [Validators.required, Validators.email]],
@@ -158,8 +160,16 @@ export class HouseholdMembersComponent implements OnInit {
 
     canManageMembers(): boolean {
         if (!this.household) return false;
-        // Add logic to check if current user can manage members
-        return true; // Placeholder
+        // Check if current user is an admin or owner of the household
+        const currentUser = this.authService.currentUser;
+        if (!currentUser) return false;
+        
+        // Check if user is household owner
+        if (this.household.ownerId === currentUser.id) return true;
+        
+        // Check if user has admin role in the household
+        const member = this.members.find(m => m.userId === currentUser.id);
+        return member ? member.role === 'admin' || member.role === 'owner' : false;
     }
 }
 

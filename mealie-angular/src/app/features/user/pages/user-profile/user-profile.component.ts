@@ -21,6 +21,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { AuthService } from '../../../../core/services/auth.service';
 import { UserService } from '../../../../core/services/user.service';
 import { User, UserProfile, UserPreferences } from '../../../../core/models/user.model';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-user-profile',
@@ -71,7 +72,8 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         private authService: AuthService,
         private userService: UserService,
         private snackBar: MatSnackBar,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private router: Router
     ) {
         this.initializeForms();
     }
@@ -307,14 +309,46 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
     onDeleteAccount(): void {
         if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
-            // TODO: Implement account deletion
-            this.snackBar.open('Account deletion coming soon', 'Close', { duration: 3000 });
+            if (confirm('This will permanently delete all your data. Are you absolutely sure?')) {
+                this.loading = true;
+                this.userService.deleteAccount(this.userProfile!.id).subscribe({
+                    next: () => {
+                        this.snackBar.open('Account deleted successfully', 'Close', { duration: 3000 });
+                        this.authService.logout();
+                        this.router.navigate(['/']);
+                    },
+                    error: (error) => {
+                        console.error('Error deleting account:', error);
+                        this.snackBar.open('Failed to delete account', 'Close', { duration: 3000 });
+                        this.loading = false;
+                    }
+                });
+            }
         }
     }
 
     onExportData(): void {
-        // TODO: Implement data export
-        this.snackBar.open('Data export coming soon', 'Close', { duration: 3000 });
+        this.loading = true;
+        this.userService.exportUserData(this.userProfile!.id).subscribe({
+            next: (data) => {
+                // Create a blob and download the data
+                const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+                const url = window.URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `user-data-${this.userProfile!.username}-${new Date().toISOString()}.json`;
+                link.click();
+                window.URL.revokeObjectURL(url);
+                
+                this.snackBar.open('Data exported successfully', 'Close', { duration: 3000 });
+                this.loading = false;
+            },
+            error: (error) => {
+                console.error('Error exporting data:', error);
+                this.snackBar.open('Failed to export data', 'Close', { duration: 3000 });
+                this.loading = false;
+            }
+        });
     }
 
     getErrorMessage(fieldName: string): string {

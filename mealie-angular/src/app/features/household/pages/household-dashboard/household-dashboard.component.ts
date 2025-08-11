@@ -323,18 +323,35 @@ export class HouseholdDashboardComponent implements OnInit, OnDestroy {
     }
 
     onViewMembers(): void {
-        // TODO: Navigate to members management
-        this.snackBar.open('Members management coming soon', 'Close', { duration: 2000 });
+        this.router.navigate(['/household/members']);
     }
 
     onExportHouseholdData(): void {
-        // TODO: Implement household data export
-        this.snackBar.open('Household data export coming soon', 'Close', { duration: 2000 });
+        this.loading = true;
+        this.householdService.exportHouseholdData(this.currentHousehold!.id).subscribe({
+            next: (data) => {
+                // Create a blob and download the data
+                const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+                const url = window.URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `household-${this.currentHousehold!.name}-${new Date().toISOString()}.json`;
+                link.click();
+                window.URL.revokeObjectURL(url);
+                
+                this.snackBar.open('Household data exported successfully', 'Close', { duration: 3000 });
+                this.loading = false;
+            },
+            error: (error) => {
+                console.error('Error exporting household data:', error);
+                this.snackBar.open('Failed to export household data', 'Close', { duration: 3000 });
+                this.loading = false;
+            }
+        });
     }
 
     onHouseholdSettings(): void {
-        // TODO: Navigate to household settings
-        this.snackBar.open('Household settings coming soon', 'Close', { duration: 2000 });
+        this.router.navigate(['/household/settings']);
     }
 
     getFormattedDate(date: Date): string {

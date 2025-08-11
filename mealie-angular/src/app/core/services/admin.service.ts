@@ -19,7 +19,7 @@ export class AdminService {
      * Get system health check
      */
     getSystemHealth(): Observable<any> {
-        return this.api.get<any>('/admin/health');
+        return this.api.get<any>('/admin/system/health');
     }
 
     /**

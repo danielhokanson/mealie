@@ -28,7 +28,8 @@ import { AuthService } from '../../../../core/services/auth.service';
 import { GroupService } from '../../../../core/services/group.service';
 import { HouseholdService } from '../../../../core/services/household.service';
 import { UserService } from '../../../../core/services/user.service';
-import { User, Group, Household } from '../../../../core/models/user.model';
+import { User, Group } from '../../../../core/models/user.model';
+import { Household } from '../../../../core/models/household.model';
 
 @Component({
     selector: 'app-admin-manage',

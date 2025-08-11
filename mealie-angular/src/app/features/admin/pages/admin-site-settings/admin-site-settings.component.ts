@@ -272,7 +272,7 @@ export class AdminSiteSettingsComponent implements OnInit, OnDestroy {
                 next: (settings) => {
                     this.originalSettings = settings;
                     this.settingsForm.patchValue(settings);
-                    this.hasUnsavedChanges = false;
+                    this.hasChanges = false;
                     this.loading = false;
                 },
                 error: (error) => {
@@ -360,7 +360,7 @@ export class AdminSiteSettingsComponent implements OnInit, OnDestroy {
                 .subscribe({
                     next: (updatedSettings) => {
                         this.originalSettings = updatedSettings;
-                        this.hasUnsavedChanges = false;
+                        this.hasChanges = false;
                         this.saving = false;
                         this.snackBar.open('Settings saved successfully', 'Close', { duration: 3000 });
                     },

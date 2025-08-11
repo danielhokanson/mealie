@@ -50,7 +50,7 @@ import { Recipe, RecipeIngredient, RecipeInstruction, RecipeCategory, RecipeTag,
     styleUrls: ['./recipe-edit.component.scss']
 })
 export class RecipeEditComponent implements OnInit, OnDestroy {
-    recipeForm: FormGroup;
+    recipeForm!: FormGroup;
     loading = true;
     saving = false;
     error = false;
@@ -104,7 +104,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
         });
     }
 
-    private loadRecipe(recipeId: string): void {
+    public loadRecipe(recipeId: string): void {
         this.loading = true;
         this.error = false;
 

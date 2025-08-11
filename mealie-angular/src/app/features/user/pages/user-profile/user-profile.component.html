@@ -32,7 +32,7 @@
           <button 
             mat-icon-button 
             class="avatar-edit"
-            (click)="document.getElementById('avatar-input')?.click()">
+            (click)="avatarInput.click()">
             <mat-icon>edit</mat-icon>
           </button>
           <input 
@@ -46,8 +46,8 @@
       </div>
       <div class="profile-info">
         <h1>{{ currentUser.fullName }}</h1>
-        <p class="username">@{{ currentUser.username }}</p>
-        <p class="bio" *ngIf="userProfile?.bio">{{ userProfile.bio }}</p>
+        <p class="username">{{ currentUser.username }}</p>
+        <p class="bio" *ngIf="userProfile?.bio">{{ userProfile?.bio }}</p>
         <div class="profile-stats">
           <div class="stat">
             <span class="stat-number">42</span>

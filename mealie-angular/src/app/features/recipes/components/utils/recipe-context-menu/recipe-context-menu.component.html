@@ -9,7 +9,7 @@
   <!-- Recipe Print Preferences Dialog -->
   <app-recipe-dialog-print-preferences 
     [(open)]="printPreferencesDialog" 
-    [recipe]="recipeRef">
+    [recipe]="recipeRef || undefined">
   </app-recipe-dialog-print-preferences>
 
   <!-- Recipe Delete Dialog -->
@@ -93,7 +93,7 @@
   <app-recipe-dialog-add-to-shopping-list
     *ngIf="shoppingLists && recipeRefWithScale"
     [(open)]="shoppingListDialog"
-    [recipes]="[recipeRefWithScale]"
+    [recipes]="recipeRefWithScale ? [recipeRefWithScale] : []"
     [shoppingLists]="shoppingLists">
   </app-recipe-dialog-add-to-shopping-list>
 

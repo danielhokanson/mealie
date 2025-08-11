@@ -28,7 +28,8 @@ import { GroupService } from '../../../../core/services/group.service';
 import { HouseholdService } from '../../../../core/services/household.service';
 import { RecipeService } from '../../../../core/services/recipe.service';
 import { ShoppingListService } from '../../../../core/services/shopping-list.service';
-import { User, Group, Household } from '../../../../core/models/user.model';
+import { User, Group } from '../../../../core/models/user.model';
+import { Household } from '../../../../core/models/household.model';
 import { Recipe } from '../../../../core/models/recipe.model';
 import { ShoppingList } from '../../../../core/models/shopping-list.model';
 

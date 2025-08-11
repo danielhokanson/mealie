@@ -17,6 +17,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { Subject, takeUntil } from 'rxjs';
 import { ShoppingListService } from '../../../../core/services/shopping-list.service';
 import { ShoppingList } from '../../../../core/models/shopping-list.model';
+import { PaginationData } from '../../../../core/models/pagination.model';
 
 @Component({
     selector: 'app-shopping-lists',
@@ -61,18 +62,18 @@ export class ShoppingListsComponent implements OnInit, OnDestroy {
         this.destroy$.complete();
     }
 
-    private loadShoppingLists(): void {
+    public loadShoppingLists(): void {
         this.loading = true;
         this.error = false;
 
         this.shoppingListService.getShoppingLists().pipe(
             takeUntil(this.destroy$)
         ).subscribe({
-            next: (lists) => {
-                this.shoppingLists = lists;
+            next: (response: PaginationData<ShoppingList>) => {
+                this.shoppingLists = response.items || [];
                 this.loading = false;
             },
-            error: (error) => {
+            error: (error: any) => {
                 console.error('Error loading shopping lists:', error);
                 this.error = true;
                 this.loading = false;
@@ -139,8 +140,11 @@ export class ShoppingListsComponent implements OnInit, OnDestroy {
         return (this.getCompletedItemsCount(list) / total) * 100;
     }
 
-    getFormattedDate(date: string): string {
-        return new Date(date).toLocaleDateString();
+    getFormattedDate(date: Date | string): string {
+        if (typeof date === 'string') {
+            return new Date(date).toLocaleDateString();
+        }
+        return date.toLocaleDateString();
     }
 
     getLabelColor(labelId: string): string {
@@ -157,5 +161,9 @@ export class ShoppingListsComponent implements OnInit, OnDestroy {
             index === self.findIndex(l => l.id === label.id)
         );
         return uniqueLabels;
+    }
+
+    hasLabels(list: ShoppingList): boolean {
+        return list.items && list.items.some(item => item.labels && item.labels.length > 0);
     }
 } 

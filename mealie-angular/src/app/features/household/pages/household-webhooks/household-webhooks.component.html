@@ -1,0 +1,65 @@
+<div class="household-webhooks-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Household Webhooks</mat-card-title>
+      <mat-card-subtitle>Configure webhooks for external integrations</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="webhooks-actions">
+        <button mat-raised-button color="primary" (click)="addWebhook()">
+          <mat-icon>add</mat-icon>
+          Add Webhook
+        </button>
+      </div>
+
+      <div *ngIf="loading" class="loading-container">
+        <mat-icon class="loading-icon">refresh</mat-icon>
+        <p>Loading webhooks...</p>
+      </div>
+
+      <div *ngIf="!loading && webhooks.length === 0" class="empty-state">
+        <mat-icon>webhook</mat-icon>
+        <h3>No webhooks configured</h3>
+        <p>Set up webhooks to integrate with external services like Slack, Discord, or custom APIs.</p>
+        <button mat-raised-button color="primary" (click)="addWebhook()">
+          Add Your First Webhook
+        </button>
+      </div>
+
+      <div *ngIf="!loading && webhooks.length > 0" class="webhooks-list">
+        <mat-list>
+          <mat-list-item *ngFor="let webhook of webhooks">
+            <div matListItemTitle>{{ webhook.name }}</div>
+            <div matListItemLine>
+              <mat-chip [color]="webhook.enabled ? 'primary' : 'default'" selected>
+                {{ webhook.type }}
+              </mat-chip>
+              <span class="url">{{ webhook.url }}</span>
+            </div>
+            <div matListItemLine>
+              <span class="events">
+                Events: {{ webhook.events.join(', ') }}
+              </span>
+            </div>
+            <div matListItemMeta>
+              <mat-slide-toggle
+                [checked]="webhook.enabled"
+                (change)="toggleWebhook(webhook)">
+              </mat-slide-toggle>
+              <button mat-icon-button (click)="testWebhook(webhook)">
+                <mat-icon>play_arrow</mat-icon>
+              </button>
+              <button mat-icon-button (click)="editWebhook(webhook)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" (click)="deleteWebhook(webhook.id)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

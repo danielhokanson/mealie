@@ -92,18 +92,18 @@ export class ShoppingListDetailComponent implements OnInit, OnDestroy {
         this.destroy$.complete();
     }
 
-    private loadShoppingList(listId: string): void {
+    public loadShoppingList(listId: string): void {
         this.loading = true;
         this.error = false;
 
         this.shoppingListService.getShoppingList(listId).pipe(
             takeUntil(this.destroy$)
         ).subscribe({
-            next: (list) => {
+            next: (list: ShoppingList) => {
                 this.shoppingList = list;
                 this.loading = false;
             },
-            error: (error) => {
+            error: (error: any) => {
                 console.error('Error loading shopping list:', error);
                 this.error = true;
                 this.loading = false;
@@ -176,21 +176,21 @@ export class ShoppingListDetailComponent implements OnInit, OnDestroy {
                 this.shoppingList!.id,
                 newItem
             ).subscribe({
-                next: (item) => {
-                    this.shoppingList!.items.push(item);
-                    this.newItemForm.reset();
-                    this.selectedLabels = [];
-                    this.showAddItem = false;
-                    this.snackBar.open('Item added successfully', 'Close', {
-                        duration: 2000
-                    });
-                },
-                error: (error) => {
-                    console.error('Error adding item:', error);
-                    this.snackBar.open('Failed to add item', 'Close', {
-                        duration: 3000
-                    });
-                }
+                            next: (item: ShoppingListItem) => {
+                this.shoppingList!.items.push(item);
+                this.newItemForm.reset();
+                this.selectedLabels = [];
+                this.showAddItem = false;
+                this.snackBar.open('Item added successfully', 'Close', {
+                    duration: 2000
+                });
+            },
+            error: (error: any) => {
+                console.error('Error adding item:', error);
+                this.snackBar.open('Failed to add item', 'Close', {
+                    duration: 3000
+                });
+            }
             });
         }
     }

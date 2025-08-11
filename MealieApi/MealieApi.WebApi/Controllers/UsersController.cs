@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using MealieApi.Domain.Entities.Users;
 using MealieApi.Domain.Interfaces;
 using MealieApi.Shared.DTOs;
+using MealieApi.Shared.DTOs.Auth;
 using AutoMapper;
 using MealieApi.Domain.Enums;
 
@@ -190,7 +191,7 @@ public class UsersController : BaseController
             }
 
             // In a real application, you would hash the password here
-            user.PasswordHash = HashPassword(createDto.Password);
+            user.Password = HashPassword(createDto.Password);
 
             var createdUser = await _userRepository.AddAsync(user, cancellationToken);
             await _userRepository.SaveChangesAsync(cancellationToken);
@@ -505,13 +506,13 @@ public class UsersController : BaseController
             }
 
             // Verify current password
-            if (!VerifyPassword(request.CurrentPassword, user.PasswordHash))
+            if (!VerifyPassword(request.CurrentPassword, user.Password))
             {
                 return BadRequest("Current password is incorrect");
             }
 
             // Update password
-            user.PasswordHash = HashPassword(request.NewPassword);
+            user.Password = HashPassword(request.NewPassword);
             user.UpdatedAt = DateTime.UtcNow;
 
             await _userRepository.UpdateAsync(user, cancellationToken);

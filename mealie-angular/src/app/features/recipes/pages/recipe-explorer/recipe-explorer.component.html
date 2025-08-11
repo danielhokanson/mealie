@@ -11,7 +11,7 @@
             [(ngModel)]="searchQuery"
             name="searchQuery"
             placeholder="Search recipes..."
-            (input)="onSearchQueryChange($event.target.value)">
+            (input)="onSearchQueryChange($event)">
           <button 
             *ngIf="searchQuery" 
             matSuffix 

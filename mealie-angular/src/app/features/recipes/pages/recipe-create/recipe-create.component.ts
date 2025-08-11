@@ -50,7 +50,7 @@ import { Recipe, RecipeIngredient, RecipeInstruction, RecipeCategory, RecipeTag,
     styleUrls: ['./recipe-create.component.scss']
 })
 export class RecipeCreateComponent implements OnInit, OnDestroy {
-    recipeForm: FormGroup;
+    recipeForm!: FormGroup;
     loading = false;
     selectedTab = 0;
     categories: RecipeCategory[] = [];

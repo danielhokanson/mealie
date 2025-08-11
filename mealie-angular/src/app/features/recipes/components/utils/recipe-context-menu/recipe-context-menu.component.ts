@@ -14,10 +14,12 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule } from '@angular/forms';
 
-import { BaseDialogComponent } from '../base-dialog/base-dialog.component';
-import { RecipeDialogAddToShoppingListComponent } from '../recipe-dialog-add-to-shopping-list/recipe-dialog-add-to-shopping-list.component';
-import { RecipeDialogPrintPreferencesComponent } from '../recipe-dialog-print-preferences/recipe-dialog-print-preferences.component';
-import { RecipeDialogShareComponent } from '../recipe-dialog-share/recipe-dialog-share.component';
+import { BaseDialogComponent } from '../../base-dialog/base-dialog.component';
+import { RecipeDialogAddToShoppingListComponent } from '../../recipe-dialog-add-to-shopping-list/recipe-dialog-add-to-shopping-list.component';
+import { RecipeDialogPrintPreferencesComponent } from '../../recipe-dialog-print-preferences/recipe-dialog-print-preferences.component';
+import { RecipeDialogShareComponent } from '../../recipe-dialog-share/recipe-dialog-share.component';
+import { Recipe } from '../../../../../core/models/recipe.model';
+import { ShoppingList } from '../../../../../core/models/shopping-list.model';
 
 export interface ContextMenuIncludes {
     delete: boolean;
@@ -40,21 +42,7 @@ export interface ContextMenuItem {
     isPublic: boolean;
 }
 
-export interface Recipe {
-    id: string;
-    name: string;
-    slug: string;
-    userId: string;
-    scale: number;
-    // ... other recipe properties
-}
 
-export interface ShoppingListSummary {
-    id: string;
-    name: string;
-    userId: string;
-    // ... other shopping list properties
-}
 
 export interface GroupRecipeActionOut {
     id: string;
@@ -147,7 +135,7 @@ export class RecipeContextMenuComponent implements OnInit {
     pickerMenu = false;
 
     // Data
-    shoppingLists?: ShoppingListSummary[];
+    shoppingLists?: ShoppingList[];
     recipeRef?: Recipe;
     recipeActions?: GroupRecipeActionOut[];
 
@@ -289,8 +277,8 @@ export class RecipeContextMenuComponent implements OnInit {
             // In a real app, you'd call the backend API
             // const response = await this.shoppingListService.getAll();
             this.shoppingLists = [
-                { id: '1', name: 'Grocery List', userId: 'current-user-id' },
-                { id: '2', name: 'Weekly Shopping', userId: 'current-user-id' }
+                { id: '1', name: 'Grocery List', description: '', groupId: 'current-group-id', isActive: true, createdAt: new Date(), updatedAt: new Date(), items: [] },
+                { id: '2', name: 'Weekly Shopping', description: '', groupId: 'current-group-id', isActive: true, createdAt: new Date(), updatedAt: new Date(), items: [] }
             ];
         } catch (error) {
             console.error('Failed to get shopping lists:', error);

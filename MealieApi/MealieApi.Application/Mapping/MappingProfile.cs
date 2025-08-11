@@ -33,13 +33,15 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.Id, opt => opt.Ignore())
             .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
             .ForMember(dest => dest.UpdatedAt, opt => opt.Ignore())
-            .ForMember(dest => dest.PasswordHash, opt => opt.Ignore()); // Password hashing handled separately
+            .ForMember(dest => dest.Password, opt => opt.Ignore()) // Password hashing handled separately
+            .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => $"{src.FirstName} {src.LastName}".Trim()));
 
         CreateMap<CreateUserDto, AdminUser>()
             .ForMember(dest => dest.Id, opt => opt.Ignore())
             .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
             .ForMember(dest => dest.UpdatedAt, opt => opt.Ignore())
-            .ForMember(dest => dest.PasswordHash, opt => opt.Ignore()); // Password hashing handled separately
+            .ForMember(dest => dest.Password, opt => opt.Ignore()) // Password hashing handled separately
+            .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => $"{src.FirstName} {src.LastName}".Trim()));
     }
 
     private void CreateRecipeMappings()

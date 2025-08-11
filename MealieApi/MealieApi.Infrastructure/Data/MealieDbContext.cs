@@ -121,7 +121,7 @@ public class MealieDbContext : DbContext
         modelBuilder.Entity<ContentItem>()
             .HasIndex(c => c.Slug)
             .IsUnique()
-            .HasFilter("[Slug] IS NOT NULL");
+            .HasFilter("\"Slug\" IS NOT NULL");
 
         // Category self-referencing relationship
         modelBuilder.Entity<Category>()

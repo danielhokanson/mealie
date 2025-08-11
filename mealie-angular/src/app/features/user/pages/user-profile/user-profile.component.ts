@@ -57,9 +57,9 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     userPreferences: UserPreferences | null = null;
 
     // Forms
-    profileForm: FormGroup;
-    preferencesForm: FormGroup;
-    passwordForm: FormGroup;
+    profileForm!: FormGroup;
+    preferencesForm!: FormGroup;
+    passwordForm!: FormGroup;
 
     // Profile image
     selectedImage: File | null = null;
@@ -107,7 +107,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         }, { validators: this.passwordMatchValidator });
     }
 
-    private loadUserData(): void {
+    public loadUserData(): void {
         this.loading = true;
         this.error = false;
 
@@ -139,23 +139,30 @@ export class UserProfileComponent implements OnInit, OnDestroy {
                 error: (error) => {
                     console.error('Error loading user profile:', error);
                     // Create default profile on error
+                    //TODO: Explain why we are doing this in the on error 
                     this.userProfile = {
                         id: this.currentUser!.id,
+                        username: this.currentUser!.username,
+                        fullName: this.currentUser!.fullName,
+                        email: this.currentUser!.email,
                         bio: '',
-                        location: '',
-                        website: '',
-                        phone: '',
-                        avatar: null,
-                        socialLinks: {
-                            twitter: '',
-                            instagram: '',
-                            facebook: ''
-                        },
+                        avatar: this.currentUser!.avatar,
+                        group: { id: '', name: '', slug: '', description: '', isPrivate: false, createdAt: new Date(), updatedAt: new Date(), users: [], households: [] },
+                        household: undefined,
                         preferences: {
+                            id: '',
+                            userId: this.currentUser!.id,
+                            theme: 'light',
+                            language: 'en',
+                            timezone: 'UTC',
+                            units: 'metric',
                             dietaryRestrictions: [],
+                            emailNotifications: true,
                             allergies: [],
                             cuisinePreferences: [],
-                            cookingSkill: 'beginner'
+                            cookingSkill: 'beginner',
+                            createdAt: new Date(),
+                            updatedAt: new Date()
                         }
                     };
                     this.populateForms();
@@ -175,21 +182,19 @@ export class UserProfileComponent implements OnInit, OnDestroy {
                     console.error('Error loading user preferences:', error);
                     // Create default preferences on error
                     this.userPreferences = {
+                        id: '',
+                        userId: this.currentUser!.id,
                         theme: 'light',
                         language: 'en',
                         timezone: 'UTC',
+                        units: 'metric',
+                        dietaryRestrictions: [],
                         emailNotifications: true,
-                        pushNotifications: false,
-                        recipeNotifications: true,
-                        shoppingListNotifications: true,
-                        weeklyReports: false,
-                        autoSave: true,
-                        showNutritionInfo: true,
-                        showIngredients: true,
-                        showInstructions: true,
-                        defaultServings: 4,
-                        defaultPrepTime: 30,
-                        defaultCookTime: 60
+                        allergies: [],
+                        cuisinePreferences: [],
+                        cookingSkill: 'beginner',
+                        createdAt: new Date(),
+                        updatedAt: new Date()
                     };
                     this.populateForms();
                 }

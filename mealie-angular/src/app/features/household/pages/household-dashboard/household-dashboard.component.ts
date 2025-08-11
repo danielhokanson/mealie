@@ -28,7 +28,8 @@ import { GroupService } from '../../../../core/services/group.service';
 import { HouseholdService } from '../../../../core/services/household.service';
 import { RecipeService } from '../../../../core/services/recipe.service';
 import { ShoppingListService } from '../../../../core/services/shopping-list.service';
-import { User, Group, Household } from '../../../../core/models/user.model';
+import { User, Group } from '../../../../core/models/user.model';
+import { Household } from '../../../../core/models/household.model';
 import { Recipe } from '../../../../core/models/recipe.model';
 import { ShoppingList } from '../../../../core/models/shopping-list.model';
 
@@ -121,7 +122,7 @@ export class HouseholdDashboardComponent implements OnInit, OnDestroy {
         });
     }
 
-    private loadHouseholdData(): void {
+    public loadHouseholdData(): void {
         this.loading = true;
         this.error = false;
 
@@ -172,7 +173,13 @@ export class HouseholdDashboardComponent implements OnInit, OnDestroy {
     }
 
     private loadMembers(): void {
-        this.householdService.getHouseholdMembers()
+        if (!this.currentHousehold?.id) {
+            console.warn('No current household available for loading members');
+            this.members = [];
+            return;
+        }
+
+        this.householdService.getHouseholdMembers(this.currentHousehold.id)
             .pipe(takeUntil(this.destroy$))
             .subscribe({
                 next: (response) => {

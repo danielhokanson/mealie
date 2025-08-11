@@ -5,6 +5,8 @@ export interface User {
     email: string;
     groupId: string;
     householdId?: string;
+    role: string;
+    isActive: boolean;
     createdAt: Date;
     updatedAt: Date;
     avatar?: string;
@@ -22,18 +24,7 @@ export interface Group {
     createdAt: Date;
     updatedAt: Date;
     users: User[];
-    households: Household[];
-}
-
-export interface Household {
-    id: string;
-    name: string;
-    slug: string;
-    description?: string;
-    groupId: string;
-    createdAt: Date;
-    updatedAt: Date;
-    users: User[];
+    households: import('./household.model').Household[];
 }
 
 export interface UserProfile {
@@ -42,8 +33,12 @@ export interface UserProfile {
     fullName: string;
     email: string;
     avatar?: string;
+    bio: string;
+    location?: string;
+    website?: string;
+    socialLinks?: SocialLinks;
     group: Group;
-    household?: Household;
+    household?: import('./household.model').Household;
     preferences: UserPreferences;
 }
 
@@ -54,6 +49,12 @@ export interface UserPreferences {
     language?: string;
     timezone?: string;
     units?: string;
+    dietaryRestrictions: string[];
+    allergies: string[];
+    cuisinePreferences: string[];
+    cookingSkill: 'beginner' | 'intermediate' | 'advanced';
+    emailNotifications: boolean;
+    pushNotifications?: boolean;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -77,4 +78,12 @@ export interface RegisterRequest {
     email: string;
     password: string;
     confirmPassword: string;
+}
+
+export interface SocialLinks {
+    twitter?: string;
+    facebook?: string;
+    instagram?: string;
+    linkedin?: string;
+    github?: string;
 } 

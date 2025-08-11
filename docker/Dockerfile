@@ -33,20 +33,20 @@ WORKDIR /app
 
 # Copy solution and project files for better caching
 COPY MealieApi/MealieApi.sln ./
-COPY MealieApi/src/MealieApi.Domain/MealieApi.Domain.csproj ./src/MealieApi.Domain/
-COPY MealieApi/src/MealieApi.Application/MealieApi.Application.csproj ./src/MealieApi.Application/
-COPY MealieApi/src/MealieApi.Infrastructure/MealieApi.Infrastructure.csproj ./src/MealieApi.Infrastructure/
-COPY MealieApi/src/MealieApi.WebApi/MealieApi.WebApi.csproj ./src/MealieApi.WebApi/
-COPY MealieApi/src/MealieApi.Shared/MealieApi.Shared.csproj ./src/MealieApi.Shared/
+COPY MealieApi/MealieApi.Domain/MealieApi.Domain.csproj ./MealieApi.Domain/
+COPY MealieApi/MealieApi.Application/MealieApi.Application.csproj ./MealieApi.Application/
+COPY MealieApi/MealieApi.Infrastructure/MealieApi.Infrastructure.csproj ./MealieApi.Infrastructure/
+COPY MealieApi/MealieApi.WebApi/MealieApi.WebApi.csproj ./MealieApi.WebApi/
+COPY MealieApi/MealieApi.Shared/MealieApi.Shared.csproj ./MealieApi.Shared/
 
 # Restore dependencies
 RUN dotnet restore
 
 # Copy source code
-COPY MealieApi/src ./src/
+COPY MealieApi/ ./
 
 # Build and publish the application
-RUN dotnet publish src/MealieApi.WebApi/MealieApi.WebApi.csproj \
+RUN dotnet publish MealieApi.WebApi/MealieApi.WebApi.csproj \
     -c Release \
     -o /app/publish \
     --no-restore \

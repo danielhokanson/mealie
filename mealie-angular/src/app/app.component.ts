@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, Router, NavigationEnd, RouterModule } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -8,9 +8,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { Router } from '@angular/router';
-import { AuthService } from './services/auth.service';
-import { Subscription } from 'rxjs';
+import { AuthService } from './core/services/auth.service';
+import { Subscription, filter } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +17,7 @@ import { Subscription } from 'rxjs';
   imports: [
     CommonModule,
     RouterOutlet,
+    RouterModule,
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
@@ -34,6 +34,7 @@ export class AppComponent implements OnInit, OnDestroy {
   sidenavOpened = false;
   isAuthenticated = false;
   private authSubscription?: Subscription;
+  private routerSubscription?: Subscription;
 
   constructor(
     private router: Router,
@@ -41,14 +42,29 @@ export class AppComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.authSubscription = this.authService.getAuthState().subscribe(state => {
-      this.isAuthenticated = state.user !== null;
+    this.authSubscription = this.authService.currentUser$.subscribe(user => {
+      this.isAuthenticated = user !== null;
     });
+
+    // Subscribe to router navigation events for logging
+    this.routerSubscription = this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event: NavigationEnd) => {
+      console.log(`Navigation completed: ${event.url}`);
+    });
+
+    // Log current route on component init
+    console.log('App component initialized');
+    console.log('Current route:', this.router.url);
+    console.log('Router config:', this.router.config);
   }
 
   ngOnDestroy(): void {
     if (this.authSubscription) {
       this.authSubscription.unsubscribe();
+    }
+    if (this.routerSubscription) {
+      this.routerSubscription.unsubscribe();
     }
   }
 
@@ -63,12 +79,12 @@ export class AppComponent implements OnInit, OnDestroy {
 
   onLogin(): void {
     console.log('Login clicked');
-    this.router.navigate(['/login']);
+    this.router.navigate(['/auth/login']);
   }
 
   onRegister(): void {
     console.log('Register clicked');
-    this.router.navigate(['/register']);
+    this.router.navigate(['/auth/register']);
   }
 
   onLogout(): void {
@@ -89,5 +105,15 @@ export class AppComponent implements OnInit, OnDestroy {
       console.log('Settings clicked');
       // Navigate to settings page when implemented
     }
+  }
+
+  // Test method to debug router navigation
+  testNavigation(route: string): void {
+    console.log(`Testing navigation to: ${route}`);
+    this.router.navigate([route]).then(success => {
+      console.log(`Navigation to ${route} successful:`, success);
+    }).catch(error => {
+      console.error(`Navigation to ${route} failed:`, error);
+    });
   }
 }

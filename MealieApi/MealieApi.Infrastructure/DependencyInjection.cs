@@ -16,7 +16,7 @@ public static class DependencyInjection
     {
         // Add Entity Framework DbContext
         services.AddDbContext<MealieDbContext>(options =>
-            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
 
         // Register repositories
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));

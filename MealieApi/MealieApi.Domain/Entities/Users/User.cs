@@ -20,13 +20,16 @@ public abstract class User : AuditableEntity
     
     [Required]
     [StringLength(255)]
-    public string PasswordHash { get; set; } = string.Empty;
+    public string Password { get; set; } = string.Empty;
     
     [StringLength(100)]
     public string? FirstName { get; set; }
     
     [StringLength(100)]
     public string? LastName { get; set; }
+    
+    [StringLength(200)]
+    public string FullName { get; set; } = string.Empty;
     
     public string? Avatar { get; set; }
     
@@ -35,6 +38,14 @@ public abstract class User : AuditableEntity
     public bool EmailVerified { get; set; } = false;
     
     public DateTime? LastLoginAt { get; set; }
+    
+    public AuthMethod AuthMethod { get; set; } = AuthMethod.Mealie;
+    
+    public int LoginAttempts { get; set; } = 0;
+    
+    public bool IsLocked { get; set; } = false;
+    
+    public DateTime? LockedAt { get; set; }
     
     /// <summary>
     /// Discriminator property for TPH

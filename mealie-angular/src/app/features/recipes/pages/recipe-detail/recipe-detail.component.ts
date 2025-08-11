@@ -84,7 +84,7 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
         this.destroy$.complete();
     }
 
-    private loadRecipe(recipeId: string): void {
+    public loadRecipe(recipeId: string): void {
         this.loading = true;
         this.error = false;
 
@@ -183,10 +183,21 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
         }
     }
 
-    onScaleChange(scale: number): void {
-        this.currentScale = scale;
+    onScaleChange(scale: number | any): void {
+        // Handle both number and event types
+        let scaleValue: number;
+        if (typeof scale === 'number') {
+            scaleValue = scale;
+        } else if (scale && typeof scale === 'object' && 'value' in scale) {
+            scaleValue = scale.value;
+        } else {
+            console.warn('Unexpected scale value:', scale);
+            return;
+        }
+
+        this.currentScale = scaleValue;
         if (this.recipe) {
-            this.recipeService.scaleRecipe(this.recipe.id, scale).subscribe({
+            this.recipeService.scaleRecipe(this.recipe.id, scaleValue).subscribe({
                 next: (scaledRecipe) => {
                     this.recipe = scaledRecipe;
                 },

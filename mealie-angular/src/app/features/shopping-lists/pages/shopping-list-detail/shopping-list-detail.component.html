@@ -168,7 +168,7 @@
               <div class="label-header">
                 <span class="label-color" [style.background-color]="label.color"></span>
                 {{ label.name }}
-                <mat-badge [content]="getItemsByLabel(label.id).length" color="primary"></mat-badge>
+                <span class="item-count">{{ getItemsByLabel(label.id).length }}</span>
               </div>
             </mat-panel-title>
           </mat-expansion-panel-header>
@@ -208,7 +208,7 @@
               <div class="label-header">
                 <span class="label-color" style="background-color: #ccc;"></span>
                 No Label
-                <mat-badge [content]="getUnlabeledItems().length" color="primary"></mat-badge>
+                <span class="item-count">{{ getUnlabeledItems().length }}</span>
               </div>
             </mat-panel-title>
           </mat-expansion-panel-header>

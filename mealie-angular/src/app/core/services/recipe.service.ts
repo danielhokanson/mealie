@@ -71,8 +71,8 @@ export class RecipeService {
     /**
      * Get recipes with search parameters (used by recipe explorer)
      */
-    getRecipes(params?: any): Observable<{ recipes: Recipe[], total: number }> {
-        return this.api.get<{ recipes: Recipe[], total: number }>('/recipes', params);
+    getRecipes(params?: any): Observable<PaginationData<Recipe>> {
+        return this.api.get<PaginationData<Recipe>>('/recipes', params);
     }
 
     /**
@@ -229,7 +229,7 @@ export class RecipeService {
     /**
      * Create recipe asset
      */
-    createRecipeAsset(slug: string, asset: FormData): Observable<any> {
+    createRecipeAsset(slug: string, asset: File): Observable<any> {
         return this.api.upload<any>(`/recipes/${slug}/assets`, asset);
     }
 
@@ -293,7 +293,7 @@ export class RecipeService {
      * Bulk delete recipes
      */
     bulkDeleteRecipes(recipeIds: string[]): Observable<void> {
-        return this.api.delete<void>('/recipes/bulk', { ids: recipeIds });
+        return this.api.post<void>('/recipes/bulk/delete', { ids: recipeIds });
     }
 
     /**
@@ -329,5 +329,40 @@ export class RecipeService {
      */
     bulkRemoveTag(recipeIds: string[], tagId: string): Observable<any> {
         return this.api.post<any>('/recipes/bulk/tag', { recipeIds, tagId, action: 'remove' });
+    }
+
+    /**
+     * Share a recipe
+     */
+    shareRecipe(id: string, options: any): Observable<any> {
+        return this.api.post<any>(`/recipes/${id}/share`, options);
+    }
+
+    /**
+     * Remove recipe from favorites
+     */
+    removeFromFavorites(id: string): Observable<Recipe> {
+        return this.api.delete<Recipe>(`/recipes/${id}/favorite`);
+    }
+
+    /**
+     * Add recipe to favorites
+     */
+    addToFavorites(id: string): Observable<Recipe> {
+        return this.api.post<Recipe>(`/recipes/${id}/favorite`, {});
+    }
+
+    /**
+     * Create a recipe note
+     */
+    createRecipeNote(id: string, note: any): Observable<any> {
+        return this.api.post<any>(`/recipes/${id}/notes`, note);
+    }
+
+    /**
+     * Save recipe rating
+     */
+    saveRecipeRating(id: string, rating: number): Observable<any> {
+        return this.api.post<any>(`/recipes/${id}/rating`, { rating });
     }
 }

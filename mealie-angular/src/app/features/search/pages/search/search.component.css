@@ -1,0 +1,39 @@
+.search-container {
+    padding: 20px;
+}
+
+.search-form {
+    margin-bottom: 20px;
+}
+
+.search-results {
+    margin-top: 20px;
+}
+
+.filter-chips {
+    margin: 10px 0;
+}
+
+.result-card {
+    margin-bottom: 15px;
+}
+
+.result-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.result-description {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.result-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.tag-chip {
+    font-size: 12px;
+}

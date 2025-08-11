@@ -60,7 +60,7 @@
                             <div matListItemIcon class="member-avatar">
                                 <img *ngIf="member.avatar" [src]="member.avatar" [alt]="member.username">
                                 <div *ngIf="!member.avatar" class="avatar-placeholder">
-                                    {{ member.username?.charAt(0)?.toUpperCase() }}
+                                    {{ member.username.charAt(0).toUpperCase() }}
                                 </div>
                             </div>
 

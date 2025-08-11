@@ -10,6 +10,7 @@ using MealieApi.Domain.Entities.Unit;
 using MealieApi.Domain.Entities.Comment;
 using MealieApi.Domain.Entities.Timeline;
 using MealieApi.Domain.Entities.Admin;
+using MealieApi.Domain.Entities;
 using MealieApi.Domain.Enums;
 
 namespace MealieApi.Infrastructure.Data;
@@ -40,6 +41,8 @@ public class MealieDbContext : DbContext
     public DbSet<UserPreferences> UserPreferences { get; set; }
     public DbSet<SystemSettings> SystemSettings { get; set; }
     public DbSet<Backup> Backups { get; set; }
+    public DbSet<MealPlan> MealPlans { get; set; }
+    public DbSet<MealPlanRule> MealPlanRules { get; set; }
     
     // Derived type DbSets for easier querying
     public DbSet<StandardUser> StandardUsers { get; set; }

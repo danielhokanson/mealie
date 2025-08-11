@@ -129,4 +129,12 @@ export class UserService {
     updateUserSettings(settings: { profile: any; preferences: any }): Observable<{ profile: any; preferences: any }> {
         return this.api.put<{ profile: any; preferences: any }>('/users/self/settings', settings);
     }
+
+    deleteAccount(userId: string): Observable<void> {
+        return this.api.delete<void>(`/users/${userId}`);
+    }
+
+    exportUserData(userId: string): Observable<any> {
+        return this.api.get<any>(`/users/${userId}/export`);
+    }
 }

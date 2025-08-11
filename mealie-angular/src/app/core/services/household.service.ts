@@ -141,4 +141,44 @@ export class HouseholdService {
     createInvitation(payload: any): Observable<any> {
         return this.api.post<any>('/households/invitations', payload);
     }
+
+    exportHouseholdData(householdId: string): Observable<any> {
+        return this.api.get<any>(`/households/${householdId}/export`);
+    }
+
+    getWebhooks(): Observable<any[]> {
+        return this.api.get<any[]>('/households/webhooks');
+    }
+
+    createWebhook(webhook: any): Observable<any> {
+        return this.api.post<any>('/households/webhooks', webhook);
+    }
+
+    updateWebhook(webhookId: string, webhook: any): Observable<any> {
+        return this.api.put<any>(`/households/webhooks/${webhookId}`, webhook);
+    }
+
+    deleteWebhook(webhookId: string): Observable<void> {
+        return this.api.delete<void>(`/households/webhooks/${webhookId}`);
+    }
+
+    testWebhook(webhookId: string): Observable<any> {
+        return this.api.post<any>(`/households/webhooks/${webhookId}/test`, {});
+    }
+
+    getNotifiers(): Observable<any[]> {
+        return this.api.get<any[]>('/households/notifiers');
+    }
+
+    createNotifier(notifier: any): Observable<any> {
+        return this.api.post<any>('/households/notifiers', notifier);
+    }
+
+    updateNotifier(notifierId: string, notifier: any): Observable<any> {
+        return this.api.put<any>(`/households/notifiers/${notifierId}`, notifier);
+    }
+
+    deleteNotifier(notifierId: string): Observable<void> {
+        return this.api.delete<void>(`/households/notifiers/${notifierId}`);
+    }
 }

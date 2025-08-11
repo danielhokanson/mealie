@@ -90,10 +90,7 @@ export class ShoppingListsComponent implements OnInit, OnDestroy {
     }
 
     onEditList(list: ShoppingList): void {
-        // TODO: Implement edit functionality
-        this.snackBar.open('Edit functionality coming soon', 'Close', {
-            duration: 2000
-        });
+        this.router.navigate(['/shopping-lists', list.id, 'edit']);
     }
 
     onDeleteList(list: ShoppingList): void {
@@ -116,9 +113,35 @@ export class ShoppingListsComponent implements OnInit, OnDestroy {
     }
 
     onShareList(list: ShoppingList): void {
-        // TODO: Implement share functionality
-        this.snackBar.open('Share functionality coming soon', 'Close', {
-            duration: 2000
+        // Generate a shareable link
+        const shareUrl = `${window.location.origin}/shopping-lists/${list.id}/shared`;
+        
+        if (navigator.share) {
+            // Use Web Share API if available
+            navigator.share({
+                title: `Shopping List: ${list.name}`,
+                text: `Check out my shopping list: ${list.name}`,
+                url: shareUrl
+            }).catch((error) => {
+                console.log('Error sharing:', error);
+                // Fallback to clipboard
+                this.copyToClipboard(shareUrl);
+            });
+        } else {
+            // Fallback to clipboard
+            this.copyToClipboard(shareUrl);
+        }
+    }
+
+    private copyToClipboard(text: string): void {
+        navigator.clipboard.writeText(text).then(() => {
+            this.snackBar.open('Share link copied to clipboard!', 'Close', {
+                duration: 3000
+            });
+        }).catch(() => {
+            this.snackBar.open('Failed to copy link', 'Close', {
+                duration: 3000
+            });
         });
     }
 

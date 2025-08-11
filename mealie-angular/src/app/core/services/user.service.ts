@@ -90,9 +90,9 @@ export class UserService {
     }
 
     /**
-     * Export user data
+     * Export current user data
      */
-    exportUserData(): Observable<Blob> {
+    exportCurrentUserData(): Observable<Blob> {
         return this.api.get<Blob>('/users/export');
     }
 

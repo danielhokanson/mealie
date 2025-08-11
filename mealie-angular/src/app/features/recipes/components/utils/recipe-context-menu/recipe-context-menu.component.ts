@@ -146,7 +146,7 @@ export class RecipeContextMenuComponent implements OnInit {
         groupSlug: 'default-group'
     };
 
-    // Mock data
+    // Meal plan type options - these are standard meal types
     planTypeOptions: PlanTypeOption[] = [
         { text: 'Breakfast', value: 'breakfast' },
         { text: 'Lunch', value: 'lunch' },

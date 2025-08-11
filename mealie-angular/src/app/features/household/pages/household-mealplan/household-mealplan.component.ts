@@ -7,6 +7,10 @@ import { MatListModule } from '@angular/material/list';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { MealPlanService } from '../../../../core/services/meal-plan.service';
 
@@ -20,7 +24,11 @@ import { MealPlanService } from '../../../../core/services/meal-plan.service';
         MatIconModule,
         MatListModule,
         MatChipsModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatDatepickerModule,
+        MatNativeDateModule
     ],
     templateUrl: './household-mealplan.component.html',
     styleUrls: ['./household-mealplan.component.scss']
@@ -28,6 +36,7 @@ import { MealPlanService } from '../../../../core/services/meal-plan.service';
 export class HouseholdMealplanComponent implements OnInit {
     mealPlan: any[] = [];
     loading = false;
+    selectedDate = new Date();
 
     constructor(
         private mealPlanService: MealPlanService,
@@ -52,6 +61,11 @@ export class HouseholdMealplanComponent implements OnInit {
                 this.loading = false;
             }
         });
+    }
+
+    onDateChange(date: Date): void {
+        this.selectedDate = date;
+        this.loadMealPlan();
     }
 
     addMeal(): void {

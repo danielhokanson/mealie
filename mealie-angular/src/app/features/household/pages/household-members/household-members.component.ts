@@ -164,11 +164,11 @@ export class HouseholdMembersComponent implements OnInit {
         const currentUser = this.authService.currentUser;
         if (!currentUser) return false;
         
-        // Check if user is household owner
-        if (this.household.ownerId === currentUser.id) return true;
+        // Check if user has admin role
+        if (currentUser.admin) return true;
         
         // Check if user has admin role in the household
-        const member = this.members.find(m => m.userId === currentUser.id);
+        const member = this.members.find(m => m.id === currentUser.id);
         return member ? member.role === 'admin' || member.role === 'owner' : false;
     }
 }

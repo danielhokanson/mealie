@@ -46,17 +46,12 @@ export class AppComponent implements OnInit, OnDestroy {
       this.isAuthenticated = user !== null;
     });
 
-    // Subscribe to router navigation events for logging
+    // Subscribe to router navigation events
     this.routerSubscription = this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
-      console.log(`Navigation completed: ${event.url}`);
+      // Navigation tracking can be added here if needed
     });
-
-    // Log current route on component init
-    console.log('App component initialized');
-    console.log('Current route:', this.router.url);
-    console.log('Router config:', this.router.config);
   }
 
   ngOnDestroy(): void {
@@ -73,47 +68,35 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   focusSearch(): void {
-    // This will be implemented to focus the search input
-    console.log('Focus search');
+    // Focus the search input when implemented
+    const searchInput = document.querySelector('.search-input') as HTMLInputElement;
+    if (searchInput) {
+      searchInput.focus();
+    }
   }
 
   onLogin(): void {
-    console.log('Login clicked');
     this.router.navigate(['/auth/login']);
   }
 
   onRegister(): void {
-    console.log('Register clicked');
     this.router.navigate(['/auth/register']);
   }
 
   onLogout(): void {
-    console.log('Logout clicked');
     this.authService.logout();
     this.router.navigate(['/']);
   }
 
   onProfile(): void {
     if (this.isAuthenticated) {
-      console.log('Profile clicked');
-      // Navigate to profile page when implemented
+      this.router.navigate(['/user/profile']);
     }
   }
 
   onSettings(): void {
     if (this.isAuthenticated) {
-      console.log('Settings clicked');
-      // Navigate to settings page when implemented
+      this.router.navigate(['/user/settings']);
     }
-  }
-
-  // Test method to debug router navigation
-  testNavigation(route: string): void {
-    console.log(`Testing navigation to: ${route}`);
-    this.router.navigate([route]).then(success => {
-      console.log(`Navigation to ${route} successful:`, success);
-    }).catch(error => {
-      console.error(`Navigation to ${route} failed:`, error);
-    });
   }
 }

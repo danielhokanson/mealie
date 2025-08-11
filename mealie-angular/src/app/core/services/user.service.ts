@@ -90,9 +90,9 @@ export class UserService {
     }
 
     /**
-     * Export user data
+     * Export current user data
      */
-    exportUserData(): Observable<Blob> {
+    exportCurrentUserData(): Observable<Blob> {
         return this.api.get<Blob>('/users/export');
     }
 
@@ -134,6 +134,9 @@ export class UserService {
         return this.api.delete<void>(`/users/${userId}`);
     }
 
+    /**
+     * Export specific user data (admin only)
+     */
     exportUserData(userId: string): Observable<any> {
         return this.api.get<any>(`/users/${userId}/export`);
     }

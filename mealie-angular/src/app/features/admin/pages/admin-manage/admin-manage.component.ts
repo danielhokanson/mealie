@@ -362,6 +362,7 @@ export class AdminManageComponent implements OnInit, OnDestroy {
                     slug: householdData.name.toLowerCase().replace(/\s+/g, '-'),
                     description: householdData.description,
                     groupId: householdData.groupId,
+                    ownerId: this.authService.currentUser?.id || '',
                     createdAt: new Date(),
                     updatedAt: new Date(),
                     users: []

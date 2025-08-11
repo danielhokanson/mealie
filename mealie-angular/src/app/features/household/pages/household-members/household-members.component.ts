@@ -168,7 +168,7 @@ export class HouseholdMembersComponent implements OnInit {
         if (this.household.ownerId === currentUser.id) return true;
         
         // Check if user has admin role in the household
-        const member = this.members.find(m => m.userId === currentUser.id);
+        const member = this.members.find(m => m.id === currentUser.id);
         return member ? member.role === 'admin' || member.role === 'owner' : false;
     }
 }

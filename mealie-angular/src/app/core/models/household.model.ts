@@ -4,6 +4,7 @@ export interface Household {
     slug: string;
     description?: string;
     groupId: string;
+    ownerId: string;
     createdAt: Date;
     updatedAt: Date;
     users: HouseholdUser[];

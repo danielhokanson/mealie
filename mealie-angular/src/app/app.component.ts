@@ -8,7 +8,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { AuthService } from './core/services/auth.service';
+import { ThemeService, Theme } from './services/theme.service';
 import { Subscription, filter } from 'rxjs';
 
 @Component({
@@ -24,7 +26,8 @@ import { Subscription, filter } from 'rxjs';
     MatSidenavModule,
     MatListModule,
     MatMenuModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSlideToggleModule
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
@@ -33,15 +36,25 @@ export class AppComponent implements OnInit, OnDestroy {
   title = 'Mealie Angular';
   sidenavOpened = false;
   isAuthenticated = false;
+  currentTheme: Theme = 'dark';
+  isDarkTheme = true;
   private authSubscription?: Subscription;
   private routerSubscription?: Subscription;
+  private themeSubscription?: Subscription;
 
   constructor(
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private themeService: ThemeService
   ) { }
 
   ngOnInit(): void {
+    // Initialize theme
+    this.themeSubscription = this.themeService.getTheme().subscribe(theme => {
+      this.currentTheme = theme;
+      this.isDarkTheme = theme === 'dark';
+    });
+
     this.authSubscription = this.authService.currentUser$.subscribe(user => {
       this.isAuthenticated = user !== null;
     });
@@ -61,10 +74,17 @@ export class AppComponent implements OnInit, OnDestroy {
     if (this.routerSubscription) {
       this.routerSubscription.unsubscribe();
     }
+    if (this.themeSubscription) {
+      this.themeSubscription.unsubscribe();
+    }
   }
 
   toggleSidenav(): void {
     this.sidenavOpened = !this.sidenavOpened;
+  }
+
+  toggleTheme(): void {
+    this.themeService.toggleTheme();
   }
 
   focusSearch(): void {

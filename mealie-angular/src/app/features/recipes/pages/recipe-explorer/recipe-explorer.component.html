@@ -1,44 +1,41 @@
-<div class="recipe-explorer">
+<section class="recipe-explorer page-container">
   <!-- Search Container -->
-  <div class="search-container">
+  <header class="card mb-lg">
     <!-- Header with Create Button -->
-    <div class="search-header">
-      <h2>Recipe Explorer</h2>
+    <div class="flex justify-between items-center mb-md">
+      <h1 class="text-2xl font-medium m-0">Recipe Explorer</h1>
       <button 
         mat-raised-button 
-        color="primary" 
-        (click)="onCreateRecipe()"
-        class="create-recipe-button">
+        class="btn btn-primary" 
+        (click)="onCreateRecipe()">
         <mat-icon>add</mat-icon>
         Create Recipe
       </button>
     </div>
     
-    <form class="search-form" (ngSubmit)="onSearch()">
+    <form (ngSubmit)="onSearch()">
       <!-- Search Bar -->
-      <div class="search-bar">
-        <mat-form-field appearance="outline" class="search-field">
-          <mat-icon matPrefix>search</mat-icon>
-          <input 
-            matInput 
-            [(ngModel)]="searchQuery"
-            name="searchQuery"
-            placeholder="Search recipes..."
-            (input)="onSearchQueryChange($event)">
-          <button 
-            *ngIf="searchQuery" 
-            matSuffix 
-            mat-icon-button 
-            type="button"
-            (click)="searchQuery = ''; onSearchQueryChange('')"
-            aria-label="Clear search">
-            <mat-icon>clear</mat-icon>
-          </button>
-        </mat-form-field>
-      </div>
+      <mat-form-field appearance="outline" class="w-full mb-md">
+        <mat-icon matPrefix>search</mat-icon>
+        <input 
+          matInput 
+          [(ngModel)]="searchQuery"
+          name="searchQuery"
+          placeholder="Search recipes..."
+          (input)="onSearchQueryChange($event)">
+        <button 
+          *ngIf="searchQuery" 
+          matSuffix 
+          mat-icon-button 
+          type="button"
+          (click)="searchQuery = ''; onSearchQueryChange('')"
+          aria-label="Clear search">
+          <mat-icon>clear</mat-icon>
+        </button>
+      </mat-form-field>
 
       <!-- Filter Row -->
-      <div class="filter-row">
+      <div class="flex flex-wrap gap-sm items-center mb-md">
         <!-- Categories Filter -->
         <app-search-filter
           *ngIf="categories.length > 0"
@@ -115,9 +112,9 @@
         </mat-menu>
 
         <button 
-          mat-raised-button 
+          mat-stroked-button 
           [matMenuTriggerFor]="sortMenu"
-          class="sort-button">
+          class="btn btn-secondary">
           <mat-icon>{{ orderDirection === 'asc' ? 'arrow_upward' : 'arrow_downward' }}</mat-icon>
           Sort
         </button>
@@ -125,17 +122,17 @@
         <!-- Settings Menu -->
         <mat-menu #settingsMenu="matMenu">
           <ng-template matMenuContent>
-            <div class="settings-content">
+            <div class="p-md">
               <mat-slide-toggle 
                 [(ngModel)]="autoSearch"
-                name="autoSearch">
+                name="autoSearch"
+                class="mb-sm">
                 Auto Search
               </mat-slide-toggle>
               <button 
-                mat-raised-button 
-                color="primary"
+                mat-stroked-button 
                 (click)="onReset()"
-                class="reset-button">
+                class="w-full">
                 Reset Filters
               </button>
             </div>
@@ -145,78 +142,76 @@
         <button 
           mat-icon-button 
           [matMenuTriggerFor]="settingsMenu"
-          class="settings-button">
+          matTooltip="Settings">
           <mat-icon>settings</mat-icon>
         </button>
       </div>
 
       <!-- Search Button (when auto-search is disabled) -->
-      <div *ngIf="!autoSearch" class="search-button-container">
-        <button 
-          mat-raised-button 
-          color="primary"
-          type="submit"
-          class="search-button">
-          <mat-icon>search</mat-icon>
-          Search
-        </button>
-      </div>
+      <button 
+        *ngIf="!autoSearch" 
+        mat-raised-button 
+        class="btn btn-primary w-full"
+        type="submit">
+        <mat-icon>search</mat-icon>
+        Search
+      </button>
     </form>
-  </div>
+  </header>
 
   <!-- Active Filters Display -->
-  <div *ngIf="selectedCategories.length > 0 || selectedTags.length > 0 || selectedTools.length > 0 || selectedFoods.length > 0" 
-       class="active-filters">
-    <mat-chip-listbox>
-      <mat-chip 
-        *ngFor="let category of selectedCategories"
-        (removed)="removeCategory(category)"
-        removable>
-        {{ getCategoryName(category) }}
-        <mat-icon matChipRemove>cancel</mat-icon>
-      </mat-chip>
-      <mat-chip 
-        *ngFor="let tag of selectedTags"
-        (removed)="removeTag(tag)"
-        removable>
-        {{ getTagName(tag) }}
-        <mat-icon matChipRemove>cancel</mat-icon>
-      </mat-chip>
-      <mat-chip 
-        *ngFor="let tool of selectedTools"
-        (removed)="removeTool(tool)"
-        removable>
-        {{ getToolName(tool) }}
-        <mat-icon matChipRemove>cancel</mat-icon>
-      </mat-chip>
-      <mat-chip 
-        *ngFor="let food of selectedFoods"
-        (removed)="removeFood(food)"
-        removable>
-        {{ getFoodName(food) }}
-        <mat-icon matChipRemove>cancel</mat-icon>
-      </mat-chip>
-    </mat-chip-listbox>
-  </div>
+  <mat-chip-listbox 
+    *ngIf="selectedCategories.length > 0 || selectedTags.length > 0 || selectedTools.length > 0 || selectedFoods.length > 0" 
+    class="mb-md">
+    <mat-chip 
+      *ngFor="let category of selectedCategories"
+      (removed)="removeCategory(category)"
+      removable>
+      {{ getCategoryName(category) }}
+      <mat-icon matChipRemove>cancel</mat-icon>
+    </mat-chip>
+    <mat-chip 
+      *ngFor="let tag of selectedTags"
+      (removed)="removeTag(tag)"
+      removable>
+      {{ getTagName(tag) }}
+      <mat-icon matChipRemove>cancel</mat-icon>
+    </mat-chip>
+    <mat-chip 
+      *ngFor="let tool of selectedTools"
+      (removed)="removeTool(tool)"
+      removable>
+      {{ getToolName(tool) }}
+      <mat-icon matChipRemove>cancel</mat-icon>
+    </mat-chip>
+    <mat-chip 
+      *ngFor="let food of selectedFoods"
+      (removed)="removeFood(food)"
+      removable>
+      {{ getFoodName(food) }}
+      <mat-icon matChipRemove>cancel</mat-icon>
+    </mat-chip>
+  </mat-chip-listbox>
 
   <!-- Loading Spinner -->
-  <div *ngIf="loading" class="loading-container">
+  <div *ngIf="loading" class="flex flex-col items-center justify-center py-xl">
     <mat-spinner></mat-spinner>
-    <p>Loading recipes...</p>
+    <p class="mt-md text-secondary">Loading recipes...</p>
   </div>
 
   <!-- Recipe Grid -->
-  <div *ngIf="!loading" class="recipe-grid">
-    <div *ngIf="recipes.length === 0" class="no-results">
-      <mat-icon>search_off</mat-icon>
-      <h3>No recipes found</h3>
-      <p>Try adjusting your search criteria or filters.</p>
+  <div *ngIf="!loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-md mb-lg">
+    <!-- No Results -->
+    <div *ngIf="recipes.length === 0" class="col-span-full flex flex-col items-center justify-center py-xl text-center">
+      <mat-icon class="text-6xl text-tertiary mb-md">search_off</mat-icon>
+      <h3 class="text-xl font-medium mb-sm">No recipes found</h3>
+      <p class="text-secondary">Try adjusting your search criteria or filters.</p>
     </div>
 
+    <!-- Recipe Cards -->
     <app-recipe-card 
       *ngFor="let recipe of recipes"
-      [recipe]="recipe"
-      class="recipe-card">
+      [recipe]="recipe">
     </app-recipe-card>
   </div>
 
@@ -227,17 +222,18 @@
     [pageSize]="pageSize"
     [pageIndex]="currentPage - 1"
     [pageSizeOptions]="[10, 20, 50, 100]"
-    (page)="onPageChange($event.pageIndex + 1)">
+    (page)="onPageChange($event.pageIndex + 1)"
+    class="surface-secondary rounded-lg">
   </mat-paginator>
 
   <!-- Floating Action Button for Create Recipe -->
   <button 
     mat-fab 
-    color="primary" 
-    class="create-recipe-fab"
+    class="fixed bottom-6 right-6 z-fixed"
+    style="background-color: var(--primary-600); color: white;"
     (click)="onCreateRecipe()"
     matTooltip="Create New Recipe"
     aria-label="Create new recipe">
     <mat-icon>add</mat-icon>
   </button>
-</div> 
+</section> 

@@ -46,7 +46,7 @@
               <mat-slide-toggle
                 [checked]="webhook.enabled"
                 (change)="toggleWebhook(webhook)">
-              </mat-slide-toggle>
+              </div>
               <button mat-icon-button (click)="testWebhook(webhook)">
                 <mat-icon>play_arrow</mat-icon>
               </button>
@@ -56,10 +56,9 @@
               <button mat-icon-button class="btn btn-error" (click)="deleteWebhook(webhook.id)">
                 <mat-icon>delete</mat-icon>
               </button>
-            </div>
-          </mat-list-item>
-        </mat-list>
-      </div>
-    </mat-card-content>
-  </mat-card>
-</section>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </section>

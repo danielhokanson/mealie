@@ -26,13 +26,12 @@
               <button 
                 type="button"
                 mat-icon-button 
-                class="btn btn-error"
-                class="remove-note-btn"
+                class="btn btn-error remove-note-btn"
                 [matTooltip]="'Remove note'"
                 (click)="removeNote(i)">
                 <mat-icon>delete</mat-icon>
-              </button>
-            </div>
+              </div>
+            </mat-card-content>
             
             <mat-form-field appearance="outline" class="note-text-field w-full">
               <mat-label>Note</mat-label>
@@ -45,13 +44,13 @@
                 cdkTextareaAutosize
                 cdkAutosizeMinRows="3"
                 cdkAutosizeMaxRows="10">
-              </textarea>
+              </mat-form-field>
               <mat-error *ngFor="let error of getFormErrors(getNoteTextControl(i))">
                 {{ error }}
               </mat-error>
-            </mat-form-field>
-          </mat-card-content>
-        </mat-card>
+            </mat-card>
+          </div>
+        </form>
 
         <!-- View Mode -->
         <div *ngIf="!edit" class="note-view">
@@ -60,7 +59,7 @@
             <app-safe-markdown [source]="note.text"></app-safe-markdown>
           
       </div>
-  </form>
+  </div>
 
   <!-- Add Note Button -->
   <div *ngIf="edit" class="add-note-section">
@@ -69,5 +68,4 @@
       (click)="addNote()">
       <mat-icon>add</mat-icon>
       Add Note
-    </app-base-button>
-  </section>
+    </div>

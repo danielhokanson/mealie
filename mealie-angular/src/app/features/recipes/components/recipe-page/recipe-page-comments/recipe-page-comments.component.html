@@ -18,7 +18,7 @@
             [user]="currentUser"
             [size]="40"
             [tooltip]="false">
-          </app-user-avatar>
+          </section>
 
           <form [formGroup]="commentForm" class="comment-form-content">
             <mat-form-field appearance="outline" class="comment-textarea w-full">
@@ -31,11 +31,11 @@
                 cdkTextareaAutosize
                 cdkAutosizeMinRows="2"
                 cdkAutosizeMaxRows="6">
-              </textarea>
+              </mat-form-field>
               <mat-error *ngFor="let error of getFormErrors()">
                 {{ error }}
               </mat-error>
-            </mat-form-field>
+            </form>
 
             <div class="comment-actions">
               <app-base-button 
@@ -45,10 +45,10 @@
                 (click)="submitComment()">
                 <mat-icon>check</mat-icon>
                 Submit
-              </app-base-button>
+              </div>
             </div>
-          </form>
-        </div>
+          </mat-card-content>
+        </mat-card>
 
       <!-- Comments List -->
       <div class="comments-list">
@@ -59,7 +59,7 @@
             [user]="comment.user"
             [size]="40"
             [tooltip]="false">
-          </app-user-avatar>
+          </div>
 
           <mat-card class="comment-card card">
             <mat-card-content class="comment-content card">
@@ -76,21 +76,16 @@
             <mat-card-actions class="comment-actions" *ngIf="canDeleteComment(comment)" class="card">
               <button 
                 mat-button 
-                class="btn btn-error" 
-                class="delete-comment-btn"
+                class="btn btn-error delete-comment-btn"
                 (click)="deleteComment(comment.id)">
                 <mat-icon>delete</mat-icon>
                 Delete
-              </button>
-            </mat-card-actions>
-          </mat-card>
-        </div>
+              </mat-card-actions>
+            </mat-card>
+          </article>
 
       <!-- Empty State -->
       <div *ngIf="recipe.comments.length === 0" class="empty-state">
         <mat-icon class="empty-icon">comment</mat-icon>
         <p class="empty-text text-secondary mb-sm">No comments yet. Be the first to comment!</p>
       </div>
-    </mat-card-content>
-  </mat-card>
-</section>

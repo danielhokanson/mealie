@@ -23,7 +23,7 @@
           [disabled]="loading">
           <mat-icon>calculate</mat-icon>
           Calculate Nutrition
-        </button>
+        </div>
         <button 
           mat-raised-button 
           class="btn btn-secondary"
@@ -31,15 +31,15 @@
           [class.active]="autoCalculate">
           <mat-icon>auto_fix_high</mat-icon>
           Auto Calculate
-        </button>
+        </div>
         <button 
           mat-raised-button 
           class="btn btn-error"
           (click)="onResetNutrition()">
           <mat-icon>refresh</mat-icon>
           Reset
-        </button>
-      </div>
+        </div>
+      </section>
 
       <div class="control-group">
         <button 
@@ -48,8 +48,7 @@
           (click)="onToggleAdvanced()">
           <mat-icon>{{ showAdvanced ? 'expand_less' : 'expand_more' }}</mat-icon>
           {{ showAdvanced ? 'Hide' : 'Show' }} Advanced
-        </button>
-      </div>
+        </div>
 
     <!-- Nutrition Summary -->
     <div class="nutrition-summary">
@@ -159,7 +158,7 @@
               <span class="progress-text">{{ getDailyValuePercentage(getFieldValue(field.key), field.key) }}% DV</span>
             </div>
         </div>
-      </mat-expansion-panel>
+      </div>
 
       <!-- Form Actions -->
       <div class="flex justify-end gap-sm mt-lg">
@@ -170,14 +169,13 @@
           [disabled]="loading || nutritionForm.invalid">
           <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner>
           <span *ngIf="!loading">Save Nutrition</span>
-        </button>
-      </div>
-    </form>
-  </div>
+        </div>
+      </form>
+    </div>
 
   <!-- No Recipe State -->
   <div *ngIf="!loading && !recipe" class="no-recipe">
     <mat-icon class="no-recipe-icon">restaurant</mat-icon>
     <h3 class="text-lg font-medium mb-sm">No Recipe Selected</h3>
     <p class="text-secondary mb-sm">Please select a recipe to edit its nutrition information.</p>
-  </section>
+  </div>

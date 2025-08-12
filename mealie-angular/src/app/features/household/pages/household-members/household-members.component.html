@@ -42,9 +42,9 @@
                                 [disabled]="!inviteForm.valid || loading">
                                 <mat-icon>person_add</mat-icon>
                                 Invite
-                            </button>
-                        </div>
-                    </form>
+                            </div>
+                        </form>
+                    </div>
                 </div>
 
                 <!-- Current Members -->
@@ -72,7 +72,7 @@
                                     [style.background-color]="getRoleColor(member.role || 'member')"
                                     class="role-chip">
                                     {{ member.role || 'member' }}
-                                </mat-chip>
+                                </div>
 
                                 <div class="action-buttons" *ngIf="canManageMembers()">
                                     <button 
@@ -80,7 +80,7 @@
                                         [matMenuTriggerFor]="roleMenu"
                                         (click)="$event.stopPropagation()">
                                         <mat-icon>more_vert</mat-icon>
-                                    </button>
+                                    </div>
 
                                     <mat-menu #roleMenu="matMenu">
                                         <button mat-menu-item (click)="updateMemberRole(member.id, 'member')">
@@ -97,13 +97,15 @@
                                         </button>
                                     </mat-menu>
                                 </div>
-                        </mat-list-item>
-                    </mat-list>
-                </div>
+                        </div>
+                    </mat-list-item>
+                </mat-list>
 
             <div *ngIf="!loading && !household" class="no-household">
                 <p class="text-secondary mb-sm">No household found. Please create or join a household first.</p>
             </div>
-        </mat-card-content>
-    </mat-card>
+        </div>
+    </mat-card-content>
+</mat-card>
+
 </section>

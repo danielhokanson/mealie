@@ -4,25 +4,23 @@
     [strokeWidth]="size().width"
     mode="indeterminate"
     class="loader-spinner">
-  </mat-spinner>
-  
+
   <div class="loader-content" *ngIf="size().icon > 0">
     <mat-icon 
       [style.font-size.px]="size().icon"
       class="loader-icon">
       {{ primaryIcon }}
-    </mat-icon>
-    
+
     <div *ngIf="large" class="loader-text-large">
       <ng-content>
         {{ (small || tiny) ? "" : waitingTextCalculated }}
-      </ng-content>
+
     </div>
   </div>
   
   <div *ngIf="!large" class="loader-text">
     <ng-content>
       {{ (small || tiny) ? "" : waitingTextCalculated }}
-    </ng-content>
+
   </div>
 </div>

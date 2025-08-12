@@ -16,10 +16,10 @@
                         (change)="onHeaderVisibilityChange(header, $event.checked)"
                         class="column-checkbox">
                         {{ header.text }}
-                    </mat-checkbox>
-                </mat-card-content>
-            </mat-card>
-        </mat-menu>
+                    </mat-card-content>
+                </mat-card>
+            </mat-menu>
+        </mat-card-actions>
 
         <!-- Bulk Actions -->
         <app-base-overflow-button
@@ -29,11 +29,10 @@
             color="info"
             btnClass="elevated"
             (itemClick)="onBulkAction($event)">
-        </app-base-overflow-button>
+        </section>
 
         <!-- Custom Button Row -->
         <ng-content select="[slot=button-row]"></ng-content>
-    </mat-card-actions>
 
     <!-- Search Field -->
     <section class="page-container">
@@ -46,7 +45,7 @@
                 placeholder="Search...">
             <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
-    </div>
+    </section>
 
     <!-- Data Table -->
     <table mat-table class="w-full"
@@ -64,16 +63,14 @@
                     (change)="$event ? masterToggle() : null"
                     [checked]="selection.hasValue() && isAllSelected()"
                     [indeterminate]="selection.hasValue() && !isAllSelected()">
-                </mat-checkbox>
-            </th>
+                </th>
+            </ng-container>
             <td mat-cell *matCellDef="let row">
                 <mat-checkbox
                     (click)="$event.stopPropagation()"
                     (change)="$event ? selection.toggle(row) : null"
                     [checked]="selection.isSelected(row)">
-                </mat-checkbox>
-            </td>
-        </ng-container>
+                </td>
 
         <!-- Dynamic Columns -->
         <ng-container *ngFor="let header of headersWithoutActions" [matColumnDef]="header.value">
@@ -83,7 +80,7 @@
             <td mat-cell *matCellDef="let element">
                 <ng-content [attr.select]="'item.' + header.value" [attr.data-item]="element">
                     {{ element[header.value] }}
-                </ng-content>
+
             </td>
         </ng-container>
 
@@ -107,16 +104,13 @@
                         }
                     ]"
                     (buttonClick)="onActionClick($event, element)">
-                </app-base-button-group>
-            </td>
-        </ng-container>
+                </td>
+            </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="activeHeaders"></tr>
         <tr mat-row *matRowDef="let row; columns: activeHeaders;" 
             [class.selected]="selection.isSelected(row)"
             (click)="onRowClick(row)">
-        </tr>
-    </table>
 
     <!-- Paginator -->
     <mat-paginator
@@ -124,7 +118,6 @@
         [pageSizeOptions]="[5, 10, 15, 25, 50]"
         (page)="onPageChange($event)"
         class="table-paginator">
-    </mat-paginator>
 
     <!-- Bottom Actions -->
     <mat-card-actions class="bottom-actions card">
@@ -136,6 +129,4 @@
             (click)="downloadAsJson(filteredData, 'export.json')">
             <mat-icon>download</mat-icon>
             Download
-        </app-base-button>
-    </mat-card-actions>
-</section>
+        </mat-card-actions>

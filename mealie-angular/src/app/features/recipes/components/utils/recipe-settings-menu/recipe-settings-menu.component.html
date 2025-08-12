@@ -6,7 +6,7 @@
     class="settings-button">
     <mat-icon class="settings-icon">settings</mat-icon>
     Settings
-  </button>
+  </section>
 
   <mat-menu #settingsMenu="matMenu" class="settings-menu">
     
@@ -22,9 +22,7 @@
             [(value)]="value"
             [isOwner]="isOwner"
             (valueChange)="onSettingsChange($event)">
-          </app-recipe-settings-switches>
-        </mat-card-content>
-      </mat-card>
+          </mat-card-content>
+        </mat-card>
+      </mat-menu>
     
-  </mat-menu>
-</section>

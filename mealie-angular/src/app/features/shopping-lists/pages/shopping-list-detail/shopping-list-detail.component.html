@@ -35,21 +35,21 @@
           (click)="onShareList()" 
           matTooltip="Share list">
           <mat-icon>share</mat-icon>
-        </button>
+        </div>
 
         <button 
           mat-icon-button 
           (click)="onPrintList()" 
           matTooltip="Print list">
           <mat-icon>print</mat-icon>
-        </button>
+        </div>
 
         <button 
           mat-icon-button 
           [matMenuTriggerFor]="listMenu" 
           matTooltip="More options">
           <mat-icon>more_vert</mat-icon>
-        </button>
+        </div>
 
         <mat-menu #listMenu="matMenu">
           <button mat-menu-item (click)="onEditList()">
@@ -77,8 +77,8 @@
       <mat-progress-bar 
         [value]="getProgressPercentage()"
         [color]="getProgressPercentage() === 100 ? 'accent' : 'primary'">
-      </mat-progress-bar>
-    </div>
+      </div>
+    </section>
 
     <!-- Add Item Section -->
     <mat-card class="add-item-section card">
@@ -135,7 +135,7 @@
                 (change)="onLabelToggle(label.id)"
                 [style.color]="label.color">
                 {{ label.name }}
-              </mat-checkbox>
+              </div>
             </div>
 
           <div class="flex justify-end gap-sm mt-lg">
@@ -145,11 +145,10 @@
               type="submit"
               [disabled]="newItemForm.invalid">
               Add Item
-            </button>
-          </div>
-        </form>
-      </mat-card-content>
-    </mat-card>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
 
     <!-- Items Section -->
     <mat-card class="items-section card">
@@ -176,7 +175,7 @@
                 [checked]="item.checked"
                 (change)="onToggleItem(item)"
                 class="item-checkbox">
-              </mat-checkbox>
+              </mat-list-item>
               
               <div class="item-content" [class.checked]="item.checked">
                 <span class="item-title">{{ item.title }}</span>
@@ -193,10 +192,10 @@
                 (click)="onDeleteItem(item)"
                 class="delete-button">
                 <mat-icon>delete</mat-icon>
-              </button>
-            </mat-list-item>
-          </mat-list>
-        </mat-expansion-panel>
+              </mat-list>
+            </mat-expansion-panel>
+          </mat-card-content>
+        </mat-card>
 
         <!-- Unlabeled Items -->
         <mat-expansion-panel *ngIf="getUnlabeledItems().length > 0" class="unlabeled-panel">
@@ -216,7 +215,7 @@
                 [checked]="item.checked"
                 (change)="onToggleItem(item)"
                 class="item-checkbox">
-              </mat-checkbox>
+              </mat-list-item>
               
               <div class="item-content" [class.checked]="item.checked">
                 <span class="item-title">{{ item.title }}</span>
@@ -233,10 +232,8 @@
                 (click)="onDeleteItem(item)"
                 class="delete-button">
                 <mat-icon>delete</mat-icon>
-              </button>
-            </mat-list-item>
-          </mat-list>
-        </mat-expansion-panel>
+              </mat-list>
+            </mat-expansion-panel>
 
         <!-- Empty State -->
         <div *ngIf="getTotalItemsCount() === 0" class="empty-items">
@@ -244,6 +241,3 @@
           <h3 class="text-lg font-medium mb-sm">No Items Yet</h3>
           <p class="text-secondary mb-sm">Add your first item to get started</p>
         </div>
-      </mat-card-content>
-    </mat-card>
-  </section>

@@ -12,11 +12,8 @@
       
       {{ displayText }}
       
-      <mat-icon class="end-icon">
-        expand_more
-    </button>
-  </ng-template>
-  
+      <mat-icon class="end-icon">expand_more</mat-icon>
+
   <!-- Model Mode -->
   <mat-list *ngIf="mode === MODES.MODEL" class="overflow-list">
     <ng-container *ngFor="let item of items; let index = index">
@@ -28,11 +25,11 @@
           <mat-icon *ngIf="item.icon" matListItemIcon>
             {{ item.icon }}
           <span matListItemTitle>{{ item.text }}</span>
-        </button>
+
         <mat-divider *ngIf="item.divider" class="my-1"></mat-divider>
-      </div>
-    </ng-container>
-  </mat-list>
+      </mat-icon>
+    </div>
+  </ng-container>
   
   <!-- Link Mode -->
   <mat-list *ngIf="mode === MODES.LINK" class="overflow-list">
@@ -45,11 +42,11 @@
           <mat-icon *ngIf="item.icon" matListItemIcon>
             {{ item.icon }}
           <span matListItemTitle>{{ item.text }}</span>
-        </button>
+
         <mat-divider *ngIf="item.divider" class="my-1"></mat-divider>
-      </div>
-    </ng-container>
-  </mat-list>
+      </mat-icon>
+    </div>
+  </ng-container>
   
   <!-- Event Mode -->
   <mat-list *ngIf="mode === MODES.EVENT" class="overflow-list">
@@ -62,9 +59,15 @@
           <mat-icon *ngIf="item.icon" matListItemIcon>
             {{ item.icon }}
           <span matListItemTitle>{{ item.text }}</span>
-        </button>
+
         <mat-divider *ngIf="item.divider" class="my-1"></mat-divider>
-      </div>
-    </ng-container>
-  </mat-list>
+      </mat-icon>
+    </div>
+  </ng-container>
+</mat-list>
+
+</mat-list>
+</mat-list>
+</mat-icon>
+</ng-template>
 </mat-menu>

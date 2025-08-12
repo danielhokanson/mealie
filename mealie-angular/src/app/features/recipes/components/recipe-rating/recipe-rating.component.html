@@ -16,7 +16,7 @@
         (mouseenter)="hoverRating = star"
         (mouseleave)="hoverRating = 0">
         <mat-icon>{{ getStarIcon(star) }}</mat-icon>
-      </button>
+      </section>
     </div>
     <button 
       *ngIf="userRating"
@@ -26,8 +26,6 @@
       [matTooltip]="'Clear rating'"
       (click)="clearRating()">
       <mat-icon>clear</mat-icon>
-    </button>
-  </div>
 
   <!-- Group Rating (read-only) -->
   <div *ngIf="!canRate || (!userRating && !isHovering && ratingsLoaded)" 
@@ -39,9 +37,8 @@
         [class.active]="groupRating >= star"
         [class.half]="groupRating >= star - 0.5 && groupRating < star">
         {{ getStarIcon(star) }}
-      </mat-icon>
-    </div>
+
+    </section>
     <span *ngIf="groupRating > 0" class="rating-text">
       {{ groupRating.toFixed(1) }}
     </span>
-  </section>

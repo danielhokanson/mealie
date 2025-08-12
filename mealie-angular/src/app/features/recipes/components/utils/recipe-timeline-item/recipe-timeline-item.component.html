@@ -19,7 +19,7 @@
             <app-user-avatar
               [userId]="event.userId"
               [size]="attrs.avatar.size">
-            </app-user-avatar>
+            </div>
 
           <!-- Date Chip (Mobile) -->
           <div *ngIf="useMobileFormat && event.timestamp" class="mobile-date">
@@ -44,9 +44,9 @@
               [useMobileFormat]="useMobileFormat"
               (update)="update.emit()"
               (delete)="delete.emit()">
-            </app-recipe-timeline-context-menu>
-          </div>
-      </mat-card-header>
+            </div>
+          </mat-card-header>
+      </mat-card>
       
       <!-- Recipe Card (if enabled) -->
       <mat-card-content *ngIf="showRecipeCards && recipe" class="recipe-card-content card">
@@ -60,9 +60,9 @@
             [recipeId]="recipe.id"
             [isFlat]="true"
             [vertical]="useMobileFormat">
-          </app-recipe-card-mobile>
-        </div>
-      </mat-card-content>
+          </div>
+        </mat-card-content>
+      </div>
       
       <!-- Divider -->
       <mat-divider *ngIf="showRecipeCards && recipe && (useMobileFormat || event.eventMessage)"></mat-divider>
@@ -87,6 +87,6 @@
           <div *ngIf="event.eventMessage" class="event-message" [class]="useMobileFormat ? 'text-caption' : ''">
             <app-safe-markdown [source]="event.eventMessage"></app-safe-markdown>
           
-      </mat-card-content>
-    </mat-card>
-  </section>
+      </div>
+    </mat-card-content>
+  </div>

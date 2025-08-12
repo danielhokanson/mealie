@@ -64,7 +64,7 @@
                 (click)="onAddUser()">
                 <mat-icon>add</mat-icon>
                 Add User
-              </button>
+              </div>
 
             <!-- Users Table -->
             <section class="page-container">
@@ -122,7 +122,7 @@
                       [matMenuTriggerFor]="userMenu"
                       matTooltip="Actions">
                       <mat-icon>more_vert</mat-icon>
-                    </button>
+                    </td>
 
                     <mat-menu #userMenu="matMenu">
                       <button mat-menu-item (click)="onEditUser(user)">
@@ -139,14 +139,14 @@
                         <span>Delete</span>
                       </button>
                     </mat-menu>
-                  </td>
-                </ng-container>
+                  </ng-container>
+                </table>
 
                 <tr mat-header-row *matHeaderRowDef="['username', 'fullName', 'email', 'role', 'status', 'createdAt', 'actions']"></tr>
                 <tr mat-row *matRowDef="let row; columns: ['username', 'fullName', 'email', 'role', 'status', 'createdAt', 'actions'];"></tr>
-              </table>
-            </div>
-        </mat-tab>
+              </section>
+            </mat-tab>
+        </mat-tab-group>
 
         <!-- Groups Tab -->
         <mat-tab label="Groups">
@@ -168,7 +168,7 @@
                 (click)="onAddGroup()">
                 <mat-icon>add</mat-icon>
                 Add Group
-              </button>
+              </div>
 
             <!-- Groups Table -->
             <section class="page-container">
@@ -210,7 +210,7 @@
                       [matMenuTriggerFor]="groupMenu"
                       matTooltip="Actions">
                       <mat-icon>more_vert</mat-icon>
-                    </button>
+                    </td>
 
                     <mat-menu #groupMenu="matMenu">
                       <button mat-menu-item (click)="onEditGroup(group)">
@@ -223,14 +223,14 @@
                         <span>Delete</span>
                       </button>
                     </mat-menu>
-                  </td>
-                </ng-container>
+                  </ng-container>
+                </table>
 
                 <tr mat-header-row *matHeaderRowDef="['name', 'description', 'status', 'createdAt', 'actions']"></tr>
                 <tr mat-row *matRowDef="let row; columns: ['name', 'description', 'status', 'createdAt', 'actions'];"></tr>
-              </table>
-            </div>
-        </mat-tab>
+              </section>
+            </mat-tab>
+        </mat-card>
 
         <!-- Households Tab -->
         <mat-tab label="Households">
@@ -252,7 +252,7 @@
                 (click)="onAddHousehold()">
                 <mat-icon>add</mat-icon>
                 Add Household
-              </button>
+              </div>
 
             <!-- Households Table -->
             <section class="page-container">
@@ -300,7 +300,7 @@
                       [matMenuTriggerFor]="householdMenu"
                       matTooltip="Actions">
                       <mat-icon>more_vert</mat-icon>
-                    </button>
+                    </td>
 
                     <mat-menu #householdMenu="matMenu">
                       <button mat-menu-item (click)="onEditHousehold(household)">
@@ -313,17 +313,15 @@
                         <span>Delete</span>
                       </button>
                     </mat-menu>
-                  </td>
-                </ng-container>
+                  </ng-container>
+                </table>
 
                 <tr mat-header-row *matHeaderRowDef="['name', 'description', 'group', 'status', 'createdAt', 'actions']"></tr>
                 <tr mat-row *matRowDef="let row; columns: ['name', 'description', 'group', 'status', 'createdAt', 'actions'];"></tr>
-              </table>
-            </div>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card>
-  </div>
+              </section>
+            </mat-tab>
+        </div>
+      </section>
 
   <!-- User Dialog -->
   <div *ngIf="showUserDialog" class="dialog-overlay">
@@ -397,10 +395,9 @@
           (click)="onSaveUser()"
           [disabled]="userForm.invalid">
           {{ editingUser ? 'Update' : 'Create' }}
-        </button>
-      </mat-card-actions>
-    </mat-card>
-  </div>
+        </mat-card-actions>
+      </mat-card>
+    </div>
 
   <!-- Group Dialog -->
   <div *ngIf="showGroupDialog" class="dialog-overlay">
@@ -428,17 +425,17 @@
                 formControlName="description"
                 placeholder="Enter description"
                 rows="3">
-              </textarea>
-            </mat-form-field>
-          </div>
+              </mat-form-field>
+            </div>
+          </form>
 
           <div class="form-row">
             <mat-checkbox formControlName="isActive">
               Active
             </mat-checkbox>
           </div>
-        </form>
-      </mat-card-content>
+        </mat-card-content>
+      </mat-card>
       <mat-card-actions class="card">
         <button mat-button (click)="showGroupDialog = false">Cancel</button>
         <button 
@@ -447,10 +444,8 @@
           (click)="onSaveGroup()"
           [disabled]="groupForm.invalid">
           {{ editingGroup ? 'Update' : 'Create' }}
-        </button>
-      </mat-card-actions>
-    </mat-card>
-  </div>
+        </mat-card-actions>
+      </div>
 
   <!-- Household Dialog -->
   <div *ngIf="showHouseholdDialog" class="dialog-overlay">
@@ -478,9 +473,9 @@
                 formControlName="description"
                 placeholder="Enter description"
                 rows="3">
-              </textarea>
-            </mat-form-field>
-          </div>
+              </mat-form-field>
+            </div>
+          </form>
 
           <div class="form-row">
             <mat-form-field appearance="outline" class="w-full">
@@ -498,8 +493,8 @@
               Active
             </mat-checkbox>
           </div>
-        </form>
-      </mat-card-content>
+        </mat-card-content>
+      </mat-card>
       <mat-card-actions class="card">
         <button mat-button (click)="showHouseholdDialog = false">Cancel</button>
         <button 
@@ -508,7 +503,5 @@
           (click)="onSaveHousehold()"
           [disabled]="householdForm.invalid">
           {{ editingHousehold ? 'Update' : 'Create' }}
-        </button>
-      </mat-card-actions>
-    </mat-card>
-  </section>
+        </mat-card-actions>
+      </div>

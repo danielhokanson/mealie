@@ -23,22 +23,22 @@
           (click)="onShareTypeChange('link')">
           <mat-icon>link</mat-icon>
           Link
-        </button>
+        </div>
         <button 
           mat-button 
           [class.active]="shareType === 'email'"
           (click)="onShareTypeChange('email')">
           <mat-icon>email</mat-icon>
           Email
-        </button>
+        </div>
         <button 
           mat-button 
           [class.active]="shareType === 'social'"
           (click)="onShareTypeChange('social')">
           <mat-icon>share</mat-icon>
           Social
-        </button>
-      </div>
+        </div>
+      </section>
 
     <!-- Link Sharing -->
     <div *ngIf="shareType === 'link'" class="share-section">
@@ -56,8 +56,8 @@
             (click)="onCopyLink()"
             matTooltip="Copy link">
             <mat-icon>content_copy</mat-icon>
-          </button>
-        </mat-form-field>
+          </mat-form-field>
+        </section>
       </div>
       
       <div class="link-actions">
@@ -67,15 +67,13 @@
           (click)="onCopyLink()">
           <mat-icon>content_copy</mat-icon>
           Copy Link
-        </button>
+        </div>
         <button 
           mat-raised-button 
           class="btn btn-secondary"
           (click)="onGenerateQRCode()">
           <mat-icon>qr_code</mat-icon>
           Generate QR Code
-        </button>
-      </div>
 
     <!-- Email Sharing -->
     <div *ngIf="shareType === 'email'" class="share-section">
@@ -89,9 +87,9 @@
               formControlName="message"
               placeholder="Add a personal message..."
               rows="3">
-            </textarea>
-          </mat-form-field>
-        </div>
+            </mat-form-field>
+          </div>
+        </form>
 
         <div class="form-row">
           <h4>Select Recipients</h4>
@@ -106,9 +104,9 @@
                     <span class="recipient-name">{{ user.fullName }}</span>
                     <span class="recipient-email">{{ user.email }}</span>
                   </div>
-                </mat-checkbox>
-              </mat-list-item>
-            </mat-list>
+                </mat-list-item>
+              </mat-list>
+            </div>
           </div>
 
         <div class="form-row">
@@ -120,7 +118,7 @@
                 (change)="onToggleOption('includeImage')"
                 class="btn btn-primary">
                 Include Recipe Image
-              </mat-checkbox>
+              </div>
             </div>
             <div class="option-item">
               <mat-checkbox 
@@ -128,7 +126,7 @@
                 (change)="onToggleOption('includeNutrition')"
                 class="btn btn-primary">
                 Include Nutrition Information
-              </mat-checkbox>
+              </div>
             </div>
             <div class="option-item">
               <mat-checkbox 
@@ -136,7 +134,7 @@
                 (change)="onToggleOption('includeNotes')"
                 class="btn btn-primary">
                 Include Notes
-              </mat-checkbox>
+              </div>
             </div>
             <div class="option-item">
               <mat-checkbox 
@@ -144,17 +142,14 @@
                 (change)="onToggleOption('includeComments')"
                 class="btn btn-primary">
                 Include Comments
-              </mat-checkbox>
-            </div>
+              </div>
             <div class="option-item">
               <mat-checkbox 
                 [(ngModel)]="shareOptions.includeTimeline"
                 (change)="onToggleOption('includeTimeline')"
                 class="btn btn-primary">
                 Include Timeline
-              </mat-checkbox>
-            </div>
-        </div>
+              </div>
 
         <div class="flex justify-end gap-sm mt-lg">
           <button 
@@ -164,10 +159,7 @@
             [disabled]="selectedUsers.length === 0">
             <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner>
             <span *ngIf="!loading">Send Email</span>
-          </button>
-        </div>
-      </form>
-    </div>
+          </div>
 
     <!-- Social Sharing -->
     <div *ngIf="shareType === 'social'" class="share-section">
@@ -180,7 +172,7 @@
           class="social-button twitter">
           <mat-icon>twitter</mat-icon>
           Twitter
-        </button>
+        </div>
         <button 
           mat-raised-button 
           class="btn btn-primary"
@@ -188,7 +180,7 @@
           class="social-button facebook">
           <mat-icon>facebook</mat-icon>
           Facebook
-        </button>
+        </div>
         <button 
           mat-raised-button 
           class="btn btn-primary"
@@ -196,7 +188,6 @@
           class="social-button pinterest">
           <mat-icon>pinterest</mat-icon>
           Pinterest
-        </button>
         <button 
           mat-raised-button 
           class="btn btn-primary"
@@ -204,7 +195,6 @@
           class="social-button whatsapp">
           <mat-icon>whatsapp</mat-icon>
           WhatsApp
-        </button>
         <button 
           mat-raised-button 
           class="btn btn-primary"
@@ -212,8 +202,6 @@
           class="social-button email">
           <mat-icon>email</mat-icon>
           Email
-        </button>
-      </div>
 
     <!-- Additional Actions -->
     <div class="additional-actions">
@@ -225,16 +213,14 @@
           (click)="onExportRecipe()">
           <mat-icon>download</mat-icon>
           Export Recipe
-        </button>
+        </div>
         <button 
           mat-raised-button 
           class="btn btn-primary"
           (click)="onGenerateQRCode()">
           <mat-icon>qr_code</mat-icon>
           QR Code
-        </button>
-      </div>
-  </div>
+        </div>
 
   <!-- No Recipe State -->
   <div *ngIf="!loading && !recipe" class="no-recipe">
@@ -249,5 +235,4 @@
       mat-button 
       (click)="onClose()">
       Close
-    </button>
-  </section>
+    </div>

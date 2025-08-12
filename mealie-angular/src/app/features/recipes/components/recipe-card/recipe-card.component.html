@@ -35,7 +35,7 @@
       *ngIf="isOwnGroup"
       [recipeId]="recipeId"
       [showAlways]="true">
-    </app-recipe-favorite-badge>
+    </div>
     
     <!-- Recipe Rating -->
     <app-recipe-rating
@@ -44,13 +44,11 @@
       [recipeId]="recipeId"
       [slug]="slug"
       [small]="true">
-    </app-recipe-rating>
 
     <!-- Recipe Tags -->
     <app-recipe-chips
       [items]="tags"
       urlPrefix="tags">
-    </app-recipe-chips>
 
     <!-- Context Menu -->
     <app-recipe-context-menu
@@ -60,9 +58,6 @@
       [recipeId]="recipeId"
       [useItems]="contextMenuItems"
       (delete)="onDelete($event)">
-    </app-recipe-context-menu>
-  </div>
 
   <!-- Additional Content Slot -->
   <ng-content></ng-content>
-</mat-card>

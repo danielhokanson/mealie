@@ -4,7 +4,7 @@
     *ngIf="parsedIngredient.quantity"
     [markdown]="parsedIngredient.quantity"
     class="d-inline">
-  </app-safe-markdown>
+  </div>
 
   <!-- Unit -->
   <span *ngIf="parsedIngredient.unit" class="unit-text">
@@ -16,19 +16,15 @@
     *ngIf="parsedIngredient.note && !parsedIngredient.name"
     [markdown]="parsedIngredient.note"
     class="text-bold d-inline">
-  </app-safe-markdown>
 
   <!-- Name and Note -->
   <ng-container *ngIf="parsedIngredient.name">
     <app-safe-markdown
       [markdown]="parsedIngredient.name"
       class="text-bold d-inline">
-    </app-safe-markdown>
+    </ng-container>
     
     <app-safe-markdown
       *ngIf="parsedIngredient.note"
       [markdown]="parsedIngredient.note"
       class="note">
-    </app-safe-markdown>
-  </ng-container>
-</section>

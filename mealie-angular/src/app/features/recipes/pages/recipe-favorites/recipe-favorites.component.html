@@ -42,14 +42,14 @@
             class="btn btn-primary"
             (click)="onSearch()">
             Search
-          </button>
+          </div>
           
           <button 
             mat-button 
             (click)="onClearSearch()">
             Clear
-          </button>
-        </div>
+          </mat-card-content>
+        </mat-card>
 
         <mat-divider></mat-divider>
 
@@ -60,7 +60,7 @@
             class="filters-toggle">
             <mat-icon>{{ showFilters ? 'expand_less' : 'expand_more' }}</mat-icon>
             Filters
-          </button>
+          </div>
 
           <div *ngIf="showFilters" class="filters-content">
             <div class="filter-group">
@@ -72,7 +72,7 @@
                   (change)="onCategoryToggle(category.id)"
                   [style.color]="category.color">
                   {{ category.name }}
-                </mat-checkbox>
+                </div>
               </div>
 
             <div class="filter-group">
@@ -84,7 +84,7 @@
                   (change)="onTagToggle(tag.id)"
                   [style.color]="tag.color">
                   {{ tag.name }}
-                </mat-checkbox>
+                </div>
               </div>
 
             <div class="filter-group">
@@ -95,7 +95,7 @@
                   [checked]="selectedTools.includes(tool.id)"
                   (change)="onToolToggle(tool.id)">
                   {{ tool.name }}
-                </mat-checkbox>
+                </div>
               </div>
 
             <div class="filter-group">
@@ -106,7 +106,7 @@
                   [checked]="selectedFoods.includes(food.id)"
                   (change)="onFoodToggle(food.id)">
                   {{ food.name }}
-                </mat-checkbox>
+                </div>
               </div>
 
             <div class="filter-group">
@@ -126,11 +126,11 @@
                 (click)="orderDirection = orderDirection === 'asc' ? 'desc' : 'asc'; onSortChange()"
                 [matTooltip]="orderDirection === 'asc' ? 'Ascending' : 'Descending'">
                 <mat-icon>{{ orderDirection === 'asc' ? 'arrow_upward' : 'arrow_downward' }}</mat-icon>
-              </button>
+              </div>
             </div>
         </div>
-      </mat-card-content>
-    </mat-card>
+      </div>
+    </section>
 
     <!-- Results -->
     <div class="results-section">
@@ -148,7 +148,7 @@
           class="btn btn-primary"
           (click)="router.navigate(['/recipes'])">
           Browse Recipes
-        </button>
+        </div>
       </div>
 
       <!-- Recipe Grid -->
@@ -167,7 +167,7 @@
                 (click)="onRemoveFavorite(recipe); $event.stopPropagation()"
                 matTooltip="Remove from favorites">
                 <mat-icon>favorite</mat-icon>
-              </button>
+              </article>
             </div>
 
           <mat-card-content class="card">
@@ -198,9 +198,9 @@
                   *ngFor="let category of recipe.categories"
                   [style.background-color]="getCategoryColor(category.id)">
                   {{ category.name }}
-                </mat-chip>
-              </mat-chip-listbox>
-            </div>
+                </mat-chip-listbox>
+              </div>
+            </article>
 
             <!-- Tags -->
             <div *ngIf="recipe.tags.length > 0" class="recipe-tags">
@@ -209,10 +209,10 @@
                   *ngFor="let tag of recipe.tags"
                   [style.background-color]="getTagColor(tag.id)">
                   {{ tag.name }}
-                </mat-chip>
-              </mat-chip-listbox>
-            </div>
-          </mat-card-content>
+                </mat-chip-listbox>
+              </div>
+            </mat-card-content>
+          </div>
 
           <mat-card-actions class="card">
             <button 
@@ -220,13 +220,12 @@
               class="btn btn-primary"
               (click)="onViewRecipe(recipe); $event.stopPropagation()">
               View Recipe
-            </button>
+            </mat-card-actions>
             <button 
               mat-icon-button 
               [matMenuTriggerFor]="recipeMenu"
               (click)="$event.stopPropagation()">
               <mat-icon>more_vert</mat-icon>
-            </button>
 
             <mat-menu #recipeMenu="matMenu">
               <button mat-menu-item (click)="onShareRecipe(recipe)">
@@ -243,6 +242,3 @@
                 <span>Remove from Favorites</span>
               </button>
             </mat-menu>
-          </mat-card-actions>
-        </mat-card>
-      </section>

@@ -45,9 +45,9 @@
           [checked]="isDarkTheme" 
           (change)="toggleTheme()"
           class="btn btn-primary">
-        </mat-slide-toggle>
+        </div>
       </div>
-  </mat-sidenav>
+  </mat-sidenav-container>
 
   <!-- Main Content -->
   <mat-sidenav-content class="sidenav-content">
@@ -59,7 +59,7 @@
         mat-icon-button 
         (click)="toggleSidenav()">
         <mat-icon>menu</mat-icon>
-      </button>
+      </mat-toolbar>
       
       <span class="toolbar-title font-medium">{{ title }}</span>
       
@@ -100,7 +100,7 @@
           <span>Logout</span>
         </button>
       </mat-menu>
-    </mat-toolbar>
+    </mat-sidenav-content>
 
     <!-- Page Content -->
     <main id="main-content" class="page-container">
@@ -118,5 +118,3 @@
       <!-- Scroll to Top Button -->
       <app-scroll-to-top></app-scroll-to-top>
     </main>
-  </mat-sidenav-content>
-</mat-sidenav-container>

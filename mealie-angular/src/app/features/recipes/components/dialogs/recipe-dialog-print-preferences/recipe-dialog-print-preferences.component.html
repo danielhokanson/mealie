@@ -26,7 +26,7 @@
             <mat-button-toggle [value]="ImagePosition.Hidden">
               <mat-icon>close</mat-icon>
             </mat-button-toggle>
-          </mat-button-toggle-group>
+          </div>
         </div>
 
         <!-- Content Options -->
@@ -36,7 +36,7 @@
               [(ngModel)]="preferences.showDescription"
               class="btn btn-primary">
               Description
-            </mat-slide-toggle>
+            </div>
           </div>
           
           <div class="option-group">
@@ -44,7 +44,7 @@
               [(ngModel)]="preferences.showNotes"
               class="btn btn-primary">
               Notes
-            </mat-slide-toggle>
+            </div>
           </div>
 
         <!-- Nutrition Options -->
@@ -54,7 +54,7 @@
               [(ngModel)]="preferences.showNutrition"
               class="btn btn-primary">
               Nutrition
-            </mat-slide-toggle>
+            </div>
           </div>
       </div>
 
@@ -63,7 +63,4 @@
       <app-recipe-print-view
         [recipe]="recipe"
         [preferences]="preferences">
-      </app-recipe-print-view>
-    </mat-card>
-  </div>
-</app-base-dialog>
+      </mat-card>

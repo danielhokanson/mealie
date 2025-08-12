@@ -15,9 +15,9 @@
         (click)="clearSearch()"
         aria-label="Clear search">
         <mat-icon>clear</mat-icon>
-      </button>
-    </mat-form-field>
-  </div>
+      </mat-form-field>
+    </section>
+  </section>
 
   <!-- Filter Buttons -->
   <div class="filter-buttons">
@@ -28,7 +28,7 @@
       (click)="onFilterClick('categories')">
       <mat-icon>category</mat-icon>
       Categories
-    </button>
+    </div>
     
     <button 
       mat-raised-button 
@@ -37,7 +37,6 @@
       (click)="onFilterClick('tags')">
       <mat-icon>local_offer</mat-icon>
       Tags
-    </button>
     
     <button 
       mat-raised-button 
@@ -46,7 +45,6 @@
       (click)="onFilterClick('tools')">
       <mat-icon>build</mat-icon>
       Tools
-    </button>
     
     <button 
       mat-raised-button 
@@ -55,7 +53,6 @@
       (click)="onFilterClick('foods')">
       <mat-icon>restaurant</mat-icon>
       Foods
-    </button>
     
     <button 
       mat-raised-button 
@@ -64,7 +61,6 @@
       (click)="onFilterClick('created')">
       <mat-icon>sort</mat-icon>
       Created
-    </button>
     
     <button 
       mat-icon-button 
@@ -72,8 +68,6 @@
       class="settings-button"
       (click)="onFilterClick('settings')">
       <mat-icon>settings</mat-icon>
-    </button>
-  </div>
 
   <!-- Active Filter Display -->
   <div *ngIf="activeFilter" class="active-filter">
@@ -100,4 +94,4 @@
   <div class="empty-state" *ngIf="!searchResults.length && !searchQuery">
     <mat-icon>search</mat-icon>
     <p class="text-secondary mb-sm">Start typing to search for recipes</p>
-  </section>
+  </div>

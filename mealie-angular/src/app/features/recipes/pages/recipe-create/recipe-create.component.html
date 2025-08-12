@@ -2,7 +2,7 @@
   <article class="card">
     <h1 class="text-2xl font-medium mb-md">Create New Recipe</h1>
     <p class="text-secondary mb-sm">Fill in the details below to create your recipe</p>
-  </div>
+  </article>
 
   <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()" class="recipe-form">
     <!-- Basic Information -->
@@ -32,9 +32,9 @@
               formControlName="description"
               placeholder="Enter recipe description"
               rows="3">
-            </textarea>
-          </mat-form-field>
-        </div>
+            </mat-form-field>
+          </div>
+        </mat-card-content>
 
         <div class="form-row time-inputs">
           <mat-form-field appearance="outline" class="w-full">
@@ -87,8 +87,8 @@
         <div class="time-summary">
           <p class="text-secondary mb-sm"><strong>Total Time:</strong> {{ getFormattedTime(getTotalTime()) }}</p>
         </div>
-      </mat-card-content>
-    </mat-card>
+      </mat-card>
+    </form>
 
     <!-- Categories and Tags -->
     <mat-card class="form-section card">
@@ -105,7 +105,7 @@
               (change)="onCategoryToggle(category.id)"
               [style.color]="category.color">
               {{ category.name }}
-            </mat-checkbox>
+            </div>
           </div>
 
         <div class="tags-section">
@@ -117,7 +117,7 @@
               (change)="onTagToggle(tag.id)"
               [style.color]="tag.color">
               {{ tag.name }}
-            </mat-checkbox>
+            </div>
           </div>
 
         <div class="tools-section">
@@ -128,7 +128,7 @@
               [checked]="selectedTools.includes(tool.id)"
               (change)="onToolToggle(tool.id)">
               {{ tool.name }}
-            </mat-checkbox>
+            </div>
           </div>
 
         <div class="foods-section">
@@ -139,7 +139,7 @@
               [checked]="selectedFoods.includes(food.id)"
               (change)="onFoodToggle(food.id)">
               {{ food.name }}
-            </mat-checkbox>
+            </div>
           </div>
       </mat-card-content>
     </mat-card>
@@ -191,7 +191,7 @@
                 (click)="removeIngredient(i)"
                 class="remove-button">
                 <mat-icon>delete</mat-icon>
-              </button>
+              </div>
             </div>
 
             <div class="ingredient-row">
@@ -224,10 +224,9 @@
             class="add-button">
             <mat-icon>add</mat-icon>
             Add Ingredient
-          </button>
-        </div>
-      </mat-card-content>
-    </mat-card>
+          </mat-card-content>
+        </mat-card>
+      </section>
 
     <!-- Instructions -->
     <mat-card class="form-section card">
@@ -251,8 +250,8 @@
                   formControlName="text"
                   placeholder="Enter instruction step"
                   rows="2">
-                </textarea>
-              </mat-form-field>
+                </mat-form-field>
+              </div>
               <button 
                 mat-icon-button 
                 class="btn btn-error"
@@ -260,8 +259,8 @@
                 (click)="removeInstruction(i)"
                 class="remove-button">
                 <mat-icon>delete</mat-icon>
-              </button>
-            </div>
+              </div>
+            </mat-card-content>
 
           <button 
             mat-raised-button 
@@ -271,10 +270,7 @@
             class="add-button">
             <mat-icon>add</mat-icon>
             Add Instruction
-          </button>
-        </div>
-      </mat-card-content>
-    </mat-card>
+          </mat-card>
 
     <!-- Form Actions -->
     <div class="flex justify-end gap-sm mt-lg">
@@ -284,7 +280,7 @@
         (click)="onCancel()"
         class="btn btn-secondary">
         Cancel
-      </button>
+      </div>
       <button 
         mat-raised-button 
         class="btn btn-primary"
@@ -293,7 +289,3 @@
         class="btn btn-primary">
         <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner>
         <span *ngIf="!loading">Create Recipe</span>
-      </button>
-    </div>
-  </form>
-</section>

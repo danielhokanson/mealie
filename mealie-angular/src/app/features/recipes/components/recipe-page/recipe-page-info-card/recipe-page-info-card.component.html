@@ -3,7 +3,7 @@
     <app-recipe-page-info-card-image
       *ngIf="landscape"
       [recipe]="recipe">
-    </app-recipe-page-info-card-image>
+    </div>
     
     <mat-card class="info-card" [class.full-width]="landscape" class="card">
       <mat-card-content class="info-content card">
@@ -13,8 +13,8 @@
             [recipeId]="recipe.id"
             [slug]="recipe.id"
             [modelValue]="recipe.rating || 0">
-          </app-recipe-rating>
-        </div>
+          </article>
+        </mat-card-content>
         
         <mat-divider class="title-divider"></mat-divider>
         
@@ -31,7 +31,7 @@
                 [yieldQuantity]="recipe.recipeYieldQuantity"
                 [yieldText]="recipe.recipeYield"
                 [scale]="recipeScale">
-              </app-recipe-yield>
+              </div>
             </div>
             
             <div *ngIf="isOwnGroup" class="last-made-section">
@@ -43,14 +43,12 @@
               [prepTime]="recipe.prepTime"
               [totalTime]="recipe.totalTime"
               [performTime]="recipe.totalTime">
-            </app-recipe-time-card>
-          </div>
-      </mat-card-content>
-    </mat-card>
+            </div>
+          </article>
+      </mat-card>
+    </article>
     
     <app-recipe-page-info-card-image
       *ngIf="!landscape"
       [recipe]="recipe"
       class="recipe-image">
-    </app-recipe-page-info-card-image>
-  </section>

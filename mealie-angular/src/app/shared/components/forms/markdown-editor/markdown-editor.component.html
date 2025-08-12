@@ -10,15 +10,14 @@
             [placeholder]="hint"
             rows="10"
             class="markdown-textarea">
-          </textarea>
-        </mat-form-field>
+          </mat-form-field>
+        </mat-tab>
       
-    </mat-tab>
+    </mat-tab-group>
     
     <mat-tab label="Preview" *ngIf="showPreview">
       
         <app-safe-markdown [source]="markdownContent"></app-safe-markdown>
       
     </mat-tab>
-  </mat-tab-group>
-</section>
+  </div>

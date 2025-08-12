@@ -28,9 +28,9 @@
               <div class="health-header">
                 <mat-icon [style.color]="getHealthStatusColor(systemHealth?.database?.status)">
                   {{ getHealthStatusIcon(systemHealth?.database?.status) }}
-                </mat-icon>
+
                 <span class="health-title">Database</span>
-              </div>
+
               <div class="health-details">
                 <div class="health-metric">
                   <span class="metric-label">Size:</span>
@@ -51,9 +51,9 @@
               <div class="health-header">
                 <mat-icon [style.color]="getHealthStatusColor(systemHealth?.storage?.status)">
                   {{ getHealthStatusIcon(systemHealth?.storage?.status) }}
-                </mat-icon>
+
                 <span class="health-title">Storage</span>
-              </div>
+
               <div class="health-details">
                 <div class="health-metric">
                   <span class="metric-label">Used:</span>
@@ -74,9 +74,9 @@
               <div class="health-header">
                 <mat-icon [style.color]="getHealthStatusColor(systemHealth?.memory?.status)">
                   {{ getHealthStatusIcon(systemHealth?.memory?.status) }}
-                </mat-icon>
+
                 <span class="health-title">Memory</span>
-              </div>
+
               <div class="health-details">
                 <div class="health-metric">
                   <span class="metric-label">Used:</span>
@@ -97,9 +97,9 @@
               <div class="health-header">
                 <mat-icon [style.color]="getHealthStatusColor(systemHealth?.cpu?.status)">
                   {{ getHealthStatusIcon(systemHealth?.cpu?.status) }}
-                </mat-icon>
+
                 <span class="health-title">CPU</span>
-              </div>
+
               <div class="health-details">
                 <div class="health-metric">
                   <span class="metric-label">Usage:</span>
@@ -126,11 +126,11 @@
               (click)="onRefreshHealth()">
               <mat-icon>refresh</mat-icon>
               Refresh
-            </button>
-          </div>
-        </mat-card-content>
-      </mat-card>
-    </div>
+            </div>
+          </mat-icon>
+        </div>
+      </div>
+    </mat-icon>
 
     <!-- Maintenance Tasks -->
     <div class="maintenance-tasks-section">
@@ -149,13 +149,13 @@
                 <div class="task-info">
                   <mat-icon [style.color]="getTaskTypeColor(task.type)">
                     {{ getTaskTypeIcon(task.type) }}
-                  </mat-icon>
+
                   <div class="task-details">
                     <span class="task-name">{{ task.name }}</span>
                     <span class="task-description">{{ task.description }}</span>
                   </div>
-              </td>
-            </ng-container>
+
+            </mat-icon>
 
             <!-- Type Column -->
             <ng-container matColumnDef="type">
@@ -165,9 +165,9 @@
                            task.type === 'optimization' ? 'accent' : 
                            task.type === 'repair' ? 'warn' : 'default'">
                   {{ task.type }}
-                </mat-chip>
-              </td>
-            </ng-container>
+                </td>
+              </ng-container>
+            </div>
 
             <!-- Status Column -->
             <ng-container matColumnDef="status">
@@ -176,13 +176,13 @@
                 <div class="status-indicator">
                   <mat-icon [style.color]="getTaskStatusColor(task.status)">
                     {{ getTaskStatusIcon(task.status) }}
-                  </mat-icon>
+
                   <span [style.color]="getTaskStatusColor(task.status)">
                     {{ task.status }}
                   </span>
-                </div>
-              </td>
-            </ng-container>
+
+              </mat-icon>
+            </div>
 
             <!-- Last Run Column -->
             <ng-container matColumnDef="lastRun">
@@ -202,7 +202,7 @@
                     [matMenuTriggerFor]="menu"
                     [disabled]="!canRunTask(task)">
                     <mat-icon>more_vert</mat-icon>
-                  </button>
+                  </div>
                   
                   <mat-menu #menu="matMenu">
                     <button mat-menu-item (click)="onRunTask(task)">
@@ -218,13 +218,13 @@
                       <span>View Details</span>
                     </button>
                   </mat-menu>
-                </div>
-              </td>
-            </ng-container>
+                </td>
+              </ng-container>
+            </td>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
+          </ng-container>
 
           <!-- Empty State -->
           <div *ngIf="maintenanceTasks.length === 0" class="empty-tasks">
@@ -232,9 +232,9 @@
             <h3 class="text-lg font-medium mb-sm">No Maintenance Tasks</h3>
             <p class="text-secondary mb-sm">No maintenance tasks are currently configured</p>
           </div>
-        </mat-card-content>
-      </mat-card>
-    </div>
+        </td>
+      </ng-container>
+    </table>
 
     <!-- Emergency Actions -->
     <div class="emergency-actions-section">
@@ -253,15 +253,15 @@
               [disabled]="loading">
               <mat-icon>warning</mat-icon>
               Emergency Maintenance
-            </button>
+            </div>
             <p class="emergency-note text-secondary mb-sm">
               Use emergency maintenance only when the system is experiencing critical issues.
               This may temporarily affect system performance.
             </p>
-          </div>
-        </mat-card-content>
-      </mat-card>
-    </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-card-content>
 
   <!-- Progress Overlay -->
   <div *ngIf="runningTask" class="progress-overlay">
@@ -273,11 +273,27 @@
           mode="determinate" 
           [value]="taskProgress"
           class="btn btn-primary">
-        </mat-progress-bar>
+        </mat-card-content>
         <span class="progress-text">{{ taskProgress }}%</span>
         <p class="estimated-time text-secondary mb-sm">
           Estimated time: {{ getEstimatedTimeDisplay(runningTask.estimatedTime) }}
         </p>
-      </mat-card-content>
-    </mat-card>
-  </section>
+      </mat-card>
+    </div>
+  </mat-card>
+
+</div>
+</div>
+</div>
+</mat-icon>
+</div>
+</div>
+</mat-icon>
+</div>
+</div>
+</div>
+</mat-card-content>
+</mat-card>
+</div>
+</div>
+</section>

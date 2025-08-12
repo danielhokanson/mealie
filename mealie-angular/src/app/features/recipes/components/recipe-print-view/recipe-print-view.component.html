@@ -32,14 +32,14 @@
               [performTime]="getNumber(recipe.performTime)"
               [small]="true"
               color="white">
-            </app-recipe-time-card>
-          </div>
+            </div>
+          </article>
           
           <!-- Description -->
           <div *ngIf="(preferences || defaultPreferences).showDescription && recipe.description" class="description-section">
             <app-safe-markdown [markdown]="recipe.description || ''"></app-safe-markdown>
           </div>
-      </div>
+      </article>
   </section>
 
   <!-- Ingredients Section -->
@@ -50,15 +50,13 @@
       <h4 *ngIf="ingredientSection.ingredients[0].title" 
           class="ingredient-title">
         {{ ingredientSection.ingredients[0].title }}
-      </h4>
+      </section>
       <div class="ingredient-grid"
            [style.grid-template-rows]="'repeat(' + (ingredientSection.ingredients.length / 2) + ', min-content)'">
         <p *ngFor="let ingredient of ingredientSection.ingredients; let ingredientIndex = index"
            class="ingredient-body"
            [innerHTML]="parseIngredientText(ingredient)" class="text-secondary mb-sm">
-        </p>
-      </div>
-  </section>
+        </div>
 
   <!-- Instructions Section -->
   <section>
@@ -75,9 +73,8 @@
         </h5>
         <article class="card">
           <app-safe-markdown [markdown]="step.text || ''"></app-safe-markdown>
-        </div>
-    </div>
-  </section>
+        </article>
+    </section>
 
   <!-- Notes Section -->
   <div *ngIf="(preferences || defaultPreferences).showNotes">
@@ -89,8 +86,8 @@
         <div class="note-body">
           <app-safe-markdown [markdown]="note.text || ''"></app-safe-markdown>
         </div>
-    </section>
-  </div>
+    </div>
+  </section>
 
   <!-- Nutrition Section -->
   <div *ngIf="(preferences || defaultPreferences).showNutrition && recipe.nutrition">
@@ -108,4 +105,6 @@
         </table>
       </div>
     </section>
-  </section>
+  </div>
+
+</div>

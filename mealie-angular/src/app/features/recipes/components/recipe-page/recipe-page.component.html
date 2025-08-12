@@ -9,7 +9,7 @@
             <mat-icon *ngFor="let star of [1,2,3,4,5]" 
                       [color]="star <= recipe.rating ? 'accent' : 'basic'">
               {{ star <= recipe.rating ? 'star' : 'star_border' }}
-            </mat-icon>
+
             <span class="rating-text">{{ recipe.rating }}/5</span>
           </span>
           <span class="recipe-servings">
@@ -20,7 +20,7 @@
             <mat-icon>schedule</mat-icon>
             {{ totalTime }} min
           </span>
-        </div>
+        </article>
       
       <article class="card">
         <app-base-button 
@@ -28,20 +28,20 @@
           (click)="toggleEditMode()"
           *ngIf="!isEditForm">
           Edit
-        </app-base-button>
+        </article>
         <app-base-button 
           [save]="true" 
           (click)="onSave()"
           *ngIf="isEditForm">
           Save
-        </app-base-button>
+        </article>
         <app-base-button 
           [delete]="true" 
           (click)="onDelete()"
           *ngIf="isEditForm">
           Delete
-        </app-base-button>
-      </div>
+        </article>
+      </mat-card>
 
     <!-- Recipe Image -->
     <div *ngIf="recipe.image" class="recipe-image-container">
@@ -66,7 +66,7 @@
         (input)="onScaleChange($event)"
         class="scale-slider">
       <span class="scale-text">{{ scale }}x</span>
-    </div>
+    </article>
 
     <!-- Recipe Content -->
     
@@ -90,8 +90,8 @@
           [create]="true" 
           (click)="addIngredient()">
           Add Ingredient
-        </app-base-button>
-      </div>
+        </div>
+      </article>
 
       <mat-divider vertical class="recipe-divider"></mat-divider>
 
@@ -109,8 +109,8 @@
           [create]="true" 
           (click)="addInstruction()">
           Add Step
-        </app-base-button>
-      </div>
+        </article>
+      </article>
 
     <!-- Recipe Notes -->
     <div *ngIf="recipe.notes" class="recipe-notes">
@@ -126,5 +126,3 @@
         </mat-chip>
       </mat-chip-set>
     </div>
-  </mat-card>
-</section>

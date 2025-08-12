@@ -35,10 +35,10 @@
                 <mat-progress-bar
                     [value]="uploadProgress"
                     class="btn btn-primary">
-                </mat-progress-bar>
+                </div>
                 <p class="progress-text text-secondary mb-sm">Uploading... {{ uploadProgress | number:'1.0-0' }}%</p>
-            </div>
-        </mat-card-content>
+            </mat-card-content>
+        </section>
         
         <mat-card-actions class="drop-zone-actions card">
             <button
@@ -48,7 +48,7 @@
                 [disabled]="disabled">
                 <mat-icon>folder_open</mat-icon>
                 Browse Files
-            </button>
+            </mat-card-actions>
             
             <button
                 *ngIf="selectedFiles.length > 0"
@@ -57,7 +57,3 @@
                 (click)="clearFiles(); $event.stopPropagation()">
                 <mat-icon>clear</mat-icon>
                 Clear
-            </button>
-        </mat-card-actions>
-    </mat-card>
-</section>

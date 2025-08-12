@@ -13,7 +13,7 @@
         [matMenuTriggerFor]="listMenu"
         class="list-menu-btn">
         <mat-icon>more_vert</mat-icon>
-      </button>
+      </div>
       
       <mat-menu #listMenu="matMenu">
         <button mat-menu-item (click)="addItem()">
@@ -30,8 +30,8 @@
           <span>Delete List</span>
         </button>
       </mat-menu>
-    </div>
-  </mat-card-header>
+    </mat-card-header>
+  </mat-card>
 
   <mat-card-content class="card">
     <!-- Progress Bar -->
@@ -58,7 +58,7 @@
           (checked)="onItemChecked($event)"
           (save)="onItemUpdated($event)"
           (delete)="onItemDeleted($event)">
-        </app-shopping-list-item>
+        </div>
       </div>
 
     <!-- Checked Items -->
@@ -77,7 +77,7 @@
           (checked)="onItemChecked($event)"
           (save)="onItemUpdated($event)"
           (delete)="onItemDeleted($event)">
-        </app-shopping-list-item>
+        </div>
       </div>
 
     <!-- Empty State -->
@@ -89,5 +89,5 @@
         Add First Item
       </button>
     </div>
-  </mat-card-content>
-</mat-card>
+  </div>
+</mat-card-content>

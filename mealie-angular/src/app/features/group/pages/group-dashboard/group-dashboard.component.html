@@ -33,20 +33,20 @@
           (click)="onAddMember()">
           <mat-icon>person_add</mat-icon>
           Add Member
-        </button>
+        </div>
         <button 
           mat-raised-button 
           class="btn btn-secondary"
           (click)="onCreateHousehold()">
           <mat-icon>home</mat-icon>
           Create Household
-        </button>
+        </div>
         <button 
           mat-icon-button 
           [matMenuTriggerFor]="groupMenu"
           matTooltip="Group Actions">
           <mat-icon>more_vert</mat-icon>
-        </button>
+        </div>
 
         <mat-menu #groupMenu="matMenu">
           <button mat-menu-item (click)="onViewMembers()">
@@ -191,18 +191,18 @@
                   (click)="onDeleteHousehold(household)"
                   matTooltip="Delete household">
                   <mat-icon>delete</mat-icon>
-                </button>
-              </div>
-            </mat-list-item>
-          </mat-list>
-        </mat-card-content>
+                </div>
+              </mat-list-item>
+            </mat-list>
+          </mat-card-content>
+        </mat-card>
         <mat-card-actions class="card">
           <button mat-button class="btn btn-primary" (click)="onViewHouseholds()">
             View All Households
           </button>
         </mat-card-actions>
-      </mat-card>
-    </div>
+      </div>
+    </section>
 
     <!-- Recent Activity -->
     <div class="activity-section">
@@ -290,10 +290,9 @@
           (click)="onSaveMember()"
           [disabled]="addMemberForm.invalid">
           Add Member
-        </button>
-      </mat-card-actions>
-    </mat-card>
-  </div>
+        </mat-card-actions>
+      </mat-card>
+    </div>
 
   <!-- Create Household Dialog -->
   <div *ngIf="showCreateHouseholdDialog" class="dialog-overlay">
@@ -321,17 +320,17 @@
                 formControlName="description"
                 placeholder="Enter description"
                 rows="3">
-              </textarea>
-            </mat-form-field>
-          </div>
+              </mat-form-field>
+            </div>
+          </form>
 
           <div class="form-row">
             <mat-checkbox formControlName="isActive">
               Active
             </mat-checkbox>
           </div>
-        </form>
-      </mat-card-content>
+        </mat-card-content>
+      </mat-card>
       <mat-card-actions class="card">
         <button mat-button (click)="showCreateHouseholdDialog = false">Cancel</button>
         <button 
@@ -340,7 +339,5 @@
           (click)="onSaveHousehold()"
           [disabled]="createHouseholdForm.invalid">
           Create Household
-        </button>
-      </mat-card-actions>
-    </mat-card>
-  </section>
+        </mat-card-actions>
+      </div>

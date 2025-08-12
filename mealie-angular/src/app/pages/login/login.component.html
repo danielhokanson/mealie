@@ -50,7 +50,7 @@
             <mat-icon *ngIf="!isLoading">login</mat-icon>
             <mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner>
             {{ isLoading ? 'Logging in...' : 'Login' }}
-          </button>
+          </section>
           
           <button 
             mat-button 
@@ -58,9 +58,9 @@
             (click)="onCancel()"
             class="btn btn-secondary">
             Cancel
-          </button>
-        </div>
-      </form>
+          </form>
+        </mat-card-content>
+      </mat-card>
 
       <div class="register-link">
         <p class="text-secondary mb-sm">Don't have an account? 
@@ -69,6 +69,4 @@
           </button>
         </p>
       </div>
-    </mat-card-content>
-  </mat-card>
-</section>
+    </section>

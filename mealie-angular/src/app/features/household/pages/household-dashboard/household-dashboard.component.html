@@ -33,20 +33,20 @@
           (click)="onAddMember()">
           <mat-icon>person_add</mat-icon>
           Add Member
-        </button>
+        </div>
         <button 
           mat-raised-button 
           class="btn btn-secondary"
           (click)="onCreateShoppingList()">
           <mat-icon>add_shopping_cart</mat-icon>
           Create List
-        </button>
+        </div>
         <button 
           mat-icon-button 
           [matMenuTriggerFor]="householdMenu"
           matTooltip="Household Actions">
           <mat-icon>more_vert</mat-icon>
-        </button>
+        </div>
 
         <mat-menu #householdMenu="matMenu">
           <button mat-menu-item (click)="onViewMembers()">
@@ -160,17 +160,17 @@
                   (click)="onRemoveMember(member)"
                   matTooltip="Remove member">
                   <mat-icon>remove_circle</mat-icon>
-                </button>
-              </div>
-            </mat-list-item>
-          </mat-list>
-        </mat-card-content>
+                </div>
+              </mat-list-item>
+            </mat-list>
+          </mat-card-content>
+        </mat-card>
         <mat-card-actions class="card">
           <button mat-button class="btn btn-primary" (click)="onViewMembers()">
             View All Members
           </button>
         </mat-card-actions>
-      </mat-card>
+      </div>
 
       <!-- Shopping Lists Section -->
       <mat-card class="section-card card">
@@ -194,18 +194,17 @@
                   (click)="onDeleteShoppingList(list)"
                   matTooltip="Delete list">
                   <mat-icon>delete</mat-icon>
-                </button>
-              </div>
-            </mat-list-item>
-          </mat-list>
-        </mat-card-content>
+                </div>
+              </mat-list-item>
+            </mat-list>
+          </mat-card-content>
+        </mat-card>
         <mat-card-actions class="card">
           <button mat-button class="btn btn-primary" (click)="onViewShoppingLists()">
             View All Lists
           </button>
         </mat-card-actions>
-      </mat-card>
-    </div>
+      </section>
 
     <!-- Recent Activity -->
     <div class="activity-section">
@@ -293,10 +292,9 @@
           (click)="onSaveMember()"
           [disabled]="addMemberForm.invalid">
           Add Member
-        </button>
-      </mat-card-actions>
-    </mat-card>
-  </div>
+        </mat-card-actions>
+      </mat-card>
+    </div>
 
   <!-- Create Shopping List Dialog -->
   <div *ngIf="showCreateListDialog" class="dialog-overlay">
@@ -324,17 +322,17 @@
                 formControlName="description"
                 placeholder="Enter description"
                 rows="3">
-              </textarea>
-            </mat-form-field>
-          </div>
+              </mat-form-field>
+            </div>
+          </form>
 
           <div class="form-row">
             <mat-checkbox formControlName="isActive">
               Active
             </mat-checkbox>
           </div>
-        </form>
-      </mat-card-content>
+        </mat-card-content>
+      </mat-card>
       <mat-card-actions class="card">
         <button mat-button (click)="showCreateListDialog = false">Cancel</button>
         <button 
@@ -343,7 +341,5 @@
           (click)="onSaveShoppingList()"
           [disabled]="createShoppingListForm.invalid">
           Create List
-        </button>
-      </mat-card-actions>
-    </mat-card>
-  </section>
+        </mat-card-actions>
+      </div>

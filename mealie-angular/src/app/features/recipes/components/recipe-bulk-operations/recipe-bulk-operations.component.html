@@ -13,22 +13,20 @@
       (click)="onSelectAll()">
       <mat-icon>select_all</mat-icon>
       Select All
-    </button>
+    </div>
     <button 
       mat-button 
       class="btn btn-primary"
       (click)="onInvertSelection()">
       <mat-icon>swap_horiz</mat-icon>
       Invert Selection
-    </button>
+    </section>
     <button 
       mat-button 
       class="btn btn-error"
       (click)="onClearSelection()">
       <mat-icon>clear</mat-icon>
       Clear Selection
-    </button>
-  </div>
 
   <!-- Operation Type Selection -->
   <div class="operation-selection">
@@ -40,36 +38,32 @@
         (click)="onOperationTypeChange('category')">
         <mat-icon>category</mat-icon>
         Update Categories
-      </button>
+      </div>
       <button 
         mat-button 
         [class.active]="operationType === 'tag'"
         (click)="onOperationTypeChange('tag')">
         <mat-icon>label</mat-icon>
         Update Tags
-      </button>
+      </div>
       <button 
         mat-button 
         [class.active]="operationType === 'delete'"
         (click)="onOperationTypeChange('delete')">
         <mat-icon>delete</mat-icon>
         Delete Recipes
-      </button>
       <button 
         mat-button 
         [class.active]="operationType === 'export'"
         (click)="onOperationTypeChange('export')">
         <mat-icon>download</mat-icon>
         Export Recipes
-      </button>
       <button 
         mat-button 
         [class.active]="operationType === 'share'"
         (click)="onOperationTypeChange('share')">
         <mat-icon>share</mat-icon>
         Share Recipes
-      </button>
-    </div>
 
   <!-- Operation Configuration -->
   <div class="operation-config">
@@ -92,12 +86,12 @@
                 <span class="category-name">{{ category.name }}</span>
                 <span class="category-description" *ngIf="category.description">{{ category.description }}</span>
               </div>
-            </mat-checkbox>
+            </div>
             <div 
               class="category-color"
               [style.background-color]="getCategoryColor(category)">
             </div>
-        </div>
+        </form>
 
         <div class="selected-summary" *ngIf="selectedCategories.length > 0">
           <h4>Selected Categories:</h4>
@@ -106,7 +100,7 @@
               *ngFor="let categoryName of getSelectedCategoryNames()"
               [style.background-color]="getCategoryColor(availableCategories.find(c => c.name === categoryName)!)">
               {{ categoryName }}
-            </mat-chip>
+            </div>
           </div>
       </div>
 
@@ -128,12 +122,11 @@
                 <span class="tag-name">{{ tag.name }}</span>
                 <span class="tag-description" *ngIf="tag.description">{{ tag.description }}</span>
               </div>
-            </mat-checkbox>
+            </div>
             <div 
               class="tag-color"
               [style.background-color]="getTagColor(tag)">
             </div>
-        </div>
 
         <div class="selected-summary" *ngIf="selectedTags.length > 0">
           <h4>Selected Tags:</h4>
@@ -142,9 +135,8 @@
               *ngFor="let tagName of getSelectedTagNames()"
               [style.background-color]="getTagColor(availableTags.find(t => t.name === tagName)!)">
               {{ tagName }}
-            </mat-chip>
+            </div>
           </div>
-      </div>
 
       <!-- Delete Operation -->
       <div *ngIf="operationType === 'delete'" class="operation-section">
@@ -160,7 +152,7 @@
             (change)="onConfirmDeleteChange()"
             class="btn btn-error">
             I understand that this action cannot be undone
-          </mat-checkbox>
+          </div>
         </div>
 
         <div class="recipes-to-delete">
@@ -271,7 +263,7 @@
             </button>
           </div>
       </div>
-    </form>
+    </div>
   </div>
 
   <!-- Execute Button -->
@@ -290,5 +282,7 @@
         <mat-icon *ngIf="operationType === 'share'">share</mat-icon>
         {{ getOperationButtonText() }}
       </span>
-    </button>
-  </section>
+    </div>
+  </div>
+
+</div>

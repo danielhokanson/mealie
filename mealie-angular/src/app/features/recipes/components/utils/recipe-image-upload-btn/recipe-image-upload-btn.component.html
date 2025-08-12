@@ -6,7 +6,7 @@
     class="upload-button">
     <mat-icon class="upload-icon">image</mat-icon>
     Image
-  </button>
+  </section>
 
   <mat-menu #imageMenu="matMenu" class="image-menu">
     <mat-card class="menu-card card">
@@ -20,9 +20,9 @@
             [post]="false"
             (uploaded)="uploadImage($event)"
             class="upload-component">
-          </app-app-button-upload>
+          </mat-card-title>
         
-      </mat-card-title>
+      </mat-card>
       
       <mat-card-content class="menu-content card">
         <div class="url-section">
@@ -43,9 +43,6 @@
                   (click)="getImageFromURL()"
                   class="get-button">
             Get
-          </button>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </mat-menu>
-</section>
+          </div>
+        </mat-card-content>
+      </mat-menu>

@@ -7,16 +7,15 @@
       (click)="createNewList()">
       <mat-icon>add</mat-icon>
       New List
-    </button>
-  </header>
+    </header>
+  </section>
 
   <!-- Loading State -->
   <div *ngIf="loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md stagger-animation">
     <app-skeleton-loader 
       *ngFor="let item of [1,2,3,4,5,6]"
       type="card">
-    </app-skeleton-loader>
-  </div>
+    </div>
 
   <!-- Error State -->
   <div *ngIf="error && !loading" class="flex flex-col items-center justify-center py-xl text-center">
@@ -27,8 +26,7 @@
       class="btn btn-primary"
       (click)="loadData()">
       Retry
-    </button>
-  </div>
+    </div>
 
   <!-- Content -->
   <main *ngIf="!loading && !error">
@@ -43,8 +41,8 @@
         (click)="createNewList()">
         <mat-icon>add</mat-icon>
         Create First List
-      </button>
-    </div>
+      </div>
+    </main>
 
     <!-- Shopping Lists Grid -->
     <div *ngIf="shoppingLists.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md stagger-animation">
@@ -60,7 +58,4 @@
         (itemUpdated)="onItemUpdated($event)"
         (itemDeleted)="onItemDeleted($event)"
         (listDeleted)="onListDeleted($event)">
-      </app-shopping-list>
-    </div>
-  </main>
-</section>
+      </div>

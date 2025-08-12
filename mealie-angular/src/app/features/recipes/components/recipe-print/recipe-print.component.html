@@ -15,22 +15,21 @@
         (click)="onPrint()">
         <mat-icon>print</mat-icon>
         Print Recipe
-      </button>
+      </div>
       <button 
         mat-raised-button 
         class="btn btn-secondary"
         (click)="onExportPDF()">
         <mat-icon>picture_as_pdf</mat-icon>
         Export PDF
-      </button>
+      </div>
       <button 
         mat-raised-button 
         class="btn btn-primary"
         (click)="onShare()">
         <mat-icon>share</mat-icon>
         Share
-      </button>
-    </div>
+      </div>
 
     <!-- Print Options -->
     <div class="print-options no-print">
@@ -45,39 +44,36 @@
                 [(ngModel)]="showNutrition"
                 class="btn btn-primary">
                 Include Nutrition Information
-              </mat-checkbox>
+              </div>
             </div>
             <div class="option-item">
               <mat-checkbox 
                 [(ngModel)]="showNotes"
                 class="btn btn-primary">
                 Include Notes
-              </mat-checkbox>
-            </div>
+              </div>
+            </mat-card-content>
             <div class="option-item">
               <mat-checkbox 
                 [(ngModel)]="showComments"
                 class="btn btn-primary">
                 Include Comments
-              </mat-checkbox>
-            </div>
+              </div>
+            </mat-card>
             <div class="option-item">
               <mat-checkbox 
                 [(ngModel)]="showTimeline"
                 class="btn btn-primary">
                 Include Timeline
-              </mat-checkbox>
+              </div>
             </div>
-        </mat-card-content>
-      </mat-card>
-    </div>
 
     <!-- Recipe Header -->
     <article class="card">
       <article class="card">
         <h1 class="text-2xl font-medium mb-md">{{ recipe.name }}</h1>
         <p class="recipe-description text-secondary mb-sm">{{ recipe.description }}</p>
-      </div>
+      </article>
 
       <article class="card">
         <div class="meta-item">
@@ -109,7 +105,7 @@
             *ngFor="let category of recipe.categories"
             [style.background-color]="getCategoryColor(category)">
             {{ category.name }}
-          </mat-chip>
+          </div>
         </div>
         <div class="tags" *ngIf="recipe.tags?.length">
           <span class="tag-label">Tags:</span>
@@ -117,9 +113,9 @@
             *ngFor="let tag of recipe.tags"
             [style.background-color]="getTagColor(tag)">
             {{ tag.name }}
-          </mat-chip>
-        </div>
-    </div>
+          </div>
+        </article>
+    </article>
 
     <!-- Recipe Image -->
     <div class="recipe-image" *ngIf="recipe.image">
@@ -140,7 +136,7 @@
             
           </mat-list-item>
         </mat-list>
-      </div>
+      </article>
 
       <!-- Instructions -->
       <article class="card">
@@ -153,7 +149,7 @@
             
           </mat-list-item>
         </mat-list>
-      </div>
+      </article>
 
     <!-- Nutrition Information -->
     <div class="recipe-nutrition" *ngIf="showNutrition && recipe.nutrition">
@@ -217,9 +213,9 @@
               <span class="comment-date" *ngIf="comment.createdAt">{{ getFormattedDate(comment.createdAt) }}</span>
             
             <div class="comment-text">{{ comment.text }}</div>
-        </mat-list-item>
-      </mat-list>
-    </div>
+        </div>
+      </mat-list-item>
+    </mat-list>
 
     <!-- Timeline -->
     <div class="recipe-timeline" *ngIf="showTimeline && recipe.timeline?.length">
@@ -232,20 +228,25 @@
               <span class="timeline-date" *ngIf="event.date">{{ getFormattedDate(event.date) }}</span>
             
             <div class="timeline-description" *ngIf="event.description">{{ event.description }}</div>
-        </mat-list-item>
-      </mat-list>
-    </div>
+        </div>
+      </mat-list-item>
+    </mat-list>
 
     <!-- Recipe Footer -->
     <article class="card">
       <p class="recipe-source" *ngIf="recipe.source" class="text-secondary mb-sm">Source: {{ recipe.source }}</p>
       <p class="recipe-created" *ngIf="recipe.createdAt" class="text-secondary mb-sm">Created: {{ getFormattedDate(recipe.createdAt) }}</p>
       <p class="recipe-updated" *ngIf="recipe.updatedAt" class="text-secondary mb-sm">Updated: {{ getFormattedDate(recipe.updatedAt) }}</p>
-    </div>
+    </article>
 
   <!-- No Recipe State -->
   <div *ngIf="!loading && !recipe" class="no-recipe">
     <mat-icon class="no-recipe-icon">restaurant</mat-icon>
     <h3 class="text-lg font-medium mb-sm">No Recipe Selected</h3>
     <p class="text-secondary mb-sm">Please select a recipe to print.</p>
-  </section>
+  </div>
+
+</div>
+</div>
+</div>
+</article>

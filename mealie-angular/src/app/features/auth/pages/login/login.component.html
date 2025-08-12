@@ -38,11 +38,11 @@
             (click)="togglePasswordVisibility()"
             [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'">
             <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
-          </button>
+          </mat-form-field>
           <mat-error *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
             {{ getErrorMessage('password') }}
           </mat-error>
-        </mat-form-field>
+        </form>
 
         <!-- Remember Me Checkbox -->
         <mat-checkbox formControlName="rememberMe" class="mb-md">
@@ -57,9 +57,9 @@
           [disabled]="loading || loginForm.invalid">
           <mat-spinner *ngIf="loading" diameter="20" class="mr-sm"></mat-spinner>
           <span>{{ loading ? 'Signing in...' : 'Sign In' }}</span>
-        </button>
-      </form>
-    </mat-card-content>
+        </mat-card-content>
+      </mat-card>
+    </section>
 
     <mat-card-actions class="flex flex-col gap-sm pt-md card">
       <button 
@@ -67,13 +67,9 @@
         (click)="onForgotPassword()"
         class="w-full">
         Forgot Password?
-      </button>
+      </mat-card-actions>
       <button 
         mat-button 
         (click)="onRegister()"
         class="w-full text-primary">
         Don't have an account? Sign up
-      </button>
-    </mat-card-actions>
-  </mat-card>
-</section>

@@ -14,14 +14,13 @@
         [returnObject]="true"
         [showAdd]="true"
         selectorType="categories">
-      </app-recipe-organizer-selector>
+      </mat-card-content>
       
       <app-recipe-chips
         *ngIf="!isEditForm"
         [items]="recipe.recipeCategory">
-      </app-recipe-chips>
-    </mat-card-content>
-  </mat-card>
+      </mat-card>
+    </article>
 
   <!-- Recipe Tags -->
   <mat-card *ngIf="recipe.tags.length  class="card"> 0 || isEditForm" class="organizer-card">
@@ -38,15 +37,13 @@
         [returnObject]="true"
         [showAdd]="true"
         selectorType="tags">
-      </app-recipe-organizer-selector>
+      </mat-card-content>
       
       <app-recipe-chips
         *ngIf="!isEditForm"
         [items]="recipe.tags"
         urlPrefix="tags">
-      </app-recipe-chips>
-    </mat-card-content>
-  </mat-card>
+      </mat-card>
 
   <!-- Recipe Tools -->
   <mat-card *ngIf="isEditForm" class="organizer-card card">
@@ -60,9 +57,8 @@
       <app-recipe-organizer-selector
         [(ngModel)]="recipe.tools"
         selectorType="tools">
-      </app-recipe-organizer-selector>
-    </mat-card-content>
-  </mat-card>
+      </mat-card-content>
+    </mat-card>
 
   <!-- Recipe Nutrition -->
   <app-recipe-nutrition
@@ -70,7 +66,6 @@
     [(ngModel)]="recipe.nutrition"
     [edit]="isEditForm"
     class="nutrition-section">
-  </app-recipe-nutrition>
 
   <!-- Recipe Assets -->
   <app-recipe-assets
@@ -80,5 +75,3 @@
     [slug]="recipe.slug"
     [recipeId]="recipe.id"
     class="assets-section">
-  </app-recipe-assets>
-</section>

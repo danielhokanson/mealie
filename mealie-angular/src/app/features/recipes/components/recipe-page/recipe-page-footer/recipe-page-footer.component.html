@@ -11,11 +11,10 @@
       [href]="recipe.orgURL"
       target="_blank"
       mat-stroked-button
-      class="btn btn-secondary"
-      class="url-button">
+      class="btn btn-secondary url-button">
       Original URL
-    </a>
-  </div>
+    </div>
+  </article>
 
   <!-- API Extras Section (Advanced Only) -->
   <div *ngIf="isEditForm && isAdvancedUser" class="api-extras-section">
@@ -42,10 +41,10 @@
               (click)="removeApiExtra(extra.key)"
               [matTooltip]="'Remove extra'">
               <mat-icon>delete</mat-icon>
-            </button>
-          </mat-form-field>
-        </div>
-      </mat-card-content>
+            </mat-form-field>
+          </div>
+        </mat-card-content>
+      </mat-card>
       
       <mat-card-actions class="add-extra-section card">
         <mat-form-field class="new-key-input w-full">
@@ -60,7 +59,5 @@
           [disabled]="!apiNewKey || hasDuplicateKey()">
           <mat-icon>add</mat-icon>
           Add Extra
-        </button>
-      </mat-card-actions>
-    </mat-card>
-  </section>
+        </mat-card-actions>
+      </div>

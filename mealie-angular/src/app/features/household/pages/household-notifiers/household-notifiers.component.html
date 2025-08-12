@@ -41,17 +41,16 @@
               <mat-slide-toggle
                 [checked]="notifier.enabled"
                 (change)="toggleNotifier(notifier)">
-              </mat-slide-toggle>
+              </div>
               <button mat-icon-button (click)="editNotifier(notifier)">
                 <mat-icon>edit</mat-icon>
               </button>
               <button mat-icon-button class="btn btn-error" (click)="deleteNotifier(notifier.id)">
                 <mat-icon>delete</mat-icon>
               </button>
-            </div>
-          </mat-list-item>
-        </mat-list>
-      </div>
-    </mat-card-content>
-  </mat-card>
-</section>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </section>

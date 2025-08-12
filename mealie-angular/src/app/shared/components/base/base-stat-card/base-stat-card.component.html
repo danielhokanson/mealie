@@ -10,14 +10,11 @@
           
           <mat-icon *ngIf="icon" class="avatar-icon">
             {{ icon }}
-          </mat-icon>
-          
+
           <div *ngIf="text" class="avatar-text">
             {{ text }}
           </div>
-      </div>
-    </ng-content>
-    
+
     <div *ngIf="hasAfterHeading" class="after-heading">
       <ng-content select="[slot=after-heading]"></ng-content>
     </div>
@@ -34,4 +31,10 @@
     
       <ng-content select="[slot=bottom]"></ng-content>
     
+</div>
+
+</div>
+</mat-icon>
+</div>
+</div>
 </mat-card>

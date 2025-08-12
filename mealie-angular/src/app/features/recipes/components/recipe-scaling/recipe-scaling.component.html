@@ -62,7 +62,7 @@
               (click)="onScalingOptionChange(option.value)"
               class="scaling-option">
               {{ option.label }}
-            </button>
+            </div>
           </div>
 
         <div class="control-section">
@@ -73,7 +73,7 @@
             (click)="onToggleAdvanced()">
             <mat-icon>{{ showAdvanced ? 'expand_less' : 'expand_more' }}</mat-icon>
             {{ showAdvanced ? 'Hide' : 'Show' }} Advanced Options
-          </button>
+          </div>
 
           <div *ngIf="showAdvanced" class="advanced-options">
             <div class="option-group">
@@ -84,7 +84,7 @@
                   (change)="onToggleRounding()"
                   class="btn btn-primary">
                   Round ingredient quantities
-                </mat-checkbox>
+                </div>
               </div>
               <div class="option-item" *ngIf="roundDecimals">
                 <label>Round to nearest:</label>
@@ -95,7 +95,7 @@
                   <mat-option value="0.25">1/4</mat-option>
                   <mat-option value="0.5">1/2</mat-option>
                   <mat-option value="1">1</mat-option>
-                </mat-select>
+                </div>
               </div>
 
             <div class="option-group">
@@ -105,24 +105,24 @@
                   formControlName="scaleTime"
                   class="btn btn-primary">
                   Scale cooking time
-                </mat-checkbox>
+                </div>
               </div>
               <div class="option-item">
                 <mat-checkbox 
                   formControlName="scaleTemperature"
                   class="btn btn-primary">
                   Scale temperature (experimental)
-                </mat-checkbox>
+                </div>
               </div>
               <div class="option-item">
                 <mat-checkbox 
                   formControlName="scaleEquipment"
                   class="btn btn-primary">
                   Scale equipment size
-                </mat-checkbox>
-              </div>
+                </div>
+              </form>
           </div>
-      </form>
+      </div>
     </div>
 
     <!-- Scaled Recipe Preview -->
@@ -145,7 +145,7 @@
             <mat-icon>timer</mat-icon>
             <span>Cook: {{ getFormattedTime(getScaledTime(recipe.cookTime)) }}</span>
           </div>
-      </div>
+      </article>
 
       <!-- Scaled Ingredients -->
       <div class="scaled-ingredients">
@@ -187,7 +187,7 @@
           <mat-icon>save</mat-icon>
           Save Scaled Recipe
         </span>
-      </button>
+      </div>
       <button 
         mat-raised-button 
         class="btn btn-secondary"
@@ -195,7 +195,7 @@
         [disabled]="loading">
         <mat-icon>print</mat-icon>
         Print Scaled Recipe
-      </button>
+      </article>
       <button 
         mat-raised-button 
         class="btn btn-primary"
@@ -203,12 +203,12 @@
         [disabled]="loading">
         <mat-icon>download</mat-icon>
         Export Scaled Recipe
-      </button>
-    </div>
+      </div>
+    </section>
 
   <!-- No Recipe State -->
   <div *ngIf="!loading && !recipe" class="no-recipe">
     <mat-icon class="no-recipe-icon">restaurant</mat-icon>
     <h3 class="text-lg font-medium mb-sm">No Recipe Selected</h3>
     <p class="text-secondary mb-sm">Please select a recipe to scale.</p>
-  </section>
+  </div>

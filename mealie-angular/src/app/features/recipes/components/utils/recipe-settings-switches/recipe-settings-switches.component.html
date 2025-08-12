@@ -4,8 +4,6 @@
     [checked]="value[key]"
     (change)="onSettingChange(key, $event.checked)"
     [disabled]="isDisabled(key)"
-    class="btn btn-primary"
-    class="setting-toggle">
+    class="btn btn-primary setting-toggle">
     {{ labels[key] }}
-  </mat-slide-toggle>
-</section>
+  </div>

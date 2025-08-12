@@ -10,8 +10,8 @@
         (click)="onCreateRecipe()">
         <mat-icon>add</mat-icon>
         Create Recipe
-      </button>
-    </div>
+      </div>
+    </header>
     
     <form (ngSubmit)="onSearch()">
       <!-- Search Bar -->
@@ -31,8 +31,8 @@
           (click)="searchQuery = ''; onSearchQueryChange('')"
           aria-label="Clear search">
           <mat-icon>clear</mat-icon>
-        </button>
-      </mat-form-field>
+        </mat-form-field>
+      </form>
 
       <!-- Filter Row -->
       <div class="flex flex-wrap gap-sm items-center mb-md">
@@ -45,7 +45,7 @@
           (selectionChange)="onFilterChange()"
           label="Categories"
           icon="category">
-        </app-search-filter>
+        </div>
 
         <!-- Tags Filter -->
         <app-search-filter
@@ -56,7 +56,7 @@
           (selectionChange)="onFilterChange()"
           label="Tags"
           icon="local_offer">
-        </app-search-filter>
+        </section>
 
         <!-- Tools Filter -->
         <app-search-filter
@@ -67,7 +67,6 @@
           (selectionChange)="onFilterChange()"
           label="Tools"
           icon="build">
-        </app-search-filter>
 
         <!-- Foods Filter -->
         <app-search-filter
@@ -78,7 +77,6 @@
           (selectionChange)="onFilterChange()"
           label="Foods"
           icon="restaurant">
-        </app-search-filter>
 
         <!-- Sort Options -->
         <mat-menu #sortMenu="matMenu">
@@ -117,7 +115,6 @@
           class="btn btn-secondary">
           <mat-icon>{{ orderDirection === 'asc' ? 'arrow_upward' : 'arrow_downward' }}</mat-icon>
           Sort
-        </button>
 
         <!-- Settings Menu -->
         <mat-menu #settingsMenu="matMenu">
@@ -128,24 +125,20 @@
                 name="autoSearch"
                 class="mb-sm">
                 Auto Search
-              </mat-slide-toggle>
+              </div>
               <button 
                 mat-stroked-button 
                 (click)="onReset()"
                 class="w-full">
                 Reset Filters
-              </button>
-            </div>
-          </ng-template>
-        </mat-menu>
+              </ng-template>
+            </mat-menu>
 
         <button 
           mat-icon-button 
           [matMenuTriggerFor]="settingsMenu"
           matTooltip="Settings">
           <mat-icon>settings</mat-icon>
-        </button>
-      </div>
 
       <!-- Search Button (when auto-search is disabled) -->
       <button 
@@ -155,9 +148,6 @@
         type="submit">
         <mat-icon>search</mat-icon>
         Search
-      </button>
-    </form>
-  </header>
 
   <!-- Active Filters Display -->
   <mat-chip-listbox 
@@ -169,37 +159,31 @@
       removable>
       {{ getCategoryName(category) }}
       <mat-icon matChipRemove>cancel</mat-icon>
-    </mat-chip>
     <mat-chip 
       *ngFor="let tag of selectedTags"
       (removed)="removeTag(tag)"
       removable>
       {{ getTagName(tag) }}
       <mat-icon matChipRemove>cancel</mat-icon>
-    </mat-chip>
     <mat-chip 
       *ngFor="let tool of selectedTools"
       (removed)="removeTool(tool)"
       removable>
       {{ getToolName(tool) }}
       <mat-icon matChipRemove>cancel</mat-icon>
-    </mat-chip>
     <mat-chip 
       *ngFor="let food of selectedFoods"
       (removed)="removeFood(food)"
       removable>
       {{ getFoodName(food) }}
       <mat-icon matChipRemove>cancel</mat-icon>
-    </mat-chip>
-  </mat-chip-listbox>
 
   <!-- Loading Skeletons -->
   <div *ngIf="loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-md mb-lg stagger-animation">
     <app-skeleton-loader 
       *ngFor="let item of [1,2,3,4,5,6,7,8]"
       type="card">
-    </app-skeleton-loader>
-  </div>
+    </div>
 
   <!-- Recipe Grid -->
   <div *ngIf="!loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-md mb-lg stagger-animation">
@@ -214,8 +198,7 @@
     <app-recipe-card 
       *ngFor="let recipe of recipes"
       [recipe]="recipe">
-    </app-recipe-card>
-  </div>
+    </div>
 
   <!-- Pagination -->
   <mat-paginator 
@@ -226,7 +209,6 @@
     [pageSizeOptions]="[10, 20, 50, 100]"
     (page)="onPageChange($event.pageIndex + 1)"
     class="surface-secondary rounded-lg">
-  </mat-paginator>
 
   <!-- Floating Action Button for Create Recipe -->
   <button 
@@ -237,5 +219,3 @@
     matTooltip="Create New Recipe"
     aria-label="Create new recipe">
     <mat-icon>add</mat-icon>
-  </button>
-</section>

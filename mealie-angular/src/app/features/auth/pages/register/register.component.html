@@ -68,11 +68,11 @@
               (click)="togglePasswordVisibility()"
               [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'">
               <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
-            </button>
+            </mat-form-field>
             <mat-error *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
               {{ getErrorMessage('password') }}
             </mat-error>
-          </mat-form-field>
+          </form>
 
           <!-- Password Strength Indicator -->
           <div *ngIf="registerForm.get('password')?.value" class="password-strength">
@@ -104,11 +104,11 @@
               (click)="toggleConfirmPasswordVisibility()"
               [attr.aria-label]="showConfirmPassword ? 'Hide password' : 'Show password'">
               <mat-icon>{{ showConfirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
-            </button>
+            </mat-form-field>
             <mat-error *ngIf="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched">
               {{ getErrorMessage('confirmPassword') }}
             </mat-error>
-          </mat-form-field>
+          </mat-card-content>
 
           <!-- Terms and Conditions -->
           <div class="terms-checkbox">
@@ -132,9 +132,9 @@
             [disabled]="loading || registerForm.invalid">
             <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner>
             <span *ngIf="!loading">Create Account</span>
-          </button>
-        </form>
-      </mat-card-content>
+          </mat-card>
+        </div>
+      </section>
 
       <mat-card-actions class="flex justify-end gap-sm pt-md card">
         <button 
@@ -143,7 +143,4 @@
           (click)="onLogin()"
           class="login-link">
           Already have an account? Sign in
-        </button>
-      </mat-card-actions>
-    </mat-card>
-  </section>
+        </mat-card-actions>

@@ -12,7 +12,7 @@
         [step]="0.25"
         [value]="scale"
         (valueChange)="onScaleChange($event)">
-      </mat-slider>
+      </div>
     </div>
     
     <div class="scale-input" *ngIf="canEditScale">
@@ -38,11 +38,11 @@
         [matTooltip]="'Reset to 1x'"
         (click)="resetScale()">
         <mat-icon>refresh</mat-icon>
-      </button>
+      </div>
     </div>
   
   <div class="scale-summary">
     <span class="summary-text">
       Serves {{ getScaledServings() }} people
     </span>
-  </section>
+  </div>

@@ -31,17 +31,17 @@
               formControlName="description"
               placeholder="Enter a description for this shopping list"
               rows="3">
-            </textarea>
-          </mat-form-field>
-        </div>
+            </mat-form-field>
+          </div>
+        </mat-card-content>
 
         <div class="form-row">
           <mat-checkbox formControlName="private">
             Make this list private
           </mat-checkbox>
         </div>
-      </mat-card-content>
-    </mat-card>
+      </mat-card>
+    </form>
 
     <!-- Labels Section -->
     <mat-card class="form-section" *ngIf="labels.length  class="card"> 0">
@@ -57,10 +57,10 @@
             (change)="onLabelToggle(label.id)"
             [style.color]="label.color">
             {{ label.name }}
-          </mat-checkbox>
-        </div>
-      </mat-card-content>
-    </mat-card>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </section>
 
     <!-- Form Actions -->
     <div class="flex justify-end gap-sm mt-lg">
@@ -70,7 +70,7 @@
         (click)="onCancel()"
         class="btn btn-secondary">
         Cancel
-      </button>
+      </div>
       <button 
         mat-raised-button 
         class="btn btn-primary"
@@ -79,7 +79,3 @@
         class="btn btn-primary">
         <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner>
         <span *ngIf="!loading">Create Shopping List</span>
-      </button>
-    </div>
-  </form>
-</section>

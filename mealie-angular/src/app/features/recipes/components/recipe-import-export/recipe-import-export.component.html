@@ -41,7 +41,7 @@
                     (click)="fileInput.click()">
                     <mat-icon>upload</mat-icon>
                     Choose File
-                  </button>
+                  </div>
                   
                   <div class="file-info" *ngIf="selectedFile">
                     <mat-icon>description</mat-icon>
@@ -115,7 +115,7 @@
                     <mat-icon>upload</mat-icon>
                     Import Recipes
                   </span>
-                </button>
+                </div>
                 
                 <button 
                   mat-button 
@@ -124,14 +124,14 @@
                   [disabled]="!selectedFile || loading">
                   <mat-icon>verified</mat-icon>
                   Validate File
-                </button>
+                </div>
                 
                 <button 
                   mat-button 
                   (click)="onCancelImport()"
                   [disabled]="loading">
                   Cancel
-                </button>
+                </div>
               </div>
 
               <!-- Progress Bar -->
@@ -140,9 +140,9 @@
                   mode="determinate" 
                   [value]="importProgress"
                   class="btn btn-primary">
-                </mat-progress-bar>
+                </div>
                 <span class="progress-text">{{ importProgress }}%</span>
-              </div>
+              </form>
 
               <!-- Import Results -->
               <div class="results-section" *ngIf="importResults.length > 0">
@@ -154,15 +154,13 @@
                     [style.border-left-color]="getStatusColor(result.status)">
                     <mat-icon [style.color]="getStatusColor(result.status)">
                       {{ getStatusIcon(result.status) }}
-                    </mat-icon>
-                    
+
                       <span class="result-name">{{ result.name }}</span>
                       <span class="result-message">{{ result.message }}</span>
-                    
-                </div>
-            </form>
+
+            </mat-icon>
           </div>
-      </mat-tab>
+      </div>
 
       <!-- Export Tab -->
       <mat-tab label="Export Recipes">
@@ -245,14 +243,14 @@
                     <mat-icon>download</mat-icon>
                     Export Recipes
                   </span>
-                </button>
+                </div>
                 
                 <button 
                   mat-button 
                   (click)="onCancelExport()"
                   [disabled]="loading">
                   Cancel
-                </button>
+                </div>
               </div>
 
               <!-- Progress Bar -->
@@ -261,9 +259,9 @@
                   mode="determinate" 
                   [value]="exportProgress"
                   class="btn btn-primary">
-                </mat-progress-bar>
+                </div>
                 <span class="progress-text">{{ exportProgress }}%</span>
-              </div>
+              </form>
 
               <!-- Export Results -->
               <div class="results-section" *ngIf="exportResults.length > 0">
@@ -275,15 +273,13 @@
                     [style.border-left-color]="getStatusColor(result.status)">
                     <mat-icon [style.color]="getStatusColor(result.status)">
                       {{ getStatusIcon(result.status) }}
-                    </mat-icon>
-                    
+
                       <span class="result-name">{{ result.name }}</span>
                       <span class="result-message">{{ result.message }}</span>
-                    
-                </div>
-            </form>
+
+            </mat-icon>
           </div>
-      </mat-tab>
+      </div>
 
       <!-- Templates Tab -->
       <mat-tab label="Templates">
@@ -308,9 +304,16 @@
                   (click)="onDownloadTemplate(format.value)">
                   <mat-icon>download</mat-icon>
                   Download
-                </button>
+                </div>
               </div>
           </div>
-      </mat-tab>
-    </mat-tab-group>
-  </section>
+      </div>
+    </mat-tab>
+  </div>
+
+</mat-tab>
+</div>
+</mat-tab>
+</mat-tab-group>
+</div>
+</section>

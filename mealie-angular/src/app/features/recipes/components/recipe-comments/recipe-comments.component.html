@@ -21,7 +21,7 @@
               *ngFor="let star of getRatingStars(getAverageRating())"
               [style.color]="star ? '#ffc107' : '#e0e0e0'">
               {{ star ? 'star' : 'star_border' }}
-            </mat-icon>
+
           </div>
           <span class="rating-count">({{ comments.length }} reviews)</span>
         </div>
@@ -36,7 +36,7 @@
           (click)="onAddComment()">
           <mat-icon>add</mat-icon>
           Add Comment
-        </button>
+        </div>
       </div>
 
       <div class="control-group">
@@ -75,7 +75,7 @@
             <section class="card">
               <span class="user-name">{{ comment.user.fullName }}</span>
               <span class="comment-date">{{ getRelativeDate(comment.createdAt) }}</span>
-            </div>
+            </section>
 
           <div class="comment-rating">
             <div class="rating-stars">
@@ -83,7 +83,7 @@
                 *ngFor="let star of getRatingStars(comment.rating)"
                 [style.color]="star ? '#ffc107' : '#e0e0e0'">
                 {{ star ? 'star' : 'star_border' }}
-              </mat-icon>
+
             </div>
             <span class="rating-value" [style.color]="getRatingColor(comment.rating)">
               {{ comment.rating }}/5
@@ -96,7 +96,7 @@
               [matMenuTriggerFor]="commentMenu"
               matTooltip="More options">
               <mat-icon>more_vert</mat-icon>
-            </button>
+            </div>
             <mat-menu #commentMenu="matMenu">
               <button 
                 mat-menu-item 
@@ -104,15 +104,15 @@
                 *ngIf="canEditComment(comment)">
                 <mat-icon>edit</mat-icon>
                 <span>Edit Comment</span>
-              </button>
+              </mat-menu>
               <button 
                 mat-menu-item 
                 (click)="onDeleteComment(comment)"
                 *ngIf="canDeleteComment(comment)">
                 <mat-icon>delete</mat-icon>
                 <span>Delete Comment</span>
-              </button>
-            </mat-menu>
+              </div>
+            </div>
           </div>
 
         <!-- Comment Content -->
@@ -124,7 +124,7 @@
               *ngIf="!comment.isPublic"
               class="private-chip">
               Private
-            </mat-chip>
+            </div>
             <span class="comment-time">{{ getFormattedDate(comment.createdAt) }}</span>
           
       </div>
@@ -140,7 +140,7 @@
         (click)="onAddComment()">
         <mat-icon>add</mat-icon>
         Add First Comment
-      </button>
+      </div>
     </div>
 
   <!-- No Recipe State -->
@@ -167,12 +167,12 @@
                 formControlName="text"
                 placeholder="Share your thoughts about this recipe..."
                 rows="4">
-              </textarea>
+              </mat-form-field>
               <mat-error *ngIf="commentForm.get('text')?.invalid && commentForm.get('text')?.touched">
                 {{ getErrorMessage('text') }}
               </mat-error>
-            </mat-form-field>
-          </div>
+            </div>
+          </form>
 
           <div class="form-row">
             <div class="rating-input">
@@ -185,7 +185,7 @@
                   (click)="commentForm.patchValue({ rating: star })"
                   [style.color]="star <= commentForm.get('rating')?.value ? '#ffc107' : '#e0e0e0'">
                   <mat-icon>{{ star <= commentForm.get('rating')?.value ? 'star' : 'star_border' }}</mat-icon>
-                </button>
+                </div>
               </div>
               <span class="rating-text">{{ commentForm.get('rating')?.value }}/5</span>
             </div>
@@ -195,15 +195,15 @@
               Make this comment public
             </mat-checkbox>
           </div>
-        </form>
-      </mat-card-content>
+        </mat-card-content>
+      </mat-card>
 
       <mat-card-actions class="card">
         <button 
           mat-button 
           (click)="onCancel()">
           Cancel
-        </button>
+        </mat-card-actions>
         <button 
           mat-raised-button 
           class="btn btn-primary"
@@ -211,7 +211,5 @@
           [disabled]="loading || commentForm.invalid">
           <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner>
           <span *ngIf="!loading">{{ editingComment ? 'Update' : 'Add' }} Comment</span>
-        </button>
-      </mat-card-actions>
-    </mat-card>
-  </section>
+        </div>
+      </section>

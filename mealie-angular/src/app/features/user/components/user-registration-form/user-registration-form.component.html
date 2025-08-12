@@ -75,16 +75,16 @@
             [attr.aria-label]="'Hide password'"
             [attr.aria-pressed]="showPassword">
             <mat-icon>{{ getPasswordIcon() }}</mat-icon>
-          </button>
+          </mat-form-field>
           <mat-error *ngFor="let error of getFormErrors('password')">
             {{ error }}
           </mat-error>
-        </mat-form-field>
+        </form>
 
         <!-- Password Strength -->
         <app-user-password-strength 
           [password]="registrationForm.get('password')?.value">
-        </app-user-password-strength>
+        </mat-card-content>
 
         <!-- Confirm Password Field -->
         <mat-form-field appearance="outline" class="w-full">
@@ -104,14 +104,14 @@
             [attr.aria-label]="'Hide password'"
             [attr.aria-pressed]="showConfirmPassword">
             <mat-icon>{{ getConfirmPasswordIcon() }}</mat-icon>
-          </button>
+          </mat-form-field>
           <mat-error *ngFor="let error of getFormErrors('confirmPassword')">
             {{ error }}
           </mat-error>
           <mat-error *ngIf="getPasswordMatchError()">
             {{ getPasswordMatchError() }}
           </mat-error>
-        </mat-form-field>
+        </mat-card>
 
         <!-- Advanced Options -->
         <div class="advanced-options">
@@ -123,7 +123,4 @@
           </p>
         </div>
 
-      </form>
-    </mat-card-content>
-  </mat-card>
-</section>
+      </div>

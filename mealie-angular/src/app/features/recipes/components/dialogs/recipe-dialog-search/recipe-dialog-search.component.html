@@ -24,8 +24,8 @@
                   (click)="closeDialog()"
                   class="close-button">
             <mat-icon>close</mat-icon>
-          </button>
-        </mat-toolbar>
+          </mat-toolbar>
+        </mat-card>
 
         <!-- Search Results -->
         <div class="search-results" [class.loading]="loading">
@@ -46,12 +46,14 @@
               class="arrow-nav"
               [class.selected]="selected && index === selectedIndex"
               (click)="handleSelect(recipe)">
-            </app-recipe-card-mobile>
+            </section>
 
             <div *ngIf="searchResults.length === 0 && !loading" class="flex flex-col items-center justify-center py-xl text-center">
               <mat-icon class="no-results-icon">search_off</mat-icon>
               <p class="no-results-text text-secondary mb-sm">No recipes found</p>
             </div>
         </div>
-      </mat-card>
-    </section>
+      </div>
+    </div>
+
+</div>

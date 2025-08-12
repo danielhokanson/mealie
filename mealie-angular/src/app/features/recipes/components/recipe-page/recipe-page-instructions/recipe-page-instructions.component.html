@@ -17,8 +17,8 @@
             [(ngModel)]="activeRefs"
             [value]="ing.referenceId">
             <app-recipe-ingredient-html [markup]="parseIngredientText(ing)"></app-recipe-ingredient-html>
-          </mat-checkbox>
-        </div>
+          </div>
+        </mat-card-content>
         
         <div *ngIf="usedIngredients.length > 0" class="used-ingredients">
           <h4>Linked to Other Step</h4>
@@ -27,9 +27,9 @@
             [(ngModel)]="activeRefs"
             [value]="ing.referenceId">
             <app-recipe-ingredient-html [markup]="parseIngredientText(ing)"></app-recipe-ingredient-html>
-          </mat-checkbox>
-        </div>
-      </mat-card-content>
+          </div>
+        </mat-card>
+      </div>
       
       <mat-card-actions class="card">
         <button mat-button (click)="closeLinkDialog()">Cancel</button>
@@ -37,8 +37,7 @@
         <button mat-raised-button class="btn btn-primary" (click)="setIngredientIds()">Save</button>
         <button *ngIf="availableNextStep" mat-button (click)="saveAndOpenNextLinkIngredients()">Next Step</button>
       </mat-card-actions>
-    </mat-card>
-  </div>
+    </section>
 
   <!-- Instructions Header -->
   <div class="instructions-header">
@@ -50,8 +49,7 @@
       (click)="toggleCookMode()">
       <mat-icon>restaurant</mat-icon>
       Cook Mode
-    </button>
-  </div>
+    </div>
 
   <!-- Instructions List -->
   <div cdkDropList (cdkDropListDropped)="onDrop($event)" class="instructions-list">
@@ -135,9 +133,7 @@
               </mat-menu>
             </div>
             
-            <mat-icon *ngIf="isChecked(index)" class="check-icon btn btn-primary">
-              check_circle
-            </mat-icon>
+            <mat-icon *ngIf="isChecked(index)" class="check-icon btn btn-primary">check_circle</mat-icon>
           </div>
         </mat-card-header>
 
@@ -150,13 +146,13 @@
             [(ngModel)]="step.text"
             [preview]="previewStates[index]"
             (previewChange)="previewStates[index] = $event">
-          </app-markdown-editor>
+          </mat-card-content>
           
           <app-recipe-ingredient-html
             *ngFor="let ing of step.ingredientReferences"
             [markup]="getIngredientByRefId(ing.referenceId)">
-          </app-recipe-ingredient-html>
-        </mat-card-content>
+          </mat-card>
+        </div>
 
         <!-- View Mode Content -->
         <mat-card-content *ngIf="!isChecked(index) && !isEditForm" class="view-content card">
@@ -167,12 +163,10 @@
                 [scale]="scale"
                 [disableAmount]="recipe.settings?.disableAmount"
                 [isCookMode]="isCookMode">
-              </app-recipe-ingredients>
+              </div>
             </div>
 
               <app-safe-markdown [source]="step.text"></app-safe-markdown>
             
         </mat-card-content>
-      </mat-card>
-    </div>
-</section>
+      </div>

@@ -26,15 +26,13 @@
             [src]="imagePreview || userProfile?.avatar" 
             alt="Profile Avatar"
             class="avatar-image">
-          <mat-icon *ngIf="!imagePreview && !userProfile?.avatar" class="avatar-placeholder">
-            person
-          </mat-icon>
+          <mat-icon *ngIf="!imagePreview && !userProfile?.avatar" class="avatar-placeholder">person</mat-icon>
           <button 
             mat-icon-button 
             class="avatar-edit"
             (click)="avatarInput.click()">
             <mat-icon>edit</mat-icon>
-          </button>
+          </section>
           <input 
             #avatarInput
             id="avatar-input"
@@ -143,8 +141,8 @@
                       formControlName="bio"
                       placeholder="Tell us about yourself"
                       rows="3">
-                    </textarea>
-                  </mat-form-field>
+                    </mat-form-field>
+                  </div>
                 </div>
 
               <div class="form-section" *ngIf="userProfile">
@@ -158,7 +156,7 @@
                         *ngFor="let restriction of userProfile.preferences.dietaryRestrictions"
                         [style.background-color]="getCookingSkillColor('intermediate')">
                         {{ restriction }}
-                      </mat-chip>
+                      </section>
                     </div>
 
                   <div class="preference-group">
@@ -168,7 +166,7 @@
                         *ngFor="let allergy of userProfile.preferences.allergies"
                         [style.background-color]="getCookingSkillColor('beginner')">
                         {{ allergy }}
-                      </mat-chip>
+                      </section>
                     </div>
 
                   <div class="preference-group">
@@ -178,7 +176,7 @@
                         *ngFor="let cuisine of userProfile.preferences.cuisinePreferences"
                         [style.background-color]="getCookingSkillColor('advanced')">
                         {{ cuisine }}
-                      </mat-chip>
+                      </section>
                     </div>
 
                   <div class="preference-group">
@@ -197,10 +195,10 @@
                   [disabled]="saving || profileForm.invalid">
                   <mat-spinner *ngIf="saving" diameter="20" class="spinner"></mat-spinner>
                   <span *ngIf="!saving">Save Profile</span>
-                </button>
+                </div>
               </div>
-            </form>
-          </div>
+            </div>
+          </form>
         </mat-tab>
 
         <!-- Preferences Tab -->
@@ -326,11 +324,11 @@
                   [disabled]="saving || preferencesForm.invalid">
                   <mat-spinner *ngIf="saving" diameter="20" class="spinner"></mat-spinner>
                   <span *ngIf="!saving">Save Preferences</span>
-                </button>
+                </div>
               </div>
-            </form>
+            </div>
           </div>
-        </mat-tab>
+        </div>
 
         <!-- Security Tab -->
         <mat-tab label="Security">
@@ -385,7 +383,7 @@
                     [disabled]="saving || passwordForm.invalid">
                     <mat-spinner *ngIf="saving" diameter="20" class="spinner"></mat-spinner>
                     <span *ngIf="!saving">Change Password</span>
-                  </button>
+                  </div>
                 </div>
               </form>
             </div>
@@ -402,7 +400,7 @@
                   (click)="onExportData()">
                   <mat-icon>download</mat-icon>
                   Export Data
-                </button>
+                </div>
                 
                 <button 
                   mat-raised-button 
@@ -410,10 +408,14 @@
                   (click)="onDeleteAccount()">
                   <mat-icon>delete_forever</mat-icon>
                   Delete Account
-                </button>
-              </div>
-          </div>
+                </div>
+              </mat-tab>
+          </form>
         </mat-tab>
       </mat-tab-group>
     </mat-card>
-  </section>
+  </div>
+
+</div>
+</div>
+</section>

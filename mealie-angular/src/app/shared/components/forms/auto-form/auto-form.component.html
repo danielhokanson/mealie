@@ -24,7 +24,7 @@
                 (blur)="onFieldBlur()"
                 class="form-checkbox">
                 {{ inputField.label }}
-            </mat-checkbox>
+            </div>
 
             <!-- Text Field -->
             <mat-form-field
@@ -41,7 +41,7 @@
                     (ngModelChange)="onFieldChange(inputField.varName, $event)"
                     (blur)="onFieldBlur()">
                 <mat-hint *ngIf="inputField.hint">{{ inputField.hint }}</mat-hint>
-            </mat-form-field>
+            </div>
 
             <!-- Text Area -->
             <mat-form-field
@@ -55,9 +55,8 @@
                     [disabled]="isFieldDisabled(inputField)"
                     rows="3"
                     (ngModelChange)="onFieldChange(inputField.varName, $event)"
-                    (blur)="onFieldBlur()"></textarea>
+                    (blur)="onFieldBlur()"></mat-card>
                 <mat-hint *ngIf="inputField.hint">{{ inputField.hint }}</mat-hint>
-            </mat-form-field>
 
             <!-- Select Field -->
             <mat-form-field
@@ -72,9 +71,7 @@
                     <mat-option *ngFor="let option of inputField.options" [value]="option.value">
                         {{ option.label }}
                     </mat-option>
-                </mat-select>
                 <mat-hint *ngIf="inputField.hint">{{ inputField.hint }}</mat-hint>
-            </mat-form-field>
 
             <!-- Multi Select Field -->
             <mat-form-field
@@ -90,9 +87,7 @@
                     <mat-option *ngFor="let option of inputField.options" [value]="option.value">
                         {{ option.label }}
                     </mat-option>
-                </mat-select>
                 <mat-hint *ngIf="inputField.hint">{{ inputField.hint }}</mat-hint>
-            </mat-form-field>
 
             <!-- Number Field -->
             <mat-form-field
@@ -111,7 +106,6 @@
                     (ngModelChange)="onFieldChange(inputField.varName, $event)"
                     (blur)="onFieldBlur()">
                 <mat-hint *ngIf="inputField.hint">{{ inputField.hint }}</mat-hint>
-            </mat-form-field>
 
             <!-- Slider Field -->
             <div *ngIf="inputField.type === fieldTypes.SLIDER" class="flex items-center gap-md">
@@ -121,9 +115,8 @@
                     [disabled]="isFieldDisabled(inputField)"
                     (ngModelChange)="onFieldChange(inputField.varName, $event)"
                     (blur)="onFieldBlur()">
-                </mat-slider>
+                </div>
                 <span class="slider-value">{{ modelValue[inputField.varName] }}</span>
-            </div>
 
             <!-- Color Field -->
             <div *ngIf="inputField.type === fieldTypes.COLOR" class="flex items-center gap-md">
@@ -135,7 +128,7 @@
                     [matMenuTriggerFor]="colorMenu"
                     class="color-button">
                     {{ inputField.label }}
-                </button>
+                </div>
                 <mat-menu #colorMenu="matMenu">
                     <div class="color-picker">
                         <input
@@ -146,7 +139,6 @@
                             class="color-input">
                     </div>
                 </mat-menu>
-            </div>
 
             <!-- Object Field -->
             <div *ngIf="inputField.type === fieldTypes.OBJECT" class="border rounded-lg p-md">
@@ -154,8 +146,7 @@
                     [items]="inputField.items || []"
                     [color]="color"
                     (blur)="onFieldBlur()">
-                </app-auto-form>
-            </div>
+                </div>
 
             <!-- List Field -->
             <div *ngIf="inputField.type === fieldTypes.LIST" class="flex flex-col gap-sm">
@@ -176,7 +167,7 @@
                         (click)="removeByIndex(modelValue[inputField.varName], i)"
                         class="remove-button">
                         <mat-icon>delete</mat-icon>
-                    </button>
+                    </div>
                 </div>
                 <button
                     mat-button
@@ -185,8 +176,6 @@
                     class="add-button">
                     <mat-icon>add</mat-icon>
                     Add Item
-                </button>
-            </div>
 
             <!-- Date Field -->
             <mat-form-field
@@ -204,7 +193,6 @@
                 <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
                 <mat-datepicker #datePicker></mat-datepicker>
                 <mat-hint *ngIf="inputField.hint">{{ inputField.hint }}</mat-hint>
-            </mat-form-field>
 
             <!-- Time Field -->
             <mat-form-field
@@ -220,7 +208,6 @@
                     (ngModelChange)="onFieldChange(inputField.varName, $event)"
                     (blur)="onFieldBlur()">
                 <mat-hint *ngIf="inputField.hint">{{ inputField.hint }}</mat-hint>
-            </mat-form-field>
 
             <!-- DateTime Field -->
             <mat-form-field
@@ -236,7 +223,4 @@
                     (ngModelChange)="onFieldChange(inputField.varName, $event)"
                     (blur)="onFieldBlur()">
                 <mat-hint *ngIf="inputField.hint">{{ inputField.hint }}</mat-hint>
-            </mat-form-field>
 
-        </div>
-</mat-card>

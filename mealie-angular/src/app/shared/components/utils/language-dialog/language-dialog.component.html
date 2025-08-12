@@ -27,12 +27,10 @@
                     {{ language.code.toUpperCase() }}
                 </div>
                 
-                <mat-icon *ngIf="language.code === currentLanguage" class="selected-icon">
-                    check
-                </mat-icon>
-            </mat-list-item>
-        </mat-list>
-    </mat-dialog-content>
+                <mat-icon *ngIf="language.code === currentLanguage" class="selected-icon">check</mat-icon>
+            </mat-list>
+        </mat-dialog-content>
+    </section>
 
     <mat-dialog-actions class="dialog-actions">
         <button
@@ -40,6 +38,4 @@
             (click)="onCancel()"
             class="btn btn-secondary">
             Cancel
-        </button>
-    </mat-dialog-actions>
-</section>
+        </mat-dialog-actions>

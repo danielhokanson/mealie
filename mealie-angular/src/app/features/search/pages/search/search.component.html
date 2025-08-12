@@ -37,7 +37,7 @@
             (removed)="onFilterChange(filter)">
             {{ filter }}
             <mat-icon matChipRemove>cancel</mat-icon>
-          </mat-chip>
+          </div>
         </div>
 
       <div *ngIf="loading" class="flex items-center justify-center py-xl">
@@ -71,9 +71,12 @@
                 [color]="selectedFilters.includes(tag) ? 'primary' : 'default'"
                 (click)="onFilterChange(tag)">
                 {{ tag }}
-              </mat-chip>
+              </div>
             </div>
         </div>
-    </mat-card-content>
-  </mat-card>
+    </div>
+  </div>
+</mat-card-content>
+
+</mat-card>
 </section>

@@ -9,8 +9,8 @@
                     [style.width]="cropperWidth" 
                     [style.height]="cropperHeight"
                     class="cropper-canvas">
-            </canvas>
-        </mat-card-content>
+            </mat-card-content>
+        </mat-card>
 
         <!-- Control buttons -->
         <mat-card-actions class="cropper-controls card">
@@ -22,9 +22,9 @@
                     (click)="control.callback()"
                     class="control-button">
                     <mat-icon>{{ control.icon }}</mat-icon>
-                </button>
-            </div>
-        </mat-card-actions>
+                </div>
+            </mat-card-actions>
+        </section>
 
         <!-- Action buttons -->
         <mat-card-actions class="action-buttons card">
@@ -35,7 +35,7 @@
                 class="delete-button">
                 <mat-icon>delete</mat-icon>
                 Delete
-            </button>
+            </mat-card-actions>
             
             <button
                 mat-raised-button
@@ -45,7 +45,3 @@
                 class="save-button">
                 <mat-icon>save</mat-icon>
                 Save
-            </button>
-        </mat-card-actions>
-    </mat-card>
-</section>

@@ -14,11 +14,11 @@
             class="btn btn-primary"
             (click)="onGoToDashboard()">
             Go to Dashboard
-          </button>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </section>
 
   <!-- Setup Form -->
   <div *ngIf="!setupComplete" class="setup-form">
@@ -116,7 +116,7 @@
                 [disabled]="loading">
                 <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner>
                 <span *ngIf="!loading">Test Connection</span>
-              </button>
+              </div>
             </div>
         </div>
 
@@ -132,9 +132,9 @@
                        setupForm.get('databaseUsername')?.invalid || 
                        setupForm.get('databasePassword')?.invalid">
             Next
-          </button>
-        </div>
-      </mat-step>
+          </div>
+        </mat-step>
+      </mat-stepper>
 
       <!-- Step 2: Application Settings -->
       <mat-step [stepControl]="setupForm" label="Application">
@@ -233,7 +233,7 @@
                        setupForm.get('adminPassword')?.invalid || 
                        setupForm.get('adminConfirmPassword')?.invalid">
             Next
-          </button>
+          </div>
         </div>
       </mat-step>
 
@@ -314,7 +314,7 @@
             class="btn btn-primary"
             (click)="onNextStep()">
             Next
-          </button>
+          </div>
         </div>
       </mat-step>
 
@@ -341,7 +341,7 @@
                 class="btn btn-primary"
                 (click)="onGenerateJwtSecret()">
                 Generate
-              </button>
+              </div>
 
             <div class="form-row">
               <mat-form-field appearance="outline" class="w-full">
@@ -405,8 +405,6 @@
             [disabled]="loading || setupForm.invalid">
             <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner>
             <span *ngIf="!loading">Complete Setup</span>
-          </button>
-        </div>
-      </mat-step>
-    </mat-stepper>
-  </section>
+          </div>
+        </mat-step>
+      </div>

@@ -8,8 +8,8 @@
       <mat-option *ngFor="let item of availableItems" [value]="item">
         {{ item.name }}
       </mat-option>
-    </mat-select>
-  </mat-form-field>
+    </mat-form-field>
+  </div>
   
   <div *ngIf="showAdd" class="add-section">
     <mat-form-field class="add-input w-full">
@@ -29,5 +29,4 @@
       (removed)="removeItem(item)">
       {{ item.name }}
       <mat-icon matChipRemove>cancel</mat-icon>
-    </mat-chip>
-  </section>
+    </div>

@@ -9,7 +9,7 @@
            (input)="onTitleChange()"
            (click)="onFieldClick('title')"
            placeholder="Section Title">
-  </mat-form-field>
+  </div>
 
   <!-- Ingredient Row -->
   <div class="ingredient-row" [class.md-and-up]="isMdAndUp">
@@ -45,12 +45,12 @@
           <mat-option *ngIf="unitSearch && !units.find(u => u.name.includes(unitSearch))">
             Press Enter to create "{{ unitSearch }}"
           </mat-option>
-        </mat-autocomplete>
+        </mat-form-field>
         <mat-icon matPrefix *ngIf="unitError" 
                   [matTooltip]="unitErrorTooltip"
                   matTooltipPosition="below"
-                  class="btn btn-primary">warning</mat-icon>
-      </mat-form-field>
+                  class="btn btn-primary">warning
+      </div>
     </div>
 
     <!-- Food Field -->
@@ -71,13 +71,12 @@
           <mat-option *ngIf="foodSearch && !foods.find(f => f.name.includes(foodSearch))">
             Press Enter to create "{{ foodSearch }}"
           </mat-option>
-        </mat-autocomplete>
+        </mat-form-field>
         <mat-icon matPrefix *ngIf="foodError" 
                   [matTooltip]="foodErrorTooltip"
                   matTooltipPosition="below"
-                  class="btn btn-primary">warning</mat-icon>
-      </mat-form-field>
-    </div>
+                  class="btn btn-primary">warning
+      </div>
 
     <!-- Note Field -->
     <div class="note-field">
@@ -97,9 +96,8 @@
           [large]="false"
           (buttonClick)="onButtonClick($event)"
           class="action-buttons">
-        </app-base-button-group>
+        </div>
       </div>
-  </div>
 
   <!-- Original Text -->
   <p *ngIf="showOriginalText" class="original-text text-secondary mb-sm">
@@ -108,4 +106,3 @@
 
   <!-- Divider for mobile -->
   <mat-divider *ngIf="!isMdAndUp" class="mobile-divider"></mat-divider>
-</section>

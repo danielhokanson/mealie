@@ -1,21 +1,6 @@
-.banner-experimental {
-  background-color: #fff3cd;
-  border: 1px solid #ffeaa7;
-  margin: 8px 0;
-}
+// Component styles - using utility classes in template
+// Only custom styles that can't be achieved with utilities should be added here
 
-.banner-content {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px;
+:host {
+  display: block;
 }
-
-.banner-icon {
-  color: #856404;
-}
-
-.banner-text {
-  color: #856404;
-  font-weight: 500;
-} 

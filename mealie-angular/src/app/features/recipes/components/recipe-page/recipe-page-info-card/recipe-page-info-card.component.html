@@ -5,10 +5,10 @@
       [recipe]="recipe">
     </app-recipe-page-info-card-image>
     
-    <mat-card class="info-card" [class.full-width]="landscape">
-      <mat-card-content class="info-content">
+    <mat-card class="info-card" [class.full-width]="landscape" class="card">
+      <mat-card-content class="info-content card">
         <div class="recipe-title-section">
-          <h1 class="recipe-title">{{ recipe.name }}</h1>
+          <h1 class="recipe-title text-2xl font-medium mb-md text-2xl font-medium mb-md">{{ recipe.name }}</h1>
           <app-recipe-rating
             [recipeId]="recipe.id"
             [slug]="recipe.id"
@@ -37,7 +37,6 @@
             <div *ngIf="isOwnGroup" class="last-made-section">
               <app-recipe-last-made [recipe]="recipe"></app-recipe-last-made>
             </div>
-          </div>
           
           <div *ngIf="recipe.prepTime || recipe.totalTime" class="time-section">
             <app-recipe-time-card
@@ -46,7 +45,6 @@
               [performTime]="recipe.totalTime">
             </app-recipe-time-card>
           </div>
-        </div>
       </mat-card-content>
     </mat-card>
     
@@ -55,5 +53,4 @@
       [recipe]="recipe"
       class="recipe-image">
     </app-recipe-page-info-card-image>
-  </div>
-</div> 
+  </section>

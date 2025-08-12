@@ -3,7 +3,7 @@
   [style.cursor]="cursor"
   [style.min-height.px]="imageHeight + 75"
   (click)="onCardClick()"
-  class="recipe-card card overflow-hidden">
+  class="recipe-card card overflow-hidden card">
   
   <!-- Recipe Card Image -->
   <div class="relative overflow-hidden" [style.height.px]="imageHeight">
@@ -19,12 +19,11 @@
       <div class="p-md text-white">
         <app-safe-markdown [markdown]="description || ''"></app-safe-markdown>
       </div>
-    </div>
   </div>
 
   <!-- Recipe Title -->
-  <mat-card-title class="px-md pt-md pb-sm">
-    <h3 class="text-lg font-medium m-0 text-primary">{{ name }}</h3>
+  <mat-card-title class="px-md pt-md pb-sm card">
+    <h3 class="text-lg font-medium m-0 text-primary text-lg font-medium mb-sm text-lg font-medium mb-sm">{{ name }}</h3>
   </mat-card-title>
 
   <!-- Recipe Actions -->

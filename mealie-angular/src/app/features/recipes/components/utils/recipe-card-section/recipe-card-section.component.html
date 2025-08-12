@@ -31,7 +31,7 @@
     </button>
 
     <mat-menu #sortMenu="matMenu">
-      <mat-list>
+      <mat-list class="flex flex-col gap-sm">
         <mat-list-item *ngFor="let item of sortMenuItems"
                        (click)="sortRecipes(item.event)"
                        class="sort-menu-item">
@@ -50,7 +50,7 @@
     </button>
 
     <mat-menu #contextMenu="matMenu">
-      <mat-list>
+      <mat-list class="flex flex-col gap-sm">
         <mat-list-item *ngFor="let item of contextMenuItems"
                        (click)="onContextMenuClick(item.event)"
                        class="context-menu-item">
@@ -79,7 +79,6 @@
             [recipeId]="recipe.id">
           </app-recipe-card>
         </div>
-      </div>
 
       <!-- Mobile Cards -->
       <div *ngIf="useMobileCards" class="mobile-cards">
@@ -96,23 +95,20 @@
             [recipeId]="recipe.id">
           </app-recipe-card-mobile>
         </div>
-      </div>
     </div>
 
     <!-- Infinite Scroll Trigger -->
     <div class="scroll-trigger" (intersection)="handleInfiniteScroll()"></div>
 
     <!-- Loading Spinner -->
-    <div *ngIf="loading" class="loading-container">
+    <div *ngIf="loading" class="flex items-center justify-center py-xl">
       <mat-spinner diameter="40"></mat-spinner>
-      <p class="loading-text">Loading more recipes...</p>
+      <p class="loading-text text-secondary mb-sm text-secondary mb-sm">Loading more recipes...</p>
     </div>
-  </div>
 
   <!-- Empty State -->
   <div *ngIf="recipes.length === 0 && ready" class="empty-state">
     <mat-icon class="empty-icon">restaurant</mat-icon>
-    <p class="empty-text">No recipes found</p>
-    <p class="empty-subtext">Try adjusting your search criteria</p>
-  </div>
-</div> 
+    <p class="empty-text text-secondary mb-sm text-secondary mb-sm">No recipes found</p>
+    <p class="empty-subtext text-secondary mb-sm text-secondary mb-sm">Try adjusting your search criteria</p>
+  </section>

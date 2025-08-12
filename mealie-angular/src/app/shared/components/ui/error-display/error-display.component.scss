@@ -1,31 +1,6 @@
-.error-display-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 20px;
-  text-align: center;
+// Component styles - using utility classes in template
+// Only custom styles that can't be achieved with utilities should be added here
 
-  .error-icon {
-    font-size: 64px;
-    width: 64px;
-    height: 64px;
-    color: #f44336;
-    margin-bottom: 16px;
-  }
-
-  h3 {
-    font-size: 24px;
-    font-weight: 500;
-    color: var(--mat-text-color-primary, #333);
-    margin: 0 0 12px 0;
-  }
-
-  p {
-    font-size: 16px;
-    color: var(--mat-text-color-secondary, #666);
-    margin: 0 0 24px 0;
-    line-height: 1.5;
-    max-width: 400px;
-  }
-} 
+:host {
+  display: block;
+}

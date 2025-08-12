@@ -1,4 +1,4 @@
-<table mat-table [dataSource]="items" class="report-table">
+<table mat-table class="w-full" [dataSource]="items" class="report-table">
   <!-- Category Column -->
   <ng-container matColumnDef="category">
     <th mat-header-cell *matHeaderCellDef>Category</th>
@@ -37,7 +37,7 @@
     <td mat-cell *matCellDef="let item">
       <button
         mat-icon-button
-        color="warn"
+        class="btn btn-error"
         (click)="onDelete(item.id)"
         class="delete-button">
         <mat-icon>delete</mat-icon>

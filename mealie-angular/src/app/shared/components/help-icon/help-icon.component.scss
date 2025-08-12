@@ -1,21 +1,6 @@
-.help-icon {
-  cursor: help;
-  
-  &.help-icon-small {
-    font-size: 16px;
-    width: 16px;
-    height: 16px;
-  }
-  
-  &.help-icon-medium {
-    font-size: 20px;
-    width: 20px;
-    height: 20px;
-  }
-  
-  &.help-icon-large {
-    font-size: 24px;
-    width: 24px;
-    height: 24px;
-  }
-} 
+// Component styles - using utility classes in template
+// Only custom styles that can't be achieved with utilities should be added here
+
+:host {
+  display: block;
+}

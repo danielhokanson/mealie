@@ -1,40 +1,6 @@
-.context-menu-trigger {
-  &.fab {
-    border-radius: 50%;
-    
-    &.small {
-      width: 32px;
-      height: 32px;
-    }
-  }
-}
+// Component styles - using utility classes in template
+// Only custom styles that can't be achieved with utilities should be added here
 
-.context-menu-list {
-  min-width: 120px;
-  padding: 0;
+:host {
+  display: block;
 }
-
-.context-menu-item {
-  height: 36px;
-  line-height: 36px;
-  padding: 0 16px;
-  
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.04);
-  }
-}
-
-// Material Design color classes
-.grey-darken-2 {
-  background-color: #424242;
-  color: white;
-}
-
-// Menu positioning
-.menu-top {
-  margin-top: 5px;
-}
-
-.menu-bottom {
-  margin-bottom: 5px;
-} 

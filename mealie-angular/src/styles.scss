@@ -462,6 +462,15 @@ a {
 .bottom-0 { bottom: 0; }
 .left-0 { left: 0; }
 
+// Z-index utilities
+.z-modal-backdrop { z-index: var(--z-modal-backdrop); }
+.z-modal { z-index: var(--z-modal); }
+.z-dropdown { z-index: var(--z-dropdown); }
+.z-sticky { z-index: var(--z-sticky); }
+.z-fixed { z-index: var(--z-fixed); }
+.z-popover { z-index: var(--z-popover); }
+.z-tooltip { z-index: var(--z-tooltip); }
+
 // ============================================================================
 // Overflow Utilities
 // ============================================================================

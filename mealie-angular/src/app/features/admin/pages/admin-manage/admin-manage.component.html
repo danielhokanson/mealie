@@ -1,16 +1,16 @@
-<div class="admin-manage-container">
+<section class="page-container">
   <!-- Loading State -->
-  <div *ngIf="loading" class="loading-container">
+  <div *ngIf="loading" class="flex items-center justify-center py-xl">
     <mat-spinner diameter="50"></mat-spinner>
-    <p>Loading management data...</p>
+    <p class="text-secondary mb-sm text-secondary mb-sm">Loading management data...</p>
   </div>
 
   <!-- Error State -->
   <div *ngIf="error && !loading" class="error-container">
     <mat-icon class="error-icon">error</mat-icon>
-    <h3>Error Loading Data</h3>
-    <p>Unable to load management data. Please try again.</p>
-    <button mat-raised-button color="primary" (click)="loadData()">
+    <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Error Loading Data</h3>
+    <p class="text-secondary mb-sm text-secondary mb-sm">Unable to load management data. Please try again.</p>
+    <button mat-raised-button class="btn btn-primary" (click)="loadData()">
       Retry
     </button>
   </div>
@@ -19,19 +19,19 @@
   <div *ngIf="!loading && !error" class="manage-content">
     <!-- Header -->
     <div class="manage-header">
-      <h1>User & Group Management</h1>
-      <p>Manage users, groups, and households</p>
+      <h1 class="text-2xl font-medium mb-md text-2xl font-medium mb-md">User & Group Management</h1>
+      <p class="text-secondary mb-sm text-secondary mb-sm">Manage users, groups, and households</p>
     </div>
 
     <!-- Tabs -->
-    <mat-card class="tabs-card">
+    <mat-card class="tabs-card card">
       <mat-tab-group [(selectedIndex)]="selectedTab">
         <!-- Users Tab -->
         <mat-tab label="Users">
           <div class="tab-content">
             <!-- Search and Filters -->
             <div class="search-filters">
-              <mat-form-field appearance="outline" class="search-field">
+              <mat-form-field appearance="outline" class="search-field w-full">
                 <mat-label>Search users</mat-label>
                 <input 
                   matInput 
@@ -40,7 +40,7 @@
                 <mat-icon matSuffix>search</mat-icon>
               </mat-form-field>
 
-              <mat-form-field appearance="outline" class="filter-field">
+              <mat-form-field appearance="outline" class="filter-field w-full">
                 <mat-label>Role</mat-label>
                 <mat-select [(ngModel)]="selectedRole">
                   <mat-option value="all">All Roles</mat-option>
@@ -49,7 +49,7 @@
                 </mat-select>
               </mat-form-field>
 
-              <mat-form-field appearance="outline" class="filter-field">
+              <mat-form-field appearance="outline" class="filter-field w-full">
                 <mat-label>Status</mat-label>
                 <mat-select [(ngModel)]="selectedStatus">
                   <mat-option value="all">All Status</mat-option>
@@ -60,7 +60,7 @@
 
               <button 
                 mat-raised-button 
-                color="primary"
+                class="btn btn-primary"
                 (click)="onAddUser()">
                 <mat-icon>add</mat-icon>
                 Add User
@@ -68,8 +68,8 @@
             </div>
 
             <!-- Users Table -->
-            <div class="table-container">
-              <table mat-table [dataSource]="getFilteredUsers()" class="users-table">
+            <section class="page-container">
+              <table mat-table class="w-full" [dataSource]="getFilteredUsers()" class="users-table">
                 <!-- Username Column -->
                 <ng-container matColumnDef="username">
                   <th mat-header-cell *matHeaderCellDef>Username</th>
@@ -147,7 +147,6 @@
                 <tr mat-row *matRowDef="let row; columns: ['username', 'fullName', 'email', 'role', 'status', 'createdAt', 'actions'];"></tr>
               </table>
             </div>
-          </div>
         </mat-tab>
 
         <!-- Groups Tab -->
@@ -155,7 +154,7 @@
           <div class="tab-content">
             <!-- Search and Filters -->
             <div class="search-filters">
-              <mat-form-field appearance="outline" class="search-field">
+              <mat-form-field appearance="outline" class="search-field w-full">
                 <mat-label>Search groups</mat-label>
                 <input 
                   matInput 
@@ -166,7 +165,7 @@
 
               <button 
                 mat-raised-button 
-                color="primary"
+                class="btn btn-primary"
                 (click)="onAddGroup()">
                 <mat-icon>add</mat-icon>
                 Add Group
@@ -174,8 +173,8 @@
             </div>
 
             <!-- Groups Table -->
-            <div class="table-container">
-              <table mat-table [dataSource]="getFilteredGroups()" class="groups-table">
+            <section class="page-container">
+              <table mat-table class="w-full" [dataSource]="getFilteredGroups()" class="groups-table">
                 <!-- Name Column -->
                 <ng-container matColumnDef="name">
                   <th mat-header-cell *matHeaderCellDef>Name</th>
@@ -233,7 +232,6 @@
                 <tr mat-row *matRowDef="let row; columns: ['name', 'description', 'status', 'createdAt', 'actions'];"></tr>
               </table>
             </div>
-          </div>
         </mat-tab>
 
         <!-- Households Tab -->
@@ -241,7 +239,7 @@
           <div class="tab-content">
             <!-- Search and Filters -->
             <div class="search-filters">
-              <mat-form-field appearance="outline" class="search-field">
+              <mat-form-field appearance="outline" class="search-field w-full">
                 <mat-label>Search households</mat-label>
                 <input 
                   matInput 
@@ -252,7 +250,7 @@
 
               <button 
                 mat-raised-button 
-                color="primary"
+                class="btn btn-primary"
                 (click)="onAddHousehold()">
                 <mat-icon>add</mat-icon>
                 Add Household
@@ -260,8 +258,8 @@
             </div>
 
             <!-- Households Table -->
-            <div class="table-container">
-              <table mat-table [dataSource]="getFilteredHouseholds()" class="households-table">
+            <section class="page-container">
+              <table mat-table class="w-full" [dataSource]="getFilteredHouseholds()" class="households-table">
                 <!-- Name Column -->
                 <ng-container matColumnDef="name">
                   <th mat-header-cell *matHeaderCellDef>Name</th>
@@ -325,7 +323,6 @@
                 <tr mat-row *matRowDef="let row; columns: ['name', 'description', 'group', 'status', 'createdAt', 'actions'];"></tr>
               </table>
             </div>
-          </div>
         </mat-tab>
       </mat-tab-group>
     </mat-card>
@@ -333,14 +330,14 @@
 
   <!-- User Dialog -->
   <div *ngIf="showUserDialog" class="dialog-overlay">
-    <mat-card class="dialog-card">
-      <mat-card-header>
-        <mat-card-title>{{ editingUser ? 'Edit User' : 'Add User' }}</mat-card-title>
+    <mat-card class="dialog-card card">
+      <mat-card-header class="card">
+        <mat-card-title class="card">{{ editingUser ? 'Edit User' : 'Add User' }}</mat-card-title>
       </mat-card-header>
-      <mat-card-content>
+      <mat-card-content class="card">
         <form [formGroup]="userForm" class="dialog-form">
           <div class="form-row">
-            <mat-form-field appearance="outline" class="form-field">
+            <mat-form-field appearance="outline" class="w-full">
               <mat-label>Username</mat-label>
               <input 
                 matInput 
@@ -348,7 +345,7 @@
                 placeholder="Enter username">
             </mat-form-field>
 
-            <mat-form-field appearance="outline" class="form-field">
+            <mat-form-field appearance="outline" class="w-full">
               <mat-label>Full Name</mat-label>
               <input 
                 matInput 
@@ -358,7 +355,7 @@
           </div>
 
           <div class="form-row">
-            <mat-form-field appearance="outline" class="form-field">
+            <mat-form-field appearance="outline" class="w-full">
               <mat-label>Email</mat-label>
               <input 
                 matInput 
@@ -369,7 +366,7 @@
           </div>
 
           <div class="form-row">
-            <mat-form-field appearance="outline" class="form-field">
+            <mat-form-field appearance="outline" class="w-full">
               <mat-label>Role</mat-label>
               <mat-select formControlName="role">
                 <mat-option value="user">User</mat-option>
@@ -377,7 +374,7 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field appearance="outline" class="form-field">
+            <mat-form-field appearance="outline" class="w-full">
               <mat-label>Group</mat-label>
               <mat-select formControlName="groupId">
                 <mat-option value="">No Group</mat-option>
@@ -395,11 +392,11 @@
           </div>
         </form>
       </mat-card-content>
-      <mat-card-actions>
+      <mat-card-actions class="card">
         <button mat-button (click)="showUserDialog = false">Cancel</button>
         <button 
           mat-raised-button 
-          color="primary"
+          class="btn btn-primary"
           (click)="onSaveUser()"
           [disabled]="userForm.invalid">
           {{ editingUser ? 'Update' : 'Create' }}
@@ -410,14 +407,14 @@
 
   <!-- Group Dialog -->
   <div *ngIf="showGroupDialog" class="dialog-overlay">
-    <mat-card class="dialog-card">
-      <mat-card-header>
-        <mat-card-title>{{ editingGroup ? 'Edit Group' : 'Add Group' }}</mat-card-title>
+    <mat-card class="dialog-card card">
+      <mat-card-header class="card">
+        <mat-card-title class="card">{{ editingGroup ? 'Edit Group' : 'Add Group' }}</mat-card-title>
       </mat-card-header>
-      <mat-card-content>
+      <mat-card-content class="card">
         <form [formGroup]="groupForm" class="dialog-form">
           <div class="form-row">
-            <mat-form-field appearance="outline" class="form-field">
+            <mat-form-field appearance="outline" class="w-full">
               <mat-label>Name</mat-label>
               <input 
                 matInput 
@@ -427,7 +424,7 @@
           </div>
 
           <div class="form-row">
-            <mat-form-field appearance="outline" class="form-field">
+            <mat-form-field appearance="outline" class="w-full">
               <mat-label>Description</mat-label>
               <textarea 
                 matInput 
@@ -445,11 +442,11 @@
           </div>
         </form>
       </mat-card-content>
-      <mat-card-actions>
+      <mat-card-actions class="card">
         <button mat-button (click)="showGroupDialog = false">Cancel</button>
         <button 
           mat-raised-button 
-          color="primary"
+          class="btn btn-primary"
           (click)="onSaveGroup()"
           [disabled]="groupForm.invalid">
           {{ editingGroup ? 'Update' : 'Create' }}
@@ -460,14 +457,14 @@
 
   <!-- Household Dialog -->
   <div *ngIf="showHouseholdDialog" class="dialog-overlay">
-    <mat-card class="dialog-card">
-      <mat-card-header>
-        <mat-card-title>{{ editingHousehold ? 'Edit Household' : 'Add Household' }}</mat-card-title>
+    <mat-card class="dialog-card card">
+      <mat-card-header class="card">
+        <mat-card-title class="card">{{ editingHousehold ? 'Edit Household' : 'Add Household' }}</mat-card-title>
       </mat-card-header>
-      <mat-card-content>
+      <mat-card-content class="card">
         <form [formGroup]="householdForm" class="dialog-form">
           <div class="form-row">
-            <mat-form-field appearance="outline" class="form-field">
+            <mat-form-field appearance="outline" class="w-full">
               <mat-label>Name</mat-label>
               <input 
                 matInput 
@@ -477,7 +474,7 @@
           </div>
 
           <div class="form-row">
-            <mat-form-field appearance="outline" class="form-field">
+            <mat-form-field appearance="outline" class="w-full">
               <mat-label>Description</mat-label>
               <textarea 
                 matInput 
@@ -489,7 +486,7 @@
           </div>
 
           <div class="form-row">
-            <mat-form-field appearance="outline" class="form-field">
+            <mat-form-field appearance="outline" class="w-full">
               <mat-label>Group</mat-label>
               <mat-select formControlName="groupId">
                 <mat-option *ngFor="let group of groups" [value]="group.id">
@@ -506,16 +503,15 @@
           </div>
         </form>
       </mat-card-content>
-      <mat-card-actions>
+      <mat-card-actions class="card">
         <button mat-button (click)="showHouseholdDialog = false">Cancel</button>
         <button 
           mat-raised-button 
-          color="primary"
+          class="btn btn-primary"
           (click)="onSaveHousehold()"
           [disabled]="householdForm.invalid">
           {{ editingHousehold ? 'Update' : 'Create' }}
         </button>
       </mat-card-actions>
     </mat-card>
-  </div>
-</div> 
+  </section>

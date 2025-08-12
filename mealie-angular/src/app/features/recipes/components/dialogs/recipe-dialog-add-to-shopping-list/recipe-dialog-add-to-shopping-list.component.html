@@ -15,13 +15,13 @@
       </app-base-page-title>
     </div>
 
-    <div class="shopping-lists-container">
+    <section class="page-container">
       <mat-card
         *ngFor="let list of shoppingListChoices"
         
         class="shopping-list-card"
-        (click)="openShoppingListIngredientDialog(list)">
-        <mat-card-title class="card-title">
+        (click)="openShoppingListIngredientDialog(list)" class="card">
+        <mat-card-title class="card-title card">
           {{ list.name }}
         </mat-card-title>
       </mat-card>
@@ -34,15 +34,14 @@
         Cancel
       </button>
       
-      <div class="show-all-container">
+      <section class="page-container">
         <mat-checkbox
           [(ngModel)]="preferences.viewAllLists"
           (change)="setShowAllToggled()"
-          color="primary">
+          class="btn btn-primary">
           Show All
         </mat-checkbox>
       </div>
-    </div>
   </app-base-dialog>
 
   <!-- Shopping List Ingredients Dialog -->
@@ -57,16 +56,16 @@
     (submit)="addRecipesToList()"
     (modelValueChange)="onDialogChange($event)">
     
-    <div class="ingredients-container">
+    <section class="page-container">
       <mat-card
         *ngFor="let recipeSection of recipeIngredientSections; let recipeSectionIndex = index"
         
-        class="recipe-section-card">
+        class="recipe-section-card card">
         
         <mat-divider *ngIf="recipeSectionIndex > 0" class="section-divider"></mat-divider>
         
         <!-- Recipe Title -->
-        <mat-card-title *ngIf="recipeIngredientSections.length > 1" class="recipe-title">
+        <mat-card-title *ngIf="recipeIngredientSections.length  class="card"> 1" class="recipe-title">
           <div class="recipe-title-content">
             <div class="recipe-name">
               {{ recipeSection.recipeName }}
@@ -74,7 +73,6 @@
             <div *ngIf="recipeSection.recipeScale > 1" class="recipe-scale">
               (Quantity: {{ recipeSection.recipeScale }})
             </div>
-          </div>
         </mat-card-title>
 
         <!-- Ingredient Sections -->
@@ -85,7 +83,7 @@
             class="ingredient-section">
             
             <!-- Section Title -->
-            <mat-card-title *ngIf="ingredientSection.sectionName" class="ingredient-title">
+            <mat-card-title *ngIf="ingredientSection.sectionName" class="ingredient-title card">
               {{ ingredientSection.sectionName }}
             </mat-card-title>
 
@@ -101,7 +99,7 @@
                 
                 <mat-checkbox
                   [checked]="ingredientData.checked"
-                  color="accent"
+                  class="btn btn-secondary"
                   class="ingredient-checkbox">
                 </mat-checkbox>
                 
@@ -114,7 +112,6 @@
                 </div>
               </mat-list-item>
             </div>
-          </div>
         </div>
       </mat-card>
     </div>
@@ -138,4 +135,4 @@
       </app-base-button-group>
     </div>
   </app-base-dialog>
-</div> 
+</section> 

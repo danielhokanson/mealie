@@ -1,3 +1,6 @@
-.base-divider {
-  margin: 8px 0;
-} 
+// Component styles - using utility classes in template
+// Only custom styles that can't be achieved with utilities should be added here
+
+:host {
+  display: block;
+}

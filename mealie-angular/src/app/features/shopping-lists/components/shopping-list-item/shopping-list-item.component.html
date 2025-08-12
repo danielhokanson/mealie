@@ -19,7 +19,6 @@
             {{ modelValue.notes }}
           </span>
         </div>
-      </div>
     </div>
     
     <div class="item-spacer"></div>
@@ -69,7 +68,7 @@
       </div>
       
       <mat-menu #contextMenu="matMenu">
-        <mat-list>
+        <mat-list class="flex flex-col gap-sm">
           <mat-list-item 
             *ngFor="let action of contextMenu"
             (click)="onContextHandler(action.event)"
@@ -79,7 +78,6 @@
         </mat-list>
       </mat-menu>
     </div>
-  </div>
   
   <!-- Recipe References -->
   <div 
@@ -101,7 +99,6 @@
       Completed on {{ modelValue.updatedAt | date:'shortDate' }}
     </span>
   </div>
-</div>
 
 <!-- Edit Mode -->
 <div *ngIf="edit" class="edit-mode">
@@ -114,4 +111,4 @@
     (cancel)="onCancel()"
     (delete)="delete.emit()">
   </app-shopping-list-item-editor>
-</div> 
+</section> 

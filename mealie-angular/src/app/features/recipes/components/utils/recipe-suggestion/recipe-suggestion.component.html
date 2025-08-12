@@ -1,4 +1,4 @@
-<div class="suggestion-container">
+<section class="page-container">
   <div class="suggestion-content">
     <!-- Recipe Card -->
     <div class="recipe-card-section">
@@ -24,18 +24,15 @@
         <div class="organizer-items">
           <mat-chip *ngFor="let item of organizer.items; let itemIdx = index"
                    class="organizer-chip"
-                   color="accent"
+                   class="btn btn-secondary"
                    variant="flat">
             <mat-checkbox
               [checked]="item.selected"
               (change)="handleCheckbox(item)"
-              color="primary"
+              class="btn btn-primary"
               class="organizer-checkbox">
               <span class="chip-label">{{ organizer.getLabel(item.item) }}</span>
             </mat-checkbox>
           </mat-chip>
         </div>
-      </div>
-    </div>
-  </div>
-</div> 
+    </section>

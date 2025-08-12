@@ -1,14 +1,14 @@
 <section class="recipe-instructions">
   <!-- Ingredient Link Dialog -->
   <div *ngIf="showLinkDialog" class="link-dialog-overlay">
-    <mat-card class="link-dialog">
+    <mat-card class="link-dialog card">
       <div class="dialog-header">
         <mat-icon>link</mat-icon>
-        <h2>Ingredient Linker</h2>
+        <h2 class="text-xl font-medium mb-md text-xl font-medium mb-md">Ingredient Linker</h2>
       </div>
       
-      <mat-card-content>
-        <p>{{ activeText }}</p>
+      <mat-card-content class="card">
+        <p class="text-secondary mb-sm text-secondary mb-sm">{{ activeText }}</p>
         <mat-divider></mat-divider>
         
         <div class="ingredient-checkboxes">
@@ -31,10 +31,10 @@
         </div>
       </mat-card-content>
       
-      <mat-card-actions>
+      <mat-card-actions class="card">
         <button mat-button (click)="closeLinkDialog()">Cancel</button>
-        <button mat-button color="primary" (click)="autoSetReferences()">Auto</button>
-        <button mat-raised-button color="primary" (click)="setIngredientIds()">Save</button>
+        <button mat-button class="btn btn-primary" (click)="autoSetReferences()">Auto</button>
+        <button mat-raised-button class="btn btn-primary" (click)="setIngredientIds()">Save</button>
         <button *ngIf="availableNextStep" mat-button (click)="saveAndOpenNextLinkIngredients()">Next Step</button>
       </mat-card-actions>
     </mat-card>
@@ -42,11 +42,11 @@
 
   <!-- Instructions Header -->
   <div class="instructions-header">
-    <h2 *ngIf="!isCookMode" class="instructions-title">Instructions</h2>
+    <h2 *ngIf="!isCookMode" class="instructions-title text-xl font-medium mb-md text-xl font-medium mb-md">Instructions</h2>
     <button
       *ngIf="!isEditForm && !isCookMode"
       mat-raised-button
-      color="primary"
+      class="btn btn-primary"
       (click)="toggleCookMode()">
       <mat-icon>restaurant</mat-icon>
       Cook Mode
@@ -65,21 +65,20 @@
       <!-- Section Title -->
       <div *ngIf="step.title && showTitleEditor[step.id]" class="section-title">
         <div *ngIf="isEditForm" class="title-editor">
-          <mat-form-field>
+          <mat-form-field class="w-full">
             <input matInput [(ngModel)]="step.title" placeholder="Section Title">
           </mat-form-field>
         </div>
         <div *ngIf="!isEditForm" class="title-display">
           {{ step.title }}
         </div>
-      </div>
 
       <!-- Instruction Card -->
-      <mat-card class="instruction-card" (click)="toggleDisabled(index)">
-        <mat-card-header>
+      <mat-card class="instruction-card" (click)="toggleDisabled(index)" class="card">
+        <mat-card-header class="card">
           <div class="card-header-content">
             <div *ngIf="isEditForm" class="summary-editor">
-              <mat-form-field>
+              <mat-form-field class="w-full">
                 <input matInput [(ngModel)]="step.summary" [placeholder]="'Step ' + (index + 1)">
               </mat-form-field>
             </div>
@@ -136,7 +135,7 @@
               </mat-menu>
             </div>
             
-            <mat-icon *ngIf="isChecked(index)" class="check-icon" color="primary">
+            <mat-icon *ngIf="isChecked(index)" class="check-icon btn btn-primary">
               check_circle
             </mat-icon>
           </div>
@@ -146,7 +145,7 @@
         <mat-progress-bar *ngIf="isEditForm && loadingStates[index]" mode="indeterminate"></mat-progress-bar>
 
         <!-- Edit Mode Content -->
-        <mat-card-content *ngIf="isEditForm" class="edit-content">
+        <mat-card-content *ngIf="isEditForm" class="edit-content card">
           <app-markdown-editor
             [(ngModel)]="step.text"
             [preview]="previewStates[index]"
@@ -160,7 +159,7 @@
         </mat-card-content>
 
         <!-- View Mode Content -->
-        <mat-card-content *ngIf="!isChecked(index) && !isEditForm" class="view-content">
+        <mat-card-content *ngIf="!isChecked(index) && !isEditForm" class="view-content card">
           <div class="content-layout">
             <div *ngIf="isCookMode && step.ingredientReferences?.length > 0" class="ingredients-panel">
               <app-recipe-ingredients
@@ -174,9 +173,7 @@
             <div class="markdown-content">
               <app-safe-markdown [source]="step.text"></app-safe-markdown>
             </div>
-          </div>
         </mat-card-content>
       </mat-card>
     </div>
-  </div>
 </section> 

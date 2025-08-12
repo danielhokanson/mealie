@@ -1,7 +1,7 @@
 <div class="recipe-ingredients">
   <div *ngFor="let ingredient of value" class="ingredient-item">
-    <mat-card class="ingredient-card">
-      <mat-card-content>
+    <mat-card class="ingredient-card card">
+      <mat-card-content class="card">
         <div class="ingredient-content">
           <div class="ingredient-quantity" *ngIf="!disableAmount && ingredient.quantity">
             {{ ingredient.quantity }}
@@ -15,8 +15,6 @@
           <div class="ingredient-note" *ngIf="ingredient.note">
             ({{ ingredient.note }})
           </div>
-        </div>
       </mat-card-content>
     </mat-card>
-  </div>
-</div> 
+  </section>

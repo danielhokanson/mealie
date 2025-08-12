@@ -1,39 +1,6 @@
-.label-chip {
-  max-width: 100%;
-  overflow: hidden;
-  
-  &.small {
-    font-size: 10px;
-    height: 20px;
-    
-    .label-text {
-      font-size: 10px;
-    }
-  }
-  
-  &.medium {
-    font-size: 12px;
-    height: 24px;
-    
-    .label-text {
-      font-size: 12px;
-    }
-  }
-  
-  &.large {
-    font-size: 14px;
-    height: 28px;
-    
-    .label-text {
-      font-size: 14px;
-    }
-  }
-}
+// Component styles - using utility classes in template
+// Only custom styles that can't be achieved with utilities should be added here
 
-.label-text {
-  max-width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+:host {
   display: block;
-} 
+}

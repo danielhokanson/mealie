@@ -1,10 +1,10 @@
-<div class="recipe-explorer-container">
+<section class="page-container">
   <!-- Search Container -->
-  <div class="search-container">
+  <section class="page-container">
     <form class="search-box" (ngSubmit)="search()">
       <!-- Search Input -->
-      <div class="search-input-container">
-        <mat-form-field appearance="outline" class="search-input">
+      <section class="page-container">
+        <mat-form-field appearance="outline" class="search-input w-full">
           <mat-label>Search recipes...</mat-label>
           <input matInput
                  #searchInput
@@ -28,7 +28,7 @@
       <div class="search-row">
         <!-- Category Filter -->
         <div class="filter-section" *ngIf="categories.length > 0">
-          <mat-form-field appearance="outline" class="filter-input">
+          <mat-form-field appearance="outline" class="filter-input w-full">
             <mat-label>Categories</mat-label>
             <mat-select [(ngModel)]="selectedCategories" 
                        name="categories"
@@ -49,7 +49,7 @@
 
         <!-- Tag Filter -->
         <div class="filter-section" *ngIf="tags.length > 0">
-          <mat-form-field appearance="outline" class="filter-input">
+          <mat-form-field appearance="outline" class="filter-input w-full">
             <mat-label>Tags</mat-label>
             <mat-select [(ngModel)]="selectedTags" 
                        name="tags"
@@ -70,7 +70,7 @@
 
         <!-- Tool Filter -->
         <div class="filter-section" *ngIf="tools.length > 0">
-          <mat-form-field appearance="outline" class="filter-input">
+          <mat-form-field appearance="outline" class="filter-input w-full">
             <mat-label>Tools</mat-label>
             <mat-select [(ngModel)]="selectedTools" 
                        name="tools"
@@ -91,7 +91,7 @@
 
         <!-- Food Filter -->
         <div class="filter-section" *ngIf="foods.length > 0">
-          <mat-form-field appearance="outline" class="filter-input">
+          <mat-form-field appearance="outline" class="filter-input w-full">
             <mat-label>Foods</mat-label>
             <mat-select [(ngModel)]="selectedFoods" 
                        name="foods"
@@ -112,7 +112,7 @@
 
         <!-- Household Filter -->
         <div class="filter-section" *ngIf="households.length > 1">
-          <mat-form-field appearance="outline" class="filter-input">
+          <mat-form-field appearance="outline" class="filter-input w-full">
             <mat-label>Households</mat-label>
             <mat-select [(ngModel)]="selectedHouseholds" 
                        name="households"
@@ -135,7 +135,7 @@
         </button>
 
         <mat-menu #sortMenu="matMenu">
-          <mat-list>
+          <mat-list class="flex flex-col gap-sm">
             <mat-list-item (click)="toggleOrderDirection()">
               <mat-icon matListItemIcon>
                 {{ state.orderDirection === 'asc' ? 'sort_descending' : 'sort_ascending' }}
@@ -162,13 +162,13 @@
         </button>
 
         <mat-menu #settingsMenu="matMenu">
-          <mat-card>
-            <mat-card-content>
+          <mat-card class="card">
+            <mat-card-content class="card">
               <mat-slide-toggle [(ngModel)]="state.auto">
                 Auto Search
               </mat-slide-toggle>
               <button mat-raised-button
-                      color="primary"
+                      class="btn btn-primary"
                       (click)="reset()"
                       class="reset-button">
                 Reset
@@ -181,7 +181,7 @@
       <!-- Search Button -->
       <div class="search-button-container" *ngIf="!state.auto">
         <button mat-raised-button
-                color="primary"
+                class="btn btn-primary"
                 type="submit"
                 class="search-button">
           <mat-icon>search</mat-icon>
@@ -194,7 +194,7 @@
   <mat-divider></mat-divider>
 
   <!-- Recipe Cards Section -->
-  <div class="recipe-section-container">
+  <section class="page-container">
     <app-recipe-card-section
       *ngIf="state.ready"
       [icon]="'restaurant'"
@@ -206,5 +206,4 @@
       (replaceRecipes)="replaceRecipes($event)"
       (appendRecipes)="appendRecipes($event)">
     </app-recipe-card-section>
-  </div>
-</div> 
+  </section>

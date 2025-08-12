@@ -1,43 +1,6 @@
-.household-dashboard {
-  padding: 20px;
+// Component styles - using utility classes in template
+// Only custom styles that can't be achieved with utilities should be added here
 
-  .dashboard-header {
-    text-align: center;
-    margin-bottom: 32px;
-
-    h1 {
-      font-size: 32px;
-      font-weight: 600;
-      margin: 0 0 8px 0;
-    }
-  }
-
-  .dashboard-content {
-    display: grid;
-    grid-template-columns: 1fr 300px;
-    gap: 32px;
-
-    .main-content {
-      .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 16px;
-        margin-bottom: 32px;
-      }
-
-      .recent-activity {
-        margin-bottom: 32px;
-      }
-    }
-
-    .sidebar {
-      .household-info {
-        margin-bottom: 24px;
-      }
-
-      .quick-actions {
-        margin-bottom: 24px;
-      }
-    }
-  }
-} 
+:host {
+  display: block;
+}

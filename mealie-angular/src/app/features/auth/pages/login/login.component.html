@@ -1,11 +1,11 @@
 <section class="min-h-screen flex items-center justify-center p-md">
-  <mat-card class="card w-full max-w-md">
-    <mat-card-header class="text-center mb-lg">
-      <mat-card-title class="text-2xl font-medium mb-sm">Welcome Back</mat-card-title>
-      <mat-card-subtitle class="text-secondary">Sign in to your account</mat-card-subtitle>
+  <mat-card class="card w-full max-w-md card">
+    <mat-card-header class="text-center mb-lg card">
+      <mat-card-title class="text-2xl font-medium mb-sm card">Welcome Back</mat-card-title>
+      <mat-card-subtitle class="text-secondary card">Sign in to your account</mat-card-subtitle>
     </mat-card-header>
 
-    <mat-card-content>
+    <mat-card-content class="card">
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-md">
         <!-- Username Field -->
         <mat-form-field appearance="outline" class="w-full">
@@ -61,7 +61,7 @@
       </form>
     </mat-card-content>
 
-    <mat-card-actions class="flex flex-col gap-sm pt-md">
+    <mat-card-actions class="flex flex-col gap-sm pt-md card">
       <button 
         mat-button 
         (click)="onForgotPassword()"

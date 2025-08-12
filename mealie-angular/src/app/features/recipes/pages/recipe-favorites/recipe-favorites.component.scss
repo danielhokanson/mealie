@@ -1,3 +1,4 @@
+// TODO: Review and update to use theme variables
 .recipe-favorites-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -171,7 +172,7 @@
               right: 8px;
 
               button {
-                background: rgba(255, 255, 255, 0.9);
+                background: var(--text-primary);
                 backdrop-filter: blur(4px);
 
                 &.favorited {

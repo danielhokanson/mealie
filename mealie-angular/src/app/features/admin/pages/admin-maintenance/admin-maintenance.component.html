@@ -1,27 +1,27 @@
-<div class="admin-maintenance-container">
+<section class="page-container">
   <!-- Loading State -->
-  <div *ngIf="loading" class="loading-container">
+  <div *ngIf="loading" class="flex items-center justify-center py-xl">
     <mat-spinner diameter="50"></mat-spinner>
-    <p>Loading system information...</p>
+    <p class="text-secondary mb-sm text-secondary mb-sm">Loading system information...</p>
   </div>
 
   <!-- Maintenance Content -->
   <div *ngIf="!loading" class="maintenance-content">
     <!-- Header -->
     <div class="maintenance-header">
-      <h2>System Maintenance</h2>
-      <p>Monitor system health and perform maintenance tasks</p>
+      <h2 class="text-xl font-medium mb-md text-xl font-medium mb-md">System Maintenance</h2>
+      <p class="text-secondary mb-sm text-secondary mb-sm">Monitor system health and perform maintenance tasks</p>
     </div>
 
     <!-- System Health -->
     <div class="system-health-section">
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title>System Health</mat-card-title>
-          <mat-card-subtitle>Current system status and performance</mat-card-subtitle>
+      <mat-card class="card">
+        <mat-card-header class="card">
+          <mat-card-title class="card">System Health</mat-card-title>
+          <mat-card-subtitle class="card">Current system status and performance</mat-card-subtitle>
         </mat-card-header>
 
-        <mat-card-content>
+        <mat-card-content class="card">
           <div class="health-grid">
             <!-- Database Health -->
             <div class="health-item">
@@ -44,7 +44,6 @@
                   <span class="metric-label">Performance:</span>
                   <span class="metric-value">{{ systemHealth?.database?.performance || 0 }}%</span>
                 </div>
-              </div>
             </div>
 
             <!-- Storage Health -->
@@ -68,7 +67,6 @@
                   <span class="metric-label">Usage:</span>
                   <span class="metric-value">{{ getStoragePercentage() }}%</span>
                 </div>
-              </div>
             </div>
 
             <!-- Memory Health -->
@@ -92,7 +90,6 @@
                   <span class="metric-label">Usage:</span>
                   <span class="metric-value">{{ getMemoryPercentage() }}%</span>
                 </div>
-              </div>
             </div>
 
             <!-- CPU Health -->
@@ -112,9 +109,7 @@
                   <span class="metric-label">Performance:</span>
                   <span class="metric-value">{{ systemHealth?.cpu?.performance || 0 }}%</span>
                 </div>
-              </div>
             </div>
-          </div>
 
           <!-- Overall Health Status -->
           <div class="overall-health">
@@ -127,7 +122,7 @@
             </div>
             <button 
               mat-button 
-              color="primary"
+              class="btn btn-primary"
               (click)="onRefreshHealth()">
               <mat-icon>refresh</mat-icon>
               Refresh
@@ -139,14 +134,14 @@
 
     <!-- Maintenance Tasks -->
     <div class="maintenance-tasks-section">
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title>Maintenance Tasks</mat-card-title>
-          <mat-card-subtitle>System maintenance and optimization tasks</mat-card-subtitle>
+      <mat-card class="card">
+        <mat-card-header class="card">
+          <mat-card-title class="card">Maintenance Tasks</mat-card-title>
+          <mat-card-subtitle class="card">System maintenance and optimization tasks</mat-card-subtitle>
         </mat-card-header>
 
-        <mat-card-content>
-          <table mat-table [dataSource]="maintenanceTasks" class="maintenance-table">
+        <mat-card-content class="card">
+          <table mat-table class="w-full" [dataSource]="maintenanceTasks" class="maintenance-table">
             <!-- Name Column -->
             <ng-container matColumnDef="name">
               <th mat-header-cell *matHeaderCellDef>Task</th>
@@ -159,7 +154,6 @@
                     <span class="task-name">{{ task.name }}</span>
                     <span class="task-description">{{ task.description }}</span>
                   </div>
-                </div>
               </td>
             </ng-container>
 
@@ -235,8 +229,8 @@
           <!-- Empty State -->
           <div *ngIf="maintenanceTasks.length === 0" class="empty-tasks">
             <mat-icon class="empty-icon">build</mat-icon>
-            <h3>No Maintenance Tasks</h3>
-            <p>No maintenance tasks are currently configured</p>
+            <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">No Maintenance Tasks</h3>
+            <p class="text-secondary mb-sm text-secondary mb-sm">No maintenance tasks are currently configured</p>
           </div>
         </mat-card-content>
       </mat-card>
@@ -244,23 +238,23 @@
 
     <!-- Emergency Actions -->
     <div class="emergency-actions-section">
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title>Emergency Actions</mat-card-title>
-          <mat-card-subtitle>Critical system operations</mat-card-subtitle>
+      <mat-card class="card">
+        <mat-card-header class="card">
+          <mat-card-title class="card">Emergency Actions</mat-card-title>
+          <mat-card-subtitle class="card">Critical system operations</mat-card-subtitle>
         </mat-card-header>
 
-        <mat-card-content>
+        <mat-card-content class="card">
           <div class="emergency-actions">
             <button 
               mat-raised-button 
-              color="warn"
+              class="btn btn-error"
               (click)="onEmergencyMaintenance()"
               [disabled]="loading">
               <mat-icon>warning</mat-icon>
               Emergency Maintenance
             </button>
-            <p class="emergency-note">
+            <p class="emergency-note text-secondary mb-sm text-secondary mb-sm">
               Use emergency maintenance only when the system is experiencing critical issues.
               This may temporarily affect system performance.
             </p>
@@ -268,24 +262,22 @@
         </mat-card-content>
       </mat-card>
     </div>
-  </div>
 
   <!-- Progress Overlay -->
   <div *ngIf="runningTask" class="progress-overlay">
-    <mat-card class="progress-card">
-      <mat-card-content>
-        <h3>Running: {{ runningTask.name }}</h3>
-        <p>{{ runningTask.description }}</p>
+    <mat-card class="progress-card card">
+      <mat-card-content class="card">
+        <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Running: {{ runningTask.name }}</h3>
+        <p class="text-secondary mb-sm text-secondary mb-sm">{{ runningTask.description }}</p>
         <mat-progress-bar 
           mode="determinate" 
           [value]="taskProgress"
-          color="primary">
+          class="btn btn-primary">
         </mat-progress-bar>
         <span class="progress-text">{{ taskProgress }}%</span>
-        <p class="estimated-time">
+        <p class="estimated-time text-secondary mb-sm text-secondary mb-sm">
           Estimated time: {{ getEstimatedTimeDisplay(runningTask.estimatedTime) }}
         </p>
       </mat-card-content>
     </mat-card>
-  </div>
-</div> 
+  </section>

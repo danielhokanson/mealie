@@ -1,8 +1,8 @@
-<div class="user-settings-container">
+<section class="page-container">
   <div class="settings-content" *ngIf="!loading; else loadingTemplate">
     <div class="settings-header">
-      <h2>User Settings</h2>
-      <p>Manage your account preferences and settings</p>
+      <h2 class="text-xl font-medium mb-md text-xl font-medium mb-md">User Settings</h2>
+      <p class="text-secondary mb-sm text-secondary mb-sm">Manage your account preferences and settings</p>
     </div>
 
     <mat-tab-group class="settings-tabs">
@@ -11,14 +11,14 @@
         <div class="tab-content">
           <form [formGroup]="profileForm" class="settings-form">
             <div class="form-section">
-              <h3>Profile Information</h3>
+              <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Profile Information</h3>
               
               <div class="avatar-section">
                 <div class="avatar-preview">
                   <mat-icon class="avatar-icon">account_circle</mat-icon>
                 </div>
                 <div class="avatar-actions">
-                  <button mat-raised-button color="primary" type="button">
+                  <button mat-raised-button class="btn btn-primary" type="button">
                     <mat-icon>upload</mat-icon>
                     Upload Photo
                   </button>
@@ -27,10 +27,9 @@
                     Remove Photo
                   </button>
                 </div>
-              </div>
 
               <div class="form-row">
-                <mat-form-field class="form-field">
+                <mat-form-field class="w-full">
                   <mat-label>Display Name</mat-label>
                   <input matInput formControlName="displayName" placeholder="Enter your display name">
                   <mat-error *ngIf="profileForm.get('displayName')?.hasError('required')">
@@ -43,7 +42,7 @@
               </div>
 
               <div class="form-row">
-                <mat-form-field class="form-field">
+                <mat-form-field class="w-full">
                   <mat-label>Email</mat-label>
                   <input matInput formControlName="email" type="email" placeholder="Enter your email">
                   <mat-error *ngIf="profileForm.get('email')?.hasError('required')">
@@ -56,7 +55,7 @@
               </div>
 
               <div class="form-row">
-                <mat-form-field class="form-field">
+                <mat-form-field class="w-full">
                   <mat-label>Bio</mat-label>
                   <textarea matInput formControlName="bio" placeholder="Tell us about yourself" rows="3"></textarea>
                   <mat-hint>{{ getBioLength() }}/{{ getMaxBioLength() }}</mat-hint>
@@ -65,7 +64,6 @@
                   </mat-error>
                 </mat-form-field>
               </div>
-            </div>
           </form>
         </div>
       </mat-tab>
@@ -75,7 +73,7 @@
         <div class="tab-content">
           <form [formGroup]="preferencesForm" class="settings-form">
             <div class="form-section">
-              <h3>Display Preferences</h3>
+              <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Display Preferences</h3>
               
               <div class="form-row">
                 <mat-slide-toggle formControlName="darkMode">
@@ -104,10 +102,9 @@
                 </mat-slide-toggle>
                 <span class="preference-description">Display images in recipe lists and cards</span>
               </div>
-            </div>
 
             <div class="form-section">
-              <h3>Notification Preferences</h3>
+              <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Notification Preferences</h3>
               
               <div class="form-row">
                 <mat-slide-toggle formControlName="emailNotifications">
@@ -136,10 +133,9 @@
                 </mat-slide-toggle>
                 <span class="preference-description">Get reminded about incomplete shopping lists</span>
               </div>
-            </div>
 
             <div class="form-section">
-              <h3>Privacy Settings</h3>
+              <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Privacy Settings</h3>
               
               <div class="form-row">
                 <mat-slide-toggle formControlName="publicProfile">
@@ -161,7 +157,6 @@
                 </mat-slide-toggle>
                 <span class="preference-description">Allow others to share your recipes</span>
               </div>
-            </div>
           </form>
         </div>
       </mat-tab>
@@ -171,10 +166,10 @@
         <div class="tab-content">
           <form [formGroup]="securityForm" class="settings-form">
             <div class="form-section">
-              <h3>Password</h3>
+              <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Password</h3>
               
               <div class="form-row">
-                <mat-form-field class="form-field">
+                <mat-form-field class="w-full">
                   <mat-label>Current Password</mat-label>
                   <input matInput formControlName="currentPassword" type="password" placeholder="Enter current password">
                   <mat-error *ngIf="securityForm.get('currentPassword')?.hasError('required')">
@@ -184,7 +179,7 @@
               </div>
 
               <div class="form-row">
-                <mat-form-field class="form-field">
+                <mat-form-field class="w-full">
                   <mat-label>New Password</mat-label>
                   <input matInput formControlName="newPassword" type="password" placeholder="Enter new password">
                   <mat-error *ngIf="securityForm.get('newPassword')?.hasError('required')">
@@ -197,7 +192,7 @@
               </div>
 
               <div class="form-row">
-                <mat-form-field class="form-field">
+                <mat-form-field class="w-full">
                   <mat-label>Confirm New Password</mat-label>
                   <input matInput formControlName="confirmPassword" type="password" placeholder="Confirm new password">
                   <mat-error *ngIf="securityForm.get('confirmPassword')?.hasError('required')">
@@ -210,15 +205,14 @@
               </div>
 
               <div class="form-row">
-                <button mat-raised-button color="primary" type="button" (click)="onChangePassword()" [disabled]="!canChangePassword()">
+                <button mat-raised-button class="btn btn-primary" type="button" (click)="onChangePassword()" [disabled]="!canChangePassword()">
                   <mat-icon>lock</mat-icon>
                   Change Password
                 </button>
               </div>
-            </div>
 
             <div class="form-section">
-              <h3>Two-Factor Authentication</h3>
+              <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Two-Factor Authentication</h3>
               
               <div class="form-row">
                 <mat-slide-toggle formControlName="twoFactorEnabled">
@@ -233,10 +227,9 @@
                   Setup Two-Factor Authentication
                 </button>
               </div>
-            </div>
 
             <div class="form-section">
-              <h3>Session Management</h3>
+              <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Session Management</h3>
               
               <div class="form-row">
                 <button mat-stroked-button type="button" (click)="onViewActiveSessions()">
@@ -251,7 +244,6 @@
                   Logout All Devices
                 </button>
               </div>
-            </div>
           </form>
         </div>
       </mat-tab>
@@ -261,19 +253,18 @@
         <div class="tab-content">
           <div class="settings-form">
             <div class="form-section">
-              <h3>Data Export</h3>
+              <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Data Export</h3>
               
               <div class="form-row">
-                <button mat-raised-button color="primary" type="button" (click)="onExportData()">
+                <button mat-raised-button class="btn btn-primary" type="button" (click)="onExportData()">
                   <mat-icon>download</mat-icon>
                   Export My Data
                 </button>
                 <span class="preference-description">Download all your data in JSON format</span>
               </div>
-            </div>
 
             <div class="form-section">
-              <h3>Data Import</h3>
+              <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Data Import</h3>
               
               <div class="form-row">
                 <button mat-stroked-button type="button" (click)="onImportData()">
@@ -282,26 +273,23 @@
                 </button>
                 <span class="preference-description">Import data from a JSON file</span>
               </div>
-            </div>
 
             <div class="form-section">
-              <h3>Account Deletion</h3>
+              <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Account Deletion</h3>
               
               <div class="form-row">
-                <button mat-raised-button color="warn" type="button" (click)="onDeleteAccount()">
+                <button mat-raised-button class="btn btn-error" type="button" (click)="onDeleteAccount()">
                   <mat-icon>delete_forever</mat-icon>
                   Delete Account
                 </button>
                 <span class="preference-description">Permanently delete your account and all data</span>
               </div>
-            </div>
           </div>
-        </div>
       </mat-tab>
     </mat-tab-group>
 
     <div class="settings-actions">
-      <button mat-raised-button color="primary" (click)="onSaveSettings()" [disabled]="!canSaveSettings()">
+      <button mat-raised-button class="btn btn-primary" (click)="onSaveSettings()" [disabled]="!canSaveSettings()">
         <mat-spinner diameter="20" *ngIf="saving"></mat-spinner>
         <mat-icon *ngIf="!saving">save</mat-icon>
         Save Settings
@@ -310,12 +298,11 @@
         Cancel
       </button>
     </div>
-  </div>
 
   <ng-template #loadingTemplate>
-    <div class="loading-container">
+    <div class="flex items-center justify-center py-xl">
       <mat-spinner diameter="40"></mat-spinner>
-      <p>Loading user settings...</p>
+      <p class="text-secondary mb-sm text-secondary mb-sm">Loading user settings...</p>
     </div>
   </ng-template>
-</div> 
+</section> 

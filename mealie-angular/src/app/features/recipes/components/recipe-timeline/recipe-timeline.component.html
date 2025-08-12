@@ -32,15 +32,13 @@
             <mat-checkbox
               [checked]="option.checked"
               (change)="toggleEventTypeOption(option.value)"
-              color="primary">
+              class="btn btn-primary">
               <mat-icon class="option-icon">{{ option.icon }}</mat-icon>
               {{ option.label }}
             </mat-checkbox>
           </div>
-        </div>
       </mat-menu>
     </div>
-  </div>
   
   <mat-divider class="timeline-divider"></mat-divider>
   
@@ -61,22 +59,20 @@
         (delete)="deleteTimelineEvent(index)">
       </app-recipe-timeline-item>
     </div>
-  </div>
   
   <mat-card
     *ngIf="!timelineEvents.length && !loading"
-    class="no-events-card">
-    <mat-card-title class="no-events-title">
+    class="no-events-card card">
+    <mat-card-title class="no-events-title card">
       No timeline events found. Try adjusting your filters.
     </mat-card-title>
   </mat-card>
   
   <div
     *ngIf="loading"
-    class="loading-container">
+    class="flex items-center justify-center py-xl">
     <app-loader
       [loading]="loading"
       [waitingText]="'Loading events...'">
     </app-loader>
-  </div>
-</div> 
+  </section>

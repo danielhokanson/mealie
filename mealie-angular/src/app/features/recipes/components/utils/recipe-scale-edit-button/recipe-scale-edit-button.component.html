@@ -12,14 +12,14 @@
       </div>
 
       <mat-menu #scaleMenu="matMenu" class="scale-menu">
-        <mat-card class="menu-card">
-          <mat-card-title class="menu-title">
+        <mat-card class="menu-card card">
+          <mat-card-title class="menu-title card">
             Servings
           </mat-card-title>
           
-          <mat-card-content class="menu-content">
+          <mat-card-content class="menu-content card">
             <div class="input-section">
-              <mat-form-field appearance="outline" class="yield-input">
+              <mat-form-field appearance="outline" class="yield-input w-full">
                 <mat-label>Servings</mat-label>
                 <input matInput
                        type="number"
@@ -49,5 +49,4 @@
       (decrement)="onDecrement()"
       (increment)="onIncrement()">
     </app-base-button-group>
-  </div>
-</div> 
+  </section>

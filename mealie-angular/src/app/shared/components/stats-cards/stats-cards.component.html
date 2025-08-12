@@ -2,7 +2,7 @@
   [style.min-width]="minWidth"
   [class.clickable]="isClickable"
   (click)="navigateTo()"
-  class="stats-card">
+  class="stats-card card">
   
   <div class="card-content">
     <div
@@ -22,6 +22,5 @@
       <div class="stats-value">
         <ng-content select="[slot=value]"></ng-content>
       </div>
-    </div>
   </div>
 </mat-card> 

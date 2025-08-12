@@ -4,7 +4,7 @@
        class="rating-container"
        (mouseenter)="isHovering = true"
        (mouseleave)="isHovering = false">
-    <div class="stars-container">
+    <section class="page-container">
       <button 
         *ngFor="let star of [1,2,3,4,5]; let i = index"
         type="button"
@@ -32,7 +32,7 @@
   <!-- Group Rating (read-only) -->
   <div *ngIf="!canRate || (!userRating && !isHovering && ratingsLoaded)" 
        class="rating-container group-rating">
-    <div class="stars-container">
+    <section class="page-container">
       <mat-icon 
         *ngFor="let star of [1,2,3,4,5]; let i = index"
         class="star-icon"
@@ -44,5 +44,4 @@
     <span *ngIf="groupRating > 0" class="rating-text">
       {{ groupRating.toFixed(1) }}
     </span>
-  </div>
-</div> 
+  </section>

@@ -1,6 +1,6 @@
-<div class="image-cropper-container">
-    <mat-card class="cropper-card">
-        <mat-card-content>
+<section class="page-container">
+    <mat-card class="cropper-card card">
+        <mat-card-content class="card">
             <!-- Hidden image for loading -->
             <img #cropperImage [src]="img" style="display: none;">
             
@@ -13,7 +13,7 @@
         </mat-card-content>
 
         <!-- Control buttons -->
-        <mat-card-actions class="cropper-controls">
+        <mat-card-actions class="cropper-controls card">
             <div class="control-group" *ngFor="let group of controls">
                 <button
                     *ngFor="let control of group"
@@ -27,10 +27,10 @@
         </mat-card-actions>
 
         <!-- Action buttons -->
-        <mat-card-actions class="action-buttons">
+        <mat-card-actions class="action-buttons card">
             <button
                 mat-raised-button
-                color="warn"
+                class="btn btn-error"
                 (click)="onDelete()"
                 class="delete-button">
                 <mat-icon>delete</mat-icon>
@@ -39,7 +39,7 @@
             
             <button
                 mat-raised-button
-                color="primary"
+                class="btn btn-primary"
                 [disabled]="submitted"
                 (click)="onSave()"
                 class="save-button">
@@ -48,4 +48,4 @@
             </button>
         </mat-card-actions>
     </mat-card>
-</div> 
+</section> 

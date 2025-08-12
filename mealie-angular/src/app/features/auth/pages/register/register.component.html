@@ -1,15 +1,15 @@
-<div class="register-container">
+<section class="page-container">
   <div class="register-card">
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title>Create Account</mat-card-title>
-        <mat-card-subtitle>Join Mealie and start organizing your recipes</mat-card-subtitle>
+    <mat-card class="card">
+      <mat-card-header class="card">
+        <mat-card-title class="card">Create Account</mat-card-title>
+        <mat-card-subtitle class="card">Join Mealie and start organizing your recipes</mat-card-subtitle>
       </mat-card-header>
 
-      <mat-card-content>
+      <mat-card-content class="card">
         <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
           <!-- Username Field -->
-          <mat-form-field appearance="outline" class="form-field">
+          <mat-form-field appearance="outline" class="w-full">
             <mat-label>Username</mat-label>
             <input 
               matInput 
@@ -23,7 +23,7 @@
           </mat-form-field>
 
           <!-- Full Name Field -->
-          <mat-form-field appearance="outline" class="form-field">
+          <mat-form-field appearance="outline" class="w-full">
             <mat-label>Full Name</mat-label>
             <input 
               matInput 
@@ -37,7 +37,7 @@
           </mat-form-field>
 
           <!-- Email Field -->
-          <mat-form-field appearance="outline" class="form-field">
+          <mat-form-field appearance="outline" class="w-full">
             <mat-label>Email</mat-label>
             <input 
               matInput 
@@ -52,7 +52,7 @@
           </mat-form-field>
 
           <!-- Password Field -->
-          <mat-form-field appearance="outline" class="form-field">
+          <mat-form-field appearance="outline" class="w-full">
             <mat-label>Password</mat-label>
             <input 
               matInput 
@@ -82,14 +82,13 @@
                 [style.background-color]="getPasswordStrengthColor()"
                 [style.width]="getPasswordStrength() === 'weak' ? '33%' : getPasswordStrength() === 'medium' ? '66%' : '100%'">
               </div>
-            </div>
             <span class="strength-text" [style.color]="getPasswordStrengthColor()">
               Password strength: {{ getPasswordStrength() }}
             </span>
           </div>
 
           <!-- Confirm Password Field -->
-          <mat-form-field appearance="outline" class="form-field">
+          <mat-form-field appearance="outline" class="w-full">
             <mat-label>Confirm Password</mat-label>
             <input 
               matInput 
@@ -113,7 +112,7 @@
 
           <!-- Terms and Conditions -->
           <div class="terms-checkbox">
-            <mat-checkbox formControlName="acceptTerms" color="primary">
+            <mat-checkbox formControlName="acceptTerms" class="btn btn-primary">
               I agree to the 
               <a href="#" class="terms-link">Terms of Service</a> 
               and 
@@ -127,9 +126,9 @@
           <!-- Submit Button -->
           <button 
             mat-raised-button 
-            color="primary" 
+            class="btn btn-primary" 
             type="submit"
-            class="submit-button"
+            class="btn btn-primary"
             [disabled]="loading || registerForm.invalid">
             <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner>
             <span *ngIf="!loading">Create Account</span>
@@ -137,15 +136,14 @@
         </form>
       </mat-card-content>
 
-      <mat-card-actions class="card-actions">
+      <mat-card-actions class="flex justify-end gap-sm pt-md card">
         <button 
           mat-button 
-          color="accent"
+          class="btn btn-secondary"
           (click)="onLogin()"
           class="login-link">
           Already have an account? Sign in
         </button>
       </mat-card-actions>
     </mat-card>
-  </div>
-</div> 
+  </section>

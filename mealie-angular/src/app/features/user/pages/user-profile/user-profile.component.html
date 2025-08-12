@@ -1,16 +1,16 @@
-<div class="user-profile-container">
+<section class="page-container">
   <!-- Loading State -->
-  <div *ngIf="loading" class="loading-container">
+  <div *ngIf="loading" class="flex items-center justify-center py-xl">
     <mat-spinner diameter="50"></mat-spinner>
-    <p>Loading profile...</p>
+    <p class="text-secondary mb-sm text-secondary mb-sm">Loading profile...</p>
   </div>
 
   <!-- Error State -->
   <div *ngIf="error && !loading" class="error-container">
     <mat-icon class="error-icon">error</mat-icon>
-    <h3>Error Loading Profile</h3>
-    <p>Unable to load your profile. Please try again.</p>
-    <button mat-raised-button color="primary" (click)="loadUserData()">
+    <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Error Loading Profile</h3>
+    <p class="text-secondary mb-sm text-secondary mb-sm">Unable to load your profile. Please try again.</p>
+    <button mat-raised-button class="btn btn-primary" (click)="loadUserData()">
       Retry
     </button>
   </div>
@@ -20,7 +20,7 @@
     <!-- Header -->
     <div class="profile-header">
       <div class="profile-avatar">
-        <div class="avatar-container">
+        <section class="page-container">
           <img 
             *ngIf="imagePreview || userProfile?.avatar" 
             [src]="imagePreview || userProfile?.avatar" 
@@ -43,11 +43,10 @@
             (change)="onImageSelected($event)"
             style="display: none;">
         </div>
-      </div>
       <div class="profile-info">
-        <h1>{{ currentUser.fullName }}</h1>
-        <p class="username">{{ currentUser.username }}</p>
-        <p class="bio" *ngIf="userProfile?.bio">{{ userProfile?.bio }}</p>
+        <h1 class="text-2xl font-medium mb-md text-2xl font-medium mb-md">{{ currentUser.fullName }}</h1>
+        <p class="username text-secondary mb-sm text-secondary mb-sm">{{ currentUser.username }}</p>
+        <p class="bio" *ngIf="userProfile?.bio" class="text-secondary mb-sm text-secondary mb-sm">{{ userProfile?.bio }}</p>
         <div class="profile-stats">
           <div class="stat">
             <span class="stat-number">42</span>
@@ -61,22 +60,20 @@
             <span class="stat-number">8</span>
             <span class="stat-label">Favorites</span>
           </div>
-        </div>
       </div>
-    </div>
 
     <!-- Tabs -->
-    <mat-card class="tabs-card">
+    <mat-card class="tabs-card card">
       <mat-tab-group [(selectedIndex)]="selectedTab">
         <!-- Profile Tab -->
         <mat-tab label="Profile">
           <div class="tab-content">
             <form [formGroup]="profileForm" (ngSubmit)="onSaveProfile()" class="profile-form">
               <div class="form-section">
-                <h3>Basic Information</h3>
+                <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Basic Information</h3>
                 
                 <div class="form-row">
-                  <mat-form-field appearance="outline" class="form-field">
+                  <mat-form-field appearance="outline" class="w-full">
                     <mat-label>Username</mat-label>
                     <input 
                       matInput 
@@ -87,7 +84,7 @@
                     </mat-error>
                   </mat-form-field>
 
-                  <mat-form-field appearance="outline" class="form-field">
+                  <mat-form-field appearance="outline" class="w-full">
                     <mat-label>Full Name</mat-label>
                     <input 
                       matInput 
@@ -100,7 +97,7 @@
                 </div>
 
                 <div class="form-row">
-                  <mat-form-field appearance="outline" class="form-field">
+                  <mat-form-field appearance="outline" class="w-full">
                     <mat-label>Email</mat-label>
                     <input 
                       matInput 
@@ -112,7 +109,7 @@
                     </mat-error>
                   </mat-form-field>
 
-                  <mat-form-field appearance="outline" class="form-field">
+                  <mat-form-field appearance="outline" class="w-full">
                     <mat-label>Phone</mat-label>
                     <input 
                       matInput 
@@ -122,7 +119,7 @@
                 </div>
 
                 <div class="form-row">
-                  <mat-form-field appearance="outline" class="form-field">
+                  <mat-form-field appearance="outline" class="w-full">
                     <mat-label>Location</mat-label>
                     <input 
                       matInput 
@@ -130,7 +127,7 @@
                       placeholder="Enter location">
                   </mat-form-field>
 
-                  <mat-form-field appearance="outline" class="form-field">
+                  <mat-form-field appearance="outline" class="w-full">
                     <mat-label>Website</mat-label>
                     <input 
                       matInput 
@@ -140,7 +137,7 @@
                 </div>
 
                 <div class="form-row">
-                  <mat-form-field appearance="outline" class="form-field">
+                  <mat-form-field appearance="outline" class="w-full">
                     <mat-label>Bio</mat-label>
                     <textarea 
                       matInput 
@@ -150,44 +147,40 @@
                     </textarea>
                   </mat-form-field>
                 </div>
-              </div>
 
               <div class="form-section" *ngIf="userProfile">
-                <h3>Preferences</h3>
+                <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Preferences</h3>
                 
                 <div class="preferences-grid">
                   <div class="preference-group">
                     <h4>Dietary Restrictions</h4>
-                    <div class="chips-container">
+                    <section class="page-container">
                       <mat-chip 
                         *ngFor="let restriction of userProfile.preferences.dietaryRestrictions"
                         [style.background-color]="getCookingSkillColor('intermediate')">
                         {{ restriction }}
                       </mat-chip>
                     </div>
-                  </div>
 
                   <div class="preference-group">
                     <h4>Allergies</h4>
-                    <div class="chips-container">
+                    <section class="page-container">
                       <mat-chip 
                         *ngFor="let allergy of userProfile.preferences.allergies"
                         [style.background-color]="getCookingSkillColor('beginner')">
                         {{ allergy }}
                       </mat-chip>
                     </div>
-                  </div>
 
                   <div class="preference-group">
                     <h4>Cuisine Preferences</h4>
-                    <div class="chips-container">
+                    <section class="page-container">
                       <mat-chip 
                         *ngFor="let cuisine of userProfile.preferences.cuisinePreferences"
                         [style.background-color]="getCookingSkillColor('advanced')">
                         {{ cuisine }}
                       </mat-chip>
                     </div>
-                  </div>
 
                   <div class="preference-group">
                     <h4>Cooking Skill</h4>
@@ -195,13 +188,12 @@
                       {{ userProfile.preferences.cookingSkill }}
                     </mat-chip>
                   </div>
-                </div>
               </div>
 
-              <div class="form-actions">
+              <div class="flex justify-end gap-sm mt-lg">
                 <button 
                   mat-raised-button 
-                  color="primary"
+                  class="btn btn-primary"
                   type="submit"
                   [disabled]="saving || profileForm.invalid">
                   <mat-spinner *ngIf="saving" diameter="20" class="spinner"></mat-spinner>
@@ -217,10 +209,10 @@
           <div class="tab-content">
             <form [formGroup]="preferencesForm" (ngSubmit)="onSavePreferences()" class="preferences-form">
               <div class="form-section">
-                <h3>App Settings</h3>
+                <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">App Settings</h3>
                 
                 <div class="form-row">
-                  <mat-form-field appearance="outline" class="form-field">
+                  <mat-form-field appearance="outline" class="w-full">
                     <mat-label>Theme</mat-label>
                     <mat-select formControlName="theme">
                       <mat-option value="light">Light</mat-option>
@@ -229,7 +221,7 @@
                     </mat-select>
                   </mat-form-field>
 
-                  <mat-form-field appearance="outline" class="form-field">
+                  <mat-form-field appearance="outline" class="w-full">
                     <mat-label>Language</mat-label>
                     <mat-select formControlName="language">
                       <mat-option value="en">English</mat-option>
@@ -241,7 +233,7 @@
                 </div>
 
                 <div class="form-row">
-                  <mat-form-field appearance="outline" class="form-field">
+                  <mat-form-field appearance="outline" class="w-full">
                     <mat-label>Timezone</mat-label>
                     <mat-select formControlName="timezone">
                       <mat-option value="UTC">UTC</mat-option>
@@ -252,10 +244,9 @@
                     </mat-select>
                   </mat-form-field>
                 </div>
-              </div>
 
               <div class="form-section">
-                <h3>Notifications</h3>
+                <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Notifications</h3>
                 
                 <div class="checkbox-group">
                   <mat-checkbox formControlName="emailNotifications">
@@ -278,10 +269,9 @@
                     Weekly Reports
                   </mat-checkbox>
                 </div>
-              </div>
 
               <div class="form-section">
-                <h3>Recipe Settings</h3>
+                <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Recipe Settings</h3>
                 
                 <div class="checkbox-group">
                   <mat-checkbox formControlName="autoSave">
@@ -302,7 +292,7 @@
                 </div>
 
                 <div class="form-row">
-                  <mat-form-field appearance="outline" class="form-field">
+                  <mat-form-field appearance="outline" class="w-full">
                     <mat-label>Default Servings</mat-label>
                     <input 
                       matInput 
@@ -311,7 +301,7 @@
                       min="1">
                   </mat-form-field>
 
-                  <mat-form-field appearance="outline" class="form-field">
+                  <mat-form-field appearance="outline" class="w-full">
                     <mat-label>Default Prep Time (minutes)</mat-label>
                     <input 
                       matInput 
@@ -320,7 +310,7 @@
                       min="0">
                   </mat-form-field>
 
-                  <mat-form-field appearance="outline" class="form-field">
+                  <mat-form-field appearance="outline" class="w-full">
                     <mat-label>Default Cook Time (minutes)</mat-label>
                     <input 
                       matInput 
@@ -329,12 +319,11 @@
                       min="0">
                   </mat-form-field>
                 </div>
-              </div>
 
-              <div class="form-actions">
+              <div class="flex justify-end gap-sm mt-lg">
                 <button 
                   mat-raised-button 
-                  color="primary"
+                  class="btn btn-primary"
                   type="submit"
                   [disabled]="saving || preferencesForm.invalid">
                   <mat-spinner *ngIf="saving" diameter="20" class="spinner"></mat-spinner>
@@ -349,10 +338,10 @@
         <mat-tab label="Security">
           <div class="tab-content">
             <div class="security-section">
-              <h3>Change Password</h3>
+              <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Change Password</h3>
               <form [formGroup]="passwordForm" (ngSubmit)="onChangePassword()" class="password-form">
                 <div class="form-row">
-                  <mat-form-field appearance="outline" class="form-field">
+                  <mat-form-field appearance="outline" class="w-full">
                     <mat-label>Current Password</mat-label>
                     <input 
                       matInput 
@@ -366,7 +355,7 @@
                 </div>
 
                 <div class="form-row">
-                  <mat-form-field appearance="outline" class="form-field">
+                  <mat-form-field appearance="outline" class="w-full">
                     <mat-label>New Password</mat-label>
                     <input 
                       matInput 
@@ -378,7 +367,7 @@
                     </mat-error>
                   </mat-form-field>
 
-                  <mat-form-field appearance="outline" class="form-field">
+                  <mat-form-field appearance="outline" class="w-full">
                     <mat-label>Confirm New Password</mat-label>
                     <input 
                       matInput 
@@ -391,10 +380,10 @@
                   </mat-form-field>
                 </div>
 
-                <div class="form-actions">
+                <div class="flex justify-end gap-sm mt-lg">
                   <button 
                     mat-raised-button 
-                    color="primary"
+                    class="btn btn-primary"
                     type="submit"
                     [disabled]="saving || passwordForm.invalid">
                     <mat-spinner *ngIf="saving" diameter="20" class="spinner"></mat-spinner>
@@ -407,12 +396,12 @@
             <mat-divider></mat-divider>
 
             <div class="security-section">
-              <h3>Account Actions</h3>
+              <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Account Actions</h3>
               
               <div class="action-buttons">
                 <button 
                   mat-raised-button 
-                  color="accent"
+                  class="btn btn-secondary"
                   (click)="onExportData()">
                   <mat-icon>download</mat-icon>
                   Export Data
@@ -420,16 +409,14 @@
                 
                 <button 
                   mat-raised-button 
-                  color="warn"
+                  class="btn btn-error"
                   (click)="onDeleteAccount()">
                   <mat-icon>delete_forever</mat-icon>
                   Delete Account
                 </button>
               </div>
-            </div>
           </div>
         </mat-tab>
       </mat-tab-group>
     </mat-card>
-  </div>
-</div> 
+  </section>

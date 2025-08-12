@@ -6,15 +6,15 @@
   <div class="timeline-content">
     <!-- Date Chip (Desktop) -->
     <div *ngIf="!useMobileFormat && event.timestamp" class="date-chip">
-      <mat-chip color="primary" class="date-chip-content">
+      <mat-chip class="btn btn-primary date-chip-content">
         <mat-icon class="date-icon">calendar_today</mat-icon>
         {{ formattedDate }}
       </mat-chip>
     </div>
     
     <!-- Timeline Card -->
-    <mat-card class="timeline-card" (click)="onCardClick()">
-      <mat-card-header class="card-header">
+    <mat-card class="timeline-card" (click)="onCardClick()" class="card">
+      <mat-card-header class="card-header card">
         <div class="header-content">
           <!-- User Avatar -->
           <div class="avatar-section" [class]="attrs.avatar.class">
@@ -26,7 +26,7 @@
           
           <!-- Date Chip (Mobile) -->
           <div *ngIf="useMobileFormat && event.timestamp" class="mobile-date">
-            <mat-chip color="primary">
+            <mat-chip class="btn btn-primary">
               <mat-icon>calendar_today</mat-icon>
               {{ formattedDate }}
             </mat-chip>
@@ -50,11 +50,10 @@
               (delete)="delete.emit()">
             </app-recipe-timeline-context-menu>
           </div>
-        </div>
       </mat-card-header>
       
       <!-- Recipe Card (if enabled) -->
-      <mat-card-content *ngIf="showRecipeCards && recipe" class="recipe-card-content">
+      <mat-card-content *ngIf="showRecipeCards && recipe" class="recipe-card-content card">
         <div class="recipe-card-wrapper" [class]="useMobileFormat ? 'py-3 mx-0' : 'py-3 mx-0'">
           <app-recipe-card-mobile
             [name]="recipe.name"
@@ -73,7 +72,7 @@
       <mat-divider *ngIf="showRecipeCards && recipe && (useMobileFormat || event.eventMessage)"></mat-divider>
       
       <!-- Event Content -->
-      <mat-card-content class="event-content">
+      <mat-card-content class="event-content card">
         <div class="content-wrapper">
           <!-- Subject (Mobile) -->
           <strong *ngIf="useMobileFormat" class="mobile-subject">{{ event.subject }}</strong>
@@ -92,8 +91,6 @@
           <div *ngIf="event.eventMessage" class="event-message" [class]="useMobileFormat ? 'text-caption' : ''">
             <app-safe-markdown [source]="event.eventMessage"></app-safe-markdown>
           </div>
-        </div>
       </mat-card-content>
     </mat-card>
-  </div>
-</div> 
+  </section>

@@ -1,16 +1,16 @@
-<div class="recipe-edit-container">
+<section class="page-container">
   <!-- Loading State -->
-  <div *ngIf="loading" class="loading-container">
+  <div *ngIf="loading" class="flex items-center justify-center py-xl">
     <mat-spinner diameter="50"></mat-spinner>
-    <p>Loading recipe...</p>
+    <p class="text-secondary mb-sm text-secondary mb-sm">Loading recipe...</p>
   </div>
 
   <!-- Error State -->
   <div *ngIf="error && !loading" class="error-container">
     <mat-icon class="error-icon">error</mat-icon>
-    <h3>Error Loading Recipe</h3>
-    <p>Unable to load the recipe for editing. Please try again.</p>
-    <button mat-raised-button color="primary" (click)="loadRecipe(recipe?.id || '')">
+    <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Error Loading Recipe</h3>
+    <p class="text-secondary mb-sm text-secondary mb-sm">Unable to load the recipe for editing. Please try again.</p>
+    <button mat-raised-button class="btn btn-primary" (click)="loadRecipe(recipe?.id || '')">
       Retry
     </button>
   </div>
@@ -18,19 +18,19 @@
   <!-- Edit Form -->
   <div *ngIf="recipe && !loading" class="recipe-edit-content">
     <div class="edit-header">
-      <h1>Edit Recipe: {{ recipe.name }}</h1>
-      <p>Update your recipe details below</p>
+      <h1 class="text-2xl font-medium mb-md text-2xl font-medium mb-md">Edit Recipe: {{ recipe.name }}</h1>
+      <p class="text-secondary mb-sm text-secondary mb-sm">Update your recipe details below</p>
     </div>
 
     <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()" class="recipe-form">
       <!-- Basic Information -->
-      <mat-card class="form-section">
-        <mat-card-header>
-          <mat-card-title>Basic Information</mat-card-title>
+      <mat-card class="form-section card">
+        <mat-card-header class="card">
+          <mat-card-title class="card">Basic Information</mat-card-title>
         </mat-card-header>
-        <mat-card-content>
+        <mat-card-content class="card">
           <div class="form-row">
-            <mat-form-field appearance="outline" class="form-field">
+            <mat-form-field appearance="outline" class="w-full">
               <mat-label>Recipe Name</mat-label>
               <input 
                 matInput 
@@ -43,7 +43,7 @@
           </div>
 
           <div class="form-row">
-            <mat-form-field appearance="outline" class="form-field">
+            <mat-form-field appearance="outline" class="w-full">
               <mat-label>Description</mat-label>
               <textarea 
                 matInput 
@@ -55,7 +55,7 @@
           </div>
 
           <div class="form-row time-inputs">
-            <mat-form-field appearance="outline" class="form-field">
+            <mat-form-field appearance="outline" class="w-full">
               <mat-label>Prep Time (minutes)</mat-label>
               <input 
                 matInput 
@@ -67,7 +67,7 @@
               </mat-error>
             </mat-form-field>
 
-            <mat-form-field appearance="outline" class="form-field">
+            <mat-form-field appearance="outline" class="w-full">
               <mat-label>Cook Time (minutes)</mat-label>
               <input 
                 matInput 
@@ -79,7 +79,7 @@
               </mat-error>
             </mat-form-field>
 
-            <mat-form-field appearance="outline" class="form-field">
+            <mat-form-field appearance="outline" class="w-full">
               <mat-label>Servings</mat-label>
               <input 
                 matInput 
@@ -93,7 +93,7 @@
           </div>
 
           <div class="form-row">
-            <mat-form-field appearance="outline" class="form-field">
+            <mat-form-field appearance="outline" class="w-full">
               <mat-label>Yield</mat-label>
               <input 
                 matInput 
@@ -103,19 +103,19 @@
           </div>
 
           <div class="time-summary">
-            <p><strong>Total Time:</strong> {{ getFormattedTime(getTotalTime()) }}</p>
+            <p class="text-secondary mb-sm text-secondary mb-sm"><strong>Total Time:</strong> {{ getFormattedTime(getTotalTime()) }}</p>
           </div>
         </mat-card-content>
       </mat-card>
 
       <!-- Categories and Tags -->
-      <mat-card class="form-section">
-        <mat-card-header>
-          <mat-card-title>Categories & Tags</mat-card-title>
+      <mat-card class="form-section card">
+        <mat-card-header class="card">
+          <mat-card-title class="card">Categories & Tags</mat-card-title>
         </mat-card-header>
-        <mat-card-content>
+        <mat-card-content class="card">
           <div class="categories-section">
-            <h3>Categories</h3>
+            <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Categories</h3>
             <div class="selection-grid">
               <mat-checkbox 
                 *ngFor="let category of categories"
@@ -125,10 +125,9 @@
                 {{ category.name }}
               </mat-checkbox>
             </div>
-          </div>
 
           <div class="tags-section">
-            <h3>Tags</h3>
+            <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Tags</h3>
             <div class="selection-grid">
               <mat-checkbox 
                 *ngFor="let tag of tags"
@@ -138,10 +137,9 @@
                 {{ tag.name }}
               </mat-checkbox>
             </div>
-          </div>
 
           <div class="tools-section">
-            <h3>Tools</h3>
+            <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Tools</h3>
             <div class="selection-grid">
               <mat-checkbox 
                 *ngFor="let tool of tools"
@@ -150,10 +148,9 @@
                 {{ tool.name }}
               </mat-checkbox>
             </div>
-          </div>
 
           <div class="foods-section">
-            <h3>Foods</h3>
+            <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Foods</h3>
             <div class="selection-grid">
               <mat-checkbox 
                 *ngFor="let food of foods"
@@ -162,17 +159,16 @@
                 {{ food.name }}
               </mat-checkbox>
             </div>
-          </div>
         </mat-card-content>
       </mat-card>
 
       <!-- Ingredients -->
-      <mat-card class="form-section">
-        <mat-card-header>
-          <mat-card-title>Ingredients</mat-card-title>
-          <mat-card-subtitle>Update the ingredients needed for this recipe</mat-card-subtitle>
+      <mat-card class="form-section card">
+        <mat-card-header class="card">
+          <mat-card-title class="card">Ingredients</mat-card-title>
+          <mat-card-subtitle class="card">Update the ingredients needed for this recipe</mat-card-subtitle>
         </mat-card-header>
-        <mat-card-content>
+        <mat-card-content class="card">
           <div formArrayName="ingredients" class="ingredients-list">
             <div 
               *ngFor="let ingredient of ingredients.controls; let i = index"
@@ -180,7 +176,7 @@
               class="ingredient-item">
               
               <div class="ingredient-row">
-                <mat-form-field appearance="outline" class="quantity-field">
+                <mat-form-field appearance="outline" class="quantity-field w-full">
                   <mat-label>Quantity</mat-label>
                   <input 
                     matInput 
@@ -190,7 +186,7 @@
                     step="0.1">
                 </mat-form-field>
 
-                <mat-form-field appearance="outline" class="unit-field">
+                <mat-form-field appearance="outline" class="unit-field w-full">
                   <mat-label>Unit</mat-label>
                   <input 
                     matInput 
@@ -198,7 +194,7 @@
                     placeholder="e.g., cups, grams">
                 </mat-form-field>
 
-                <mat-form-field appearance="outline" class="food-field">
+                <mat-form-field appearance="outline" class="food-field w-full">
                   <mat-label>Food/Ingredient</mat-label>
                   <input 
                     matInput 
@@ -208,7 +204,7 @@
 
                 <button 
                   mat-icon-button 
-                  color="warn"
+                  class="btn btn-error"
                   type="button"
                   (click)="removeIngredient(i)"
                   class="remove-button">
@@ -217,7 +213,7 @@
               </div>
 
               <div class="ingredient-row">
-                <mat-form-field appearance="outline" class="title-field">
+                <mat-form-field appearance="outline" class="title-field w-full">
                   <mat-label>Title (optional)</mat-label>
                   <input 
                     matInput 
@@ -225,7 +221,7 @@
                     placeholder="e.g., All-purpose flour">
                 </mat-form-field>
 
-                <mat-form-field appearance="outline" class="note-field">
+                <mat-form-field appearance="outline" class="note-field w-full">
                   <mat-label>Note (optional)</mat-label>
                   <input 
                     matInput 
@@ -237,11 +233,10 @@
                   No amount needed
                 </mat-checkbox>
               </div>
-            </div>
 
             <button 
               mat-raised-button 
-              color="primary"
+              class="btn btn-primary"
               type="button"
               (click)="addIngredient()"
               class="add-button">
@@ -253,12 +248,12 @@
       </mat-card>
 
       <!-- Instructions -->
-      <mat-card class="form-section">
-        <mat-card-header>
-          <mat-card-title>Instructions</mat-card-title>
-          <mat-card-subtitle>Update the step-by-step instructions for making this recipe</mat-card-subtitle>
+      <mat-card class="form-section card">
+        <mat-card-header class="card">
+          <mat-card-title class="card">Instructions</mat-card-title>
+          <mat-card-subtitle class="card">Update the step-by-step instructions for making this recipe</mat-card-subtitle>
         </mat-card-header>
-        <mat-card-content>
+        <mat-card-content class="card">
           <div formArrayName="instructions" class="instructions-list">
             <div 
               *ngFor="let instruction of instructions.controls; let i = index"
@@ -267,7 +262,7 @@
               
               <div class="instruction-row">
                 <span class="step-number">{{ i + 1 }}.</span>
-                <mat-form-field appearance="outline" class="instruction-field">
+                <mat-form-field appearance="outline" class="instruction-field w-full">
                   <mat-label>Instruction</mat-label>
                   <textarea 
                     matInput 
@@ -278,18 +273,17 @@
                 </mat-form-field>
                 <button 
                   mat-icon-button 
-                  color="warn"
+                  class="btn btn-error"
                   type="button"
                   (click)="removeInstruction(i)"
                   class="remove-button">
                   <mat-icon>delete</mat-icon>
                 </button>
               </div>
-            </div>
 
             <button 
               mat-raised-button 
-              color="primary"
+              class="btn btn-primary"
               type="button"
               (click)="addInstruction()"
               class="add-button">
@@ -301,24 +295,23 @@
       </mat-card>
 
       <!-- Form Actions -->
-      <div class="form-actions">
+      <div class="flex justify-end gap-sm mt-lg">
         <button 
           mat-button 
           type="button"
           (click)="onCancel()"
-          class="cancel-button">
+          class="btn btn-secondary">
           Cancel
         </button>
         <button 
           mat-raised-button 
-          color="primary"
+          class="btn btn-primary"
           type="submit"
           [disabled]="saving || recipeForm.invalid"
-          class="submit-button">
+          class="btn btn-primary">
           <mat-spinner *ngIf="saving" diameter="20" class="spinner"></mat-spinner>
           <span *ngIf="!saving">Update Recipe</span>
         </button>
       </div>
     </form>
-  </div>
-</div> 
+  </section>

@@ -1,38 +1,6 @@
-.recipe-page-header {
-  position: relative;
-  margin-bottom: 24px;
+// Component styles - using utility classes in template
+// Only custom styles that can't be achieved with utilities should be added here
+
+:host {
+  display: block;
 }
-
-.action-menu {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  z-index: 10;
-}
-
-// Responsive design
-@media (max-width: 768px) {
-  .recipe-page-header {
-    margin-bottom: 16px;
-  }
-
-  .action-menu {
-    top: 8px;
-    right: 8px;
-  }
-}
-
-@media (max-width: 480px) {
-  .recipe-page-header {
-    margin-bottom: 12px;
-  }
-
-  .action-menu {
-    position: relative;
-    top: auto;
-    right: auto;
-    margin-top: 16px;
-    display: flex;
-    justify-content: center;
-  }
-} 

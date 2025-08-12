@@ -1,9 +1,9 @@
 <div class="shopping-lists-page">
   <div class="page-header">
-    <h1>Shopping Lists</h1>
+    <h1 class="text-2xl font-medium mb-md text-2xl font-medium mb-md">Shopping Lists</h1>
     <button 
       mat-raised-button 
-      color="primary"
+      class="btn btn-primary"
       (click)="createNewList()">
       <mat-icon>add</mat-icon>
       New List
@@ -11,33 +11,33 @@
   </div>
 
   <!-- Loading State -->
-  <div *ngIf="loading" class="loading-container">
+  <div *ngIf="loading" class="flex items-center justify-center py-xl">
     <mat-spinner diameter="40"></mat-spinner>
-    <p>Loading shopping lists...</p>
+    <p class="text-secondary mb-sm text-secondary mb-sm">Loading shopping lists...</p>
   </div>
 
   <!-- Error State -->
   <div *ngIf="error && !loading" class="error-container">
     <mat-icon class="error-icon">error</mat-icon>
-    <p class="error-text">{{ error }}</p>
+    <p class="error-text text-secondary mb-sm text-secondary mb-sm">{{ error }}</p>
     <button 
       mat-raised-button 
-      color="primary"
+      class="btn btn-primary"
       (click)="loadData()">
       Retry
     </button>
   </div>
 
   <!-- Content -->
-  <div *ngIf="!loading && !error" class="content">
+  <div *ngIf="!loading && !error" class="flex-1">
     <!-- Empty State -->
     <div *ngIf="shoppingLists.length === 0" class="empty-state">
       <mat-icon class="empty-icon">shopping_cart</mat-icon>
-      <h2>No Shopping Lists</h2>
-      <p>Create your first shopping list to get started</p>
+      <h2 class="text-xl font-medium mb-md text-xl font-medium mb-md">No Shopping Lists</h2>
+      <p class="text-secondary mb-sm text-secondary mb-sm">Create your first shopping list to get started</p>
       <button 
         mat-raised-button 
-        color="primary"
+        class="btn btn-primary"
         (click)="createNewList()">
         <mat-icon>add</mat-icon>
         Create First List
@@ -59,6 +59,4 @@
         (itemDeleted)="onItemDeleted($event)"
         (listDeleted)="onListDeleted($event)">
       </app-shopping-list>
-    </div>
-  </div>
-</div> 
+    </section>

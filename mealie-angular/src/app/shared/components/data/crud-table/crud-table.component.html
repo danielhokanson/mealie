@@ -1,15 +1,15 @@
-<div class="crud-table-container">
+<section class="page-container">
     <!-- Table Actions -->
-    <mat-card-actions class="table-actions">
+    <mat-card-actions class="table-actions card">
         <!-- Column Visibility Menu -->
         <mat-menu *ngIf="tableConfig.hideColumns" #columnMenu="matMenu">
             <ng-template matMenuTrigger>
-                <button mat-raised-button color="accent">
+                <button mat-raised-button class="btn btn-secondary">
                     <mat-icon>settings</mat-icon>
                 </button>
             </ng-template>
-            <mat-card>
-                <mat-card-content>
+            <mat-card class="card">
+                <mat-card-content class="card">
                     <mat-checkbox
                         *ngFor="let header of localHeaders"
                         [checked]="header.show"
@@ -36,8 +36,8 @@
     </mat-card-actions>
 
     <!-- Search Field -->
-    <div class="search-container">
-        <mat-form-field class="search-field">
+    <section class="page-container">
+        <mat-form-field class="search-field w-full">
             <mat-label>Search</mat-label>
             <input
                 matInput
@@ -49,7 +49,7 @@
     </div>
 
     <!-- Data Table -->
-    <table mat-table
+    <table mat-table class="w-full"
            [dataSource]="filteredData"
            matSort
            [matSortActive]="sortBy[0]?.active || ''"
@@ -127,7 +127,7 @@
     </mat-paginator>
 
     <!-- Bottom Actions -->
-    <mat-card-actions class="bottom-actions">
+    <mat-card-actions class="bottom-actions card">
         <ng-content select="[slot=button-bottom]"></ng-content>
         
         <app-base-button
@@ -138,4 +138,4 @@
             Download
         </app-base-button>
     </mat-card-actions>
-</div> 
+</section> 

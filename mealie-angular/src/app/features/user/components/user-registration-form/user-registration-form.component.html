@@ -1,7 +1,7 @@
 <div class="registration-form">
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title class="form-title">
+  <mat-card class="card">
+    <mat-card-header class="card">
+      <mat-card-title class="form-title card">
         <mat-icon class="title-icon">person</mat-icon>
         <span>Account Details</span>
       </mat-card-title>
@@ -9,11 +9,11 @@
 
     <mat-divider></mat-divider>
 
-    <mat-card-content>
+    <mat-card-content class="card">
       <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="form-content">
         
         <!-- Username Field -->
-        <mat-form-field appearance="outline" class="form-field">
+        <mat-form-field appearance="outline" class="w-full">
           <mat-label>Username</mat-label>
           <input 
             matInput 
@@ -28,7 +28,7 @@
         </mat-form-field>
 
         <!-- Full Name Field -->
-        <mat-form-field appearance="outline" class="form-field">
+        <mat-form-field appearance="outline" class="w-full">
           <mat-label>Full Name</mat-label>
           <input 
             matInput 
@@ -42,7 +42,7 @@
         </mat-form-field>
 
         <!-- Email Field -->
-        <mat-form-field appearance="outline" class="form-field">
+        <mat-form-field appearance="outline" class="w-full">
           <mat-label>Email</mat-label>
           <input 
             matInput 
@@ -58,7 +58,7 @@
         </mat-form-field>
 
         <!-- Password Field -->
-        <mat-form-field appearance="outline" class="form-field">
+        <mat-form-field appearance="outline" class="w-full">
           <mat-label>Password</mat-label>
           <input 
             matInput 
@@ -87,7 +87,7 @@
         </app-user-password-strength>
 
         <!-- Confirm Password Field -->
-        <mat-form-field appearance="outline" class="form-field">
+        <mat-form-field appearance="outline" class="w-full">
           <mat-label>Confirm Password</mat-label>
           <input 
             matInput 
@@ -118,7 +118,7 @@
           <mat-checkbox formControlName="advancedOptions" class="advanced-checkbox">
             Enable Advanced Content
           </mat-checkbox>
-          <p class="advanced-description">
+          <p class="advanced-description text-secondary mb-sm text-secondary mb-sm">
             Enable advanced features and content that may not be suitable for all users.
           </p>
         </div>
@@ -126,4 +126,4 @@
       </form>
     </mat-card-content>
   </mat-card>
-</div> 
+</section> 

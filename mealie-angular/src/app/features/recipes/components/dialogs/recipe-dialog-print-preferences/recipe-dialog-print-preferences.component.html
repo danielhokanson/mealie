@@ -35,7 +35,7 @@
           <div class="option-group">
             <mat-slide-toggle
               [(ngModel)]="preferences.showDescription"
-              color="primary">
+              class="btn btn-primary">
               Description
             </mat-slide-toggle>
           </div>
@@ -43,27 +43,24 @@
           <div class="option-group">
             <mat-slide-toggle
               [(ngModel)]="preferences.showNotes"
-              color="primary">
+              class="btn btn-primary">
               Notes
             </mat-slide-toggle>
           </div>
-        </div>
 
         <!-- Nutrition Options -->
         <div class="nutrition-options">
           <div class="option-group">
             <mat-slide-toggle
               [(ngModel)]="preferences.showNutrition"
-              color="primary">
+              class="btn btn-primary">
               Nutrition
             </mat-slide-toggle>
           </div>
-        </div>
       </div>
-    </div>
 
     <!-- Print Preview -->
-    <mat-card class="print-preview" *ngIf="recipe">
+    <mat-card class="print-preview" *ngIf="recipe" class="card">
       <app-recipe-print-view
         [recipe]="recipe"
         [preferences]="preferences">

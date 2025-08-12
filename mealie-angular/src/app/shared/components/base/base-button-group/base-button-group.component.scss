@@ -1,42 +1,6 @@
-.button-group {
-  display: flex;
-  align-items: center;
-  gap: 4px;
+// Component styles - using utility classes in template
+// Only custom styles that can't be achieved with utilities should be added here
 
-  .menu-button,
-  .tooltip-button {
-    &.large {
-      width: 48px;
-      height: 48px;
-    }
-
-    &:not(.large) {
-      width: 40px;
-      height: 40px;
-    }
-  }
-
-  .menu-button {
-    border-radius: 0;
-  }
-
-  .tooltip-button {
-    border-radius: 0;
-  }
+:host {
+  display: block;
 }
-
-// Material menu styling
-::ng-deep .mat-mdc-menu-panel {
-  min-width: 120px;
-}
-
-::ng-deep .mat-mdc-menu-item {
-  height: 36px;
-  line-height: 36px;
-}
-
-// Tooltip styling
-::ng-deep .mat-mdc-tooltip {
-  font-size: 12px;
-  background-color: rgba(97, 97, 97, 0.9);
-} 

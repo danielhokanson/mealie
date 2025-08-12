@@ -16,7 +16,7 @@
     </div>
     
     <div class="scale-input" *ngIf="canEditScale">
-      <mat-form-field appearance="outline" class="scale-input-field">
+      <mat-form-field appearance="outline" class="scale-input-field w-full">
         <mat-label>Scale</mat-label>
         <input 
           matInput 
@@ -34,17 +34,15 @@
     <div class="scale-reset" *ngIf="canEditScale && scale !== 1">
       <button 
         mat-icon-button 
-        color="primary"
+        class="btn btn-primary"
         [matTooltip]="'Reset to 1x'"
         (click)="resetScale()">
         <mat-icon>refresh</mat-icon>
       </button>
     </div>
-  </div>
   
   <div class="scale-summary">
     <span class="summary-text">
       Serves {{ getScaledServings() }} people
     </span>
-  </div>
-</div> 
+  </section>

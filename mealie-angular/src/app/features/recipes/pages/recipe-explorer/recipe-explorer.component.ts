@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -82,7 +83,10 @@ export class RecipeExplorerComponent implements OnInit, OnDestroy {
     private searchSubject = new Subject<string>();
     private destroy$ = new Subject<void>();
 
-    constructor(private recipeService: RecipeService) {
+    constructor(
+        private recipeService: RecipeService,
+        private router: Router
+    ) {
         this.setupSearchDebounce();
     }
 
@@ -247,5 +251,9 @@ export class RecipeExplorerComponent implements OnInit, OnDestroy {
     removeFood(food: string): void {
         this.selectedFoods = this.selectedFoods.filter(f => f !== food);
         this.onFilterChange();
+    }
+
+    onCreateRecipe(): void {
+        this.router.navigate(['/recipes/create']);
     }
 } 

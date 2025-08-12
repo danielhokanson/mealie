@@ -10,6 +10,26 @@
     margin-bottom: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
+    .search-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--mat-divider-color, #e0e0e0);
+
+      h2 {
+        margin: 0;
+        color: var(--mat-text-color-primary, #333);
+        font-size: 24px;
+        font-weight: 500;
+      }
+
+      .create-recipe-button {
+        min-width: 140px;
+      }
+    }
+
     .search-form {
       .search-bar {
         margin-bottom: 20px;
@@ -123,6 +143,26 @@
   mat-paginator {
     margin-top: 20px;
   }
+
+  // Floating Action Button for Create Recipe
+  .create-recipe-fab {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    @media (max-width: 768px) {
+      bottom: 16px;
+      right: 16px;
+    }
+  }
 }
 
 // Responsive design
@@ -158,6 +198,19 @@
     .recipe-grid {
       grid-template-columns: 1fr;
       gap: 15px;
+    }
+
+    .search-container {
+      .search-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+        text-align: center;
+
+        .create-recipe-button {
+          width: 100%;
+        }
+      }
     }
   }
 }

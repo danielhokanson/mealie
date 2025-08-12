@@ -1,6 +1,19 @@
 <div class="recipe-explorer">
   <!-- Search Container -->
   <div class="search-container">
+    <!-- Header with Create Button -->
+    <div class="search-header">
+      <h2>Recipe Explorer</h2>
+      <button 
+        mat-raised-button 
+        color="primary" 
+        (click)="onCreateRecipe()"
+        class="create-recipe-button">
+        <mat-icon>add</mat-icon>
+        Create Recipe
+      </button>
+    </div>
+    
     <form class="search-form" (ngSubmit)="onSearch()">
       <!-- Search Bar -->
       <div class="search-bar">
@@ -216,4 +229,15 @@
     [pageSizeOptions]="[10, 20, 50, 100]"
     (page)="onPageChange($event.pageIndex + 1)">
   </mat-paginator>
+
+  <!-- Floating Action Button for Create Recipe -->
+  <button 
+    mat-fab 
+    color="primary" 
+    class="create-recipe-fab"
+    (click)="onCreateRecipe()"
+    matTooltip="Create New Recipe"
+    aria-label="Create new recipe">
+    <mat-icon>add</mat-icon>
+  </button>
 </div> 

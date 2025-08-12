@@ -1,13 +1,7 @@
 using BCrypt.Net;
+using MealieApi.Shared.Interfaces;
 
 namespace MealieApi.Application.Services;
-
-public interface IPasswordService
-{
-    string HashPassword(string password);
-    bool VerifyPassword(string password, string hashedPassword);
-    string GenerateSecurePassword();
-}
 
 public class PasswordService : IPasswordService
 {

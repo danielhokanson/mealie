@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using MealieApi.Application.Services;
+using MealieApi.Shared.Interfaces;
 using MealieApi.Shared.DTOs.Auth;
 
 namespace MealieApi.WebApi.Controllers;

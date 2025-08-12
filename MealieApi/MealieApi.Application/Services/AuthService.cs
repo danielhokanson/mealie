@@ -2,23 +2,12 @@ using MealieApi.Domain.Entities.Users;
 using MealieApi.Domain.Interfaces;
 using MealieApi.Shared.DTOs;
 using MealieApi.Shared.DTOs.Auth;
+using MealieApi.Shared.Interfaces;
 using MealieApi.Domain.Enums;
 using AutoMapper;
 using Microsoft.Extensions.Logging;
 
 namespace MealieApi.Application.Services;
-
-public interface IAuthService
-{
-    Task<AuthResponse> LoginAsync(LoginRequest request);
-    Task<AuthResponse> RegisterAsync(RegisterRequest request);
-    Task<AuthResponse> RefreshTokenAsync(string refreshToken);
-    Task<bool> LogoutAsync(string refreshToken);
-    Task<AuthResponse> ChangePasswordAsync(Guid userId, ChangePasswordRequest request);
-    Task<AuthResponse> ForgotPasswordAsync(ForgotPasswordRequest request);
-    Task<AuthResponse> ResetPasswordAsync(ResetPasswordRequest request);
-    Task<bool> ValidateTokenAsync(string token);
-}
 
 public class AuthService : IAuthService
 {

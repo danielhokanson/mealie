@@ -5,17 +5,9 @@ using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using MealieApi.Domain.Entities.Users;
+using MealieApi.Shared.Interfaces;
 
 namespace MealieApi.Application.Services;
-
-public interface IJwtService
-{
-    string GenerateAccessToken(User user, bool rememberMe = false);
-    string GenerateRefreshToken();
-    ClaimsPrincipal? ValidateToken(string token);
-    Guid? GetUserIdFromToken(string token);
-    string? GetUsernameFromToken(string token);
-}
 
 public class JwtService : IJwtService
 {

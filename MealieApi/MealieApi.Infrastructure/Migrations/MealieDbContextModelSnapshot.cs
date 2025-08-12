@@ -17,7 +17,7 @@ namespace MealieApi.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.8")
+                .HasAnnotation("ProductVersion", "9.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -35,6 +35,36 @@ namespace MealieApi.Infrastructure.Migrations
                     b.HasIndex("RecipesId");
 
                     b.ToTable("RecipeCategories", (string)null);
+                });
+
+            modelBuilder.Entity("MealPlanRuleRecipeCategory", b =>
+                {
+                    b.Property<Guid>("CategoriesId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("MealPlanRulesId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("CategoriesId", "MealPlanRulesId");
+
+                    b.HasIndex("MealPlanRulesId");
+
+                    b.ToTable("MealPlanRuleRecipeCategory");
+                });
+
+            modelBuilder.Entity("MealPlanRuleRecipeTag", b =>
+                {
+                    b.Property<Guid>("MealPlanRulesId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("TagsId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("MealPlanRulesId", "TagsId");
+
+                    b.HasIndex("TagsId");
+
+                    b.ToTable("MealPlanRuleRecipeTag");
                 });
 
             modelBuilder.Entity("MealieApi.Domain.Entities.Admin.Backup", b =>
@@ -390,6 +420,97 @@ namespace MealieApi.Infrastructure.Migrations
                     b.ToTable("Labels");
                 });
 
+            modelBuilder.Entity("MealieApi.Domain.Entities.MealPlan", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("EntryType")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("GroupId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("HouseholdId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("RecipeId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GroupId");
+
+                    b.HasIndex("HouseholdId");
+
+                    b.HasIndex("RecipeId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("MealPlans");
+                });
+
+            modelBuilder.Entity("MealieApi.Domain.Entities.MealPlanRule", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Day")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("EntryType")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("GroupId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("HouseholdId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("QueryFilterString")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GroupId");
+
+                    b.HasIndex("HouseholdId");
+
+                    b.ToTable("MealPlanRules");
+                });
+
             modelBuilder.Entity("MealieApi.Domain.Entities.Organization.Organization", b =>
                 {
                     b.Property<Guid>("Id")
@@ -509,6 +630,12 @@ namespace MealieApi.Infrastructure.Migrations
                     b.Property<int>("RatingCount")
                         .HasColumnType("integer");
 
+                    b.Property<Guid?>("RecipeCategoryId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("RecipeTagId")
+                        .HasColumnType("uuid");
+
                     b.Property<int>("RecipeType")
                         .HasColumnType("integer");
 
@@ -534,6 +661,10 @@ namespace MealieApi.Infrastructure.Migrations
 
                     b.HasIndex("Name");
 
+                    b.HasIndex("RecipeCategoryId");
+
+                    b.HasIndex("RecipeTagId");
+
                     b.HasIndex("Slug")
                         .IsUnique();
 
@@ -544,6 +675,70 @@ namespace MealieApi.Infrastructure.Migrations
                     b.HasDiscriminator<int>("RecipeType");
 
                     b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity("MealieApi.Domain.Entities.Recipe.RecipeCategory", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<string>("Slug")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RecipeCategory");
+                });
+
+            modelBuilder.Entity("MealieApi.Domain.Entities.Recipe.RecipeTag", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Color")
+                        .HasMaxLength(7)
+                        .HasColumnType("character varying(7)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<string>("Slug")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RecipeTag");
                 });
 
             modelBuilder.Entity("MealieApi.Domain.Entities.ShoppingList.ShoppingList", b =>
@@ -1152,6 +1347,9 @@ namespace MealieApi.Infrastructure.Migrations
                     b.Property<string>("DietaryRestrictions")
                         .HasColumnType("text");
 
+                    b.Property<Guid?>("MealPlanRuleId")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("PreferredUnits")
                         .HasColumnType("text");
 
@@ -1163,6 +1361,8 @@ namespace MealieApi.Infrastructure.Migrations
 
                     b.Property<decimal?>("WeeklyBudget")
                         .HasColumnType("numeric");
+
+                    b.HasIndex("MealPlanRuleId");
 
                     b.HasDiscriminator().HasValue(1);
                 });
@@ -1279,6 +1479,36 @@ namespace MealieApi.Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("MealPlanRuleRecipeCategory", b =>
+                {
+                    b.HasOne("MealieApi.Domain.Entities.Recipe.RecipeCategory", null)
+                        .WithMany()
+                        .HasForeignKey("CategoriesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MealieApi.Domain.Entities.MealPlanRule", null)
+                        .WithMany()
+                        .HasForeignKey("MealPlanRulesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("MealPlanRuleRecipeTag", b =>
+                {
+                    b.HasOne("MealieApi.Domain.Entities.MealPlanRule", null)
+                        .WithMany()
+                        .HasForeignKey("MealPlanRulesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MealieApi.Domain.Entities.Recipe.RecipeTag", null)
+                        .WithMany()
+                        .HasForeignKey("TagsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("MealieApi.Domain.Entities.Comment.Comment", b =>
                 {
                     b.HasOne("MealieApi.Domain.Entities.Recipe.Recipe", "Recipe")
@@ -1307,8 +1537,64 @@ namespace MealieApi.Infrastructure.Migrations
                     b.Navigation("Organization");
                 });
 
+            modelBuilder.Entity("MealieApi.Domain.Entities.MealPlan", b =>
+                {
+                    b.HasOne("MealieApi.Domain.Entities.Organization.Group", "Group")
+                        .WithMany()
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MealieApi.Domain.Entities.Organization.Household", "Household")
+                        .WithMany()
+                        .HasForeignKey("HouseholdId");
+
+                    b.HasOne("MealieApi.Domain.Entities.Recipe.Recipe", "Recipe")
+                        .WithMany()
+                        .HasForeignKey("RecipeId");
+
+                    b.HasOne("MealieApi.Domain.Entities.Users.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Group");
+
+                    b.Navigation("Household");
+
+                    b.Navigation("Recipe");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("MealieApi.Domain.Entities.MealPlanRule", b =>
+                {
+                    b.HasOne("MealieApi.Domain.Entities.Organization.Group", "Group")
+                        .WithMany()
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MealieApi.Domain.Entities.Organization.Household", "Household")
+                        .WithMany()
+                        .HasForeignKey("HouseholdId");
+
+                    b.Navigation("Group");
+
+                    b.Navigation("Household");
+                });
+
             modelBuilder.Entity("MealieApi.Domain.Entities.Recipe.Recipe", b =>
                 {
+                    b.HasOne("MealieApi.Domain.Entities.Recipe.RecipeCategory", null)
+                        .WithMany("Recipes")
+                        .HasForeignKey("RecipeCategoryId");
+
+                    b.HasOne("MealieApi.Domain.Entities.Recipe.RecipeTag", null)
+                        .WithMany("Recipes")
+                        .HasForeignKey("RecipeTagId");
+
                     b.HasOne("MealieApi.Domain.Entities.Users.User", "User")
                         .WithMany("Recipes")
                         .HasForeignKey("UserId")
@@ -1471,6 +1757,18 @@ namespace MealieApi.Infrastructure.Migrations
                     b.Navigation("ParentCategory");
                 });
 
+            modelBuilder.Entity("MealieApi.Domain.Entities.Organization.Household", b =>
+                {
+                    b.HasOne("MealieApi.Domain.Entities.MealPlanRule", null)
+                        .WithMany("Households")
+                        .HasForeignKey("MealPlanRuleId");
+                });
+
+            modelBuilder.Entity("MealieApi.Domain.Entities.MealPlanRule", b =>
+                {
+                    b.Navigation("Households");
+                });
+
             modelBuilder.Entity("MealieApi.Domain.Entities.Organization.Organization", b =>
                 {
                     b.Navigation("ShoppingLists");
@@ -1481,6 +1779,16 @@ namespace MealieApi.Infrastructure.Migrations
                     b.Navigation("Comments");
 
                     b.Navigation("TimelineEvents");
+                });
+
+            modelBuilder.Entity("MealieApi.Domain.Entities.Recipe.RecipeCategory", b =>
+                {
+                    b.Navigation("Recipes");
+                });
+
+            modelBuilder.Entity("MealieApi.Domain.Entities.Recipe.RecipeTag", b =>
+                {
+                    b.Navigation("Recipes");
                 });
 
             modelBuilder.Entity("MealieApi.Domain.Entities.ShoppingList.ShoppingList", b =>

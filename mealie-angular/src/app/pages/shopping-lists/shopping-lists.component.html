@@ -1,6 +1,6 @@
-<div class="shopping-lists-page">
-  <div class="page-header">
-    <h1 class="text-2xl font-medium mb-md text-2xl font-medium mb-md">Shopping Lists</h1>
+<section class="page-container">
+  <header class="flex justify-between items-center mb-lg">
+    <h1 class="text-2xl font-medium">Shopping Lists</h1>
     <button 
       mat-raised-button 
       class="btn btn-primary"
@@ -8,18 +8,18 @@
       <mat-icon>add</mat-icon>
       New List
     </button>
-  </div>
+  </header>
 
   <!-- Loading State -->
-  <div *ngIf="loading" class="flex items-center justify-center py-xl">
+  <div *ngIf="loading" class="flex flex-col items-center justify-center py-xl">
     <mat-spinner diameter="40"></mat-spinner>
-    <p class="text-secondary mb-sm text-secondary mb-sm">Loading shopping lists...</p>
+    <p class="text-secondary mt-md">Loading shopping lists...</p>
   </div>
 
   <!-- Error State -->
-  <div *ngIf="error && !loading" class="error-container">
-    <mat-icon class="error-icon">error</mat-icon>
-    <p class="error-text text-secondary mb-sm text-secondary mb-sm">{{ error }}</p>
+  <div *ngIf="error && !loading" class="flex flex-col items-center justify-center py-xl text-center">
+    <mat-icon class="text-6xl text-error mb-md">error</mat-icon>
+    <p class="text-secondary mb-md">{{ error }}</p>
     <button 
       mat-raised-button 
       class="btn btn-primary"
@@ -29,12 +29,12 @@
   </div>
 
   <!-- Content -->
-  <div *ngIf="!loading && !error" class="flex-1">
+  <main *ngIf="!loading && !error">
     <!-- Empty State -->
-    <div *ngIf="shoppingLists.length === 0" class="empty-state">
-      <mat-icon class="empty-icon">shopping_cart</mat-icon>
-      <h2 class="text-xl font-medium mb-md text-xl font-medium mb-md">No Shopping Lists</h2>
-      <p class="text-secondary mb-sm text-secondary mb-sm">Create your first shopping list to get started</p>
+    <div *ngIf="shoppingLists.length === 0" class="flex flex-col items-center justify-center py-xl text-center">
+      <mat-icon class="text-6xl text-tertiary mb-md">shopping_cart</mat-icon>
+      <h2 class="text-xl font-medium mb-sm">No Shopping Lists</h2>
+      <p class="text-secondary mb-md">Create your first shopping list to get started</p>
       <button 
         mat-raised-button 
         class="btn btn-primary"
@@ -44,8 +44,8 @@
       </button>
     </div>
 
-    <!-- Shopping Lists -->
-    <div *ngIf="shoppingLists.length > 0" class="lists-container">
+    <!-- Shopping Lists Grid -->
+    <div *ngIf="shoppingLists.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md">
       <app-shopping-list
         *ngFor="let list of shoppingLists; trackBy: trackByListId"
         [shoppingList]="list"
@@ -59,4 +59,6 @@
         (itemDeleted)="onItemDeleted($event)"
         (listDeleted)="onListDeleted($event)">
       </app-shopping-list>
-    </section>
+    </div>
+  </main>
+</section>

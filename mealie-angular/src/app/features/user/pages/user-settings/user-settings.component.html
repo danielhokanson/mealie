@@ -1,22 +1,22 @@
 <section class="page-container">
   <div class="settings-content" *ngIf="!loading; else loadingTemplate">
     <div class="settings-header">
-      <h2 class="text-xl font-medium mb-md text-xl font-medium mb-md">User Settings</h2>
-      <p class="text-secondary mb-sm text-secondary mb-sm">Manage your account preferences and settings</p>
+      <h2 class="text-xl font-medium mb-md">User Settings</h2>
+      <p class="text-secondary mb-sm">Manage your account preferences and settings</p>
     </div>
 
     <mat-tab-group class="settings-tabs">
       <!-- Profile Tab -->
       <mat-tab label="Profile">
-        <div class="tab-content">
+        
           <form [formGroup]="profileForm" class="settings-form">
             <div class="form-section">
-              <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Profile Information</h3>
+              <h3 class="text-lg font-medium mb-sm">Profile Information</h3>
               
               <div class="avatar-section">
                 <div class="avatar-preview">
                   <mat-icon class="avatar-icon">account_circle</mat-icon>
-                </div>
+                
                 <div class="avatar-actions">
                   <button mat-raised-button class="btn btn-primary" type="button">
                     <mat-icon>upload</mat-icon>
@@ -70,17 +70,16 @@
 
       <!-- Preferences Tab -->
       <mat-tab label="Preferences">
-        <div class="tab-content">
+        
           <form [formGroup]="preferencesForm" class="settings-form">
             <div class="form-section">
-              <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Display Preferences</h3>
+              <h3 class="text-lg font-medium mb-sm">Display Preferences</h3>
               
               <div class="form-row">
                 <mat-slide-toggle formControlName="darkMode">
                   Dark Mode
                 </mat-slide-toggle>
                 <span class="preference-description">Use dark theme for better viewing in low light</span>
-              </div>
 
               <div class="form-row">
                 <mat-slide-toggle formControlName="compactMode">
@@ -104,7 +103,7 @@
               </div>
 
             <div class="form-section">
-              <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Notification Preferences</h3>
+              <h3 class="text-lg font-medium mb-sm">Notification Preferences</h3>
               
               <div class="form-row">
                 <mat-slide-toggle formControlName="emailNotifications">
@@ -135,7 +134,7 @@
               </div>
 
             <div class="form-section">
-              <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Privacy Settings</h3>
+              <h3 class="text-lg font-medium mb-sm">Privacy Settings</h3>
               
               <div class="form-row">
                 <mat-slide-toggle formControlName="publicProfile">
@@ -163,10 +162,10 @@
 
       <!-- Security Tab -->
       <mat-tab label="Security">
-        <div class="tab-content">
+        
           <form [formGroup]="securityForm" class="settings-form">
             <div class="form-section">
-              <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Password</h3>
+              <h3 class="text-lg font-medium mb-sm">Password</h3>
               
               <div class="form-row">
                 <mat-form-field class="w-full">
@@ -176,7 +175,6 @@
                     Current password is required
                   </mat-error>
                 </mat-form-field>
-              </div>
 
               <div class="form-row">
                 <mat-form-field class="w-full">
@@ -212,7 +210,7 @@
               </div>
 
             <div class="form-section">
-              <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Two-Factor Authentication</h3>
+              <h3 class="text-lg font-medium mb-sm">Two-Factor Authentication</h3>
               
               <div class="form-row">
                 <mat-slide-toggle formControlName="twoFactorEnabled">
@@ -229,7 +227,7 @@
               </div>
 
             <div class="form-section">
-              <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Session Management</h3>
+              <h3 class="text-lg font-medium mb-sm">Session Management</h3>
               
               <div class="form-row">
                 <button mat-stroked-button type="button" (click)="onViewActiveSessions()">
@@ -250,10 +248,10 @@
 
       <!-- Data Tab -->
       <mat-tab label="Data">
-        <div class="tab-content">
+        
           <div class="settings-form">
             <div class="form-section">
-              <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Data Export</h3>
+              <h3 class="text-lg font-medium mb-sm">Data Export</h3>
               
               <div class="form-row">
                 <button mat-raised-button class="btn btn-primary" type="button" (click)="onExportData()">
@@ -261,10 +259,9 @@
                   Export My Data
                 </button>
                 <span class="preference-description">Download all your data in JSON format</span>
-              </div>
 
             <div class="form-section">
-              <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Data Import</h3>
+              <h3 class="text-lg font-medium mb-sm">Data Import</h3>
               
               <div class="form-row">
                 <button mat-stroked-button type="button" (click)="onImportData()">
@@ -275,7 +272,7 @@
               </div>
 
             <div class="form-section">
-              <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Account Deletion</h3>
+              <h3 class="text-lg font-medium mb-sm">Account Deletion</h3>
               
               <div class="form-row">
                 <button mat-raised-button class="btn btn-error" type="button" (click)="onDeleteAccount()">
@@ -302,7 +299,7 @@
   <ng-template #loadingTemplate>
     <div class="flex items-center justify-center py-xl">
       <mat-spinner diameter="40"></mat-spinner>
-      <p class="text-secondary mb-sm text-secondary mb-sm">Loading user settings...</p>
+      <p class="text-secondary mb-sm">Loading user settings...</p>
     </div>
   </ng-template>
-</section> 
+</section>

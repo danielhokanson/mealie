@@ -21,20 +21,17 @@
     <div *ngIf="hasAfterHeading" class="after-heading">
       <ng-content select="[slot=after-heading]"></ng-content>
     </div>
-  
-  <div class="card-content">
+
     <ng-content></ng-content>
-  </div>
-  
+
   <div *ngIf="hasActions" class="flex justify-end gap-sm pt-md">
     <mat-divider></mat-divider>
-    <div class="actions-content">
+    
       <ng-content select="[slot=actions]"></ng-content>
-    </div>
-  
+
   <div *ngIf="hasBottom && !hasActions" class="card-bottom">
     <mat-divider></mat-divider>
-    <div class="bottom-content">
+    
       <ng-content select="[slot=bottom]"></ng-content>
-    </div>
-</mat-card> 
+    
+</mat-card>

@@ -2,15 +2,15 @@
   <!-- Loading State -->
   <div *ngIf="loading" class="flex items-center justify-center py-xl">
     <mat-spinner diameter="50"></mat-spinner>
-    <p class="text-secondary mb-sm text-secondary mb-sm">Loading system information...</p>
+    <p class="text-secondary mb-sm">Loading system information...</p>
   </div>
 
   <!-- Maintenance Content -->
   <div *ngIf="!loading" class="maintenance-content">
     <!-- Header -->
     <div class="maintenance-header">
-      <h2 class="text-xl font-medium mb-md text-xl font-medium mb-md">System Maintenance</h2>
-      <p class="text-secondary mb-sm text-secondary mb-sm">Monitor system health and perform maintenance tasks</p>
+      <h2 class="text-xl font-medium mb-md">System Maintenance</h2>
+      <p class="text-secondary mb-sm">Monitor system health and perform maintenance tasks</p>
     </div>
 
     <!-- System Health -->
@@ -229,8 +229,8 @@
           <!-- Empty State -->
           <div *ngIf="maintenanceTasks.length === 0" class="empty-tasks">
             <mat-icon class="empty-icon">build</mat-icon>
-            <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">No Maintenance Tasks</h3>
-            <p class="text-secondary mb-sm text-secondary mb-sm">No maintenance tasks are currently configured</p>
+            <h3 class="text-lg font-medium mb-sm">No Maintenance Tasks</h3>
+            <p class="text-secondary mb-sm">No maintenance tasks are currently configured</p>
           </div>
         </mat-card-content>
       </mat-card>
@@ -254,7 +254,7 @@
               <mat-icon>warning</mat-icon>
               Emergency Maintenance
             </button>
-            <p class="emergency-note text-secondary mb-sm text-secondary mb-sm">
+            <p class="emergency-note text-secondary mb-sm">
               Use emergency maintenance only when the system is experiencing critical issues.
               This may temporarily affect system performance.
             </p>
@@ -267,15 +267,15 @@
   <div *ngIf="runningTask" class="progress-overlay">
     <mat-card class="progress-card card">
       <mat-card-content class="card">
-        <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Running: {{ runningTask.name }}</h3>
-        <p class="text-secondary mb-sm text-secondary mb-sm">{{ runningTask.description }}</p>
+        <h3 class="text-lg font-medium mb-sm">Running: {{ runningTask.name }}</h3>
+        <p class="text-secondary mb-sm">{{ runningTask.description }}</p>
         <mat-progress-bar 
           mode="determinate" 
           [value]="taskProgress"
           class="btn btn-primary">
         </mat-progress-bar>
         <span class="progress-text">{{ taskProgress }}%</span>
-        <p class="estimated-time text-secondary mb-sm text-secondary mb-sm">
+        <p class="estimated-time text-secondary mb-sm">
           Estimated time: {{ getEstimatedTimeDisplay(runningTask.estimatedTime) }}
         </p>
       </mat-card-content>

@@ -15,13 +15,13 @@
 
       <div *ngIf="loading" class="flex items-center justify-center py-xl">
         <mat-icon class="loading-icon">refresh</mat-icon>
-        <p class="text-secondary mb-sm text-secondary mb-sm">Loading webhooks...</p>
+        <p class="text-secondary mb-sm">Loading webhooks...</p>
       </div>
 
       <div *ngIf="!loading && webhooks.length === 0" class="empty-state">
         <mat-icon>webhook</mat-icon>
-        <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">No webhooks configured</h3>
-        <p class="text-secondary mb-sm text-secondary mb-sm">Set up webhooks to integrate with external services like Slack, Discord, or custom APIs.</p>
+        <h3 class="text-lg font-medium mb-sm">No webhooks configured</h3>
+        <p class="text-secondary mb-sm">Set up webhooks to integrate with external services like Slack, Discord, or custom APIs.</p>
         <button mat-raised-button class="btn btn-primary" (click)="addWebhook()">
           Add Your First Webhook
         </button>

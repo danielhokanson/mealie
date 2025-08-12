@@ -2,15 +2,15 @@
   <!-- Loading State -->
   <div *ngIf="loading" class="flex items-center justify-center py-xl">
     <mat-spinner diameter="50"></mat-spinner>
-    <p class="text-secondary mb-sm text-secondary mb-sm">Processing scaled recipe...</p>
+    <p class="text-secondary mb-sm">Processing scaled recipe...</p>
   </div>
 
   <!-- Scaling Content -->
   <div *ngIf="!loading && recipe" class="scaling-content">
     <!-- Header -->
     <div class="scaling-header">
-      <h2 class="text-xl font-medium mb-md text-xl font-medium mb-md">Recipe Scaling</h2>
-      <p class="text-secondary mb-sm text-secondary mb-sm">Scale {{ recipe.name }} to your desired serving size</p>
+      <h2 class="text-xl font-medium mb-md">Recipe Scaling</h2>
+      <p class="text-secondary mb-sm">Scale {{ recipe.name }} to your desired serving size</p>
     </div>
 
     <!-- Scaling Summary -->
@@ -34,7 +34,7 @@
     <div class="scaling-controls">
       <form [formGroup]="scalingForm">
         <div class="control-section">
-          <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Servings</h3>
+          <h3 class="text-lg font-medium mb-sm">Servings</h3>
           <div class="servings-control">
             <mat-form-field appearance="outline" class="w-full">
               <mat-label>Target Servings</mat-label>
@@ -53,7 +53,7 @@
           </div>
 
         <div class="control-section">
-          <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Quick Scaling Options</h3>
+          <h3 class="text-lg font-medium mb-sm">Quick Scaling Options</h3>
           <div class="scaling-options">
             <button 
               *ngFor="let option of scalingOptions"
@@ -66,7 +66,7 @@
           </div>
 
         <div class="control-section">
-          <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Advanced Options</h3>
+          <h3 class="text-lg font-medium mb-sm">Advanced Options</h3>
           <button 
             mat-button 
             class="btn btn-primary"
@@ -127,12 +127,12 @@
 
     <!-- Scaled Recipe Preview -->
     <div class="scaled-preview">
-      <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Scaled Recipe Preview</h3>
+      <h3 class="text-lg font-medium mb-sm">Scaled Recipe Preview</h3>
       
       <!-- Recipe Info -->
-      <div class="recipe-info">
+      <article class="card">
         <h4>{{ recipe.name }}</h4>
-        <div class="recipe-meta">
+        <article class="card">
           <div class="meta-item">
             <mat-icon>people</mat-icon>
             <span>{{ getScalingSummary().targetServings }} servings</span>
@@ -152,12 +152,12 @@
         <h4>Ingredients</h4>
         <mat-list class="flex flex-col gap-sm">
           <mat-list-item *ngFor="let ingredient of scaledIngredients" class="ingredient-item">
-            <div class="ingredient-content">
+            
               <span class="ingredient-quantity">{{ getFormattedQuantity(ingredient.quantity) }}</span>
               <span class="ingredient-unit">{{ ingredient.unit }}</span>
               <span class="ingredient-name">{{ ingredient.food?.name || ingredient.note }}</span>
               <span class="ingredient-notes" *ngIf="ingredient.notes">({{ ingredient.notes }})</span>
-            </div>
+            
           </mat-list-item>
         </mat-list>
       </div>
@@ -167,10 +167,10 @@
         <h4>Instructions</h4>
         <mat-list class="flex flex-col gap-sm">
           <mat-list-item *ngFor="let instruction of recipe.instructions" class="instruction-item">
-            <div class="instruction-content">
+            
               <span class="instruction-number">{{ instruction.position }}.</span>
               <span class="instruction-text">{{ instruction.text }}</span>
-            </div>
+            
           </mat-list-item>
         </mat-list>
       </div>
@@ -209,6 +209,6 @@
   <!-- No Recipe State -->
   <div *ngIf="!loading && !recipe" class="no-recipe">
     <mat-icon class="no-recipe-icon">restaurant</mat-icon>
-    <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">No Recipe Selected</h3>
-    <p class="text-secondary mb-sm text-secondary mb-sm">Please select a recipe to scale.</p>
+    <h3 class="text-lg font-medium mb-sm">No Recipe Selected</h3>
+    <p class="text-secondary mb-sm">Please select a recipe to scale.</p>
   </section>

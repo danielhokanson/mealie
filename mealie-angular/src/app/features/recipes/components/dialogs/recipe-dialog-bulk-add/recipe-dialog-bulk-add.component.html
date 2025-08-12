@@ -34,10 +34,10 @@
           <div class="utilities-section">
             <div *ngFor="let util of utilities; let last = last" class="utility-item">
               <mat-list-item class="utility-list-item">
-                <div class="utility-content">
+                
                   <div class="utility-description">
                     {{ util.description }}
-                  </div>
+                  
                   <app-base-button
                     size="small"
                     class="btn btn-secondary"
@@ -60,9 +60,7 @@
             (click)="closeDialog()">
             Cancel
           </app-base-button>
-          
-          <div class="spacer"></div>
-          
+
           <app-base-button
             save
             color="success"

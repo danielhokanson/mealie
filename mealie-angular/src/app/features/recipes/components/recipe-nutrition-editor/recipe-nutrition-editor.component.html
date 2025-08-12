@@ -2,15 +2,15 @@
   <!-- Loading State -->
   <div *ngIf="loading" class="flex items-center justify-center py-xl">
     <mat-spinner diameter="50"></mat-spinner>
-    <p class="text-secondary mb-sm text-secondary mb-sm">Calculating nutrition...</p>
+    <p class="text-secondary mb-sm">Calculating nutrition...</p>
   </div>
 
   <!-- Nutrition Editor Content -->
   <div *ngIf="!loading && recipe" class="nutrition-content">
     <!-- Header -->
     <div class="nutrition-header">
-      <h2 class="text-xl font-medium mb-md text-xl font-medium mb-md">Nutrition Information</h2>
-      <p class="text-secondary mb-sm text-secondary mb-sm">Edit nutrition values for {{ recipe.name }}</p>
+      <h2 class="text-xl font-medium mb-md">Nutrition Information</h2>
+      <p class="text-secondary mb-sm">Edit nutrition values for {{ recipe.name }}</p>
     </div>
 
     <!-- Controls -->
@@ -53,7 +53,7 @@
 
     <!-- Nutrition Summary -->
     <div class="nutrition-summary">
-      <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Nutrition Summary</h3>
+      <h3 class="text-lg font-medium mb-sm">Nutrition Summary</h3>
       <div class="summary-grid">
         <div class="summary-item">
           <span class="summary-label">Calories</span>
@@ -85,7 +85,7 @@
     <form [formGroup]="nutritionForm" class="nutrition-form">
       <!-- Basic Nutrition -->
       <div class="nutrition-section">
-        <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Basic Nutrition</h3>
+        <h3 class="text-lg font-medium mb-sm">Basic Nutrition</h3>
         <div class="nutrition-grid">
           <div 
             *ngFor="let field of nutritionFields.slice(0, 7)" 
@@ -178,6 +178,6 @@
   <!-- No Recipe State -->
   <div *ngIf="!loading && !recipe" class="no-recipe">
     <mat-icon class="no-recipe-icon">restaurant</mat-icon>
-    <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">No Recipe Selected</h3>
-    <p class="text-secondary mb-sm text-secondary mb-sm">Please select a recipe to edit its nutrition information.</p>
+    <h3 class="text-lg font-medium mb-sm">No Recipe Selected</h3>
+    <p class="text-secondary mb-sm">Please select a recipe to edit its nutrition information.</p>
   </section>

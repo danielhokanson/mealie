@@ -1,7 +1,7 @@
 <div class="markdown-editor">
   <mat-tab-group [(selectedIndex)]="activeTab">
     <mat-tab label="Edit">
-      <div class="editor-content">
+      
         <mat-form-field class="full-width w-full">
           <textarea
             matInput
@@ -12,13 +12,13 @@
             class="markdown-textarea">
           </textarea>
         </mat-form-field>
-      </div>
+      
     </mat-tab>
     
     <mat-tab label="Preview" *ngIf="showPreview">
-      <div class="preview-content">
+      
         <app-safe-markdown [source]="markdownContent"></app-safe-markdown>
-      </div>
+      
     </mat-tab>
   </mat-tab-group>
-</section> 
+</section>

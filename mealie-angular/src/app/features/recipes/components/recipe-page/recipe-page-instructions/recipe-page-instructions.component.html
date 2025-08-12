@@ -4,11 +4,11 @@
     <mat-card class="link-dialog card">
       <div class="dialog-header">
         <mat-icon>link</mat-icon>
-        <h2 class="text-xl font-medium mb-md text-xl font-medium mb-md">Ingredient Linker</h2>
+        <h2 class="text-xl font-medium mb-md">Ingredient Linker</h2>
       </div>
       
       <mat-card-content class="card">
-        <p class="text-secondary mb-sm text-secondary mb-sm">{{ activeText }}</p>
+        <p class="text-secondary mb-sm">{{ activeText }}</p>
         <mat-divider></mat-divider>
         
         <div class="ingredient-checkboxes">
@@ -42,7 +42,7 @@
 
   <!-- Instructions Header -->
   <div class="instructions-header">
-    <h2 *ngIf="!isCookMode" class="instructions-title text-xl font-medium mb-md text-xl font-medium mb-md">Instructions</h2>
+    <h2 *ngIf="!isCookMode" class="instructions-title text-xl font-medium mb-md">Instructions</h2>
     <button
       *ngIf="!isEditForm && !isCookMode"
       mat-raised-button
@@ -76,12 +76,12 @@
       <!-- Instruction Card -->
       <mat-card class="instruction-card" (click)="toggleDisabled(index)" class="card">
         <mat-card-header class="card">
-          <div class="card-header-content">
+          
             <div *ngIf="isEditForm" class="summary-editor">
               <mat-form-field class="w-full">
                 <input matInput [(ngModel)]="step.summary" [placeholder]="'Step ' + (index + 1)">
               </mat-form-field>
-            </div>
+            
             <div *ngIf="!isEditForm" class="summary-display">
               {{ step.summary || 'Step ' + (index + 1) }}
             </div>
@@ -169,11 +169,10 @@
                 [isCookMode]="isCookMode">
               </app-recipe-ingredients>
             </div>
-            
-            <div class="markdown-content">
+
               <app-safe-markdown [source]="step.text"></app-safe-markdown>
-            </div>
+            
         </mat-card-content>
       </mat-card>
     </div>
-</section> 
+</section>

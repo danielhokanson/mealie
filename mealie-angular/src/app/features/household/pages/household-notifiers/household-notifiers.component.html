@@ -15,13 +15,13 @@
 
       <div *ngIf="loading" class="flex items-center justify-center py-xl">
         <mat-icon class="loading-icon">refresh</mat-icon>
-        <p class="text-secondary mb-sm text-secondary mb-sm">Loading notifiers...</p>
+        <p class="text-secondary mb-sm">Loading notifiers...</p>
       </div>
 
       <div *ngIf="!loading && notifiers.length === 0" class="empty-state">
         <mat-icon>notifications_off</mat-icon>
-        <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">No notifiers configured</h3>
-        <p class="text-secondary mb-sm text-secondary mb-sm">Set up notifications to stay informed about household activities.</p>
+        <h3 class="text-lg font-medium mb-sm">No notifiers configured</h3>
+        <p class="text-secondary mb-sm">Set up notifications to stay informed about household activities.</p>
         <button mat-raised-button class="btn btn-primary" (click)="addNotifier()">
           Add Your First Notifier
         </button>

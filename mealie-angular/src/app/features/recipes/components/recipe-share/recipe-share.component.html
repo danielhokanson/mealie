@@ -2,20 +2,20 @@
   <!-- Loading State -->
   <div *ngIf="loading" class="flex items-center justify-center py-xl">
     <mat-spinner diameter="50"></mat-spinner>
-    <p class="text-secondary mb-sm text-secondary mb-sm">Sharing recipe...</p>
+    <p class="text-secondary mb-sm">Sharing recipe...</p>
   </div>
 
   <!-- Share Content -->
   <div *ngIf="!loading && recipe" class="share-content">
     <!-- Header -->
     <div class="share-header">
-      <h2 class="text-xl font-medium mb-md text-xl font-medium mb-md">Share Recipe</h2>
-      <p class="text-secondary mb-sm text-secondary mb-sm">{{ recipe.name }}</p>
+      <h2 class="text-xl font-medium mb-md">Share Recipe</h2>
+      <p class="text-secondary mb-sm">{{ recipe.name }}</p>
     </div>
 
     <!-- Share Type Selection -->
     <div class="share-type-selection">
-      <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Share Method</h3>
+      <h3 class="text-lg font-medium mb-sm">Share Method</h3>
       <div class="share-type-buttons">
         <button 
           mat-button 
@@ -42,7 +42,7 @@
 
     <!-- Link Sharing -->
     <div *ngIf="shareType === 'link'" class="share-section">
-      <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Share Link</h3>
+      <h3 class="text-lg font-medium mb-sm">Share Link</h3>
       <section class="page-container">
         <mat-form-field appearance="outline" class="link-field w-full">
           <mat-label>Recipe URL</mat-label>
@@ -79,7 +79,7 @@
 
     <!-- Email Sharing -->
     <div *ngIf="shareType === 'email'" class="share-section">
-      <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Share via Email</h3>
+      <h3 class="text-lg font-medium mb-sm">Share via Email</h3>
       <form [formGroup]="shareForm" class="email-form">
         <div class="form-row">
           <mat-form-field appearance="outline" class="w-full">
@@ -171,7 +171,7 @@
 
     <!-- Social Sharing -->
     <div *ngIf="shareType === 'social'" class="share-section">
-      <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Share on Social Media</h3>
+      <h3 class="text-lg font-medium mb-sm">Share on Social Media</h3>
       <div class="social-buttons">
         <button 
           mat-raised-button 
@@ -239,8 +239,8 @@
   <!-- No Recipe State -->
   <div *ngIf="!loading && !recipe" class="no-recipe">
     <mat-icon class="no-recipe-icon">restaurant</mat-icon>
-    <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">No Recipe Selected</h3>
-    <p class="text-secondary mb-sm text-secondary mb-sm">Please select a recipe to share.</p>
+    <h3 class="text-lg font-medium mb-sm">No Recipe Selected</h3>
+    <p class="text-secondary mb-sm">Please select a recipe to share.</p>
   </div>
 
   <!-- Dialog Actions -->

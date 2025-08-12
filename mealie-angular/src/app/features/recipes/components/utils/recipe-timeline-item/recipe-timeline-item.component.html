@@ -2,28 +2,25 @@
   <div class="timeline-icon">
     <mat-icon class="icon">{{ icon }}</mat-icon>
   </div>
-  
-  <div class="timeline-content">
+
     <!-- Date Chip (Desktop) -->
     <div *ngIf="!useMobileFormat && event.timestamp" class="date-chip">
       <mat-chip class="btn btn-primary date-chip-content">
         <mat-icon class="date-icon">calendar_today</mat-icon>
         {{ formattedDate }}
       </mat-chip>
-    </div>
-    
+
     <!-- Timeline Card -->
     <mat-card class="timeline-card" (click)="onCardClick()" class="card">
       <mat-card-header class="card-header card">
-        <div class="header-content">
+        
           <!-- User Avatar -->
           <div class="avatar-section" [class]="attrs.avatar.class">
             <app-user-avatar
               [userId]="event.userId"
               [size]="attrs.avatar.size">
             </app-user-avatar>
-          </div>
-          
+
           <!-- Date Chip (Mobile) -->
           <div *ngIf="useMobileFormat && event.timestamp" class="mobile-date">
             <mat-chip class="btn btn-primary">
@@ -38,8 +35,7 @@
           </div>
           
           <!-- Spacer -->
-          <div class="spacer"></div>
-          
+
           <!-- Context Menu -->
           <div class="context-menu-section">
             <app-recipe-timeline-context-menu
@@ -73,7 +69,7 @@
       
       <!-- Event Content -->
       <mat-card-content class="event-content card">
-        <div class="content-wrapper">
+        
           <!-- Subject (Mobile) -->
           <strong *ngIf="useMobileFormat" class="mobile-subject">{{ event.subject }}</strong>
           
@@ -90,7 +86,7 @@
           <!-- Event Message -->
           <div *ngIf="event.eventMessage" class="event-message" [class]="useMobileFormat ? 'text-caption' : ''">
             <app-safe-markdown [source]="event.eventMessage"></app-safe-markdown>
-          </div>
+          
       </mat-card-content>
     </mat-card>
   </section>

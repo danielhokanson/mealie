@@ -2,14 +2,14 @@
   <!-- Loading State -->
   <div *ngIf="loading" class="flex items-center justify-center py-xl">
     <mat-spinner diameter="50"></mat-spinner>
-    <p class="text-secondary mb-sm text-secondary mb-sm">Loading recipe...</p>
+    <p class="text-secondary mb-sm">Loading recipe...</p>
   </div>
 
   <!-- Error State -->
   <div *ngIf="error && !loading" class="error-container">
     <mat-icon class="error-icon">error</mat-icon>
-    <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Error Loading Recipe</h3>
-    <p class="text-secondary mb-sm text-secondary mb-sm">Unable to load the recipe for editing. Please try again.</p>
+    <h3 class="text-lg font-medium mb-sm">Error Loading Recipe</h3>
+    <p class="text-secondary mb-sm">Unable to load the recipe for editing. Please try again.</p>
     <button mat-raised-button class="btn btn-primary" (click)="loadRecipe(recipe?.id || '')">
       Retry
     </button>
@@ -18,8 +18,8 @@
   <!-- Edit Form -->
   <div *ngIf="recipe && !loading" class="recipe-edit-content">
     <div class="edit-header">
-      <h1 class="text-2xl font-medium mb-md text-2xl font-medium mb-md">Edit Recipe: {{ recipe.name }}</h1>
-      <p class="text-secondary mb-sm text-secondary mb-sm">Update your recipe details below</p>
+      <h1 class="text-2xl font-medium mb-md">Edit Recipe: {{ recipe.name }}</h1>
+      <p class="text-secondary mb-sm">Update your recipe details below</p>
     </div>
 
     <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()" class="recipe-form">
@@ -103,7 +103,7 @@
           </div>
 
           <div class="time-summary">
-            <p class="text-secondary mb-sm text-secondary mb-sm"><strong>Total Time:</strong> {{ getFormattedTime(getTotalTime()) }}</p>
+            <p class="text-secondary mb-sm"><strong>Total Time:</strong> {{ getFormattedTime(getTotalTime()) }}</p>
           </div>
         </mat-card-content>
       </mat-card>
@@ -115,7 +115,7 @@
         </mat-card-header>
         <mat-card-content class="card">
           <div class="categories-section">
-            <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Categories</h3>
+            <h3 class="text-lg font-medium mb-sm">Categories</h3>
             <div class="selection-grid">
               <mat-checkbox 
                 *ngFor="let category of categories"
@@ -127,7 +127,7 @@
             </div>
 
           <div class="tags-section">
-            <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Tags</h3>
+            <h3 class="text-lg font-medium mb-sm">Tags</h3>
             <div class="selection-grid">
               <mat-checkbox 
                 *ngFor="let tag of tags"
@@ -139,7 +139,7 @@
             </div>
 
           <div class="tools-section">
-            <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Tools</h3>
+            <h3 class="text-lg font-medium mb-sm">Tools</h3>
             <div class="selection-grid">
               <mat-checkbox 
                 *ngFor="let tool of tools"
@@ -150,7 +150,7 @@
             </div>
 
           <div class="foods-section">
-            <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Foods</h3>
+            <h3 class="text-lg font-medium mb-sm">Foods</h3>
             <div class="selection-grid">
               <mat-checkbox 
                 *ngFor="let food of foods"

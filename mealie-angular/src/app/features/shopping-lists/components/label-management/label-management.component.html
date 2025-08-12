@@ -1,7 +1,7 @@
 <section class="page-container">
   <div class="flex justify-between items-center mb-md">
-    <h2 class="text-xl font-medium mb-md text-xl font-medium mb-md">Label Management</h2>
-    <p class="text-secondary mb-sm text-secondary mb-sm">Manage shopping list labels for better organization</p>
+    <h2 class="text-xl font-medium mb-md">Label Management</h2>
+    <p class="text-secondary mb-sm">Manage shopping list labels for better organization</p>
   </div>
 
   <div class="actions-bar">
@@ -113,8 +113,8 @@
     <ng-template #emptyTemplate>
       <div class="empty-state">
         <mat-icon class="empty-icon">label</mat-icon>
-        <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">No labels found</h3>
-        <p class="text-secondary mb-sm text-secondary mb-sm">Create your first label to start organizing your shopping lists</p>
+        <h3 class="text-lg font-medium mb-sm">No labels found</h3>
+        <p class="text-secondary mb-sm">Create your first label to start organizing your shopping lists</p>
         <button mat-raised-button class="btn btn-primary" (click)="onAddLabel()">
           <mat-icon>add</mat-icon>
           Create First Label
@@ -126,7 +126,7 @@
   <ng-template #loadingTemplate>
     <div class="flex items-center justify-center py-xl">
       <mat-spinner diameter="40"></mat-spinner>
-      <p class="text-secondary mb-sm text-secondary mb-sm">Loading labels...</p>
+      <p class="text-secondary mb-sm">Loading labels...</p>
     </div>
   </ng-template>
 
@@ -134,7 +134,7 @@
   <div class="dialog-overlay" *ngIf="showAddLabel" (click)="onCancel()">
     <div class="dialog-content" (click)="$event.stopPropagation()">
       <div class="dialog-header">
-        <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">{{ editingLabel ? 'Edit Label' : 'Add New Label' }}</h3>
+        <h3 class="text-lg font-medium mb-sm">{{ editingLabel ? 'Edit Label' : 'Add New Label' }}</h3>
         <button mat-icon-button (click)="onCancel()">
           <mat-icon>close</mat-icon>
         </button>

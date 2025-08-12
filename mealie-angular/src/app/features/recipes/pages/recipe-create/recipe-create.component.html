@@ -1,7 +1,7 @@
 <section class="page-container">
-  <div class="recipe-create-header">
-    <h1 class="text-2xl font-medium mb-md text-2xl font-medium mb-md">Create New Recipe</h1>
-    <p class="text-secondary mb-sm text-secondary mb-sm">Fill in the details below to create your recipe</p>
+  <article class="card">
+    <h1 class="text-2xl font-medium mb-md">Create New Recipe</h1>
+    <p class="text-secondary mb-sm">Fill in the details below to create your recipe</p>
   </div>
 
   <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()" class="recipe-form">
@@ -85,7 +85,7 @@
         </div>
 
         <div class="time-summary">
-          <p class="text-secondary mb-sm text-secondary mb-sm"><strong>Total Time:</strong> {{ getFormattedTime(getTotalTime()) }}</p>
+          <p class="text-secondary mb-sm"><strong>Total Time:</strong> {{ getFormattedTime(getTotalTime()) }}</p>
         </div>
       </mat-card-content>
     </mat-card>
@@ -97,7 +97,7 @@
       </mat-card-header>
       <mat-card-content class="card">
         <div class="categories-section">
-          <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Categories</h3>
+          <h3 class="text-lg font-medium mb-sm">Categories</h3>
           <div class="selection-grid">
             <mat-checkbox 
               *ngFor="let category of categories"
@@ -109,7 +109,7 @@
           </div>
 
         <div class="tags-section">
-          <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Tags</h3>
+          <h3 class="text-lg font-medium mb-sm">Tags</h3>
           <div class="selection-grid">
             <mat-checkbox 
               *ngFor="let tag of tags"
@@ -121,7 +121,7 @@
           </div>
 
         <div class="tools-section">
-          <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Tools</h3>
+          <h3 class="text-lg font-medium mb-sm">Tools</h3>
           <div class="selection-grid">
             <mat-checkbox 
               *ngFor="let tool of tools"
@@ -132,7 +132,7 @@
           </div>
 
         <div class="foods-section">
-          <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Foods</h3>
+          <h3 class="text-lg font-medium mb-sm">Foods</h3>
           <div class="selection-grid">
             <mat-checkbox 
               *ngFor="let food of foods"
@@ -296,4 +296,4 @@
       </button>
     </div>
   </form>
-</section> 
+</section>

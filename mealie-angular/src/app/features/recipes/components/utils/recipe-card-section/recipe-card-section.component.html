@@ -63,7 +63,7 @@
 
   <!-- Recipe Cards -->
   <div *ngIf="recipes && ready" class="recipe-cards-container">
-    <div class="recipe-grid">
+    <article class="card">
       <!-- Desktop Cards -->
       <div *ngIf="!useMobileCards" class="desktop-cards">
         <div class="recipe-card-wrapper"
@@ -103,12 +103,12 @@
     <!-- Loading Spinner -->
     <div *ngIf="loading" class="flex items-center justify-center py-xl">
       <mat-spinner diameter="40"></mat-spinner>
-      <p class="loading-text text-secondary mb-sm text-secondary mb-sm">Loading more recipes...</p>
+      <p class="loading-text text-secondary mb-sm">Loading more recipes...</p>
     </div>
 
   <!-- Empty State -->
   <div *ngIf="recipes.length === 0 && ready" class="empty-state">
     <mat-icon class="empty-icon">restaurant</mat-icon>
-    <p class="empty-text text-secondary mb-sm text-secondary mb-sm">No recipes found</p>
-    <p class="empty-subtext text-secondary mb-sm text-secondary mb-sm">Try adjusting your search criteria</p>
+    <p class="empty-text text-secondary mb-sm">No recipes found</p>
+    <p class="empty-subtext text-secondary mb-sm">Try adjusting your search criteria</p>
   </section>

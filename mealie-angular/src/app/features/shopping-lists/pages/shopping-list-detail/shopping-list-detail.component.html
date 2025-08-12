@@ -2,14 +2,14 @@
   <!-- Loading State -->
   <div *ngIf="loading" class="flex items-center justify-center py-xl">
     <mat-spinner diameter="50"></mat-spinner>
-    <p class="text-secondary mb-sm text-secondary mb-sm">Loading shopping list...</p>
+    <p class="text-secondary mb-sm">Loading shopping list...</p>
   </div>
 
   <!-- Error State -->
   <div *ngIf="error && !loading" class="error-container">
     <mat-icon class="error-icon">error</mat-icon>
-    <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Error Loading Shopping List</h3>
-    <p class="text-secondary mb-sm text-secondary mb-sm">Unable to load the shopping list. Please try again.</p>
+    <h3 class="text-lg font-medium mb-sm">Error Loading Shopping List</h3>
+    <p class="text-secondary mb-sm">Unable to load the shopping list. Please try again.</p>
     <button mat-raised-button class="btn btn-primary" (click)="loadShoppingList(shoppingList?.id || '')">
       Retry
     </button>
@@ -20,7 +20,7 @@
     <!-- Header -->
     <div class="list-header">
       <div class="list-title-section">
-        <h1 class="text-2xl font-medium mb-md text-2xl font-medium mb-md">{{ shoppingList.name }}</h1>
+        <h1 class="text-2xl font-medium mb-md">{{ shoppingList.name }}</h1>
         <div class="list-meta">
           <span>Created {{ getFormattedDate(shoppingList.createdAt) }}</span>
           <span *ngIf="shoppingList.updatedAt && shoppingList.updatedAt !== shoppingList.createdAt">
@@ -241,8 +241,8 @@
         <!-- Empty State -->
         <div *ngIf="getTotalItemsCount() === 0" class="empty-items">
           <mat-icon class="empty-icon">shopping_cart</mat-icon>
-          <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">No Items Yet</h3>
-          <p class="text-secondary mb-sm text-secondary mb-sm">Add your first item to get started</p>
+          <h3 class="text-lg font-medium mb-sm">No Items Yet</h3>
+          <p class="text-secondary mb-sm">Add your first item to get started</p>
         </div>
       </mat-card-content>
     </mat-card>

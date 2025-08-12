@@ -7,13 +7,13 @@
 
         <mat-card-content class="card">
             <div *ngIf="loading" class="flex items-center justify-center py-xl">
-                <p class="text-secondary mb-sm text-secondary mb-sm">Loading household data...</p>
+                <p class="text-secondary mb-sm">Loading household data...</p>
             </div>
 
-            <div *ngIf="!loading && household" class="content-container">
+            <div *ngIf="!loading && household" class="flex-1">
                 <!-- Invite New Member -->
                 <div class="invite-section">
-                    <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Invite New Member</h3>
+                    <h3 class="text-lg font-medium mb-sm">Invite New Member</h3>
                     <form [formGroup]="inviteForm" (ngSubmit)="inviteMember()" class="invite-form">
                         <div class="form-row">
                             <mat-form-field appearance="outline" class="w-full">
@@ -49,10 +49,10 @@
 
                 <!-- Current Members -->
                 <div class="members-section">
-                    <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Current Members ({{ members.length }})</h3>
+                    <h3 class="text-lg font-medium mb-sm">Current Members ({{ members.length }})</h3>
                     
                     <div *ngIf="members.length === 0" class="no-members">
-                        <p class="text-secondary mb-sm text-secondary mb-sm">No members found. Invite someone to get started!</p>
+                        <p class="text-secondary mb-sm">No members found. Invite someone to get started!</p>
                     </div>
 
                     <mat-list *ngIf="members.length > 0">
@@ -102,9 +102,8 @@
                 </div>
 
             <div *ngIf="!loading && !household" class="no-household">
-                <p class="text-secondary mb-sm text-secondary mb-sm">No household found. Please create or join a household first.</p>
+                <p class="text-secondary mb-sm">No household found. Please create or join a household first.</p>
             </div>
         </mat-card-content>
     </mat-card>
 </section>
-

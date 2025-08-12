@@ -1,7 +1,7 @@
 <section class="page-container">
-  <div class="suggestion-content">
+  
     <!-- Recipe Card -->
-    <div class="recipe-card-section">
+    <article class="card">
       <app-recipe-card-mobile
         [name]="recipe.name"
         [description]="recipe.description"
@@ -10,7 +10,6 @@
         [image]="recipe.image"
         [recipeId]="recipe.id">
       </app-recipe-card-mobile>
-    </div>
 
     <!-- Missing Organizers -->
     <div *ngFor="let organizer of missingOrganizers; let idx = index" 

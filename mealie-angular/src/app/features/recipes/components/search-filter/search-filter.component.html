@@ -1,10 +1,10 @@
 <div class="search-filter">
   <mat-menu #filterMenu="matMenu" class="filter-menu">
     <ng-template matMenuContent>
-      <div class="filter-content">
+      
         <!-- Header -->
         <div class="filter-header">
-          <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">{{ label }}</h3>
+          <h3 class="text-lg font-medium mb-sm">{{ label }}</h3>
           <button 
             mat-icon-button 
             (click)="clearSelection()"
@@ -12,7 +12,6 @@
             matTooltip="Clear selection">
             <mat-icon>clear</mat-icon>
           </button>
-        </div>
 
         <!-- Require All Toggle (for multiple selection) -->
         <div *ngIf="multiple && !radio" class="require-all-toggle">

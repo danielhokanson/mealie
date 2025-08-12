@@ -5,8 +5,7 @@
   width="70%"
   maxWidth="816px"
   (modelValueChange)="onDialogChange($event)">
-  
-  <div class="dialog-content">
+
     <!-- Print Configuration -->
     <div class="print-config">
       <div class="config-row">
@@ -14,7 +13,7 @@
         <div class="image-position-section">
           <div class="section-title">
             Recipe Image
-          </div>
+          
           <mat-button-toggle-group
             [(ngModel)]="imagePositionValue"
             class="image-position-toggle">
@@ -67,4 +66,4 @@
       </app-recipe-print-view>
     </mat-card>
   </div>
-</app-base-dialog> 
+</app-base-dialog>

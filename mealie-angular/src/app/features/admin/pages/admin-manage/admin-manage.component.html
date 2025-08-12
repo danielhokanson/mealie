@@ -2,14 +2,14 @@
   <!-- Loading State -->
   <div *ngIf="loading" class="flex items-center justify-center py-xl">
     <mat-spinner diameter="50"></mat-spinner>
-    <p class="text-secondary mb-sm text-secondary mb-sm">Loading management data...</p>
+    <p class="text-secondary mb-sm">Loading management data...</p>
   </div>
 
   <!-- Error State -->
-  <div *ngIf="error && !loading" class="error-container">
+  <div *ngIf="error && !loading" class="flex flex-col items-center justify-center py-xl text-center">
     <mat-icon class="error-icon">error</mat-icon>
-    <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Error Loading Data</h3>
-    <p class="text-secondary mb-sm text-secondary mb-sm">Unable to load management data. Please try again.</p>
+    <h3 class="text-lg font-medium mb-sm">Error Loading Data</h3>
+    <p class="text-secondary mb-sm">Unable to load management data. Please try again.</p>
     <button mat-raised-button class="btn btn-primary" (click)="loadData()">
       Retry
     </button>
@@ -19,8 +19,8 @@
   <div *ngIf="!loading && !error" class="manage-content">
     <!-- Header -->
     <div class="manage-header">
-      <h1 class="text-2xl font-medium mb-md text-2xl font-medium mb-md">User & Group Management</h1>
-      <p class="text-secondary mb-sm text-secondary mb-sm">Manage users, groups, and households</p>
+      <h1 class="text-2xl font-medium mb-md">User & Group Management</h1>
+      <p class="text-secondary mb-sm">Manage users, groups, and households</p>
     </div>
 
     <!-- Tabs -->
@@ -28,7 +28,7 @@
       <mat-tab-group [(selectedIndex)]="selectedTab">
         <!-- Users Tab -->
         <mat-tab label="Users">
-          <div class="tab-content">
+          
             <!-- Search and Filters -->
             <div class="search-filters">
               <mat-form-field appearance="outline" class="search-field w-full">
@@ -65,7 +65,6 @@
                 <mat-icon>add</mat-icon>
                 Add User
               </button>
-            </div>
 
             <!-- Users Table -->
             <section class="page-container">
@@ -151,7 +150,7 @@
 
         <!-- Groups Tab -->
         <mat-tab label="Groups">
-          <div class="tab-content">
+          
             <!-- Search and Filters -->
             <div class="search-filters">
               <mat-form-field appearance="outline" class="search-field w-full">
@@ -170,7 +169,6 @@
                 <mat-icon>add</mat-icon>
                 Add Group
               </button>
-            </div>
 
             <!-- Groups Table -->
             <section class="page-container">
@@ -236,7 +234,7 @@
 
         <!-- Households Tab -->
         <mat-tab label="Households">
-          <div class="tab-content">
+          
             <!-- Search and Filters -->
             <div class="search-filters">
               <mat-form-field appearance="outline" class="search-field w-full">
@@ -255,7 +253,6 @@
                 <mat-icon>add</mat-icon>
                 Add Household
               </button>
-            </div>
 
             <!-- Households Table -->
             <section class="page-container">

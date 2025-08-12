@@ -1,4 +1,4 @@
-<div class="recipe-comments">
+<article class="card">
   <mat-card class="card">
     <mat-card-header class="card">
       <mat-card-title class="comments-title card">
@@ -89,8 +89,8 @@
       <!-- Empty State -->
       <div *ngIf="recipe.comments.length === 0" class="empty-state">
         <mat-icon class="empty-icon">comment</mat-icon>
-        <p class="empty-text text-secondary mb-sm text-secondary mb-sm">No comments yet. Be the first to comment!</p>
+        <p class="empty-text text-secondary mb-sm">No comments yet. Be the first to comment!</p>
       </div>
     </mat-card-content>
   </mat-card>
-</section> 
+</section>

@@ -1,9 +1,9 @@
 <mat-card class="section-title-card card">
-  <div class="title-content">
+  
     <mat-icon *ngIf="icon" [color]="color" class="title-icon">
       {{ icon }}
     </mat-icon>
-    <h3 class="section-title text-lg font-medium mb-sm text-lg font-medium mb-sm">{{ title }}</h3>
-  </div>
+    <h3 class="section-title text-lg font-medium mb-sm">{{ title }}</h3>
+  
   <ng-content></ng-content>
-</mat-card> 
+</mat-card>

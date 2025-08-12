@@ -85,7 +85,7 @@
 
   <!-- Search Results Area -->
   <div class="search-results" *ngIf="searchResults.length > 0">
-    <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Search Results</h3>
+    <h3 class="text-lg font-medium mb-sm">Search Results</h3>
     <div class="results-list">
       <div 
         *ngFor="let result of searchResults" 
@@ -99,5 +99,5 @@
   <!-- Empty State -->
   <div class="empty-state" *ngIf="!searchResults.length && !searchQuery">
     <mat-icon>search</mat-icon>
-    <p class="text-secondary mb-sm text-secondary mb-sm">Start typing to search for recipes</p>
+    <p class="text-secondary mb-sm">Start typing to search for recipes</p>
   </section>

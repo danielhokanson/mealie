@@ -2,15 +2,15 @@
   <!-- Loading State -->
   <div *ngIf="loading" class="flex items-center justify-center py-xl">
     <mat-spinner diameter="50"></mat-spinner>
-    <p class="text-secondary mb-sm text-secondary mb-sm">Processing backup...</p>
+    <p class="text-secondary mb-sm">Processing backup...</p>
   </div>
 
   <!-- Backups Content -->
   <div *ngIf="!loading" class="backups-content">
     <!-- Header -->
     <div class="backups-header">
-      <h2 class="text-xl font-medium mb-md text-xl font-medium mb-md">Backup Management</h2>
-      <p class="text-secondary mb-sm text-secondary mb-sm">Create, manage, and restore system backups</p>
+      <h2 class="text-xl font-medium mb-md">Backup Management</h2>
+      <p class="text-secondary mb-sm">Create, manage, and restore system backups</p>
     </div>
 
     <!-- Backup Actions -->
@@ -133,8 +133,8 @@
           <!-- Empty State -->
           <div *ngIf="backups.length === 0" class="empty-backups">
             <mat-icon class="empty-icon">backup</mat-icon>
-            <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">No Backups Found</h3>
-            <p class="text-secondary mb-sm text-secondary mb-sm">Create your first backup to get started</p>
+            <h3 class="text-lg font-medium mb-sm">No Backups Found</h3>
+            <p class="text-secondary mb-sm">Create your first backup to get started</p>
             <button 
               mat-raised-button 
               class="btn btn-primary"
@@ -357,7 +357,7 @@
   <div *ngIf="backupProgress > 0" class="progress-overlay">
     <mat-card class="progress-card card">
       <mat-card-content class="card">
-        <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Creating Backup...</h3>
+        <h3 class="text-lg font-medium mb-sm">Creating Backup...</h3>
         <mat-progress-bar 
           mode="determinate" 
           [value]="backupProgress"
@@ -371,7 +371,7 @@
   <div *ngIf="restoreProgress > 0" class="progress-overlay">
     <mat-card class="progress-card card">
       <mat-card-content class="card">
-        <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Restoring Backup...</h3>
+        <h3 class="text-lg font-medium mb-sm">Restoring Backup...</h3>
         <mat-progress-bar 
           mode="determinate" 
           [value]="restoreProgress"

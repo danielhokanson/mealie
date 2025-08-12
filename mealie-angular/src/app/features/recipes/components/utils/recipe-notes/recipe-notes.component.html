@@ -1,5 +1,5 @@
 <div *ngIf="notes.length > 0 || edit" class="recipe-notes">
-  <h2 class="notes-title text-xl font-medium mb-md text-xl font-medium mb-md">Notes</h2>
+  <h2 class="notes-title text-xl font-medium mb-md">Notes</h2>
   
   <form [formGroup]="notesForm" class="notes-form">
     <div formArrayName="notes">
@@ -55,10 +55,10 @@
 
         <!-- View Mode -->
         <div *ngIf="!edit" class="note-view">
-          <h3 class="note-title text-lg font-medium mb-sm text-lg font-medium mb-sm">{{ note.title }}</h3>
-          <div class="note-content">
+          <h3 class="note-title text-lg font-medium mb-sm">{{ note.title }}</h3>
+          
             <app-safe-markdown [source]="note.text"></app-safe-markdown>
-          </div>
+          
       </div>
   </form>
 

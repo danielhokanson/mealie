@@ -1,8 +1,8 @@
 <section class="page-container">
   <!-- Header -->
   <div class="bulk-header">
-    <h2 class="text-xl font-medium mb-md text-xl font-medium mb-md">Bulk Operations</h2>
-    <p class="text-secondary mb-sm text-secondary mb-sm">{{ selectedRecipes.length }} recipe(s) selected</p>
+    <h2 class="text-xl font-medium mb-md">Bulk Operations</h2>
+    <p class="text-secondary mb-sm">{{ selectedRecipes.length }} recipe(s) selected</p>
   </div>
 
   <!-- Selection Actions -->
@@ -32,7 +32,7 @@
 
   <!-- Operation Type Selection -->
   <div class="operation-selection">
-    <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Operation Type</h3>
+    <h3 class="text-lg font-medium mb-sm">Operation Type</h3>
     <div class="operation-buttons">
       <button 
         mat-button 
@@ -76,8 +76,8 @@
     <form [formGroup]="bulkForm">
       <!-- Category Operation -->
       <div *ngIf="operationType === 'category'" class="operation-section">
-        <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Update Categories</h3>
-        <p class="text-secondary mb-sm text-secondary mb-sm">Select categories to add to the selected recipes:</p>
+        <h3 class="text-lg font-medium mb-sm">Update Categories</h3>
+        <p class="text-secondary mb-sm">Select categories to add to the selected recipes:</p>
         
         <div class="categories-grid">
           <div 
@@ -112,8 +112,8 @@
 
       <!-- Tag Operation -->
       <div *ngIf="operationType === 'tag'" class="operation-section">
-        <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Update Tags</h3>
-        <p class="text-secondary mb-sm text-secondary mb-sm">Select tags to add to the selected recipes:</p>
+        <h3 class="text-lg font-medium mb-sm">Update Tags</h3>
+        <p class="text-secondary mb-sm">Select tags to add to the selected recipes:</p>
         
         <div class="tags-grid">
           <div 
@@ -148,10 +148,10 @@
 
       <!-- Delete Operation -->
       <div *ngIf="operationType === 'delete'" class="operation-section">
-        <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Delete Recipes</h3>
+        <h3 class="text-lg font-medium mb-sm">Delete Recipes</h3>
         <div class="delete-warning">
           <mat-icon class="warning-icon">warning</mat-icon>
-          <p class="text-secondary mb-sm text-secondary mb-sm">This action will permanently delete {{ selectedRecipes.length }} recipe(s). This action cannot be undone.</p>
+          <p class="text-secondary mb-sm">This action will permanently delete {{ selectedRecipes.length }} recipe(s). This action cannot be undone.</p>
         </div>
         
         <div class="delete-confirmation">
@@ -176,8 +176,8 @@
 
       <!-- Export Operation -->
       <div *ngIf="operationType === 'export'" class="operation-section">
-        <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Export Recipes</h3>
-        <p class="text-secondary mb-sm text-secondary mb-sm">Export {{ selectedRecipes.length }} recipe(s) in various formats:</p>
+        <h3 class="text-lg font-medium mb-sm">Export Recipes</h3>
+        <p class="text-secondary mb-sm">Export {{ selectedRecipes.length }} recipe(s) in various formats:</p>
         
         <div class="export-options">
           <div class="export-option">
@@ -225,8 +225,8 @@
 
       <!-- Share Operation -->
       <div *ngIf="operationType === 'share'" class="operation-section">
-        <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Share Recipes</h3>
-        <p class="text-secondary mb-sm text-secondary mb-sm">Share {{ selectedRecipes.length }} recipe(s) with others:</p>
+        <h3 class="text-lg font-medium mb-sm">Share Recipes</h3>
+        <p class="text-secondary mb-sm">Share {{ selectedRecipes.length }} recipe(s) with others:</p>
         
         <div class="share-options">
           <div class="share-option">

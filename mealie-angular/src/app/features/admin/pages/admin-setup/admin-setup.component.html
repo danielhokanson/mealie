@@ -6,8 +6,8 @@
         <div class="complete-icon">
           <mat-icon>check_circle</mat-icon>
         </div>
-        <h2 class="text-xl font-medium mb-md text-xl font-medium mb-md">Setup Complete!</h2>
-        <p class="text-secondary mb-sm text-secondary mb-sm">Your Mealie application has been successfully configured and is ready to use.</p>
+        <h2 class="text-xl font-medium mb-md">Setup Complete!</h2>
+        <p class="text-secondary mb-sm">Your Mealie application has been successfully configured and is ready to use.</p>
         <div class="complete-actions">
           <button 
             mat-raised-button 
@@ -23,16 +23,16 @@
   <!-- Setup Form -->
   <div *ngIf="!setupComplete" class="setup-form">
     <div class="setup-header">
-      <h1 class="text-2xl font-medium mb-md text-2xl font-medium mb-md">Admin Setup</h1>
-      <p class="text-secondary mb-sm text-secondary mb-sm">Configure your Mealie application</p>
+      <h1 class="text-2xl font-medium mb-md">Admin Setup</h1>
+      <p class="text-secondary mb-sm">Configure your Mealie application</p>
     </div>
 
     <mat-stepper [linear]="true" #stepper class="setup-stepper">
       <!-- Step 1: Database Configuration -->
       <mat-step [stepControl]="setupForm" label="Database">
-        <div class="step-content">
-          <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">{{ getStepTitle(0) }}</h3>
-          <p class="text-secondary mb-sm text-secondary mb-sm">{{ getStepDescription(0) }}</p>
+        
+          <h3 class="text-lg font-medium mb-sm">{{ getStepTitle(0) }}</h3>
+          <p class="text-secondary mb-sm">{{ getStepDescription(0) }}</p>
 
           <div class="form-section">
             <div class="form-row">
@@ -44,7 +44,6 @@
                   <mat-option value="sqlite">SQLite</mat-option>
                 </mat-select>
               </mat-form-field>
-            </div>
 
             <div class="form-row">
               <mat-form-field appearance="outline" class="w-full">
@@ -139,9 +138,9 @@
 
       <!-- Step 2: Application Settings -->
       <mat-step [stepControl]="setupForm" label="Application">
-        <div class="step-content">
-          <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">{{ getStepTitle(1) }}</h3>
-          <p class="text-secondary mb-sm text-secondary mb-sm">{{ getStepDescription(1) }}</p>
+        
+          <h3 class="text-lg font-medium mb-sm">{{ getStepTitle(1) }}</h3>
+          <p class="text-secondary mb-sm">{{ getStepDescription(1) }}</p>
 
           <div class="form-section">
             <div class="form-row">
@@ -166,7 +165,6 @@
                   {{ getErrorMessage('appUrl') }}
                 </mat-error>
               </mat-form-field>
-            </div>
 
             <div class="form-row">
               <mat-form-field appearance="outline" class="w-full">
@@ -241,16 +239,15 @@
 
       <!-- Step 3: Email Configuration -->
       <mat-step [stepControl]="setupForm" label="Email">
-        <div class="step-content">
-          <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">{{ getStepTitle(2) }}</h3>
-          <p class="text-secondary mb-sm text-secondary mb-sm">{{ getStepDescription(2) }}</p>
+        
+          <h3 class="text-lg font-medium mb-sm">{{ getStepTitle(2) }}</h3>
+          <p class="text-secondary mb-sm">{{ getStepDescription(2) }}</p>
 
           <div class="form-section">
             <div class="form-row">
               <mat-checkbox formControlName="smtpEnabled">
                 Enable SMTP Email
               </mat-checkbox>
-            </div>
 
             <div class="form-row" *ngIf="setupForm.get('smtpEnabled')?.value">
               <mat-form-field appearance="outline" class="w-full">
@@ -323,9 +320,9 @@
 
       <!-- Step 4: Security Settings -->
       <mat-step [stepControl]="setupForm" label="Security">
-        <div class="step-content">
-          <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">{{ getStepTitle(3) }}</h3>
-          <p class="text-secondary mb-sm text-secondary mb-sm">{{ getStepDescription(3) }}</p>
+        
+          <h3 class="text-lg font-medium mb-sm">{{ getStepTitle(3) }}</h3>
+          <p class="text-secondary mb-sm">{{ getStepDescription(3) }}</p>
 
           <div class="form-section">
             <div class="form-row">
@@ -345,7 +342,6 @@
                 (click)="onGenerateJwtSecret()">
                 Generate
               </button>
-            </div>
 
             <div class="form-row">
               <mat-form-field appearance="outline" class="w-full">

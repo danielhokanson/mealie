@@ -66,10 +66,10 @@
         
         <!-- Recipe Title -->
         <mat-card-title *ngIf="recipeIngredientSections.length  class="card"> 1" class="recipe-title">
-          <div class="recipe-title-content">
-            <div class="recipe-name">
+          
+            <article class="card">
               {{ recipeSection.recipeName }}
-            </div>
+            
             <div *ngIf="recipeSection.recipeScale > 1" class="recipe-scale">
               (Quantity: {{ recipeSection.recipeScale }})
             </div>
@@ -102,14 +102,13 @@
                   class="btn btn-secondary"
                   class="ingredient-checkbox">
                 </mat-checkbox>
-                
-                <div class="ingredient-content">
+
                   <app-recipe-ingredient-list-item
                     [ingredient]="ingredientData.ingredient"
                     [disableAmount]="ingredientData.disableAmount"
                     [scale]="recipeSection.recipeScale">
                   </app-recipe-ingredient-list-item>
-                </div>
+                
               </mat-list-item>
             </div>
         </div>
@@ -135,4 +134,4 @@
       </app-base-button-group>
     </div>
   </app-base-dialog>
-</section> 
+</section>

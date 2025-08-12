@@ -2,14 +2,14 @@
   <!-- Loading State -->
   <div *ngIf="loading" class="flex items-center justify-center py-xl">
     <mat-spinner diameter="50"></mat-spinner>
-    <p class="text-secondary mb-sm text-secondary mb-sm">Loading admin dashboard...</p>
+    <p class="text-secondary mb-sm">Loading admin dashboard...</p>
   </div>
 
   <!-- Error State -->
-  <div *ngIf="error && !loading" class="error-container">
+  <div *ngIf="error && !loading" class="flex flex-col items-center justify-center py-xl text-center">
     <mat-icon class="error-icon">error</mat-icon>
-    <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Error Loading Dashboard</h3>
-    <p class="text-secondary mb-sm text-secondary mb-sm">Unable to load the admin dashboard. Please try again.</p>
+    <h3 class="text-lg font-medium mb-sm">Error Loading Dashboard</h3>
+    <p class="text-secondary mb-sm">Unable to load the admin dashboard. Please try again.</p>
     <button mat-raised-button class="btn btn-primary" (click)="loadDashboardData()">
       Retry
     </button>
@@ -19,8 +19,8 @@
   <div *ngIf="!loading && !error" class="dashboard-content">
     <!-- Header -->
     <div class="dashboard-header">
-      <h1 class="text-2xl font-medium mb-md text-2xl font-medium mb-md">Admin Dashboard</h1>
-      <p class="text-secondary mb-sm text-secondary mb-sm">System overview and management tools</p>
+      <h1 class="text-2xl font-medium mb-md">Admin Dashboard</h1>
+      <p class="text-secondary mb-sm">System overview and management tools</p>
     </div>
 
     <!-- Statistics Cards -->
@@ -30,10 +30,10 @@
           <div class="stat-icon">
             <mat-icon>restaurant</mat-icon>
           </div>
-          <div class="stat-content">
-            <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">{{ stats.totalRecipes }}</h3>
-            <p class="text-secondary mb-sm text-secondary mb-sm">Total Recipes</p>
-          </div>
+          
+            <h3 class="text-lg font-medium mb-sm">{{ stats.totalRecipes }}</h3>
+            <p class="text-secondary mb-sm">Total Recipes</p>
+          
         </mat-card-content>
         <mat-card-actions class="card">
           <button mat-button class="btn btn-primary" (click)="onViewRecipes()">
@@ -47,10 +47,10 @@
           <div class="stat-icon">
             <mat-icon>people</mat-icon>
           </div>
-          <div class="stat-content">
-            <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">{{ stats.totalUsers }}</h3>
-            <p class="text-secondary mb-sm text-secondary mb-sm">Total Users</p>
-          </div>
+          
+            <h3 class="text-lg font-medium mb-sm">{{ stats.totalUsers }}</h3>
+            <p class="text-secondary mb-sm">Total Users</p>
+          
         </mat-card-content>
         <mat-card-actions class="card">
           <button mat-button class="btn btn-primary" (click)="onViewUsers()">
@@ -64,10 +64,10 @@
           <div class="stat-icon">
             <mat-icon>shopping_cart</mat-icon>
           </div>
-          <div class="stat-content">
-            <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">{{ stats.totalShoppingLists }}</h3>
-            <p class="text-secondary mb-sm text-secondary mb-sm">Shopping Lists</p>
-          </div>
+          
+            <h3 class="text-lg font-medium mb-sm">{{ stats.totalShoppingLists }}</h3>
+            <p class="text-secondary mb-sm">Shopping Lists</p>
+          
         </mat-card-content>
         <mat-card-actions class="card">
           <button mat-button class="btn btn-primary" (click)="onViewShoppingLists()">
@@ -81,10 +81,10 @@
           <div class="stat-icon">
             <mat-icon>activity</mat-icon>
           </div>
-          <div class="stat-content">
-            <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">{{ stats.recentActivity }}</h3>
-            <p class="text-secondary mb-sm text-secondary mb-sm">Recent Activity</p>
-          </div>
+          
+            <h3 class="text-lg font-medium mb-sm">{{ stats.recentActivity }}</h3>
+            <p class="text-secondary mb-sm">Recent Activity</p>
+          
         </mat-card-content>
         <mat-card-actions class="card">
           <button mat-button class="btn btn-primary" (click)="onViewActivity()">
@@ -105,19 +105,19 @@
             <div class="health-status" [style.background-color]="getHealthColor(systemHealth.database)"></div>
             <div class="health-info">
               <h4>Database</h4>
-              <p class="text-secondary mb-sm text-secondary mb-sm">{{ systemHealth.database }}</p>
+              <p class="text-secondary mb-sm">{{ systemHealth.database }}</p>
             </div>
           <div class="health-item">
             <div class="health-status" [style.background-color]="getHealthColor(systemHealth.api)"></div>
             <div class="health-info">
               <h4>API</h4>
-              <p class="text-secondary mb-sm text-secondary mb-sm">{{ systemHealth.api }}</p>
+              <p class="text-secondary mb-sm">{{ systemHealth.api }}</p>
             </div>
           <div class="health-item">
             <div class="health-status" [style.background-color]="getHealthColor(systemHealth.storage)"></div>
             <div class="health-info">
               <h4>Storage</h4>
-              <p class="text-secondary mb-sm text-secondary mb-sm">{{ systemHealth.storage }}</p>
+              <p class="text-secondary mb-sm">{{ systemHealth.storage }}</p>
             </div>
         </div>
       </mat-card-content>

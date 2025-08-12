@@ -2,15 +2,15 @@
   <!-- Loading State -->
   <div *ngIf="loading" class="flex items-center justify-center py-xl">
     <mat-spinner diameter="50"></mat-spinner>
-    <p class="text-secondary mb-sm text-secondary mb-sm">Loading comments...</p>
+    <p class="text-secondary mb-sm">Loading comments...</p>
   </div>
 
   <!-- Comments Content -->
   <div *ngIf="!loading && recipe" class="comments-content">
     <!-- Header -->
     <div class="comments-header">
-      <h2 class="text-xl font-medium mb-md text-xl font-medium mb-md">Recipe Comments</h2>
-      <p class="text-secondary mb-sm text-secondary mb-sm">Share your thoughts about {{ recipe.name }}</p>
+      <h2 class="text-xl font-medium mb-md">Recipe Comments</h2>
+      <p class="text-secondary mb-sm">Share your thoughts about {{ recipe.name }}</p>
       
       <!-- Rating Summary -->
       <div class="rating-summary">
@@ -72,7 +72,7 @@
         <div class="comment-header">
           <div class="comment-user">
             <mat-icon class="user-avatar">person</mat-icon>
-            <div class="user-info">
+            <section class="card">
               <span class="user-name">{{ comment.user.fullName }}</span>
               <span class="comment-date">{{ getRelativeDate(comment.createdAt) }}</span>
             </div>
@@ -116,8 +116,8 @@
           </div>
 
         <!-- Comment Content -->
-        <div class="comment-content">
-          <p class="comment-text text-secondary mb-sm text-secondary mb-sm">{{ comment.text }}</p>
+        
+          <p class="comment-text text-secondary mb-sm">{{ comment.text }}</p>
           
           <div class="comment-meta">
             <mat-chip 
@@ -126,14 +126,14 @@
               Private
             </mat-chip>
             <span class="comment-time">{{ getFormattedDate(comment.createdAt) }}</span>
-          </div>
+          
       </div>
 
     <!-- Empty State -->
     <div *ngIf="!loading && getFilteredComments().length === 0" class="empty-comments">
       <mat-icon class="empty-icon">comment</mat-icon>
-      <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">No Comments Yet</h3>
-      <p class="text-secondary mb-sm text-secondary mb-sm">Be the first to share your thoughts about this recipe!</p>
+      <h3 class="text-lg font-medium mb-sm">No Comments Yet</h3>
+      <p class="text-secondary mb-sm">Be the first to share your thoughts about this recipe!</p>
       <button 
         mat-raised-button 
         class="btn btn-primary"
@@ -146,8 +146,8 @@
   <!-- No Recipe State -->
   <div *ngIf="!loading && !recipe" class="no-recipe">
     <mat-icon class="no-recipe-icon">restaurant</mat-icon>
-    <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">No Recipe Selected</h3>
-    <p class="text-secondary mb-sm text-secondary mb-sm">Please select a recipe to view its comments.</p>
+    <h3 class="text-lg font-medium mb-sm">No Recipe Selected</h3>
+    <p class="text-secondary mb-sm">Please select a recipe to view its comments.</p>
   </div>
 
   <!-- Add/Edit Comment Dialog -->

@@ -1,5 +1,5 @@
 <mat-card [class]="cardClass" class="card">
-  <div class="card-content">
+  
     <!-- Image Section -->
     <div *ngIf="hasImage" class="image-section">
       <img
@@ -7,15 +7,14 @@
         [alt]="name"
         class="recipe-image"
         loading="lazy">
-    </div>
-    
+
     <!-- Content Section -->
     <div class="content-section">
       <!-- Recipe Name -->
-      <h3 class="recipe-name text-lg font-medium mb-sm text-lg font-medium mb-sm">{{ name }}</h3>
+      <h3 class="recipe-name text-lg font-medium mb-sm">{{ name }}</h3>
       
       <!-- Description -->
-      <p *ngIf="description" class="recipe-description text-secondary mb-sm text-secondary mb-sm">
+      <p *ngIf="description" class="recipe-description text-secondary mb-sm">
         {{ description }}
       </p>
       
@@ -27,4 +26,4 @@
         </mat-chip>
       </div>
   </div>
-</mat-card> 
+</mat-card>

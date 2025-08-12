@@ -11,11 +11,11 @@
             </div>
             
             <div class="drop-zone-text">
-                <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">{{ text }}</h3>
-                <p *ngIf="config.accept && config.accept !== '*/*'" class="text-secondary mb-sm text-secondary mb-sm">
+                <h3 class="text-lg font-medium mb-sm">{{ text }}</h3>
+                <p *ngIf="config.accept && config.accept !== '*/*'" class="text-secondary mb-sm">
                     Accepted types: {{ config.accept }}
                 </p>
-                <p *ngIf="config.maxSize" class="text-secondary mb-sm text-secondary mb-sm">
+                <p *ngIf="config.maxSize" class="text-secondary mb-sm">
                     Maximum size: {{ formatFileSize(config.maxSize) }}
                 </p>
             </div>
@@ -36,7 +36,7 @@
                     [value]="uploadProgress"
                     class="btn btn-primary">
                 </mat-progress-bar>
-                <p class="progress-text text-secondary mb-sm text-secondary mb-sm">Uploading... {{ uploadProgress | number:'1.0-0' }}%</p>
+                <p class="progress-text text-secondary mb-sm">Uploading... {{ uploadProgress | number:'1.0-0' }}%</p>
             </div>
         </mat-card-content>
         
@@ -60,4 +60,4 @@
             </button>
         </mat-card-actions>
     </mat-card>
-</section> 
+</section>

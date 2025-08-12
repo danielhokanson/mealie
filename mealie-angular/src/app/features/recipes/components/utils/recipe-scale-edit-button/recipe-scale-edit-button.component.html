@@ -1,5 +1,5 @@
 <div *ngIf="yieldDisplay" class="scale-edit-container">
-  <div class="scale-edit-content">
+  
     <div class="scale-display">
       <div [matMenuTriggerFor]="scaleMenu"
            [matTooltip]="canEditScale ? 'Edit Scale' : ''"
@@ -9,7 +9,6 @@
            [class.disabled]="!canEditScale">
         <mat-icon *ngIf="canEditScale" class="edit-icon">edit</mat-icon>
         <span [innerHTML]="yieldDisplay"></span>
-      </div>
 
       <mat-menu #scaleMenu="matMenu" class="scale-menu">
         <mat-card class="menu-card card">

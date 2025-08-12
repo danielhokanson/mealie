@@ -1,7 +1,7 @@
 <section class="page-container">
   <div class="flex justify-between items-center mb-md">
-    <h2 class="text-xl font-medium mb-md text-xl font-medium mb-md">Unit Management</h2>
-    <p class="text-secondary mb-sm text-secondary mb-sm">Manage measurement units for recipes and shopping lists</p>
+    <h2 class="text-xl font-medium mb-md">Unit Management</h2>
+    <p class="text-secondary mb-sm">Manage measurement units for recipes and shopping lists</p>
   </div>
 
   <div class="actions-bar">
@@ -112,8 +112,8 @@
     <ng-template #emptyTemplate>
       <div class="empty-state">
         <mat-icon class="empty-icon">straighten</mat-icon>
-        <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">No units found</h3>
-        <p class="text-secondary mb-sm text-secondary mb-sm">Create your first unit to start managing measurements</p>
+        <h3 class="text-lg font-medium mb-sm">No units found</h3>
+        <p class="text-secondary mb-sm">Create your first unit to start managing measurements</p>
         <button mat-raised-button class="btn btn-primary" (click)="onAddUnit()">
           <mat-icon>add</mat-icon>
           Create First Unit
@@ -125,7 +125,7 @@
   <ng-template #loadingTemplate>
     <div class="flex items-center justify-center py-xl">
       <mat-spinner diameter="40"></mat-spinner>
-      <p class="text-secondary mb-sm text-secondary mb-sm">Loading units...</p>
+      <p class="text-secondary mb-sm">Loading units...</p>
     </div>
   </ng-template>
 
@@ -133,7 +133,7 @@
   <div class="dialog-overlay" *ngIf="showAddUnit" (click)="onCancel()">
     <div class="dialog-content" (click)="$event.stopPropagation()">
       <div class="dialog-header">
-        <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">{{ editingUnit ? 'Edit Unit' : 'Add New Unit' }}</h3>
+        <h3 class="text-lg font-medium mb-sm">{{ editingUnit ? 'Edit Unit' : 'Add New Unit' }}</h3>
         <button mat-icon-button (click)="onCancel()">
           <mat-icon>close</mat-icon>
         </button>
@@ -176,7 +176,7 @@
             <mat-checkbox formControlName="isBaseUnit" (change)="onBaseUnitChange()">
               This is a base unit
             </mat-checkbox>
-            <p class="help-text text-secondary mb-sm text-secondary mb-sm">Base units are used as reference for conversions</p>
+            <p class="help-text text-secondary mb-sm">Base units are used as reference for conversions</p>
           </div>
 
           <div class="conversion-section" *ngIf="!unitForm.get('isBaseUnit')?.value">

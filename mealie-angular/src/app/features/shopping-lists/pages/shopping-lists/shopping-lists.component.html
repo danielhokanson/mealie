@@ -1,10 +1,10 @@
 <section class="page-container">
   <!-- Header -->
   <div class="shopping-lists-header">
-    <div class="header-content">
-      <h1 class="text-2xl font-medium mb-md text-2xl font-medium mb-md">Shopping Lists</h1>
-      <p class="text-secondary mb-sm text-secondary mb-sm">Manage your shopping lists and track your grocery items</p>
-    </div>
+    
+      <h1 class="text-2xl font-medium mb-md">Shopping Lists</h1>
+      <p class="text-secondary mb-sm">Manage your shopping lists and track your grocery items</p>
+    
     <button 
       mat-raised-button 
       class="btn btn-primary"
@@ -18,14 +18,14 @@
   <!-- Loading State -->
   <div *ngIf="loading" class="flex items-center justify-center py-xl">
     <mat-spinner diameter="50"></mat-spinner>
-    <p class="text-secondary mb-sm text-secondary mb-sm">Loading shopping lists...</p>
+    <p class="text-secondary mb-sm">Loading shopping lists...</p>
   </div>
 
   <!-- Error State -->
   <div *ngIf="error && !loading" class="error-container">
     <mat-icon class="error-icon">error</mat-icon>
-    <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Error Loading Shopping Lists</h3>
-    <p class="text-secondary mb-sm text-secondary mb-sm">Unable to load your shopping lists. Please try again.</p>
+    <h3 class="text-lg font-medium mb-sm">Error Loading Shopping Lists</h3>
+    <p class="text-secondary mb-sm">Unable to load your shopping lists. Please try again.</p>
     <button mat-raised-button class="btn btn-primary" (click)="loadShoppingLists()">
       Retry
     </button>
@@ -36,8 +36,8 @@
     <!-- Empty State -->
     <div *ngIf="shoppingLists.length === 0" class="empty-state">
       <mat-icon class="empty-icon">shopping_cart</mat-icon>
-      <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">No Shopping Lists Yet</h3>
-      <p class="text-secondary mb-sm text-secondary mb-sm">Create your first shopping list to get started</p>
+      <h3 class="text-lg font-medium mb-sm">No Shopping Lists Yet</h3>
+      <p class="text-secondary mb-sm">Create your first shopping list to get started</p>
       <button 
         mat-raised-button 
         class="btn btn-primary"

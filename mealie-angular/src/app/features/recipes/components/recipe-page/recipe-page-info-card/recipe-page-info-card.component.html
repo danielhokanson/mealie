@@ -1,4 +1,4 @@
-<div class="recipe-info-card">
+<article class="card">
   <div class="info-card-layout" [class.landscape]="landscape">
     <app-recipe-page-info-card-image
       *ngIf="landscape"
@@ -7,8 +7,8 @@
     
     <mat-card class="info-card" [class.full-width]="landscape" class="card">
       <mat-card-content class="info-content card">
-        <div class="recipe-title-section">
-          <h1 class="recipe-title text-2xl font-medium mb-md text-2xl font-medium mb-md">{{ recipe.name }}</h1>
+        <article class="card">
+          <h1 class="recipe-title text-2xl font-medium mb-md">{{ recipe.name }}</h1>
           <app-recipe-rating
             [recipeId]="recipe.id"
             [slug]="recipe.id"
@@ -24,7 +24,7 @@
         
         <mat-divider *ngIf="recipe.description" class="description-divider"></mat-divider>
         
-        <div class="recipe-details">
+        <article class="card">
           <div class="details-section">
             <div *ngIf="recipe.recipeYieldQuantity || recipe.recipeYield" class="yield-section">
               <app-recipe-yield

@@ -20,14 +20,14 @@
     icon="warning"
     [canConfirm]="true"
     (confirm)="deleteRecipe()">
-    <div class="dialog-content">
-      <p *ngIf="isAdminAndNotOwner" class="text-secondary mb-sm text-secondary mb-sm">
+    
+      <p *ngIf="isAdminAndNotOwner" class="text-secondary mb-sm">
         Are you sure you want to delete this recipe? This action cannot be undone.
       </p>
-      <p *ngIf="!isAdminAndNotOwner" class="text-secondary mb-sm text-secondary mb-sm">
+      <p *ngIf="!isAdminAndNotOwner" class="text-secondary mb-sm">
         Are you sure you want to delete this recipe? This action cannot be undone.
       </p>
-    </div>
+    
   </app-base-dialog>
 
   <!-- Recipe Duplicate Dialog -->
@@ -38,7 +38,7 @@
     icon="content_copy"
     [canConfirm]="true"
     (confirm)="duplicateRecipe()">
-    <div class="dialog-content">
+    
       <mat-form-field appearance="outline" class="full-width w-full">
         <mat-label>Recipe Name</mat-label>
         <input matInput
@@ -46,7 +46,7 @@
                (keyup.enter)="duplicateRecipe()"
                autofocus>
       </mat-form-field>
-    </div>
+    
   </app-base-dialog>
 
   <!-- Meal Planner Dialog -->
@@ -57,7 +57,7 @@
     icon="calendar_today"
     [canConfirm]="true"
     (confirm)="addRecipeToPlan()">
-    <div class="dialog-content">
+    
       <!-- Date Picker -->
       <mat-form-field appearance="outline" class="full-width w-full">
         <mat-label>Date</mat-label>
@@ -74,7 +74,6 @@
           [(selected)]="newMealdate"
           (selectedChange)="pickerMenu = false">
         </mat-calendar>
-      </div>
 
       <!-- Meal Type Selector -->
       <mat-form-field appearance="outline" class="full-width w-full">
@@ -136,4 +135,4 @@
       </mat-list-item>
     </mat-list>
   </mat-menu>
-</section> 
+</section>

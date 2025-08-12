@@ -6,12 +6,12 @@
             <mat-divider *ngIf="inputField.section" class="section-divider"></mat-divider>
             
             <!-- Section Title -->
-            <h3 *ngIf="inputField.section" class="section-title text-lg font-medium mb-sm text-lg font-medium mb-sm">
+            <h3 *ngIf="inputField.section" class="section-title text-lg font-medium mb-sm">
                 {{ inputField.section }}
             </h3>
             
             <!-- Section Details -->
-            <p *ngIf="inputField.sectionDetails" class="section-details text-secondary mb-sm text-secondary mb-sm">
+            <p *ngIf="inputField.sectionDetails" class="section-details text-secondary mb-sm">
                 {{ inputField.sectionDetails }}
             </p>
 
@@ -114,7 +114,7 @@
             </mat-form-field>
 
             <!-- Slider Field -->
-            <div *ngIf="inputField.type === fieldTypes.SLIDER" class="slider-container">
+            <div *ngIf="inputField.type === fieldTypes.SLIDER" class="flex items-center gap-md">
                 <label>{{ inputField.label }}</label>
                 <mat-slider
                     [(ngModel)]="modelValue[inputField.varName]"
@@ -126,7 +126,7 @@
             </div>
 
             <!-- Color Field -->
-            <div *ngIf="inputField.type === fieldTypes.COLOR" class="color-container">
+            <div *ngIf="inputField.type === fieldTypes.COLOR" class="flex items-center gap-md">
                 <label>{{ inputField.label }}</label>
                 <button
                     mat-button
@@ -149,7 +149,7 @@
             </div>
 
             <!-- Object Field -->
-            <div *ngIf="inputField.type === fieldTypes.OBJECT" class="object-container">
+            <div *ngIf="inputField.type === fieldTypes.OBJECT" class="border rounded-lg p-md">
                 <app-auto-form
                     [items]="inputField.items || []"
                     [color]="color"
@@ -239,4 +239,4 @@
             </mat-form-field>
 
         </div>
-</mat-card> 
+</mat-card>

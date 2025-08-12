@@ -2,14 +2,14 @@
   <!-- Loading State -->
   <div *ngIf="loading" class="flex items-center justify-center py-xl">
     <mat-spinner diameter="50"></mat-spinner>
-    <p class="text-secondary mb-sm text-secondary mb-sm">Loading household dashboard...</p>
+    <p class="text-secondary mb-sm">Loading household dashboard...</p>
   </div>
 
   <!-- Error State -->
-  <div *ngIf="error && !loading" class="error-container">
+  <div *ngIf="error && !loading" class="flex flex-col items-center justify-center py-xl text-center">
     <mat-icon class="error-icon">error</mat-icon>
-    <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Error Loading Household Dashboard</h3>
-    <p class="text-secondary mb-sm text-secondary mb-sm">Unable to load the household dashboard. Please try again.</p>
+    <h3 class="text-lg font-medium mb-sm">Error Loading Household Dashboard</h3>
+    <p class="text-secondary mb-sm">Unable to load the household dashboard. Please try again.</p>
     <button mat-raised-button class="btn btn-primary" (click)="loadHouseholdData()">
       Retry
     </button>
@@ -20,8 +20,8 @@
     <!-- Header -->
     <div class="dashboard-header">
       <div class="header-info">
-        <h1 class="text-2xl font-medium mb-md text-2xl font-medium mb-md">{{ currentHousehold.name }}</h1>
-        <p class="text-secondary mb-sm text-secondary mb-sm">{{ currentHousehold.description }}</p>
+        <h1 class="text-2xl font-medium mb-md">{{ currentHousehold.name }}</h1>
+        <p class="text-secondary mb-sm">{{ currentHousehold.description }}</p>
         <div class="household-meta">
           <span class="member-count">{{ householdStats.totalMembers }} members</span>
           <span class="group-name">{{ currentGroup?.name }} group</span>
@@ -72,10 +72,10 @@
           <div class="stat-icon">
             <mat-icon>people</mat-icon>
           </div>
-          <div class="stat-content">
-            <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">{{ householdStats.totalMembers }}</h3>
-            <p class="text-secondary mb-sm text-secondary mb-sm">Household Members</p>
-          </div>
+          
+            <h3 class="text-lg font-medium mb-sm">{{ householdStats.totalMembers }}</h3>
+            <p class="text-secondary mb-sm">Household Members</p>
+          
         </mat-card-content>
         <mat-card-actions class="card">
           <button mat-button class="btn btn-primary" (click)="onViewMembers()">
@@ -89,10 +89,10 @@
           <div class="stat-icon">
             <mat-icon>restaurant</mat-icon>
           </div>
-          <div class="stat-content">
-            <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">{{ householdStats.totalRecipes }}</h3>
-            <p class="text-secondary mb-sm text-secondary mb-sm">Shared Recipes</p>
-          </div>
+          
+            <h3 class="text-lg font-medium mb-sm">{{ householdStats.totalRecipes }}</h3>
+            <p class="text-secondary mb-sm">Shared Recipes</p>
+          
         </mat-card-content>
         <mat-card-actions class="card">
           <button mat-button class="btn btn-primary" (click)="onViewRecipes()">
@@ -106,10 +106,10 @@
           <div class="stat-icon">
             <mat-icon>shopping_cart</mat-icon>
           </div>
-          <div class="stat-content">
-            <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">{{ householdStats.totalShoppingLists }}</h3>
-            <p class="text-secondary mb-sm text-secondary mb-sm">Shopping Lists</p>
-          </div>
+          
+            <h3 class="text-lg font-medium mb-sm">{{ householdStats.totalShoppingLists }}</h3>
+            <p class="text-secondary mb-sm">Shopping Lists</p>
+          
         </mat-card-content>
         <mat-card-actions class="card">
           <button mat-button class="btn btn-primary" (click)="onViewShoppingLists()">
@@ -123,10 +123,10 @@
           <div class="stat-icon">
             <mat-icon>check_circle</mat-icon>
           </div>
-          <div class="stat-content">
-            <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">{{ householdStats.activeLists }}</h3>
-            <p class="text-secondary mb-sm text-secondary mb-sm">Active Lists</p>
-          </div>
+          
+            <h3 class="text-lg font-medium mb-sm">{{ householdStats.activeLists }}</h3>
+            <p class="text-secondary mb-sm">Active Lists</p>
+          
         </mat-card-content>
         <mat-card-actions class="card">
           <button mat-button class="btn btn-primary" (click)="onViewShoppingLists()">

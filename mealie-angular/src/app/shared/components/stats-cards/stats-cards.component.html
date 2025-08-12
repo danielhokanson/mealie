@@ -3,8 +3,7 @@
   [class.clickable]="isClickable"
   (click)="navigateTo()"
   class="stats-card card">
-  
-  <div class="card-content">
+
     <div
       class="stats-avatar"
       style="width: 36px; height: 36px; border-radius: 50%; background-color: var(--mat-primary-color, #1976d2); display: flex; align-items: center; justify-content: center;">
@@ -13,8 +12,7 @@
         class="stats-icon">
         {{ activeIcon }}
       </mat-icon>
-    </div>
-    
+
     <div class="stats-info">
       <div class="stats-title">
         <ng-content select="[slot=title]"></ng-content>
@@ -23,4 +21,4 @@
         <ng-content select="[slot=value]"></ng-content>
       </div>
   </div>
-</mat-card> 
+</mat-card>

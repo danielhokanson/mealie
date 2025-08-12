@@ -42,17 +42,17 @@
 
       <div *ngIf="loading" class="flex items-center justify-center py-xl">
         <mat-icon class="loading-icon">refresh</mat-icon>
-        <p class="text-secondary mb-sm text-secondary mb-sm">Searching...</p>
+        <p class="text-secondary mb-sm">Searching...</p>
       </div>
 
       <div *ngIf="!loading && searchResults.length === 0 && searchQuery" class="flex flex-col items-center justify-center py-xl text-center">
         <mat-icon>search_off</mat-icon>
-        <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">No results found</h3>
-        <p class="text-secondary mb-sm text-secondary mb-sm">Try adjusting your search terms or filters.</p>
+        <h3 class="text-lg font-medium mb-sm">No results found</h3>
+        <p class="text-secondary mb-sm">Try adjusting your search terms or filters.</p>
       </div>
 
       <div *ngIf="!loading && searchResults.length > 0" class="search-results">
-        <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Search Results ({{ searchResults.length }})</h3>
+        <h3 class="text-lg font-medium mb-sm">Search Results ({{ searchResults.length }})</h3>
         
         <div class="results-list">
           <div *ngFor="let result of searchResults" class="result-item">
@@ -63,7 +63,7 @@
               </mat-chip>
             </div>
             
-            <p class="result-description text-secondary mb-sm text-secondary mb-sm">{{ result.description }}</p>
+            <p class="result-description text-secondary mb-sm">{{ result.description }}</p>
             
             <div class="result-tags">
               <mat-chip 

@@ -5,11 +5,10 @@
         (change)="onToggleChange($event.checked)"
         [matTooltip]="tooltipText"
         class="wakelock-toggle">
-        
-        <div class="toggle-content">
+
             <mat-icon class="toggle-icon">brightness_high</mat-icon>
             <span class="toggle-label">{{ label }}</span>
-        </div>
+        
     </mat-slide-toggle>
     
     <div *ngIf="!isSupported" class="unsupported-message">

@@ -1,22 +1,21 @@
 <section class="page-container">
   <!-- Header -->
   <div class="favorites-header">
-    <div class="header-content">
-      <h1 class="text-2xl font-medium mb-md text-2xl font-medium mb-md">Favorite Recipes</h1>
-      <p class="text-secondary mb-sm text-secondary mb-sm">Your saved and favorite recipes</p>
-    </div>
+    
+      <h1 class="text-2xl font-medium mb-md">Favorite Recipes</h1>
+      <p class="text-secondary mb-sm">Your saved and favorite recipes</p>
 
   <!-- Loading State -->
   <div *ngIf="loading" class="flex items-center justify-center py-xl">
     <mat-spinner diameter="50"></mat-spinner>
-    <p class="text-secondary mb-sm text-secondary mb-sm">Loading favorite recipes...</p>
+    <p class="text-secondary mb-sm">Loading favorite recipes...</p>
   </div>
 
   <!-- Error State -->
   <div *ngIf="error && !loading" class="error-container">
     <mat-icon class="error-icon">error</mat-icon>
-    <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">Error Loading Favorite Recipes</h3>
-    <p class="text-secondary mb-sm text-secondary mb-sm">Unable to load your favorite recipes. Please try again.</p>
+    <h3 class="text-lg font-medium mb-sm">Error Loading Favorite Recipes</h3>
+    <p class="text-secondary mb-sm">Unable to load your favorite recipes. Please try again.</p>
     <button mat-raised-button class="btn btn-primary" (click)="loadFavoriteRecipes()">
       Retry
     </button>
@@ -136,14 +135,14 @@
     <!-- Results -->
     <div class="results-section">
       <div class="results-header">
-        <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">{{ favoriteRecipes.length }} Favorite Recipe{{ favoriteRecipes.length !== 1 ? 's' : '' }}</h3>
+        <h3 class="text-lg font-medium mb-sm">{{ favoriteRecipes.length }} Favorite Recipe{{ favoriteRecipes.length !== 1 ? 's' : '' }}</h3>
       </div>
 
       <!-- Empty State -->
       <div *ngIf="favoriteRecipes.length === 0" class="empty-state">
         <mat-icon class="empty-icon">favorite_border</mat-icon>
-        <h3 class="text-lg font-medium mb-sm text-lg font-medium mb-sm">No Favorite Recipes Yet</h3>
-        <p class="text-secondary mb-sm text-secondary mb-sm">Start adding recipes to your favorites to see them here</p>
+        <h3 class="text-lg font-medium mb-sm">No Favorite Recipes Yet</h3>
+        <p class="text-secondary mb-sm">Start adding recipes to your favorites to see them here</p>
         <button 
           mat-raised-button 
           class="btn btn-primary"
@@ -161,7 +160,7 @@
           
           <div class="recipe-image" *ngIf="recipe.image">
             <img [src]="recipe.image" [alt]="recipe.name" loading="lazy">
-            <div class="recipe-overlay">
+            <article class="card">
               <button 
                 mat-icon-button 
                 [class.favorited]="recipe.favorite"
@@ -172,13 +171,13 @@
             </div>
 
           <mat-card-content class="card">
-            <h3 class="recipe-title text-lg font-medium mb-sm text-lg font-medium mb-sm">{{ recipe.name }}</h3>
+            <h3 class="recipe-title text-lg font-medium mb-sm">{{ recipe.name }}</h3>
             
-            <p *ngIf="recipe.description" class="recipe-description text-secondary mb-sm text-secondary mb-sm">
+            <p *ngIf="recipe.description" class="recipe-description text-secondary mb-sm">
               {{ recipe.description }}
             </p>
 
-            <div class="recipe-meta">
+            <article class="card">
               <div class="meta-item">
                 <mat-icon>schedule</mat-icon>
                 <span>{{ getFormattedTime(recipe.totalTime) }}</span>

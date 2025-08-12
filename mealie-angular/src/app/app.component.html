@@ -101,7 +101,16 @@
 
     <!-- Page Content -->
     <main class="page-container">
-      <router-outlet></router-outlet>
+      <!-- Breadcrumb Navigation -->
+      <app-breadcrumb></app-breadcrumb>
+      
+      <!-- Offline Indicator -->
+      <app-offline-indicator></app-offline-indicator>
+      
+      <!-- Main Content with Animation -->
+      <div class="fade-in">
+        <router-outlet></router-outlet>
+      </div>
     </main>
   </mat-sidenav-content>
 </mat-sidenav-container>

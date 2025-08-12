@@ -1,26 +1,28 @@
-<div class="<mat-spinner [diameter]="size().size"
-      [strokeWidth]="size().width"
-      class="btn btn-primary"
-      mode="indeterminate"
-      class="loader-spinner">
-      
-      <div class="loader-content" *ngIf="size().icon > 0">
-        <mat-icon 
-          [style.font-size.px]="size().icon"
-          class="btn btn-primary"
-          class="loader-icon">
-          {{ primaryIcon }}
-        </mat-icon>
-        
-        <div *ngIf="large" class="loader-text-large">
-          <ng-content>
-            {{ (small || tiny) ? "" : waitingTextCalculated }}
-          </ng-content>
-        </div>
-    </mat-spinner>
+<div class="loader-container">
+  <mat-spinner 
+    [diameter]="size().size"
+    [strokeWidth]="size().width"
+    mode="indeterminate"
+    class="loader-spinner">
+  </mat-spinner>
+  
+  <div class="loader-content" *ngIf="size().icon > 0">
+    <mat-icon 
+      [style.font-size.px]="size().icon"
+      class="loader-icon">
+      {{ primaryIcon }}
+    </mat-icon>
     
-    <div *ngIf="!large" class="loader-text">
+    <div *ngIf="large" class="loader-text-large">
       <ng-content>
         {{ (small || tiny) ? "" : waitingTextCalculated }}
       </ng-content>
-    </section>
+    </div>
+  </div>
+  
+  <div *ngIf="!large" class="loader-text">
+    <ng-content>
+      {{ (small || tiny) ? "" : waitingTextCalculated }}
+    </ng-content>
+  </div>
+</div>

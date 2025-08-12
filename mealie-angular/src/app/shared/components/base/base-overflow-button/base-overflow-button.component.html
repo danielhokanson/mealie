@@ -9,13 +9,11 @@
       
       <mat-icon *ngIf="activeObj.icon" class="start-icon">
         {{ activeObj.icon }}
-      </mat-icon>
       
       {{ displayText }}
       
       <mat-icon class="end-icon">
         expand_more
-      </mat-icon>
     </button>
   </ng-template>
   
@@ -29,7 +27,6 @@
           class="overflow-item">
           <mat-icon *ngIf="item.icon" matListItemIcon>
             {{ item.icon }}
-          </mat-icon>
           <span matListItemTitle>{{ item.text }}</span>
         </button>
         <mat-divider *ngIf="item.divider" class="my-1"></mat-divider>
@@ -47,7 +44,6 @@
           class="overflow-item">
           <mat-icon *ngIf="item.icon" matListItemIcon>
             {{ item.icon }}
-          </mat-icon>
           <span matListItemTitle>{{ item.text }}</span>
         </button>
         <mat-divider *ngIf="item.divider" class="my-1"></mat-divider>
@@ -65,7 +61,6 @@
           class="overflow-item">
           <mat-icon *ngIf="item.icon" matListItemIcon>
             {{ item.icon }}
-          </mat-icon>
           <span matListItemTitle>{{ item.text }}</span>
         </button>
         <mat-divider *ngIf="item.divider" class="my-1"></mat-divider>

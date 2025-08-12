@@ -3,7 +3,9 @@
   [style.cursor]="cursor"
   [style.min-height.px]="imageHeight + 75"
   (click)="onCardClick()"
-  class="recipe-card card overflow-hidden">
+  (mouseenter)="isHovering = true"
+  (mouseleave)="isHovering = false"
+  class="recipe-card card overflow-hidden hover-lift transition-all">
   
   <!-- Recipe Card Image -->
   <div class="relative overflow-hidden" [style.height.px]="imageHeight">

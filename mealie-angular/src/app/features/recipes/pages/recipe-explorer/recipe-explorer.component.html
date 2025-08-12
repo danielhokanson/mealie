@@ -193,14 +193,16 @@
     </mat-chip>
   </mat-chip-listbox>
 
-  <!-- Loading Spinner -->
-  <div *ngIf="loading" class="flex flex-col items-center justify-center py-xl">
-    <mat-spinner></mat-spinner>
-    <p class="mt-md text-secondary mb-sm">Loading recipes...</p>
+  <!-- Loading Skeletons -->
+  <div *ngIf="loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-md mb-lg stagger-animation">
+    <app-skeleton-loader 
+      *ngFor="let item of [1,2,3,4,5,6,7,8]"
+      type="card">
+    </app-skeleton-loader>
   </div>
 
   <!-- Recipe Grid -->
-  <div *ngIf="!loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-md mb-lg">
+  <div *ngIf="!loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-md mb-lg stagger-animation">
     <!-- No Results -->
     <div *ngIf="recipes.length === 0" class="col-span-full flex flex-col items-center justify-center py-xl text-center">
       <mat-icon class="text-6xl text-tertiary mb-md">search_off</mat-icon>

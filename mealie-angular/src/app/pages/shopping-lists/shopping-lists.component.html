@@ -11,9 +11,11 @@
   </header>
 
   <!-- Loading State -->
-  <div *ngIf="loading" class="flex flex-col items-center justify-center py-xl">
-    <mat-spinner diameter="40"></mat-spinner>
-    <p class="text-secondary mt-md">Loading shopping lists...</p>
+  <div *ngIf="loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md stagger-animation">
+    <app-skeleton-loader 
+      *ngFor="let item of [1,2,3,4,5,6]"
+      type="card">
+    </app-skeleton-loader>
   </div>
 
   <!-- Error State -->
@@ -45,7 +47,7 @@
     </div>
 
     <!-- Shopping Lists Grid -->
-    <div *ngIf="shoppingLists.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md">
+    <div *ngIf="shoppingLists.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md stagger-animation">
       <app-shopping-list
         *ngFor="let list of shoppingLists; trackBy: trackByListId"
         [shoppingList]="list"

@@ -1,4 +1,7 @@
-<mat-sidenav-container class="sidenav-container">
+<!-- Skip to main content for accessibility -->
+<a href="#main-content" class="skip-to-main">Skip to main content</a>
+
+<mat-sidenav-container class="sidenav-container" appKeyboardShortcuts>
   <!-- Side Navigation -->
   <mat-sidenav 
     #drawer 
@@ -100,7 +103,7 @@
     </mat-toolbar>
 
     <!-- Page Content -->
-    <main class="page-container">
+    <main id="main-content" class="page-container">
       <!-- Breadcrumb Navigation -->
       <app-breadcrumb></app-breadcrumb>
       
@@ -111,6 +114,9 @@
       <div class="fade-in">
         <router-outlet></router-outlet>
       </div>
+      
+      <!-- Scroll to Top Button -->
+      <app-scroll-to-top></app-scroll-to-top>
     </main>
   </mat-sidenav-content>
 </mat-sidenav-container>

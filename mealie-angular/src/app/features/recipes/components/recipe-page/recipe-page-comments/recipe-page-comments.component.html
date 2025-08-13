@@ -1,11 +1,9 @@
 <article class="card">
   <mat-card class="card">
-    <mat-card-header class="card">
-      <mat-card-title class="comments-title card">
+    <mat-card-header class="card"></mat-card-header>
+      <mat-card-title class="comments-title card"></mat-card-title>
         <mat-icon class="title-icon">comment</mat-icon>
         <span>Comments</span>
-      </mat-card-title>
-    </mat-card-header>
 
     <mat-divider></mat-divider>
 
@@ -17,7 +15,11 @@
             [userId]="currentUser.id" 
             [user]="currentUser"
             [size]="40"
-            [tooltip]="false">
+            [tooltip]="false"></app-user-avatar></<app-user-avatar 
+            [userId]="currentUser.id" 
+            [user]="currentUser"
+            [size]="40"
+            [tooltip]="false"></app-user-avatar>>
           </section>
 
           <form [formGroup]="commentForm" class="comment-form-content">
@@ -32,9 +34,8 @@
                 cdkAutosizeMinRows="2"
                 cdkAutosizeMaxRows="6">
               </mat-form-field>
-              <mat-error *ngFor="let error of getFormErrors()">
+              <mat-error *ngFor="let error of getFormErrors()"></mat-error>
                 {{ error }}
-              </mat-error>
             </form>
 
             <div class="comment-actions">
@@ -42,12 +43,14 @@
                 [primary]="true"
                 [disabled]="!canSubmit"
                 [loading]="submitting"
-                (click)="submitComment()">
+                (click)="submitComment()"></app-base-button></<app-base-button 
+                [primary]="true"
+                [disabled]="!canSubmit"
+                [loading]="submitting"
+                (click)="submitComment()"></app-base-button>>
                 <mat-icon>check</mat-icon>
                 Submit
-              </div>
-            </div>
-          </mat-card-content>
+
         </mat-card>
 
       <!-- Comments List -->
@@ -58,34 +61,34 @@
             [userId]="comment.userId" 
             [user]="comment.user"
             [size]="40"
-            [tooltip]="false">
-          </div>
-
+            [tooltip]="false"></app-user-avatar></<app-user-avatar 
+            [userId]="comment.userId" 
+            [user]="comment.user"
+            [size]="40"
+            [tooltip]="false"></app-user-avatar>></<app-user-avatar 
+            [userId]="comment.userId" 
+            [user]="comment.user"
+            [size]="40"
+            [tooltip]="false"></app-user-avatar>>>
           <mat-card class="comment-card card">
             <mat-card-content class="comment-content card">
               <div class="comment-header">
                 <span class="comment-author">{{ comment.user.fullName }}</span>
                 <span class="comment-date">{{ formatDate(comment.createdAt) }}</span>
-              </div>
-              
-              <div class="comment-text">
-                <app-safe-markdown [source]="comment.text"></app-safe-markdown>
-              </div>
-            </mat-card-content>
 
-            <mat-card-actions class="comment-actions" *ngIf="canDeleteComment(comment)" class="card">
+              <div class="comment-text">
+                <app-safe-markdown [source]="comment.text"></app-safe-markdow></app-safe-markdown>
+
+            <mat-card-actions class="comment-actions card" *ngIf="canDeleteComment(comment)" ></mat-card-actions></mat-card>
               <button 
                 mat-button 
                 class="btn btn-error delete-comment-btn"
                 (click)="deleteComment(comment.id)">
                 <mat-icon>delete</mat-icon>
                 Delete
-              </mat-card-actions>
-            </mat-card>
           </article>
 
       <!-- Empty State -->
       <div *ngIf="recipe.comments.length === 0" class="empty-state">
         <mat-icon class="empty-icon">comment</mat-icon>
         <p class="empty-text text-secondary mb-sm">No comments yet. Be the first to comment!</p>
-      </div>

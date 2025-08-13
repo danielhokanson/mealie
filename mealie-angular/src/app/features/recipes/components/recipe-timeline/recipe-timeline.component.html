@@ -11,8 +11,7 @@
         [matBadgeHidden]="filterBadgeCount === 0"
         matBadgeColor="accent">
         <mat-icon>filter_list</mat-icon>
-      </div>
-      
+
       <mat-menu #filterMenu="matMenu" class="filter-menu">
         
           <button
@@ -21,9 +20,8 @@
             <mat-icon>
               {{ preferences.orderDirection === 'asc' ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}
 
-            <span>
+            <span></span>
               {{ preferences.orderDirection === 'asc' ? 'Sort Descending' : 'Sort Ascending' }}
-            </span>
 
           <mat-divider></mat-divider>
           
@@ -34,9 +32,7 @@
               class="btn btn-primary">
               <mat-icon class="option-icon">{{ option.icon }}</mat-icon>
               {{ option.label }}
-            </div>
-          
-      </mat-icon>
+
     </mat-menu>
   
   <mat-divider class="timeline-divider"></mat-divider>
@@ -55,22 +51,31 @@
         [recipe]="recipes.get(event.recipeId)"
         [showRecipeCards]="showRecipeCards"
         (update)="updateTimelineEvent(index)"
-        (delete)="deleteTimelineEvent(index)">
-      </div>
-    </div>
-  
+        (delete)="deleteTimelineEvent(index)"></app-recipe-timeline-item></<app-recipe-timeline-item
+        *ngFor="let event of timelineEvents; let index = index"
+        [event]="event"
+        [recipe]="recipes.get(event.recipeId)"
+        [showRecipeCards]="showRecipeCards"
+        (update)="updateTimelineEvent(index)"
+        (delete)="deleteTimelineEvent(index)"></app-recipe-timeline-item>></<app-recipe-timeline-item
+        *ngFor="let event of timelineEvents; let index = index"
+        [event]="event"
+        [recipe]="recipes.get(event.recipeId)"
+        [showRecipeCards]="showRecipeCards"
+        (update)="updateTimelineEvent(index)"
+        (delete)="deleteTimelineEvent(index)"></app-recipe-timeline-item>>>
+
   <mat-card
     *ngIf="!timelineEvents.length && !loading"
     class="no-events-card card">
-    <mat-card-title class="no-events-title card">
+    <mat-card-title class="no-events-title card"></mat-card-title>
       No timeline events found. Try adjusting your filters.
-    </mat-card-title>
   
   <div
     *ngIf="loading"
     class="flex items-center justify-center py-xl">
     <app-loader
       [loading]="loading"
-      [waitingText]="'Loading events...'">
-
-</div>
+      [waitingText]="'Loading events...'"></app-loader></<app-loader
+      [loading]="loading"
+      [waitingText]="'Loading events...'"></app-loader>>

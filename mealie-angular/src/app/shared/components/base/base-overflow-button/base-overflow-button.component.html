@@ -2,10 +2,10 @@
   <ng-template matMenuTrigger>
     <button
       mat-raised-button
-      class="btn btn-primary"
+      class="btn btn-primary overflow-button"
       [disabled]="disabled"
       [class]="btnClass"
-      class="overflow-button">
+      >
       
       <mat-icon *ngIf="activeObj.icon" class="start-icon">
         {{ activeObj.icon }}
@@ -26,9 +26,8 @@
             {{ item.icon }}
           <span matListItemTitle>{{ item.text }}</span>
 
-        <mat-divider *ngIf="item.divider" class="my-1"></mat-divider>
-      </mat-icon>
-    </div>
+        <mat-divider *ngIf="item.divider" class="my-1"></mat-divider></mat-icon>
+
   </ng-container>
   
   <!-- Link Mode -->
@@ -43,9 +42,8 @@
             {{ item.icon }}
           <span matListItemTitle>{{ item.text }}</span>
 
-        <mat-divider *ngIf="item.divider" class="my-1"></mat-divider>
-      </mat-icon>
-    </div>
+        <mat-divider *ngIf="item.divider" class="my-1"></mat-divider></mat-icon>
+
   </ng-container>
   
   <!-- Event Mode -->
@@ -60,14 +58,13 @@
             {{ item.icon }}
           <span matListItemTitle>{{ item.text }}</span>
 
-        <mat-divider *ngIf="item.divider" class="my-1"></mat-divider>
-      </mat-icon>
-    </div>
+        <mat-divider *ngIf="item.divider" class="my-1"></mat-divider></mat-icon>
+
   </ng-container>
 </mat-list>
 
 </mat-list>
 </mat-list>
-</mat-icon>
+
 </ng-template>
 </mat-menu>

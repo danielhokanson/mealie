@@ -10,9 +10,7 @@
         (click)="onCreateRecipe()">
         <mat-icon>add</mat-icon>
         Create Recipe
-      </div>
-    </header>
-    
+
     <form (ngSubmit)="onSearch()">
       <!-- Search Bar -->
       <mat-form-field appearance="outline" class="w-full mb-md">
@@ -31,36 +29,31 @@
           (click)="searchQuery = ''; onSearchQueryChange('')"
           aria-label="Clear search">
           <mat-icon>clear</mat-icon>
-        </mat-form-field>
-      </form>
+
+      </mat-form-field>
 
       <!-- Filter Row -->
       <div class="flex flex-wrap gap-sm items-center mb-md">
         <!-- Categories Filter -->
-        <app-search-filter
-          *ngIf="categories.length > 0"
+        <app-search-filter</app-search-filter></app-search-filter<>*ngIf="categories.length > 0"
           [items]="categories"
           [(selectedItems)]="selectedCategories"
           [(requireAll)]="requireAllCategories"
           (selectionChange)="onFilterChange()"
           label="Categories"
           icon="category">
-        </div>
 
         <!-- Tags Filter -->
-        <app-search-filter
-          *ngIf="tags.length > 0"
+        <app-search-filter</app-search-filter></app-search-filter<>*ngIf="tags.length > 0"
           [items]="tags"
           [(selectedItems)]="selectedTags"
           [(requireAll)]="requireAllTags"
           (selectionChange)="onFilterChange()"
           label="Tags"
           icon="local_offer">
-        </section>
 
         <!-- Tools Filter -->
-        <app-search-filter
-          *ngIf="tools.length > 0"
+        <app-search-filter</app-search-filter></app-search-filter<>*ngIf="tools.length > 0"
           [items]="tools"
           [(selectedItems)]="selectedTools"
           [(requireAll)]="requireAllTools"
@@ -69,8 +62,7 @@
           icon="build">
 
         <!-- Foods Filter -->
-        <app-search-filter
-          *ngIf="foods.length > 0"
+        <app-search-filter</app-search-filter></app-search-filter<>*ngIf="foods.length > 0"
           [items]="foods"
           [(selectedItems)]="selectedFoods"
           [(requireAll)]="requireAllFoods"
@@ -84,28 +76,28 @@
             <button mat-menu-item (click)="onSortChange('name')">
               <mat-icon>sort_by_alpha</mat-icon>
               <span>Name</span>
-            </button>
+
             <button mat-menu-item (click)="onSortChange('createdAt')">
               <mat-icon>schedule</mat-icon>
               <span>Created Date</span>
-            </button>
+
             <button mat-menu-item (click)="onSortChange('updatedAt')">
               <mat-icon>update</mat-icon>
               <span>Updated Date</span>
-            </button>
+
             <button mat-menu-item (click)="onSortChange('rating')">
               <mat-icon>star</mat-icon>
               <span>Rating</span>
-            </button>
+
             <button mat-menu-item (click)="onSortChange('totalTime')">
               <mat-icon>timer</mat-icon>
               <span>Total Time</span>
-            </button>
+
             <mat-divider></mat-divider>
             <button mat-menu-item (click)="onOrderDirectionChange()">
               <mat-icon>{{ orderDirection === 'asc' ? 'arrow_downward' : 'arrow_upward' }}</mat-icon>
               <span>{{ orderDirection === 'asc' ? 'Descending' : 'Ascending' }}</span>
-            </button>
+
           </ng-template>
         </mat-menu>
 
@@ -120,19 +112,19 @@
         <mat-menu #settingsMenu="matMenu">
           <ng-template matMenuContent>
             <div class="p-md">
-              <mat-slide-toggle 
+              <mat-slide-toggle</mat-slide-toggle>
                 [(ngModel)]="autoSearch"
                 name="autoSearch"
                 class="mb-sm">
                 Auto Search
-              </div>
               <button 
                 mat-stroked-button 
                 (click)="onReset()"
                 class="w-full">
                 Reset Filters
-              </ng-template>
-            </mat-menu>
+
+          </ng-template>
+        </mat-menu>
 
         <button 
           mat-icon-button 
@@ -149,41 +141,45 @@
         <mat-icon>search</mat-icon>
         Search
 
+    </form>
+  </header>
+
   <!-- Active Filters Display -->
   <mat-chip-listbox 
     *ngIf="selectedCategories.length > 0 || selectedTags.length > 0 || selectedTools.length > 0 || selectedFoods.length > 0" 
-    class="mb-md">
-    <mat-chip 
+    class="mb-md"></mat-chip>
+    <mat-chip</mat-chip>
       *ngFor="let category of selectedCategories"
       (removed)="removeCategory(category)"
       removable>
       {{ getCategoryName(category) }}
       <mat-icon matChipRemove>cancel</mat-icon>
-    <mat-chip 
+    <mat-chip</mat-chip>
       *ngFor="let tag of selectedTags"
       (removed)="removeTag(tag)"
       removable>
       {{ getTagName(tag) }}
       <mat-icon matChipRemove>cancel</mat-icon>
-    <mat-chip 
+    <mat-chip</mat-chip>
       *ngFor="let tool of selectedTools"
       (removed)="removeTool(tool)"
       removable>
       {{ getToolName(tool) }}
       <mat-icon matChipRemove>cancel</mat-icon>
-    <mat-chip 
+    <mat-chip</mat-chip>
       *ngFor="let food of selectedFoods"
       (removed)="removeFood(food)"
       removable>
       {{ getFoodName(food) }}
       <mat-icon matChipRemove>cancel</mat-icon>
+  </mat-chip-listbox>
 
   <!-- Loading Skeletons -->
   <div *ngIf="loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-md mb-lg stagger-animation">
     <app-skeleton-loader 
       *ngFor="let item of [1,2,3,4,5,6,7,8]"
-      type="card">
-    </div>
+      type="card"></app-skeleton-loader></<app-skeleton-loader</app-skeleton-loader></app-skeleton-loader<>*ngFor="let item of [1,2,3,4,5,6,7,8]"
+      type="card">>
 
   <!-- Recipe Grid -->
   <div *ngIf="!loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-md mb-lg stagger-animation">
@@ -192,16 +188,15 @@
       <mat-icon class="text-6xl text-tertiary mb-md">search_off</mat-icon>
       <h3 class="text-xl font-medium mb-sm text-lg">No recipes found</h3>
       <p class="text-secondary mb-sm">Try adjusting your search criteria or filters.</p>
-    </div>
 
     <!-- Recipe Cards -->
     <app-recipe-card 
       *ngFor="let recipe of recipes"
-      [recipe]="recipe">
-    </div>
+      [recipe]="recipe"></app-recipe-card></<app-recipe-card</app-recipe-card></app-recipe-card<>*ngFor="let recipe of recipes"
+      [recipe]="recipe">>
 
   <!-- Pagination -->
-  <mat-paginator 
+  <mat-paginator</mat-paginator>
     *ngIf="totalRecipes > pageSize"
     [length]="totalRecipes"
     [pageSize]="pageSize"
@@ -219,3 +214,5 @@
     matTooltip="Create New Recipe"
     aria-label="Create new recipe">
     <mat-icon>add</mat-icon>
+
+</section>

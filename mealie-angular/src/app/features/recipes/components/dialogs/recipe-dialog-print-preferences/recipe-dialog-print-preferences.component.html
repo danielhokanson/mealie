@@ -4,8 +4,13 @@
   title="Print Preferences"
   width="70%"
   maxWidth="816px"
-  (modelValueChange)="onDialogChange($event)">
-
+  (modelValueChange)="onDialogChange($event)"></app-base-dialog></<app-base-dialog
+  [(modelValue)]="open"
+  icon="print_settings"
+  title="Print Preferences"
+  width="70%"
+  maxWidth="816px"
+  (modelValueChange)="onDialogChange($event)"></app-base-dialog>>
     <!-- Print Configuration -->
     <div class="print-config">
       <div class="config-row">
@@ -17,17 +22,12 @@
           <mat-button-toggle-group
             [(ngModel)]="imagePositionValue"
             class="image-position-toggle">
-            <mat-button-toggle [value]="ImagePosition.Left">
+            <mat-button-toggle [value]="ImagePosition.Left"></mat-button-toggle>
               <mat-icon>dock_left</mat-icon>
-            </mat-button-toggle>
-            <mat-button-toggle [value]="ImagePosition.Right">
+            <mat-button-toggle [value]="ImagePosition.Right"></mat-button-toggle>
               <mat-icon>dock_right</mat-icon>
-            </mat-button-toggle>
-            <mat-button-toggle [value]="ImagePosition.Hidden">
+            <mat-button-toggle [value]="ImagePosition.Hidden"></mat-button-toggle>
               <mat-icon>close</mat-icon>
-            </mat-button-toggle>
-          </div>
-        </div>
 
         <!-- Content Options -->
         <div class="content-options">
@@ -36,16 +36,12 @@
               [(ngModel)]="preferences.showDescription"
               class="btn btn-primary">
               Description
-            </div>
-          </div>
-          
+
           <div class="option-group">
             <mat-slide-toggle
               [(ngModel)]="preferences.showNotes"
               class="btn btn-primary">
               Notes
-            </div>
-          </div>
 
         <!-- Nutrition Options -->
         <div class="nutrition-options">
@@ -54,13 +50,11 @@
               [(ngModel)]="preferences.showNutrition"
               class="btn btn-primary">
               Nutrition
-            </div>
-          </div>
-      </div>
 
     <!-- Print Preview -->
-    <mat-card class="print-preview" *ngIf="recipe" class="card">
+    <mat-card class="print-preview card" *ngIf="recipe" ></mat-card>
       <app-recipe-print-view
         [recipe]="recipe"
-        [preferences]="preferences">
-      </mat-card>
+        [preferences]="preferences"></app-recipe-print-view></<app-recipe-print-view
+        [recipe]="recipe"
+        [preferences]="preferences"></app-recipe-print-view>>

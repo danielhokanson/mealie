@@ -14,18 +14,13 @@
       <h3 class="recipe-name text-lg font-medium mb-sm">{{ name }}</h3>
       
       <!-- Description -->
-      <p *ngIf="description" class="recipe-description text-secondary mb-sm">
+      <p *ngIf="description" class="recipe-description text-secondary mb-sm"></p>
         {{ description }}
-      </p>
       
       <!-- Rating -->
       <div *ngIf="displayRating > 0" class="rating-section">
-        <mat-chip class="btn btn-primary rating-chip">
+        <mat-chip class="btn btn-primary rating-chip"></mat-chip>
           <mat-icon>star</mat-icon>
           {{ displayRating.toFixed(1) }}
-        </mat-chip>
-      </div>
-  </div>
-</div>
 
 </mat-card>

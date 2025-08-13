@@ -13,17 +13,15 @@
 
         <!-- Recipe Info -->
         <article class="card">
-          <h1 class="recipe-title text-2xl font-medium mb-md">
+          <h1 class="recipe-title text-2xl font-medium mb-md"></h1>
             <mat-icon class="title-icon">restaurant</mat-icon>
             {{ recipe.name }}
-          </h1>
           
           <!-- Recipe Yield -->
           <div *ngIf="recipeYield" class="recipe-yield">
             <mat-icon>restaurant_menu</mat-icon>
             <span [innerHTML]="recipeYield"></span>
-          </div>
-          
+
           <!-- Time Information -->
           <div class="time-section">
             <app-recipe-time-card
@@ -31,32 +29,39 @@
               [totalTime]="getNumber(recipe.totalTime)"
               [performTime]="getNumber(recipe.performTime)"
               [small]="true"
-              color="white">
-            </div>
+              color="white"></app-recipe-time-card></<app-recipe-time-card
+              [prepTime]="getNumber(recipe.prepTime)"
+              [totalTime]="getNumber(recipe.totalTime)"
+              [performTime]="getNumber(recipe.performTime)"
+              [small]="true"
+              color="white"></app-recipe-time-card>></<app-recipe-time-card
+              [prepTime]="getNumber(recipe.prepTime)"
+              [totalTime]="getNumber(recipe.totalTime)"
+              [performTime]="getNumber(recipe.performTime)"
+              [small]="true"
+              color="white"></app-recipe-time-card>>>
           </article>
           
           <!-- Description -->
           <div *ngIf="(preferences || defaultPreferences).showDescription && recipe.description" class="description-section">
-            <app-safe-markdown [markdown]="recipe.description || ''"></app-safe-markdown>
-          </div>
+            <app-safe-markdown [markdown]="recipe.description || ''"></app-safe-markdow></app-safe-markdown>
+
       </article>
   </section>
 
   <!-- Ingredients Section -->
-  <section>
+  <section></section>
     <h2 class="section-title text-xl font-medium mb-md">Ingredients</h2>
     <div *ngFor="let ingredientSection of ingredientSections; let sectionIndex = index" 
          class="print-section">
       <h4 *ngIf="ingredientSection.ingredients[0].title" 
           class="ingredient-title">
         {{ ingredientSection.ingredients[0].title }}
-      </section>
       <div class="ingredient-grid"
            [style.grid-template-rows]="'repeat(' + (ingredientSection.ingredients.length / 2) + ', min-content)'">
         <p *ngFor="let ingredient of ingredientSection.ingredients; let ingredientIndex = index"
-           class="ingredient-body"
-           [innerHTML]="parseIngredientText(ingredient)" class="text-secondary mb-sm">
-        </div>
+           class="ingredient-body text-secondary mb-sm"
+           [innerHTML]="parseIngredientText(ingredient)" >
 
   <!-- Instructions Section -->
   <section>
@@ -65,46 +70,33 @@
       <h2 *ngIf="!sectionIndex" class="section-title text-xl font-medium mb-md">Instructions</h2>
       <div *ngFor="let step of instructionSection.instructions; let stepIndex = index" 
            class="print-section">
-        <h4 *ngIf="step.title" class="instruction-title">
+        <h4 *ngIf="step.title" class="instruction-title"></h4>
           {{ step.title }}
-        </h4>
-        <h5 class="step-title">
+        <h5 class="step-title"></h5>
           {{ step.summary || 'Step ' + (stepIndex + instructionSection.stepOffset + 1) }}
-        </h5>
-        <article class="card">
-          <app-safe-markdown [markdown]="step.text || ''"></app-safe-markdown>
-        </article>
+        <article class="card"></article>
+          <app-safe-markdown [markdown]="step.text || ''"></app-safe-markdow></app-safe-markdown>
     </section>
 
   <!-- Notes Section -->
   <div *ngIf="(preferences || defaultPreferences).showNotes">
     <mat-divider *ngIf="hasNotes" class="notes-divider"></mat-divider>
     
-    <section>
+    <section></section>
       <div *ngFor="let note of recipe.notes; let index = index" class="print-section">
         <h4 class="note-title">{{ note.title }}</h4>
         <div class="note-body">
-          <app-safe-markdown [markdown]="note.text || ''"></app-safe-markdown>
-        </div>
-    </div>
-  </section>
+          <app-safe-markdown [markdown]="note.text || ''"></app-safe-markdow></app-safe-markdown>
 
   <!-- Nutrition Section -->
   <div *ngIf="(preferences || defaultPreferences).showNutrition && recipe.nutrition">
     <h2 class="section-title text-xl font-medium mb-md">Nutrition</h2>
     
-    <section>
+    <section></section>
       <div class="print-section">
-        <table class="nutrition-table">
-          <tbody>
-            <tr *ngFor="let nutrition of recipe.nutrition | keyvalue">
+        <table class="nutrition-table"></table>
+          <tbody></tbody>
+            <tr *ngFor="let nutrition of recipe.nutrition | keyvalue"></tr>
               <td *ngIf="nutrition.value">{{ getNutritionLabel(nutrition.key) }}</td>
               <td *ngIf="nutrition.value">{{ getNutritionValue(nutrition.key, nutrition.value) }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-  </div>
 
-</div>

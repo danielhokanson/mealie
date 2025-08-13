@@ -2,20 +2,16 @@
   <section class="title-section">
     <ng-content select="[slot=header]"></ng-content>
     
-    <h2 class="title text-xl font-medium mb-md">
+    <h2 class="title text-xl font-medium mb-md"></h2>
       <ng-content select="[slot=title]">
         👋 Here's a Title
 
-    </h2>
-    
-    <h3 class="subtitle text-lg font-medium mb-sm">
+    <h3 class="subtitle text-lg font-medium mb-sm"></h3>
       <ng-content></ng-content>
-    </h3>
   </section>
   
-  <section class="content-section">
+  <section class="content-section"></section>
     <ng-content select="[slot=content]"></ng-content>
-  </section>
   
   <mat-divider *ngIf="divider" class="title-divider"></mat-divider>
 </section>

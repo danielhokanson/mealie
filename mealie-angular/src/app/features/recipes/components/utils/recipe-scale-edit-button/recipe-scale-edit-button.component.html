@@ -12,13 +12,12 @@
 
       <mat-menu #scaleMenu="matMenu" class="scale-menu">
         <mat-card class="menu-card card">
-          <mat-card-title class="menu-title card">
+          <mat-card-title class="menu-title card"></mat-card-title>
             Servings
-          </mat-card-title>
           
           <mat-card-content class="menu-content card">
             <div class="input-section">
-              <mat-form-field appearance="outline" class="yield-input w-full">
+              <mat-form-field appearance="outline" class="yield-input w-full"></mat-form-field>
                 <mat-label>Servings</mat-label>
                 <input matInput
                        type="number"
@@ -26,7 +25,6 @@
                        [value]="yieldQuantity"
                        (input)="onYieldQuantityChange($event)"
                        class="yield-input-field">
-              </mat-form-field>
               
               <button mat-icon-button
                       [matTooltip]="'Reset Servings Count'"
@@ -34,16 +32,18 @@
                       (click)="onReset()"
                       class="reset-button">
                 <mat-icon>undo</mat-icon>
-              </div>
-            </mat-card-content>
+
           </mat-card>
         </mat-menu>
-      </div>
-    </div>
 
     <app-base-button-group
       *ngIf="canEditScale"
       [buttons]="buttons"
       [large]="false"
       (decrement)="onDecrement()"
-      (increment)="onIncrement()">
+      (increment)="onIncrement()"></app-base-button-group></<app-base-button-group
+      *ngIf="canEditScale"
+      [buttons]="buttons"
+      [large]="false"
+      (decrement)="onDecrement()"
+      (increment)="onIncrement()"></app-base-button-group>>

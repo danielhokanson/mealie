@@ -1,22 +1,18 @@
 <section class="page-container">
   <mat-card class="card">
-    <mat-card-header class="card">
-      <mat-card-title class="card">Household Notifiers</mat-card-title>
-      <mat-card-subtitle class="card">Manage notification preferences for your household</mat-card-subtitle>
-    </mat-card-header>
+    <mat-card-header class="card"></mat-card-header>
+      <mat-card-title >Household Notifiers</mat-card-title>
+      <mat-card-subtitle >Manage notification preferences for your household</mat-card-subtitle>
 
     <mat-card-content class="card">
       <div class="notifiers-actions">
         <button mat-raised-button class="btn btn-primary" (click)="addNotifier()">
           <mat-icon>add</mat-icon>
           Add Notifier
-        </button>
-      </div>
 
       <div *ngIf="loading" class="flex items-center justify-center py-xl">
         <mat-icon class="loading-icon">refresh</mat-icon>
         <p class="text-secondary mb-sm">Loading notifiers...</p>
-      </div>
 
       <div *ngIf="!loading && notifiers.length === 0" class="empty-state">
         <mat-icon>notifications_off</mat-icon>
@@ -24,33 +20,29 @@
         <p class="text-secondary mb-sm">Set up notifications to stay informed about household activities.</p>
         <button mat-raised-button class="btn btn-primary" (click)="addNotifier()">
           Add Your First Notifier
-        </button>
-      </div>
 
       <div *ngIf="!loading && notifiers.length > 0" class="notifiers-list">
         <mat-list class="flex flex-col gap-sm">
           <mat-list-item *ngFor="let notifier of notifiers">
             <div matListItemTitle>{{ notifier.name }}</div>
             <div matListItemLine>
-              <mat-chip [color]="notifier.enabled ? 'primary' : 'default'" selected>
+              <mat-chip [color]="notifier.enabled ? 'primary' : 'default'" selected></mat-chip>
                 {{ notifier.type }}
-              </mat-chip>
               <span class="schedule">{{ notifier.schedule }}</span>
-            </div>
+
             <div matListItemMeta>
               <mat-slide-toggle
                 [checked]="notifier.enabled"
                 (change)="toggleNotifier(notifier)">
-              </div>
+
               <button mat-icon-button (click)="editNotifier(notifier)">
                 <mat-icon>edit</mat-icon>
-              </button>
+
               <button mat-icon-button class="btn btn-error" (click)="deleteNotifier(notifier.id)">
                 <mat-icon>delete</mat-icon>
-              </button>
+
             </mat-list-item>
           </mat-list>
-        </div>
-      </mat-card-content>
+
     </mat-card>
   </section>

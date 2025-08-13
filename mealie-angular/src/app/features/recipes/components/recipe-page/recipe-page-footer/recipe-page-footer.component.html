@@ -1,10 +1,9 @@
 <article class="card">
   <!-- Original URL Section -->
   <div class="url-section">
-    <mat-form-field *ngIf="isEditForm" class="url-input w-full">
+    <mat-form-field *ngIf="isEditForm" class="url-input w-full"></mat-form-field>
       <mat-label>Original URL</mat-label>
       <input matInput [(ngModel)]="recipe.orgURL" />
-    </mat-form-field>
     
     <a
       *ngIf="recipe.orgURL && !isEditForm && !isCookMode"
@@ -13,22 +12,20 @@
       mat-stroked-button
       class="btn btn-secondary url-button">
       Original URL
-    </div>
+
   </article>
 
   <!-- API Extras Section (Advanced Only) -->
   <div *ngIf="isEditForm && isAdvancedUser" class="api-extras-section">
     <mat-card class="extras-card card">
-      <mat-card-header class="card">
-        <mat-card-title class="card">API Extras</mat-card-title>
-      </mat-card-header>
+      <mat-card-header class="card"></mat-card-header>
+        <mat-card-title >API Extras</mat-card-title>
       
       <mat-divider></mat-divider>
       
       <mat-card-content class="card">
-        <p class="extras-description text-secondary mb-sm">
+        <p class="extras-description text-secondary mb-sm"></p>
           Additional API data that can be used for integrations and custom functionality.
-        </p>
         
         <div *ngFor="let extra of extrasArray" class="extra-item">
           <mat-form-field class="extra-input w-full">
@@ -42,15 +39,13 @@
               [matTooltip]="'Remove extra'">
               <mat-icon>delete</mat-icon>
             </mat-form-field>
-          </div>
-        </mat-card-content>
+
       </mat-card>
       
       <mat-card-actions class="add-extra-section card">
-        <mat-form-field class="new-key-input w-full">
+        <mat-form-field class="new-key-input w-full"></mat-form-field>
           <mat-label>Message Key</mat-label>
           <input matInput [(ngModel)]="apiNewKey" />
-        </mat-form-field>
         
         <button
           mat-raised-button
@@ -60,4 +55,3 @@
           <mat-icon>add</mat-icon>
           Add Extra
         </mat-card-actions>
-      </div>

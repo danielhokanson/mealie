@@ -1,9 +1,8 @@
 <section class="page-container">
-  <div class="settings-content" *ngIf="!loading; else loadingTemplate">
+  <div class="settings-content" *ngIf="!loading">
     <div class="settings-header">
       <h2 class="text-xl font-medium mb-md">User Settings</h2>
       <p class="text-secondary mb-sm">Manage your account preferences and settings</p>
-    </div>
 
     <mat-tab-group class="settings-tabs">
       <!-- Profile Tab -->
@@ -21,52 +20,36 @@
                   <button mat-raised-button class="btn btn-primary" type="button">
                     <mat-icon>upload</mat-icon>
                     Upload Photo
-                  </button>
+
                   <button mat-stroked-button type="button">
                     <mat-icon>delete</mat-icon>
                     Remove Photo
-                  </button>
-                </div>
 
               <div class="form-row">
-                <mat-form-field class="w-full">
+                <mat-form-field class="w-full"></mat-form-field>
                   <mat-label>Display Name</mat-label>
                   <input matInput formControlName="displayName" placeholder="Enter your display name">
-                  <mat-error *ngIf="profileForm.get('displayName')?.hasError('required')">
+                  <mat-error *ngIf="profileForm.get('displayName')?.hasError('required')"></mat-error>
                     Display name is required
-                  </mat-error>
-                  <mat-error *ngIf="profileForm.get('displayName')?.hasError('maxlength')">
+                  <mat-error *ngIf="profileForm.get('displayName')?.hasError('maxlength')"></mat-error>
                     Display name must be no more than 50 characters
-                  </mat-error>
-                </mat-form-field>
-              </div>
 
               <div class="form-row">
-                <mat-form-field class="w-full">
+                <mat-form-field class="w-full"></mat-form-field>
                   <mat-label>Email</mat-label>
                   <input matInput formControlName="email" type="email" placeholder="Enter your email">
-                  <mat-error *ngIf="profileForm.get('email')?.hasError('required')">
+                  <mat-error *ngIf="profileForm.get('email')?.hasError('required')"></mat-error>
                     Email is required
-                  </mat-error>
-                  <mat-error *ngIf="profileForm.get('email')?.hasError('email')">
+                  <mat-error *ngIf="profileForm.get('email')?.hasError('email')"></mat-error>
                     Please enter a valid email address
-                  </mat-error>
-                </mat-form-field>
-              </div>
 
               <div class="form-row">
-                <mat-form-field class="w-full">
+                <mat-form-field class="w-full"></mat-form-field>
                   <mat-label>Bio</mat-label>
                   <textarea matInput formControlName="bio" placeholder="Tell us about yourself" rows="3"></textarea>
                   <mat-hint>{{ getBioLength() }}/{{ getMaxBioLength() }}</mat-hint>
-                  <mat-error *ngIf="profileForm.get('bio')?.hasError('maxlength')">
+                  <mat-error *ngIf="profileForm.get('bio')?.hasError('maxlength')"></mat-error>
                     Bio must be no more than 500 characters
-                  </mat-error>
-                </mat-form-field>
-              </div>
-          </div>
-        </div>
-      </div>
 
       <!-- Preferences Tab -->
       <mat-tab label="Preferences">
@@ -76,89 +59,65 @@
               <h3 class="text-lg font-medium mb-sm">Display Preferences</h3>
               
               <div class="form-row">
-                <mat-slide-toggle formControlName="darkMode">
+                <mat-slide-toggle formControlName="darkMode"></mat-slide-toggle>
                   Dark Mode
-                </mat-slide-toggle>
                 <span class="preference-description">Use dark theme for better viewing in low light</span>
 
               <div class="form-row">
-                <mat-slide-toggle formControlName="compactMode">
+                <mat-slide-toggle formControlName="compactMode"></mat-slide-toggle>
                   Compact Mode
-                </mat-slide-toggle>
                 <span class="preference-description">Show more content in less space</span>
-              </div>
 
               <div class="form-row">
-                <mat-slide-toggle formControlName="showNutrition">
+                <mat-slide-toggle formControlName="showNutrition"></mat-slide-toggle>
                   Show Nutrition Information
-                </mat-slide-toggle>
                 <span class="preference-description">Display nutrition facts on recipe cards</span>
-              </div>
 
               <div class="form-row">
-                <mat-slide-toggle formControlName="showImages">
+                <mat-slide-toggle formControlName="showImages"></mat-slide-toggle>
                   Show Recipe Images
-                </mat-slide-toggle>
                 <span class="preference-description">Display images in recipe lists and cards</span>
-              </div>
 
             <div class="form-section">
               <h3 class="text-lg font-medium mb-sm">Notification Preferences</h3>
               
               <div class="form-row">
-                <mat-slide-toggle formControlName="emailNotifications">
+                <mat-slide-toggle formControlName="emailNotifications"></mat-slide-toggle>
                   Email Notifications
-                </mat-slide-toggle>
                 <span class="preference-description">Receive notifications via email</span>
-              </div>
 
               <div class="form-row">
-                <mat-slide-toggle formControlName="pushNotifications">
+                <mat-slide-toggle formControlName="pushNotifications"></mat-slide-toggle>
                   Push Notifications
-                </mat-slide-toggle>
                 <span class="preference-description">Receive push notifications in browser</span>
-              </div>
 
               <div class="form-row">
-                <mat-slide-toggle formControlName="mealPlanReminders">
+                <mat-slide-toggle formControlName="mealPlanReminders"></mat-slide-toggle>
                   Meal Plan Reminders
-                </mat-slide-toggle>
                 <span class="preference-description">Get reminded about upcoming meal plans</span>
-              </div>
 
               <div class="form-row">
-                <mat-slide-toggle formControlName="shoppingListReminders">
+                <mat-slide-toggle formControlName="shoppingListReminders"></mat-slide-toggle>
                   Shopping List Reminders
-                </mat-slide-toggle>
                 <span class="preference-description">Get reminded about incomplete shopping lists</span>
-              </div>
 
             <div class="form-section">
               <h3 class="text-lg font-medium mb-sm">Privacy Settings</h3>
               
               <div class="form-row">
-                <mat-slide-toggle formControlName="publicProfile">
+                <mat-slide-toggle formControlName="publicProfile"></mat-slide-toggle>
                   Public Profile
-                </mat-slide-toggle>
                 <span class="preference-description">Allow others to view your profile</span>
-              </div>
 
               <div class="form-row">
-                <mat-slide-toggle formControlName="showEmail">
+                <mat-slide-toggle formControlName="showEmail"></mat-slide-toggle>
                   Show Email Address
-                </mat-slide-toggle>
                 <span class="preference-description">Display email in public profile</span>
-              </div>
 
               <div class="form-row">
-                <mat-slide-toggle formControlName="allowRecipeSharing">
+                <mat-slide-toggle formControlName="allowRecipeSharing"></mat-slide-toggle>
                   Allow Recipe Sharing
-                </mat-slide-toggle>
                 <span class="preference-description">Allow others to share your recipes</span>
-              </div>
-          </div>
-        </div>
-      </div>
 
       <!-- Security Tab -->
       <mat-tab label="Security">
@@ -168,63 +127,47 @@
               <h3 class="text-lg font-medium mb-sm">Password</h3>
               
               <div class="form-row">
-                <mat-form-field class="w-full">
+                <mat-form-field class="w-full"></mat-form-field>
                   <mat-label>Current Password</mat-label>
                   <input matInput formControlName="currentPassword" type="password" placeholder="Enter current password">
-                  <mat-error *ngIf="securityForm.get('currentPassword')?.hasError('required')">
+                  <mat-error *ngIf="securityForm.get('currentPassword')?.hasError('required')"></mat-error>
                     Current password is required
-                  </mat-error>
-                </mat-form-field>
 
               <div class="form-row">
-                <mat-form-field class="w-full">
+                <mat-form-field class="w-full"></mat-form-field>
                   <mat-label>New Password</mat-label>
                   <input matInput formControlName="newPassword" type="password" placeholder="Enter new password">
-                  <mat-error *ngIf="securityForm.get('newPassword')?.hasError('required')">
+                  <mat-error *ngIf="securityForm.get('newPassword')?.hasError('required')"></mat-error>
                     New password is required
-                  </mat-error>
-                  <mat-error *ngIf="securityForm.get('newPassword')?.hasError('minlength')">
+                  <mat-error *ngIf="securityForm.get('newPassword')?.hasError('minlength')"></mat-error>
                     Password must be at least 8 characters
-                  </mat-error>
-                </mat-form-field>
-              </div>
 
               <div class="form-row">
-                <mat-form-field class="w-full">
+                <mat-form-field class="w-full"></mat-form-field>
                   <mat-label>Confirm New Password</mat-label>
                   <input matInput formControlName="confirmPassword" type="password" placeholder="Confirm new password">
-                  <mat-error *ngIf="securityForm.get('confirmPassword')?.hasError('required')">
+                  <mat-error *ngIf="securityForm.get('confirmPassword')?.hasError('required')"></mat-error>
                     Please confirm your new password
-                  </mat-error>
-                  <mat-error *ngIf="securityForm.hasError('passwordMismatch')">
+                  <mat-error *ngIf="securityForm.hasError('passwordMismatch')"></mat-error>
                     Passwords do not match
-                  </mat-error>
-                </mat-form-field>
-              </div>
 
               <div class="form-row">
                 <button mat-raised-button class="btn btn-primary" type="button" (click)="onChangePassword()" [disabled]="!canChangePassword()">
                   <mat-icon>lock</mat-icon>
                   Change Password
-                </button>
-              </div>
 
             <div class="form-section">
               <h3 class="text-lg font-medium mb-sm">Two-Factor Authentication</h3>
               
               <div class="form-row">
-                <mat-slide-toggle formControlName="twoFactorEnabled">
+                <mat-slide-toggle formControlName="twoFactorEnabled"></mat-slide-toggle>
                   Enable Two-Factor Authentication
-                </mat-slide-toggle>
                 <span class="preference-description">Add an extra layer of security to your account</span>
-              </div>
 
               <div class="form-row" *ngIf="securityForm.get('twoFactorEnabled')?.value">
                 <button mat-stroked-button type="button" (click)="onSetupTwoFactor()">
                   <mat-icon>qr_code</mat-icon>
                   Setup Two-Factor Authentication
-                </button>
-              </div>
 
             <div class="form-section">
               <h3 class="text-lg font-medium mb-sm">Session Management</h3>
@@ -233,18 +176,11 @@
                 <button mat-stroked-button type="button" (click)="onViewActiveSessions()">
                   <mat-icon>devices</mat-icon>
                   View Active Sessions
-                </button>
-              </div>
 
               <div class="form-row">
                 <button mat-stroked-button type="button" (click)="onLogoutAllDevices()">
                   <mat-icon>logout</mat-icon>
                   Logout All Devices
-                </button>
-              </div>
-          </div>
-        </div>
-      </div>
 
       <!-- Data Tab -->
       <mat-tab label="Data">
@@ -257,7 +193,7 @@
                 <button mat-raised-button class="btn btn-primary" type="button" (click)="onExportData()">
                   <mat-icon>download</mat-icon>
                   Export My Data
-                </button>
+
                 <span class="preference-description">Download all your data in JSON format</span>
 
             <div class="form-section">
@@ -267,9 +203,8 @@
                 <button mat-stroked-button type="button" (click)="onImportData()">
                   <mat-icon>upload</mat-icon>
                   Import Data
-                </button>
+
                 <span class="preference-description">Import data from a JSON file</span>
-              </div>
 
             <div class="form-section">
               <h3 class="text-lg font-medium mb-sm">Account Deletion</h3>
@@ -278,42 +213,34 @@
                 <button mat-raised-button class="btn btn-error" type="button" (click)="onDeleteAccount()">
                   <mat-icon>delete_forever</mat-icon>
                   Delete Account
-                </button>
+
                 <span class="preference-description">Permanently delete your account and all data</span>
-              </div>
-          </div>
-      </div>
-    </div>
 
     <div class="settings-actions">
       <button mat-raised-button class="btn btn-primary" (click)="onSaveSettings()" [disabled]="!canSaveSettings()">
         <mat-spinner diameter="20" *ngIf="saving"></mat-spinner>
         <mat-icon *ngIf="!saving">save</mat-icon>
         Save Settings
-      </button>
+
       <button mat-stroked-button (click)="onCancel()">
         Cancel
-      </button>
-    </div>
 
   <ng-template #loadingTemplate>
     <div class="flex items-center justify-center py-xl">
       <mat-spinner diameter="40"></mat-spinner>
       <p class="text-secondary mb-sm">Loading user settings...</p>
-    </div>
-  </ng-template>
-</div>
 
-</div>
+  </ng-template>
+
 </mat-tab>
-</div>
+
 </form>
 </mat-tab>
-</div>
+
 </form>
 </mat-tab>
 </form>
 </mat-tab>
 </mat-tab-group>
-</div>
+
 </section>

@@ -1,5 +1,5 @@
 <section class="page-container">
-  <header class="flex justify-between items-center mb-lg">
+  <header class="flex justify-between items-center mb-lg"></header>
     <h1 class="text-2xl font-medium">Shopping Lists</h1>
     <button 
       mat-raised-button 
@@ -7,15 +7,15 @@
       (click)="createNewList()">
       <mat-icon>add</mat-icon>
       New List
-    </header>
   </section>
 
   <!-- Loading State -->
   <div *ngIf="loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md stagger-animation">
     <app-skeleton-loader 
       *ngFor="let item of [1,2,3,4,5,6]"
-      type="card">
-    </div>
+      type="card"></app-skeleton-loader></<app-skeleton-loader 
+      *ngFor="let item of [1,2,3,4,5,6]"
+      type="card"></app-skeleton-loader>>
 
   <!-- Error State -->
   <div *ngIf="error && !loading" class="flex flex-col items-center justify-center py-xl text-center">
@@ -26,7 +26,6 @@
       class="btn btn-primary"
       (click)="loadData()">
       Retry
-    </div>
 
   <!-- Content -->
   <main *ngIf="!loading && !error">
@@ -41,7 +40,7 @@
         (click)="createNewList()">
         <mat-icon>add</mat-icon>
         Create First List
-      </div>
+
     </main>
 
     <!-- Shopping Lists Grid -->
@@ -57,5 +56,26 @@
         (itemChecked)="onItemChecked($event)"
         (itemUpdated)="onItemUpdated($event)"
         (itemDeleted)="onItemDeleted($event)"
-        (listDeleted)="onListDeleted($event)">
-      </div>
+        (listDeleted)="onListDeleted($event)"></app-shopping-list></<app-shopping-list
+        *ngFor="let list of shoppingLists; trackBy: trackByListId"
+        [shoppingList]="list"
+        [labels]="labels"
+        [units]="units"
+        [foods]="foods"
+        [recipes]="recipes"
+        [showLabels]="true"
+        (itemChecked)="onItemChecked($event)"
+        (itemUpdated)="onItemUpdated($event)"
+        (itemDeleted)="onItemDeleted($event)"
+        (listDeleted)="onListDeleted($event)"></app-shopping-list>></<app-shopping-list
+        *ngFor="let list of shoppingLists; trackBy: trackByListId"
+        [shoppingList]="list"
+        [labels]="labels"
+        [units]="units"
+        [foods]="foods"
+        [recipes]="recipes"
+        [showLabels]="true"
+        (itemChecked)="onItemChecked($event)"
+        (itemUpdated)="onItemUpdated($event)"
+        (itemDeleted)="onItemDeleted($event)"
+        (listDeleted)="onListDeleted($event)"></app-shopping-list>>>

@@ -1,11 +1,9 @@
 <div [style.width]="width" style="height: 100%;">
-  <mat-card class="card">
+  <mat-card class="card"></mat-card>
     <mat-toolbar
         class="btn btn-primary wizard-toolbar">
-        <mat-toolbar-row>
+        <mat-toolbar-row></mat-toolbar-row>
           <span class="wizard-title">Mealie</span>
-        </mat-toolbar-row>
-      </mat-card>
 
       <section class="page-container">
         <mat-divider class="icon-divider"></mat-divider>
@@ -21,7 +19,6 @@
               d="M8.1,13.34L3.91,9.16C2.35,7.59 2.35,5.06 3.91,3.5L10.93,10.5L8.1,13.34M13.41,13L20.29,19.88L18.88,21.29L12,14.41L5.12,21.29L3.71,19.88L13.36,10.22L13.16,10C12.38,9.23 12.38,7.97 13.16,7.19L17.5,2.82L18.43,3.74L15.19,7L16.15,7.94L19.39,4.69L20.31,5.61L17.06,8.85L18,9.81L21.26,6.56L22.18,7.5L17.81,11.84C17.03,12.62 15.77,12.62 15,11.84L14.78,11.64L13.41,13Z"
             / class="text-secondary mb-sm">
           </section>
-        </div>
 
       <ng-content [attr.data-width]="pageWidth"></ng-content>
 
@@ -30,8 +27,7 @@
         [value]="progressValue"
         mode="determinate"
         class="progress-bar">
-      </div>
-    
+
     <mat-divider class="wizard-divider"></mat-divider>
     
     <mat-card-actions class="wizard-actions card">
@@ -56,20 +52,17 @@
         
         <div *ngIf="isSubmitting" class="submitting">
           <mat-spinner diameter="24" color="white"></mat-spinner>
-        </div>
-        
+
         <div *ngIf="!isSubmitting" class="button-content">
           <mat-icon *ngIf="nextButtonIconRef && !nextButtonIconAfter">{{ nextButtonIconRef }}</mat-icon>
           {{ nextButtonTextRef }}
           <mat-icon *ngIf="nextButtonIconRef && nextButtonIconAfter">{{ nextButtonIconRef }}</mat-icon>
-        </div>
-    
-    <mat-card-actions class="language-actions card">
+
+    <mat-card-actions class="language-actions card"></mat-card-actions>
       <button
         mat-raised-button
-        class="btn btn-primary"
+        class="btn btn-primary language-button"
         (click)="langDialog = true"
-        class="language-button">
+        >
         <mat-icon>translate</mat-icon>
         Choose Language
-      </mat-card-actions>

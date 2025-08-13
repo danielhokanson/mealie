@@ -2,54 +2,44 @@
   <div class="shopping-list-create-header">
     <h1 class="text-2xl font-medium mb-md">Create New Shopping List</h1>
     <p class="text-secondary mb-sm">Fill in the details below to create your shopping list</p>
-  </div>
 
   <form [formGroup]="shoppingListForm" (ngSubmit)="onSubmit()" class="shopping-list-form">
     <mat-card class="form-section card">
-      <mat-card-header class="card">
-        <mat-card-title class="card">Basic Information</mat-card-title>
-      </mat-card-header>
+      <mat-card-header class="card"></mat-card-header>
+        <mat-card-title >Basic Information</mat-card-title>
       <mat-card-content class="card">
         <div class="form-row">
-          <mat-form-field appearance="outline" class="w-full">
+          <mat-form-field appearance="outline" class="w-full"></mat-form-field>
             <mat-label>List Name</mat-label>
             <input 
               matInput 
               formControlName="name"
               placeholder="Enter shopping list name">
-            <mat-error *ngIf="shoppingListForm.get('name')?.invalid && shoppingListForm.get('name')?.touched">
+            <mat-error *ngIf="shoppingListForm.get('name')?.invalid && shoppingListForm.get('name')?.touched"></mat-error>
               {{ getErrorMessage('name') }}
-            </mat-error>
-          </mat-form-field>
-        </div>
 
         <div class="form-row">
-          <mat-form-field appearance="outline" class="w-full">
+          <mat-form-field appearance="outline" class="w-full"></mat-form-field>
             <mat-label>Description (optional)</mat-label>
             <textarea 
               matInput 
               formControlName="description"
               placeholder="Enter a description for this shopping list"
               rows="3">
-            </mat-form-field>
-          </div>
-        </mat-card-content>
 
         <div class="form-row">
-          <mat-checkbox formControlName="private">
+          <mat-checkbox formControlName="private"></mat-checkbox>
             Make this list private
-          </mat-checkbox>
-        </div>
+
       </mat-card>
     </form>
 
     <!-- Labels Section -->
-    <mat-card class="form-section" *ngIf="labels.length  class="card"> 0">
-      <mat-card-header class="card">
-        <mat-card-title class="card">Labels</mat-card-title>
-        <mat-card-subtitle class="card">Select labels to organize your shopping list</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content class="card">
+    <mat-card class="form-section card" *ngIf="labels.length  > 0">
+      <mat-card-header class="card"></mat-card-header>
+        <mat-card-title >Labels</mat-card-title>
+        <mat-card-subtitle >Select labels to organize your shopping list</mat-card-subtitle>
+      <mat-card-content class="card"></mat-card>
         <div class="labels-grid">
           <mat-checkbox 
             *ngFor="let label of labels"
@@ -57,9 +47,7 @@
             (change)="onLabelToggle(label.id)"
             [style.color]="label.color">
             {{ label.name }}
-          </div>
-        </mat-card-content>
-      </mat-card>
+
     </section>
 
     <!-- Form Actions -->
@@ -70,12 +58,12 @@
         (click)="onCancel()"
         class="btn btn-secondary">
         Cancel
-      </div>
+
       <button 
         mat-raised-button 
-        class="btn btn-primary"
+        class="btn btn-primary btn btn-primary"
         type="submit"
         [disabled]="loading || shoppingListForm.invalid"
-        class="btn btn-primary">
+        >
         <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner>
         <span *ngIf="!loading">Create Shopping List</span>

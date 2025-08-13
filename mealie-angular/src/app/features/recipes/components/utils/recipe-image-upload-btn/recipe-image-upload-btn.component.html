@@ -1,9 +1,9 @@
 <section class="page-container">
   <button
     mat-raised-button
-    class="btn btn-secondary"
+    class="btn btn-secondary upload-button"
     [matMenuTriggerFor]="imageMenu"
-    class="upload-button">
+    >
     <mat-icon class="upload-icon">image</mat-icon>
     Image
   </section>
@@ -19,14 +19,20 @@
             [textBtn]="false"
             [post]="false"
             (uploaded)="uploadImage($event)"
-            class="upload-component">
+            class="upload-component"></app-app-button-upload></<app-app-button-upload
+            url="none"
+            fileName="image"
+            [textBtn]="false"
+            [post]="false"
+            (uploaded)="uploadImage($event)"
+            class="upload-component"></app-app-button-upload>>
           </mat-card-title>
         
       </mat-card>
       
       <mat-card-content class="menu-content card">
         <div class="url-section">
-          <mat-form-field appearance="outline" class="url-input w-full">
+          <mat-form-field appearance="outline" class="url-input w-full"></mat-form-field>
             <mat-label>URL</mat-label>
             <input matInput
                    [(ngModel)]="url"
@@ -34,15 +40,13 @@
                    placeholder="Enter image URL"
                    class="url-input-field">
             <mat-error *ngIf="messages.length > 0">{{ messages[0] }}</mat-error>
-          </mat-form-field>
           
           <button mat-raised-button
-                  class="btn btn-primary"
+                  class="btn btn-primary get-button"
                   [loading]="loading"
                   [disabled]="isDisabled"
                   (click)="getImageFromURL()"
-                  class="get-button">
+                  >
             Get
-          </div>
-        </mat-card-content>
+
       </mat-menu>

@@ -3,7 +3,6 @@
   <div *ngIf="loading" class="flex items-center justify-center py-xl">
     <mat-spinner diameter="50"></mat-spinner>
     <p class="text-secondary mb-sm">Loading recipe...</p>
-  </div>
 
   <!-- Error State -->
   <div *ngIf="error && !loading" class="error-container">
@@ -12,8 +11,6 @@
     <p class="text-secondary mb-sm">Unable to load the recipe. Please try again.</p>
     <button mat-raised-button class="btn btn-primary" (click)="loadRecipe(recipe?.id || '')">
       Retry
-    </button>
-  </div>
 
   <!-- Recipe Content -->
   <div *ngIf="recipe && !loading" class="recipe-content">
@@ -25,60 +22,53 @@
           <div class="meta-item">
             <mat-icon>schedule</mat-icon>
             <span>{{ getFormattedTime() }}</span>
-          </div>
+
           <div class="meta-item">
             <mat-icon>people</mat-icon>
             <span>{{ recipe.servings }} servings</span>
-          </div>
+
           <div class="meta-item" *ngIf="recipe.rating">
             <mat-icon>star</mat-icon>
             <span>{{ recipe.rating }}/5</span>
-          </div>
+
       </article>
 
       <!-- Action Buttons -->
-      <article class="card">
+      <article class="card"></article>
         <button 
           mat-icon-button 
           [class.favorited]="recipe.favorite"
           (click)="onToggleFavorite()"
           matTooltip="{{ recipe.favorite ? 'Remove from favorites' : 'Add to favorites' }}">
           <mat-icon>{{ recipe.favorite ? 'favorite' : 'favorite_border' }}</mat-icon>
-        </article>
 
         <button mat-icon-button (click)="onShareRecipe()" matTooltip="Share recipe">
           <mat-icon>share</mat-icon>
-        </button>
 
         <button mat-icon-button (click)="onPrintRecipe()" matTooltip="Print recipe">
           <mat-icon>print</mat-icon>
-        </button>
 
         <button mat-icon-button [matMenuTriggerFor]="moreMenu" matTooltip="More options">
           <mat-icon>more_vert</mat-icon>
-        </button>
 
-        <mat-menu #moreMenu="matMenu">
+        <mat-menu #moreMenu="matMenu"></mat-menu>
           <button mat-menu-item (click)="onEditRecipe()">
             <mat-icon>edit</mat-icon>
             <span>Edit Recipe</span>
-          </button>
+
           <button mat-menu-item (click)="onDeleteRecipe()" class="delete-action">
             <mat-icon>delete</mat-icon>
             <span>Delete Recipe</span>
-          </button>
-        </mat-menu>
+
       </article>
 
     <!-- Recipe Image -->
     <div *ngIf="recipe.image" class="recipe-image">
       <img [src]="recipe.image" [alt]="recipe.name" loading="lazy">
-    </div>
 
     <!-- Recipe Description -->
     <div *ngIf="recipe.description" class="recipe-description">
       <p class="text-secondary mb-sm">{{ recipe.description }}</p>
-    </div>
 
     <!-- Recipe Rating -->
     <div *ngIf="recipe.rating !== undefined" class="recipe-rating">
@@ -90,31 +80,25 @@
           (click)="onRateRecipe(i + 1)"
           class="star-button">
           <mat-icon [class.filled]="star === 1">{{ star === 1 ? 'star' : 'star_border' }}</mat-icon>
-        </div>
-      </div>
 
     <!-- Recipe Categories and Tags -->
-    <article class="card">
+    <article class="card"></article>
       <div *ngIf="recipe.categories.length > 0" class="categories">
         <h3 class="text-lg font-medium mb-sm">Categories</h3>
-        <mat-chip-listbox>
-          <mat-chip 
+        <mat-chip-listbox></mat-chip></mat-chip-listbox>
+    <mat-chip 
             *ngFor="let category of recipe.categories"
             [style.background-color]="category.color">
             {{ category.name }}
-          </mat-chip-listbox>
-        </div>
-      </article>
 
       <div *ngIf="recipe.tags.length > 0" class="tags">
         <h3 class="text-lg font-medium mb-sm">Tags</h3>
-        <mat-chip-listbox>
-          <mat-chip 
+        <mat-chip-listbox></mat-chip></mat-chip-listbox>
+    <mat-chip 
             *ngFor="let tag of recipe.tags"
             [style.background-color]="tag.color">
             {{ tag.name }}
-          </mat-chip-listbox>
-        </div>
+
       </article>
 
     <!-- Recipe Scaling -->
@@ -127,7 +111,7 @@
           [step]="0.25"
           [(ngModel)]="currentScale"
           (valueChange)="onScaleChange($event)">
-        </div>
+
         <span class="scale-value">{{ currentScale }}x</span>
       </article>
 
@@ -138,36 +122,26 @@
         
           <h3 class="text-lg font-medium mb-sm">Ingredients</h3>
           <mat-list class="flex flex-col gap-sm">
-            <mat-list-item *ngFor="let ingredient of recipe.ingredients; let i = index">
+            <mat-list-item *ngFor="let ingredient of recipe.ingredients; let i = index"></mat-list-item></mat-list>
               <div class="ingredient-item">
-                <span class="ingredient-quantity">
+                <span class="ingredient-quantity"></span>
                   {{ getScaledQuantity(ingredient.quantity) }}
                   <span *ngIf="ingredient.unit">{{ ingredient.unit }}</span>
-                </span>
-                <span class="ingredient-name">
+                <span class="ingredient-name"></span>
                   {{ ingredient.food || ingredient.title }}
                   <span *ngIf="ingredient.note" class="ingredient-note">({{ ingredient.note }})</span>
-                </span>
-              
-            </div>
-          </mat-list-item>
-        </mat-list>
+
       </mat-tab>
 
       <!-- Instructions Tab -->
-      <mat-tab label="Instructions">
+      <mat-tab label="Instructions"></mat-tab>
         
           <h3 class="text-lg font-medium mb-sm">Instructions</h3>
           <mat-list class="flex flex-col gap-sm">
-            <mat-list-item *ngFor="let instruction of recipe.instructions; let i = index">
+            <mat-list-item *ngFor="let instruction of recipe.instructions; let i = index"></mat-list-item></mat-list>
               <div class="instruction-item">
                 <span class="instruction-number">{{ i + 1 }}.</span>
                 <span class="instruction-text">{{ instruction.text }}</span>
-              
-            </div>
-          </mat-list-item>
-        </mat-list>
-      </mat-tab>
 
       <!-- Notes Tab -->
       <mat-tab label="Notes">
@@ -180,19 +154,17 @@
               (click)="showAddNote = !showAddNote">
               <mat-icon>add</mat-icon>
               Add Note
-            </div>
 
           <!-- Add Note Form -->
           <div *ngIf="showAddNote" class="add-note-form">
-            <mat-form-field appearance="outline" class="note-input w-full">
+            <mat-form-field appearance="outline" class="note-input w-full"></mat-form-field>
               <mat-label>New Note</mat-label>
               <textarea 
                 matInput 
                 [(ngModel)]="newNote"
                 placeholder="Enter your note..."
                 rows="3">
-              </mat-form-field>
-            </div>
+
             <div class="note-actions">
               <button 
                 mat-raised-button 
@@ -200,7 +172,7 @@
                 (click)="onAddNote()"
                 [disabled]="!newNote.trim()">
                 Add Note
-              </div>
+
               <button 
                 mat-button 
                 (click)="showAddNote = false; newNote = ''">
@@ -210,19 +182,14 @@
 
           <!-- Notes List -->
           <mat-list *ngIf="recipe.notes.length > 0">
-            <mat-list-item *ngFor="let note of recipe.notes">
+            <mat-list-item *ngFor="let note of recipe.notes"></mat-list-item></mat-list>
               <div class="note-item">
                 <h4>{{ note.title }}</h4>
                 <p class="text-secondary mb-sm">{{ note.text }}</p>
                 <span class="note-date">{{ note.createdAt | date:'short' }}</span>
-              </div>
-            </mat-list-item>
-          </mat-list>
 
           <div *ngIf="recipe.notes.length === 0" class="no-notes">
             <p class="text-secondary mb-sm">No notes yet. Add your first note!</p>
-          </div>
-      </div>
 
       <!-- Comments Tab -->
       <mat-tab label="Comments">
@@ -235,19 +202,17 @@
               (click)="showAddComment = !showAddComment">
               <mat-icon>add</mat-icon>
               Add Comment
-            </div>
 
           <!-- Add Comment Form -->
           <div *ngIf="showAddComment" class="add-comment-form">
-            <mat-form-field appearance="outline" class="comment-input w-full">
+            <mat-form-field appearance="outline" class="comment-input w-full"></mat-form-field>
               <mat-label>New Comment</mat-label>
               <textarea 
                 matInput 
                 [(ngModel)]="newComment"
                 placeholder="Enter your comment..."
                 rows="3">
-              </mat-form-field>
-            </div>
+
             <div class="comment-actions">
               <button 
                 mat-raised-button 
@@ -255,7 +220,7 @@
                 (click)="onAddComment()"
                 [disabled]="!newComment.trim()">
                 Add Comment
-              </div>
+
               <button 
                 mat-button 
                 (click)="showAddComment = false; newComment = ''">
@@ -265,17 +230,13 @@
 
           <!-- Comments List -->
           <mat-list *ngIf="recipe.comments && recipe.comments.length > 0">
-            <mat-list-item *ngFor="let comment of recipe.comments">
+            <mat-list-item *ngFor="let comment of recipe.comments"></mat-list-item></mat-list>
               <div class="comment-item">
                 <div class="comment-header">
                   <span class="comment-author">{{ comment.user.fullName }}</span>
                   <span class="comment-date">{{ comment.createdAt | date:'short' }}</span>
-                </div>
+
                 <p class="comment-text text-secondary mb-sm">{{ comment.text }}</p>
-              </div>
-            </mat-list-item>
-          </mat-list>
 
           <div *ngIf="!recipe.comments || recipe.comments.length === 0" class="no-comments">
             <p class="text-secondary mb-sm">No comments yet. Be the first to comment!</p>
-          </div>

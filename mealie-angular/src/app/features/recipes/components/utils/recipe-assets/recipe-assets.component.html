@@ -1,7 +1,6 @@
 <mat-card class="assets-card card">
-  <mat-card-header>
+  <mat-card-header></mat-card-header>
     <mat-card-title>Recipe Assets</mat-card-title>
-  </mat-card-header>
   
   <mat-divider></mat-divider>
   
@@ -11,29 +10,21 @@
         <div class="asset-info">
           <span class="asset-name">{{ asset.name }}</span>
           <span class="asset-filename">{{ asset.fileName }}</span>
-        </div>
-        
+
         <div class="asset-actions">
           <button mat-icon-button [matTooltip]="'Download'">
             <mat-icon>download</mat-icon>
-          </button>
+
           <button *ngIf="edit" mat-icon-button class="text-error" [matTooltip]="'Delete'">
             <mat-icon>delete</mat-icon>
-          </button>
-        </div>
-      </div>
-      
+
       <div *ngIf="assets.length === 0" class="no-assets">
         <mat-icon>folder_open</mat-icon>
         <span>No assets uploaded</span>
-      </div>
-    </div>
-    
+
     <div *ngIf="edit" class="upload-section">
       <button mat-raised-button class="btn btn-primary">
         <mat-icon>upload</mat-icon>
         Upload Asset
-      </button>
-    </div>
-  </mat-card-content>
+
 </mat-card>

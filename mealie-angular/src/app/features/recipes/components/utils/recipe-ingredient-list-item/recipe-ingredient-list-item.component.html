@@ -3,28 +3,38 @@
   <app-safe-markdown
     *ngIf="parsedIngredient.quantity"
     [markdown]="parsedIngredient.quantity"
-    class="d-inline">
-  </div>
-
+    class="d-inline"></app-safe-markdown></<app-safe-markdown
+    *ngIf="parsedIngredient.quantity"
+    [markdown]="parsedIngredient.quantity"
+    class="d-inline"></app-safe-markdown>></<app-safe-markdown
+    *ngIf="parsedIngredient.quantity"
+    [markdown]="parsedIngredient.quantity"
+    class="d-inline"></app-safe-markdown>>>
   <!-- Unit -->
-  <span *ngIf="parsedIngredient.unit" class="unit-text">
+  <span *ngIf="parsedIngredient.unit" class="unit-text"></span>
     {{ parsedIngredient.unit }}
-  </span>
 
   <!-- Note (when no name) -->
   <app-safe-markdown
     *ngIf="parsedIngredient.note && !parsedIngredient.name"
     [markdown]="parsedIngredient.note"
-    class="text-bold d-inline">
-
+    class="text-bold d-inline"></app-safe-markdown></<app-safe-markdown
+    *ngIf="parsedIngredient.note && !parsedIngredient.name"
+    [markdown]="parsedIngredient.note"
+    class="text-bold d-inline"></app-safe-markdown>>
   <!-- Name and Note -->
   <ng-container *ngIf="parsedIngredient.name">
     <app-safe-markdown
       [markdown]="parsedIngredient.name"
-      class="text-bold d-inline">
+      class="text-bold d-inline"></app-safe-markdown></<app-safe-markdown
+      [markdown]="parsedIngredient.name"
+      class="text-bold d-inline"></app-safe-markdown>>
     </ng-container>
     
     <app-safe-markdown
       *ngIf="parsedIngredient.note"
       [markdown]="parsedIngredient.note"
-      class="note">
+      class="note"></app-safe-markdown></<app-safe-markdown
+      *ngIf="parsedIngredient.note"
+      [markdown]="parsedIngredient.note"
+      class="note"></app-safe-markdown>>

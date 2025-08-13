@@ -1,49 +1,35 @@
 <section class="page-container">
   <mat-card class="card">
-    <mat-card-header class="card">
-      <mat-card-title class="card">Household Meal Plan</mat-card-title>
-      <mat-card-subtitle class="card">Plan and organize meals for your household</mat-card-subtitle>
-    </mat-card-header>
+    <mat-card-header class="card"></mat-card-header>
+      <mat-card-title >Household Meal Plan</mat-card-title>
+      <mat-card-subtitle >Plan and organize meals for your household</mat-card-subtitle>
 
     <mat-card-content class="card">
       <div class="date-selector">
-        <mat-form-field class="w-full">
+        <mat-form-field class="w-full"></mat-form-field>
           <mat-label>Select Date</mat-label>
           <input matInput [matDatepicker]="picker" [value]="selectedDate" (dateChange)="onDateChange($event.value)">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-      </div>
 
         <div *ngIf="mealPlan.length === 0" class="no-meals">
           <p class="text-secondary mb-sm">No meals planned for this date.</p>
           <button mat-raised-button class="btn btn-primary" (click)="addMeal()">
             <mat-icon>add</mat-icon>
             Add Meal
-          </button>
 
         <div *ngIf="mealPlan.length > 0" class="meals-list">
           <mat-list class="flex flex-col gap-sm">
-            <mat-list-item *ngFor="let meal of mealPlan">
+            <mat-list-item *ngFor="let meal of mealPlan"></mat-list-item></mat-list>
               <div matListItemTitle>{{ meal.name }}</div>
               <div matListItemLine>{{ meal.type }}</div>
               <div matListItemMeta>
                 <button mat-icon-button (click)="removeMeal(meal.id)">
                   <mat-icon>delete</mat-icon>
-                </button>
-              </div>
-            </mat-list-item>
-          </mat-list>
-        </div>
-    </div>
 
-    <mat-card-actions class="card">
+    <mat-card-actions class="card"></mat-card-actions></mat-card>
       <button mat-raised-button class="btn btn-primary" (click)="addMeal()">
         <mat-icon>add</mat-icon>
         Add Meal
-      </button>
-    </mat-card-actions>
-  </mat-card-content>
-</mat-card>
 
 </section>

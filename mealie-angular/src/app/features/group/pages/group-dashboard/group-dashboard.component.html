@@ -3,7 +3,6 @@
   <div *ngIf="loading" class="flex items-center justify-center py-xl">
     <mat-spinner diameter="50"></mat-spinner>
     <p class="text-secondary mb-sm">Loading group dashboard...</p>
-  </div>
 
   <!-- Error State -->
   <div *ngIf="error && !loading" class="flex flex-col items-center justify-center py-xl text-center">
@@ -12,8 +11,6 @@
     <p class="text-secondary mb-sm">Unable to load the group dashboard. Please try again.</p>
     <button mat-raised-button class="btn btn-primary" (click)="loadGroupData()">
       Retry
-    </button>
-  </div>
 
   <!-- Dashboard Content -->
   <div *ngIf="!loading && !error && currentGroup" class="dashboard-content">
@@ -25,7 +22,7 @@
         <div class="group-meta">
           <span class="member-count">{{ groupStats.totalMembers }} members</span>
           <span class="household-count">{{ groupStats.activeHouseholds }} households</span>
-        </div>
+
       <div class="header-actions">
         <button 
           mat-raised-button 
@@ -33,41 +30,39 @@
           (click)="onAddMember()">
           <mat-icon>person_add</mat-icon>
           Add Member
-        </div>
+
         <button 
           mat-raised-button 
           class="btn btn-secondary"
           (click)="onCreateHousehold()">
           <mat-icon>home</mat-icon>
           Create Household
-        </div>
+
         <button 
           mat-icon-button 
           [matMenuTriggerFor]="groupMenu"
           matTooltip="Group Actions">
           <mat-icon>more_vert</mat-icon>
-        </div>
 
         <mat-menu #groupMenu="matMenu">
           <button mat-menu-item (click)="onViewMembers()">
             <mat-icon>people</mat-icon>
             <span>Manage Members</span>
-          </button>
+
           <button mat-menu-item (click)="onViewHouseholds()">
             <mat-icon>home</mat-icon>
             <span>Manage Households</span>
-          </button>
+
           <mat-divider></mat-divider>
           <button mat-menu-item (click)="onExportGroupData()">
             <mat-icon>download</mat-icon>
             <span>Export Data</span>
-          </button>
+
           <button mat-menu-item (click)="onGroupSettings()">
             <mat-icon>settings</mat-icon>
             <span>Group Settings</span>
-          </button>
+
         </mat-menu>
-      </div>
 
     <!-- Statistics Cards -->
     <div class="stats-grid">
@@ -75,106 +70,76 @@
         <mat-card-content class="card">
           <div class="stat-icon">
             <mat-icon>people</mat-icon>
-          </div>
-          
+
             <h3 class="text-lg font-medium mb-sm">{{ groupStats.totalMembers }}</h3>
             <p class="text-secondary mb-sm">Total Members</p>
-          
-        </mat-card-content>
-        <mat-card-actions class="card">
+
+        <mat-card-actions class="card"></mat-card-actions></mat-card>
           <button mat-button class="btn btn-primary" (click)="onViewMembers()">
             View All
-          </button>
-        </mat-card-actions>
-      </mat-card>
 
       <mat-card class="stat-card card">
         <mat-card-content class="card">
           <div class="stat-icon">
             <mat-icon>restaurant</mat-icon>
-          </div>
-          
+
             <h3 class="text-lg font-medium mb-sm">{{ groupStats.totalRecipes }}</h3>
             <p class="text-secondary mb-sm">Group Recipes</p>
-          
-        </mat-card-content>
-        <mat-card-actions class="card">
+
+        <mat-card-actions class="card"></mat-card-actions></mat-card>
           <button mat-button class="btn btn-primary" (click)="onViewRecipes()">
             View All
-          </button>
-        </mat-card-actions>
-      </mat-card>
 
       <mat-card class="stat-card card">
         <mat-card-content class="card">
           <div class="stat-icon">
             <mat-icon>shopping_cart</mat-icon>
-          </div>
-          
+
             <h3 class="text-lg font-medium mb-sm">{{ groupStats.totalShoppingLists }}</h3>
             <p class="text-secondary mb-sm">Shopping Lists</p>
-          
-        </mat-card-content>
-        <mat-card-actions class="card">
+
+        <mat-card-actions class="card"></mat-card-actions></mat-card>
           <button mat-button class="btn btn-primary" (click)="onViewShoppingLists()">
             View All
-          </button>
-        </mat-card-actions>
-      </mat-card>
 
       <mat-card class="stat-card card">
         <mat-card-content class="card">
           <div class="stat-icon">
             <mat-icon>home</mat-icon>
-          </div>
-          
+
             <h3 class="text-lg font-medium mb-sm">{{ groupStats.activeHouseholds }}</h3>
             <p class="text-secondary mb-sm">Active Households</p>
-          
-        </mat-card-content>
-        <mat-card-actions class="card">
+
+        <mat-card-actions class="card"></mat-card-actions></mat-card>
           <button mat-button class="btn btn-primary" (click)="onViewHouseholds()">
             View All
-          </button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
 
     <!-- Content Sections -->
     <div class="content-sections">
       <!-- Members Section -->
       <mat-card class="section-card card">
-        <mat-card-header class="card">
-          <mat-card-title class="card">Recent Members</mat-card-title>
-          <mat-card-subtitle class="card">Latest group members</mat-card-subtitle>
-        </mat-card-header>
+        <mat-card-header class="card"></mat-card-header>
+          <mat-card-title >Recent Members</mat-card-title>
+          <mat-card-subtitle >Latest group members</mat-card-subtitle>
         <mat-card-content class="card">
           <mat-list class="flex flex-col gap-sm">
-            <mat-list-item *ngFor="let member of members.slice(0, 5)" class="member-item">
+            <mat-list-item *ngFor="let member of members.slice(0, 5)" class="member-item"></mat-list-item></mat-list>
               <mat-icon matListItemIcon>person</mat-icon>
               <div matListItemTitle>{{ member.fullName }}</div>
               <div matListItemLine>{{ '@' + member.username }}</div>
               <div matListItemMeta>
-                <mat-chip [style.background-color]="getRoleColor(member.admin ? 'admin' : 'user')">
+                <mat-chip [style.background-color]="getRoleColor(member.admin ? 'admin' : 'user')"></mat-chip>
                   {{ member.admin ? 'Admin' : 'User' }}
-                </mat-chip>
-              </div>
-            </mat-list-item>
-          </mat-list>
-        </mat-card-content>
-        <mat-card-actions class="card">
+
+        <mat-card-actions class="card"></mat-card-actions></mat-card>
           <button mat-button class="btn btn-primary" (click)="onViewMembers()">
             View All Members
-          </button>
-        </mat-card-actions>
-      </mat-card>
 
       <!-- Households Section -->
       <mat-card class="section-card card">
-        <mat-card-header class="card">
-          <mat-card-title class="card">Households</mat-card-title>
-          <mat-card-subtitle class="card">Group households</mat-card-subtitle>
-        </mat-card-header>
+        <mat-card-header class="card"></mat-card-header>
+          <mat-card-title >Households</mat-card-title>
+          <mat-card-subtitle >Group households</mat-card-subtitle>
         <mat-card-content class="card">
           <mat-list class="flex flex-col gap-sm">
             <mat-list-item *ngFor="let household of households" class="household-item">
@@ -182,34 +147,30 @@
               <div matListItemTitle>{{ household.name }}</div>
               <div matListItemLine>{{ household.description }}</div>
               <div matListItemMeta>
-                <mat-chip [style.background-color]="getStatusColor(true)">
+                <mat-chip [style.background-color]="getStatusColor(true)"></mat-chip>
                   Active
-                </mat-chip>
                 <button 
                   mat-icon-button 
                   class="btn btn-error"
                   (click)="onDeleteHousehold(household)"
                   matTooltip="Delete household">
                   <mat-icon>delete</mat-icon>
-                </div>
+
               </mat-list-item>
             </mat-list>
-          </mat-card-content>
+
         </mat-card>
-        <mat-card-actions class="card">
+        <mat-card-actions class="card"></mat-card-actions>
           <button mat-button class="btn btn-primary" (click)="onViewHouseholds()">
             View All Households
-          </button>
-        </mat-card-actions>
-      </div>
+
     </section>
 
     <!-- Recent Activity -->
     <div class="activity-section">
       <mat-card class="recent-recipes-card card">
-        <mat-card-header class="card">
-          <mat-card-title class="card">Recent Recipes</mat-card-title>
-        </mat-card-header>
+        <mat-card-header class="card"></mat-card-header>
+          <mat-card-title >Recent Recipes</mat-card-title>
         <mat-card-content class="card">
           <mat-list class="flex flex-col gap-sm">
             <mat-list-item *ngFor="let recipe of recentRecipes" class="recipe-item">
@@ -217,72 +178,59 @@
               <div matListItemTitle>{{ recipe.name }}</div>
               <div matListItemLine>{{ recipe.description }}</div>
               <div matListItemMeta>
-                <span class="recipe-meta">
+                <span class="recipe-meta"></span>
                   {{ recipe.prepTime + recipe.cookTime }}m • {{ recipe.servings }} servings
-                </span>
                 <mat-icon class="rating-icon">star</mat-icon>
                 <span class="rating">{{ recipe.rating }}</span>
-              </div>
+
             </mat-list-item>
           </mat-list>
-        </mat-card-content>
+
       </mat-card>
 
       <mat-card class="recent-lists-card card">
-        <mat-card-header class="card">
-          <mat-card-title class="card">Recent Shopping Lists</mat-card-title>
-        </mat-card-header>
+        <mat-card-header class="card"></mat-card-header>
+          <mat-card-title >Recent Shopping Lists</mat-card-title>
         <mat-card-content class="card">
           <mat-list class="flex flex-col gap-sm">
-            <mat-list-item *ngFor="let list of recentShoppingLists" class="list-item">
+            <mat-list-item *ngFor="let list of recentShoppingLists" class="list-item"></mat-list-item></mat-list>
               <mat-icon matListItemIcon>shopping_cart</mat-icon>
               <div matListItemTitle>{{ list.name }}</div>
               <div matListItemLine>{{ list.description }}</div>
               <div matListItemMeta>
-                <mat-chip [style.background-color]="getStatusColor(true)">
+                <mat-chip [style.background-color]="getStatusColor(true)"></mat-chip>
                   Active
-                </mat-chip>
-              </div>
-            </mat-list-item>
-          </mat-list>
-        </mat-card-content>
+
       </mat-card>
-    </div>
 
   <!-- Add Member Dialog -->
   <div *ngIf="showAddMemberDialog" class="dialog-overlay">
     <mat-card class="dialog-card card">
-      <mat-card-header class="card">
-        <mat-card-title class="card">Add Member</mat-card-title>
-      </mat-card-header>
+      <mat-card-header class="card"></mat-card-header>
+        <mat-card-title >Add Member</mat-card-title>
       <mat-card-content class="card">
         <form [formGroup]="addMemberForm" class="dialog-form">
           <div class="form-row">
-            <mat-form-field appearance="outline" class="w-full">
+            <mat-form-field appearance="outline" class="w-full"></mat-form-field>
               <mat-label>Email</mat-label>
               <input 
                 matInput 
                 type="email"
                 formControlName="email"
                 placeholder="Enter member email">
-              <mat-error *ngIf="addMemberForm.get('email')?.invalid && addMemberForm.get('email')?.touched">
+              <mat-error *ngIf="addMemberForm.get('email')?.invalid && addMemberForm.get('email')?.touched"></mat-error>
                 {{ getErrorMessage('email') }}
-              </mat-error>
-            </mat-form-field>
-          </div>
 
           <div class="form-row">
-            <mat-form-field appearance="outline" class="w-full">
+            <mat-form-field appearance="outline" class="w-full"></mat-form-field>
               <mat-label>Role</mat-label>
-              <mat-select formControlName="role">
+              <mat-select formControlName="role"></mat-select>
                 <mat-option value="member">Member</mat-option>
                 <mat-option value="admin">Admin</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
+
         </form>
-      </mat-card-content>
-      <mat-card-actions class="card">
+
+      <mat-card-actions class="card"></mat-card-actions></mat-card>
         <button mat-button (click)="showAddMemberDialog = false">Cancel</button>
         <button 
           mat-raised-button 
@@ -290,48 +238,39 @@
           (click)="onSaveMember()"
           [disabled]="addMemberForm.invalid">
           Add Member
-        </mat-card-actions>
-      </mat-card>
-    </div>
 
   <!-- Create Household Dialog -->
   <div *ngIf="showCreateHouseholdDialog" class="dialog-overlay">
     <mat-card class="dialog-card card">
-      <mat-card-header class="card">
-        <mat-card-title class="card">Create Household</mat-card-title>
-      </mat-card-header>
+      <mat-card-header class="card"></mat-card-header>
+        <mat-card-title >Create Household</mat-card-title>
       <mat-card-content class="card">
         <form [formGroup]="createHouseholdForm" class="dialog-form">
           <div class="form-row">
-            <mat-form-field appearance="outline" class="w-full">
+            <mat-form-field appearance="outline" class="w-full"></mat-form-field>
               <mat-label>Name</mat-label>
               <input 
                 matInput 
                 formControlName="name"
                 placeholder="Enter household name">
-            </mat-form-field>
-          </div>
 
           <div class="form-row">
-            <mat-form-field appearance="outline" class="w-full">
+            <mat-form-field appearance="outline" class="w-full"></mat-form-field>
               <mat-label>Description</mat-label>
               <textarea 
                 matInput 
                 formControlName="description"
                 placeholder="Enter description"
                 rows="3">
-              </mat-form-field>
-            </div>
+
           </form>
 
           <div class="form-row">
-            <mat-checkbox formControlName="isActive">
+            <mat-checkbox formControlName="isActive"></mat-checkbox>
               Active
-            </mat-checkbox>
-          </div>
-        </mat-card-content>
+
       </mat-card>
-      <mat-card-actions class="card">
+      <mat-card-actions class="card"></mat-card-actions>
         <button mat-button (click)="showCreateHouseholdDialog = false">Cancel</button>
         <button 
           mat-raised-button 
@@ -339,5 +278,3 @@
           (click)="onSaveHousehold()"
           [disabled]="createHouseholdForm.invalid">
           Create Household
-        </mat-card-actions>
-      </div>

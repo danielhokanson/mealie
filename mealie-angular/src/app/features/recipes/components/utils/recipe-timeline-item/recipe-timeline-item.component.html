@@ -1,39 +1,36 @@
 <div class="timeline-item" [class]="attrs.class" [style.width]="width">
   <div class="timeline-icon">
     <mat-icon class="icon">{{ icon }}</mat-icon>
-  </div>
 
     <!-- Date Chip (Desktop) -->
     <div *ngIf="!useMobileFormat && event.timestamp" class="date-chip">
-      <mat-chip class="btn btn-primary date-chip-content">
+      <mat-chip class="btn btn-primary date-chip-content"></mat-chip>
         <mat-icon class="date-icon">calendar_today</mat-icon>
         {{ formattedDate }}
-      </mat-chip>
 
     <!-- Timeline Card -->
-    <mat-card class="timeline-card" (click)="onCardClick()" class="card">
+    <mat-card class="timeline-card card" (click)="onCardClick()" >
       <mat-card-header class="card-header card">
         
           <!-- User Avatar -->
           <div class="avatar-section" [class]="attrs.avatar.class">
             <app-user-avatar
               [userId]="event.userId"
-              [size]="attrs.avatar.size">
-            </div>
-
+              [size]="attrs.avatar.size"></app-user-avatar></<app-user-avatar
+              [userId]="event.userId"
+              [size]="attrs.avatar.size"></app-user-avatar>></<app-user-avatar
+              [userId]="event.userId"
+              [size]="attrs.avatar.size"></app-user-avatar>>>
           <!-- Date Chip (Mobile) -->
           <div *ngIf="useMobileFormat && event.timestamp" class="mobile-date">
-            <mat-chip class="btn btn-primary">
+            <mat-chip class="btn btn-primary"></mat-chip>
               <mat-icon>calendar_today</mat-icon>
               {{ formattedDate }}
-            </mat-chip>
-          </div>
-          
+
           <!-- Subject (Desktop) -->
           <div *ngIf="!useMobileFormat" class="subject-section">
             {{ event.subject }}
-          </div>
-          
+
           <!-- Spacer -->
 
           <!-- Context Menu -->
@@ -43,8 +40,17 @@
               [event]="event"
               [useMobileFormat]="useMobileFormat"
               (update)="update.emit()"
-              (delete)="delete.emit()">
-            </div>
+              (delete)="delete.emit()"></app-recipe-timeline-context-menu></<app-recipe-timeline-context-menu
+              *ngIf="canEdit"
+              [event]="event"
+              [useMobileFormat]="useMobileFormat"
+              (update)="update.emit()"
+              (delete)="delete.emit()"></app-recipe-timeline-context-menu>></<app-recipe-timeline-context-menu
+              *ngIf="canEdit"
+              [event]="event"
+              [useMobileFormat]="useMobileFormat"
+              (update)="update.emit()"
+              (delete)="delete.emit()"></app-recipe-timeline-context-menu>>>
           </mat-card-header>
       </mat-card>
       
@@ -59,11 +65,24 @@
             [image]="recipe.image"
             [recipeId]="recipe.id"
             [isFlat]="true"
-            [vertical]="useMobileFormat">
-          </div>
-        </mat-card-content>
-      </div>
-      
+            [vertical]="useMobileFormat"></app-recipe-card-mobile></<app-recipe-card-mobile
+            [name]="recipe.name"
+            [slug]="recipe.slug"
+            [description]="recipe.description"
+            [rating]="recipe.rating"
+            [image]="recipe.image"
+            [recipeId]="recipe.id"
+            [isFlat]="true"
+            [vertical]="useMobileFormat"></app-recipe-card-mobile>></<app-recipe-card-mobile
+            [name]="recipe.name"
+            [slug]="recipe.slug"
+            [description]="recipe.description"
+            [rating]="recipe.rating"
+            [image]="recipe.image"
+            [recipeId]="recipe.id"
+            [isFlat]="true"
+            [vertical]="useMobileFormat"></app-recipe-card-mobile>>>
+
       <!-- Divider -->
       <mat-divider *ngIf="showRecipeCards && recipe && (useMobileFormat || event.eventMessage)"></mat-divider>
       
@@ -85,8 +104,4 @@
           
           <!-- Event Message -->
           <div *ngIf="event.eventMessage" class="event-message" [class]="useMobileFormat ? 'text-caption' : ''">
-            <app-safe-markdown [source]="event.eventMessage"></app-safe-markdown>
-          
-      </div>
-    </mat-card-content>
-  </div>
+            <app-safe-markdown [source]="event.eventMessage"></app-safe-markdow></app-safe-markdown>

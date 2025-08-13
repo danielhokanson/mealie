@@ -5,7 +5,7 @@
       <mat-card-content class="card">
         <div class="complete-icon">
           <mat-icon>check_circle</mat-icon>
-        </div>
+
         <h2 class="text-xl font-medium mb-md">Setup Complete!</h2>
         <p class="text-secondary mb-sm">Your Mealie application has been successfully configured and is ready to use.</p>
         <div class="complete-actions">
@@ -14,10 +14,9 @@
             class="btn btn-primary"
             (click)="onGoToDashboard()">
             Go to Dashboard
-          </div>
-        </mat-card-content>
+
       </mat-card>
-    </div>
+
   </section>
 
   <!-- Setup Form -->
@@ -25,7 +24,6 @@
     <div class="setup-header">
       <h1 class="text-2xl font-medium mb-md">Admin Setup</h1>
       <p class="text-secondary mb-sm">Configure your Mealie application</p>
-    </div>
 
     <mat-stepper [linear]="true" #stepper class="setup-stepper">
       <!-- Step 1: Database Configuration -->
@@ -36,77 +34,62 @@
 
           <div class="form-section">
             <div class="form-row">
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="w-full"></mat-form-field>
                 <mat-label>Database Type</mat-label>
-                <mat-select formControlName="databaseType">
+                <mat-select formControlName="databaseType"></mat-select>
                   <mat-option value="postgresql">PostgreSQL</mat-option>
                   <mat-option value="mysql">MySQL</mat-option>
                   <mat-option value="sqlite">SQLite</mat-option>
-                </mat-select>
-              </mat-form-field>
 
             <div class="form-row">
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="w-full"></mat-form-field>
                 <mat-label>Database Host</mat-label>
                 <input 
                   matInput 
                   formControlName="databaseHost"
                   placeholder="localhost">
-                <mat-error *ngIf="setupForm.get('databaseHost')?.invalid && setupForm.get('databaseHost')?.touched">
+                <mat-error *ngIf="setupForm.get('databaseHost')?.invalid && setupForm.get('databaseHost')?.touched"></mat-error>
                   {{ getErrorMessage('databaseHost') }}
-                </mat-error>
-              </mat-form-field>
 
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="w-full"></mat-form-field>
                 <mat-label>Database Port</mat-label>
                 <input 
                   matInput 
                   type="number"
                   formControlName="databasePort"
                   placeholder="5432">
-                <mat-error *ngIf="setupForm.get('databasePort')?.invalid && setupForm.get('databasePort')?.touched">
+                <mat-error *ngIf="setupForm.get('databasePort')?.invalid && setupForm.get('databasePort')?.touched"></mat-error>
                   {{ getErrorMessage('databasePort') }}
-                </mat-error>
-              </mat-form-field>
-            </div>
 
             <div class="form-row">
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="w-full"></mat-form-field>
                 <mat-label>Database Name</mat-label>
                 <input 
                   matInput 
                   formControlName="databaseName"
                   placeholder="mealie">
-                <mat-error *ngIf="setupForm.get('databaseName')?.invalid && setupForm.get('databaseName')?.touched">
+                <mat-error *ngIf="setupForm.get('databaseName')?.invalid && setupForm.get('databaseName')?.touched"></mat-error>
                   {{ getErrorMessage('databaseName') }}
-                </mat-error>
-              </mat-form-field>
-            </div>
 
             <div class="form-row">
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="w-full"></mat-form-field>
                 <mat-label>Database Username</mat-label>
                 <input 
                   matInput 
                   formControlName="databaseUsername"
                   placeholder="Enter database username">
-                <mat-error *ngIf="setupForm.get('databaseUsername')?.invalid && setupForm.get('databaseUsername')?.touched">
+                <mat-error *ngIf="setupForm.get('databaseUsername')?.invalid && setupForm.get('databaseUsername')?.touched"></mat-error>
                   {{ getErrorMessage('databaseUsername') }}
-                </mat-error>
-              </mat-form-field>
 
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="w-full"></mat-form-field>
                 <mat-label>Database Password</mat-label>
                 <input 
                   matInput 
                   type="password"
                   formControlName="databasePassword"
                   placeholder="Enter database password">
-                <mat-error *ngIf="setupForm.get('databasePassword')?.invalid && setupForm.get('databasePassword')?.touched">
+                <mat-error *ngIf="setupForm.get('databasePassword')?.invalid && setupForm.get('databasePassword')?.touched"></mat-error>
                   {{ getErrorMessage('databasePassword') }}
-                </mat-error>
-              </mat-form-field>
-            </div>
 
             <div class="flex justify-end gap-sm mt-lg">
               <button 
@@ -116,9 +99,6 @@
                 [disabled]="loading">
                 <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner>
                 <span *ngIf="!loading">Test Connection</span>
-              </div>
-            </div>
-        </div>
 
         <div class="step-actions">
           <button 
@@ -132,7 +112,7 @@
                        setupForm.get('databaseUsername')?.invalid || 
                        setupForm.get('databasePassword')?.invalid">
             Next
-          </div>
+
         </mat-step>
       </mat-stepper>
 
@@ -144,81 +124,65 @@
 
           <div class="form-section">
             <div class="form-row">
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="w-full"></mat-form-field>
                 <mat-label>Application Name</mat-label>
                 <input 
                   matInput 
                   formControlName="appName"
                   placeholder="Mealie">
-                <mat-error *ngIf="setupForm.get('appName')?.invalid && setupForm.get('appName')?.touched">
+                <mat-error *ngIf="setupForm.get('appName')?.invalid && setupForm.get('appName')?.touched"></mat-error>
                   {{ getErrorMessage('appName') }}
-                </mat-error>
-              </mat-form-field>
 
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="w-full"></mat-form-field>
                 <mat-label>Application URL</mat-label>
                 <input 
                   matInput 
                   formControlName="appUrl"
                   placeholder="http://localhost:4200">
-                <mat-error *ngIf="setupForm.get('appUrl')?.invalid && setupForm.get('appUrl')?.touched">
+                <mat-error *ngIf="setupForm.get('appUrl')?.invalid && setupForm.get('appUrl')?.touched"></mat-error>
                   {{ getErrorMessage('appUrl') }}
-                </mat-error>
-              </mat-form-field>
 
             <div class="form-row">
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="w-full"></mat-form-field>
                 <mat-label>Admin Email</mat-label>
                 <input 
                   matInput 
                   type="email"
                   formControlName="adminEmail"
                   placeholder="admin@example.com">
-                <mat-error *ngIf="setupForm.get('adminEmail')?.invalid && setupForm.get('adminEmail')?.touched">
+                <mat-error *ngIf="setupForm.get('adminEmail')?.invalid && setupForm.get('adminEmail')?.touched"></mat-error>
                   {{ getErrorMessage('adminEmail') }}
-                </mat-error>
-              </mat-form-field>
-            </div>
 
             <div class="form-row">
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="w-full"></mat-form-field>
                 <mat-label>Admin Username</mat-label>
                 <input 
                   matInput 
                   formControlName="adminUsername"
                   placeholder="admin">
-                <mat-error *ngIf="setupForm.get('adminUsername')?.invalid && setupForm.get('adminUsername')?.touched">
+                <mat-error *ngIf="setupForm.get('adminUsername')?.invalid && setupForm.get('adminUsername')?.touched"></mat-error>
                   {{ getErrorMessage('adminUsername') }}
-                </mat-error>
-              </mat-form-field>
-            </div>
 
             <div class="form-row">
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="w-full"></mat-form-field>
                 <mat-label>Admin Password</mat-label>
                 <input 
                   matInput 
                   type="password"
                   formControlName="adminPassword"
                   placeholder="Enter admin password">
-                <mat-error *ngIf="setupForm.get('adminPassword')?.invalid && setupForm.get('adminPassword')?.touched">
+                <mat-error *ngIf="setupForm.get('adminPassword')?.invalid && setupForm.get('adminPassword')?.touched"></mat-error>
                   {{ getErrorMessage('adminPassword') }}
-                </mat-error>
-              </mat-form-field>
 
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="w-full"></mat-form-field>
                 <mat-label>Confirm Password</mat-label>
                 <input 
                   matInput 
                   type="password"
                   formControlName="adminConfirmPassword"
                   placeholder="Confirm admin password">
-                <mat-error *ngIf="setupForm.get('adminConfirmPassword')?.invalid && setupForm.get('adminConfirmPassword')?.touched">
+                <mat-error *ngIf="setupForm.get('adminConfirmPassword')?.invalid && setupForm.get('adminConfirmPassword')?.touched"></mat-error>
                   {{ getErrorMessage('adminConfirmPassword') }}
-                </mat-error>
-              </mat-form-field>
-            </div>
-        </div>
 
         <div class="step-actions">
           <button mat-button (click)="onPreviousStep()">Previous</button>
@@ -233,8 +197,7 @@
                        setupForm.get('adminPassword')?.invalid || 
                        setupForm.get('adminConfirmPassword')?.invalid">
             Next
-          </div>
-        </div>
+
       </mat-step>
 
       <!-- Step 3: Email Configuration -->
@@ -245,67 +208,56 @@
 
           <div class="form-section">
             <div class="form-row">
-              <mat-checkbox formControlName="smtpEnabled">
+              <mat-checkbox formControlName="smtpEnabled"></mat-checkbox>
                 Enable SMTP Email
-              </mat-checkbox>
 
             <div class="form-row" *ngIf="setupForm.get('smtpEnabled')?.value">
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="w-full"></mat-form-field>
                 <mat-label>SMTP Host</mat-label>
                 <input 
                   matInput 
                   formControlName="smtpHost"
                   placeholder="smtp.gmail.com">
-              </mat-form-field>
 
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="w-full"></mat-form-field>
                 <mat-label>SMTP Port</mat-label>
                 <input 
                   matInput 
                   type="number"
                   formControlName="smtpPort"
                   placeholder="587">
-              </mat-form-field>
-            </div>
 
             <div class="form-row" *ngIf="setupForm.get('smtpEnabled')?.value">
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="w-full"></mat-form-field>
                 <mat-label>SMTP Username</mat-label>
                 <input 
                   matInput 
                   formControlName="smtpUsername"
                   placeholder="your-email@gmail.com">
-              </mat-form-field>
 
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="w-full"></mat-form-field>
                 <mat-label>SMTP Password</mat-label>
                 <input 
                   matInput 
                   type="password"
                   formControlName="smtpPassword"
                   placeholder="Enter SMTP password">
-              </mat-form-field>
-            </div>
 
             <div class="form-row" *ngIf="setupForm.get('smtpEnabled')?.value">
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="w-full"></mat-form-field>
                 <mat-label>From Email</mat-label>
                 <input 
                   matInput 
                   type="email"
                   formControlName="smtpFromEmail"
                   placeholder="noreply@example.com">
-              </mat-form-field>
 
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="w-full"></mat-form-field>
                 <mat-label>From Name</mat-label>
                 <input 
                   matInput 
                   formControlName="smtpFromName"
                   placeholder="Mealie">
-              </mat-form-field>
-            </div>
-        </div>
 
         <div class="step-actions">
           <button mat-button (click)="onPreviousStep()">Previous</button>
@@ -314,8 +266,7 @@
             class="btn btn-primary"
             (click)="onNextStep()">
             Next
-          </div>
-        </div>
+
       </mat-step>
 
       <!-- Step 4: Security Settings -->
@@ -326,75 +277,59 @@
 
           <div class="form-section">
             <div class="form-row">
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="w-full"></mat-form-field>
                 <mat-label>JWT Secret</mat-label>
                 <input 
                   matInput 
                   formControlName="jwtSecret"
                   placeholder="Enter JWT secret">
-                <mat-error *ngIf="setupForm.get('jwtSecret')?.invalid && setupForm.get('jwtSecret')?.touched">
+                <mat-error *ngIf="setupForm.get('jwtSecret')?.invalid && setupForm.get('jwtSecret')?.touched"></mat-error>
                   {{ getErrorMessage('jwtSecret') }}
-                </mat-error>
-              </mat-form-field>
               <button 
                 mat-button 
                 class="btn btn-primary"
                 (click)="onGenerateJwtSecret()">
                 Generate
-              </div>
 
             <div class="form-row">
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="w-full"></mat-form-field>
                 <mat-label>Session Timeout (hours)</mat-label>
                 <input 
                   matInput 
                   type="number"
                   formControlName="sessionTimeout"
                   min="1">
-                <mat-error *ngIf="setupForm.get('sessionTimeout')?.invalid && setupForm.get('sessionTimeout')?.touched">
+                <mat-error *ngIf="setupForm.get('sessionTimeout')?.invalid && setupForm.get('sessionTimeout')?.touched"></mat-error>
                   {{ getErrorMessage('sessionTimeout') }}
-                </mat-error>
-              </mat-form-field>
 
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="w-full"></mat-form-field>
                 <mat-label>Max Login Attempts</mat-label>
                 <input 
                   matInput 
                   type="number"
                   formControlName="maxLoginAttempts"
                   min="1">
-                <mat-error *ngIf="setupForm.get('maxLoginAttempts')?.invalid && setupForm.get('maxLoginAttempts')?.touched">
+                <mat-error *ngIf="setupForm.get('maxLoginAttempts')?.invalid && setupForm.get('maxLoginAttempts')?.touched"></mat-error>
                   {{ getErrorMessage('maxLoginAttempts') }}
-                </mat-error>
-              </mat-form-field>
-            </div>
 
             <div class="form-row">
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline" class="w-full"></mat-form-field>
                 <mat-label>Minimum Password Length</mat-label>
                 <input 
                   matInput 
                   type="number"
                   formControlName="passwordMinLength"
                   min="6">
-                <mat-error *ngIf="setupForm.get('passwordMinLength')?.invalid && setupForm.get('passwordMinLength')?.touched">
+                <mat-error *ngIf="setupForm.get('passwordMinLength')?.invalid && setupForm.get('passwordMinLength')?.touched"></mat-error>
                   {{ getErrorMessage('passwordMinLength') }}
-                </mat-error>
-              </mat-form-field>
-            </div>
 
             <div class="form-row">
-              <mat-checkbox formControlName="requireEmailVerification">
+              <mat-checkbox formControlName="requireEmailVerification"></mat-checkbox>
                 Require Email Verification
-              </mat-checkbox>
-            </div>
 
             <div class="form-row">
-              <mat-checkbox formControlName="allowRegistration">
+              <mat-checkbox formControlName="allowRegistration"></mat-checkbox>
                 Allow User Registration
-              </mat-checkbox>
-            </div>
-        </div>
 
         <div class="step-actions">
           <button mat-button (click)="onPreviousStep()">Previous</button>
@@ -405,6 +340,5 @@
             [disabled]="loading || setupForm.invalid">
             <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner>
             <span *ngIf="!loading">Complete Setup</span>
-          </div>
+
         </mat-step>
-      </div>

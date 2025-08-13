@@ -28,8 +28,7 @@
       (click)="onFilterClick('categories')">
       <mat-icon>category</mat-icon>
       Categories
-    </div>
-    
+
     <button 
       mat-raised-button 
       [color]="activeFilter === 'tags' ? 'accent' : 'primary'"
@@ -71,11 +70,9 @@
 
   <!-- Active Filter Display -->
   <div *ngIf="activeFilter" class="active-filter">
-    <mat-chip class="btn btn-secondary" selected>
+    <mat-chip class="btn btn-secondary" selected></mat-chip>
       <mat-icon>filter_list</mat-icon>
       {{ activeFilter | titlecase }} filter active
-    </mat-chip>
-  </div>
 
   <!-- Search Results Area -->
   <div class="search-results" *ngIf="searchResults.length > 0">
@@ -87,11 +84,8 @@
         (click)="onResultClick(result)">
         <mat-icon>restaurant</mat-icon>
         <span>{{ result.name }}</span>
-      </div>
-  </div>
 
   <!-- Empty State -->
   <div class="empty-state" *ngIf="!searchResults.length && !searchQuery">
     <mat-icon>search</mat-icon>
     <p class="text-secondary mb-sm">Start typing to search for recipes</p>
-  </div>

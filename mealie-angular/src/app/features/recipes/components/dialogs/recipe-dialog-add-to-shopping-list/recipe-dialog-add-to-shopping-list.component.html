@@ -5,42 +5,39 @@
     [(modelValue)]="open"
     title="Add to List"
     icon="shopping_cart_checkout"
-    (modelValueChange)="onDialogChange($event)">
-    
+    (modelValueChange)="onDialogChange($event)"></app-base-dialog></<app-base-dialog
+    *ngIf="shoppingListDialog && ready"
+    [(modelValue)]="open"
+    title="Add to List"
+    icon="shopping_cart_checkout"
+    (modelValueChange)="onDialogChange($event)"></app-base-dialog>>
     <div *ngIf="!shoppingListChoices.length" class="no-lists-container">
-      <app-base-page-title>
+      <app-base-page-title></app-base-page-title></<app-base-page-title></app-base-page-title>></app-base-page-title>
         <ng-container title>
           No shopping lists found
         </ng-container>
-      </app-base-page-title>
-    </div>
 
-    <section class="page-container">
+    <section class="page-container"></section>
       <mat-card
         *ngFor="let list of shoppingListChoices"
         
-        class="shopping-list-card"
-        (click)="openShoppingListIngredientDialog(list)" class="card">
-        <mat-card-title class="card-title card">
+        class="shopping-list-card card"
+        (click)="openShoppingListIngredientDialog(list)" >
+        <mat-card-title class="card-title card"></mat-card-title>
           {{ list.name }}
-        </mat-card-title>
-      </section>
-    </div>
 
     <div class="dialog-actions">
       <button mat-button
               color="grey"
               (click)="closeDialog()">
         Cancel
-      </div>
-      
-      <section class="page-container">
+
+      <section class="page-container"></section>
         <mat-checkbox
           [(ngModel)]="preferences.viewAllLists"
           (change)="setShowAllToggled()"
           class="btn btn-primary">
           Show All
-        </section>
 
   <!-- Shopping List Ingredients Dialog -->
   <app-base-dialog
@@ -52,8 +49,16 @@
     submitText="Add to List"
     [canSubmit]="true"
     (submit)="addRecipesToList()"
-    (modelValueChange)="onDialogChange($event)">
-    
+    (modelValueChange)="onDialogChange($event)"></app-base-dialog></<app-base-dialog
+    *ngIf="shoppingListIngredientDialog"
+    [(modelValue)]="open"
+    [title]="selectedShoppingList?.name || 'Add to List'"
+    icon="shopping_cart_checkout"
+    width="70%"
+    submitText="Add to List"
+    [canSubmit]="true"
+    (submit)="addRecipesToList()"
+    (modelValueChange)="onDialogChange($event)"></app-base-dialog>>
     <section class="page-container">
       <mat-card
         *ngFor="let recipeSection of recipeIngredientSections; let recipeSectionIndex = index"
@@ -65,13 +70,11 @@
         <!-- Recipe Title -->
         <mat-card-title *ngIf="recipeIngredientSections.length  class="card"> 1" class="recipe-title">
           
-            <article class="card">
+            <article class="card"></article>
               {{ recipeSection.recipeName }}
             
             <div *ngIf="recipeSection.recipeScale > 1" class="recipe-scale">
               (Quantity: {{ recipeSection.recipeScale }})
-            </div>
-        </article>
 
         <!-- Ingredient Sections -->
         <div class="ingredient-sections">
@@ -81,9 +84,8 @@
             class="ingredient-section">
             
             <!-- Section Title -->
-            <mat-card-title *ngIf="ingredientSection.sectionName" class="ingredient-title card">
+            <mat-card-title *ngIf="ingredientSection.sectionName" class="ingredient-title card"></mat-card-title>
               {{ ingredientSection.sectionName }}
-            </mat-card-title>
 
             <!-- Ingredients Grid -->
             <div class="ingredient-grid"
@@ -98,12 +100,14 @@
                 <mat-checkbox
                   [checked]="ingredientData.checked"
                   class="btn btn-secondary ingredient-checkbox">
-                </div>
 
                   <app-recipe-ingredient-list-item
                     [ingredient]="ingredientData.ingredient"
                     [disableAmount]="ingredientData.disableAmount"
-                    [scale]="recipeSection.recipeScale">
+                    [scale]="recipeSection.recipeScale"></app-recipe-ingredient-list-item></<app-recipe-ingredient-list-item
+                    [ingredient]="ingredientData.ingredient"
+                    [disableAmount]="ingredientData.disableAmount"
+                    [scale]="recipeSection.recipeScale"></app-recipe-ingredient-list-item>>
                   </mat-card-title>
                 
               </section>
@@ -123,5 +127,30 @@
             event: 'check'
           }
         ]"
-        (buttonClick)="bulkCheckIngredients($event)">
-      </div>
+        (buttonClick)="bulkCheckIngredients($event)"></app-base-button-group></<app-base-button-group
+        [buttons]="[
+          {
+            icon: 'check_box_outline_blank',
+            text: 'Uncheck All Items',
+            event: 'uncheck'
+          },
+          {
+            icon: 'check_box',
+            text: 'Check All Items',
+            event: 'check'
+          }
+        ]"
+        (buttonClick)="bulkCheckIngredients($event)"></app-base-button-group>></<app-base-button-group
+        [buttons]="[
+          {
+            icon: 'check_box_outline_blank',
+            text: 'Uncheck All Items',
+            event: 'uncheck'
+          },
+          {
+            icon: 'check_box',
+            text: 'Check All Items',
+            event: 'check'
+          }
+        ]"
+        (buttonClick)="bulkCheckIngredients($event)"></app-base-button-group>>>

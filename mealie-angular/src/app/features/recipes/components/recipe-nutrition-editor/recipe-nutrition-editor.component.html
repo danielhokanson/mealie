@@ -3,7 +3,6 @@
   <div *ngIf="loading" class="flex items-center justify-center py-xl">
     <mat-spinner diameter="50"></mat-spinner>
     <p class="text-secondary mb-sm">Calculating nutrition...</p>
-  </div>
 
   <!-- Nutrition Editor Content -->
   <div *ngIf="!loading && recipe" class="nutrition-content">
@@ -11,7 +10,6 @@
     <div class="nutrition-header">
       <h2 class="text-xl font-medium mb-md">Nutrition Information</h2>
       <p class="text-secondary mb-sm">Edit nutrition values for {{ recipe.name }}</p>
-    </div>
 
     <!-- Controls -->
     <div class="nutrition-controls">
@@ -23,7 +21,7 @@
           [disabled]="loading">
           <mat-icon>calculate</mat-icon>
           Calculate Nutrition
-        </div>
+
         <button 
           mat-raised-button 
           class="btn btn-secondary"
@@ -31,14 +29,14 @@
           [class.active]="autoCalculate">
           <mat-icon>auto_fix_high</mat-icon>
           Auto Calculate
-        </div>
+
         <button 
           mat-raised-button 
           class="btn btn-error"
           (click)="onResetNutrition()">
           <mat-icon>refresh</mat-icon>
           Reset
-        </div>
+
       </section>
 
       <div class="control-group">
@@ -48,7 +46,6 @@
           (click)="onToggleAdvanced()">
           <mat-icon>{{ showAdvanced ? 'expand_less' : 'expand_more' }}</mat-icon>
           {{ showAdvanced ? 'Hide' : 'Show' }} Advanced
-        </div>
 
     <!-- Nutrition Summary -->
     <div class="nutrition-summary">
@@ -57,28 +54,26 @@
         <div class="summary-item">
           <span class="summary-label">Calories</span>
           <span class="summary-value">{{ getNutritionSummary().totalCalories }} cal</span>
-        </div>
+
         <div class="summary-item">
           <span class="summary-label">Protein</span>
           <span class="summary-value">{{ getNutritionSummary().totalProtein }}g</span>
-        </div>
+
         <div class="summary-item">
           <span class="summary-label">Fat</span>
           <span class="summary-value">{{ getNutritionSummary().totalFat }}g</span>
-        </div>
+
         <div class="summary-item">
           <span class="summary-label">Carbs</span>
           <span class="summary-value">{{ getNutritionSummary().totalCarbs }}g</span>
-        </div>
+
         <div class="summary-item">
           <span class="summary-label">Fiber</span>
           <span class="summary-value">{{ getNutritionSummary().totalFiber }}g</span>
-        </div>
+
         <div class="summary-item">
           <span class="summary-label">Sugar</span>
           <span class="summary-value">{{ getNutritionSummary().totalSugar }}g</span>
-        </div>
-    </div>
 
     <!-- Nutrition Form -->
     <form [formGroup]="nutritionForm" class="nutrition-form">
@@ -100,33 +95,28 @@
                   [max]="field.max"
                   [placeholder]="'0'">
                 <span matSuffix>{{ field.unit }}</span>
-                <mat-error *ngIf="nutritionForm.get(field.key)?.invalid && nutritionForm.get(field.key)?.touched">
+                <mat-error *ngIf="nutritionForm.get(field.key)?.invalid && nutritionForm.get(field.key)?.touched"></mat-error>
                   {{ getFieldError(field.key) }}
-                </mat-error>
               </mat-form-field>
-            </div>
+
             <div class="field-progress" *ngIf="getFieldValue(field.key) > 0">
               <div class="progress-bar">
                 <div 
                   class="progress-fill"
                   [style.width.%]="getDailyValuePercentage(getFieldValue(field.key), field.key)"
                   [style.background-color]="getProgressColor(getDailyValuePercentage(getFieldValue(field.key), field.key))">
-                </div>
+
               <span class="progress-text">{{ getDailyValuePercentage(getFieldValue(field.key), field.key) }}% DV</span>
-            </div>
-        </div>
 
       <!-- Advanced Nutrition -->
       <mat-expansion-panel 
         *ngIf="showAdvanced" 
         class="advanced-nutrition"
         [expanded]="true">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
+        <mat-expansion-panel-header></mat-expansion-panel-header>
+          <mat-panel-title></mat-panel-title>
             <mat-icon>science</mat-icon>
             Advanced Nutrition
-          </mat-panel-title>
-        </mat-expansion-panel-header>
 
         <div class="nutrition-grid">
           <div 
@@ -143,22 +133,18 @@
                   [max]="field.max"
                   [placeholder]="'0'">
                 <span matSuffix>{{ field.unit }}</span>
-                <mat-error *ngIf="nutritionForm.get(field.key)?.invalid && nutritionForm.get(field.key)?.touched">
+                <mat-error *ngIf="nutritionForm.get(field.key)?.invalid && nutritionForm.get(field.key)?.touched"></mat-error>
                   {{ getFieldError(field.key) }}
-                </mat-error>
               </mat-form-field>
-            </div>
+
             <div class="field-progress" *ngIf="getFieldValue(field.key) > 0">
               <div class="progress-bar">
                 <div 
                   class="progress-fill"
                   [style.width.%]="getDailyValuePercentage(getFieldValue(field.key), field.key)"
                   [style.background-color]="getProgressColor(getDailyValuePercentage(getFieldValue(field.key), field.key))">
-                </div>
+
               <span class="progress-text">{{ getDailyValuePercentage(getFieldValue(field.key), field.key) }}% DV</span>
-            </div>
-        </div>
-      </div>
 
       <!-- Form Actions -->
       <div class="flex justify-end gap-sm mt-lg">
@@ -169,13 +155,11 @@
           [disabled]="loading || nutritionForm.invalid">
           <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner>
           <span *ngIf="!loading">Save Nutrition</span>
-        </div>
+
       </form>
-    </div>
 
   <!-- No Recipe State -->
   <div *ngIf="!loading && !recipe" class="no-recipe">
     <mat-icon class="no-recipe-icon">restaurant</mat-icon>
     <h3 class="text-lg font-medium mb-sm">No Recipe Selected</h3>
     <p class="text-secondary mb-sm">Please select a recipe to edit its nutrition information.</p>
-  </div>

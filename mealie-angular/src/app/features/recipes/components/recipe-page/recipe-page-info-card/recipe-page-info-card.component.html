@@ -2,26 +2,28 @@
   <div class="info-card-layout" [class.landscape]="landscape">
     <app-recipe-page-info-card-image
       *ngIf="landscape"
-      [recipe]="recipe">
-    </div>
-    
-    <mat-card class="info-card" [class.full-width]="landscape" class="card">
+      [recipe]="recipe"></app-recipe-page-info-card-image></<app-recipe-page-info-card-image
+      *ngIf="landscape"
+      [recipe]="recipe"></app-recipe-page-info-card-image>></<app-recipe-page-info-card-image
+      *ngIf="landscape"
+      [recipe]="recipe"></app-recipe-page-info-card-image>>>
+    <mat-card class="info-card card" [class.full-width]="landscape" >
       <mat-card-content class="info-content card">
-        <article class="card">
+        <article class="card"></article>
           <h1 class="recipe-title text-2xl font-medium mb-md">{{ recipe.name }}</h1>
           <app-recipe-rating
             [recipeId]="recipe.id"
             [slug]="recipe.id"
-            [modelValue]="recipe.rating || 0">
-          </article>
-        </mat-card-content>
-        
+            [modelValue]="recipe.rating || 0"></app-recipe-rating></<app-recipe-rating
+            [recipeId]="recipe.id"
+            [slug]="recipe.id"
+            [modelValue]="recipe.rating || 0"></app-recipe-rating>>
+
         <mat-divider class="title-divider"></mat-divider>
         
         <div *ngIf="recipe.description" class="recipe-description">
-          <app-safe-markdown [source]="recipe.description"></app-safe-markdown>
-        </div>
-        
+          <app-safe-markdown [source]="recipe.description"></app-safe-markdow></app-safe-markdown>
+
         <mat-divider *ngIf="recipe.description" class="description-divider"></mat-divider>
         
         <article class="card">
@@ -30,20 +32,28 @@
               <app-recipe-yield
                 [yieldQuantity]="recipe.recipeYieldQuantity"
                 [yieldText]="recipe.recipeYield"
-                [scale]="recipeScale">
-              </div>
-            </div>
-            
+                [scale]="recipeScale"></app-recipe-yield></<app-recipe-yield
+                [yieldQuantity]="recipe.recipeYieldQuantity"
+                [yieldText]="recipe.recipeYield"
+                [scale]="recipeScale"></app-recipe-yield>></<app-recipe-yield
+                [yieldQuantity]="recipe.recipeYieldQuantity"
+                [yieldText]="recipe.recipeYield"
+                [scale]="recipeScale"></app-recipe-yield>>>
+
             <div *ngIf="isOwnGroup" class="last-made-section">
-              <app-recipe-last-made [recipe]="recipe"></app-recipe-last-made>
-            </div>
-          
+              <app-recipe-last-made [recipe]="recipe"></app-recipe-last-mad></app-recipe-last-made>
+
           <div *ngIf="recipe.prepTime || recipe.totalTime" class="time-section">
             <app-recipe-time-card
               [prepTime]="recipe.prepTime"
               [totalTime]="recipe.totalTime"
-              [performTime]="recipe.totalTime">
-            </div>
+              [performTime]="recipe.totalTime"></app-recipe-time-card></<app-recipe-time-card
+              [prepTime]="recipe.prepTime"
+              [totalTime]="recipe.totalTime"
+              [performTime]="recipe.totalTime"></app-recipe-time-card>></<app-recipe-time-card
+              [prepTime]="recipe.prepTime"
+              [totalTime]="recipe.totalTime"
+              [performTime]="recipe.totalTime"></app-recipe-time-card>>>
           </article>
       </mat-card>
     </article>
@@ -51,4 +61,7 @@
     <app-recipe-page-info-card-image
       *ngIf="!landscape"
       [recipe]="recipe"
-      class="recipe-image">
+      class="recipe-image"></app-recipe-page-info-card-image></<app-recipe-page-info-card-image
+      *ngIf="!landscape"
+      [recipe]="recipe"
+      class="recipe-image"></app-recipe-page-info-card-image>>

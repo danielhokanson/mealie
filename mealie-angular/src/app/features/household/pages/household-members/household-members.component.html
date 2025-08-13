@@ -1,14 +1,12 @@
 <section class="page-container">
     <mat-card class="card">
-        <mat-card-header class="card">
-            <mat-card-title class="card">Household Members</mat-card-title>
-            <mat-card-subtitle class="card">Manage your household members and their roles</mat-card-subtitle>
-        </mat-card-header>
+        <mat-card-header class="card"></mat-card-header>
+            <mat-card-title >Household Members</mat-card-title>
+            <mat-card-subtitle >Manage your household members and their roles</mat-card-subtitle>
 
         <mat-card-content class="card">
             <div *ngIf="loading" class="flex items-center justify-center py-xl">
                 <p class="text-secondary mb-sm">Loading household data...</p>
-            </div>
 
             <div *ngIf="!loading && household" class="flex-1">
                 <!-- Invite New Member -->
@@ -16,24 +14,19 @@
                     <h3 class="text-lg font-medium mb-sm">Invite New Member</h3>
                     <form [formGroup]="inviteForm" (ngSubmit)="inviteMember()" class="invite-form">
                         <div class="form-row">
-                            <mat-form-field appearance="outline" class="w-full">
+                            <mat-form-field appearance="outline" class="w-full"></mat-form-field>
                                 <mat-label>Email Address</mat-label>
                                 <input matInput formControlName="email" type="email" placeholder="Enter email address">
-                                <mat-error *ngIf="inviteForm.get('email')?.hasError('required')">
+                                <mat-error *ngIf="inviteForm.get('email')?.hasError('required')"></mat-error>
                                     Email is required
-                                </mat-error>
-                                <mat-error *ngIf="inviteForm.get('email')?.hasError('email')">
+                                <mat-error *ngIf="inviteForm.get('email')?.hasError('email')"></mat-error>
                                     Please enter a valid email address
-                                </mat-error>
-                            </mat-form-field>
 
-                            <mat-form-field appearance="outline" class="w-full">
+                            <mat-form-field appearance="outline" class="w-full"></mat-form-field>
                                 <mat-label>Role</mat-label>
-                                <mat-select formControlName="role">
+                                <mat-select formControlName="role"></mat-select>
                                     <mat-option value="member">Member</mat-option>
                                     <mat-option value="admin">Admin</mat-option>
-                                </mat-select>
-                            </mat-form-field>
 
                             <button 
                                 mat-raised-button 
@@ -42,10 +35,8 @@
                                 [disabled]="!inviteForm.valid || loading">
                                 <mat-icon>person_add</mat-icon>
                                 Invite
-                            </div>
+
                         </form>
-                    </div>
-                </div>
 
                 <!-- Current Members -->
                 <div class="members-section">
@@ -53,7 +44,6 @@
                     
                     <div *ngIf="members.length === 0" class="no-members">
                         <p class="text-secondary mb-sm">No members found. Invite someone to get started!</p>
-                    </div>
 
                     <mat-list *ngIf="members.length > 0">
                         <mat-list-item *ngFor="let member of members" class="member-item">
@@ -61,7 +51,6 @@
                                 <img *ngIf="member.avatar" [src]="member.avatar" [alt]="member.username">
                                 <div *ngIf="!member.avatar" class="avatar-placeholder">
                                     {{ member.username.charAt(0).toUpperCase() }}
-                                </div>
 
                             <div matListItemTitle class="member-info">
                                 <div class="member-name">{{ member.username }}</div>
@@ -72,7 +61,6 @@
                                     [style.background-color]="getRoleColor(member.role || 'member')"
                                     class="role-chip">
                                     {{ member.role || 'member' }}
-                                </div>
 
                                 <div class="action-buttons" *ngIf="canManageMembers()">
                                     <button 
@@ -80,32 +68,28 @@
                                         [matMenuTriggerFor]="roleMenu"
                                         (click)="$event.stopPropagation()">
                                         <mat-icon>more_vert</mat-icon>
-                                    </div>
 
                                     <mat-menu #roleMenu="matMenu">
                                         <button mat-menu-item (click)="updateMemberRole(member.id, 'member')">
                                             <mat-icon>person</mat-icon>
                                             Set as Member
-                                        </button>
+
                                         <button mat-menu-item (click)="updateMemberRole(member.id, 'admin')">
                                             <mat-icon>admin_panel_settings</mat-icon>
                                             Set as Admin
-                                        </button>
+
                                         <button mat-menu-item (click)="removeMember(member.id)" class="danger">
                                             <mat-icon>person_remove</mat-icon>
                                             Remove Member
-                                        </button>
+
                                     </mat-menu>
-                                </div>
-                        </div>
+
                     </mat-list-item>
                 </mat-list>
 
             <div *ngIf="!loading && !household" class="no-household">
                 <p class="text-secondary mb-sm">No household found. Please create or join a household first.</p>
-            </div>
-        </div>
-    </mat-card-content>
+
 </mat-card>
 
 </section>

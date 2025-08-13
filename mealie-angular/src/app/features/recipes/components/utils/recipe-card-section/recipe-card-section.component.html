@@ -6,7 +6,7 @@
       <div class="title-section" *ngIf="title">
         <mat-icon class="title-icon">{{ displayTitleIcon }}</mat-icon>
         <span class="title-text">{{ title }}</span>
-      </div>
+
     </ng-content>
 
     <span class="spacer"></span>
@@ -18,7 +18,6 @@
             class="random-button">
       <mat-icon>casino</mat-icon>
       <span class="button-text">Random</span>
-    </button>
 
     <!-- Sort Menu -->
     <button mat-icon-button
@@ -28,18 +27,14 @@
             class="sort-button">
       <mat-icon>{{ preferences.sortIcon }}</mat-icon>
       <span class="button-text">Sort</span>
-    </button>
 
-    <mat-menu #sortMenu="matMenu">
+    <mat-menu #sortMenu="matMenu"></mat-menu>
       <mat-list class="flex flex-col gap-sm">
-        <mat-list-item *ngFor="let item of sortMenuItems"
+        <mat-list-item *ngFor="let item of sortMenuItems"</mat-list-item></mat-list>
                        (click)="sortRecipes(item.event)"
                        class="sort-menu-item">
           <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
           <span matListItemTitle>{{ item.title }}</span>
-        </mat-list-item>
-      </mat-list>
-    </mat-menu>
 
     <!-- Context Menu -->
     <button mat-icon-button
@@ -47,18 +42,14 @@
             [matMenuTriggerFor]="contextMenu"
             class="context-button">
       <mat-icon>more_vert</mat-icon>
-    </button>
 
-    <mat-menu #contextMenu="matMenu">
+    <mat-menu #contextMenu="matMenu"></mat-menu>
       <mat-list class="flex flex-col gap-sm">
-        <mat-list-item *ngFor="let item of contextMenuItems"
+        <mat-list-item *ngFor="let item of contextMenuItems"</mat-list-item></mat-list>
                        (click)="onContextMenuClick(item.event)"
                        class="context-menu-item">
           <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
           <span matListItemTitle>{{ item.title }}</span>
-        </mat-list-item>
-      </mat-list>
-    </mat-menu>
   </mat-toolbar>
 
   <!-- Recipe Cards -->
@@ -75,10 +66,13 @@
           [rating]="recipe.rating"
           [image]="recipe.image"
           [tags]="recipe.tags"
-          [recipeId]="recipe.id">
-        </app-recipe-card>
-      </div>
-    </div>
+          [recipeId]="recipe.id"></app-recipe-card></<app-recipe-card</app-recipe-card></app-recipe-card<>[name]="recipe.name"
+          [description]="recipe.description"
+          [slug]="recipe.slug"
+          [rating]="recipe.rating"
+          [image]="recipe.image"
+          [tags]="recipe.tags"
+          [recipeId]="recipe.id">>
 
     <!-- Mobile Cards -->
     <div *ngIf="useMobileCards" class="mobile-cards">
@@ -92,10 +86,13 @@
           [rating]="recipe.rating"
           [image]="recipe.image"
           [tags]="recipe.tags"
-          [recipeId]="recipe.id">
-        </app-recipe-card-mobile>
-      </div>
-    </div>
+          [recipeId]="recipe.id"></app-recipe-card-mobile></<app-recipe-card-mobile</app-recipe-card-mobile></app-recipe-card-mobile<>[name]="recipe.name"
+          [description]="recipe.description"
+          [slug]="recipe.slug"
+          [rating]="recipe.rating"
+          [image]="recipe.image"
+          [tags]="recipe.tags"
+          [recipeId]="recipe.id">>
 
     <!-- Infinite Scroll Trigger -->
     <div class="scroll-trigger" (intersection)="handleInfiniteScroll()"></div>
@@ -104,12 +101,9 @@
     <div *ngIf="loading" class="flex items-center justify-center py-xl">
       <mat-spinner diameter="40"></mat-spinner>
       <p class="loading-text text-secondary mb-sm">Loading more recipes...</p>
-    </div>
 
     <!-- No Recipes Message -->
     <div *ngIf="recipes.length === 0 && !loading" class="no-recipes">
       <mat-icon class="empty-icon">restaurant_menu</mat-icon>
       <p class="text-lg font-medium mb-sm">No recipes found</p>
-    </div>
-  </div>
-</div>
+

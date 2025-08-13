@@ -2,7 +2,10 @@
   <app-recipe-page-info-card
     [recipe]="recipe"
     [recipeScale]="recipeScale"
-    [landscape]="landscape">
+    [landscape]="landscape"></app-recipe-page-info-card></<app-recipe-page-info-card
+    [recipe]="recipe"
+    [recipeScale]="recipeScale"
+    [landscape]="landscape"></app-recipe-page-info-card>>
   </article>
   
   <mat-divider></mat-divider>
@@ -22,4 +25,19 @@
     (edit)="setMode(PageMode.EDIT)"
     (save)="onSave()"
     (delete)="onDelete()"
-    (print)="printRecipe()">
+    (print)="printRecipe()"></app-recipe-action-menu></<app-recipe-action-menu
+    [recipe]="recipe"
+    [slug]="recipe.slug"
+    [recipeScale]="recipeScale"
+    [canEdit]="canEditRecipe"
+    [name]="recipe.name"
+    [loggedIn]="isOwnGroup"
+    [open]="isEditMode"
+    [recipeId]="recipe.id"
+    class="action-menu"
+    (close)="setMode(PageMode.VIEW)"
+    (json)="toggleEditMode()"
+    (edit)="setMode(PageMode.EDIT)"
+    (save)="onSave()"
+    (delete)="onDelete()"
+    (print)="printRecipe()"></app-recipe-action-menu>>

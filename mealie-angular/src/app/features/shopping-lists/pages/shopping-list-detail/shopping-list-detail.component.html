@@ -3,7 +3,6 @@
   <div *ngIf="loading" class="flex items-center justify-center py-xl">
     <mat-spinner diameter="50"></mat-spinner>
     <p class="text-secondary mb-sm">Loading shopping list...</p>
-  </div>
 
   <!-- Error State -->
   <div *ngIf="error && !loading" class="error-container">
@@ -12,8 +11,6 @@
     <p class="text-secondary mb-sm">Unable to load the shopping list. Please try again.</p>
     <button mat-raised-button class="btn btn-primary" (click)="loadShoppingList(shoppingList?.id || '')">
       Retry
-    </button>
-  </div>
 
   <!-- Shopping List Content -->
   <div *ngIf="shoppingList && !loading" class="shopping-list-content">
@@ -23,10 +20,8 @@
         <h1 class="text-2xl font-medium mb-md">{{ shoppingList.name }}</h1>
         <div class="list-meta">
           <span>Created {{ getFormattedDate(shoppingList.createdAt) }}</span>
-          <span *ngIf="shoppingList.updatedAt && shoppingList.updatedAt !== shoppingList.createdAt">
+          <span *ngIf="shoppingList.updatedAt && shoppingList.updatedAt !== shoppingList.createdAt"></span>
             • Updated {{ getFormattedDate(shoppingList.updatedAt) }}
-          </span>
-        </div>
 
       <!-- Action Buttons -->
       <div class="list-actions">
@@ -35,68 +30,60 @@
           (click)="onShareList()" 
           matTooltip="Share list">
           <mat-icon>share</mat-icon>
-        </div>
 
         <button 
           mat-icon-button 
           (click)="onPrintList()" 
           matTooltip="Print list">
           <mat-icon>print</mat-icon>
-        </div>
 
         <button 
           mat-icon-button 
           [matMenuTriggerFor]="listMenu" 
           matTooltip="More options">
           <mat-icon>more_vert</mat-icon>
-        </div>
 
         <mat-menu #listMenu="matMenu">
           <button mat-menu-item (click)="onEditList()">
             <mat-icon>edit</mat-icon>
             <span>Edit List</span>
-          </button>
+
           <mat-divider></mat-divider>
           <button mat-menu-item (click)="onDeleteList()" class="delete-action">
             <mat-icon>delete</mat-icon>
             <span>Delete List</span>
-          </button>
+
         </mat-menu>
-      </div>
 
     <!-- Progress Section -->
     <div class="progress-section">
       <div class="progress-info">
-        <span class="progress-text">
+        <span class="progress-text"></span>
           {{ getCompletedItemsCount() }} of {{ getTotalItemsCount() }} items
-        </span>
-        <span class="progress-percentage">
+        <span class="progress-percentage"></span>
           {{ getProgressPercentage() | number:'1.0-0' }}%
-        </span>
-      </div>
+
       <mat-progress-bar 
         [value]="getProgressPercentage()"
         [color]="getProgressPercentage() === 100 ? 'accent' : 'primary'">
-      </div>
+
     </section>
 
     <!-- Add Item Section -->
     <mat-card class="add-item-section card">
-      <mat-card-header class="card">
-        <mat-card-title class="card">Add New Item</mat-card-title>
-      </mat-card-header>
+      <mat-card-header class="card"></mat-card-header>
+        <mat-card-title >Add New Item</mat-card-title>
       <mat-card-content class="card">
         <form [formGroup]="newItemForm" (ngSubmit)="onAddItem()" class="add-item-form">
           <div class="form-row">
-            <mat-form-field appearance="outline" class="title-field w-full">
+            <mat-form-field appearance="outline" class="title-field w-full"></mat-form-field>
               <mat-label>Item Name</mat-label>
               <input 
                 matInput 
                 formControlName="title"
                 placeholder="Enter item name">
-            </mat-form-field>
 
-            <mat-form-field appearance="outline" class="quantity-field w-full">
+            <mat-form-field appearance="outline" class="quantity-field w-full"></mat-form-field>
               <mat-label>Quantity</mat-label>
               <input 
                 matInput 
@@ -104,26 +91,21 @@
                 formControlName="quantity"
                 min="0"
                 step="0.1">
-            </mat-form-field>
 
-            <mat-form-field appearance="outline" class="unit-field w-full">
+            <mat-form-field appearance="outline" class="unit-field w-full"></mat-form-field>
               <mat-label>Unit</mat-label>
               <input 
                 matInput 
                 formControlName="unit"
                 placeholder="e.g., cups, grams">
-            </mat-form-field>
-          </div>
 
           <div class="form-row">
-            <mat-form-field appearance="outline" class="note-field w-full">
+            <mat-form-field appearance="outline" class="note-field w-full"></mat-form-field>
               <mat-label>Note (optional)</mat-label>
               <input 
                 matInput 
                 formControlName="note"
                 placeholder="Add a note">
-            </mat-form-field>
-          </div>
 
           <!-- Labels Selection -->
           <div class="labels-section" *ngIf="labels.length > 0">
@@ -135,8 +117,6 @@
                 (change)="onLabelToggle(label.id)"
                 [style.color]="label.color">
                 {{ label.name }}
-              </div>
-            </div>
 
           <div class="flex justify-end gap-sm mt-lg">
             <button 
@@ -145,92 +125,79 @@
               type="submit"
               [disabled]="newItemForm.invalid">
               Add Item
-            </div>
+
           </form>
-        </mat-card-content>
+
       </mat-card>
 
     <!-- Items Section -->
     <mat-card class="items-section card">
-      <mat-card-header class="card">
-        <mat-card-title class="card">Shopping Items</mat-card-title>
-        <mat-card-subtitle class="card">{{ getTotalItemsCount() }} items</mat-card-subtitle>
-      </mat-card-header>
+      <mat-card-header class="card"></mat-card-header>
+        <mat-card-title >Shopping Items</mat-card-title>
+        <mat-card-subtitle >{{ getTotalItemsCount() }} items</mat-card-subtitle>
       <mat-card-content class="card">
         <!-- Items by Label -->
         <mat-expansion-panel *ngFor="let label of getUniqueLabels()" class="label-panel">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
+          <mat-expansion-panel-header></mat-expansion-panel-header>
+            <mat-panel-title></mat-panel-title>
               <div class="label-header">
                 <span class="label-color" [style.background-color]="label.color"></span>
                 {{ label.name }}
                 <span class="item-count">{{ getItemsByLabel(label.id).length }}</span>
-              </div>
-            </mat-panel-title>
-          </mat-expansion-panel-header>
 
           <mat-list class="flex flex-col gap-sm">
-            <mat-list-item *ngFor="let item of getItemsByLabel(label.id)" class="item-row">
+            <mat-list-item *ngFor="let item of getItemsByLabel(label.id)" class="item-row"></mat-list-item>
               <mat-checkbox 
                 [checked]="item.checked"
                 (change)="onToggleItem(item)"
                 class="item-checkbox">
-              </mat-list-item>
               
               <div class="item-content" [class.checked]="item.checked">
                 <span class="item-title">{{ item.title }}</span>
-                <span *ngIf="item.quantity" class="item-quantity">
+                <span *ngIf="item.quantity" class="item-quantity"></span>
                   {{ item.quantity }}
                   <span *ngIf="item.unit">{{ item.unit }}</span>
-                </span>
                 <span *ngIf="item.note" class="item-note">({{ item.note }})</span>
-              </div>
 
               <button 
                 mat-icon-button 
-                class="btn btn-error"
+                class="btn btn-error delete-button"
                 (click)="onDeleteItem(item)"
-                class="delete-button">
+                >
                 <mat-icon>delete</mat-icon>
               </mat-list>
             </mat-expansion-panel>
-          </mat-card-content>
+
         </mat-card>
 
         <!-- Unlabeled Items -->
         <mat-expansion-panel *ngIf="getUnlabeledItems().length > 0" class="unlabeled-panel">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
+          <mat-expansion-panel-header></mat-expansion-panel-header>
+            <mat-panel-title></mat-panel-title>
               <div class="label-header">
                 <span class="label-color" style="background-color: #ccc;"></span>
                 No Label
                 <span class="item-count">{{ getUnlabeledItems().length }}</span>
-              </div>
-            </mat-panel-title>
-          </mat-expansion-panel-header>
 
           <mat-list class="flex flex-col gap-sm">
-            <mat-list-item *ngFor="let item of getUnlabeledItems()" class="item-row">
+            <mat-list-item *ngFor="let item of getUnlabeledItems()" class="item-row"></mat-list-item>
               <mat-checkbox 
                 [checked]="item.checked"
                 (change)="onToggleItem(item)"
                 class="item-checkbox">
-              </mat-list-item>
               
               <div class="item-content" [class.checked]="item.checked">
                 <span class="item-title">{{ item.title }}</span>
-                <span *ngIf="item.quantity" class="item-quantity">
+                <span *ngIf="item.quantity" class="item-quantity"></span>
                   {{ item.quantity }}
                   <span *ngIf="item.unit">{{ item.unit }}</span>
-                </span>
                 <span *ngIf="item.note" class="item-note">({{ item.note }})</span>
-              </div>
 
               <button 
                 mat-icon-button 
-                class="btn btn-error"
+                class="btn btn-error delete-button"
                 (click)="onDeleteItem(item)"
-                class="delete-button">
+                >
                 <mat-icon>delete</mat-icon>
               </mat-list>
             </mat-expansion-panel>
@@ -240,4 +207,3 @@
           <mat-icon class="empty-icon">shopping_cart</mat-icon>
           <h3 class="text-lg font-medium mb-sm">No Items Yet</h3>
           <p class="text-secondary mb-sm">Add your first item to get started</p>
-        </div>

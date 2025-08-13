@@ -1,16 +1,16 @@
-<div class="admin-dashboard-container">
+<section class="page-container">
   <!-- Loading State -->
-  <div *ngIf="loading" class="loading-container">
+  <div *ngIf="loading" class="flex items-center justify-center py-xl">
     <mat-spinner diameter="50"></mat-spinner>
-    <p>Loading admin dashboard...</p>
+    <p class="text-secondary mb-sm">Loading admin dashboard...</p>
   </div>
 
   <!-- Error State -->
-  <div *ngIf="error && !loading" class="error-container">
+  <div *ngIf="error && !loading" class="flex flex-col items-center justify-center py-xl text-center">
     <mat-icon class="error-icon">error</mat-icon>
-    <h3>Error Loading Dashboard</h3>
-    <p>Unable to load the admin dashboard. Please try again.</p>
-    <button mat-raised-button color="primary" (click)="loadDashboardData()">
+    <h3 class="text-lg font-medium mb-sm">Error Loading Dashboard</h3>
+    <p class="text-secondary mb-sm">Unable to load the admin dashboard. Please try again.</p>
+    <button mat-raised-button class="btn btn-primary" (click)="loadDashboardData()">
       Retry
     </button>
   </div>
@@ -19,75 +19,75 @@
   <div *ngIf="!loading && !error" class="dashboard-content">
     <!-- Header -->
     <div class="dashboard-header">
-      <h1>Admin Dashboard</h1>
-      <p>System overview and management tools</p>
+      <h1 class="text-2xl font-medium mb-md">Admin Dashboard</h1>
+      <p class="text-secondary mb-sm">System overview and management tools</p>
     </div>
 
     <!-- Statistics Cards -->
     <div class="stats-grid">
-      <mat-card class="stat-card">
-        <mat-card-content>
+      <mat-card class="stat-card card">
+        <mat-card-content class="card">
           <div class="stat-icon">
             <mat-icon>restaurant</mat-icon>
           </div>
-          <div class="stat-content">
-            <h3>{{ stats.totalRecipes }}</h3>
-            <p>Total Recipes</p>
-          </div>
+          
+            <h3 class="text-lg font-medium mb-sm">{{ stats.totalRecipes }}</h3>
+            <p class="text-secondary mb-sm">Total Recipes</p>
+          
         </mat-card-content>
-        <mat-card-actions>
-          <button mat-button color="primary" (click)="onViewRecipes()">
+        <mat-card-actions class="card">
+          <button mat-button class="btn btn-primary" (click)="onViewRecipes()">
             View All
           </button>
         </mat-card-actions>
       </mat-card>
 
-      <mat-card class="stat-card">
-        <mat-card-content>
+      <mat-card class="stat-card card">
+        <mat-card-content class="card">
           <div class="stat-icon">
             <mat-icon>people</mat-icon>
           </div>
-          <div class="stat-content">
-            <h3>{{ stats.totalUsers }}</h3>
-            <p>Total Users</p>
-          </div>
+          
+            <h3 class="text-lg font-medium mb-sm">{{ stats.totalUsers }}</h3>
+            <p class="text-secondary mb-sm">Total Users</p>
+          
         </mat-card-content>
-        <mat-card-actions>
-          <button mat-button color="primary" (click)="onViewUsers()">
+        <mat-card-actions class="card">
+          <button mat-button class="btn btn-primary" (click)="onViewUsers()">
             Manage Users
           </button>
         </mat-card-actions>
       </mat-card>
 
-      <mat-card class="stat-card">
-        <mat-card-content>
+      <mat-card class="stat-card card">
+        <mat-card-content class="card">
           <div class="stat-icon">
             <mat-icon>shopping_cart</mat-icon>
           </div>
-          <div class="stat-content">
-            <h3>{{ stats.totalShoppingLists }}</h3>
-            <p>Shopping Lists</p>
-          </div>
+          
+            <h3 class="text-lg font-medium mb-sm">{{ stats.totalShoppingLists }}</h3>
+            <p class="text-secondary mb-sm">Shopping Lists</p>
+          
         </mat-card-content>
-        <mat-card-actions>
-          <button mat-button color="primary" (click)="onViewShoppingLists()">
+        <mat-card-actions class="card">
+          <button mat-button class="btn btn-primary" (click)="onViewShoppingLists()">
             View All
           </button>
         </mat-card-actions>
       </mat-card>
 
-      <mat-card class="stat-card">
-        <mat-card-content>
+      <mat-card class="stat-card card">
+        <mat-card-content class="card">
           <div class="stat-icon">
             <mat-icon>activity</mat-icon>
           </div>
-          <div class="stat-content">
-            <h3>{{ stats.recentActivity }}</h3>
-            <p>Recent Activity</p>
-          </div>
+          
+            <h3 class="text-lg font-medium mb-sm">{{ stats.recentActivity }}</h3>
+            <p class="text-secondary mb-sm">Recent Activity</p>
+          
         </mat-card-content>
-        <mat-card-actions>
-          <button mat-button color="primary" (click)="onViewActivity()">
+        <mat-card-actions class="card">
+          <button mat-button class="btn btn-primary" (click)="onViewActivity()">
             View Log
           </button>
         </mat-card-actions>
@@ -95,45 +95,42 @@
     </div>
 
     <!-- System Health -->
-    <mat-card class="health-card">
-      <mat-card-header>
-        <mat-card-title>System Health</mat-card-title>
+    <mat-card class="health-card card">
+      <mat-card-header class="card">
+        <mat-card-title class="card">System Health</mat-card-title>
       </mat-card-header>
-      <mat-card-content>
+      <mat-card-content class="card">
         <div class="health-grid">
           <div class="health-item">
             <div class="health-status" [style.background-color]="getHealthColor(systemHealth.database)"></div>
             <div class="health-info">
               <h4>Database</h4>
-              <p>{{ systemHealth.database }}</p>
+              <p class="text-secondary mb-sm">{{ systemHealth.database }}</p>
             </div>
-          </div>
           <div class="health-item">
             <div class="health-status" [style.background-color]="getHealthColor(systemHealth.api)"></div>
             <div class="health-info">
               <h4>API</h4>
-              <p>{{ systemHealth.api }}</p>
+              <p class="text-secondary mb-sm">{{ systemHealth.api }}</p>
             </div>
-          </div>
           <div class="health-item">
             <div class="health-status" [style.background-color]="getHealthColor(systemHealth.storage)"></div>
             <div class="health-info">
               <h4>Storage</h4>
-              <p>{{ systemHealth.storage }}</p>
+              <p class="text-secondary mb-sm">{{ systemHealth.storage }}</p>
             </div>
-          </div>
         </div>
-      </mat-card-content>
-    </mat-card>
+      </div>
+    </div>
 
     <!-- Recent Activity -->
     <div class="activity-section">
-      <mat-card class="recent-recipes-card">
-        <mat-card-header>
-          <mat-card-title>Recent Recipes</mat-card-title>
+      <mat-card class="recent-recipes-card card">
+        <mat-card-header class="card">
+          <mat-card-title class="card">Recent Recipes</mat-card-title>
         </mat-card-header>
-        <mat-card-content>
-          <mat-list>
+        <mat-card-content class="card">
+          <mat-list class="flex flex-col gap-sm">
             <mat-list-item *ngFor="let recipe of recentRecipes" class="activity-item">
               <mat-icon matListItemIcon>restaurant</mat-icon>
               <div matListItemTitle>{{ recipe.name }}</div>
@@ -144,12 +141,12 @@
         </mat-card-content>
       </mat-card>
 
-      <mat-card class="recent-users-card">
-        <mat-card-header>
-          <mat-card-title>Recent Users</mat-card-title>
+      <mat-card class="recent-users-card card">
+        <mat-card-header class="card">
+          <mat-card-title class="card">Recent Users</mat-card-title>
         </mat-card-header>
-        <mat-card-content>
-          <mat-list>
+        <mat-card-content class="card">
+          <mat-list class="flex flex-col gap-sm">
             <mat-list-item *ngFor="let user of recentUsers" class="activity-item">
               <mat-icon matListItemIcon>person</mat-icon>
               <div matListItemTitle>{{ user.fullName }}</div>
@@ -162,50 +159,49 @@
     </div>
 
     <!-- System Actions -->
-    <mat-card class="system-actions-card">
-      <mat-card-header>
-        <mat-card-title>System Actions</mat-card-title>
-        <mat-card-subtitle>Administrative tools and maintenance</mat-card-subtitle>
+    <mat-card class="system-actions-card card">
+      <mat-card-header class="card">
+        <mat-card-title class="card">System Actions</mat-card-title>
+        <mat-card-subtitle class="card">Administrative tools and maintenance</mat-card-subtitle>
       </mat-card-header>
-      <mat-card-content>
+      <mat-card-content class="card">
         <div class="actions-grid">
           <button 
             mat-raised-button 
-            color="primary"
+            class="btn btn-primary"
             (click)="onSystemBackup()"
             class="action-button">
             <mat-icon>backup</mat-icon>
             System Backup
-          </button>
+          </div>
 
           <button 
             mat-raised-button 
-            color="accent"
+            class="btn btn-secondary"
             (click)="onSystemRestore()"
             class="action-button">
             <mat-icon>restore</mat-icon>
             System Restore
-          </button>
+          </mat-card-content>
 
           <button 
             mat-raised-button 
-            color="primary"
+            class="btn btn-primary"
             (click)="onDatabaseOptimize()"
             class="action-button">
             <mat-icon>storage</mat-icon>
             Optimize Database
-          </button>
+          </mat-card>
 
           <button 
             mat-raised-button 
-            color="warn"
+            class="btn btn-error"
             (click)="onClearCache()"
             class="action-button">
             <mat-icon>clear_all</mat-icon>
             Clear Cache
-          </button>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </div>
-</div> 
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </section>

@@ -1,8 +1,7 @@
-<div class="recipe-chips">
+<article class="card">
   <mat-chip
     *ngFor="let item of items"
     [routerLink]="['/', urlPrefix, item.slug]"
     class="chip-item">
     {{ item.name }}
-  </mat-chip>
-</div> 
+  </article>

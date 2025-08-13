@@ -1,3 +1,4 @@
+// TODO: Review and update to use theme variables
 .recipe-page {
   max-width: 1200px;
   margin: 0 auto;
@@ -231,7 +232,7 @@
   padding: 16px;
   background-color: #fff3e0;
   border-radius: 8px;
-  border-left: 4px solid #ff9800;
+  border-left: 4px solid var(--primary-500);
   
   h3 {
     margin: 0 0 12px 0;

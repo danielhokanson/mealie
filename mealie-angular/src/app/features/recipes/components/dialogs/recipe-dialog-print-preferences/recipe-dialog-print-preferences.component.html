@@ -5,8 +5,7 @@
   width="70%"
   maxWidth="816px"
   (modelValueChange)="onDialogChange($event)">
-  
-  <div class="dialog-content">
+
     <!-- Print Configuration -->
     <div class="print-config">
       <div class="config-row">
@@ -14,7 +13,7 @@
         <div class="image-position-section">
           <div class="section-title">
             Recipe Image
-          </div>
+          
           <mat-button-toggle-group
             [(ngModel)]="imagePositionValue"
             class="image-position-toggle">
@@ -27,7 +26,7 @@
             <mat-button-toggle [value]="ImagePosition.Hidden">
               <mat-icon>close</mat-icon>
             </mat-button-toggle>
-          </mat-button-toggle-group>
+          </div>
         </div>
 
         <!-- Content Options -->
@@ -35,39 +34,33 @@
           <div class="option-group">
             <mat-slide-toggle
               [(ngModel)]="preferences.showDescription"
-              color="primary">
+              class="btn btn-primary">
               Description
-            </mat-slide-toggle>
+            </div>
           </div>
           
           <div class="option-group">
             <mat-slide-toggle
               [(ngModel)]="preferences.showNotes"
-              color="primary">
+              class="btn btn-primary">
               Notes
-            </mat-slide-toggle>
+            </div>
           </div>
-        </div>
 
         <!-- Nutrition Options -->
         <div class="nutrition-options">
           <div class="option-group">
             <mat-slide-toggle
               [(ngModel)]="preferences.showNutrition"
-              color="primary">
+              class="btn btn-primary">
               Nutrition
-            </mat-slide-toggle>
+            </div>
           </div>
-        </div>
       </div>
-    </div>
 
     <!-- Print Preview -->
-    <mat-card class="print-preview" *ngIf="recipe">
+    <mat-card class="print-preview" *ngIf="recipe" class="card">
       <app-recipe-print-view
         [recipe]="recipe"
         [preferences]="preferences">
-      </app-recipe-print-view>
-    </mat-card>
-  </div>
-</app-base-dialog> 
+      </mat-card>

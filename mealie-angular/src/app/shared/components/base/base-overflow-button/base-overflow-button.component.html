@@ -2,23 +2,18 @@
   <ng-template matMenuTrigger>
     <button
       mat-raised-button
-      color="primary"
+      class="btn btn-primary"
       [disabled]="disabled"
       [class]="btnClass"
       class="overflow-button">
       
       <mat-icon *ngIf="activeObj.icon" class="start-icon">
         {{ activeObj.icon }}
-      </mat-icon>
       
       {{ displayText }}
       
-      <mat-icon class="end-icon">
-        expand_more
-      </mat-icon>
-    </button>
-  </ng-template>
-  
+      <mat-icon class="end-icon">expand_more</mat-icon>
+
   <!-- Model Mode -->
   <mat-list *ngIf="mode === MODES.MODEL" class="overflow-list">
     <ng-container *ngFor="let item of items; let index = index">
@@ -29,13 +24,12 @@
           class="overflow-item">
           <mat-icon *ngIf="item.icon" matListItemIcon>
             {{ item.icon }}
-          </mat-icon>
           <span matListItemTitle>{{ item.text }}</span>
-        </button>
+
         <mat-divider *ngIf="item.divider" class="my-1"></mat-divider>
-      </div>
-    </ng-container>
-  </mat-list>
+      </mat-icon>
+    </div>
+  </ng-container>
   
   <!-- Link Mode -->
   <mat-list *ngIf="mode === MODES.LINK" class="overflow-list">
@@ -47,13 +41,12 @@
           class="overflow-item">
           <mat-icon *ngIf="item.icon" matListItemIcon>
             {{ item.icon }}
-          </mat-icon>
           <span matListItemTitle>{{ item.text }}</span>
-        </button>
+
         <mat-divider *ngIf="item.divider" class="my-1"></mat-divider>
-      </div>
-    </ng-container>
-  </mat-list>
+      </mat-icon>
+    </div>
+  </ng-container>
   
   <!-- Event Mode -->
   <mat-list *ngIf="mode === MODES.EVENT" class="overflow-list">
@@ -65,11 +58,16 @@
           class="overflow-item">
           <mat-icon *ngIf="item.icon" matListItemIcon>
             {{ item.icon }}
-          </mat-icon>
           <span matListItemTitle>{{ item.text }}</span>
-        </button>
+
         <mat-divider *ngIf="item.divider" class="my-1"></mat-divider>
-      </div>
-    </ng-container>
-  </mat-list>
-</mat-menu> 
+      </mat-icon>
+    </div>
+  </ng-container>
+</mat-list>
+
+</mat-list>
+</mat-list>
+</mat-icon>
+</ng-template>
+</mat-menu>

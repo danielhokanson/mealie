@@ -1,5 +1,5 @@
 <div *ngIf="yieldDisplay" class="scale-edit-container">
-  <div class="scale-edit-content">
+  
     <div class="scale-display">
       <div [matMenuTriggerFor]="scaleMenu"
            [matTooltip]="canEditScale ? 'Edit Scale' : ''"
@@ -9,17 +9,16 @@
            [class.disabled]="!canEditScale">
         <mat-icon *ngIf="canEditScale" class="edit-icon">edit</mat-icon>
         <span [innerHTML]="yieldDisplay"></span>
-      </div>
 
       <mat-menu #scaleMenu="matMenu" class="scale-menu">
-        <mat-card class="menu-card">
-          <mat-card-title class="menu-title">
+        <mat-card class="menu-card card">
+          <mat-card-title class="menu-title card">
             Servings
           </mat-card-title>
           
-          <mat-card-content class="menu-content">
+          <mat-card-content class="menu-content card">
             <div class="input-section">
-              <mat-form-field appearance="outline" class="yield-input">
+              <mat-form-field appearance="outline" class="yield-input w-full">
                 <mat-label>Servings</mat-label>
                 <input matInput
                        type="number"
@@ -35,11 +34,11 @@
                       (click)="onReset()"
                       class="reset-button">
                 <mat-icon>undo</mat-icon>
-              </button>
-            </div>
-          </mat-card-content>
-        </mat-card>
-      </mat-menu>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </mat-menu>
+      </div>
     </div>
 
     <app-base-button-group
@@ -48,6 +47,3 @@
       [large]="false"
       (decrement)="onDecrement()"
       (increment)="onIncrement()">
-    </app-base-button-group>
-  </div>
-</div> 

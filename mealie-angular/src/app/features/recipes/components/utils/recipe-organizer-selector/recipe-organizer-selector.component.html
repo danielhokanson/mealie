@@ -1,5 +1,5 @@
 <div class="organizer-selector">
-  <mat-form-field class="full-width">
+  <mat-form-field class="full-width w-full">
     <mat-label>{{ getSelectorLabel() }}</mat-label>
     <mat-select
       [(ngModel)]="selectedItems"
@@ -8,15 +8,15 @@
       <mat-option *ngFor="let item of availableItems" [value]="item">
         {{ item.name }}
       </mat-option>
-    </mat-select>
-  </mat-form-field>
+    </mat-form-field>
+  </div>
   
   <div *ngIf="showAdd" class="add-section">
-    <mat-form-field class="add-input">
+    <mat-form-field class="add-input w-full">
       <mat-label>Add New {{ getSelectorLabel() }}</mat-label>
       <input matInput [(ngModel)]="newItemName" (keyup.enter)="addNewItem()" />
     </mat-form-field>
-    <button mat-raised-button color="primary" (click)="addNewItem()" [disabled]="!newItemName">
+    <button mat-raised-button class="btn btn-primary" (click)="addNewItem()" [disabled]="!newItemName">
       <mat-icon>add</mat-icon>
       Add
     </button>
@@ -29,6 +29,4 @@
       (removed)="removeItem(item)">
       {{ item.name }}
       <mat-icon matChipRemove>cancel</mat-icon>
-    </mat-chip>
-  </div>
-</div> 
+    </div>

@@ -1,20 +1,20 @@
-<div class="recipe-info-card">
+<article class="card">
   <div class="info-card-layout" [class.landscape]="landscape">
     <app-recipe-page-info-card-image
       *ngIf="landscape"
       [recipe]="recipe">
-    </app-recipe-page-info-card-image>
+    </div>
     
-    <mat-card class="info-card" [class.full-width]="landscape">
-      <mat-card-content class="info-content">
-        <div class="recipe-title-section">
-          <h1 class="recipe-title">{{ recipe.name }}</h1>
+    <mat-card class="info-card" [class.full-width]="landscape" class="card">
+      <mat-card-content class="info-content card">
+        <article class="card">
+          <h1 class="recipe-title text-2xl font-medium mb-md">{{ recipe.name }}</h1>
           <app-recipe-rating
             [recipeId]="recipe.id"
             [slug]="recipe.id"
             [modelValue]="recipe.rating || 0">
-          </app-recipe-rating>
-        </div>
+          </article>
+        </mat-card-content>
         
         <mat-divider class="title-divider"></mat-divider>
         
@@ -24,36 +24,31 @@
         
         <mat-divider *ngIf="recipe.description" class="description-divider"></mat-divider>
         
-        <div class="recipe-details">
+        <article class="card">
           <div class="details-section">
             <div *ngIf="recipe.recipeYieldQuantity || recipe.recipeYield" class="yield-section">
               <app-recipe-yield
                 [yieldQuantity]="recipe.recipeYieldQuantity"
                 [yieldText]="recipe.recipeYield"
                 [scale]="recipeScale">
-              </app-recipe-yield>
+              </div>
             </div>
             
             <div *ngIf="isOwnGroup" class="last-made-section">
               <app-recipe-last-made [recipe]="recipe"></app-recipe-last-made>
             </div>
-          </div>
           
           <div *ngIf="recipe.prepTime || recipe.totalTime" class="time-section">
             <app-recipe-time-card
               [prepTime]="recipe.prepTime"
               [totalTime]="recipe.totalTime"
               [performTime]="recipe.totalTime">
-            </app-recipe-time-card>
-          </div>
-        </div>
-      </mat-card-content>
-    </mat-card>
+            </div>
+          </article>
+      </mat-card>
+    </article>
     
     <app-recipe-page-info-card-image
       *ngIf="!landscape"
       [recipe]="recipe"
       class="recipe-image">
-    </app-recipe-page-info-card-image>
-  </div>
-</div> 

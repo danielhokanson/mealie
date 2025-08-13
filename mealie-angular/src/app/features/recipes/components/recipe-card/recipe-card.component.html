@@ -1,79 +1,63 @@
-<div>
-  <mat-card
-    [class.on-hover]="isHovering"
-    [style.cursor]="cursor"
-    [style.min-height.px]="imageHeight + 75"
-    (click)="onCardClick()"
-    class="recipe-card">
+<mat-card
+  [class.on-hover]="isHovering"
+  [style.cursor]="cursor"
+  [style.min-height.px]="imageHeight + 75"
+  (click)="onCardClick()"
+  (mouseenter)="isHovering = true"
+  (mouseleave)="isHovering = false"
+  class="recipe-card card overflow-hidden hover-lift transition-all">
+  
+  <!-- Recipe Card Image -->
+  <div class="relative overflow-hidden" [style.height.px]="imageHeight">
+    <img 
+      [src]="image" 
+      [alt]="name"
+      class="w-full object-cover"
+      [style.height.px]="imageHeight">
     
-    <!-- Recipe Card Image -->
-    <div class="recipe-image-container" [style.height.px]="imageHeight">
-      <img 
-        [src]="image" 
-        [alt]="name"
-        class="recipe-image"
-        [style.height.px]="imageHeight">
-      
-      <!-- Description Overlay on Hover -->
-      <div *ngIf="description && isHovering"
-           class="description-overlay">
-        <div class="description-content">
-          <div class="description-wrapper">
-            <app-safe-markdown [markdown]="description || ''"></app-safe-markdown>
-          </div>
-        </div>
+    <!-- Description Overlay on Hover -->
+    <div *ngIf="description && isHovering"
+         class="absolute inset-0 bg-overlay flex items-end">
+      <div class="p-md text-white">
+        <app-safe-markdown [markdown]="description || ''"></app-safe-markdown>
       </div>
+  </div>
+
+  <!-- Recipe Title -->
+  <mat-card-title class="px-md pt-md pb-sm card">
+    <h3 class="text-lg font-medium m-0 text-primary mb-sm">{{ name }}</h3>
+  </mat-card-title>
+
+  <!-- Recipe Actions -->
+  <div class="px-md pb-md flex items-center gap-sm" *ngIf="showRecipeContent">
+    <!-- Favorite Badge -->
+    <app-recipe-favorite-badge
+      *ngIf="isOwnGroup"
+      [recipeId]="recipeId"
+      [showAlways]="true">
     </div>
+    
+    <!-- Recipe Rating -->
+    <app-recipe-rating
+      class="flex-1"
+      [modelValue]="rating"
+      [recipeId]="recipeId"
+      [slug]="slug"
+      [small]="true">
 
-    <!-- Recipe Title -->
-    <mat-card-title class="recipe-title">
-      <div class="header-class">
-        {{ name }}
-      </div>
-    </mat-card-title>
+    <!-- Recipe Tags -->
+    <app-recipe-chips
+      [items]="tags"
+      urlPrefix="tags">
 
-    <!-- Recipe Actions -->
-    <div class="recipe-actions" *ngIf="showRecipeContent">
-      <!-- Favorite Badge -->
-      <app-recipe-favorite-badge
-        *ngIf="isOwnGroup"
-        class="favorite-badge"
-        [recipeId]="recipeId"
-        [showAlways]="true">
-      </app-recipe-favorite-badge>
-      
-      <div *ngIf="!isOwnGroup" class="spacer"></div>
+    <!-- Context Menu -->
+    <app-recipe-context-menu
+      *ngIf="isOwnGroup"
+      [slug]="slug"
+      [name]="name"
+      [recipeId]="recipeId"
+      [useItems]="contextMenuItems"
+      (delete)="onDelete($event)">
 
-      <!-- Recipe Rating -->
-      <app-recipe-rating
-        class="recipe-rating"
-        [modelValue]="rating"
-        [recipeId]="recipeId"
-        [slug]="slug"
-        [small]="true">
-      </app-recipe-rating>
-
-      <div class="spacer"></div>
-
-      <!-- Recipe Tags -->
-      <app-recipe-chips
-        [items]="tags"
-        urlPrefix="tags">
-      </app-recipe-chips>
-
-      <!-- Context Menu -->
-      <app-recipe-context-menu
-        *ngIf="isOwnGroup"
-        color="grey-darken-2"
-        [slug]="slug"
-        [name]="name"
-        [recipeId]="recipeId"
-        [useItems]="contextMenuItems"
-        (delete)="onDelete($event)">
-      </app-recipe-context-menu>
-    </div>
-
-    <!-- Additional Content Slot -->
-    <ng-content></ng-content>
-  </mat-card>
-</div> 
+  <!-- Additional Content Slot -->
+  <ng-content></ng-content>

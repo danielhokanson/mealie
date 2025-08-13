@@ -1,12 +1,12 @@
-<div class="unit-management-container">
-  <div class="header">
-    <h2>Unit Management</h2>
-    <p>Manage measurement units for recipes and shopping lists</p>
+<section class="page-container">
+  <div class="flex justify-between items-center mb-md">
+    <h2 class="text-xl font-medium mb-md">Unit Management</h2>
+    <p class="text-secondary mb-sm">Manage measurement units for recipes and shopping lists</p>
   </div>
 
   <div class="actions-bar">
     <div class="search-section">
-      <mat-form-field appearance="outline" class="search-field">
+      <mat-form-field appearance="outline" class="search-field w-full">
         <mat-label>Search units</mat-label>
         <input matInput [(ngModel)]="searchTerm" placeholder="Search by name, abbreviation, or description...">
         <mat-icon matSuffix>search</mat-icon>
@@ -14,20 +14,19 @@
     </div>
 
     <div class="action-buttons">
-      <button mat-raised-button color="primary" (click)="onAddUnit()" [disabled]="loading">
+      <button mat-raised-button class="btn btn-primary" (click)="onAddUnit()" [disabled]="loading">
         <mat-icon>add</mat-icon>
         Add Unit
       </button>
-      <button mat-raised-button color="warn" (click)="onBulkDelete()" [disabled]="!canDelete()">
+      <button mat-raised-button class="btn btn-error" (click)="onBulkDelete()" [disabled]="!canDelete()">
         <mat-icon>delete</mat-icon>
         Delete Selected
       </button>
     </div>
-  </div>
 
-  <div class="content" *ngIf="!loading; else loadingTemplate">
+  <div class="flex-1" *ngIf="!loading; else loadingTemplate">
     <div class="units-table" *ngIf="getFilteredUnits().length > 0; else emptyTemplate">
-      <table mat-table [dataSource]="getFilteredUnits()" class="mat-elevation-z1">
+      <table mat-table class="w-full" [dataSource]="getFilteredUnits()" class="mat-elevation-z1">
         <!-- Checkbox Column -->
         <ng-container matColumnDef="select">
           <th mat-header-cell *matHeaderCellDef>
@@ -35,16 +34,16 @@
               (change)="onSelectAll()"
               [checked]="selectedUnits.length === getFilteredUnits().length"
               [indeterminate]="selectedUnits.length > 0 && selectedUnits.length < getFilteredUnits().length">
-            </mat-checkbox>
-          </th>
+            </th>
+          </ng-container>
           <td mat-cell *matCellDef="let unit">
             <mat-checkbox
               (click)="$event.stopPropagation()"
               (change)="onSelectUnit(unit.id)"
               [checked]="isSelected(unit.id)">
-            </mat-checkbox>
-          </td>
-        </ng-container>
+            </td>
+          </table>
+        </div>
 
         <!-- Name Column -->
         <ng-container matColumnDef="name">
@@ -52,7 +51,7 @@
           <td mat-cell *matCellDef="let unit">
             <div class="unit-info">
               <span class="unit-name">{{ unit.name }}</span>
-              <mat-chip *ngIf="unit.isBaseUnit" color="primary" selected>
+              <mat-chip *ngIf="unit.isBaseUnit" class="btn btn-primary" selected>
                 Base Unit
               </mat-chip>
             </div>
@@ -107,26 +106,26 @@
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
+      </div>
     </div>
 
     <ng-template #emptyTemplate>
       <div class="empty-state">
         <mat-icon class="empty-icon">straighten</mat-icon>
-        <h3>No units found</h3>
-        <p>Create your first unit to start managing measurements</p>
-        <button mat-raised-button color="primary" (click)="onAddUnit()">
+        <h3 class="text-lg font-medium mb-sm">No units found</h3>
+        <p class="text-secondary mb-sm">Create your first unit to start managing measurements</p>
+        <button mat-raised-button class="btn btn-primary" (click)="onAddUnit()">
           <mat-icon>add</mat-icon>
           Create First Unit
         </button>
       </div>
     </ng-template>
-  </div>
+  </section>
 
   <ng-template #loadingTemplate>
-    <div class="loading-container">
+    <div class="flex items-center justify-center py-xl">
       <mat-spinner diameter="40"></mat-spinner>
-      <p>Loading units...</p>
+      <p class="text-secondary mb-sm">Loading units...</p>
     </div>
   </ng-template>
 
@@ -134,7 +133,7 @@
   <div class="dialog-overlay" *ngIf="showAddUnit" (click)="onCancel()">
     <div class="dialog-content" (click)="$event.stopPropagation()">
       <div class="dialog-header">
-        <h3>{{ editingUnit ? 'Edit Unit' : 'Add New Unit' }}</h3>
+        <h3 class="text-lg font-medium mb-sm">{{ editingUnit ? 'Edit Unit' : 'Add New Unit' }}</h3>
         <button mat-icon-button (click)="onCancel()">
           <mat-icon>close</mat-icon>
         </button>
@@ -142,7 +141,7 @@
 
       <form [formGroup]="unitForm" (ngSubmit)="onSaveUnit()" class="dialog-form">
         <div class="form-section">
-          <mat-form-field appearance="outline" class="full-width">
+          <mat-form-field appearance="outline" class="full-width w-full">
             <mat-label>Unit Name</mat-label>
             <input matInput formControlName="name" placeholder="Enter unit name">
             <mat-error *ngIf="unitForm.get('name')?.hasError('required')">
@@ -153,7 +152,7 @@
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field appearance="outline" class="full-width">
+          <mat-form-field appearance="outline" class="full-width w-full">
             <mat-label>Abbreviation</mat-label>
             <input matInput formControlName="abbreviation" placeholder="Enter abbreviation">
             <mat-error *ngIf="unitForm.get('abbreviation')?.hasError('required')">
@@ -164,7 +163,7 @@
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field appearance="outline" class="full-width">
+          <mat-form-field appearance="outline" class="full-width w-full">
             <mat-label>Description (Optional)</mat-label>
             <textarea matInput formControlName="description" placeholder="Enter description" rows="3"></textarea>
             <mat-hint align="end">{{ getDescriptionLength() }}/{{ getMaxDescriptionLength() }}</mat-hint>
@@ -177,11 +176,11 @@
             <mat-checkbox formControlName="isBaseUnit" (change)="onBaseUnitChange()">
               This is a base unit
             </mat-checkbox>
-            <p class="help-text">Base units are used as reference for conversions</p>
+            <p class="help-text text-secondary mb-sm">Base units are used as reference for conversions</p>
           </div>
 
           <div class="conversion-section" *ngIf="!unitForm.get('isBaseUnit')?.value">
-            <mat-form-field appearance="outline" class="full-width">
+            <mat-form-field appearance="outline" class="full-width w-full">
               <mat-label>Base Unit</mat-label>
               <mat-select formControlName="baseUnitId">
                 <mat-option *ngFor="let baseUnit of getBaseUnits()" [value]="baseUnit.id">
@@ -193,7 +192,7 @@
               </mat-error>
             </mat-form-field>
 
-            <mat-form-field appearance="outline" class="full-width">
+            <mat-form-field appearance="outline" class="full-width w-full">
               <mat-label>Conversion Factor</mat-label>
               <input matInput type="number" formControlName="conversionFactor" placeholder="1.0" step="0.001" min="0.001">
               <mat-hint>How many base units equal one of this unit</mat-hint>
@@ -211,26 +210,26 @@
             <div class="preview-unit">
               <span class="preview-name">{{ unitForm.get('name')?.value }}</span>
               <span class="preview-abbreviation">({{ unitForm.get('abbreviation')?.value }})</span>
-              <mat-chip *ngIf="unitForm.get('isBaseUnit')?.value" color="primary" selected>
+              <mat-chip *ngIf="unitForm.get('isBaseUnit')?.value" class="btn btn-primary" selected>
                 Base Unit
               </mat-chip>
             </div>
             <div class="preview-conversion" *ngIf="!unitForm.get('isBaseUnit')?.value && unitForm.get('baseUnitId')?.value">
               <span>1 {{ unitForm.get('abbreviation')?.value }} = {{ unitForm.get('conversionFactor')?.value }} {{ getBaseUnitName(unitForm.get('baseUnitId')?.value) }}</span>
             </div>
-          </div>
         </div>
 
         <div class="dialog-actions">
           <button mat-button type="button" (click)="onCancel()" [disabled]="loading">
             Cancel
           </button>
-          <button mat-raised-button color="primary" type="submit" [disabled]="!canSave()">
+          <button mat-raised-button class="btn btn-primary" type="submit" [disabled]="!canSave()">
             <mat-spinner diameter="20" *ngIf="loading"></mat-spinner>
             <span>{{ editingUnit ? 'Update' : 'Create' }}</span>
           </button>
         </div>
-      </form>
-    </div>
-  </div>
-</div> 
+      </div>
+    </form>
+
+</div>
+</div>

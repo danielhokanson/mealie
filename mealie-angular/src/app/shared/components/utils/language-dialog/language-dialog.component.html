@@ -1,11 +1,11 @@
-<div class="language-dialog-container">
-    <h2 mat-dialog-title class="dialog-title">
+<section class="page-container">
+    <h2 mat-dialog-title class="dialog-title text-xl font-medium mb-md">
         <mat-icon>language</mat-icon>
         Select Language
     </h2>
 
     <mat-dialog-content class="dialog-content">
-        <mat-list>
+        <mat-list class="flex flex-col gap-sm">
             <mat-list-item
                 *ngFor="let language of languages"
                 (click)="onLanguageSelect(language.code)"
@@ -27,19 +27,15 @@
                     {{ language.code.toUpperCase() }}
                 </div>
                 
-                <mat-icon *ngIf="language.code === currentLanguage" class="selected-icon">
-                    check
-                </mat-icon>
-            </mat-list-item>
-        </mat-list>
-    </mat-dialog-content>
+                <mat-icon *ngIf="language.code === currentLanguage" class="selected-icon">check</mat-icon>
+            </mat-list>
+        </mat-dialog-content>
+    </section>
 
     <mat-dialog-actions class="dialog-actions">
         <button
             mat-button
             (click)="onCancel()"
-            class="cancel-button">
+            class="btn btn-secondary">
             Cancel
-        </button>
-    </mat-dialog-actions>
-</div> 
+        </mat-dialog-actions>

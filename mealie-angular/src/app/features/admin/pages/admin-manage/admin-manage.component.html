@@ -1,16 +1,16 @@
-<div class="admin-manage-container">
+<section class="page-container">
   <!-- Loading State -->
-  <div *ngIf="loading" class="loading-container">
+  <div *ngIf="loading" class="flex items-center justify-center py-xl">
     <mat-spinner diameter="50"></mat-spinner>
-    <p>Loading management data...</p>
+    <p class="text-secondary mb-sm">Loading management data...</p>
   </div>
 
   <!-- Error State -->
-  <div *ngIf="error && !loading" class="error-container">
+  <div *ngIf="error && !loading" class="flex flex-col items-center justify-center py-xl text-center">
     <mat-icon class="error-icon">error</mat-icon>
-    <h3>Error Loading Data</h3>
-    <p>Unable to load management data. Please try again.</p>
-    <button mat-raised-button color="primary" (click)="loadData()">
+    <h3 class="text-lg font-medium mb-sm">Error Loading Data</h3>
+    <p class="text-secondary mb-sm">Unable to load management data. Please try again.</p>
+    <button mat-raised-button class="btn btn-primary" (click)="loadData()">
       Retry
     </button>
   </div>
@@ -19,19 +19,19 @@
   <div *ngIf="!loading && !error" class="manage-content">
     <!-- Header -->
     <div class="manage-header">
-      <h1>User & Group Management</h1>
-      <p>Manage users, groups, and households</p>
+      <h1 class="text-2xl font-medium mb-md">User & Group Management</h1>
+      <p class="text-secondary mb-sm">Manage users, groups, and households</p>
     </div>
 
     <!-- Tabs -->
-    <mat-card class="tabs-card">
+    <mat-card class="tabs-card card">
       <mat-tab-group [(selectedIndex)]="selectedTab">
         <!-- Users Tab -->
         <mat-tab label="Users">
-          <div class="tab-content">
+          
             <!-- Search and Filters -->
             <div class="search-filters">
-              <mat-form-field appearance="outline" class="search-field">
+              <mat-form-field appearance="outline" class="search-field w-full">
                 <mat-label>Search users</mat-label>
                 <input 
                   matInput 
@@ -40,7 +40,7 @@
                 <mat-icon matSuffix>search</mat-icon>
               </mat-form-field>
 
-              <mat-form-field appearance="outline" class="filter-field">
+              <mat-form-field appearance="outline" class="filter-field w-full">
                 <mat-label>Role</mat-label>
                 <mat-select [(ngModel)]="selectedRole">
                   <mat-option value="all">All Roles</mat-option>
@@ -49,7 +49,7 @@
                 </mat-select>
               </mat-form-field>
 
-              <mat-form-field appearance="outline" class="filter-field">
+              <mat-form-field appearance="outline" class="filter-field w-full">
                 <mat-label>Status</mat-label>
                 <mat-select [(ngModel)]="selectedStatus">
                   <mat-option value="all">All Status</mat-option>
@@ -60,16 +60,15 @@
 
               <button 
                 mat-raised-button 
-                color="primary"
+                class="btn btn-primary"
                 (click)="onAddUser()">
                 <mat-icon>add</mat-icon>
                 Add User
-              </button>
-            </div>
+              </div>
 
             <!-- Users Table -->
-            <div class="table-container">
-              <table mat-table [dataSource]="getFilteredUsers()" class="users-table">
+            <section class="page-container">
+              <table mat-table class="w-full" [dataSource]="getFilteredUsers()" class="users-table">
                 <!-- Username Column -->
                 <ng-container matColumnDef="username">
                   <th mat-header-cell *matHeaderCellDef>Username</th>
@@ -123,7 +122,7 @@
                       [matMenuTriggerFor]="userMenu"
                       matTooltip="Actions">
                       <mat-icon>more_vert</mat-icon>
-                    </button>
+                    </td>
 
                     <mat-menu #userMenu="matMenu">
                       <button mat-menu-item (click)="onEditUser(user)">
@@ -140,22 +139,21 @@
                         <span>Delete</span>
                       </button>
                     </mat-menu>
-                  </td>
-                </ng-container>
+                  </ng-container>
+                </table>
 
                 <tr mat-header-row *matHeaderRowDef="['username', 'fullName', 'email', 'role', 'status', 'createdAt', 'actions']"></tr>
                 <tr mat-row *matRowDef="let row; columns: ['username', 'fullName', 'email', 'role', 'status', 'createdAt', 'actions'];"></tr>
-              </table>
-            </div>
-          </div>
-        </mat-tab>
+              </section>
+            </mat-tab>
+        </mat-tab-group>
 
         <!-- Groups Tab -->
         <mat-tab label="Groups">
-          <div class="tab-content">
+          
             <!-- Search and Filters -->
             <div class="search-filters">
-              <mat-form-field appearance="outline" class="search-field">
+              <mat-form-field appearance="outline" class="search-field w-full">
                 <mat-label>Search groups</mat-label>
                 <input 
                   matInput 
@@ -166,16 +164,15 @@
 
               <button 
                 mat-raised-button 
-                color="primary"
+                class="btn btn-primary"
                 (click)="onAddGroup()">
                 <mat-icon>add</mat-icon>
                 Add Group
-              </button>
-            </div>
+              </div>
 
             <!-- Groups Table -->
-            <div class="table-container">
-              <table mat-table [dataSource]="getFilteredGroups()" class="groups-table">
+            <section class="page-container">
+              <table mat-table class="w-full" [dataSource]="getFilteredGroups()" class="groups-table">
                 <!-- Name Column -->
                 <ng-container matColumnDef="name">
                   <th mat-header-cell *matHeaderCellDef>Name</th>
@@ -213,7 +210,7 @@
                       [matMenuTriggerFor]="groupMenu"
                       matTooltip="Actions">
                       <mat-icon>more_vert</mat-icon>
-                    </button>
+                    </td>
 
                     <mat-menu #groupMenu="matMenu">
                       <button mat-menu-item (click)="onEditGroup(group)">
@@ -226,22 +223,21 @@
                         <span>Delete</span>
                       </button>
                     </mat-menu>
-                  </td>
-                </ng-container>
+                  </ng-container>
+                </table>
 
                 <tr mat-header-row *matHeaderRowDef="['name', 'description', 'status', 'createdAt', 'actions']"></tr>
                 <tr mat-row *matRowDef="let row; columns: ['name', 'description', 'status', 'createdAt', 'actions'];"></tr>
-              </table>
-            </div>
-          </div>
-        </mat-tab>
+              </section>
+            </mat-tab>
+        </mat-card>
 
         <!-- Households Tab -->
         <mat-tab label="Households">
-          <div class="tab-content">
+          
             <!-- Search and Filters -->
             <div class="search-filters">
-              <mat-form-field appearance="outline" class="search-field">
+              <mat-form-field appearance="outline" class="search-field w-full">
                 <mat-label>Search households</mat-label>
                 <input 
                   matInput 
@@ -252,16 +248,15 @@
 
               <button 
                 mat-raised-button 
-                color="primary"
+                class="btn btn-primary"
                 (click)="onAddHousehold()">
                 <mat-icon>add</mat-icon>
                 Add Household
-              </button>
-            </div>
+              </div>
 
             <!-- Households Table -->
-            <div class="table-container">
-              <table mat-table [dataSource]="getFilteredHouseholds()" class="households-table">
+            <section class="page-container">
+              <table mat-table class="w-full" [dataSource]="getFilteredHouseholds()" class="households-table">
                 <!-- Name Column -->
                 <ng-container matColumnDef="name">
                   <th mat-header-cell *matHeaderCellDef>Name</th>
@@ -305,7 +300,7 @@
                       [matMenuTriggerFor]="householdMenu"
                       matTooltip="Actions">
                       <mat-icon>more_vert</mat-icon>
-                    </button>
+                    </td>
 
                     <mat-menu #householdMenu="matMenu">
                       <button mat-menu-item (click)="onEditHousehold(household)">
@@ -318,29 +313,26 @@
                         <span>Delete</span>
                       </button>
                     </mat-menu>
-                  </td>
-                </ng-container>
+                  </ng-container>
+                </table>
 
                 <tr mat-header-row *matHeaderRowDef="['name', 'description', 'group', 'status', 'createdAt', 'actions']"></tr>
                 <tr mat-row *matRowDef="let row; columns: ['name', 'description', 'group', 'status', 'createdAt', 'actions'];"></tr>
-              </table>
-            </div>
-          </div>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card>
-  </div>
+              </section>
+            </mat-tab>
+        </div>
+      </section>
 
   <!-- User Dialog -->
   <div *ngIf="showUserDialog" class="dialog-overlay">
-    <mat-card class="dialog-card">
-      <mat-card-header>
-        <mat-card-title>{{ editingUser ? 'Edit User' : 'Add User' }}</mat-card-title>
+    <mat-card class="dialog-card card">
+      <mat-card-header class="card">
+        <mat-card-title class="card">{{ editingUser ? 'Edit User' : 'Add User' }}</mat-card-title>
       </mat-card-header>
-      <mat-card-content>
+      <mat-card-content class="card">
         <form [formGroup]="userForm" class="dialog-form">
           <div class="form-row">
-            <mat-form-field appearance="outline" class="form-field">
+            <mat-form-field appearance="outline" class="w-full">
               <mat-label>Username</mat-label>
               <input 
                 matInput 
@@ -348,7 +340,7 @@
                 placeholder="Enter username">
             </mat-form-field>
 
-            <mat-form-field appearance="outline" class="form-field">
+            <mat-form-field appearance="outline" class="w-full">
               <mat-label>Full Name</mat-label>
               <input 
                 matInput 
@@ -358,7 +350,7 @@
           </div>
 
           <div class="form-row">
-            <mat-form-field appearance="outline" class="form-field">
+            <mat-form-field appearance="outline" class="w-full">
               <mat-label>Email</mat-label>
               <input 
                 matInput 
@@ -369,7 +361,7 @@
           </div>
 
           <div class="form-row">
-            <mat-form-field appearance="outline" class="form-field">
+            <mat-form-field appearance="outline" class="w-full">
               <mat-label>Role</mat-label>
               <mat-select formControlName="role">
                 <mat-option value="user">User</mat-option>
@@ -377,7 +369,7 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field appearance="outline" class="form-field">
+            <mat-form-field appearance="outline" class="w-full">
               <mat-label>Group</mat-label>
               <mat-select formControlName="groupId">
                 <mat-option value="">No Group</mat-option>
@@ -395,29 +387,28 @@
           </div>
         </form>
       </mat-card-content>
-      <mat-card-actions>
+      <mat-card-actions class="card">
         <button mat-button (click)="showUserDialog = false">Cancel</button>
         <button 
           mat-raised-button 
-          color="primary"
+          class="btn btn-primary"
           (click)="onSaveUser()"
           [disabled]="userForm.invalid">
           {{ editingUser ? 'Update' : 'Create' }}
-        </button>
-      </mat-card-actions>
-    </mat-card>
-  </div>
+        </mat-card-actions>
+      </mat-card>
+    </div>
 
   <!-- Group Dialog -->
   <div *ngIf="showGroupDialog" class="dialog-overlay">
-    <mat-card class="dialog-card">
-      <mat-card-header>
-        <mat-card-title>{{ editingGroup ? 'Edit Group' : 'Add Group' }}</mat-card-title>
+    <mat-card class="dialog-card card">
+      <mat-card-header class="card">
+        <mat-card-title class="card">{{ editingGroup ? 'Edit Group' : 'Add Group' }}</mat-card-title>
       </mat-card-header>
-      <mat-card-content>
+      <mat-card-content class="card">
         <form [formGroup]="groupForm" class="dialog-form">
           <div class="form-row">
-            <mat-form-field appearance="outline" class="form-field">
+            <mat-form-field appearance="outline" class="w-full">
               <mat-label>Name</mat-label>
               <input 
                 matInput 
@@ -427,47 +418,45 @@
           </div>
 
           <div class="form-row">
-            <mat-form-field appearance="outline" class="form-field">
+            <mat-form-field appearance="outline" class="w-full">
               <mat-label>Description</mat-label>
               <textarea 
                 matInput 
                 formControlName="description"
                 placeholder="Enter description"
                 rows="3">
-              </textarea>
-            </mat-form-field>
-          </div>
+              </mat-form-field>
+            </div>
+          </form>
 
           <div class="form-row">
             <mat-checkbox formControlName="isActive">
               Active
             </mat-checkbox>
           </div>
-        </form>
-      </mat-card-content>
-      <mat-card-actions>
+        </mat-card-content>
+      </mat-card>
+      <mat-card-actions class="card">
         <button mat-button (click)="showGroupDialog = false">Cancel</button>
         <button 
           mat-raised-button 
-          color="primary"
+          class="btn btn-primary"
           (click)="onSaveGroup()"
           [disabled]="groupForm.invalid">
           {{ editingGroup ? 'Update' : 'Create' }}
-        </button>
-      </mat-card-actions>
-    </mat-card>
-  </div>
+        </mat-card-actions>
+      </div>
 
   <!-- Household Dialog -->
   <div *ngIf="showHouseholdDialog" class="dialog-overlay">
-    <mat-card class="dialog-card">
-      <mat-card-header>
-        <mat-card-title>{{ editingHousehold ? 'Edit Household' : 'Add Household' }}</mat-card-title>
+    <mat-card class="dialog-card card">
+      <mat-card-header class="card">
+        <mat-card-title class="card">{{ editingHousehold ? 'Edit Household' : 'Add Household' }}</mat-card-title>
       </mat-card-header>
-      <mat-card-content>
+      <mat-card-content class="card">
         <form [formGroup]="householdForm" class="dialog-form">
           <div class="form-row">
-            <mat-form-field appearance="outline" class="form-field">
+            <mat-form-field appearance="outline" class="w-full">
               <mat-label>Name</mat-label>
               <input 
                 matInput 
@@ -477,19 +466,19 @@
           </div>
 
           <div class="form-row">
-            <mat-form-field appearance="outline" class="form-field">
+            <mat-form-field appearance="outline" class="w-full">
               <mat-label>Description</mat-label>
               <textarea 
                 matInput 
                 formControlName="description"
                 placeholder="Enter description"
                 rows="3">
-              </textarea>
-            </mat-form-field>
-          </div>
+              </mat-form-field>
+            </div>
+          </form>
 
           <div class="form-row">
-            <mat-form-field appearance="outline" class="form-field">
+            <mat-form-field appearance="outline" class="w-full">
               <mat-label>Group</mat-label>
               <mat-select formControlName="groupId">
                 <mat-option *ngFor="let group of groups" [value]="group.id">
@@ -504,18 +493,15 @@
               Active
             </mat-checkbox>
           </div>
-        </form>
-      </mat-card-content>
-      <mat-card-actions>
+        </mat-card-content>
+      </mat-card>
+      <mat-card-actions class="card">
         <button mat-button (click)="showHouseholdDialog = false">Cancel</button>
         <button 
           mat-raised-button 
-          color="primary"
+          class="btn btn-primary"
           (click)="onSaveHousehold()"
           [disabled]="householdForm.invalid">
           {{ editingHousehold ? 'Update' : 'Create' }}
-        </button>
-      </mat-card-actions>
-    </mat-card>
-  </div>
-</div> 
+        </mat-card-actions>
+      </div>

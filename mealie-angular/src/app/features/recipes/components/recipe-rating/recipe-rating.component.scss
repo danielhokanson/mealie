@@ -1,3 +1,4 @@
+// TODO: Review and update to use theme variables
 .recipe-rating {
   display: inline-flex;
   align-items: center;
@@ -32,7 +33,7 @@
   }
 
   &.active {
-    color: #ff9800;
+    color: var(--primary-500);
   }
 
   &.hover {
@@ -53,7 +54,7 @@
   color: #ccc;
 
   &.active {
-    color: #ff9800;
+    color: var(--primary-500);
   }
 
   &.half {

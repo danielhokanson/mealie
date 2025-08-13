@@ -3,14 +3,14 @@
   <app-base-button
     (click)="openDialog()">
     Bulk Add
-  </app-base-button>
+  </div>
 
   <!-- Dialog -->
   <div *ngIf="dialog" class="dialog-overlay" (click)="closeDialog()">
     <div class="dialog-content" (click)="$event.stopPropagation()">
-      <mat-card class="dialog-card">
+      <mat-card class="dialog-card card">
         <!-- Dialog Header -->
-        <mat-toolbar color="primary" class="dialog-header">
+        <mat-toolbar class="btn btn-primary dialog-header">
           <mat-icon class="header-icon">add_circle</mat-icon>
           <span class="header-title">Bulk Add</span>
           <span class="spacer"></span>
@@ -19,14 +19,14 @@
         <!-- Dialog Body -->
         <div class="dialog-body">
           <!-- Text Input Area -->
-          <mat-form-field appearance="outline" class="text-input">
+          <mat-form-field appearance="outline" class="text-input w-full">
             <mat-label>Recipe Data</mat-label>
             <textarea matInput
                       [(ngModel)]="inputText"
                       rows="12"
                       placeholder="Paste in your recipe data. Each line will be treated as an item in a list">
-            </textarea>
-          </mat-form-field>
+            </mat-form-field>
+          </div>
 
           <mat-divider class="section-divider"></mat-divider>
 
@@ -34,24 +34,23 @@
           <div class="utilities-section">
             <div *ngFor="let util of utilities; let last = last" class="utility-item">
               <mat-list-item class="utility-list-item">
-                <div class="utility-content">
+                
                   <div class="utility-description">
                     {{ util.description }}
-                  </div>
+                  
                   <app-base-button
                     size="small"
-                    color="accent"
+                    class="btn btn-secondary"
                     (click)="util.action()"
                     class="utility-button">
                     <mat-icon>smart_toy</mat-icon>
                     Run
-                  </app-base-button>
-                </div>
-              </mat-list-item>
+                  </div>
+                </mat-list-item>
+              </div>
               <mat-divider *ngIf="!last" class="utility-divider"></mat-divider>
             </div>
-          </div>
-        </div>
+        </mat-card>
 
         <!-- Dialog Actions -->
         <mat-divider class="action-divider"></mat-divider>
@@ -60,18 +59,12 @@
             cancel
             (click)="closeDialog()">
             Cancel
-          </app-base-button>
-          
-          <div class="spacer"></div>
-          
+          </div>
+
           <app-base-button
             save
             color="success"
             (click)="save()">
             Save
-          </app-base-button>
+          </div>
         </div>
-      </mat-card>
-    </div>
-  </div>
-</div> 

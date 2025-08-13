@@ -1,5 +1,5 @@
-<mat-card [class]="cardClass">
-  <div class="card-content">
+<mat-card [class]="cardClass" class="card">
+  
     <!-- Image Section -->
     <div *ngIf="hasImage" class="image-section">
       <img
@@ -7,25 +7,25 @@
         [alt]="name"
         class="recipe-image"
         loading="lazy">
-    </div>
-    
+
     <!-- Content Section -->
     <div class="content-section">
       <!-- Recipe Name -->
-      <h3 class="recipe-name">{{ name }}</h3>
+      <h3 class="recipe-name text-lg font-medium mb-sm">{{ name }}</h3>
       
       <!-- Description -->
-      <p *ngIf="description" class="recipe-description">
+      <p *ngIf="description" class="recipe-description text-secondary mb-sm">
         {{ description }}
       </p>
       
       <!-- Rating -->
       <div *ngIf="displayRating > 0" class="rating-section">
-        <mat-chip color="primary" class="rating-chip">
+        <mat-chip class="btn btn-primary rating-chip">
           <mat-icon>star</mat-icon>
           {{ displayRating.toFixed(1) }}
         </mat-chip>
       </div>
-    </div>
   </div>
-</mat-card> 
+</div>
+
+</mat-card>

@@ -1,39 +1,39 @@
-<div class="admin-backups-container">
+<section class="page-container">
   <!-- Loading State -->
-  <div *ngIf="loading" class="loading-container">
+  <div *ngIf="loading" class="flex items-center justify-center py-xl">
     <mat-spinner diameter="50"></mat-spinner>
-    <p>Processing backup...</p>
+    <p class="text-secondary mb-sm">Processing backup...</p>
   </div>
 
   <!-- Backups Content -->
   <div *ngIf="!loading" class="backups-content">
     <!-- Header -->
     <div class="backups-header">
-      <h2>Backup Management</h2>
-      <p>Create, manage, and restore system backups</p>
+      <h2 class="text-xl font-medium mb-md">Backup Management</h2>
+      <p class="text-secondary mb-sm">Create, manage, and restore system backups</p>
     </div>
 
     <!-- Backup Actions -->
     <div class="backup-actions">
       <button 
         mat-raised-button 
-        color="primary"
+        class="btn btn-primary"
         (click)="onCreateBackup()">
         <mat-icon>backup</mat-icon>
         Create Backup
-      </button>
+      </div>
     </div>
 
     <!-- Backups Table -->
     <div class="backups-table">
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title>System Backups</mat-card-title>
-          <mat-card-subtitle>Manage your system backups</mat-card-subtitle>
+      <mat-card class="card">
+        <mat-card-header class="card">
+          <mat-card-title class="card">System Backups</mat-card-title>
+          <mat-card-subtitle class="card">Manage your system backups</mat-card-subtitle>
         </mat-card-header>
 
-        <mat-card-content>
-          <table mat-table [dataSource]="backups" class="backups-table">
+        <mat-card-content class="card">
+          <table mat-table class="w-full" [dataSource]="backups" class="backups-table">
             <!-- Name Column -->
             <ng-container matColumnDef="name">
               <th mat-header-cell *matHeaderCellDef>Name</th>
@@ -44,9 +44,8 @@
                     <span class="backup-title">{{ backup.name }}</span>
                     <span class="backup-description" *ngIf="backup.description">{{ backup.description }}</span>
                   </div>
-                </div>
-              </td>
-            </ng-container>
+              </div>
+            </td>
 
             <!-- Type Column -->
             <ng-container matColumnDef="type">
@@ -84,13 +83,13 @@
                 <div class="status-indicator">
                   <mat-icon [style.color]="getStatusColor(backup.status)">
                     {{ getStatusIcon(backup.status) }}
-                  </mat-icon>
+
                   <span [style.color]="getStatusColor(backup.status)">
                     {{ backup.status }}
                   </span>
-                </div>
-              </td>
-            </ng-container>
+
+              </mat-icon>
+            </div>
 
             <!-- Actions Column -->
             <ng-container matColumnDef="actions">
@@ -102,7 +101,7 @@
                     [matMenuTriggerFor]="menu"
                     [disabled]="backup.status === 'in_progress'">
                     <mat-icon>more_vert</mat-icon>
-                  </button>
+                  </div>
                   
                   <mat-menu #menu="matMenu">
                     <button mat-menu-item (click)="onViewBackupDetails(backup)">
@@ -118,49 +117,48 @@
                       <span>Restore</span>
                     </button>
                     <mat-divider></mat-divider>
-                    <button mat-menu-item (click)="onDeleteBackup(backup)" color="warn">
+                    <button mat-menu-item (click)="onDeleteBackup(backup)" class="btn btn-error">
                       <mat-icon>delete</mat-icon>
                       <span>Delete</span>
                     </button>
                   </mat-menu>
-                </div>
-              </td>
-            </ng-container>
+                </td>
+              </ng-container>
+            </td>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
+          </ng-container>
 
           <!-- Empty State -->
           <div *ngIf="backups.length === 0" class="empty-backups">
             <mat-icon class="empty-icon">backup</mat-icon>
-            <h3>No Backups Found</h3>
-            <p>Create your first backup to get started</p>
+            <h3 class="text-lg font-medium mb-sm">No Backups Found</h3>
+            <p class="text-secondary mb-sm">Create your first backup to get started</p>
             <button 
               mat-raised-button 
-              color="primary"
+              class="btn btn-primary"
               (click)="onCreateBackup()">
               <mat-icon>backup</mat-icon>
               Create First Backup
-            </button>
-          </div>
-        </mat-card-content>
-      </mat-card>
-    </div>
-  </div>
+            </div>
+          </ng-container>
+        </table>
+      </mat-card-content>
+    </mat-card>
 
   <!-- Create Backup Dialog -->
   <div *ngIf="showCreateBackup" class="dialog-overlay">
-    <mat-card class="dialog-card">
-      <mat-card-header>
-        <mat-card-title>Create New Backup</mat-card-title>
-        <mat-card-subtitle>Configure your backup settings</mat-card-subtitle>
+    <mat-card class="dialog-card card">
+      <mat-card-header class="card">
+        <mat-card-title class="card">Create New Backup</mat-card-title>
+        <mat-card-subtitle class="card">Configure your backup settings</mat-card-subtitle>
       </mat-card-header>
 
-      <mat-card-content>
+      <mat-card-content class="card">
         <form [formGroup]="backupForm" class="backup-form">
           <div class="form-row">
-            <mat-form-field appearance="outline" class="form-field">
+            <mat-form-field appearance="outline" class="w-full">
               <mat-label>Backup Name</mat-label>
               <input 
                 matInput 
@@ -173,7 +171,7 @@
           </div>
 
           <div class="form-row">
-            <mat-form-field appearance="outline" class="form-field">
+            <mat-form-field appearance="outline" class="w-full">
               <mat-label>Backup Type</mat-label>
               <mat-select formControlName="type">
                 <mat-option *ngFor="let type of backupTypes" [value]="type.value">
@@ -187,53 +185,52 @@
           </div>
 
           <div class="form-row">
-            <mat-form-field appearance="outline" class="form-field">
+            <mat-form-field appearance="outline" class="w-full">
               <mat-label>Description (Optional)</mat-label>
               <textarea 
                 matInput 
                 formControlName="description"
                 placeholder="Describe this backup..."
                 rows="3">
-              </textarea>
+              </mat-form-field>
               <mat-error *ngIf="backupForm.get('description')?.invalid && backupForm.get('description')?.touched">
                 {{ getErrorMessage('description') }}
               </mat-error>
-            </mat-form-field>
-          </div>
+            </div>
+          </form>
 
           <div class="form-section">
             <h4>Backup Contents</h4>
             <div class="form-row">
-              <mat-checkbox formControlName="includeImages" color="primary">
+              <mat-checkbox formControlName="includeImages" class="btn btn-primary">
                 Include recipe images
               </mat-checkbox>
             </div>
             <div class="form-row">
-              <mat-checkbox formControlName="includeDatabase" color="primary">
+              <mat-checkbox formControlName="includeDatabase" class="btn btn-primary">
                 Include database
               </mat-checkbox>
             </div>
             <div class="form-row">
-              <mat-checkbox formControlName="includeSettings" color="primary">
+              <mat-checkbox formControlName="includeSettings" class="btn btn-primary">
                 Include system settings
               </mat-checkbox>
             </div>
-          </div>
 
           <div class="form-section">
             <h4>Backup Options</h4>
             <div class="form-row">
-              <mat-checkbox formControlName="compressionEnabled" color="primary">
+              <mat-checkbox formControlName="compressionEnabled" class="btn btn-primary">
                 Enable compression
               </mat-checkbox>
             </div>
             <div class="form-row">
-              <mat-checkbox formControlName="encryptionEnabled" color="primary">
+              <mat-checkbox formControlName="encryptionEnabled" class="btn btn-primary">
                 Enable encryption
               </mat-checkbox>
             </div>
             <div class="form-row" *ngIf="backupForm.get('encryptionEnabled')?.value">
-              <mat-form-field appearance="outline" class="form-field">
+              <mat-form-field appearance="outline" class="w-full">
                 <mat-label>Encryption Password</mat-label>
                 <input 
                   matInput 
@@ -245,37 +242,36 @@
                 </mat-error>
               </mat-form-field>
             </div>
-          </div>
-        </form>
-      </mat-card-content>
+        </div>
+      </div>
 
-      <mat-card-actions>
+      <mat-card-actions class="card">
         <button 
           mat-button 
           (click)="onCancelBackup()">
           Cancel
-        </button>
+        </mat-card-actions>
         <button 
           mat-raised-button 
-          color="primary"
+          class="btn btn-primary"
           (click)="onSaveBackup()"
           [disabled]="!canSaveBackup()">
           <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner>
           <span *ngIf="!loading">Create Backup</span>
-        </button>
-      </mat-card-actions>
-    </mat-card>
+        </mat-card-content>
+      </mat-card>
+    </div>
   </div>
 
   <!-- Backup Details Dialog -->
   <div *ngIf="selectedBackup" class="dialog-overlay">
-    <mat-card class="dialog-card">
-      <mat-card-header>
-        <mat-card-title>Backup Details</mat-card-title>
-        <mat-card-subtitle>{{ selectedBackup.name }}</mat-card-subtitle>
+    <mat-card class="dialog-card card">
+      <mat-card-header class="card">
+        <mat-card-title class="card">Backup Details</mat-card-title>
+        <mat-card-subtitle class="card">{{ selectedBackup.name }}</mat-card-subtitle>
       </mat-card-header>
 
-      <mat-card-content>
+      <mat-card-content class="card">
         <div class="backup-details">
           <div class="detail-row">
             <span class="detail-label">Name:</span>
@@ -303,12 +299,12 @@
               <div class="status-indicator">
                 <mat-icon [style.color]="getStatusColor(selectedBackup.status)">
                   {{ getStatusIcon(selectedBackup.status) }}
-                </mat-icon>
+
                 <span [style.color]="getStatusColor(selectedBackup.status)">
                   {{ selectedBackup.status }}
                 </span>
-              </div>
-            </span>
+
+            </mat-icon>
           </div>
           <div class="detail-row" *ngIf="selectedBackup.description">
             <span class="detail-label">Description:</span>
@@ -327,63 +323,63 @@
             <span class="detail-value">
               <mat-icon [style.color]="selectedBackup.encryptionEnabled ? '#4caf50' : '#666'">
                 {{ selectedBackup.encryptionEnabled ? 'lock' : 'lock_open' }}
-              </mat-icon>
-              {{ selectedBackup.encryptionEnabled ? 'Enabled' : 'Disabled' }}
-            </span>
-          </div>
-        </div>
-      </mat-card-content>
 
-      <mat-card-actions>
+              {{ selectedBackup.encryptionEnabled ? 'Enabled' : 'Disabled' }}
+
+          </mat-icon>
+      </span>
+
+      <mat-card-actions class="card">
         <button 
           mat-button 
           (click)="onCloseBackupDetails()">
           Close
-        </button>
+        </mat-card-actions>
         <button 
           mat-raised-button 
-          color="primary"
+          class="btn btn-primary"
           (click)="onDownloadBackup(selectedBackup)">
           <mat-icon>download</mat-icon>
           Download
-        </button>
+        </div>
         <button 
           mat-raised-button 
-          color="accent"
+          class="btn btn-secondary"
           (click)="onRestoreBackup(selectedBackup)">
           <mat-icon>restore</mat-icon>
           Restore
-        </button>
-      </mat-card-actions>
-    </mat-card>
-  </div>
+        </span>
+      </div>
+    </div>
+  </mat-card-content>
 
   <!-- Progress Bars -->
   <div *ngIf="backupProgress > 0" class="progress-overlay">
-    <mat-card class="progress-card">
-      <mat-card-content>
-        <h3>Creating Backup...</h3>
+    <mat-card class="progress-card card">
+      <mat-card-content class="card">
+        <h3 class="text-lg font-medium mb-sm">Creating Backup...</h3>
         <mat-progress-bar 
           mode="determinate" 
           [value]="backupProgress"
-          color="primary">
-        </mat-progress-bar>
+          class="btn btn-primary">
+        </mat-card-content>
         <span class="progress-text">{{ backupProgress }}%</span>
-      </mat-card-content>
-    </mat-card>
-  </div>
+      </mat-card>
+    </div>
 
   <div *ngIf="restoreProgress > 0" class="progress-overlay">
-    <mat-card class="progress-card">
-      <mat-card-content>
-        <h3>Restoring Backup...</h3>
+    <mat-card class="progress-card card">
+      <mat-card-content class="card">
+        <h3 class="text-lg font-medium mb-sm">Restoring Backup...</h3>
         <mat-progress-bar 
           mode="determinate" 
           [value]="restoreProgress"
-          color="accent">
-        </mat-progress-bar>
+          class="btn btn-secondary">
+        </mat-card-content>
         <span class="progress-text">{{ restoreProgress }}%</span>
-      </mat-card-content>
-    </mat-card>
-  </div>
-</div> 
+      </mat-card>
+    </div>
+
+</mat-card>
+</div>
+</section>

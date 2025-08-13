@@ -1,18 +1,17 @@
 <div class="search-filter">
   <mat-menu #filterMenu="matMenu" class="filter-menu">
     <ng-template matMenuContent>
-      <div class="filter-content">
+      
         <!-- Header -->
         <div class="filter-header">
-          <h3>{{ label }}</h3>
+          <h3 class="text-lg font-medium mb-sm">{{ label }}</h3>
           <button 
             mat-icon-button 
             (click)="clearSelection()"
             [disabled]="selectedItems.length === 0"
             matTooltip="Clear selection">
             <mat-icon>clear</mat-icon>
-          </button>
-        </div>
+          </div>
 
         <!-- Require All Toggle (for multiple selection) -->
         <div *ngIf="multiple && !radio" class="require-all-toggle">
@@ -20,8 +19,8 @@
             [(ngModel)]="requireAll"
             (change)="onRequireAllChange()">
             Require all selected
-          </mat-checkbox>
-        </div>
+          </div>
+        </ng-template>
 
         <!-- Filter Items -->
         <div class="filter-items">
@@ -36,31 +35,26 @@
               [checked]="selectedItems.includes(item.id)"
               (click)="$event.stopPropagation()"
               (change)="toggleItem(item.id)">
-            </mat-checkbox>
+            </div>
 
             <mat-radio-button 
               *ngIf="radio"
               [checked]="selectedItems.includes(item.id)"
               (click)="$event.stopPropagation()"
               (change)="toggleItem(item.id)">
-            </mat-radio-button>
+            </mat-menu>
 
             <span 
               class="item-name"
               [style.color]="item.color">
               {{ item.name }}
-            </span>
-          </div>
-        </div>
+            </div>
 
         <!-- No Items Message -->
         <div *ngIf="items.length === 0" class="no-items">
           <mat-icon>info</mat-icon>
           <span>No {{ label.toLowerCase() }} available</span>
         </div>
-      </div>
-    </ng-template>
-  </mat-menu>
 
   <!-- Filter Button -->
   <button 
@@ -74,7 +68,6 @@
     <span *ngIf="selectedItems.length > 0" class="selection-count">
       ({{ selectedItems.length }})
     </span>
-  </button>
 
   <!-- Selected Items Display -->
   <div *ngIf="selectedItems.length > 0" class="selected-items">
@@ -86,7 +79,5 @@
         removable>
         {{ getItemName(itemId) }}
         <mat-icon matChipRemove>cancel</mat-icon>
-      </mat-chip>
-    </mat-chip-listbox>
-  </div>
-</div> 
+      </mat-chip-listbox>
+    </div>

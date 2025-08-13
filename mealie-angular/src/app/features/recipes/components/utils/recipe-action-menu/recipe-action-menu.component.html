@@ -1,11 +1,11 @@
-<div class="recipe-action-menu">
+<article class="card">
   <button
     mat-icon-button
     [matMenuTriggerFor]="menu"
     [matTooltip]="'Recipe Actions'"
     class="action-button">
     <mat-icon>more_vert</mat-icon>
-  </button>
+  </article>
   
   <mat-menu #menu="matMenu" class="action-menu">
     <button
@@ -15,7 +15,7 @@
       [matTooltip]="'Edit Recipe'">
       <mat-icon>edit</mat-icon>
       <span>Edit</span>
-    </button>
+    </mat-menu>
     
     <button
       *ngIf="loggedIn"
@@ -24,7 +24,6 @@
       [matTooltip]="'Print Recipe'">
       <mat-icon>print</mat-icon>
       <span>Print</span>
-    </button>
     
     <button
       *ngIf="canEdit"
@@ -33,7 +32,6 @@
       [matTooltip]="'Save Changes'">
       <mat-icon>save</mat-icon>
       <span>Save</span>
-    </button>
     
     <button
       *ngIf="canEdit"
@@ -43,6 +41,3 @@
       class="delete-action">
       <mat-icon>delete</mat-icon>
       <span>Delete</span>
-    </button>
-  </mat-menu>
-</div> 

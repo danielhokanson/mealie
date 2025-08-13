@@ -1,8 +1,8 @@
 <div class="recipe-print-container" [class.print-mode]="printMode">
   <!-- Loading State -->
-  <div *ngIf="loading" class="loading-container">
+  <div *ngIf="loading" class="flex items-center justify-center py-xl">
     <mat-spinner diameter="50"></mat-spinner>
-    <p>Loading recipe...</p>
+    <p class="text-secondary mb-sm">Loading recipe...</p>
   </div>
 
   <!-- Recipe Content -->
@@ -11,76 +11,71 @@
     <div class="print-controls no-print">
       <button 
         mat-raised-button 
-        color="primary"
+        class="btn btn-primary"
         (click)="onPrint()">
         <mat-icon>print</mat-icon>
         Print Recipe
-      </button>
+      </div>
       <button 
         mat-raised-button 
-        color="accent"
+        class="btn btn-secondary"
         (click)="onExportPDF()">
         <mat-icon>picture_as_pdf</mat-icon>
         Export PDF
-      </button>
+      </div>
       <button 
         mat-raised-button 
-        color="primary"
+        class="btn btn-primary"
         (click)="onShare()">
         <mat-icon>share</mat-icon>
         Share
-      </button>
-    </div>
+      </div>
 
     <!-- Print Options -->
     <div class="print-options no-print">
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title>Print Options</mat-card-title>
+      <mat-card class="card">
+        <mat-card-header class="card">
+          <mat-card-title class="card">Print Options</mat-card-title>
         </mat-card-header>
-        <mat-card-content>
+        <mat-card-content class="card">
           <div class="options-grid">
             <div class="option-item">
               <mat-checkbox 
                 [(ngModel)]="showNutrition"
-                color="primary">
+                class="btn btn-primary">
                 Include Nutrition Information
-              </mat-checkbox>
+              </div>
             </div>
             <div class="option-item">
               <mat-checkbox 
                 [(ngModel)]="showNotes"
-                color="primary">
+                class="btn btn-primary">
                 Include Notes
-              </mat-checkbox>
-            </div>
+              </div>
+            </mat-card-content>
             <div class="option-item">
               <mat-checkbox 
                 [(ngModel)]="showComments"
-                color="primary">
+                class="btn btn-primary">
                 Include Comments
-              </mat-checkbox>
-            </div>
+              </div>
+            </mat-card>
             <div class="option-item">
               <mat-checkbox 
                 [(ngModel)]="showTimeline"
-                color="primary">
+                class="btn btn-primary">
                 Include Timeline
-              </mat-checkbox>
+              </div>
             </div>
-          </div>
-        </mat-card-content>
-      </mat-card>
-    </div>
 
     <!-- Recipe Header -->
-    <div class="recipe-header">
-      <div class="recipe-title">
-        <h1>{{ recipe.name }}</h1>
-        <p class="recipe-description">{{ recipe.description }}</p>
-      </div>
+    <article class="card">
+      <article class="card">
+        <h1 class="text-2xl font-medium mb-md">{{ recipe.name }}</h1>
+        <p class="recipe-description text-secondary mb-sm">{{ recipe.description }}</p>
+      </article>
 
-      <div class="recipe-meta">
+      <article class="card">
         <div class="meta-item">
           <mat-icon>schedule</mat-icon>
           <span>Prep: {{ getFormattedTime(recipe.prepTime || 0) }}</span>
@@ -101,7 +96,6 @@
           <mat-icon>star</mat-icon>
           <span>Rating: {{ recipe.rating }}/5</span>
         </div>
-      </div>
 
       <!-- Categories and Tags -->
       <div class="recipe-tags" *ngIf="recipe.categories?.length || recipe.tags?.length">
@@ -111,7 +105,7 @@
             *ngFor="let category of recipe.categories"
             [style.background-color]="getCategoryColor(category)">
             {{ category.name }}
-          </mat-chip>
+          </div>
         </div>
         <div class="tags" *ngIf="recipe.tags?.length">
           <span class="tag-label">Tags:</span>
@@ -119,10 +113,9 @@
             *ngFor="let tag of recipe.tags"
             [style.background-color]="getTagColor(tag)">
             {{ tag.name }}
-          </mat-chip>
-        </div>
-      </div>
-    </div>
+          </div>
+        </article>
+    </article>
 
     <!-- Recipe Image -->
     <div class="recipe-image" *ngIf="recipe.image">
@@ -130,38 +123,37 @@
     </div>
 
     <!-- Recipe Content Grid -->
-    <div class="recipe-content-grid">
+    <article class="card">
       <!-- Ingredients -->
-      <div class="recipe-ingredients">
-        <h2>Ingredients</h2>
-        <mat-list>
+      <article class="card">
+        <h2 class="text-xl font-medium mb-md">Ingredients</h2>
+        <mat-list class="flex flex-col gap-sm">
           <mat-list-item *ngFor="let ingredient of recipe.ingredients" class="ingredient-item">
-            <div class="ingredient-content">
+            
               <span class="ingredient-amount">{{ ingredient.quantity }} {{ ingredient.unit }}</span>
               <span class="ingredient-name">{{ ingredient.food?.name || ingredient.note }}</span>
               <span class="ingredient-notes" *ngIf="ingredient.notes">({{ ingredient.notes }})</span>
-            </div>
+            
           </mat-list-item>
         </mat-list>
-      </div>
+      </article>
 
       <!-- Instructions -->
-      <div class="recipe-instructions">
-        <h2>Instructions</h2>
-        <mat-list>
+      <article class="card">
+        <h2 class="text-xl font-medium mb-md">Instructions</h2>
+        <mat-list class="flex flex-col gap-sm">
           <mat-list-item *ngFor="let instruction of recipe.instructions" class="instruction-item">
-            <div class="instruction-content">
+            
               <span class="instruction-number">{{ instruction.position }}.</span>
               <span class="instruction-text">{{ instruction.text }}</span>
-            </div>
+            
           </mat-list-item>
         </mat-list>
-      </div>
-    </div>
+      </article>
 
     <!-- Nutrition Information -->
     <div class="recipe-nutrition" *ngIf="showNutrition && recipe.nutrition">
-      <h2>Nutrition Information</h2>
+      <h2 class="text-xl font-medium mb-md">Nutrition Information</h2>
       <div class="nutrition-grid">
         <div class="nutrition-item">
           <span class="nutrition-label">Calories:</span>
@@ -195,66 +187,66 @@
           <span class="nutrition-label">Cholesterol:</span>
           <span class="nutrition-value">{{ getNutritionValue(recipe.nutrition, 'cholesterol') }}</span>
         </div>
-      </div>
     </div>
 
     <!-- Notes -->
     <div class="recipe-notes" *ngIf="showNotes && recipe.notes?.length">
-      <h2>Notes</h2>
-      <mat-list>
+      <h2 class="text-xl font-medium mb-md">Notes</h2>
+      <mat-list class="flex flex-col gap-sm">
         <mat-list-item *ngFor="let note of recipe.notes" class="note-item">
-          <div class="note-content">
+          
             <span class="note-text">{{ note.text }}</span>
             <span class="note-date" *ngIf="note.createdAt">{{ getFormattedDate(note.createdAt) }}</span>
-          </div>
+          
         </mat-list-item>
       </mat-list>
     </div>
 
     <!-- Comments -->
     <div class="recipe-comments" *ngIf="showComments && recipe.comments?.length">
-      <h2>Comments</h2>
-      <mat-list>
+      <h2 class="text-xl font-medium mb-md">Comments</h2>
+      <mat-list class="flex flex-col gap-sm">
         <mat-list-item *ngFor="let comment of recipe.comments" class="comment-item">
-          <div class="comment-content">
+          
             <div class="comment-header">
               <span class="comment-author">{{ comment.user?.fullName || comment.user?.username }}</span>
               <span class="comment-date" *ngIf="comment.createdAt">{{ getFormattedDate(comment.createdAt) }}</span>
-            </div>
+            
             <div class="comment-text">{{ comment.text }}</div>
-          </div>
-        </mat-list-item>
-      </mat-list>
-    </div>
+        </div>
+      </mat-list-item>
+    </mat-list>
 
     <!-- Timeline -->
     <div class="recipe-timeline" *ngIf="showTimeline && recipe.timeline?.length">
-      <h2>Timeline</h2>
-      <mat-list>
+      <h2 class="text-xl font-medium mb-md">Timeline</h2>
+      <mat-list class="flex flex-col gap-sm">
         <mat-list-item *ngFor="let event of recipe.timeline" class="timeline-item">
-          <div class="timeline-content">
+          
             <div class="timeline-header">
               <span class="timeline-title">{{ event.title }}</span>
               <span class="timeline-date" *ngIf="event.date">{{ getFormattedDate(event.date) }}</span>
-            </div>
+            
             <div class="timeline-description" *ngIf="event.description">{{ event.description }}</div>
-          </div>
-        </mat-list-item>
-      </mat-list>
-    </div>
+        </div>
+      </mat-list-item>
+    </mat-list>
 
     <!-- Recipe Footer -->
-    <div class="recipe-footer">
-      <p class="recipe-source" *ngIf="recipe.source">Source: {{ recipe.source }}</p>
-      <p class="recipe-created" *ngIf="recipe.createdAt">Created: {{ getFormattedDate(recipe.createdAt) }}</p>
-      <p class="recipe-updated" *ngIf="recipe.updatedAt">Updated: {{ getFormattedDate(recipe.updatedAt) }}</p>
-    </div>
-  </div>
+    <article class="card">
+      <p class="recipe-source" *ngIf="recipe.source" class="text-secondary mb-sm">Source: {{ recipe.source }}</p>
+      <p class="recipe-created" *ngIf="recipe.createdAt" class="text-secondary mb-sm">Created: {{ getFormattedDate(recipe.createdAt) }}</p>
+      <p class="recipe-updated" *ngIf="recipe.updatedAt" class="text-secondary mb-sm">Updated: {{ getFormattedDate(recipe.updatedAt) }}</p>
+    </article>
 
   <!-- No Recipe State -->
   <div *ngIf="!loading && !recipe" class="no-recipe">
     <mat-icon class="no-recipe-icon">restaurant</mat-icon>
-    <h3>No Recipe Selected</h3>
-    <p>Please select a recipe to print.</p>
+    <h3 class="text-lg font-medium mb-sm">No Recipe Selected</h3>
+    <p class="text-secondary mb-sm">Please select a recipe to print.</p>
   </div>
-</div> 
+
+</div>
+</div>
+</div>
+</article>

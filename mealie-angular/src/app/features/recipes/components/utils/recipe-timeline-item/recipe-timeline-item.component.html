@@ -2,31 +2,28 @@
   <div class="timeline-icon">
     <mat-icon class="icon">{{ icon }}</mat-icon>
   </div>
-  
-  <div class="timeline-content">
+
     <!-- Date Chip (Desktop) -->
     <div *ngIf="!useMobileFormat && event.timestamp" class="date-chip">
-      <mat-chip color="primary" class="date-chip-content">
+      <mat-chip class="btn btn-primary date-chip-content">
         <mat-icon class="date-icon">calendar_today</mat-icon>
         {{ formattedDate }}
       </mat-chip>
-    </div>
-    
+
     <!-- Timeline Card -->
-    <mat-card class="timeline-card" (click)="onCardClick()">
-      <mat-card-header class="card-header">
-        <div class="header-content">
+    <mat-card class="timeline-card" (click)="onCardClick()" class="card">
+      <mat-card-header class="card-header card">
+        
           <!-- User Avatar -->
           <div class="avatar-section" [class]="attrs.avatar.class">
             <app-user-avatar
               [userId]="event.userId"
               [size]="attrs.avatar.size">
-            </app-user-avatar>
-          </div>
-          
+            </div>
+
           <!-- Date Chip (Mobile) -->
           <div *ngIf="useMobileFormat && event.timestamp" class="mobile-date">
-            <mat-chip color="primary">
+            <mat-chip class="btn btn-primary">
               <mat-icon>calendar_today</mat-icon>
               {{ formattedDate }}
             </mat-chip>
@@ -38,8 +35,7 @@
           </div>
           
           <!-- Spacer -->
-          <div class="spacer"></div>
-          
+
           <!-- Context Menu -->
           <div class="context-menu-section">
             <app-recipe-timeline-context-menu
@@ -48,13 +44,12 @@
               [useMobileFormat]="useMobileFormat"
               (update)="update.emit()"
               (delete)="delete.emit()">
-            </app-recipe-timeline-context-menu>
-          </div>
-        </div>
-      </mat-card-header>
+            </div>
+          </mat-card-header>
+      </mat-card>
       
       <!-- Recipe Card (if enabled) -->
-      <mat-card-content *ngIf="showRecipeCards && recipe" class="recipe-card-content">
+      <mat-card-content *ngIf="showRecipeCards && recipe" class="recipe-card-content card">
         <div class="recipe-card-wrapper" [class]="useMobileFormat ? 'py-3 mx-0' : 'py-3 mx-0'">
           <app-recipe-card-mobile
             [name]="recipe.name"
@@ -65,16 +60,16 @@
             [recipeId]="recipe.id"
             [isFlat]="true"
             [vertical]="useMobileFormat">
-          </app-recipe-card-mobile>
-        </div>
-      </mat-card-content>
+          </div>
+        </mat-card-content>
+      </div>
       
       <!-- Divider -->
       <mat-divider *ngIf="showRecipeCards && recipe && (useMobileFormat || event.eventMessage)"></mat-divider>
       
       <!-- Event Content -->
-      <mat-card-content class="event-content">
-        <div class="content-wrapper">
+      <mat-card-content class="event-content card">
+        
           <!-- Subject (Mobile) -->
           <strong *ngIf="useMobileFormat" class="mobile-subject">{{ event.subject }}</strong>
           
@@ -91,9 +86,7 @@
           <!-- Event Message -->
           <div *ngIf="event.eventMessage" class="event-message" [class]="useMobileFormat ? 'text-caption' : ''">
             <app-safe-markdown [source]="event.eventMessage"></app-safe-markdown>
-          </div>
-        </div>
-      </mat-card-content>
-    </mat-card>
+          
+      </div>
+    </mat-card-content>
   </div>
-</div> 

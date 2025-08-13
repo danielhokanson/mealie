@@ -1,22 +1,22 @@
-<div class="household-members-container">
-    <mat-card>
-        <mat-card-header>
-            <mat-card-title>Household Members</mat-card-title>
-            <mat-card-subtitle>Manage your household members and their roles</mat-card-subtitle>
+<section class="page-container">
+    <mat-card class="card">
+        <mat-card-header class="card">
+            <mat-card-title class="card">Household Members</mat-card-title>
+            <mat-card-subtitle class="card">Manage your household members and their roles</mat-card-subtitle>
         </mat-card-header>
 
-        <mat-card-content>
-            <div *ngIf="loading" class="loading-container">
-                <p>Loading household data...</p>
+        <mat-card-content class="card">
+            <div *ngIf="loading" class="flex items-center justify-center py-xl">
+                <p class="text-secondary mb-sm">Loading household data...</p>
             </div>
 
-            <div *ngIf="!loading && household" class="content-container">
+            <div *ngIf="!loading && household" class="flex-1">
                 <!-- Invite New Member -->
                 <div class="invite-section">
-                    <h3>Invite New Member</h3>
+                    <h3 class="text-lg font-medium mb-sm">Invite New Member</h3>
                     <form [formGroup]="inviteForm" (ngSubmit)="inviteMember()" class="invite-form">
                         <div class="form-row">
-                            <mat-form-field appearance="outline">
+                            <mat-form-field appearance="outline" class="w-full">
                                 <mat-label>Email Address</mat-label>
                                 <input matInput formControlName="email" type="email" placeholder="Enter email address">
                                 <mat-error *ngIf="inviteForm.get('email')?.hasError('required')">
@@ -27,7 +27,7 @@
                                 </mat-error>
                             </mat-form-field>
 
-                            <mat-form-field appearance="outline">
+                            <mat-form-field appearance="outline" class="w-full">
                                 <mat-label>Role</mat-label>
                                 <mat-select formControlName="role">
                                     <mat-option value="member">Member</mat-option>
@@ -37,22 +37,22 @@
 
                             <button 
                                 mat-raised-button 
-                                color="primary" 
+                                class="btn btn-primary" 
                                 type="submit"
                                 [disabled]="!inviteForm.valid || loading">
                                 <mat-icon>person_add</mat-icon>
                                 Invite
-                            </button>
-                        </div>
-                    </form>
+                            </div>
+                        </form>
+                    </div>
                 </div>
 
                 <!-- Current Members -->
                 <div class="members-section">
-                    <h3>Current Members ({{ members.length }})</h3>
+                    <h3 class="text-lg font-medium mb-sm">Current Members ({{ members.length }})</h3>
                     
                     <div *ngIf="members.length === 0" class="no-members">
-                        <p>No members found. Invite someone to get started!</p>
+                        <p class="text-secondary mb-sm">No members found. Invite someone to get started!</p>
                     </div>
 
                     <mat-list *ngIf="members.length > 0">
@@ -62,19 +62,17 @@
                                 <div *ngIf="!member.avatar" class="avatar-placeholder">
                                     {{ member.username.charAt(0).toUpperCase() }}
                                 </div>
-                            </div>
 
                             <div matListItemTitle class="member-info">
                                 <div class="member-name">{{ member.username }}</div>
                                 <div class="member-email">{{ member.email }}</div>
-                            </div>
 
                             <div matListItemMeta class="member-actions">
                                 <mat-chip 
                                     [style.background-color]="getRoleColor(member.role || 'member')"
                                     class="role-chip">
                                     {{ member.role || 'member' }}
-                                </mat-chip>
+                                </div>
 
                                 <div class="action-buttons" *ngIf="canManageMembers()">
                                     <button 
@@ -82,7 +80,7 @@
                                         [matMenuTriggerFor]="roleMenu"
                                         (click)="$event.stopPropagation()">
                                         <mat-icon>more_vert</mat-icon>
-                                    </button>
+                                    </div>
 
                                     <mat-menu #roleMenu="matMenu">
                                         <button mat-menu-item (click)="updateMemberRole(member.id, 'member')">
@@ -99,16 +97,15 @@
                                         </button>
                                     </mat-menu>
                                 </div>
-                            </div>
-                        </mat-list-item>
-                    </mat-list>
-                </div>
-            </div>
+                        </div>
+                    </mat-list-item>
+                </mat-list>
 
             <div *ngIf="!loading && !household" class="no-household">
-                <p>No household found. Please create or join a household first.</p>
+                <p class="text-secondary mb-sm">No household found. Please create or join a household first.</p>
             </div>
-        </mat-card-content>
-    </mat-card>
-</div>
+        </div>
+    </mat-card-content>
+</mat-card>
 
+</section>

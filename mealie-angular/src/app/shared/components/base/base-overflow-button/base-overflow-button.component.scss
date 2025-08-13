@@ -1,32 +1,6 @@
-.overflow-button {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
+// Component styles - using utility classes in template
+// Only custom styles that can't be achieved with utilities should be added here
 
-.start-icon {
-  margin-right: 8px;
+:host {
+  display: block;
 }
-
-.end-icon {
-  margin-left: 8px;
-}
-
-.overflow-list {
-  min-width: 200px;
-  max-height: 300px;
-  overflow-y: auto;
-}
-
-.overflow-item {
-  height: 36px;
-  line-height: 36px;
-  
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.04);
-  }
-}
-
-.my-1 {
-  margin: 4px 0;
-} 

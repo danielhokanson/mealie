@@ -1,17 +1,17 @@
-<div class="shopping-list-create-container">
+<section class="page-container">
   <div class="shopping-list-create-header">
-    <h1>Create New Shopping List</h1>
-    <p>Fill in the details below to create your shopping list</p>
+    <h1 class="text-2xl font-medium mb-md">Create New Shopping List</h1>
+    <p class="text-secondary mb-sm">Fill in the details below to create your shopping list</p>
   </div>
 
   <form [formGroup]="shoppingListForm" (ngSubmit)="onSubmit()" class="shopping-list-form">
-    <mat-card class="form-section">
-      <mat-card-header>
-        <mat-card-title>Basic Information</mat-card-title>
+    <mat-card class="form-section card">
+      <mat-card-header class="card">
+        <mat-card-title class="card">Basic Information</mat-card-title>
       </mat-card-header>
-      <mat-card-content>
+      <mat-card-content class="card">
         <div class="form-row">
-          <mat-form-field appearance="outline" class="form-field">
+          <mat-form-field appearance="outline" class="w-full">
             <mat-label>List Name</mat-label>
             <input 
               matInput 
@@ -24,32 +24,32 @@
         </div>
 
         <div class="form-row">
-          <mat-form-field appearance="outline" class="form-field">
+          <mat-form-field appearance="outline" class="w-full">
             <mat-label>Description (optional)</mat-label>
             <textarea 
               matInput 
               formControlName="description"
               placeholder="Enter a description for this shopping list"
               rows="3">
-            </textarea>
-          </mat-form-field>
-        </div>
+            </mat-form-field>
+          </div>
+        </mat-card-content>
 
         <div class="form-row">
           <mat-checkbox formControlName="private">
             Make this list private
           </mat-checkbox>
         </div>
-      </mat-card-content>
-    </mat-card>
+      </mat-card>
+    </form>
 
     <!-- Labels Section -->
-    <mat-card class="form-section" *ngIf="labels.length > 0">
-      <mat-card-header>
-        <mat-card-title>Labels</mat-card-title>
-        <mat-card-subtitle>Select labels to organize your shopping list</mat-card-subtitle>
+    <mat-card class="form-section" *ngIf="labels.length  class="card"> 0">
+      <mat-card-header class="card">
+        <mat-card-title class="card">Labels</mat-card-title>
+        <mat-card-subtitle class="card">Select labels to organize your shopping list</mat-card-subtitle>
       </mat-card-header>
-      <mat-card-content>
+      <mat-card-content class="card">
         <div class="labels-grid">
           <mat-checkbox 
             *ngFor="let label of labels"
@@ -57,29 +57,25 @@
             (change)="onLabelToggle(label.id)"
             [style.color]="label.color">
             {{ label.name }}
-          </mat-checkbox>
-        </div>
-      </mat-card-content>
-    </mat-card>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </section>
 
     <!-- Form Actions -->
-    <div class="form-actions">
+    <div class="flex justify-end gap-sm mt-lg">
       <button 
         mat-button 
         type="button"
         (click)="onCancel()"
-        class="cancel-button">
+        class="btn btn-secondary">
         Cancel
-      </button>
+      </div>
       <button 
         mat-raised-button 
-        color="primary"
+        class="btn btn-primary"
         type="submit"
         [disabled]="loading || shoppingListForm.invalid"
-        class="submit-button">
+        class="btn btn-primary">
         <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner>
         <span *ngIf="!loading">Create Shopping List</span>
-      </button>
-    </div>
-  </form>
-</div> 

@@ -1,6 +1,6 @@
 <div style="height: 100%;">
   <div class="timeline-header">
-    <div class="spacer"></div>
+    
     <div class="filter-section">
       <!-- Filters -->
       <button
@@ -11,36 +11,33 @@
         [matBadgeHidden]="filterBadgeCount === 0"
         matBadgeColor="accent">
         <mat-icon>filter_list</mat-icon>
-      </button>
+      </div>
       
       <mat-menu #filterMenu="matMenu" class="filter-menu">
-        <div class="filter-menu-content">
+        
           <button
             mat-menu-item
             (click)="reverseSort()">
             <mat-icon>
               {{ preferences.orderDirection === 'asc' ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}
-            </mat-icon>
+
             <span>
               {{ preferences.orderDirection === 'asc' ? 'Sort Descending' : 'Sort Ascending' }}
             </span>
-          </button>
-          
+
           <mat-divider></mat-divider>
           
           <div *ngFor="let option of eventTypeFilterState" class="filter-option">
             <mat-checkbox
               [checked]="option.checked"
               (change)="toggleEventTypeOption(option.value)"
-              color="primary">
+              class="btn btn-primary">
               <mat-icon class="option-icon">{{ option.icon }}</mat-icon>
               {{ option.label }}
-            </mat-checkbox>
-          </div>
-        </div>
-      </mat-menu>
-    </div>
-  </div>
+            </div>
+          
+      </mat-icon>
+    </mat-menu>
   
   <mat-divider class="timeline-divider"></mat-divider>
   
@@ -59,24 +56,21 @@
         [showRecipeCards]="showRecipeCards"
         (update)="updateTimelineEvent(index)"
         (delete)="deleteTimelineEvent(index)">
-      </app-recipe-timeline-item>
+      </div>
     </div>
-  </div>
   
   <mat-card
     *ngIf="!timelineEvents.length && !loading"
-    class="no-events-card">
-    <mat-card-title class="no-events-title">
+    class="no-events-card card">
+    <mat-card-title class="no-events-title card">
       No timeline events found. Try adjusting your filters.
     </mat-card-title>
-  </mat-card>
   
   <div
     *ngIf="loading"
-    class="loading-container">
+    class="flex items-center justify-center py-xl">
     <app-loader
       [loading]="loading"
       [waitingText]="'Loading events...'">
-    </app-loader>
-  </div>
-</div> 
+
+</div>

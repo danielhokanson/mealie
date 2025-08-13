@@ -1,28 +1,6 @@
-.recipe-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+// Component styles - using utility classes in template
+// Only custom styles that can't be achieved with utilities should be added here
+
+:host {
+  display: block;
 }
-
-.chip-item {
-  cursor: pointer;
-  transition: all 0.2s ease;
-
-  &:hover {
-    background-color: #1976d2;
-    color: white;
-  }
-}
-
-// Responsive design
-@media (max-width: 768px) {
-  .recipe-chips {
-    gap: 6px;
-  }
-}
-
-@media (max-width: 480px) {
-  .recipe-chips {
-    gap: 4px;
-  }
-} 

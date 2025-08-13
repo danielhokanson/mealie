@@ -1,14 +1,14 @@
-<div class="page-title-container">
+<section class="page-container">
   <section class="title-section">
     <ng-content select="[slot=header]"></ng-content>
     
-    <h2 class="title">
+    <h2 class="title text-xl font-medium mb-md">
       <ng-content select="[slot=title]">
         👋 Here's a Title
-      </ng-content>
+
     </h2>
     
-    <h3 class="subtitle">
+    <h3 class="subtitle text-lg font-medium mb-sm">
       <ng-content></ng-content>
     </h3>
   </section>
@@ -18,4 +18,4 @@
   </section>
   
   <mat-divider *ngIf="divider" class="title-divider"></mat-divider>
-</div> 
+</section>

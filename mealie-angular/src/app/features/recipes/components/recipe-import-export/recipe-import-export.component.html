@@ -1,26 +1,26 @@
-<div class="recipe-import-export-container">
+<section class="page-container">
   <!-- Loading State -->
-  <div *ngIf="loading" class="loading-container">
+  <div *ngIf="loading" class="flex items-center justify-center py-xl">
     <mat-spinner diameter="50"></mat-spinner>
-    <p>Processing...</p>
+    <p class="text-secondary mb-sm">Processing...</p>
   </div>
 
   <!-- Import/Export Content -->
   <div *ngIf="!loading" class="import-export-content">
     <!-- Header -->
     <div class="import-export-header">
-      <h2>Recipe Import/Export</h2>
-      <p>Import recipes from external sources or export your recipes to various formats</p>
+      <h2 class="text-xl font-medium mb-md">Recipe Import/Export</h2>
+      <p class="text-secondary mb-sm">Import recipes from external sources or export your recipes to various formats</p>
     </div>
 
     <!-- Tabs -->
     <mat-tab-group class="import-export-tabs">
       <!-- Import Tab -->
       <mat-tab label="Import Recipes">
-        <div class="tab-content">
+        
           <div class="import-section">
-            <h3>Import Recipes</h3>
-            <p>Upload recipe files to import them into your collection</p>
+            <h3 class="text-lg font-medium mb-sm">Import Recipes</h3>
+            <p class="text-secondary mb-sm">Upload recipe files to import them into your collection</p>
 
             <form [formGroup]="importForm" class="import-form">
               <!-- File Upload -->
@@ -37,32 +37,30 @@
                   <button 
                     type="button"
                     mat-raised-button 
-                    color="primary"
+                    class="btn btn-primary"
                     (click)="fileInput.click()">
                     <mat-icon>upload</mat-icon>
                     Choose File
-                  </button>
+                  </div>
                   
                   <div class="file-info" *ngIf="selectedFile">
                     <mat-icon>description</mat-icon>
                     <div class="file-details">
                       <span class="file-name">{{ selectedFile.name }}</span>
                       <span class="file-size">{{ getFileSize(selectedFile.size) }}</span>
-                    </div>
-                  </div>
+                    
                 </div>
                 
                 <div class="supported-formats">
-                  <p>Supported formats: {{ getSupportedExtensions() }}</p>
+                  <p class="text-secondary mb-sm">Supported formats: {{ getSupportedExtensions() }}</p>
                 </div>
-              </div>
 
               <!-- Import Options -->
               <div class="form-section">
                 <h4>Import Options</h4>
                 
                 <div class="form-row">
-                  <mat-form-field appearance="outline">
+                  <mat-form-field appearance="outline" class="w-full">
                     <mat-label>File Format</mat-label>
                     <mat-select formControlName="format">
                       <mat-option *ngFor="let format of supportedFormats" [value]="format.value">
@@ -76,41 +74,40 @@
                 </div>
 
                 <div class="form-row">
-                  <mat-checkbox formControlName="overwrite" color="primary">
+                  <mat-checkbox formControlName="overwrite" class="btn btn-primary">
                     Overwrite existing recipes
                   </mat-checkbox>
                 </div>
 
                 <div class="form-row">
-                  <mat-checkbox formControlName="validateOnly" color="primary">
+                  <mat-checkbox formControlName="validateOnly" class="btn btn-primary">
                     Validate only (don't import)
                   </mat-checkbox>
                 </div>
 
                 <div class="form-row">
-                  <mat-checkbox formControlName="includeImages" color="primary">
+                  <mat-checkbox formControlName="includeImages" class="btn btn-primary">
                     Include images
                   </mat-checkbox>
                 </div>
 
                 <div class="form-row">
-                  <mat-checkbox formControlName="includeNutrition" color="primary">
+                  <mat-checkbox formControlName="includeNutrition" class="btn btn-primary">
                     Include nutrition data
                   </mat-checkbox>
                 </div>
 
                 <div class="form-row">
-                  <mat-checkbox formControlName="includeComments" color="primary">
+                  <mat-checkbox formControlName="includeComments" class="btn btn-primary">
                     Include comments
                   </mat-checkbox>
                 </div>
-              </div>
 
               <!-- Import Actions -->
-              <div class="form-actions">
+              <div class="flex justify-end gap-sm mt-lg">
                 <button 
                   mat-raised-button 
-                  color="primary"
+                  class="btn btn-primary"
                   (click)="onImportRecipes()"
                   [disabled]="!canImport() || loading">
                   <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner>
@@ -118,23 +115,23 @@
                     <mat-icon>upload</mat-icon>
                     Import Recipes
                   </span>
-                </button>
+                </div>
                 
                 <button 
                   mat-button 
-                  color="accent"
+                  class="btn btn-secondary"
                   (click)="onValidateFile()"
                   [disabled]="!selectedFile || loading">
                   <mat-icon>verified</mat-icon>
                   Validate File
-                </button>
+                </div>
                 
                 <button 
                   mat-button 
                   (click)="onCancelImport()"
                   [disabled]="loading">
                   Cancel
-                </button>
+                </div>
               </div>
 
               <!-- Progress Bar -->
@@ -142,10 +139,10 @@
                 <mat-progress-bar 
                   mode="determinate" 
                   [value]="importProgress"
-                  color="primary">
-                </mat-progress-bar>
+                  class="btn btn-primary">
+                </div>
                 <span class="progress-text">{{ importProgress }}%</span>
-              </div>
+              </form>
 
               <!-- Import Results -->
               <div class="results-section" *ngIf="importResults.length > 0">
@@ -157,25 +154,20 @@
                     [style.border-left-color]="getStatusColor(result.status)">
                     <mat-icon [style.color]="getStatusColor(result.status)">
                       {{ getStatusIcon(result.status) }}
-                    </mat-icon>
-                    <div class="result-content">
+
                       <span class="result-name">{{ result.name }}</span>
                       <span class="result-message">{{ result.message }}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </form>
+
+            </mat-icon>
           </div>
-        </div>
-      </mat-tab>
+      </div>
 
       <!-- Export Tab -->
       <mat-tab label="Export Recipes">
-        <div class="tab-content">
+        
           <div class="export-section">
-            <h3>Export Recipes</h3>
-            <p>Export your recipes to various formats for backup or sharing</p>
+            <h3 class="text-lg font-medium mb-sm">Export Recipes</h3>
+            <p class="text-secondary mb-sm">Export your recipes to various formats for backup or sharing</p>
 
             <form [formGroup]="exportForm" class="export-form">
               <!-- Export Options -->
@@ -183,7 +175,7 @@
                 <h4>Export Options</h4>
                 
                 <div class="form-row">
-                  <mat-form-field appearance="outline">
+                  <mat-form-field appearance="outline" class="w-full">
                     <mat-label>Export Type</mat-label>
                     <mat-select formControlName="exportType">
                       <mat-option *ngFor="let option of exportOptions" [value]="option.value">
@@ -194,10 +186,9 @@
                       {{ getExportErrorMessage('exportType') }}
                     </mat-error>
                   </mat-form-field>
-                </div>
 
                 <div class="form-row">
-                  <mat-form-field appearance="outline">
+                  <mat-form-field appearance="outline" class="w-full">
                     <mat-label>Export Format</mat-label>
                     <mat-select formControlName="format">
                       <mat-option *ngFor="let format of supportedFormats" [value]="format.value">
@@ -211,41 +202,40 @@
                 </div>
 
                 <div class="form-row">
-                  <mat-checkbox formControlName="includeImages" color="primary">
+                  <mat-checkbox formControlName="includeImages" class="btn btn-primary">
                     Include images
                   </mat-checkbox>
                 </div>
 
                 <div class="form-row">
-                  <mat-checkbox formControlName="includeNutrition" color="primary">
+                  <mat-checkbox formControlName="includeNutrition" class="btn btn-primary">
                     Include nutrition data
                   </mat-checkbox>
                 </div>
 
                 <div class="form-row">
-                  <mat-checkbox formControlName="includeComments" color="primary">
+                  <mat-checkbox formControlName="includeComments" class="btn btn-primary">
                     Include comments
                   </mat-checkbox>
                 </div>
 
                 <div class="form-row">
-                  <mat-checkbox formControlName="includeMetadata" color="primary">
+                  <mat-checkbox formControlName="includeMetadata" class="btn btn-primary">
                     Include metadata
                   </mat-checkbox>
                 </div>
 
                 <div class="form-row">
-                  <mat-checkbox formControlName="compressOutput" color="primary">
+                  <mat-checkbox formControlName="compressOutput" class="btn btn-primary">
                     Compress output
                   </mat-checkbox>
                 </div>
-              </div>
 
               <!-- Export Actions -->
-              <div class="form-actions">
+              <div class="flex justify-end gap-sm mt-lg">
                 <button 
                   mat-raised-button 
-                  color="primary"
+                  class="btn btn-primary"
                   (click)="onExportRecipes()"
                   [disabled]="!canExport() || loading">
                   <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner>
@@ -253,14 +243,14 @@
                     <mat-icon>download</mat-icon>
                     Export Recipes
                   </span>
-                </button>
+                </div>
                 
                 <button 
                   mat-button 
                   (click)="onCancelExport()"
                   [disabled]="loading">
                   Cancel
-                </button>
+                </div>
               </div>
 
               <!-- Progress Bar -->
@@ -268,10 +258,10 @@
                 <mat-progress-bar 
                   mode="determinate" 
                   [value]="exportProgress"
-                  color="primary">
-                </mat-progress-bar>
+                  class="btn btn-primary">
+                </div>
                 <span class="progress-text">{{ exportProgress }}%</span>
-              </div>
+              </form>
 
               <!-- Export Results -->
               <div class="results-section" *ngIf="exportResults.length > 0">
@@ -283,25 +273,20 @@
                     [style.border-left-color]="getStatusColor(result.status)">
                     <mat-icon [style.color]="getStatusColor(result.status)">
                       {{ getStatusIcon(result.status) }}
-                    </mat-icon>
-                    <div class="result-content">
+
                       <span class="result-name">{{ result.name }}</span>
                       <span class="result-message">{{ result.message }}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </form>
+
+            </mat-icon>
           </div>
-        </div>
-      </mat-tab>
+      </div>
 
       <!-- Templates Tab -->
       <mat-tab label="Templates">
-        <div class="tab-content">
+        
           <div class="templates-section">
-            <h3>Download Templates</h3>
-            <p>Download template files to help you format your recipe data correctly</p>
+            <h3 class="text-lg font-medium mb-sm">Download Templates</h3>
+            <p class="text-secondary mb-sm">Download template files to help you format your recipe data correctly</p>
 
             <div class="templates-grid">
               <div 
@@ -312,20 +297,23 @@
                   <div class="template-details">
                     <span class="template-name">{{ format.label }} Template</span>
                     <span class="template-extension">{{ format.extension }}</span>
-                  </div>
-                </div>
+                  
                 <button 
                   mat-raised-button 
-                  color="primary"
+                  class="btn btn-primary"
                   (click)="onDownloadTemplate(format.value)">
                   <mat-icon>download</mat-icon>
                   Download
-                </button>
+                </div>
               </div>
-            </div>
           </div>
-        </div>
-      </mat-tab>
-    </mat-tab-group>
+      </div>
+    </mat-tab>
   </div>
-</div> 
+
+</mat-tab>
+</div>
+</mat-tab>
+</mat-tab-group>
+</div>
+</section>

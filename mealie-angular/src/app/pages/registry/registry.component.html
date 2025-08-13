@@ -1,17 +1,17 @@
-<div class="registry-container">
-  <mat-card class="registry-card">
-    <mat-card-header>
-      <mat-card-title>Create Account</mat-card-title>
-      <mat-card-subtitle>Join Mealie to manage your recipes</mat-card-subtitle>
+<section class="page-container">
+  <mat-card class="registry-card card">
+    <mat-card-header class="card">
+      <mat-card-title class="card">Create Account</mat-card-title>
+      <mat-card-subtitle class="card">Join Mealie to manage your recipes</mat-card-subtitle>
     </mat-card-header>
     
-    <mat-card-content>
+    <mat-card-content class="card">
       <form (ngSubmit)="onRegister()" #registryForm="ngForm">
         <!-- Account Details -->
         <div class="section">
-          <h3>Account Details</h3>
+          <h3 class="text-lg font-medium mb-sm">Account Details</h3>
           
-          <mat-form-field appearance="outline" class="full-width">
+          <mat-form-field appearance="outline" class="full-width w-full">
             <mat-label>Full Name</mat-label>
             <input 
               matInput 
@@ -22,7 +22,7 @@
             <mat-icon matPrefix>person</mat-icon>
           </mat-form-field>
 
-          <mat-form-field appearance="outline" class="full-width">
+          <mat-form-field appearance="outline" class="full-width w-full">
             <mat-label>Username</mat-label>
             <input 
               matInput 
@@ -33,7 +33,7 @@
             <mat-icon matPrefix>account_circle</mat-icon>
           </mat-form-field>
 
-          <mat-form-field appearance="outline" class="full-width">
+          <mat-form-field appearance="outline" class="full-width w-full">
             <mat-label>Email</mat-label>
             <input 
               matInput 
@@ -48,9 +48,9 @@
 
         <!-- Credentials -->
         <div class="section">
-          <h3>Credentials</h3>
+          <h3 class="text-lg font-medium mb-sm">Credentials</h3>
           
-          <mat-form-field appearance="outline" class="full-width">
+          <mat-form-field appearance="outline" class="full-width w-full">
             <mat-label>Password</mat-label>
             <input 
               matInput 
@@ -62,7 +62,7 @@
             <mat-icon matPrefix>lock</mat-icon>
           </mat-form-field>
 
-          <mat-form-field appearance="outline" class="full-width">
+          <mat-form-field appearance="outline" class="full-width w-full">
             <mat-label>Confirm Password</mat-label>
             <input 
               matInput 
@@ -77,7 +77,7 @@
 
         <!-- Group Details -->
         <div class="section">
-          <h3>Group Details</h3>
+          <h3 class="text-lg font-medium mb-sm">Group Details</h3>
           
           <div class="group-type-selector">
             <mat-checkbox [(ngModel)]="createGroup" name="createGroup">
@@ -87,7 +87,7 @@
 
           <!-- Create Group Form -->
           <div *ngIf="createGroup" class="group-form">
-            <mat-form-field appearance="outline" class="full-width">
+            <mat-form-field appearance="outline" class="full-width w-full">
               <mat-label>Group Name</mat-label>
               <input 
                 matInput 
@@ -107,11 +107,10 @@
                 Include Sample Data
               </mat-checkbox>
             </div>
-          </div>
 
           <!-- Join Group Form -->
           <div *ngIf="!createGroup" class="group-form">
-            <mat-form-field appearance="outline" class="full-width">
+            <mat-form-field appearance="outline" class="full-width w-full">
               <mat-label>Group Token</mat-label>
               <input 
                 matInput 
@@ -122,7 +121,6 @@
               <mat-icon matPrefix>vpn_key</mat-icon>
             </mat-form-field>
           </div>
-        </div>
 
         <!-- Advanced Options -->
         <div class="section">
@@ -131,43 +129,44 @@
               Enable Advanced Features
             </mat-checkbox>
           </div>
-        </div>
 
         <!-- Error Message -->
-        <div *ngIf="errorMessage" class="error-message">
+        <div *ngIf="errorMessage" class="text-error mb-md">
           {{ errorMessage }}
         </div>
 
         <!-- Action Buttons -->
-        <div class="button-container">
+        <section class="page-container">
           <button 
             mat-raised-button 
-            color="primary" 
+            class="btn btn-primary" 
             type="submit"
             [disabled]="isLoading"
             class="register-button">
             <mat-icon *ngIf="!isLoading">person_add</mat-icon>
             <mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner>
             {{ isLoading ? 'Creating Account...' : 'Create Account' }}
-          </button>
+          </section>
           
           <button 
             mat-button 
             type="button"
             (click)="onCancel()"
-            class="cancel-button">
+            class="btn btn-secondary">
             Cancel
-          </button>
+          </div>
         </div>
-      </form>
+      </div>
 
       <div class="login-link">
-        <p>Already have an account? 
-          <button mat-button color="accent" (click)="navigateToLogin()">
+        <p class="text-secondary mb-sm">Already have an account? 
+          <button mat-button class="btn btn-secondary" (click)="navigateToLogin()">
             Login here
           </button>
         </p>
       </div>
-    </mat-card-content>
-  </mat-card>
-</div>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+</section>

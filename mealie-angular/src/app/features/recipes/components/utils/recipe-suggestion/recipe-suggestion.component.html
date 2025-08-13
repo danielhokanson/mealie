@@ -1,7 +1,7 @@
-<div class="suggestion-container">
-  <div class="suggestion-content">
+<section class="page-container">
+  
     <!-- Recipe Card -->
-    <div class="recipe-card-section">
+    <article class="card">
       <app-recipe-card-mobile
         [name]="recipe.name"
         [description]="recipe.description"
@@ -9,8 +9,7 @@
         [rating]="recipe.rating"
         [image]="recipe.image"
         [recipeId]="recipe.id">
-      </app-recipe-card-mobile>
-    </div>
+      </article>
 
     <!-- Missing Organizers -->
     <div *ngFor="let organizer of missingOrganizers; let idx = index" 
@@ -23,19 +22,13 @@
         
         <div class="organizer-items">
           <mat-chip *ngFor="let item of organizer.items; let itemIdx = index"
-                   class="organizer-chip"
-                   color="accent"
+                   class="organizer-chip btn btn-secondary"
                    variant="flat">
             <mat-checkbox
               [checked]="item.selected"
               (change)="handleCheckbox(item)"
-              color="primary"
-              class="organizer-checkbox">
+              class="btn btn-primary organizer-checkbox">
               <span class="chip-label">{{ organizer.getLabel(item.item) }}</span>
-            </mat-checkbox>
-          </mat-chip>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> 
+            </div>
+          </div>
+        </section>

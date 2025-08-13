@@ -1,8 +1,8 @@
 <div [class]="dense ? 'wrapper' : 'wrapper pa-3'">
   <!-- Recipe Header Section -->
   <section>
-    <div class="recipe-header">
-      <div class="header-content">
+    <article class="card">
+      
         <!-- Recipe Image -->
         <div *ngIf="(preferences || defaultPreferences).imagePosition !== 'hidden' && recipeImageUrl" 
              class="image-section"
@@ -10,11 +10,10 @@
           <img [src]="recipeImageUrl" 
                [alt]="recipe.name"
                class="recipe-image">
-        </div>
-        
+
         <!-- Recipe Info -->
-        <div class="recipe-info">
-          <h1 class="recipe-title">
+        <article class="card">
+          <h1 class="recipe-title text-2xl font-medium mb-md">
             <mat-icon class="title-icon">restaurant</mat-icon>
             {{ recipe.name }}
           </h1>
@@ -33,42 +32,37 @@
               [performTime]="getNumber(recipe.performTime)"
               [small]="true"
               color="white">
-            </app-recipe-time-card>
-          </div>
+            </div>
+          </article>
           
           <!-- Description -->
           <div *ngIf="(preferences || defaultPreferences).showDescription && recipe.description" class="description-section">
             <app-safe-markdown [markdown]="recipe.description || ''"></app-safe-markdown>
           </div>
-        </div>
-      </div>
-    </div>
+      </article>
   </section>
 
   <!-- Ingredients Section -->
   <section>
-    <h2 class="section-title">Ingredients</h2>
+    <h2 class="section-title text-xl font-medium mb-md">Ingredients</h2>
     <div *ngFor="let ingredientSection of ingredientSections; let sectionIndex = index" 
          class="print-section">
       <h4 *ngIf="ingredientSection.ingredients[0].title" 
           class="ingredient-title">
         {{ ingredientSection.ingredients[0].title }}
-      </h4>
+      </section>
       <div class="ingredient-grid"
            [style.grid-template-rows]="'repeat(' + (ingredientSection.ingredients.length / 2) + ', min-content)'">
         <p *ngFor="let ingredient of ingredientSection.ingredients; let ingredientIndex = index"
            class="ingredient-body"
-           [innerHTML]="parseIngredientText(ingredient)">
-        </p>
-      </div>
-    </div>
-  </section>
+           [innerHTML]="parseIngredientText(ingredient)" class="text-secondary mb-sm">
+        </div>
 
   <!-- Instructions Section -->
   <section>
     <div *ngFor="let instructionSection of instructionSections; let sectionIndex = index"
          [class]="instructionSection.sectionName ? 'print-section' : ''">
-      <h2 *ngIf="!sectionIndex" class="section-title">Instructions</h2>
+      <h2 *ngIf="!sectionIndex" class="section-title text-xl font-medium mb-md">Instructions</h2>
       <div *ngFor="let step of instructionSection.instructions; let stepIndex = index" 
            class="print-section">
         <h4 *ngIf="step.title" class="instruction-title">
@@ -77,12 +71,10 @@
         <h5 class="step-title">
           {{ step.summary || 'Step ' + (stepIndex + instructionSection.stepOffset + 1) }}
         </h5>
-        <div class="recipe-step-body">
+        <article class="card">
           <app-safe-markdown [markdown]="step.text || ''"></app-safe-markdown>
-        </div>
-      </div>
-    </div>
-  </section>
+        </article>
+    </section>
 
   <!-- Notes Section -->
   <div *ngIf="(preferences || defaultPreferences).showNotes">
@@ -94,13 +86,12 @@
         <div class="note-body">
           <app-safe-markdown [markdown]="note.text || ''"></app-safe-markdown>
         </div>
-      </div>
-    </section>
-  </div>
+    </div>
+  </section>
 
   <!-- Nutrition Section -->
   <div *ngIf="(preferences || defaultPreferences).showNutrition && recipe.nutrition">
-    <h2 class="section-title">Nutrition</h2>
+    <h2 class="section-title text-xl font-medium mb-md">Nutrition</h2>
     
     <section>
       <div class="print-section">
@@ -115,4 +106,5 @@
       </div>
     </section>
   </div>
-</div> 
+
+</div>

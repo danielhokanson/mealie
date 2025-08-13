@@ -4,7 +4,6 @@
   class="context-menu-button"
   [style.color]="color">
   <mat-icon>{{ menuIcon }}</mat-icon>
-</button>
 
 <mat-menu #contextMenu="matMenu" class="context-menu">
   <button
@@ -13,7 +12,7 @@
     (click)="onUpdate()">
     <mat-icon>edit</mat-icon>
     <span>Edit</span>
-  </button>
+  </mat-menu>
   
   <button
     *ngIf="useItems.delete"
@@ -21,5 +20,3 @@
     (click)="onDelete()">
     <mat-icon>delete</mat-icon>
     <span>Delete</span>
-  </button>
-</mat-menu> 

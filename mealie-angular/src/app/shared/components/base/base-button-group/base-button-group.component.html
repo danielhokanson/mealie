@@ -1,4 +1,4 @@
-<div class="button-group">
+<div class="flex gap-sm">
   <ng-container *ngFor="let btn of buttons; let btnIndex = index">
     <!-- Regular button -->
     <button 
@@ -9,7 +9,7 @@
       [style.width]="stretch ? maxButtonWidth : 'auto'"
       class="menu-button">
       <mat-icon>{{ btn.icon }}</mat-icon>
-    </button>
+    </ng-container>
 
     <!-- Button with dropdown (simplified) -->
     <button 
@@ -20,7 +20,7 @@
       [style.width]="stretch ? maxButtonWidth : 'auto'"
       class="menu-button">
       <mat-icon>{{ btn.icon }}</mat-icon>
-    </button>
+    </div>
 
     <!-- Simple button with tooltip -->
     <button 
@@ -36,6 +36,3 @@
       (click)="onButtonClick(btn.event)"
       class="tooltip-button">
       <mat-icon>{{ btn.icon }}</mat-icon>
-    </button>
-  </ng-container>
-</div> 

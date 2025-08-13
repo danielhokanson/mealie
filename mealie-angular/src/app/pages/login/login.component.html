@@ -1,13 +1,13 @@
-<div class="login-container">
-  <mat-card class="login-card">
-    <mat-card-header>
-      <mat-card-title>Login to Mealie</mat-card-title>
-      <mat-card-subtitle>Enter your credentials to continue</mat-card-subtitle>
+<section class="page-container">
+  <mat-card class="login-card card">
+    <mat-card-header class="card">
+      <mat-card-title class="card">Login to Mealie</mat-card-title>
+      <mat-card-subtitle class="card">Enter your credentials to continue</mat-card-subtitle>
     </mat-card-header>
     
-    <mat-card-content>
+    <mat-card-content class="card">
       <form (ngSubmit)="onLogin()" #loginForm="ngForm">
-        <mat-form-field appearance="outline" class="full-width">
+        <mat-form-field appearance="outline" class="full-width w-full">
           <mat-label>Username</mat-label>
           <input 
             matInput 
@@ -18,7 +18,7 @@
           <mat-icon matPrefix>person</mat-icon>
         </mat-form-field>
         
-        <mat-form-field appearance="outline" class="full-width">
+        <mat-form-field appearance="outline" class="full-width w-full">
           <mat-label>Password</mat-label>
           <input 
             matInput 
@@ -36,39 +36,37 @@
           </mat-checkbox>
         </div>
 
-        <div *ngIf="errorMessage" class="error-message">
+        <div *ngIf="errorMessage" class="text-error mb-md">
           {{ errorMessage }}
         </div>
 
-        <div class="button-container">
+        <section class="page-container">
           <button 
             mat-raised-button 
-            color="primary" 
+            class="btn btn-primary" 
             type="submit"
             [disabled]="isLoading || !username || !password"
             class="login-button">
             <mat-icon *ngIf="!isLoading">login</mat-icon>
             <mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner>
             {{ isLoading ? 'Logging in...' : 'Login' }}
-          </button>
+          </section>
           
           <button 
             mat-button 
             type="button"
             (click)="onCancel()"
-            class="cancel-button">
+            class="btn btn-secondary">
             Cancel
-          </button>
-        </div>
-      </form>
+          </form>
+        </mat-card-content>
+      </mat-card>
 
       <div class="register-link">
-        <p>Don't have an account? 
-          <button mat-button color="accent" (click)="navigateToRegister()">
+        <p class="text-secondary mb-sm">Don't have an account? 
+          <button mat-button class="btn btn-secondary" (click)="navigateToRegister()">
             Register here
           </button>
         </p>
       </div>
-    </mat-card-content>
-  </mat-card>
-</div> 
+    </section>

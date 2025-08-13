@@ -1,27 +1,6 @@
-.print-container {
-  display: none;
+// Component styles - using utility classes in template
+// Only custom styles that can't be achieved with utilities should be added here
+
+:host {
+  display: block;
 }
-
-// Print media query
-@media print {
-  body,
-  html {
-    margin-top: 0 !important;
-  }
-
-  .print-container {
-    display: block !important;
-  }
-
-  .mat-sidenav-container {
-    display: block;
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-
-  .mat-sidenav-content {
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-} 

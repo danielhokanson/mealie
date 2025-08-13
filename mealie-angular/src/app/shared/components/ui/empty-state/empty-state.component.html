@@ -1,13 +1,12 @@
-<div class="empty-state-container">
-  <mat-icon class="empty-icon">{{ icon }}</mat-icon>
-  <h3>{{ title }}</h3>
-  <p>{{ message }}</p>
+<div class="flex flex-col items-center justify-center py-xl text-center">
+  <mat-icon class="text-6xl text-tertiary mb-md">{{ icon }}</mat-icon>
+  <h3 class="text-xl font-medium mb-sm text-lg">{{ title }}</h3>
+  <p class="text-secondary mb-md mb-sm">{{ message }}</p>
   <button 
     *ngIf="showAction"
     mat-raised-button 
-    color="primary"
+    class="btn btn-primary"
     (click)="onAction()">
     <mat-icon>{{ actionIcon }}</mat-icon>
     {{ actionText }}
-  </button>
-</div> 
+  </div>

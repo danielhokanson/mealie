@@ -16,20 +16,8 @@
           <mat-icon matSuffix>search</mat-icon>
         
         <div class="search-actions">
-          <button mat-raised-button class="btn btn-primary" (click)="onSearch()" [disabled]="!searchQuery.trim()">
-            <mat-icon>search</mat-icon>
-            Search
-
-          <button mat-button (click)="clearSearch()" [disabled]="!searchQuery && searchResults.length === 0">
-            <mat-icon>clear</mat-icon>
-            Clear
-
-      <div *ngIf="selectedFilters.length > 0" class="filters-section">
-        <h4>Active Filters:</h4>
-        <div class="filter-chips">
-          <mat-chip 
-            *ngFor="let filter of selectedFilters" 
-            [removable]="true"
+          <button mat-raised-button class="btn btn-primary" (click)="onSearch()" [disabled]="!searchQuery.trim()"><mat-icon>search</mat-icon> Search</button>
+          <button mat-button (click)="clearSearch()" [disabled]="!searchQuery && searchResults.length === 0"><mat-icon>clear</mat-icon> Clear <div *ngIf="selectedFilters.length > 0" class="filters-section"> <h4>Active Filters:</h4> <div class="filter-chips"> <mat-chip *ngFor="let filter of selectedFilters" [removable]="true"</button>
             (removed)="onFilterChange(filter)">
             {{ filter }}
             <mat-icon matChipRemove>cancel</mat-icon>

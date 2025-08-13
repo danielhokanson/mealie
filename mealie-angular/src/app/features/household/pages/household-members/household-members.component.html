@@ -28,16 +28,7 @@
                                     <mat-option value="member">Member</mat-option>
                                     <mat-option value="admin">Admin</mat-option>
 
-                            <button 
-                                mat-raised-button 
-                                class="btn btn-primary" 
-                                type="submit"
-                                [disabled]="!inviteForm.valid || loading">
-                                <mat-icon>person_add</mat-icon>
-                                Invite
-
-                        </form>
-
+                            <button mat-raised-button class="btn btn-primary" type="submit" [disabled]="!inviteForm.valid || loading"> <mat-icon>person_add</mat-icon> Invite</button>
                 <!-- Current Members -->
                 <div class="members-section">
                     <h3 class="text-lg font-medium mb-sm">Current Members ({{ members.length }})</h3>
@@ -63,31 +54,10 @@
                                     {{ member.role || 'member' }}
 
                                 <div class="action-buttons" *ngIf="canManageMembers()">
-                                    <button 
-                                        mat-icon-button 
-                                        [matMenuTriggerFor]="roleMenu"
-                                        (click)="$event.stopPropagation()">
-                                        <mat-icon>more_vert</mat-icon>
-
-                                    <mat-menu #roleMenu="matMenu">
-                                        <button mat-menu-item (click)="updateMemberRole(member.id, 'member')">
-                                            <mat-icon>person</mat-icon>
-                                            Set as Member
-
-                                        <button mat-menu-item (click)="updateMemberRole(member.id, 'admin')">
-                                            <mat-icon>admin_panel_settings</mat-icon>
-                                            Set as Admin
-
-                                        <button mat-menu-item (click)="removeMember(member.id)" class="danger">
-                                            <mat-icon>person_remove</mat-icon>
-                                            Remove Member
-
-                                    </mat-menu>
-
-                    </mat-list-item>
-                </mat-list>
-
-            <div *ngIf="!loading && !household" class="no-household">
+                                    <button mat-icon-button [matMenuTriggerFor]="roleMenu" (click)="$event.stopPropagation()"> <mat-icon>more_vert</mat-icon> <mat-menu #roleMenu="matMenu"></button>
+                                        <button mat-menu-item (click)="updateMemberRole(member.id, 'member')"><mat-icon>person</mat-icon> Set as Member</button>
+                                        <button mat-menu-item (click)="updateMemberRole(member.id, 'admin')"><mat-icon>admin_panel_settings</mat-icon> Set as Admin</button>
+                                        <button mat-menu-item (click)="removeMember(member.id)" class="danger"><mat-icon>person_remove</mat-icon> Remove Member <div *ngIf="!loading && !household" class="no-household"></button>
                 <p class="text-secondary mb-sm">No household found. Please create or join a household first.</p>
 
 </mat-card>

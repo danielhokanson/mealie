@@ -14,22 +14,6 @@
 
         <div *ngIf="mealPlan.length === 0" class="no-meals">
           <p class="text-secondary mb-sm">No meals planned for this date.</p>
-          <button mat-raised-button class="btn btn-primary" (click)="addMeal()">
-            <mat-icon>add</mat-icon>
-            Add Meal
-
-        <div *ngIf="mealPlan.length > 0" class="meals-list">
-          <mat-list class="flex flex-col gap-sm">
-            <mat-list-item *ngFor="let meal of mealPlan"></mat-list-item></mat-list>
-              <div matListItemTitle>{{ meal.name }}</div>
-              <div matListItemLine>{{ meal.type }}</div>
-              <div matListItemMeta>
-                <button mat-icon-button (click)="removeMeal(meal.id)">
-                  <mat-icon>delete</mat-icon>
-
-    <mat-card-actions class="card"></mat-card-actions></mat-card>
-      <button mat-raised-button class="btn btn-primary" (click)="addMeal()">
-        <mat-icon>add</mat-icon>
-        Add Meal
-
-</section>
+          <button mat-raised-button class="btn btn-primary" (click)="addMeal()"><mat-icon>add</mat-icon> Add Meal <div *ngIf="mealPlan.length > 0" class="meals-list"> <mat-list class="flex flex-col gap-sm"> <mat-list-item *ngFor="let meal of mealPlan"></mat-list-item></mat-list> <div matListItemTitle>{{ meal.name }}</div> <div matListItemLine>{{ meal.type }}</div> <div matListItemMeta></button>
+                <button mat-icon-button (click)="removeMeal(meal.id)"><mat-icon>delete</mat-icon> <mat-card-actions class="card"></mat-card-actions></mat-card></button>
+      <button mat-raised-button class="btn btn-primary" (click)="addMeal()"><mat-icon>add</mat-icon> Add Meal</button>

@@ -115,16 +115,7 @@
             <!-- Color Field -->
             <div *ngIf="inputField.type === fieldTypes.COLOR" class="flex items-center gap-md">
                 <label>{{ inputField.label }}</label>
-                <button
-                    mat-button
-                    [style.background-color]="modelValue[inputField.varName] || '#7417BE'"
-                    [disabled]="isFieldDisabled(inputField)"
-                    [matMenuTriggerFor]="colorMenu"
-                    class="color-button">
-                    {{ inputField.label }}
-
-                <mat-menu #colorMenu="matMenu"></mat-menu>
-                    <div class="color-picker">
+                <buttonmat-button [style.background-color]="modelValue[inputField.varName] || '#7417BE'" [disabled]="isFieldDisabled(inputField)" [matMenuTriggerFor]="colorMenu" class="color-button"> {{ inputField.label }} <mat-menu #colorMenu="matMenu"></mat-menu> <div class="color-picker"></button>
                         <input
                             type="color"
                             [(ngModel)]="modelValue[inputField.varName]"
@@ -156,23 +147,8 @@
                             [disabled]="isFieldDisabled(inputField)"
                             (ngModelChange)="onFieldChange(inputField.varName, modelValue[inputField.varName])"
                             (blur)="onFieldBlur()">
-                    <button
-                        mat-icon-button
-                        class="btn btn-error remove-button"
-                        (click)="removeByIndex(modelValue[inputField.varName], i)"
-                        >
-                        <mat-icon>delete</mat-icon>
-
-                <button
-                    mat-button
-                    class="btn btn-primary add-button"
-                    (click)="addListItem(inputField)"
-                    >
-                    <mat-icon>add</mat-icon>
-                    Add Item
-
-            <!-- Date Field -->
-            <mat-form-field
+                    <buttonmat-icon-button class="btn btn-error remove-button" (click)="removeByIndex(modelValue[inputField.varName], i)" > <mat-icon>delete</mat-icon></button>
+                <buttonmat-button class="btn btn-primary add-button" (click)="addListItem(inputField)" > <mat-icon>add</mat-icon> Add Item <!-- Date Field --> <mat-form-field</button>
                 *ngIf="inputField.type === fieldTypes.DATE"
                 class="w-full">
                 <mat-label>{{ inputField.label }}</mat-label>

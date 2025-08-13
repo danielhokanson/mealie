@@ -25,16 +25,7 @@
     <!-- Controls -->
     <div class="comments-controls">
       <div class="control-group">
-        <button 
-          mat-raised-button 
-          class="btn btn-primary"
-          (click)="onAddComment()">
-          <mat-icon>add</mat-icon>
-          Add Comment
-
-      <div class="control-group">
-        <mat-form-field appearance="outline" class="w-full"></mat-form-field>
-          <mat-label>Sort by</mat-label>
+        <button mat-raised-button class="btn btn-primary" (click)="onAddComment()"> <mat-icon>add</mat-icon> Add Comment <div class="control-group"> <mat-form-field appearance="outline" class="w-full"></mat-form-field> <mat-label>Sort by</mat-label></button>
           <mat-select [(ngModel)]="sortBy" (selectionChange)="onSortChange($event.value)"></mat-select>
             <mat-option value="newest">Newest First</mat-option>
             <mat-option value="oldest">Oldest First</mat-option>
@@ -74,29 +65,9 @@
               {{ comment.rating }}/5
 
           <div class="comment-actions" *ngIf="canEditComment(comment) || canDeleteComment(comment)">
-            <button 
-              mat-icon-button 
-              [matMenuTriggerFor]="commentMenu"
-              matTooltip="More options">
-              <mat-icon>more_vert</mat-icon>
-
-            <mat-menu #commentMenu="matMenu"></mat-menu>
-              <button 
-                mat-menu-item 
-                (click)="onEditComment(comment)"
-                *ngIf="canEditComment(comment)">
-                <mat-icon>edit</mat-icon>
-                <span>Edit Comment</span>
-              <button 
-                mat-menu-item 
-                (click)="onDeleteComment(comment)"
-                *ngIf="canDeleteComment(comment)">
-                <mat-icon>delete</mat-icon>
-                <span>Delete Comment</span>
-
-        <!-- Comment Content -->
-        
-          <p class="comment-text text-secondary mb-sm">{{ comment.text }}</p>
+            <button mat-icon-button [matMenuTriggerFor]="commentMenu" matTooltip="More options"> <mat-icon>more_vert</mat-icon> <mat-menu #commentMenu="matMenu"></mat-menu></button>
+              <button mat-menu-item (click)="onEditComment(comment)" *ngIf="canEditComment(comment)"> <mat-icon>edit</mat-icon> <span>Edit Comment</span></button>
+              <button mat-menu-item (click)="onDeleteComment(comment)" *ngIf="canDeleteComment(comment)"> <mat-icon>delete</mat-icon> <span>Delete Comment</span> <!-- Comment Content --> <p class="comment-text text-secondary mb-sm">{{ comment.text }}</p></button>
           
           <div class="comment-meta">
             <mat-chip 
@@ -111,16 +82,7 @@
       <mat-icon class="empty-icon">comment</mat-icon>
       <h3 class="text-lg font-medium mb-sm">No Comments Yet</h3>
       <p class="text-secondary mb-sm">Be the first to share your thoughts about this recipe!</p>
-      <button 
-        mat-raised-button 
-        class="btn btn-primary"
-        (click)="onAddComment()">
-        <mat-icon>add</mat-icon>
-        Add First Comment
-
-  <!-- No Recipe State -->
-  <div *ngIf="!loading && !recipe" class="no-recipe">
-    <mat-icon class="no-recipe-icon">restaurant</mat-icon>
+      <button mat-raised-button class="btn btn-primary" (click)="onAddComment()"> <mat-icon>add</mat-icon> Add First Comment <!-- No Recipe State --> <div *ngIf="!loading && !recipe" class="no-recipe"> <mat-icon class="no-recipe-icon">restaurant</mat-icon></button>
     <h3 class="text-lg font-medium mb-sm">No Recipe Selected</h3>
     <p class="text-secondary mb-sm">Please select a recipe to view its comments.</p>
 
@@ -149,16 +111,7 @@
             <div class="rating-input">
               <label>Rating</label>
               <div class="rating-stars-input">
-                <button 
-                  *ngFor="let star of [1, 2, 3, 4, 5]"
-                  type="button"
-                  mat-icon-button
-                  (click)="commentForm.patchValue({ rating: star })"
-                  [style.color]="star <= commentForm.get('rating')?.value ? '#ffc107' : '#e0e0e0'">
-                  <mat-icon>{{ star <= commentForm.get('rating')?.value ? 'star' : 'star_border' }}</mat-icon>
-
-              <span class="rating-text">{{ commentForm.get('rating')?.value }}/5</span>
-
+                <button *ngFor="let star of [1, 2, 3, 4, 5]" type="button" mat-icon-button (click)="commentForm.patchValue({ rating: star })" [style.color]="star <= commentForm.get('rating')?.value ? '#ffc107' : '#e0e0e0'"> <mat-icon>{{ star <= commentForm.get('rating')?.value ? 'star' : 'star_border' }}</mat-icon> <span class="rating-text">{{ commentForm.get('rating')?.value }}/5</span></button>
           <div class="form-row">
             <mat-checkbox formControlName="isPublic" class="btn btn-primary"></mat-checkbox>
               Make this comment public
@@ -166,16 +119,5 @@
       </mat-card>
 
       <mat-card-actions class="card"></mat-card-actions>
-        <button 
-          mat-button 
-          (click)="onCancel()">
-          Cancel
-        <button 
-          mat-raised-button 
-          class="btn btn-primary"
-          (click)="onSaveComment()"
-          [disabled]="loading || commentForm.invalid">
-          <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner>
-          <span *ngIf="!loading">{{ editingComment ? 'Update' : 'Add' }} Comment</span>
-
-      </section>
+        <button mat-button (click)="onCancel()"> Cancel</button>
+        <button mat-raised-button class="btn btn-primary" (click)="onSaveComment()" [disabled]="loading || commentForm.invalid"> <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner> <span *ngIf="!loading">{{ editingComment ? 'Update' : 'Add' }} Comment</span></button>

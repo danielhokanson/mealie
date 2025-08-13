@@ -31,27 +31,9 @@
     <mat-divider class="wizard-divider"></mat-divider>
     
     <mat-card-actions class="wizard-actions card">
-      <button
-        *ngIf="prevButtonShow"
-        mat-button
-        [disabled]="!prevButtonEnable"
-        [color]="prevButtonColor"
-        (click)="decrementPage()"
-        class="prev-button">
-        <mat-icon *ngIf="prevButtonIconRef">{{ prevButtonIconRef }}</mat-icon>
-        {{ prevButtonTextRef }}
-      </mat-card-actions>
+      <button*ngIf="prevButtonShow" mat-button [disabled]="!prevButtonEnable" [color]="prevButtonColor" (click)="decrementPage()" class="prev-button"> <mat-icon *ngIf="prevButtonIconRef">{{ prevButtonIconRef }}</mat-icon> {{ prevButtonTextRef }}</button>
 
-      <button
-        *ngIf="nextButtonShow"
-        mat-raised-button
-        [disabled]="!nextButtonEnable"
-        [color]="nextButtonColorRef"
-        (click)="incrementPage()"
-        class="next-button">
-        
-        <div *ngIf="isSubmitting" class="submitting">
-          <mat-spinner diameter="24" color="white"></mat-spinner>
+      <button*ngIf="nextButtonShow" mat-raised-button [disabled]="!nextButtonEnable" [color]="nextButtonColorRef" (click)="incrementPage()" class="next-button"> <div *ngIf="isSubmitting" class="submitting"> <mat-spinner diameter="24" color="white"></mat-spinner></button>
 
         <div *ngIf="!isSubmitting" class="button-content">
           <mat-icon *ngIf="nextButtonIconRef && !nextButtonIconAfter">{{ nextButtonIconRef }}</mat-icon>
@@ -59,10 +41,4 @@
           <mat-icon *ngIf="nextButtonIconRef && nextButtonIconAfter">{{ nextButtonIconRef }}</mat-icon>
 
     <mat-card-actions class="language-actions card"></mat-card-actions>
-      <button
-        mat-raised-button
-        class="btn btn-primary language-button"
-        (click)="langDialog = true"
-        >
-        <mat-icon>translate</mat-icon>
-        Choose Language
+      <buttonmat-raised-button class="btn btn-primary language-button" (click)="langDialog = true" > <mat-icon>translate</mat-icon> Choose Language</button>

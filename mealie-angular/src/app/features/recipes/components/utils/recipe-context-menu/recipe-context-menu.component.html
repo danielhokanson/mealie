@@ -110,16 +110,7 @@
     [shoppingLists]="shoppingLists">>
 
   <!-- Context Menu -->
-  <button mat-icon-button
-          [class.fab-button]="fab"
-          [class.menu-button]="!fab"
-          [color]="fab ? 'accent' : color"
-          [matMenuTriggerFor]="contextMenu"
-          (click)="$event.preventDefault()">
-    <mat-icon [class.fab-icon]="fab">{{ icon }}</mat-icon>
-
-  <mat-menu #contextMenu="matMenu" 
-            [hasBackdrop]="true"
+  <button mat-icon-button[class.fab-button]="fab" [class.menu-button]="!fab" [color]="fab ? 'accent' : color" [matMenuTriggerFor]="contextMenu" (click)="$event.preventDefault()"> <mat-icon [class.fab-icon]="fab">{{ icon }}</mat-icon> <mat-menu #contextMenu="matMenu" [hasBackdrop]="true"</button>
             [class.menu-top]="menuTop"
             [class.menu-bottom]="!menuTop">
     
@@ -128,8 +119,7 @@
       <mat-list-item *ngFor="let item of menuItems; let index = index"</mat-list-item>
                      (click)="contextMenuEventHandler(item.event)"
                      class="menu-item">
-        <mat-icon matListItemIcon [color]="item.color">
-          {{ item.icon }}</mat-icon>
+        <mat-icon matListItemIcon [color]="item.color">{{ item.icon }}</mat-icon></mat-icon>
         <span matListItemTitle>{{ item.title }}</span>
 
       <!-- Recipe Actions Divider -->

@@ -1,14 +1,5 @@
 <section class="page-container">
-  <button
-    mat-raised-button
-    class="btn btn-secondary upload-button"
-    [matMenuTriggerFor]="imageMenu"
-    >
-    <mat-icon class="upload-icon">image</mat-icon>
-    Image
-  </section>
-
-  <mat-menu #imageMenu="matMenu" class="image-menu">
+  <buttonmat-raised-button class="btn btn-secondary upload-button" [matMenuTriggerFor]="imageMenu" > <mat-icon class="upload-icon">image</mat-icon> Image <mat-menu #imageMenu="matMenu" class="image-menu"></button>
     <mat-card class="menu-card card">
       <mat-card-title class="menu-title card">
         
@@ -41,12 +32,4 @@
                    class="url-input-field">
             <mat-error *ngIf="messages.length > 0">{{ messages[0] }}</mat-error>
           
-          <button mat-raised-button
-                  class="btn btn-primary get-button"
-                  [loading]="loading"
-                  [disabled]="isDisabled"
-                  (click)="getImageFromURL()"
-                  >
-            Get
-
-      </mat-menu>
+          <button mat-raised-buttonclass="btn btn-primary get-button" [loading]="loading" [disabled]="isDisabled" (click)="getImageFromURL()" > Get</button>

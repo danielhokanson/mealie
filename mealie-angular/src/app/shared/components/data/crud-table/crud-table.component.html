@@ -4,16 +4,7 @@
         <!-- Column Visibility Menu -->
         <mat-menu *ngIf="tableConfig.hideColumns" #columnMenu="matMenu">
             <ng-template matMenuTrigger>
-                <button mat-raised-button class="btn btn-secondary">
-                    <mat-icon>settings</mat-icon>
-
-            </ng-template>
-            <mat-card class="card">
-                <mat-card-content class="card"></mat-card>
-                    <mat-checkbox
-                        *ngFor="let header of localHeaders"
-                        [checked]="header.show"
-                        (change)="onHeaderVisibilityChange(header, $event.checked)"
+                <button mat-raised-button class="btn btn-secondary"><mat-icon>settings</mat-icon> <mat-card class="card"> <mat-card-content class="card"></mat-card> <mat-checkbox *ngFor="let header of localHeaders" [checked]="header.show" (change)="onHeaderVisibilityChange(header, $event.checked)"</button>
                         class="column-checkbox">
                         {{ header.text }}
 

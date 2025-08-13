@@ -12,24 +12,8 @@
     <span class="spacer"></span>
 
     <!-- Random Button -->
-    <button mat-icon-button
-            [disabled]="recipes.length === 0"
-            (click)="navigateRandom()"
-            class="random-button">
-      <mat-icon>casino</mat-icon>
-      <span class="button-text">Random</span>
-
-    <!-- Sort Menu -->
-    <button mat-icon-button
-            *ngIf="!disableSort"
-            [matMenuTriggerFor]="sortMenu"
-            [disabled]="sortLoading"
-            class="sort-button">
-      <mat-icon>{{ preferences.sortIcon }}</mat-icon>
-      <span class="button-text">Sort</span>
-
-    <mat-menu #sortMenu="matMenu"></mat-menu>
-      <mat-list class="flex flex-col gap-sm">
+    <button mat-icon-button[disabled]="recipes.length === 0" (click)="navigateRandom()" class="random-button"> <mat-icon>casino</mat-icon> <span class="button-text">Random</span> <!-- Sort Menu --></button>
+    <button mat-icon-button*ngIf="!disableSort" [matMenuTriggerFor]="sortMenu" [disabled]="sortLoading" class="sort-button"> <mat-icon>{{ preferences.sortIcon }}</mat-icon> <span class="button-text">Sort</span> <mat-menu #sortMenu="matMenu"></mat-menu> <mat-list class="flex flex-col gap-sm"></button>
         <mat-list-item *ngFor="let item of sortMenuItems"</mat-list-item></mat-list>
                        (click)="sortRecipes(item.event)"
                        class="sort-menu-item">
@@ -37,16 +21,7 @@
           <span matListItemTitle>{{ item.title }}</span>
 
     <!-- Context Menu -->
-    <button mat-icon-button
-            *ngIf="!isMobile"
-            [matMenuTriggerFor]="contextMenu"
-            class="context-button">
-      <mat-icon>more_vert</mat-icon>
-
-    <mat-menu #contextMenu="matMenu"></mat-menu>
-      <mat-list class="flex flex-col gap-sm">
-        <mat-list-item *ngFor="let item of contextMenuItems"</mat-list-item></mat-list>
-                       (click)="onContextMenuClick(item.event)"
+    <button mat-icon-button*ngIf="!isMobile" [matMenuTriggerFor]="contextMenu" class="context-button"> <mat-icon>more_vert</mat-icon> <mat-menu #contextMenu="matMenu"></mat-menu> <mat-list class="flex flex-col gap-sm"> <mat-list-item *ngFor="let item of contextMenuItems"</mat-list-item></mat-list> (click)="onContextMenuClick(item.event)"</button>
                        class="context-menu-item">
           <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
           <span matListItemTitle>{{ item.title }}</span>

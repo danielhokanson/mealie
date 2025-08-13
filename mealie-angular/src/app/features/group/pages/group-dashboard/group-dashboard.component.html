@@ -9,65 +9,19 @@
     <mat-icon class="error-icon">error</mat-icon>
     <h3 class="text-lg font-medium mb-sm">Error Loading Group Dashboard</h3>
     <p class="text-secondary mb-sm">Unable to load the group dashboard. Please try again.</p>
-    <button mat-raised-button class="btn btn-primary" (click)="loadGroupData()">
-      Retry
-
-  <!-- Dashboard Content -->
-  <div *ngIf="!loading && !error && currentGroup" class="dashboard-content">
-    <!-- Header -->
-    <div class="dashboard-header">
-      <div class="header-info">
-        <h1 class="text-2xl font-medium mb-md">{{ currentGroup.name }}</h1>
-        <p class="text-secondary mb-sm">{{ currentGroup.description }}</p>
+    <button mat-raised-button class="btn btn-primary" (click)="loadGroupData()">Retry <!-- Dashboard Content --> <div *ngIf="!loading && !error && currentGroup" class="dashboard-content"> <!-- Header --> <div class="dashboard-header"> <div class="header-info"> <h1 class="text-2xl font-medium mb-md">{{ currentGroup.name }}</h1> <p class="text-secondary mb-sm">{{ currentGroup.description }}</p></button>
         <div class="group-meta">
           <span class="member-count">{{ groupStats.totalMembers }} members</span>
           <span class="household-count">{{ groupStats.activeHouseholds }} households</span>
 
       <div class="header-actions">
-        <button 
-          mat-raised-button 
-          class="btn btn-primary"
-          (click)="onAddMember()">
-          <mat-icon>person_add</mat-icon>
-          Add Member
-
-        <button 
-          mat-raised-button 
-          class="btn btn-secondary"
-          (click)="onCreateHousehold()">
-          <mat-icon>home</mat-icon>
-          Create Household
-
-        <button 
-          mat-icon-button 
-          [matMenuTriggerFor]="groupMenu"
-          matTooltip="Group Actions">
-          <mat-icon>more_vert</mat-icon>
-
-        <mat-menu #groupMenu="matMenu">
-          <button mat-menu-item (click)="onViewMembers()">
-            <mat-icon>people</mat-icon>
-            <span>Manage Members</span>
-
-          <button mat-menu-item (click)="onViewHouseholds()">
-            <mat-icon>home</mat-icon>
-            <span>Manage Households</span>
-
-          <mat-divider></mat-divider>
-          <button mat-menu-item (click)="onExportGroupData()">
-            <mat-icon>download</mat-icon>
-            <span>Export Data</span>
-
-          <button mat-menu-item (click)="onGroupSettings()">
-            <mat-icon>settings</mat-icon>
-            <span>Group Settings</span>
-
-        </mat-menu>
-
-    <!-- Statistics Cards -->
-    <div class="stats-grid">
-      <mat-card class="stat-card card">
-        <mat-card-content class="card">
+        <button mat-raised-button class="btn btn-primary" (click)="onAddMember()"> <mat-icon>person_add</mat-icon> Add Member</button>
+        <button mat-raised-button class="btn btn-secondary" (click)="onCreateHousehold()"> <mat-icon>home</mat-icon> Create Household</button>
+        <button mat-icon-button [matMenuTriggerFor]="groupMenu" matTooltip="Group Actions"> <mat-icon>more_vert</mat-icon> <mat-menu #groupMenu="matMenu"></button>
+          <button mat-menu-item (click)="onViewMembers()"><mat-icon>people</mat-icon> <span>Manage Members</span></button>
+          <button mat-menu-item (click)="onViewHouseholds()"><mat-icon>home</mat-icon> <span>Manage Households</span> <mat-divider></mat-divider></button>
+          <button mat-menu-item (click)="onExportGroupData()"><mat-icon>download</mat-icon> <span>Export Data</span></button>
+          <button mat-menu-item (click)="onGroupSettings()"><mat-icon>settings</mat-icon> <span>Group Settings</span> <!-- Statistics Cards --> <div class="stats-grid"> <mat-card class="stat-card card"> <mat-card-content class="card"></button>
           <div class="stat-icon">
             <mat-icon>people</mat-icon>
 
@@ -75,52 +29,16 @@
             <p class="text-secondary mb-sm">Total Members</p>
 
         <mat-card-actions class="card"></mat-card-actions></mat-card>
-          <button mat-button class="btn btn-primary" (click)="onViewMembers()">
-            View All
-
-      <mat-card class="stat-card card">
-        <mat-card-content class="card">
-          <div class="stat-icon">
-            <mat-icon>restaurant</mat-icon>
-
-            <h3 class="text-lg font-medium mb-sm">{{ groupStats.totalRecipes }}</h3>
-            <p class="text-secondary mb-sm">Group Recipes</p>
+          <button mat-button class="btn btn-primary" (click)="onViewMembers()">View All <mat-card class="stat-card card"> <mat-card-content class="card"> <div class="stat-icon"> <mat-icon>restaurant</mat-icon> <h3 class="text-lg font-medium mb-sm">{{ groupStats.totalRecipes }}</h3> <p class="text-secondary mb-sm">Group Recipes</p></button>
 
         <mat-card-actions class="card"></mat-card-actions></mat-card>
-          <button mat-button class="btn btn-primary" (click)="onViewRecipes()">
-            View All
-
-      <mat-card class="stat-card card">
-        <mat-card-content class="card">
-          <div class="stat-icon">
-            <mat-icon>shopping_cart</mat-icon>
-
-            <h3 class="text-lg font-medium mb-sm">{{ groupStats.totalShoppingLists }}</h3>
-            <p class="text-secondary mb-sm">Shopping Lists</p>
+          <button mat-button class="btn btn-primary" (click)="onViewRecipes()">View All <mat-card class="stat-card card"> <mat-card-content class="card"> <div class="stat-icon"> <mat-icon>shopping_cart</mat-icon> <h3 class="text-lg font-medium mb-sm">{{ groupStats.totalShoppingLists }}</h3> <p class="text-secondary mb-sm">Shopping Lists</p></button>
 
         <mat-card-actions class="card"></mat-card-actions></mat-card>
-          <button mat-button class="btn btn-primary" (click)="onViewShoppingLists()">
-            View All
-
-      <mat-card class="stat-card card">
-        <mat-card-content class="card">
-          <div class="stat-icon">
-            <mat-icon>home</mat-icon>
-
-            <h3 class="text-lg font-medium mb-sm">{{ groupStats.activeHouseholds }}</h3>
-            <p class="text-secondary mb-sm">Active Households</p>
+          <button mat-button class="btn btn-primary" (click)="onViewShoppingLists()">View All <mat-card class="stat-card card"> <mat-card-content class="card"> <div class="stat-icon"> <mat-icon>home</mat-icon> <h3 class="text-lg font-medium mb-sm">{{ groupStats.activeHouseholds }}</h3> <p class="text-secondary mb-sm">Active Households</p></button>
 
         <mat-card-actions class="card"></mat-card-actions></mat-card>
-          <button mat-button class="btn btn-primary" (click)="onViewHouseholds()">
-            View All
-
-    <!-- Content Sections -->
-    <div class="content-sections">
-      <!-- Members Section -->
-      <mat-card class="section-card card">
-        <mat-card-header class="card"></mat-card-header>
-          <mat-card-title >Recent Members</mat-card-title>
-          <mat-card-subtitle >Latest group members</mat-card-subtitle>
+          <button mat-button class="btn btn-primary" (click)="onViewHouseholds()">View All <!-- Content Sections --> <div class="content-sections"> <!-- Members Section --> <mat-card class="section-card card"> <mat-card-header class="card"></mat-card-header> <mat-card-title >Recent Members</mat-card-title> <mat-card-subtitle >Latest group members</mat-card-subtitle></button>
         <mat-card-content class="card">
           <mat-list class="flex flex-col gap-sm">
             <mat-list-item *ngFor="let member of members.slice(0, 5)" class="member-item"></mat-list-item></mat-list>
@@ -132,16 +50,7 @@
                   {{ member.admin ? 'Admin' : 'User' }}
 
         <mat-card-actions class="card"></mat-card-actions></mat-card>
-          <button mat-button class="btn btn-primary" (click)="onViewMembers()">
-            View All Members
-
-      <!-- Households Section -->
-      <mat-card class="section-card card">
-        <mat-card-header class="card"></mat-card-header>
-          <mat-card-title >Households</mat-card-title>
-          <mat-card-subtitle >Group households</mat-card-subtitle>
-        <mat-card-content class="card">
-          <mat-list class="flex flex-col gap-sm">
+          <button mat-button class="btn btn-primary" (click)="onViewMembers()">View All Members <!-- Households Section --> <mat-card class="section-card card"> <mat-card-header class="card"></mat-card-header> <mat-card-title >Households</mat-card-title> <mat-card-subtitle >Group households</mat-card-subtitle> <mat-card-content class="card"> <mat-list class="flex flex-col gap-sm"></button>
             <mat-list-item *ngFor="let household of households" class="household-item">
               <mat-icon matListItemIcon>home</mat-icon>
               <div matListItemTitle>{{ household.name }}</div>
@@ -149,28 +58,10 @@
               <div matListItemMeta>
                 <mat-chip [style.background-color]="getStatusColor(true)"></mat-chip>
                   Active
-                <button 
-                  mat-icon-button 
-                  class="btn btn-error"
-                  (click)="onDeleteHousehold(household)"
-                  matTooltip="Delete household">
-                  <mat-icon>delete</mat-icon>
-
-              </mat-list-item>
-            </mat-list>
-
+                <button mat-icon-button class="btn btn-error" (click)="onDeleteHousehold(household)" matTooltip="Delete household"> <mat-icon>delete</mat-icon></button>
         </mat-card>
         <mat-card-actions class="card"></mat-card-actions>
-          <button mat-button class="btn btn-primary" (click)="onViewHouseholds()">
-            View All Households
-
-    </section>
-
-    <!-- Recent Activity -->
-    <div class="activity-section">
-      <mat-card class="recent-recipes-card card">
-        <mat-card-header class="card"></mat-card-header>
-          <mat-card-title >Recent Recipes</mat-card-title>
+          <button mat-button class="btn btn-primary" (click)="onViewHouseholds()">View All Households <!-- Recent Activity --> <div class="activity-section"> <mat-card class="recent-recipes-card card"> <mat-card-header class="card"></mat-card-header> <mat-card-title >Recent Recipes</mat-card-title></button>
         <mat-card-content class="card">
           <mat-list class="flex flex-col gap-sm">
             <mat-list-item *ngFor="let recipe of recentRecipes" class="recipe-item">
@@ -232,16 +123,7 @@
 
       <mat-card-actions class="card"></mat-card-actions></mat-card>
         <button mat-button (click)="showAddMemberDialog = false">Cancel</button>
-        <button 
-          mat-raised-button 
-          class="btn btn-primary"
-          (click)="onSaveMember()"
-          [disabled]="addMemberForm.invalid">
-          Add Member
-
-  <!-- Create Household Dialog -->
-  <div *ngIf="showCreateHouseholdDialog" class="dialog-overlay">
-    <mat-card class="dialog-card card">
+        <button mat-raised-button class="btn btn-primary" (click)="onSaveMember()" [disabled]="addMemberForm.invalid"> Add Member <!-- Create Household Dialog --> <div *ngIf="showCreateHouseholdDialog" class="dialog-overlay"> <mat-card class="dialog-card card"></button>
       <mat-card-header class="card"></mat-card-header>
         <mat-card-title >Create Household</mat-card-title>
       <mat-card-content class="card">
@@ -272,9 +154,4 @@
       </mat-card>
       <mat-card-actions class="card"></mat-card-actions>
         <button mat-button (click)="showCreateHouseholdDialog = false">Cancel</button>
-        <button 
-          mat-raised-button 
-          class="btn btn-primary"
-          (click)="onSaveHousehold()"
-          [disabled]="createHouseholdForm.invalid">
-          Create Household
+        <button mat-raised-button class="btn btn-primary" (click)="onSaveHousehold()" [disabled]="createHouseholdForm.invalid"> Create Household</button>

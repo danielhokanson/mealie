@@ -80,15 +80,6 @@
                 <app-safe-markdown [source]="comment.text"></app-safe-markdow></app-safe-markdown>
 
             <mat-card-actions class="comment-actions card" *ngIf="canDeleteComment(comment)" ></mat-card-actions></mat-card>
-              <button 
-                mat-button 
-                class="btn btn-error delete-comment-btn"
-                (click)="deleteComment(comment.id)">
-                <mat-icon>delete</mat-icon>
-                Delete
-          </article>
-
-      <!-- Empty State -->
-      <div *ngIf="recipe.comments.length === 0" class="empty-state">
+              <button mat-button class="btn btn-error delete-comment-btn" (click)="deleteComment(comment.id)"> <mat-icon>delete</mat-icon> Delete <!-- Empty State --> <div *ngIf="recipe.comments.length === 0" class="empty-state"></button>
         <mat-icon class="empty-icon">comment</mat-icon>
         <p class="empty-text text-secondary mb-sm">No comments yet. Be the first to comment!</p>

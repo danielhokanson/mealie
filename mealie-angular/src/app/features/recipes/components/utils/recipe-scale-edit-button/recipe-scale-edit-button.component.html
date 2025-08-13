@@ -26,16 +26,7 @@
                        (input)="onYieldQuantityChange($event)"
                        class="yield-input-field">
               
-              <button mat-icon-button
-                      [matTooltip]="'Reset Servings Count'"
-                      matTooltipPosition="end"
-                      (click)="onReset()"
-                      class="reset-button">
-                <mat-icon>undo</mat-icon>
-
-          </mat-card>
-        </mat-menu>
-
+              <button mat-icon-button[matTooltip]="'Reset Servings Count'" matTooltipPosition="end" (click)="onReset()" class="reset-button"> <mat-icon>undo</mat-icon></button>
     <app-base-button-group
       *ngIf="canEditScale"
       [buttons]="buttons"

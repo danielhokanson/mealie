@@ -28,13 +28,4 @@
       </mat-form-field>
 
     <div class="scale-reset" *ngIf="canEditScale && scale !== 1">
-      <button 
-        mat-icon-button 
-        class="btn btn-primary"
-        [matTooltip]="'Reset to 1x'"
-        (click)="resetScale()">
-        <mat-icon>refresh</mat-icon>
-
-  <div class="scale-summary">
-    <span class="summary-text"></span>
-      Serves {{ getScaledServings() }} people
+      <button mat-icon-button class="btn btn-primary" [matTooltip]="'Reset to 1x'" (click)="resetScale()"> <mat-icon>refresh</mat-icon> <div class="scale-summary"> <span class="summary-text"></span> Serves {{ getScaledServings() }} people</button>

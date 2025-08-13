@@ -1,14 +1,5 @@
 <div *ngIf="shouldShow" class="favorite-badge">
-  <button
-    mat-icon-button
-    [matTooltip]="tooltipText"
-    matTooltipPosition="below"
-    [color]="buttonColor"
-    [class.button-style]="buttonStyle"
-    [class.circle]="buttonStyle"
-    (click)="toggleFavorite()"
-    class="favorite-button">
-    <mat-icon
+  <buttonmat-icon-button [matTooltip]="tooltipText" matTooltipPosition="below" [color]="buttonColor" [class.button-style]="buttonStyle" [class.circle]="buttonStyle" (click)="toggleFavorite()" class="favorite-button"> <mat-icon</button>
       [class.large-icon]="buttonStyle"
       [color]="iconColor">
       {{ heartIcon }}</mat-icon>

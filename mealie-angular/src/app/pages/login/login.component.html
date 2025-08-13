@@ -36,30 +36,9 @@
           {{ errorMessage }}
 
         <section class="page-container">
-          <button 
-            mat-raised-button 
-            class="btn btn-primary login-button" 
-            type="submit"
-            [disabled]="isLoading || !username || !password"
-            >
-            <mat-icon *ngIf="!isLoading">login</mat-icon>
-            <mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner>
-            {{ isLoading ? 'Logging in...' : 'Login' }}
-          </section>
+          <button mat-raised-button class="btn btn-primary login-button" type="submit" [disabled]="isLoading || !username || !password" > <mat-icon *ngIf="!isLoading">login</mat-icon> <mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner> {{ isLoading ? 'Logging in...' : 'Login' }}</button>
           
-          <button 
-            mat-button 
-            type="button"
-            (click)="onCancel()"
-            class="btn btn-secondary">
-            Cancel
-          </form>
-
-      </mat-card>
-
+          <button mat-button type="button" (click)="onCancel()" class="btn btn-secondary"> Cancel</button>
       <div class="register-link">
         <p class="text-secondary mb-sm">Don't have an account?</p>
-          <button mat-button class="btn btn-secondary" (click)="navigateToRegister()">
-            Register here
-
-    </section>
+          <button mat-button class="btn btn-secondary" (click)="navigateToRegister()">Register here</button>

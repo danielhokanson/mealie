@@ -21,16 +21,7 @@
                 <mat-error *ngFor="let error of getFormErrors(getNoteTitleControl(i))"></mat-error>
                   {{ error }}
               
-              <button 
-                type="button"
-                mat-icon-button 
-                class="btn btn-error remove-note-btn"
-                [matTooltip]="'Remove note'"
-                (click)="removeNote(i)">
-                <mat-icon>delete</mat-icon>
-
-            <mat-form-field appearance="outline" class="note-text-field w-full">
-              <mat-label>Note</mat-label>
+              <button type="button" mat-icon-button class="btn btn-error remove-note-btn" [matTooltip]="'Remove note'" (click)="removeNote(i)"> <mat-icon>delete</mat-icon> <mat-form-field appearance="outline" class="note-text-field w-full"> <mat-label>Note</mat-label></button>
               <textarea 
                 matInput 
                 [formControlName]="i"

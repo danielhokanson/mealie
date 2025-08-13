@@ -62,16 +62,7 @@
             placeholder="Enter password"
             autocomplete="new-password">
           <mat-icon matPrefix>lock</mat-icon>
-          <button 
-            mat-icon-button 
-            matSuffix 
-            type="button"
-            (click)="togglePasswordVisibility()"
-            [attr.aria-label]="'Hide password'"
-            [attr.aria-pressed]="showPassword">
-            <mat-icon>{{ getPasswordIcon() }}</mat-icon>
-          </mat-form-field>
-          <mat-error *ngFor="let error of getFormErrors('password')"></mat-error>
+          <button mat-icon-button matSuffix type="button" (click)="togglePasswordVisibility()" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="showPassword"> <mat-icon>{{ getPasswordIcon() }}</mat-icon> <mat-error *ngFor="let error of getFormErrors('password')"></mat-error></button>
             {{ error }}
         </form>
 
@@ -90,16 +81,7 @@
             placeholder="Confirm your password"
             autocomplete="new-password">
           <mat-icon matPrefix>lock</mat-icon>
-          <button 
-            mat-icon-button 
-            matSuffix 
-            type="button"
-            (click)="toggleConfirmPasswordVisibility()"
-            [attr.aria-label]="'Hide password'"
-            [attr.aria-pressed]="showConfirmPassword">
-            <mat-icon>{{ getConfirmPasswordIcon() }}</mat-icon>
-          </mat-form-field>
-          <mat-error *ngFor="let error of getFormErrors('confirmPassword')"></mat-error>
+          <button mat-icon-button matSuffix type="button" (click)="toggleConfirmPasswordVisibility()" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="showConfirmPassword"> <mat-icon>{{ getConfirmPasswordIcon() }}</mat-icon> <mat-error *ngFor="let error of getFormErrors('confirmPassword')"></mat-error></button>
             {{ error }}
           <mat-error *ngIf="getPasswordMatchError()"></mat-error>
             {{ getPasswordMatchError() }}

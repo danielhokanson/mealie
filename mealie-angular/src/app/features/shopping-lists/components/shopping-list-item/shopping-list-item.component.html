@@ -29,39 +29,10 @@
 
     <div class="item-actions" *ngIf="!modelValue.checked">
       <div class="action-buttons">
-        <button 
-          *ngIf="recipeList.length > 0"
-          mat-icon-button
-          size="small"
-          class="recipe-toggle-btn"
-          [matTooltip]="'Toggle Recipes'"
-          (click)="displayRecipeRefs = !displayRecipeRefs">
-          <mat-icon>restaurant</mat-icon>
-
-        <button 
-          *ngIf="!recipeList.length"
-          mat-icon-button
-          size="small"
-          class="dummy-btn"
-          disabled>
-
-        <button 
-          mat-icon-button
-          size="small"
-          class="drag-handle"
-          [matMenuTriggerFor]="contextMenu">
-          <mat-icon>drag_indicator</mat-icon>
-        
-        <button 
-          mat-icon-button
-          size="small"
-          class="edit-btn"
-          (click)="toggleEdit(true)">
-          <mat-icon>edit</mat-icon>
-      
-      <mat-menu #contextMenu="matMenu"></mat-menu>
-        <mat-list class="flex flex-col gap-sm">
-          <mat-list-item</mat-list>
+        <button *ngIf="recipeList.length > 0" mat-icon-button size="small" class="recipe-toggle-btn" [matTooltip]="'Toggle Recipes'" (click)="displayRecipeRefs = !displayRecipeRefs"> <mat-icon>restaurant</mat-icon></button>
+        <button *ngIf="!recipeList.length" mat-icon-button size="small" class="dummy-btn" disabled></button>
+        <button mat-icon-button size="small" class="drag-handle" [matMenuTriggerFor]="contextMenu"> <mat-icon>drag_indicator</mat-icon></button>
+        <button mat-icon-button size="small" class="edit-btn" (click)="toggleEdit(true)"> <mat-icon>edit</mat-icon> <mat-menu #contextMenu="matMenu"></mat-menu> <mat-list class="flex flex-col gap-sm"> <mat-list-item</mat-list></button>
             *ngFor="let action of contextMenu"
             (click)="onContextHandler(action.event)"
             class="context-menu-item">

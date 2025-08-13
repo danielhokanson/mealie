@@ -37,16 +37,7 @@
     <div class="flex items-center justify-end gap-sm">
       <ng-content select="[slot=card-actions]">
         <!-- Default actions -->
-        <button 
-          mat-button
-          class="btn btn-secondary"
-          (click)="onCancel()">
-          Cancel
-
-        <div class="flex-1"></div>
-        
-        <ng-content select="[slot=custom-card-action]"></ng-content>
-        
+        <button mat-button class="btn btn-secondary" (click)="onCancel()"> Cancel <div class="flex-1"></div> <ng-content select="[slot=custom-card-action]"></ng-content></button>
         <app-base-button
           *ngIf="canDelete"
           [delete]="true"

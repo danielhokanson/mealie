@@ -1,22 +1,11 @@
-<button 
-  mat-raised-button
-  [disabled]="disabled || loading"
-  [class.btn-primary]="buttonColor === 'primary'"
-  [class.btn-secondary]="buttonColor === 'accent'"
-  [class.btn-error]="buttonColor === 'warn'"
-  [class.text-sm]="buttonSize === 'small'"
-  [class.text-lg]="buttonSize === 'large'"
-  [class.mat-stroked-button]="btnStyle.outlined"
-  [class.mat-button]="btnStyle.text"
+<button mat-raised-button [disabled]="disabled || loading" [class.btn-primary]="buttonColor === 'primary'" [class.btn-secondary]="buttonColor === 'accent'" [class.btn-error]="buttonColor === 'warn'" [class.text-sm]="buttonSize === 'small'" [class.text-lg]="buttonSize === 'large'" [class.mat-stroked-button]="btnStyle.outlined" [class.mat-button]="btnStyle.text"</button>
   (click)="onButtonClick()"
   class="btn transition-all">
   
-  <mat-icon *ngIf="!iconRight && buttonIcon" class="mr-sm">
-    {{ buttonIcon }}
+  <mat-icon *ngIf="!iconRight && buttonIcon" class="mr-sm">{{ buttonIcon }}</mat-icon>
 
   <ng-content></ng-content>
   
-  <mat-icon *ngIf="iconRight && buttonIcon" class="ml-sm">
-    {{ buttonIcon }}
+  <mat-icon *ngIf="iconRight && buttonIcon" class="ml-sm">{{ buttonIcon }}</mat-icon>
 
   <mat-spinner *ngIf="loading" diameter="20" class="ml-sm"></mat-spinner></mat-icon>

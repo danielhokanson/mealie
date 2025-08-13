@@ -56,21 +56,8 @@
 
             <!-- Token Actions -->
             <div class="token-actions">
-              <button mat-icon-button
-                      (click)="deleteToken(token.id); $event.stopPropagation()"
-                      class="delete-button">
-                <mat-icon class="btn btn-error">delete</mat-icon>
-
-              <button mat-icon-button
-                      (click)="copyTokenLink(token.token); $event.stopPropagation()"
-                      class="copy-button">
-                <mat-icon class="btn btn-primary">content_copy</mat-icon>
-
-            </div></mat-list-item>
-    </mat-list>
-
-      <!-- Empty State -->
-      <div *ngIf="tokens.length === 0" class="empty-state">
+              <button mat-icon-button(click)="deleteToken(token.id); $event.stopPropagation()" class="delete-button"> <mat-icon class="btn btn-error">delete</mat-icon></button>
+              <button mat-icon-button(click)="copyTokenLink(token.token); $event.stopPropagation()" class="copy-button"> <mat-icon class="btn btn-primary">content_copy</mat-icon> <!-- Empty State --> <div *ngIf="tokens.length === 0" class="empty-state"></button>
         <mat-icon class="empty-icon">link_off</mat-icon>
         <p class="empty-text text-secondary mb-sm">No share tokens created yet</p>
         <p class="empty-subtext text-secondary mb-sm">Create a new token to share this recipe</p>

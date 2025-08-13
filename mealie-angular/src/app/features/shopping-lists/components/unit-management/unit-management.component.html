@@ -11,20 +11,8 @@
         <mat-icon matSuffix>search</mat-icon>
 
     <div class="action-buttons">
-      <button mat-raised-button class="btn btn-primary" (click)="onAddUnit()" [disabled]="loading">
-        <mat-icon>add</mat-icon>
-        Add Unit
-
-      <button mat-raised-button class="btn btn-error" (click)="onBulkDelete()" [disabled]="!canDelete()">
-        <mat-icon>delete</mat-icon>
-        Delete Selected
-
-  <div class="flex-1" *ngIf="!loading; else loadingTemplate">
-    <div class="units-table" *ngIf="getFilteredUnits().length > 0; else emptyTemplate">
-      <table mat-table class="w-full mat-elevation-z1" [dataSource]="getFilteredUnits()" >
-        <!-- Checkbox Column -->
-        <ng-container matColumnDef="select">
-          <th mat-header-cell *matHeaderCellDef></th>
+      <button mat-raised-button class="btn btn-primary" (click)="onAddUnit()" [disabled]="loading"><mat-icon>add</mat-icon> Add Unit</button>
+      <button mat-raised-button class="btn btn-error" (click)="onBulkDelete()" [disabled]="!canDelete()"><mat-icon>delete</mat-icon> Delete Selected <div class="flex-1" *ngIf="!loading; else loadingTemplate"> <div class="units-table" *ngIf="getFilteredUnits().length > 0; else emptyTemplate"> <table mat-table class="w-full mat-elevation-z1" [dataSource]="getFilteredUnits()" > <!-- Checkbox Column --> <ng-container matColumnDef="select"> <th mat-header-cell *matHeaderCellDef></th></button>
             <mat-checkbox
               (change)="onSelectAll()"
               [checked]="selectedUnits.length === getFilteredUnits().length"
@@ -78,38 +66,14 @@
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef>Actions</th>
           <td mat-cell *matCellDef="let unit">
-            <button mat-icon-button [matMenuTriggerFor]="menu" (click)="$event.stopPropagation()">
-              <mat-icon>more_vert</mat-icon>
-
-            <mat-menu #menu="matMenu"></mat-menu>
-              <button mat-menu-item (click)="onEditUnit(unit)">
-                <mat-icon>edit</mat-icon>
-                <span>Edit</span>
-
-              <button mat-menu-item (click)="onDeleteUnit(unit)" class="delete-action">
-                <mat-icon>delete</mat-icon>
-                <span>Delete</span>
-
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-    <ng-template #emptyTemplate>
+            <button mat-icon-button [matMenuTriggerFor]="menu" (click)="$event.stopPropagation()"><mat-icon>more_vert</mat-icon> <mat-menu #menu="matMenu"></mat-menu></button>
+              <button mat-menu-item (click)="onEditUnit(unit)"><mat-icon>edit</mat-icon> <span>Edit</span></button>
+              <button mat-menu-item (click)="onDeleteUnit(unit)" class="delete-action"><mat-icon>delete</mat-icon> <span>Delete</span> <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr> <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr> <ng-template #emptyTemplate></button>
       <div class="empty-state">
         <mat-icon class="empty-icon">straighten</mat-icon>
         <h3 class="text-lg font-medium mb-sm">No units found</h3>
         <p class="text-secondary mb-sm">Create your first unit to start managing measurements</p>
-        <button mat-raised-button class="btn btn-primary" (click)="onAddUnit()">
-          <mat-icon>add</mat-icon>
-          Create First Unit
-
-    </ng-template>
-  </section>
-
-  <ng-template #loadingTemplate>
-    <div class="flex items-center justify-center py-xl">
-      <mat-spinner diameter="40"></mat-spinner>
+        <button mat-raised-button class="btn btn-primary" (click)="onAddUnit()"><mat-icon>add</mat-icon> Create First Unit <ng-template #loadingTemplate> <div class="flex items-center justify-center py-xl"> <mat-spinner diameter="40"></mat-spinner></button>
       <p class="text-secondary mb-sm">Loading units...</p>
 
   </ng-template>
@@ -119,16 +83,7 @@
     <div class="dialog-content" (click)="$event.stopPropagation()">
       <div class="dialog-header">
         <h3 class="text-lg font-medium mb-sm">{{ editingUnit ? 'Edit Unit' : 'Add New Unit' }}</h3>
-        <button mat-icon-button (click)="onCancel()">
-          <mat-icon>close</mat-icon>
-
-      <form [formGroup]="unitForm" (ngSubmit)="onSaveUnit()" class="dialog-form">
-        <div class="form-section">
-          <mat-form-field appearance="outline" class="full-width w-full"></mat-form-field>
-            <mat-label>Unit Name</mat-label>
-            <input matInput formControlName="name" placeholder="Enter unit name">
-            <mat-error *ngIf="unitForm.get('name')?.hasError('required')"></mat-error>
-              Unit name is required
+        <button mat-icon-button (click)="onCancel()"><mat-icon>close</mat-icon> <form [formGroup]="unitForm" (ngSubmit)="onSaveUnit()" class="dialog-form"> <div class="form-section"> <mat-form-field appearance="outline" class="full-width w-full"></mat-form-field> <mat-label>Unit Name</mat-label> <input matInput formControlName="name" placeholder="Enter unit name"> <mat-error *ngIf="unitForm.get('name')?.hasError('required')"></mat-error> Unit name is required</button>
             <mat-error *ngIf="unitForm.get('name')?.hasError('maxlength')"></mat-error>
               Unit name must be no more than 50 characters
 
@@ -182,12 +137,5 @@
               <span>1 {{ unitForm.get('abbreviation')?.value }} = {{ unitForm.get('conversionFactor')?.value }} {{ getBaseUnitName(unitForm.get('baseUnitId')?.value) }}</span>
 
         <div class="dialog-actions">
-          <button mat-button type="button" (click)="onCancel()" [disabled]="loading">
-            Cancel
-
-          <button mat-raised-button class="btn btn-primary" type="submit" [disabled]="!canSave()">
-            <mat-spinner diameter="20" *ngIf="loading"></mat-spinner>
-            <span>{{ editingUnit ? 'Update' : 'Create' }}</span>
-
-    </form>
-
+          <button mat-button type="button" (click)="onCancel()" [disabled]="loading">Cancel</button>
+          <button mat-raised-button class="btn btn-primary" type="submit" [disabled]="!canSave()"><mat-spinner diameter="20" *ngIf="loading"></mat-spinner> <span>{{ editingUnit ? 'Update' : 'Create' }}</span></button>

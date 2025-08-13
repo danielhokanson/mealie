@@ -12,14 +12,5 @@
     <mat-form-field class="add-input w-full"></mat-form-field>
       <mat-label>Add New {{ getSelectorLabel() }}</mat-label>
       <input matInput [(ngModel)]="newItemName" (keyup.enter)="addNewItem()" />
-    <button mat-raised-button class="btn btn-primary" (click)="addNewItem()" [disabled]="!newItemName">
-      <mat-icon>add</mat-icon>
-      Add
-
-  <div class="selected-chips">
-    <mat-chip
-      *ngFor="let item of selectedItems"
-      [removable]="true"
-      (removed)="removeItem(item)">
-      {{ item.name }}
+    <button mat-raised-button class="btn btn-primary" (click)="addNewItem()" [disabled]="!newItemName"><mat-icon>add</mat-icon> Add <div class="selected-chips"> <mat-chip *ngFor="let item of selectedItems" [removable]="true" (removed)="removeItem(item)"> {{ item.name }}</button>
       <mat-icon matChipRemove>cancel</mat-icon>

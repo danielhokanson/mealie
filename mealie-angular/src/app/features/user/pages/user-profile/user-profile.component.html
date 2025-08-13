@@ -9,31 +9,13 @@
     <mat-icon class="error-icon">error</mat-icon>
     <h3 class="text-lg font-medium mb-sm">Error Loading Profile</h3>
     <p class="text-secondary mb-sm">Unable to load your profile. Please try again.</p>
-    <button mat-raised-button class="btn btn-primary" (click)="loadUserData()">
-      Retry
-
-  <!-- Profile Content -->
-  <div *ngIf="!loading && !error && currentUser" class="profile-content">
-    <!-- Header -->
-    <div class="profile-header">
-      <div class="profile-avatar">
-        <section class="page-container">
-          <img 
+    <button mat-raised-button class="btn btn-primary" (click)="loadUserData()">Retry <!-- Profile Content --> <div *ngIf="!loading && !error && currentUser" class="profile-content"> <!-- Header --> <div class="profile-header"> <div class="profile-avatar"> <section class="page-container"> <img</button>
             *ngIf="imagePreview || userProfile?.avatar" 
             [src]="imagePreview || userProfile?.avatar" 
             alt="Profile Avatar"
             class="avatar-image">
           <mat-icon *ngIf="!imagePreview && !userProfile?.avatar" class="avatar-placeholder">person</mat-icon>
-          <button 
-            mat-icon-button 
-            class="avatar-edit"
-            (click)="avatarInput.click()">
-            <mat-icon>edit</mat-icon>
-          </section>
-          <input 
-            #avatarInput
-            id="avatar-input"
-            type="file" 
+          <button mat-icon-button class="avatar-edit" (click)="avatarInput.click()"> <mat-icon>edit</mat-icon> <input #avatarInput id="avatar-input" type="file"</button>
             accept="image/*"
             (change)="onImageSelected($event)"
             style="display: none;">
@@ -57,9 +39,7 @@
 
     <!-- Tabs -->
     <mat-card class="tabs-card card">
-      <mat-tab-group [(selectedIndex)]="selectedTab">
         <!-- Profile Tab -->
-        <mat-tab label="Profile">
           
             <form [formGroup]="profileForm" (ngSubmit)="onSaveProfile()" class="profile-form">
               <div class="form-section">
@@ -160,19 +140,9 @@
                       {{ userProfile.preferences.cookingSkill }}
 
               <div class="flex justify-end gap-sm mt-lg">
-                <button 
-                  mat-raised-button 
-                  class="btn btn-primary"
-                  type="submit"
-                  [disabled]="saving || profileForm.invalid">
-                  <mat-spinner *ngIf="saving" diameter="20" class="spinner"></mat-spinner>
-                  <span *ngIf="!saving">Save Profile</span>
-
-          </form>
-        </mat-tab>
+                <button mat-raised-button class="btn btn-primary" type="submit" [disabled]="saving || profileForm.invalid"> <mat-spinner *ngIf="saving" diameter="20" class="spinner"></mat-spinner> <span *ngIf="!saving">Save Profile</span></button>
 
         <!-- Preferences Tab -->
-        <mat-tab label="Preferences">
           
             <form [formGroup]="preferencesForm" (ngSubmit)="onSavePreferences()" class="preferences-form">
               <div class="form-section">
@@ -265,16 +235,6 @@
                       min="0">
 
               <div class="flex justify-end gap-sm mt-lg">
-                <button 
-                  mat-raised-button 
-                  class="btn btn-primary"
-                  type="submit"
-                  [disabled]="saving || preferencesForm.invalid">
-                  <mat-spinner *ngIf="saving" diameter="20" class="spinner"></mat-spinner>
-                  <span *ngIf="!saving">Save Preferences</span>
-
-        <!-- Security Tab -->
-        <mat-tab label="Security">
           
             <div class="security-section">
               <h3 class="text-lg font-medium mb-sm">Change Password</h3>
@@ -312,39 +272,15 @@
                       {{ getPasswordErrorMessage('confirmPassword') }}
 
                 <div class="flex justify-end gap-sm mt-lg">
-                  <button 
-                    mat-raised-button 
-                    class="btn btn-primary"
-                    type="submit"
-                    [disabled]="saving || passwordForm.invalid">
-                    <mat-spinner *ngIf="saving" diameter="20" class="spinner"></mat-spinner>
-                    <span *ngIf="!saving">Change Password</span>
-
-              </form>
-
+                  <button mat-raised-button class="btn btn-primary" type="submit" [disabled]="saving || passwordForm.invalid"> <mat-spinner *ngIf="saving" diameter="20" class="spinner"></mat-spinner> <span *ngIf="!saving">Change Password</span></button>
             <mat-divider></mat-divider>
 
             <div class="security-section">
               <h3 class="text-lg font-medium mb-sm">Account Actions</h3>
               
               <div class="action-buttons">
-                <button 
-                  mat-raised-button 
-                  class="btn btn-secondary"
-                  (click)="onExportData()">
-                  <mat-icon>download</mat-icon>
-                  Export Data
-
-                <button 
-                  mat-raised-button 
-                  class="btn btn-error"
-                  (click)="onDeleteAccount()">
-                  <mat-icon>delete_forever</mat-icon>
-                  Delete Account
-
-              </mat-tab>
-          </form>
-        </mat-tab>
+                <button mat-raised-button class="btn btn-secondary" (click)="onExportData()"> <mat-icon>download</mat-icon> Export Data</button>
+                <button mat-raised-button class="btn btn-error" (click)="onDeleteAccount()"> <mat-icon>delete_forever</mat-icon> Delete Account</button>
       </mat-tab-group>
     </mat-card>
 

@@ -52,18 +52,5 @@
 
     <!-- Form Actions -->
     <div class="flex justify-end gap-sm mt-lg">
-      <button 
-        mat-button 
-        type="button"
-        (click)="onCancel()"
-        class="btn btn-secondary">
-        Cancel
-
-      <button 
-        mat-raised-button 
-        class="btn btn-primary btn btn-primary"
-        type="submit"
-        [disabled]="loading || shoppingListForm.invalid"
-        >
-        <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner>
-        <span *ngIf="!loading">Create Shopping List</span>
+      <button mat-button type="button" (click)="onCancel()" class="btn btn-secondary"> Cancel</button>
+      <button mat-raised-button class="btn btn-primary btn btn-primary" type="submit" [disabled]="loading || shoppingListForm.invalid" > <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner> <span *ngIf="!loading">Create Shopping List</span></button>

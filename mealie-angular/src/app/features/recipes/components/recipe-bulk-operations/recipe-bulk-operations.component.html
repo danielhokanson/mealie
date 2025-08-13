@@ -6,67 +6,15 @@
 
   <!-- Selection Actions -->
   <div class="selection-actions">
-    <button 
-      mat-button 
-      class="btn btn-primary"
-      (click)="onSelectAll()">
-      <mat-icon>select_all</mat-icon>
-      Select All
-
-    <button 
-      mat-button 
-      class="btn btn-primary"
-      (click)="onInvertSelection()">
-      <mat-icon>swap_horiz</mat-icon>
-      Invert Selection
-    </section>
-    <button 
-      mat-button 
-      class="btn btn-error"
-      (click)="onClearSelection()">
-      <mat-icon>clear</mat-icon>
-      Clear Selection
-
-  <!-- Operation Type Selection -->
-  <div class="operation-selection">
-    <h3 class="text-lg font-medium mb-sm">Operation Type</h3>
+    <button mat-button class="btn btn-primary" (click)="onSelectAll()"> <mat-icon>select_all</mat-icon> Select All</button>
+    <button mat-button class="btn btn-primary" (click)="onInvertSelection()"> <mat-icon>swap_horiz</mat-icon> Invert Selection</button>
+    <button mat-button class="btn btn-error" (click)="onClearSelection()"> <mat-icon>clear</mat-icon> Clear Selection <!-- Operation Type Selection --> <div class="operation-selection"> <h3 class="text-lg font-medium mb-sm">Operation Type</h3></button>
     <div class="operation-buttons">
-      <button 
-        mat-button 
-        [class.active]="operationType === 'category'"
-        (click)="onOperationTypeChange('category')">
-        <mat-icon>category</mat-icon>
-        Update Categories
-
-      <button 
-        mat-button 
-        [class.active]="operationType === 'tag'"
-        (click)="onOperationTypeChange('tag')">
-        <mat-icon>label</mat-icon>
-        Update Tags
-
-      <button 
-        mat-button 
-        [class.active]="operationType === 'delete'"
-        (click)="onOperationTypeChange('delete')">
-        <mat-icon>delete</mat-icon>
-        Delete Recipes
-      <button 
-        mat-button 
-        [class.active]="operationType === 'export'"
-        (click)="onOperationTypeChange('export')">
-        <mat-icon>download</mat-icon>
-        Export Recipes
-      <button 
-        mat-button 
-        [class.active]="operationType === 'share'"
-        (click)="onOperationTypeChange('share')">
-        <mat-icon>share</mat-icon>
-        Share Recipes
-
-  <!-- Operation Configuration -->
-  <div class="operation-config">
-    <form [formGroup]="bulkForm">
+      <button mat-button [class.active]="operationType === 'category'" (click)="onOperationTypeChange('category')"> <mat-icon>category</mat-icon> Update Categories</button>
+      <button mat-button [class.active]="operationType === 'tag'" (click)="onOperationTypeChange('tag')"> <mat-icon>label</mat-icon> Update Tags</button>
+      <button mat-button [class.active]="operationType === 'delete'" (click)="onOperationTypeChange('delete')"> <mat-icon>delete</mat-icon> Delete Recipes</button>
+      <button mat-button [class.active]="operationType === 'export'" (click)="onOperationTypeChange('export')"> <mat-icon>download</mat-icon> Export Recipes</button>
+      <button mat-button [class.active]="operationType === 'share'" (click)="onOperationTypeChange('share')"> <mat-icon>share</mat-icon> Share Recipes <!-- Operation Configuration --> <div class="operation-config"> <form [formGroup]="bulkForm"></button>
       <!-- Category Operation -->
       <div *ngIf="operationType === 'category'" class="operation-section">
         <h3 class="text-lg font-medium mb-sm">Update Categories</h3>
@@ -176,28 +124,10 @@
         <div class="export-formats">
           <h4>Export Formats:</h4>
           <div class="format-buttons">
-            <button mat-button class="btn btn-primary">
-              <mat-icon>description</mat-icon>
-              JSON
-
-            <button mat-button class="btn btn-primary">
-              <mat-icon>table_chart</mat-icon>
-              CSV
-
-            <button mat-button class="btn btn-primary">
-              <mat-icon>picture_as_pdf</mat-icon>
-              PDF
-
-            <button mat-button class="btn btn-primary">
-              <mat-icon>code</mat-icon>
-              XML
-
-      <!-- Share Operation -->
-      <div *ngIf="operationType === 'share'" class="operation-section">
-        <h3 class="text-lg font-medium mb-sm">Share Recipes</h3>
-        <p class="text-secondary mb-sm">Share {{ selectedRecipes.length }} recipe(s) with others:</p>
-        
-        <div class="share-options">
+            <button mat-button class="btn btn-primary"><mat-icon>description</mat-icon> JSON</button>
+            <button mat-button class="btn btn-primary"><mat-icon>table_chart</mat-icon> CSV</button>
+            <button mat-button class="btn btn-primary"><mat-icon>picture_as_pdf</mat-icon> PDF</button>
+            <button mat-button class="btn btn-primary"><mat-icon>code</mat-icon> XML <!-- Share Operation --> <div *ngIf="operationType === 'share'" class="operation-section"> <h3 class="text-lg font-medium mb-sm">Share Recipes</h3> <p class="text-secondary mb-sm">Share {{ selectedRecipes.length }} recipe(s) with others:</p> <div class="share-options"></button>
           <div class="share-option">
             <mat-checkbox class="btn btn-primary" checked></mat-checkbox>
               Include recipe images
@@ -217,34 +147,11 @@
         <div class="share-methods">
           <h4>Share Methods:</h4>
           <div class="method-buttons">
-            <button mat-button class="btn btn-primary">
-              <mat-icon>email</mat-icon>
-              Email
-
-            <button mat-button class="btn btn-primary">
-              <mat-icon>link</mat-icon>
-              Generate Links
-
-            <button mat-button class="btn btn-primary">
-              <mat-icon>qr_code</mat-icon>
-              QR Codes
-
-            <button mat-button class="btn btn-primary">
-              <mat-icon>share</mat-icon>
-              Social Media
-
-  <!-- Execute Button -->
-  <div class="execute-section">
-    <button 
-      mat-raised-button 
-      class="btn btn-primary"
-      (click)="onExecuteOperation()"
-      [disabled]="loading || selectedRecipes.length === 0 || (operationType === 'delete' && !confirmDelete)">
-      <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner>
-      <span *ngIf="!loading"></span>
-        <mat-icon *ngIf="operationType === 'category'">category</mat-icon>
-        <mat-icon *ngIf="operationType === 'tag'">label</mat-icon>
-        <mat-icon *ngIf="operationType === 'delete'">delete</mat-icon>
+            <button mat-button class="btn btn-primary"><mat-icon>email</mat-icon> Email</button>
+            <button mat-button class="btn btn-primary"><mat-icon>link</mat-icon> Generate Links</button>
+            <button mat-button class="btn btn-primary"><mat-icon>qr_code</mat-icon> QR Codes</button>
+            <button mat-button class="btn btn-primary"><mat-icon>share</mat-icon> Social Media <!-- Execute Button --> <div class="execute-section"></button>
+    <button mat-raised-button class="btn btn-primary" (click)="onExecuteOperation()" [disabled]="loading || selectedRecipes.length === 0 || (operationType === 'delete' && !confirmDelete)"> <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner> <span *ngIf="!loading"></span> <mat-icon *ngIf="operationType === 'category'">category</mat-icon> <mat-icon *ngIf="operationType === 'tag'">label</mat-icon> <mat-icon *ngIf="operationType === 'delete'">delete</mat-icon></button>
         <mat-icon *ngIf="operationType === 'export'">download</mat-icon>
         <mat-icon *ngIf="operationType === 'share'">share</mat-icon>
         {{ getOperationButtonText() }}

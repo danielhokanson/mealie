@@ -4,16 +4,7 @@
     <!-- Header with Create Button -->
     <div class="flex justify-between items-center mb-md">
       <h1 class="text-2xl font-medium m-0 mb-md">Recipe Explorer</h1>
-      <button 
-        mat-raised-button 
-        class="btn btn-primary" 
-        (click)="onCreateRecipe()">
-        <mat-icon>add</mat-icon>
-        Create Recipe
-
-    <form (ngSubmit)="onSearch()">
-      <!-- Search Bar -->
-      <mat-form-field appearance="outline" class="w-full mb-md">
+      <button mat-raised-button class="btn btn-primary" (click)="onCreateRecipe()"> <mat-icon>add</mat-icon> Create Recipe <form (ngSubmit)="onSearch()"> <!-- Search Bar --> <mat-form-field appearance="outline" class="w-full mb-md"></button>
         <mat-icon matPrefix>search</mat-icon>
         <input 
           matInput 
@@ -21,16 +12,7 @@
           name="searchQuery"
           placeholder="Search recipes..."
           (input)="onSearchQueryChange($event)">
-        <button 
-          *ngIf="searchQuery" 
-          matSuffix 
-          mat-icon-button 
-          type="button"
-          (click)="searchQuery = ''; onSearchQueryChange('')"
-          aria-label="Clear search">
-          <mat-icon>clear</mat-icon>
-
-      </mat-form-field>
+        <button *ngIf="searchQuery" matSuffix mat-icon-button type="button" (click)="searchQuery = ''; onSearchQueryChange('')" aria-label="Clear search"> <mat-icon>clear</mat-icon></button>
 
       <!-- Filter Row -->
       <div class="flex flex-wrap gap-sm items-center mb-md">
@@ -73,76 +55,22 @@
         <!-- Sort Options -->
         <mat-menu #sortMenu="matMenu">
           <ng-template matMenuContent>
-            <button mat-menu-item (click)="onSortChange('name')">
-              <mat-icon>sort_by_alpha</mat-icon>
-              <span>Name</span>
-
-            <button mat-menu-item (click)="onSortChange('createdAt')">
-              <mat-icon>schedule</mat-icon>
-              <span>Created Date</span>
-
-            <button mat-menu-item (click)="onSortChange('updatedAt')">
-              <mat-icon>update</mat-icon>
-              <span>Updated Date</span>
-
-            <button mat-menu-item (click)="onSortChange('rating')">
-              <mat-icon>star</mat-icon>
-              <span>Rating</span>
-
-            <button mat-menu-item (click)="onSortChange('totalTime')">
-              <mat-icon>timer</mat-icon>
-              <span>Total Time</span>
-
-            <mat-divider></mat-divider>
-            <button mat-menu-item (click)="onOrderDirectionChange()">
-              <mat-icon>{{ orderDirection === 'asc' ? 'arrow_downward' : 'arrow_upward' }}</mat-icon>
-              <span>{{ orderDirection === 'asc' ? 'Descending' : 'Ascending' }}</span>
-
-          </ng-template>
-        </mat-menu>
-
-        <button 
-          mat-stroked-button 
-          [matMenuTriggerFor]="sortMenu"
-          class="btn btn-secondary">
-          <mat-icon>{{ orderDirection === 'asc' ? 'arrow_upward' : 'arrow_downward' }}</mat-icon>
-          Sort
-
-        <!-- Settings Menu -->
-        <mat-menu #settingsMenu="matMenu">
-          <ng-template matMenuContent>
+            <button mat-menu-item (click)="onSortChange('name')"><mat-icon>sort_by_alpha</mat-icon> <span>Name</span></button>
+            <button mat-menu-item (click)="onSortChange('createdAt')"><mat-icon>schedule</mat-icon> <span>Created Date</span></button>
+            <button mat-menu-item (click)="onSortChange('updatedAt')"><mat-icon>update</mat-icon> <span>Updated Date</span></button>
+            <button mat-menu-item (click)="onSortChange('rating')"><mat-icon>star</mat-icon> <span>Rating</span></button>
+            <button mat-menu-item (click)="onSortChange('totalTime')"><mat-icon>timer</mat-icon> <span>Total Time</span> <mat-divider></mat-divider></button>
+            <button mat-menu-item (click)="onOrderDirectionChange()"><mat-icon>{{ orderDirection === 'asc' ? 'arrow_downward' : 'arrow_upward' }}</mat-icon> <span>{{ orderDirection === 'asc' ? 'Descending' : 'Ascending' }}</span></button>
+        <button mat-stroked-button [matMenuTriggerFor]="sortMenu" class="btn btn-secondary"> <mat-icon>{{ orderDirection === 'asc' ? 'arrow_upward' : 'arrow_downward' }}</mat-icon> Sort <!-- Settings Menu --> <mat-menu #settingsMenu="matMenu"> <ng-template matMenuContent></button>
             <div class="p-md">
               <mat-slide-toggle</mat-slide-toggle>
                 [(ngModel)]="autoSearch"
                 name="autoSearch"
                 class="mb-sm">
                 Auto Search
-              <button 
-                mat-stroked-button 
-                (click)="onReset()"
-                class="w-full">
-                Reset Filters
-
-          </ng-template>
-        </mat-menu>
-
-        <button 
-          mat-icon-button 
-          [matMenuTriggerFor]="settingsMenu"
-          matTooltip="Settings">
-          <mat-icon>settings</mat-icon>
-
-      <!-- Search Button (when auto-search is disabled) -->
-      <button 
-        *ngIf="!autoSearch" 
-        mat-raised-button 
-        class="btn btn-primary w-full"
-        type="submit">
-        <mat-icon>search</mat-icon>
-        Search
-
-    </form>
-  </header>
+              <button mat-stroked-button (click)="onReset()" class="w-full"> Reset Filters</button>
+        <button mat-icon-button [matMenuTriggerFor]="settingsMenu" matTooltip="Settings"> <mat-icon>settings</mat-icon> <!-- Search Button (when auto-search is disabled) --></button>
+      <button *ngIf="!autoSearch" mat-raised-button class="btn btn-primary w-full" type="submit"> <mat-icon>search</mat-icon> Search</button>
 
   <!-- Active Filters Display -->
   <mat-chip-listbox 
@@ -206,13 +134,4 @@
     class="surface-secondary rounded-lg">
 
   <!-- Floating Action Button for Create Recipe -->
-  <button 
-    mat-fab 
-    class="fixed bottom-6 right-6 z-fixed"
-    style="background-color: var(--primary-600); color: white;"
-    (click)="onCreateRecipe()"
-    matTooltip="Create New Recipe"
-    aria-label="Create new recipe">
-    <mat-icon>add</mat-icon>
-
-</section>
+  <button mat-fab class="fixed bottom-6 right-6 z-fixed" style="background-color: var(--primary-600); color: white;" (click)="onCreateRecipe()" matTooltip="Create New Recipe" aria-label="Create new recipe"> <mat-icon>add</mat-icon></button>

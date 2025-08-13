@@ -15,30 +15,9 @@
     <div class="share-type-selection">
       <h3 class="text-lg font-medium mb-sm">Share Method</h3>
       <div class="share-type-buttons">
-        <button 
-          mat-button 
-          [class.active]="shareType === 'link'"
-          (click)="onShareTypeChange('link')">
-          <mat-icon>link</mat-icon>
-          Link
-
-        <button 
-          mat-button 
-          [class.active]="shareType === 'email'"
-          (click)="onShareTypeChange('email')">
-          <mat-icon>email</mat-icon>
-          Email
-
-        <button 
-          mat-button 
-          [class.active]="shareType === 'social'"
-          (click)="onShareTypeChange('social')">
-          <mat-icon>share</mat-icon>
-          Social
-
-      </section>
-
-    <!-- Link Sharing -->
+        <button mat-button [class.active]="shareType === 'link'" (click)="onShareTypeChange('link')"> <mat-icon>link</mat-icon> Link</button>
+        <button mat-button [class.active]="shareType === 'email'" (click)="onShareTypeChange('email')"> <mat-icon>email</mat-icon> Email</button>
+        <button mat-button [class.active]="shareType === 'social'" (click)="onShareTypeChange('social')"> <mat-icon>share</mat-icon> Social <!-- Link Sharing --></button>
     <div *ngIf="shareType === 'link'" class="share-section">
       <h3 class="text-lg font-medium mb-sm">Share Link</h3>
       <section class="page-container">
@@ -48,33 +27,9 @@
             matInput 
             [value]="getShareUrl()"
             readonly>
-          <button 
-            mat-icon-button 
-            matSuffix
-            (click)="onCopyLink()"
-            matTooltip="Copy link">
-            <mat-icon>content_copy</mat-icon>
-          </mat-form-field>
-        </section>
-
-      <div class="link-actions">
-        <button 
-          mat-raised-button 
-          class="btn btn-primary"
-          (click)="onCopyLink()">
-          <mat-icon>content_copy</mat-icon>
-          Copy Link
-
-        <button 
-          mat-raised-button 
-          class="btn btn-secondary"
-          (click)="onGenerateQRCode()">
-          <mat-icon>qr_code</mat-icon>
-          Generate QR Code
-
-    <!-- Email Sharing -->
-    <div *ngIf="shareType === 'email'" class="share-section">
-      <h3 class="text-lg font-medium mb-sm">Share via Email</h3>
+          <button mat-icon-button matSuffix (click)="onCopyLink()" matTooltip="Copy link"> <mat-icon>content_copy</mat-icon> <div class="link-actions"></button>
+        <button mat-raised-button class="btn btn-primary" (click)="onCopyLink()"> <mat-icon>content_copy</mat-icon> Copy Link</button>
+        <button mat-raised-button class="btn btn-secondary" (click)="onGenerateQRCode()"> <mat-icon>qr_code</mat-icon> Generate QR Code <!-- Email Sharing --> <div *ngIf="shareType === 'email'" class="share-section"> <h3 class="text-lg font-medium mb-sm">Share via Email</h3></button>
       <form [formGroup]="shareForm" class="email-form">
         <div class="form-row">
           <mat-form-field appearance="outline" class="w-full"></mat-form-field>
@@ -139,83 +94,21 @@
                 Include Timeline
 
         <div class="flex justify-end gap-sm mt-lg">
-          <button 
-            mat-raised-button 
-            class="btn btn-primary"
-            (click)="onShareViaEmail()"
-            [disabled]="selectedUsers.length === 0">
-            <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner>
-            <span *ngIf="!loading">Send Email</span>
-
-    <!-- Social Sharing -->
-    <div *ngIf="shareType === 'social'" class="share-section">
+          <button mat-raised-button class="btn btn-primary" (click)="onShareViaEmail()" [disabled]="selectedUsers.length === 0"> <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner> <span *ngIf="!loading">Send Email</span> <!-- Social Sharing --> <div *ngIf="shareType === 'social'" class="share-section"></button>
       <h3 class="text-lg font-medium mb-sm">Share on Social Media</h3>
       <div class="social-buttons">
-        <button 
-          mat-raised-button 
-          class="btn btn-primary social-button twitter"
-          (click)="onShareViaSocial('twitter')"
-          >
-          <mat-icon>twitter</mat-icon>
-          Twitter
-
-        <button 
-          mat-raised-button 
-          class="btn btn-primary social-button facebook"
-          (click)="onShareViaSocial('facebook')"
-          >
-          <mat-icon>facebook</mat-icon>
-          Facebook
-
-        <button 
-          mat-raised-button 
-          class="btn btn-primary social-button pinterest"
-          (click)="onShareViaSocial('pinterest')"
-          >
-          <mat-icon>pinterest</mat-icon>
-          Pinterest
-        <button 
-          mat-raised-button 
-          class="btn btn-primary social-button whatsapp"
-          (click)="onShareViaSocial('whatsapp')"
-          >
-          <mat-icon>whatsapp</mat-icon>
-          WhatsApp
-        <button 
-          mat-raised-button 
-          class="btn btn-primary social-button email"
-          (click)="onShareViaSocial('email')"
-          >
-          <mat-icon>email</mat-icon>
-          Email
-
-    <!-- Additional Actions -->
-    <div class="additional-actions">
+        <button mat-raised-button class="btn btn-primary social-button twitter" (click)="onShareViaSocial('twitter')" > <mat-icon>twitter</mat-icon> Twitter</button>
+        <button mat-raised-button class="btn btn-primary social-button facebook" (click)="onShareViaSocial('facebook')" > <mat-icon>facebook</mat-icon> Facebook</button>
+        <button mat-raised-button class="btn btn-primary social-button pinterest" (click)="onShareViaSocial('pinterest')" > <mat-icon>pinterest</mat-icon> Pinterest</button>
+        <button mat-raised-button class="btn btn-primary social-button whatsapp" (click)="onShareViaSocial('whatsapp')" > <mat-icon>whatsapp</mat-icon> WhatsApp</button>
+        <button mat-raised-button class="btn btn-primary social-button email" (click)="onShareViaSocial('email')" > <mat-icon>email</mat-icon> Email <!-- Additional Actions --> <div class="additional-actions"></button>
       <mat-divider></mat-divider>
       <div class="action-buttons">
-        <button 
-          mat-raised-button 
-          class="btn btn-secondary"
-          (click)="onExportRecipe()">
-          <mat-icon>download</mat-icon>
-          Export Recipe
-
-        <button 
-          mat-raised-button 
-          class="btn btn-primary"
-          (click)="onGenerateQRCode()">
-          <mat-icon>qr_code</mat-icon>
-          QR Code
-
-  <!-- No Recipe State -->
-  <div *ngIf="!loading && !recipe" class="no-recipe">
-    <mat-icon class="no-recipe-icon">restaurant</mat-icon>
+        <button mat-raised-button class="btn btn-secondary" (click)="onExportRecipe()"> <mat-icon>download</mat-icon> Export Recipe</button>
+        <button mat-raised-button class="btn btn-primary" (click)="onGenerateQRCode()"> <mat-icon>qr_code</mat-icon> QR Code <!-- No Recipe State --> <div *ngIf="!loading && !recipe" class="no-recipe"> <mat-icon class="no-recipe-icon">restaurant</mat-icon></button>
     <h3 class="text-lg font-medium mb-sm">No Recipe Selected</h3>
     <p class="text-secondary mb-sm">Please select a recipe to share.</p>
 
   <!-- Dialog Actions -->
   <div class="dialog-actions" *ngIf="dialogRef">
-    <button 
-      mat-button 
-      (click)="onClose()">
-      Close
+    <button mat-button (click)="onClose()"> Close</button>

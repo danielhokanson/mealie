@@ -6,28 +6,10 @@
 
     <mat-card-content class="card">
       <div class="notifiers-actions">
-        <button mat-raised-button class="btn btn-primary" (click)="addNotifier()">
-          <mat-icon>add</mat-icon>
-          Add Notifier
-
-      <div *ngIf="loading" class="flex items-center justify-center py-xl">
-        <mat-icon class="loading-icon">refresh</mat-icon>
-        <p class="text-secondary mb-sm">Loading notifiers...</p>
-
-      <div *ngIf="!loading && notifiers.length === 0" class="empty-state">
-        <mat-icon>notifications_off</mat-icon>
+        <button mat-raised-button class="btn btn-primary" (click)="addNotifier()"><mat-icon>add</mat-icon> Add Notifier <div *ngIf="loading" class="flex items-center justify-center py-xl"> <mat-icon class="loading-icon">refresh</mat-icon> <p class="text-secondary mb-sm">Loading notifiers...</p> <div *ngIf="!loading && notifiers.length === 0" class="empty-state"> <mat-icon>notifications_off</mat-icon></button>
         <h3 class="text-lg font-medium mb-sm">No notifiers configured</h3>
         <p class="text-secondary mb-sm">Set up notifications to stay informed about household activities.</p>
-        <button mat-raised-button class="btn btn-primary" (click)="addNotifier()">
-          Add Your First Notifier
-
-      <div *ngIf="!loading && notifiers.length > 0" class="notifiers-list">
-        <mat-list class="flex flex-col gap-sm">
-          <mat-list-item *ngFor="let notifier of notifiers">
-            <div matListItemTitle>{{ notifier.name }}</div>
-            <div matListItemLine>
-              <mat-chip [color]="notifier.enabled ? 'primary' : 'default'" selected></mat-chip>
-                {{ notifier.type }}
+        <button mat-raised-button class="btn btn-primary" (click)="addNotifier()">Add Your First Notifier <div *ngIf="!loading && notifiers.length > 0" class="notifiers-list"> <mat-list class="flex flex-col gap-sm"> <mat-list-item *ngFor="let notifier of notifiers"> <div matListItemTitle>{{ notifier.name }}</div> <div matListItemLine> <mat-chip [color]="notifier.enabled ? 'primary' : 'default'" selected></mat-chip> {{ notifier.type }}</button>
               <span class="schedule">{{ notifier.schedule }}</span>
 
             <div matListItemMeta>
@@ -35,14 +17,5 @@
                 [checked]="notifier.enabled"
                 (change)="toggleNotifier(notifier)">
 
-              <button mat-icon-button (click)="editNotifier(notifier)">
-                <mat-icon>edit</mat-icon>
-
-              <button mat-icon-button class="btn btn-error" (click)="deleteNotifier(notifier.id)">
-                <mat-icon>delete</mat-icon>
-
-            </mat-list-item>
-          </mat-list>
-
-    </mat-card>
-  </section>
+              <button mat-icon-button (click)="editNotifier(notifier)"><mat-icon>edit</mat-icon></button>
+              <button mat-icon-button class="btn btn-error" (click)="deleteNotifier(notifier.id)"><mat-icon>delete</mat-icon></button>

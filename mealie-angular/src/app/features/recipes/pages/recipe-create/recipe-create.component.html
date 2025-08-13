@@ -154,16 +154,7 @@
                   formControlName="food"
                   placeholder="e.g., flour, chicken">
 
-              <button 
-                mat-icon-button 
-                class="btn btn-error remove-button"
-                type="button"
-                (click)="removeIngredient(i)"
-                >
-                <mat-icon>delete</mat-icon>
-
-            <div class="ingredient-row">
-              <mat-form-field appearance="outline" class="title-field w-full"></mat-form-field>
+              <button mat-icon-button class="btn btn-error remove-button" type="button" (click)="removeIngredient(i)" > <mat-icon>delete</mat-icon> <div class="ingredient-row"> <mat-form-field appearance="outline" class="title-field w-full"></mat-form-field></button>
                 <mat-label>Title (optional)</mat-label>
                 <input 
                   matInput 
@@ -180,16 +171,7 @@
               <mat-checkbox formControlName="disableAmount"></mat-checkbox>
                 No amount needed
 
-          <button 
-            mat-raised-button 
-            class="btn btn-primary add-button"
-            type="button"
-            (click)="addIngredient()"
-            >
-            <mat-icon>add</mat-icon>
-            Add Ingredient
-
-        </mat-card>
+          <button mat-raised-button class="btn btn-primary add-button" type="button" (click)="addIngredient()" > <mat-icon>add</mat-icon> Add Ingredient</button>
       </section>
 
     <!-- Instructions -->
@@ -214,38 +196,9 @@
                   placeholder="Enter instruction step"
                   rows="2">
 
-              <button 
-                mat-icon-button 
-                class="btn btn-error remove-button"
-                type="button"
-                (click)="removeInstruction(i)"
-                >
-                <mat-icon>delete</mat-icon>
-
-          <button 
-            mat-raised-button 
-            class="btn btn-primary add-button"
-            type="button"
-            (click)="addInstruction()"
-            >
-            <mat-icon>add</mat-icon>
-            Add Instruction
-          </mat-card>
-
+              <button mat-icon-button class="btn btn-error remove-button" type="button" (click)="removeInstruction(i)" > <mat-icon>delete</mat-icon></button>
+          <button mat-raised-button class="btn btn-primary add-button" type="button" (click)="addInstruction()" > <mat-icon>add</mat-icon> Add Instruction</button>
     <!-- Form Actions -->
     <div class="flex justify-end gap-sm mt-lg">
-      <button 
-        mat-button 
-        type="button"
-        (click)="onCancel()"
-        class="btn btn-secondary">
-        Cancel
-
-      <button 
-        mat-raised-button 
-        class="btn btn-primary btn btn-primary"
-        type="submit"
-        [disabled]="loading || recipeForm.invalid"
-        >
-        <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner>
-        <span *ngIf="!loading">Create Recipe</span>
+      <button mat-button type="button" (click)="onCancel()" class="btn btn-secondary"> Cancel</button>
+      <button mat-raised-button class="btn btn-primary btn btn-primary" type="submit" [disabled]="loading || recipeForm.invalid" > <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner> <span *ngIf="!loading">Create Recipe</span></button>

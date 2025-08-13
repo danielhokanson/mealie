@@ -3,27 +3,9 @@
     
     <div class="filter-section">
       <!-- Filters -->
-      <button
-        mat-icon-button
-        [matMenuTriggerFor]="filterMenu"
-        class="filter-button"
-        [matBadge]="filterBadgeCount"
-        [matBadgeHidden]="filterBadgeCount === 0"
-        matBadgeColor="accent">
-        <mat-icon>filter_list</mat-icon>
-
-      <mat-menu #filterMenu="matMenu" class="filter-menu">
+      <buttonmat-icon-button [matMenuTriggerFor]="filterMenu" class="filter-button" [matBadge]="filterBadgeCount" [matBadgeHidden]="filterBadgeCount === 0" matBadgeColor="accent"> <mat-icon>filter_list</mat-icon> <mat-menu #filterMenu="matMenu" class="filter-menu"></button>
         
-          <button
-            mat-menu-item
-            (click)="reverseSort()">
-            <mat-icon>
-              {{ preferences.orderDirection === 'asc' ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}
-
-            <span></span>
-              {{ preferences.orderDirection === 'asc' ? 'Sort Descending' : 'Sort Ascending' }}
-
-          <mat-divider></mat-divider>
+          <buttonmat-menu-item (click)="reverseSort()"> <mat-icon> {{ preferences.orderDirection === 'asc' ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }} <span></span> {{ preferences.orderDirection === 'asc' ? 'Sort Descending' : 'Sort Ascending' }} <mat-divider></mat-divider></button>
           
           <div *ngFor="let option of eventTypeFilterState" class="filter-option">
             <mat-checkbox

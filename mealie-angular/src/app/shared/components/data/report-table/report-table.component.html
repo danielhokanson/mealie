@@ -35,16 +35,7 @@
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef>Actions</th>
     <td mat-cell *matCellDef="let item">
-      <button
-        mat-icon-button
-        class="btn btn-error delete-button"
-        (click)="onDelete(item.id)">
-        <mat-icon>delete</mat-icon>
-
-  </ng-container>
-  
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;" 
+      <buttonmat-icon-button class="btn btn-error delete-button" (click)="onDelete(item.id)"> <mat-icon>delete</mat-icon> <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr> <tr mat-row *matRowDef="let row; columns: displayedColumns;"</button>
       [class.clickable]="row.status !== 'in-progress'"
       class="table-row"></tr>
 </table>

@@ -6,32 +6,10 @@
       {{ shoppingList.description }}
     
     <div class="list-actions">
-      <button 
-        mat-icon-button
-        [matMenuTriggerFor]="listMenu"
-        class="list-menu-btn">
-        <mat-icon>more_vert</mat-icon>
-
-      <mat-menu #listMenu="matMenu">
-        <button mat-menu-item (click)="addItem()">
-          <mat-icon>add</mat-icon>
-          <span>Add Item</span>
-
-        <button mat-menu-item (click)="clearCompleted()" [disabled]="checkedItems.length === 0">
-          <mat-icon>clear_all</mat-icon>
-          <span>Clear Completed</span>
-
-        <mat-divider></mat-divider>
-        <button mat-menu-item (click)="onDeleteList()">
-          <mat-icon class="btn btn-error">delete</mat-icon>
-          <span>Delete List</span>
-
-      </mat-menu>
-    </mat-card-header>
-  </mat-card>
-
-  <mat-card-content class="card">
-    <!-- Progress Bar -->
+      <button mat-icon-button [matMenuTriggerFor]="listMenu" class="list-menu-btn"> <mat-icon>more_vert</mat-icon> <mat-menu #listMenu="matMenu"></button>
+        <button mat-menu-item (click)="addItem()"><mat-icon>add</mat-icon> <span>Add Item</span></button>
+        <button mat-menu-item (click)="clearCompleted()" [disabled]="checkedItems.length === 0"><mat-icon>clear_all</mat-icon> <span>Clear Completed</span> <mat-divider></mat-divider></button>
+        <button mat-menu-item (click)="onDeleteList()"><mat-icon class="btn btn-error">delete</mat-icon> <span>Delete List</span> <mat-card-content class="card"> <!-- Progress Bar --></button>
     <div class="progress-container" *ngIf="shoppingList.items.length > 0">
       <div class="progress-bar">
         <div class="progress-fill" [style.width.%]="progressPercentage"></div>
@@ -115,6 +93,4 @@
     <div class="empty-state" *ngIf="shoppingList.items.length === 0">
       <mat-icon class="empty-icon">shopping_cart</mat-icon>
       <p class="empty-text text-secondary mb-sm">No items in this shopping list</p>
-      <button mat-raised-button class="btn btn-primary" (click)="addItem()">
-        <mat-icon>add</mat-icon>
-        Add First Item
+      <button mat-raised-button class="btn btn-primary" (click)="addItem()"><mat-icon>add</mat-icon> Add First Item</button>

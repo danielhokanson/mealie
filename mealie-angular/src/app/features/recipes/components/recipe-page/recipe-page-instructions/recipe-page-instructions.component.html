@@ -37,16 +37,7 @@
   <!-- Instructions Header -->
   <div class="instructions-header">
     <h2 *ngIf="!isCookMode" class="instructions-title text-xl font-medium mb-md">Instructions</h2>
-    <button
-      *ngIf="!isEditForm && !isCookMode"
-      mat-raised-button
-      class="btn btn-primary"
-      (click)="toggleCookMode()">
-      <mat-icon>restaurant</mat-icon>
-      Cook Mode
-
-  <!-- Instructions List -->
-  <div cdkDropList (cdkDropListDropped)="onDrop($event)" class="instructions-list">
+    <button*ngIf="!isEditForm && !isCookMode" mat-raised-button class="btn btn-primary" (click)="toggleCookMode()"> <mat-icon>restaurant</mat-icon> Cook Mode <!-- Instructions List --> <div cdkDropList (cdkDropListDropped)="onDrop($event)" class="instructions-list"></button>
     <div
       *ngFor="let step of instructionList; let index = index"
       cdkDrag
@@ -75,57 +66,17 @@
               {{ step.summary || 'Step ' + (index + 1) }}
 
             <div *ngIf="isEditForm" class="action-buttons">
-              <button mat-icon-button [matMenuTriggerFor]="menu">
-                <mat-icon>more_vert</mat-icon>
-
-              <mat-menu #menu="matMenu">
-                <button mat-menu-item (click)="deleteStep(index)">
-                  <mat-icon>delete</mat-icon>
-                  Delete
-
-                <button mat-menu-item (click)="toggleSection(step.id)">
-                  <mat-icon>expand_more</mat-icon>
-                  Toggle Section
-
-                <button mat-menu-item (click)="openLinkDialog(index, step.text, step.ingredientReferences)">
-                  <mat-icon>link</mat-icon>
-                  Link Ingredients
-
-                <button mat-menu-item (click)="uploadImage(index)">
-                  <mat-icon>upload</mat-icon>
-                  Upload Image
-
-                <button mat-menu-item (click)="togglePreview(index)">
-                  <mat-icon>{{ previewStates[index] ? 'edit' : 'visibility' }}</mat-icon>
-                  {{ previewStates[index] ? 'Edit' : 'Preview' }}
-
-                <mat-divider></mat-divider>
-                <button mat-menu-item (click)="mergeAbove(index)">
-                  <mat-icon>merge</mat-icon>
-                  Merge Above
-
-                <button mat-menu-item (click)="moveToTop(index)">
-                  <mat-icon>keyboard_arrow_up</mat-icon>
-                  Move to Top
-
-                <button mat-menu-item (click)="moveToBottom(index)">
-                  <mat-icon>keyboard_arrow_down</mat-icon>
-                  Move to Bottom
-
-                <button mat-menu-item (click)="insertAbove(index)">
-                  <mat-icon>add</mat-icon>
-                  Insert Above
-
-                <button mat-menu-item (click)="insertBelow(index)">
-                  <mat-icon>add</mat-icon>
-                  Insert Below
-
-              </mat-menu>
-
-            <mat-icon *ngIf="isChecked(index)" class="check-icon btn btn-primary">check_circle</mat-icon>
-
-        </mat-card-header>
-
+              <button mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon> <mat-menu #menu="matMenu"></button>
+                <button mat-menu-item (click)="deleteStep(index)"><mat-icon>delete</mat-icon> Delete</button>
+                <button mat-menu-item (click)="toggleSection(step.id)"><mat-icon>expand_more</mat-icon> Toggle Section</button>
+                <button mat-menu-item (click)="openLinkDialog(index, step.text, step.ingredientReferences)"><mat-icon>link</mat-icon> Link Ingredients</button>
+                <button mat-menu-item (click)="uploadImage(index)"><mat-icon>upload</mat-icon> Upload Image</button>
+                <button mat-menu-item (click)="togglePreview(index)"><mat-icon>{{ previewStates[index] ? 'edit' : 'visibility' }}</mat-icon> {{ previewStates[index] ? 'Edit' : 'Preview' }} <mat-divider></mat-divider></button>
+                <button mat-menu-item (click)="mergeAbove(index)"><mat-icon>merge</mat-icon> Merge Above</button>
+                <button mat-menu-item (click)="moveToTop(index)"><mat-icon>keyboard_arrow_up</mat-icon> Move to Top</button>
+                <button mat-menu-item (click)="moveToBottom(index)"><mat-icon>keyboard_arrow_down</mat-icon> Move to Bottom</button>
+                <button mat-menu-item (click)="insertAbove(index)"><mat-icon>add</mat-icon> Insert Above</button>
+                <button mat-menu-item (click)="insertBelow(index)"><mat-icon>add</mat-icon> Insert Below <mat-icon *ngIf="isChecked(index)" class="check-icon btn btn-primary">check_circle</mat-icon></button>
         <!-- Progress Bar -->
         <mat-progress-bar *ngIf="isEditForm && loadingStates[index]" mode="indeterminate"></mat-progress-bar>
 

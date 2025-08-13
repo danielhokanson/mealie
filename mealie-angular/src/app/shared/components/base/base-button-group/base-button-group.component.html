@@ -1,37 +1,10 @@
 <div class="flex gap-sm">
   <ng-container *ngFor="let btn of buttons; let btnIndex = index">
     <!-- Regular button -->
-    <button 
-      *ngIf="!btn.children"
-      mat-icon-button
-      (click)="onButtonClick(btn.event)"
-      [class.large]="large"
-      [style.width]="stretch ? maxButtonWidth : 'auto'"
-      class="menu-button">
-      <mat-icon>{{ btn.icon }}</mat-icon>
-    </ng-container>
-
+    <button *ngIf="!btn.children" mat-icon-button (click)="onButtonClick(btn.event)" [class.large]="large" [style.width]="stretch ? maxButtonWidth : 'auto'" class="menu-button"> <mat-icon>{{ btn.icon }}</mat-icon></button>
     <!-- Button with dropdown (simplified) -->
-    <button 
-      *ngIf="btn.children"
-      mat-icon-button
-      (click)="onButtonClick(btn.children[0].event)"
-      [class.large]="large"
-      [style.width]="stretch ? maxButtonWidth : 'auto'"
-      class="menu-button">
-      <mat-icon>{{ btn.icon }}</mat-icon>
-
-    <!-- Simple button with tooltip -->
-    <button 
-      *ngIf="!btn.children"
-      mat-icon-button
-      [color]="btn.color"
-      [class.large]="large"
-      [disabled]="btn.disabled"
-      [style.width]="stretch ? maxButtonWidth : 'auto'"
-      [matTooltip]="btn.text"
-      [matTooltipPosition]="'below'"
-      [matTooltipShowDelay]="200"
+    <button *ngIf="btn.children" mat-icon-button (click)="onButtonClick(btn.children[0].event)" [class.large]="large" [style.width]="stretch ? maxButtonWidth : 'auto'" class="menu-button"> <mat-icon>{{ btn.icon }}</mat-icon> <!-- Simple button with tooltip --></button>
+    <button *ngIf="!btn.children" mat-icon-button [color]="btn.color" [class.large]="large" [disabled]="btn.disabled" [style.width]="stretch ? maxButtonWidth : 'auto'" [matTooltip]="btn.text" [matTooltipPosition]="'below'" [matTooltipShowDelay]="200"</button>
       (click)="onButtonClick(btn.event)"
       class="tooltip-button">
       <mat-icon>{{ btn.icon }}</mat-icon>

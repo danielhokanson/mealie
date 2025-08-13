@@ -34,18 +34,5 @@
         </section>
         
         <mat-card-actions class="drop-zone-actions card"></mat-card-actions>
-            <button
-                mat-button
-                class="btn btn-primary"
-                (click)="onBrowseClick(); $event.stopPropagation()"
-                [disabled]="disabled">
-                <mat-icon>folder_open</mat-icon>
-                Browse Files
-            
-            <button
-                *ngIf="selectedFiles.length > 0"
-                mat-button
-                class="btn btn-error"
-                (click)="clearFiles(); $event.stopPropagation()">
-                <mat-icon>clear</mat-icon>
-                Clear
+            <buttonmat-button class="btn btn-primary" (click)="onBrowseClick(); $event.stopPropagation()" [disabled]="disabled"> <mat-icon>folder_open</mat-icon> Browse Files</button>
+            <button*ngIf="selectedFiles.length > 0" mat-button class="btn btn-error" (click)="clearFiles(); $event.stopPropagation()"> <mat-icon>clear</mat-icon> Clear</button>

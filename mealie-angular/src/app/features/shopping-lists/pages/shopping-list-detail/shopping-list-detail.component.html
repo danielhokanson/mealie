@@ -9,56 +9,18 @@
     <mat-icon class="error-icon">error</mat-icon>
     <h3 class="text-lg font-medium mb-sm">Error Loading Shopping List</h3>
     <p class="text-secondary mb-sm">Unable to load the shopping list. Please try again.</p>
-    <button mat-raised-button class="btn btn-primary" (click)="loadShoppingList(shoppingList?.id || '')">
-      Retry
-
-  <!-- Shopping List Content -->
-  <div *ngIf="shoppingList && !loading" class="shopping-list-content">
-    <!-- Header -->
-    <div class="list-header">
-      <div class="list-title-section">
-        <h1 class="text-2xl font-medium mb-md">{{ shoppingList.name }}</h1>
-        <div class="list-meta">
+    <button mat-raised-button class="btn btn-primary" (click)="loadShoppingList(shoppingList?.id || '')">Retry <!-- Shopping List Content --> <div *ngIf="shoppingList && !loading" class="shopping-list-content"> <!-- Header --> <div class="list-header"> <div class="list-title-section"> <h1 class="text-2xl font-medium mb-md">{{ shoppingList.name }}</h1> <div class="list-meta"></button>
           <span>Created {{ getFormattedDate(shoppingList.createdAt) }}</span>
           <span *ngIf="shoppingList.updatedAt && shoppingList.updatedAt !== shoppingList.createdAt"></span>
             • Updated {{ getFormattedDate(shoppingList.updatedAt) }}
 
       <!-- Action Buttons -->
       <div class="list-actions">
-        <button 
-          mat-icon-button 
-          (click)="onShareList()" 
-          matTooltip="Share list">
-          <mat-icon>share</mat-icon>
-
-        <button 
-          mat-icon-button 
-          (click)="onPrintList()" 
-          matTooltip="Print list">
-          <mat-icon>print</mat-icon>
-
-        <button 
-          mat-icon-button 
-          [matMenuTriggerFor]="listMenu" 
-          matTooltip="More options">
-          <mat-icon>more_vert</mat-icon>
-
-        <mat-menu #listMenu="matMenu">
-          <button mat-menu-item (click)="onEditList()">
-            <mat-icon>edit</mat-icon>
-            <span>Edit List</span>
-
-          <mat-divider></mat-divider>
-          <button mat-menu-item (click)="onDeleteList()" class="delete-action">
-            <mat-icon>delete</mat-icon>
-            <span>Delete List</span>
-
-        </mat-menu>
-
-    <!-- Progress Section -->
-    <div class="progress-section">
-      <div class="progress-info">
-        <span class="progress-text"></span>
+        <button mat-icon-button (click)="onShareList()" matTooltip="Share list"> <mat-icon>share</mat-icon></button>
+        <button mat-icon-button (click)="onPrintList()" matTooltip="Print list"> <mat-icon>print</mat-icon></button>
+        <button mat-icon-button [matMenuTriggerFor]="listMenu" matTooltip="More options"> <mat-icon>more_vert</mat-icon> <mat-menu #listMenu="matMenu"></button>
+          <button mat-menu-item (click)="onEditList()"><mat-icon>edit</mat-icon> <span>Edit List</span> <mat-divider></mat-divider></button>
+          <button mat-menu-item (click)="onDeleteList()" class="delete-action"><mat-icon>delete</mat-icon> <span>Delete List</span> <!-- Progress Section --> <div class="progress-section"> <div class="progress-info"> <span class="progress-text"></span></button>
           {{ getCompletedItemsCount() }} of {{ getTotalItemsCount() }} items
         <span class="progress-percentage"></span>
           {{ getProgressPercentage() | number:'1.0-0' }}%
@@ -119,16 +81,7 @@
                 {{ label.name }}
 
           <div class="flex justify-end gap-sm mt-lg">
-            <button 
-              mat-raised-button 
-              class="btn btn-primary"
-              type="submit"
-              [disabled]="newItemForm.invalid">
-              Add Item
-
-          </form>
-
-      </mat-card>
+            <button mat-raised-button class="btn btn-primary" type="submit" [disabled]="newItemForm.invalid"> Add Item</button>
 
     <!-- Items Section -->
     <mat-card class="items-section card">
@@ -159,16 +112,7 @@
                   <span *ngIf="item.unit">{{ item.unit }}</span>
                 <span *ngIf="item.note" class="item-note">({{ item.note }})</span>
 
-              <button 
-                mat-icon-button 
-                class="btn btn-error delete-button"
-                (click)="onDeleteItem(item)"
-                >
-                <mat-icon>delete</mat-icon>
-              </mat-list>
-            </mat-expansion-panel>
-
-        </mat-card>
+              <button mat-icon-button class="btn btn-error delete-button" (click)="onDeleteItem(item)" > <mat-icon>delete</mat-icon></button>
 
         <!-- Unlabeled Items -->
         <mat-expansion-panel *ngIf="getUnlabeledItems().length > 0" class="unlabeled-panel">
@@ -193,16 +137,7 @@
                   <span *ngIf="item.unit">{{ item.unit }}</span>
                 <span *ngIf="item.note" class="item-note">({{ item.note }})</span>
 
-              <button 
-                mat-icon-button 
-                class="btn btn-error delete-button"
-                (click)="onDeleteItem(item)"
-                >
-                <mat-icon>delete</mat-icon>
-              </mat-list>
-            </mat-expansion-panel>
-
-        <!-- Empty State -->
+              <button mat-icon-button class="btn btn-error delete-button" (click)="onDeleteItem(item)" > <mat-icon>delete</mat-icon> <!-- Empty State --></button>
         <div *ngIf="getTotalItemsCount() === 0" class="empty-items">
           <mat-icon class="empty-icon">shopping_cart</mat-icon>
           <h3 class="text-lg font-medium mb-sm">No Items Yet</h3>

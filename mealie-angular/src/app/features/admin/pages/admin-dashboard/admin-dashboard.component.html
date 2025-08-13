@@ -9,16 +9,7 @@
     <mat-icon class="error-icon">error</mat-icon>
     <h3 class="text-lg font-medium mb-sm">Error Loading Dashboard</h3>
     <p class="text-secondary mb-sm">Unable to load the admin dashboard. Please try again.</p>
-    <button mat-raised-button class="btn btn-primary" (click)="loadDashboardData()">
-      Retry
-
-  <!-- Dashboard Content -->
-  <div *ngIf="!loading && !error" class="dashboard-content">
-    <!-- Header -->
-    <div class="dashboard-header">
-      <h1 class="text-2xl font-medium mb-md">Admin Dashboard</h1>
-      <p class="text-secondary mb-sm">System overview and management tools</p>
-
+    <button mat-raised-button class="btn btn-primary" (click)="loadDashboardData()">Retry <!-- Dashboard Content --> <div *ngIf="!loading && !error" class="dashboard-content"> <!-- Header --> <div class="dashboard-header"> <h1 class="text-2xl font-medium mb-md">Admin Dashboard</h1> <p class="text-secondary mb-sm">System overview and management tools</p></button>
     <!-- Statistics Cards -->
     <div class="stats-grid">
       <mat-card class="stat-card card">
@@ -30,52 +21,16 @@
             <p class="text-secondary mb-sm">Total Recipes</p>
 
         <mat-card-actions class="card"></mat-card-actions></mat-card>
-          <button mat-button class="btn btn-primary" (click)="onViewRecipes()">
-            View All
-
-      <mat-card class="stat-card card">
-        <mat-card-content class="card">
-          <div class="stat-icon">
-            <mat-icon>people</mat-icon>
-
-            <h3 class="text-lg font-medium mb-sm">{{ stats.totalUsers }}</h3>
-            <p class="text-secondary mb-sm">Total Users</p>
+          <button mat-button class="btn btn-primary" (click)="onViewRecipes()">View All <mat-card class="stat-card card"> <mat-card-content class="card"> <div class="stat-icon"> <mat-icon>people</mat-icon> <h3 class="text-lg font-medium mb-sm">{{ stats.totalUsers }}</h3> <p class="text-secondary mb-sm">Total Users</p></button>
 
         <mat-card-actions class="card"></mat-card-actions></mat-card>
-          <button mat-button class="btn btn-primary" (click)="onViewUsers()">
-            Manage Users
-
-      <mat-card class="stat-card card">
-        <mat-card-content class="card">
-          <div class="stat-icon">
-            <mat-icon>shopping_cart</mat-icon>
-
-            <h3 class="text-lg font-medium mb-sm">{{ stats.totalShoppingLists }}</h3>
-            <p class="text-secondary mb-sm">Shopping Lists</p>
+          <button mat-button class="btn btn-primary" (click)="onViewUsers()">Manage Users <mat-card class="stat-card card"> <mat-card-content class="card"> <div class="stat-icon"> <mat-icon>shopping_cart</mat-icon> <h3 class="text-lg font-medium mb-sm">{{ stats.totalShoppingLists }}</h3> <p class="text-secondary mb-sm">Shopping Lists</p></button>
 
         <mat-card-actions class="card"></mat-card-actions></mat-card>
-          <button mat-button class="btn btn-primary" (click)="onViewShoppingLists()">
-            View All
-
-      <mat-card class="stat-card card">
-        <mat-card-content class="card">
-          <div class="stat-icon">
-            <mat-icon>activity</mat-icon>
-
-            <h3 class="text-lg font-medium mb-sm">{{ stats.recentActivity }}</h3>
-            <p class="text-secondary mb-sm">Recent Activity</p>
+          <button mat-button class="btn btn-primary" (click)="onViewShoppingLists()">View All <mat-card class="stat-card card"> <mat-card-content class="card"> <div class="stat-icon"> <mat-icon>activity</mat-icon> <h3 class="text-lg font-medium mb-sm">{{ stats.recentActivity }}</h3> <p class="text-secondary mb-sm">Recent Activity</p></button>
 
         <mat-card-actions class="card"></mat-card-actions></mat-card>
-          <button mat-button class="btn btn-primary" (click)="onViewActivity()">
-            View Log
-
-    <!-- System Health -->
-    <mat-card class="health-card card">
-      <mat-card-header class="card"></mat-card-header>
-        <mat-card-title >System Health</mat-card-title>
-      <mat-card-content class="card">
-        <div class="health-grid">
-          <div class="health-item">
+          <button mat-button class="btn btn-primary" (click)="onViewActivity()">View Log <!-- System Health --> <mat-card class="health-card card"> <mat-card-header class="card"></mat-card-header> <mat-card-title >System Health</mat-card-title> <mat-card-content class="card"> <div class="health-grid"> <div class="health-item"></button>
             <div class="health-status" [style.background-color]="getHealthColor(systemHealth.database)"></div>
             <div class="health-info">
               <h4>Database</h4>
@@ -124,39 +79,8 @@
         <mat-card-subtitle >Administrative tools and maintenance</mat-card-subtitle>
       <mat-card-content class="card">
         <div class="actions-grid">
-          <button 
-            mat-raised-button 
-            class="btn btn-primary action-button"
-            (click)="onSystemBackup()"
-            >
-            <mat-icon>backup</mat-icon>
-            System Backup
-
-          <button 
-            mat-raised-button 
-            class="btn btn-secondary action-button"
-            (click)="onSystemRestore()"
-            >
-            <mat-icon>restore</mat-icon>
-            System Restore
-
-          <button 
-            mat-raised-button 
-            class="btn btn-primary action-button"
-            (click)="onDatabaseOptimize()"
-            >
-            <mat-icon>storage</mat-icon>
-            Optimize Database
-          </mat-card>
-
-          <button 
-            mat-raised-button 
-            class="btn btn-error action-button"
-            (click)="onClearCache()"
-            >
-            <mat-icon>clear_all</mat-icon>
-            Clear Cache
-
-      </mat-card>
-
+          <button mat-raised-button class="btn btn-primary action-button" (click)="onSystemBackup()" > <mat-icon>backup</mat-icon> System Backup</button>
+          <button mat-raised-button class="btn btn-secondary action-button" (click)="onSystemRestore()" > <mat-icon>restore</mat-icon> System Restore</button>
+          <button mat-raised-button class="btn btn-primary action-button" (click)="onDatabaseOptimize()" > <mat-icon>storage</mat-icon> Optimize Database</button>
+          <button mat-raised-button class="btn btn-error action-button" (click)="onClearCache()" > <mat-icon>clear_all</mat-icon> Clear Cache</button>
   </section>

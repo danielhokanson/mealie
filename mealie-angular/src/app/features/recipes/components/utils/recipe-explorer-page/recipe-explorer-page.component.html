@@ -14,16 +14,7 @@
                  (input)="onSearchChange()"
                  placeholder="Search recipes...">
           <mat-icon matPrefix>search</mat-icon>
-          <button *ngIf="state.search" 
-                  matSuffix 
-                  mat-icon-button 
-                  type="button"
-                  (click)="state.search = ''; onSearchChange()">
-            <mat-icon>clear</mat-icon>
-          </mat-form-field>
-        </section>
-      </form>
-
+          <button *ngIf="state.search" matSuffix mat-icon-button type="button" (click)="state.search = ''; onSearchChange()"> <mat-icon>clear</mat-icon></button>
       <!-- Filter Row -->
       <div class="search-row">
         <!-- Category Filter -->
@@ -110,16 +101,7 @@
             <mat-icon matPrefix>home</mat-icon>
 
         <!-- Sort Options -->
-        <button mat-icon-button
-                [matMenuTriggerFor]="sortMenu"
-                class="sort-button">
-          <mat-icon>{{ state.orderDirection === 'asc' ? 'sort_ascending' : 'sort_descending' }}</mat-icon>
-          <span class="button-text">{{ sortText }}</span>
-
-        <mat-menu #sortMenu="matMenu">
-          <mat-list class="flex flex-col gap-sm">
-            <mat-list-item (click)="toggleOrderDirection()">
-              <mat-icon matListItemIcon>
+        <button mat-icon-button[matMenuTriggerFor]="sortMenu" class="sort-button"> <mat-icon>{{ state.orderDirection === 'asc' ? 'sort_ascending' : 'sort_descending' }}</mat-icon> <span class="button-text">{{ sortText }}</span> <mat-menu #sortMenu="matMenu"> <mat-list class="flex flex-col gap-sm"> <mat-list-item (click)="toggleOrderDirection()"> <mat-icon matListItemIcon></button>
                 {{ state.orderDirection === 'asc' ? 'sort_descending' : 'sort_ascending' }}
 
               <span matListItemTitle></span>
@@ -133,36 +115,9 @@
               <span matListItemTitle>{{ option.name }}</span>
 
         <!-- Settings -->
-        <button mat-icon-button
-                [matMenuTriggerFor]="settingsMenu"
-                class="settings-button">
-          <mat-icon>settings</mat-icon>
-
-        <mat-menu #settingsMenu="matMenu">
-          <mat-card class="card">
-            <mat-card-content class="card"></mat-card>
-              <mat-slide-toggle [(ngModel)]="state.auto"></mat-slide-toggle>
-                Auto Search
-              <button mat-raised-button
-                      class="btn btn-primary reset-button"
-                      (click)="reset()"
-                      >
-                Reset
-
-          </mat-menu>
-
-      <!-- Search Button -->
-      <div class="search-button-container" *ngIf="!state.auto">
-        <button mat-raised-button
-                class="btn btn-primary search-button"
-                type="submit"
-                >
-          <mat-icon>search</mat-icon>
-          Search
-
-  <mat-divider></mat-divider>
-
-  <!-- Recipe Cards Section -->
+        <button mat-icon-button[matMenuTriggerFor]="settingsMenu" class="settings-button"> <mat-icon>settings</mat-icon> <mat-menu #settingsMenu="matMenu"> <mat-card class="card"> <mat-card-content class="card"></mat-card> <mat-slide-toggle [(ngModel)]="state.auto"></mat-slide-toggle> Auto Search</button>
+              <button mat-raised-buttonclass="btn btn-primary reset-button" (click)="reset()" > Reset <!-- Search Button --> <div class="search-button-container" *ngIf="!state.auto"></button>
+        <button mat-raised-buttonclass="btn btn-primary search-button" type="submit" > <mat-icon>search</mat-icon> Search <mat-divider></mat-divider> <!-- Recipe Cards Section --></button>
   <section class="page-container">
     <app-recipe-card-section
       *ngIf="state.ready"

@@ -8,30 +8,9 @@
   <div *ngIf="!loading && recipe" class="recipe-content">
     <!-- Print Controls -->
     <div class="print-controls no-print">
-      <button 
-        mat-raised-button 
-        class="btn btn-primary"
-        (click)="onPrint()">
-        <mat-icon>print</mat-icon>
-        Print Recipe
-
-      <button 
-        mat-raised-button 
-        class="btn btn-secondary"
-        (click)="onExportPDF()">
-        <mat-icon>picture_as_pdf</mat-icon>
-        Export PDF
-
-      <button 
-        mat-raised-button 
-        class="btn btn-primary"
-        (click)="onShare()">
-        <mat-icon>share</mat-icon>
-        Share
-
-    <!-- Print Options -->
-    <div class="print-options no-print">
-      <mat-card class="card">
+      <button mat-raised-button class="btn btn-primary" (click)="onPrint()"> <mat-icon>print</mat-icon> Print Recipe</button>
+      <button mat-raised-button class="btn btn-secondary" (click)="onExportPDF()"> <mat-icon>picture_as_pdf</mat-icon> Export PDF</button>
+      <button mat-raised-button class="btn btn-primary" (click)="onShare()"> <mat-icon>share</mat-icon> Share <!-- Print Options --> <div class="print-options no-print"> <mat-card class="card"></button>
         <mat-card-header class="card"></mat-card-header>
           <mat-card-title >Print Options</mat-card-title>
         <mat-card-content class="card">

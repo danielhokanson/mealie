@@ -9,16 +9,7 @@
         <h2 class="text-xl font-medium mb-md">Setup Complete!</h2>
         <p class="text-secondary mb-sm">Your Mealie application has been successfully configured and is ready to use.</p>
         <div class="complete-actions">
-          <button 
-            mat-raised-button 
-            class="btn btn-primary"
-            (click)="onGoToDashboard()">
-            Go to Dashboard
-
-      </mat-card>
-
-  </section>
-
+          <button mat-raised-button class="btn btn-primary" (click)="onGoToDashboard()"> Go to Dashboard</button>
   <!-- Setup Form -->
   <div *ngIf="!setupComplete" class="setup-form">
     <div class="setup-header">
@@ -92,25 +83,8 @@
                   {{ getErrorMessage('databasePassword') }}
 
             <div class="flex justify-end gap-sm mt-lg">
-              <button 
-                mat-raised-button 
-                class="btn btn-primary"
-                (click)="onTestDatabaseConnection()"
-                [disabled]="loading">
-                <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner>
-                <span *ngIf="!loading">Test Connection</span>
-
-        <div class="step-actions">
-          <button 
-            mat-raised-button 
-            class="btn btn-primary"
-            (click)="onNextStep()"
-            [disabled]="setupForm.get('databaseType')?.invalid || 
-                       setupForm.get('databaseHost')?.invalid || 
-                       setupForm.get('databasePort')?.invalid || 
-                       setupForm.get('databaseName')?.invalid || 
-                       setupForm.get('databaseUsername')?.invalid || 
-                       setupForm.get('databasePassword')?.invalid">
+              <button mat-raised-button class="btn btn-primary" (click)="onTestDatabaseConnection()" [disabled]="loading"> <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner> <span *ngIf="!loading">Test Connection</span> <div class="step-actions"></button>
+          <button mat-raised-button class="btn btn-primary" (click)="onNextStep()" [disabled]="setupForm.get('databaseType')?.invalid || setupForm.get('databaseHost')?.invalid || setupForm.get('databasePort')?.invalid || setupForm.get('databaseName')?.invalid || setupForm.get('databaseUsername')?.invalid || setupForm.get('databasePassword')?.invalid"></button>
             Next
 
         </mat-step>
@@ -186,16 +160,7 @@
 
         <div class="step-actions">
           <button mat-button (click)="onPreviousStep()">Previous</button>
-          <button 
-            mat-raised-button 
-            class="btn btn-primary"
-            (click)="onNextStep()"
-            [disabled]="setupForm.get('appName')?.invalid || 
-                       setupForm.get('appUrl')?.invalid || 
-                       setupForm.get('adminEmail')?.invalid || 
-                       setupForm.get('adminUsername')?.invalid || 
-                       setupForm.get('adminPassword')?.invalid || 
-                       setupForm.get('adminConfirmPassword')?.invalid">
+          <button mat-raised-button class="btn btn-primary" (click)="onNextStep()" [disabled]="setupForm.get('appName')?.invalid || setupForm.get('appUrl')?.invalid || setupForm.get('adminEmail')?.invalid || setupForm.get('adminUsername')?.invalid || setupForm.get('adminPassword')?.invalid || setupForm.get('adminConfirmPassword')?.invalid"></button>
             Next
 
       </mat-step>
@@ -261,16 +226,7 @@
 
         <div class="step-actions">
           <button mat-button (click)="onPreviousStep()">Previous</button>
-          <button 
-            mat-raised-button 
-            class="btn btn-primary"
-            (click)="onNextStep()">
-            Next
-
-      </mat-step>
-
-      <!-- Step 4: Security Settings -->
-      <mat-step [stepControl]="setupForm" label="Security">
+          <button mat-raised-button class="btn btn-primary" (click)="onNextStep()"> Next <!-- Step 4: Security Settings --> <mat-step [stepControl]="setupForm" label="Security"></button>
         
           <h3 class="text-lg font-medium mb-sm">{{ getStepTitle(3) }}</h3>
           <p class="text-secondary mb-sm">{{ getStepDescription(3) }}</p>
@@ -285,16 +241,7 @@
                   placeholder="Enter JWT secret">
                 <mat-error *ngIf="setupForm.get('jwtSecret')?.invalid && setupForm.get('jwtSecret')?.touched"></mat-error>
                   {{ getErrorMessage('jwtSecret') }}
-              <button 
-                mat-button 
-                class="btn btn-primary"
-                (click)="onGenerateJwtSecret()">
-                Generate
-
-            <div class="form-row">
-              <mat-form-field appearance="outline" class="w-full"></mat-form-field>
-                <mat-label>Session Timeout (hours)</mat-label>
-                <input 
+              <button mat-button class="btn btn-primary" (click)="onGenerateJwtSecret()"> Generate <div class="form-row"> <mat-form-field appearance="outline" class="w-full"></mat-form-field> <mat-label>Session Timeout (hours)</mat-label> <input</button>
                   matInput 
                   type="number"
                   formControlName="sessionTimeout"
@@ -333,12 +280,4 @@
 
         <div class="step-actions">
           <button mat-button (click)="onPreviousStep()">Previous</button>
-          <button 
-            mat-raised-button 
-            class="btn btn-primary"
-            (click)="onCompleteSetup()"
-            [disabled]="loading || setupForm.invalid">
-            <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner>
-            <span *ngIf="!loading">Complete Setup</span>
-
-        </mat-step>
+          <button mat-raised-button class="btn btn-primary" (click)="onCompleteSetup()" [disabled]="loading || setupForm.invalid"> <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner> <span *ngIf="!loading">Complete Setup</span></button>

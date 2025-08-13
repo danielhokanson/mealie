@@ -31,27 +31,11 @@
           <mat-form-field class="extra-input w-full">
             <mat-label>{{ extra.key }}</mat-label>
             <input matInput [(ngModel)]="extra.value" />
-            <button
-              matSuffix
-              mat-icon-button
-              class="btn btn-error"
-              (click)="removeApiExtra(extra.key)"
-              [matTooltip]="'Remove extra'">
-              <mat-icon>delete</mat-icon>
-            </mat-form-field>
-
-      </mat-card>
+            <buttonmatSuffix mat-icon-button class="btn btn-error" (click)="removeApiExtra(extra.key)" [matTooltip]="'Remove extra'"> <mat-icon>delete</mat-icon></button>
       
       <mat-card-actions class="add-extra-section card">
         <mat-form-field class="new-key-input w-full"></mat-form-field>
           <mat-label>Message Key</mat-label>
           <input matInput [(ngModel)]="apiNewKey" />
         
-        <button
-          mat-raised-button
-          class="btn btn-primary"
-          (click)="createApiExtra()"
-          [disabled]="!apiNewKey || hasDuplicateKey()">
-          <mat-icon>add</mat-icon>
-          Add Extra
-        </mat-card-actions>
+        <buttonmat-raised-button class="btn btn-primary" (click)="createApiExtra()" [disabled]="!apiNewKey || hasDuplicateKey()"> <mat-icon>add</mat-icon> Add Extra</button>

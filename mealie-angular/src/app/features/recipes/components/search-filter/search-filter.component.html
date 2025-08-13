@@ -4,16 +4,7 @@
       <!-- Header -->
       <div class="filter-header">
         <h3 class="text-lg font-medium mb-sm">{{ label }}</h3>
-        <button 
-          mat-icon-button 
-          (click)="clearSelection()"
-          [disabled]="selectedItems.length === 0"
-          matTooltip="Clear selection">
-          <mat-icon>clear</mat-icon>
-
-      <!-- Require All Toggle (for multiple selection) -->
-      <div *ngIf="multiple && !radio" class="require-all-toggle">
-        <mat-checkbox</mat-checkbox>
+        <button mat-icon-button (click)="clearSelection()" [disabled]="selectedItems.length === 0" matTooltip="Clear selection"> <mat-icon>clear</mat-icon> <!-- Require All Toggle (for multiple selection) --> <div *ngIf="multiple && !radio" class="require-all-toggle"> <mat-checkbox</mat-checkbox></button>
           [(ngModel)]="requireAll"
           (change)="onRequireAllChange()">
           Require all selected
@@ -52,16 +43,7 @@
   </mat-menu>
 
   <!-- Filter Button -->
-  <button 
-    mat-raised-button 
-    [matMenuTriggerFor]="filterMenu"
-    [color]="selectedItems.length > 0 ? 'accent' : 'primary'"
-    class="filter-button"
-    [disabled]="disabled">
-    <mat-icon>{{ icon }}</mat-icon>
-    <span class="button-text">{{ label }}</span>
-    <span *ngIf="selectedItems.length > 0" class="selection-count"></span>
-      ({{ selectedItems.length }})
+  <button mat-raised-button [matMenuTriggerFor]="filterMenu" [color]="selectedItems.length > 0 ? 'accent' : 'primary'" class="filter-button" [disabled]="disabled"> <mat-icon>{{ icon }}</mat-icon> <span class="button-text">{{ label }}</span> <span *ngIf="selectedItems.length > 0" class="selection-count"></span> ({{ selectedItems.length }})</button>
 
   <!-- Selected Items Display -->
   <div *ngIf="selectedItems.length > 0" class="selected-items">

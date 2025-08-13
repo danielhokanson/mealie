@@ -27,16 +27,7 @@
           {{ list.name }}
 
     <div class="dialog-actions">
-      <button mat-button
-              color="grey"
-              (click)="closeDialog()">
-        Cancel
-
-      <section class="page-container"></section>
-        <mat-checkbox
-          [(ngModel)]="preferences.viewAllLists"
-          (change)="setShowAllToggled()"
-          class="btn btn-primary">
+      <button mat-buttoncolor="grey" (click)="closeDialog()"> Cancel <section class="page-container"></section> <mat-checkbox [(ngModel)]="preferences.viewAllLists" (change)="setShowAllToggled()" class="btn btn-primary"></button>
           Show All
 
   <!-- Shopping List Ingredients Dialog -->

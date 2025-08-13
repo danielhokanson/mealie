@@ -12,19 +12,6 @@
           <span class="asset-filename">{{ asset.fileName }}</span>
 
         <div class="asset-actions">
-          <button mat-icon-button [matTooltip]="'Download'">
-            <mat-icon>download</mat-icon>
-
-          <button *ngIf="edit" mat-icon-button class="text-error" [matTooltip]="'Delete'">
-            <mat-icon>delete</mat-icon>
-
-      <div *ngIf="assets.length === 0" class="no-assets">
-        <mat-icon>folder_open</mat-icon>
-        <span>No assets uploaded</span>
-
-    <div *ngIf="edit" class="upload-section">
-      <button mat-raised-button class="btn btn-primary">
-        <mat-icon>upload</mat-icon>
-        Upload Asset
-
-</mat-card>
+          <button mat-icon-button [matTooltip]="'Download'"><mat-icon>download</mat-icon></button>
+          <button *ngIf="edit" mat-icon-button class="text-error" [matTooltip]="'Delete'"><mat-icon>delete</mat-icon> <div *ngIf="assets.length === 0" class="no-assets"> <mat-icon>folder_open</mat-icon> <span>No assets uploaded</span> <div *ngIf="edit" class="upload-section"></button>
+      <button mat-raised-button class="btn btn-primary"><mat-icon>upload</mat-icon> Upload Asset</button>

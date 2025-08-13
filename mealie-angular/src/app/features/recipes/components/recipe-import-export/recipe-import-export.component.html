@@ -12,9 +12,7 @@
       <p class="text-secondary mb-sm">Import recipes from external sources or export your recipes to various formats</p>
 
     <!-- Tabs -->
-    <mat-tab-group class="import-export-tabs">
       <!-- Import Tab -->
-      <mat-tab label="Import Recipes">
         
           <div class="import-section">
             <h3 class="text-lg font-medium mb-sm">Import Recipes</h3>
@@ -32,16 +30,7 @@
                     accept=".json,.xml,.csv,.pdf,.docx,.txt"
                     style="display: none;">
                   
-                  <button 
-                    type="button"
-                    mat-raised-button 
-                    class="btn btn-primary"
-                    (click)="fileInput.click()">
-                    <mat-icon>upload</mat-icon>
-                    Choose File
-
-                  <div class="file-info" *ngIf="selectedFile">
-                    <mat-icon>description</mat-icon>
+                  <button type="button" mat-raised-button class="btn btn-primary" (click)="fileInput.click()"> <mat-icon>upload</mat-icon> Choose File <div class="file-info" *ngIf="selectedFile"> <mat-icon>description</mat-icon></button>
                     <div class="file-details">
                       <span class="file-name">{{ selectedFile.name }}</span>
                       <span class="file-size">{{ getFileSize(selectedFile.size) }}</span>
@@ -84,34 +73,9 @@
 
               <!-- Import Actions -->
               <div class="flex justify-end gap-sm mt-lg">
-                <button 
-                  mat-raised-button 
-                  class="btn btn-primary"
-                  (click)="onImportRecipes()"
-                  [disabled]="!canImport() || loading">
-                  <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner>
-                  <span *ngIf="!loading"></span>
-                    <mat-icon>upload</mat-icon>
-                    Import Recipes
-
-                <button 
-                  mat-button 
-                  class="btn btn-secondary"
-                  (click)="onValidateFile()"
-                  [disabled]="!selectedFile || loading">
-                  <mat-icon>verified</mat-icon>
-                  Validate File
-
-                <button 
-                  mat-button 
-                  (click)="onCancelImport()"
-                  [disabled]="loading">
-                  Cancel
-
-              <!-- Progress Bar -->
-              <div class="progress-section" *ngIf="importProgress > 0">
-                <mat-progress-bar 
-                  mode="determinate" 
+                <button mat-raised-button class="btn btn-primary" (click)="onImportRecipes()" [disabled]="!canImport() || loading"> <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner> <span *ngIf="!loading"></span> <mat-icon>upload</mat-icon> Import Recipes</button>
+                <button mat-button class="btn btn-secondary" (click)="onValidateFile()" [disabled]="!selectedFile || loading"> <mat-icon>verified</mat-icon> Validate File</button>
+                <button mat-button (click)="onCancelImport()" [disabled]="loading"> Cancel <!-- Progress Bar --> <div class="progress-section" *ngIf="importProgress > 0"> <mat-progress-bar mode="determinate"</button>
                   [value]="importProgress"
                   class="btn btn-primary">
 
@@ -126,14 +90,12 @@
                     *ngFor="let result of importResults" 
                     class="result-item"
                     [style.border-left-color]="getStatusColor(result.status)">
-                    <mat-icon [style.color]="getStatusColor(result.status)">
-                      {{ getStatusIcon(result.status) }}
+                    <mat-icon [style.color]="getStatusColor(result.status)">{{ getStatusIcon(result.status) }}</mat-icon>
 
                       <span class="result-name">{{ result.name }}</span>
                       <span class="result-message">{{ result.message }}</span></mat-icon>
 
       <!-- Export Tab -->
-      <mat-tab label="Export Recipes">
         
           <div class="export-section">
             <h3 class="text-lg font-medium mb-sm">Export Recipes</h3>
@@ -184,26 +146,8 @@
 
               <!-- Export Actions -->
               <div class="flex justify-end gap-sm mt-lg">
-                <button 
-                  mat-raised-button 
-                  class="btn btn-primary"
-                  (click)="onExportRecipes()"
-                  [disabled]="!canExport() || loading">
-                  <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner>
-                  <span *ngIf="!loading"></span>
-                    <mat-icon>download</mat-icon>
-                    Export Recipes
-
-                <button 
-                  mat-button 
-                  (click)="onCancelExport()"
-                  [disabled]="loading">
-                  Cancel
-
-              <!-- Progress Bar -->
-              <div class="progress-section" *ngIf="exportProgress > 0">
-                <mat-progress-bar 
-                  mode="determinate" 
+                <button mat-raised-button class="btn btn-primary" (click)="onExportRecipes()" [disabled]="!canExport() || loading"> <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner> <span *ngIf="!loading"></span> <mat-icon>download</mat-icon> Export Recipes</button>
+                <button mat-button (click)="onCancelExport()" [disabled]="loading"> Cancel <!-- Progress Bar --> <div class="progress-section" *ngIf="exportProgress > 0"> <mat-progress-bar mode="determinate"</button>
                   [value]="exportProgress"
                   class="btn btn-primary">
 
@@ -218,14 +162,12 @@
                     *ngFor="let result of exportResults" 
                     class="result-item"
                     [style.border-left-color]="getStatusColor(result.status)">
-                    <mat-icon [style.color]="getStatusColor(result.status)">
-                      {{ getStatusIcon(result.status) }}
+                    <mat-icon [style.color]="getStatusColor(result.status)">{{ getStatusIcon(result.status) }}</mat-icon>
 
                       <span class="result-name">{{ result.name }}</span>
                       <span class="result-message">{{ result.message }}</span></mat-icon>
 
       <!-- Templates Tab -->
-      <mat-tab label="Templates">
         
           <div class="templates-section">
             <h3 class="text-lg font-medium mb-sm">Download Templates</h3>
@@ -241,16 +183,7 @@
                     <span class="template-name">{{ format.label }} Template</span>
                     <span class="template-extension">{{ format.extension }}</span>
                   
-                <button 
-                  mat-raised-button 
-                  class="btn btn-primary"
-                  (click)="onDownloadTemplate(format.value)">
-                  <mat-icon>download</mat-icon>
-                  Download
-
-    </mat-tab>
-
-</mat-tab>
+                <button mat-raised-button class="btn btn-primary" (click)="onDownloadTemplate(format.value)"> <mat-icon>download</mat-icon> Download</button>
 
 </mat-tab>
 </mat-tab-group>

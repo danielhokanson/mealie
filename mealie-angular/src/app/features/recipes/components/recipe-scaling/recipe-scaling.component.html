@@ -49,26 +49,8 @@
         <div class="control-section">
           <h3 class="text-lg font-medium mb-sm">Quick Scaling Options</h3>
           <div class="scaling-options">
-            <button 
-              *ngFor="let option of scalingOptions"
-              mat-button 
-              [class.active]="scalingFactor === option.value"
-              (click)="onScalingOptionChange(option.value)"
-              class="scaling-option">
-              {{ option.label }}
-
-        <div class="control-section">
-          <h3 class="text-lg font-medium mb-sm">Advanced Options</h3>
-          <button 
-            mat-button 
-            class="btn btn-primary"
-            (click)="onToggleAdvanced()">
-            <mat-icon>{{ showAdvanced ? 'expand_less' : 'expand_more' }}</mat-icon>
-            {{ showAdvanced ? 'Hide' : 'Show' }} Advanced Options
-
-          <div *ngIf="showAdvanced" class="advanced-options">
-            <div class="option-group">
-              <h4>Rounding</h4>
+            <button *ngFor="let option of scalingOptions" mat-button [class.active]="scalingFactor === option.value" (click)="onScalingOptionChange(option.value)" class="scaling-option"> {{ option.label }} <div class="control-section"> <h3 class="text-lg font-medium mb-sm">Advanced Options</h3></button>
+          <button mat-button class="btn btn-primary" (click)="onToggleAdvanced()"> <mat-icon>{{ showAdvanced ? 'expand_less' : 'expand_more' }}</mat-icon> {{ showAdvanced ? 'Hide' : 'Show' }} Advanced Options <div *ngIf="showAdvanced" class="advanced-options"> <div class="option-group"> <h4>Rounding</h4></button>
               <div class="option-item">
                 <mat-checkbox 
                   [(ngModel)]="roundDecimals"
@@ -152,34 +134,9 @@
 
     <!-- Action Buttons -->
     <div class="action-buttons">
-      <button 
-        mat-raised-button 
-        class="btn btn-primary"
-        (click)="onSaveScaledRecipe()"
-        [disabled]="loading">
-        <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner>
-        <span *ngIf="!loading"></span>
-          <mat-icon>save</mat-icon>
-          Save Scaled Recipe
-
-      <button 
-        mat-raised-button 
-        class="btn btn-secondary"
-        (click)="onPrintScaledRecipe()"
-        [disabled]="loading">
-        <mat-icon>print</mat-icon>
-        Print Scaled Recipe
-      </article>
-      <button 
-        mat-raised-button 
-        class="btn btn-primary"
-        (click)="onExportScaledRecipe()"
-        [disabled]="loading">
-        <mat-icon>download</mat-icon>
-        Export Scaled Recipe
-
-    </section>
-
+      <button mat-raised-button class="btn btn-primary" (click)="onSaveScaledRecipe()" [disabled]="loading"> <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner> <span *ngIf="!loading"></span> <mat-icon>save</mat-icon> Save Scaled Recipe</button>
+      <button mat-raised-button class="btn btn-secondary" (click)="onPrintScaledRecipe()" [disabled]="loading"> <mat-icon>print</mat-icon> Print Scaled Recipe</button>
+      <button mat-raised-button class="btn btn-primary" (click)="onExportScaledRecipe()" [disabled]="loading"> <mat-icon>download</mat-icon> Export Scaled Recipe</button>
   <!-- No Recipe State -->
   <div *ngIf="!loading && !recipe" class="no-recipe">
     <mat-icon class="no-recipe-icon">restaurant</mat-icon>

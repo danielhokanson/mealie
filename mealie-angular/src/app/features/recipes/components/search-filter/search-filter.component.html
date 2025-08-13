@@ -1,60 +1,64 @@
 <div class="search-filter">
   <mat-menu #filterMenu="matMenu" class="filter-menu">
     <ng-template matMenuContent>
-      
-        <!-- Header -->
-        <div class="filter-header">
-          <h3 class="text-lg font-medium mb-sm">{{ label }}</h3>
-          <button 
-            mat-icon-button 
-            (click)="clearSelection()"
-            [disabled]="selectedItems.length === 0"
-            matTooltip="Clear selection">
-            <mat-icon>clear</mat-icon>
-          </div>
+      <!-- Header -->
+      <div class="filter-header">
+        <h3 class="text-lg font-medium mb-sm">{{ label }}</h3>
+        <button 
+          mat-icon-button 
+          (click)="clearSelection()"
+          [disabled]="selectedItems.length === 0"
+          matTooltip="Clear selection">
+          <mat-icon>clear</mat-icon>
+        </button>
+      </div>
 
-        <!-- Require All Toggle (for multiple selection) -->
-        <div *ngIf="multiple && !radio" class="require-all-toggle">
+      <!-- Require All Toggle (for multiple selection) -->
+      <div *ngIf="multiple && !radio" class="require-all-toggle">
+        <mat-checkbox 
+          [(ngModel)]="requireAll"
+          (change)="onRequireAllChange()">
+          Require all selected
+        </mat-checkbox>
+      </div>
+
+      <!-- Filter Items -->
+      <div class="filter-items">
+        <div 
+          *ngFor="let item of items"
+          class="filter-item"
+          [class.selected]="selectedItems.includes(item.id)"
+          (click)="toggleItem(item.id)">
+          
           <mat-checkbox 
-            [(ngModel)]="requireAll"
-            (change)="onRequireAllChange()">
-            Require all selected
-          </div>
-        </ng-template>
+            *ngIf="multiple && !radio"
+            [checked]="selectedItems.includes(item.id)"
+            (click)="$event.stopPropagation()"
+            (change)="toggleItem(item.id)">
+          </mat-checkbox>
 
-        <!-- Filter Items -->
-        <div class="filter-items">
-          <div 
-            *ngFor="let item of items"
-            class="filter-item"
-            [class.selected]="selectedItems.includes(item.id)"
-            (click)="toggleItem(item.id)">
-            
-            <mat-checkbox 
-              *ngIf="multiple && !radio"
-              [checked]="selectedItems.includes(item.id)"
-              (click)="$event.stopPropagation()"
-              (change)="toggleItem(item.id)">
-            </div>
+          <mat-radio-button 
+            *ngIf="radio"
+            [checked]="selectedItems.includes(item.id)"
+            (click)="$event.stopPropagation()"
+            (change)="toggleItem(item.id)">
+          </mat-radio-button>
 
-            <mat-radio-button 
-              *ngIf="radio"
-              [checked]="selectedItems.includes(item.id)"
-              (click)="$event.stopPropagation()"
-              (change)="toggleItem(item.id)">
-            </mat-menu>
-
-            <span 
-              class="item-name"
-              [style.color]="item.color">
-              {{ item.name }}
-            </div>
-
-        <!-- No Items Message -->
-        <div *ngIf="items.length === 0" class="no-items">
-          <mat-icon>info</mat-icon>
-          <span>No {{ label.toLowerCase() }} available</span>
+          <span 
+            class="item-name"
+            [style.color]="item.color">
+            {{ item.name }}
+          </span>
         </div>
+      </div>
+
+      <!-- No Items Message -->
+      <div *ngIf="items.length === 0" class="no-items">
+        <mat-icon>info</mat-icon>
+        <span>No {{ label.toLowerCase() }} available</span>
+      </div>
+    </ng-template>
+  </mat-menu>
 
   <!-- Filter Button -->
   <button 
@@ -68,6 +72,7 @@
     <span *ngIf="selectedItems.length > 0" class="selection-count">
       ({{ selectedItems.length }})
     </span>
+  </button>
 
   <!-- Selected Items Display -->
   <div *ngIf="selectedItems.length > 0" class="selected-items">
@@ -79,5 +84,7 @@
         removable>
         {{ getItemName(itemId) }}
         <mat-icon matChipRemove>cancel</mat-icon>
-      </mat-chip-listbox>
-    </div>
+      </mat-chip>
+    </mat-chip-listbox>
+  </div>
+</div>

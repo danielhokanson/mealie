@@ -3,8 +3,7 @@
     <div class="scale-info">
       <span class="scale-label">Scale Recipe:</span>
       <span class="scale-value">{{ scale }}x</span>
-    </div>
-    
+
     <div class="scale-slider" *ngIf="canEditScale">
       <mat-slider
         [min]="0.25"
@@ -12,9 +11,7 @@
         [step]="0.25"
         [value]="scale"
         (valueChange)="onScaleChange($event)">
-      </div>
-    </div>
-    
+
     <div class="scale-input" *ngIf="canEditScale">
       <mat-form-field appearance="outline" class="scale-input-field w-full">
         <mat-label>Scale</mat-label>
@@ -29,20 +26,6 @@
           class="scale-number-input">
         <span matSuffix>x</span>
       </mat-form-field>
-    </div>
-    
+
     <div class="scale-reset" *ngIf="canEditScale && scale !== 1">
-      <button 
-        mat-icon-button 
-        class="btn btn-primary"
-        [matTooltip]="'Reset to 1x'"
-        (click)="resetScale()">
-        <mat-icon>refresh</mat-icon>
-      </div>
-    </div>
-  
-  <div class="scale-summary">
-    <span class="summary-text">
-      Serves {{ getScaledServings() }} people
-    </span>
-  </div>
+      <button mat-icon-button class="btn btn-primary" [matTooltip]="'Reset to 1x'" (click)="resetScale()"> <mat-icon>refresh</mat-icon> <div class="scale-summary"> <span class="summary-text"></span> Serves {{ getScaledServings() }} people</button>

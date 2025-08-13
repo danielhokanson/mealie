@@ -3,7 +3,6 @@
   <div *ngIf="loading" class="flex items-center justify-center py-xl">
     <mat-spinner diameter="50"></mat-spinner>
     <p class="text-secondary mb-sm">Sharing recipe...</p>
-  </div>
 
   <!-- Share Content -->
   <div *ngIf="!loading && recipe" class="share-content">
@@ -11,36 +10,14 @@
     <div class="share-header">
       <h2 class="text-xl font-medium mb-md">Share Recipe</h2>
       <p class="text-secondary mb-sm">{{ recipe.name }}</p>
-    </div>
 
     <!-- Share Type Selection -->
     <div class="share-type-selection">
       <h3 class="text-lg font-medium mb-sm">Share Method</h3>
       <div class="share-type-buttons">
-        <button 
-          mat-button 
-          [class.active]="shareType === 'link'"
-          (click)="onShareTypeChange('link')">
-          <mat-icon>link</mat-icon>
-          Link
-        </div>
-        <button 
-          mat-button 
-          [class.active]="shareType === 'email'"
-          (click)="onShareTypeChange('email')">
-          <mat-icon>email</mat-icon>
-          Email
-        </div>
-        <button 
-          mat-button 
-          [class.active]="shareType === 'social'"
-          (click)="onShareTypeChange('social')">
-          <mat-icon>share</mat-icon>
-          Social
-        </div>
-      </section>
-
-    <!-- Link Sharing -->
+        <button mat-button [class.active]="shareType === 'link'" (click)="onShareTypeChange('link')"> <mat-icon>link</mat-icon> Link</button>
+        <button mat-button [class.active]="shareType === 'email'" (click)="onShareTypeChange('email')"> <mat-icon>email</mat-icon> Email</button>
+        <button mat-button [class.active]="shareType === 'social'" (click)="onShareTypeChange('social')"> <mat-icon>share</mat-icon> Social <!-- Link Sharing --></button>
     <div *ngIf="shareType === 'link'" class="share-section">
       <h3 class="text-lg font-medium mb-sm">Share Link</h3>
       <section class="page-container">
@@ -50,52 +27,26 @@
             matInput 
             [value]="getShareUrl()"
             readonly>
-          <button 
-            mat-icon-button 
-            matSuffix
-            (click)="onCopyLink()"
-            matTooltip="Copy link">
-            <mat-icon>content_copy</mat-icon>
-          </mat-form-field>
-        </section>
-      </div>
-      
-      <div class="link-actions">
-        <button 
-          mat-raised-button 
-          class="btn btn-primary"
-          (click)="onCopyLink()">
-          <mat-icon>content_copy</mat-icon>
-          Copy Link
-        </div>
-        <button 
-          mat-raised-button 
-          class="btn btn-secondary"
-          (click)="onGenerateQRCode()">
-          <mat-icon>qr_code</mat-icon>
-          Generate QR Code
-
-    <!-- Email Sharing -->
-    <div *ngIf="shareType === 'email'" class="share-section">
-      <h3 class="text-lg font-medium mb-sm">Share via Email</h3>
+          <button mat-icon-button matSuffix (click)="onCopyLink()" matTooltip="Copy link"> <mat-icon>content_copy</mat-icon> <div class="link-actions"></button>
+        <button mat-raised-button class="btn btn-primary" (click)="onCopyLink()"> <mat-icon>content_copy</mat-icon> Copy Link</button>
+        <button mat-raised-button class="btn btn-secondary" (click)="onGenerateQRCode()"> <mat-icon>qr_code</mat-icon> Generate QR Code <!-- Email Sharing --> <div *ngIf="shareType === 'email'" class="share-section"> <h3 class="text-lg font-medium mb-sm">Share via Email</h3></button>
       <form [formGroup]="shareForm" class="email-form">
         <div class="form-row">
-          <mat-form-field appearance="outline" class="w-full">
+          <mat-form-field appearance="outline" class="w-full"></mat-form-field>
             <mat-label>Message (Optional)</mat-label>
             <textarea 
               matInput 
               formControlName="message"
               placeholder="Add a personal message..."
               rows="3">
-            </mat-form-field>
-          </div>
+
         </form>
 
         <div class="form-row">
           <h4>Select Recipients</h4>
           <div class="recipients-list">
             <mat-list class="flex flex-col gap-sm">
-              <mat-list-item *ngFor="let user of availableUsers" class="recipient-item">
+              <mat-list-item *ngFor="let user of availableUsers" class="recipient-item"></mat-list-item></mat-list>
                 <mat-checkbox 
                   [checked]="isUserSelected(user.id)"
                   (change)="onToggleUser(user.id)"
@@ -103,11 +54,6 @@
                   <div class="recipient-info">
                     <span class="recipient-name">{{ user.fullName }}</span>
                     <span class="recipient-email">{{ user.email }}</span>
-                  </div>
-                </mat-list-item>
-              </mat-list>
-            </div>
-          </div>
 
         <div class="form-row">
           <h4>Include Options</h4>
@@ -118,121 +64,51 @@
                 (change)="onToggleOption('includeImage')"
                 class="btn btn-primary">
                 Include Recipe Image
-              </div>
-            </div>
+
             <div class="option-item">
               <mat-checkbox 
                 [(ngModel)]="shareOptions.includeNutrition"
                 (change)="onToggleOption('includeNutrition')"
                 class="btn btn-primary">
                 Include Nutrition Information
-              </div>
-            </div>
+
             <div class="option-item">
               <mat-checkbox 
                 [(ngModel)]="shareOptions.includeNotes"
                 (change)="onToggleOption('includeNotes')"
                 class="btn btn-primary">
                 Include Notes
-              </div>
-            </div>
+
             <div class="option-item">
               <mat-checkbox 
                 [(ngModel)]="shareOptions.includeComments"
                 (change)="onToggleOption('includeComments')"
                 class="btn btn-primary">
                 Include Comments
-              </div>
+
             <div class="option-item">
               <mat-checkbox 
                 [(ngModel)]="shareOptions.includeTimeline"
                 (change)="onToggleOption('includeTimeline')"
                 class="btn btn-primary">
                 Include Timeline
-              </div>
 
         <div class="flex justify-end gap-sm mt-lg">
-          <button 
-            mat-raised-button 
-            class="btn btn-primary"
-            (click)="onShareViaEmail()"
-            [disabled]="selectedUsers.length === 0">
-            <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner>
-            <span *ngIf="!loading">Send Email</span>
-          </div>
-
-    <!-- Social Sharing -->
-    <div *ngIf="shareType === 'social'" class="share-section">
+          <button mat-raised-button class="btn btn-primary" (click)="onShareViaEmail()" [disabled]="selectedUsers.length === 0"> <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner> <span *ngIf="!loading">Send Email</span> <!-- Social Sharing --> <div *ngIf="shareType === 'social'" class="share-section"></button>
       <h3 class="text-lg font-medium mb-sm">Share on Social Media</h3>
       <div class="social-buttons">
-        <button 
-          mat-raised-button 
-          class="btn btn-primary"
-          (click)="onShareViaSocial('twitter')"
-          class="social-button twitter">
-          <mat-icon>twitter</mat-icon>
-          Twitter
-        </div>
-        <button 
-          mat-raised-button 
-          class="btn btn-primary"
-          (click)="onShareViaSocial('facebook')"
-          class="social-button facebook">
-          <mat-icon>facebook</mat-icon>
-          Facebook
-        </div>
-        <button 
-          mat-raised-button 
-          class="btn btn-primary"
-          (click)="onShareViaSocial('pinterest')"
-          class="social-button pinterest">
-          <mat-icon>pinterest</mat-icon>
-          Pinterest
-        <button 
-          mat-raised-button 
-          class="btn btn-primary"
-          (click)="onShareViaSocial('whatsapp')"
-          class="social-button whatsapp">
-          <mat-icon>whatsapp</mat-icon>
-          WhatsApp
-        <button 
-          mat-raised-button 
-          class="btn btn-primary"
-          (click)="onShareViaSocial('email')"
-          class="social-button email">
-          <mat-icon>email</mat-icon>
-          Email
-
-    <!-- Additional Actions -->
-    <div class="additional-actions">
+        <button mat-raised-button class="btn btn-primary social-button twitter" (click)="onShareViaSocial('twitter')" > <mat-icon>twitter</mat-icon> Twitter</button>
+        <button mat-raised-button class="btn btn-primary social-button facebook" (click)="onShareViaSocial('facebook')" > <mat-icon>facebook</mat-icon> Facebook</button>
+        <button mat-raised-button class="btn btn-primary social-button pinterest" (click)="onShareViaSocial('pinterest')" > <mat-icon>pinterest</mat-icon> Pinterest</button>
+        <button mat-raised-button class="btn btn-primary social-button whatsapp" (click)="onShareViaSocial('whatsapp')" > <mat-icon>whatsapp</mat-icon> WhatsApp</button>
+        <button mat-raised-button class="btn btn-primary social-button email" (click)="onShareViaSocial('email')" > <mat-icon>email</mat-icon> Email <!-- Additional Actions --> <div class="additional-actions"></button>
       <mat-divider></mat-divider>
       <div class="action-buttons">
-        <button 
-          mat-raised-button 
-          class="btn btn-secondary"
-          (click)="onExportRecipe()">
-          <mat-icon>download</mat-icon>
-          Export Recipe
-        </div>
-        <button 
-          mat-raised-button 
-          class="btn btn-primary"
-          (click)="onGenerateQRCode()">
-          <mat-icon>qr_code</mat-icon>
-          QR Code
-        </div>
-
-  <!-- No Recipe State -->
-  <div *ngIf="!loading && !recipe" class="no-recipe">
-    <mat-icon class="no-recipe-icon">restaurant</mat-icon>
+        <button mat-raised-button class="btn btn-secondary" (click)="onExportRecipe()"> <mat-icon>download</mat-icon> Export Recipe</button>
+        <button mat-raised-button class="btn btn-primary" (click)="onGenerateQRCode()"> <mat-icon>qr_code</mat-icon> QR Code <!-- No Recipe State --> <div *ngIf="!loading && !recipe" class="no-recipe"> <mat-icon class="no-recipe-icon">restaurant</mat-icon></button>
     <h3 class="text-lg font-medium mb-sm">No Recipe Selected</h3>
     <p class="text-secondary mb-sm">Please select a recipe to share.</p>
-  </div>
 
   <!-- Dialog Actions -->
   <div class="dialog-actions" *ngIf="dialogRef">
-    <button 
-      mat-button 
-      (click)="onClose()">
-      Close
-    </div>
+    <button mat-button (click)="onClose()"> Close</button>

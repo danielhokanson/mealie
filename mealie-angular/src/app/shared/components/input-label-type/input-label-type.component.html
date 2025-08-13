@@ -13,13 +13,11 @@
     placeholder="Search..."
     class="autocomplete-input">
   
-  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-    <mat-option *ngFor="let item of items" [value]="item">
+  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn"></mat-autocomplete>
+    <mat-option *ngFor="let item of items" [value]="item"></mat-option>
       {{ item.name }}
-    </mat-option>
     
     <mat-option *ngIf="create && searchInput && items && !hasExistingItem()" 
                 (click)="emitCreate()">
       Create "{{ searchInput }}"
-    </mat-autocomplete>
   </mat-form-field>

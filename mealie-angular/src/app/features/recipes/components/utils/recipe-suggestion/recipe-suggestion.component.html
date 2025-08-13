@@ -8,7 +8,13 @@
         [slug]="recipe.slug"
         [rating]="recipe.rating"
         [image]="recipe.image"
-        [recipeId]="recipe.id">
+        [recipeId]="recipe.id"></app-recipe-card-mobile></<app-recipe-card-mobile
+        [name]="recipe.name"
+        [description]="recipe.description"
+        [slug]="recipe.slug"
+        [rating]="recipe.rating"
+        [image]="recipe.image"
+        [recipeId]="recipe.id"></app-recipe-card-mobile>>
       </article>
 
     <!-- Missing Organizers -->
@@ -18,8 +24,7 @@
         <div class="organizer-header">
           <mat-icon class="organizer-icon">{{ organizer.icon }}</mat-icon>
           <span class="missing-text">Missing:</span>
-        </div>
-        
+
         <div class="organizer-items">
           <mat-chip *ngFor="let item of organizer.items; let itemIdx = index"
                    class="organizer-chip btn btn-secondary"
@@ -29,6 +34,5 @@
               (change)="handleCheckbox(item)"
               class="btn btn-primary organizer-checkbox">
               <span class="chip-label">{{ organizer.getLabel(item.item) }}</span>
-            </div>
-          </div>
+
         </section>

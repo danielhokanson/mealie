@@ -5,8 +5,7 @@
       <div class="dialog-header">
         <mat-icon>link</mat-icon>
         <h2 class="text-xl font-medium mb-md">Ingredient Linker</h2>
-      </div>
-      
+
       <mat-card-content class="card">
         <p class="text-secondary mb-sm">{{ activeText }}</p>
         <mat-divider></mat-divider>
@@ -16,43 +15,29 @@
             *ngFor="let ing of unusedIngredients"
             [(ngModel)]="activeRefs"
             [value]="ing.referenceId">
-            <app-recipe-ingredient-html [markup]="parseIngredientText(ing)"></app-recipe-ingredient-html>
-          </div>
-        </mat-card-content>
-        
+            <app-recipe-ingredient-html [markup]="parseIngredientText(ing)"></app-recipe-ingredient-htm></app-recipe-ingredient-html>
+
         <div *ngIf="usedIngredients.length > 0" class="used-ingredients">
           <h4>Linked to Other Step</h4>
           <mat-checkbox
             *ngFor="let ing of usedIngredients"
             [(ngModel)]="activeRefs"
             [value]="ing.referenceId">
-            <app-recipe-ingredient-html [markup]="parseIngredientText(ing)"></app-recipe-ingredient-html>
-          </div>
+            <app-recipe-ingredient-html [markup]="parseIngredientText(ing)"></app-recipe-ingredient-htm></app-recipe-ingredient-html>
+
         </mat-card>
-      </div>
-      
-      <mat-card-actions class="card">
+
+      <mat-card-actions class="card"></mat-card-actions>
         <button mat-button (click)="closeLinkDialog()">Cancel</button>
         <button mat-button class="btn btn-primary" (click)="autoSetReferences()">Auto</button>
         <button mat-raised-button class="btn btn-primary" (click)="setIngredientIds()">Save</button>
         <button *ngIf="availableNextStep" mat-button (click)="saveAndOpenNextLinkIngredients()">Next Step</button>
-      </mat-card-actions>
     </section>
 
   <!-- Instructions Header -->
   <div class="instructions-header">
     <h2 *ngIf="!isCookMode" class="instructions-title text-xl font-medium mb-md">Instructions</h2>
-    <button
-      *ngIf="!isEditForm && !isCookMode"
-      mat-raised-button
-      class="btn btn-primary"
-      (click)="toggleCookMode()">
-      <mat-icon>restaurant</mat-icon>
-      Cook Mode
-    </div>
-
-  <!-- Instructions List -->
-  <div cdkDropList (cdkDropListDropped)="onDrop($event)" class="instructions-list">
+    <button*ngIf="!isEditForm && !isCookMode" mat-raised-button class="btn btn-primary" (click)="toggleCookMode()"> <mat-icon>restaurant</mat-icon> Cook Mode <!-- Instructions List --> <div cdkDropList (cdkDropListDropped)="onDrop($event)" class="instructions-list"></button>
     <div
       *ngFor="let step of instructionList; let index = index"
       cdkDrag
@@ -63,80 +48,35 @@
       <!-- Section Title -->
       <div *ngIf="step.title && showTitleEditor[step.id]" class="section-title">
         <div *ngIf="isEditForm" class="title-editor">
-          <mat-form-field class="w-full">
+          <mat-form-field class="w-full"></mat-form-field>
             <input matInput [(ngModel)]="step.title" placeholder="Section Title">
-          </mat-form-field>
-        </div>
+
         <div *ngIf="!isEditForm" class="title-display">
           {{ step.title }}
-        </div>
 
       <!-- Instruction Card -->
-      <mat-card class="instruction-card" (click)="toggleDisabled(index)" class="card">
+      <mat-card class="instruction-card card" (click)="toggleDisabled(index)" >
         <mat-card-header class="card">
           
             <div *ngIf="isEditForm" class="summary-editor">
-              <mat-form-field class="w-full">
+              <mat-form-field class="w-full"></mat-form-field>
                 <input matInput [(ngModel)]="step.summary" [placeholder]="'Step ' + (index + 1)">
-              </mat-form-field>
             
             <div *ngIf="!isEditForm" class="summary-display">
               {{ step.summary || 'Step ' + (index + 1) }}
-            </div>
-            
-            <div *ngIf="isEditForm" class="action-buttons">
-              <button mat-icon-button [matMenuTriggerFor]="menu">
-                <mat-icon>more_vert</mat-icon>
-              </button>
-              <mat-menu #menu="matMenu">
-                <button mat-menu-item (click)="deleteStep(index)">
-                  <mat-icon>delete</mat-icon>
-                  Delete
-                </button>
-                <button mat-menu-item (click)="toggleSection(step.id)">
-                  <mat-icon>expand_more</mat-icon>
-                  Toggle Section
-                </button>
-                <button mat-menu-item (click)="openLinkDialog(index, step.text, step.ingredientReferences)">
-                  <mat-icon>link</mat-icon>
-                  Link Ingredients
-                </button>
-                <button mat-menu-item (click)="uploadImage(index)">
-                  <mat-icon>upload</mat-icon>
-                  Upload Image
-                </button>
-                <button mat-menu-item (click)="togglePreview(index)">
-                  <mat-icon>{{ previewStates[index] ? 'edit' : 'visibility' }}</mat-icon>
-                  {{ previewStates[index] ? 'Edit' : 'Preview' }}
-                </button>
-                <mat-divider></mat-divider>
-                <button mat-menu-item (click)="mergeAbove(index)">
-                  <mat-icon>merge</mat-icon>
-                  Merge Above
-                </button>
-                <button mat-menu-item (click)="moveToTop(index)">
-                  <mat-icon>keyboard_arrow_up</mat-icon>
-                  Move to Top
-                </button>
-                <button mat-menu-item (click)="moveToBottom(index)">
-                  <mat-icon>keyboard_arrow_down</mat-icon>
-                  Move to Bottom
-                </button>
-                <button mat-menu-item (click)="insertAbove(index)">
-                  <mat-icon>add</mat-icon>
-                  Insert Above
-                </button>
-                <button mat-menu-item (click)="insertBelow(index)">
-                  <mat-icon>add</mat-icon>
-                  Insert Below
-                </button>
-              </mat-menu>
-            </div>
-            
-            <mat-icon *ngIf="isChecked(index)" class="check-icon btn btn-primary">check_circle</mat-icon>
-          </div>
-        </mat-card-header>
 
+            <div *ngIf="isEditForm" class="action-buttons">
+              <button mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon> <mat-menu #menu="matMenu"></button>
+                <button mat-menu-item (click)="deleteStep(index)"><mat-icon>delete</mat-icon> Delete</button>
+                <button mat-menu-item (click)="toggleSection(step.id)"><mat-icon>expand_more</mat-icon> Toggle Section</button>
+                <button mat-menu-item (click)="openLinkDialog(index, step.text, step.ingredientReferences)"><mat-icon>link</mat-icon> Link Ingredients</button>
+                <button mat-menu-item (click)="uploadImage(index)"><mat-icon>upload</mat-icon> Upload Image</button>
+                <button mat-menu-item (click)="togglePreview(index)"><mat-icon>{{ previewStates[index] ? 'edit' : 'visibility' }}</mat-icon> {{ previewStates[index] ? 'Edit' : 'Preview' }} <mat-divider></mat-divider></button>
+                <button mat-menu-item (click)="mergeAbove(index)"><mat-icon>merge</mat-icon> Merge Above</button>
+                <button mat-menu-item (click)="moveToTop(index)"><mat-icon>keyboard_arrow_up</mat-icon> Move to Top</button>
+                <button mat-menu-item (click)="moveToBottom(index)"><mat-icon>keyboard_arrow_down</mat-icon> Move to Bottom</button>
+                <button mat-menu-item (click)="insertAbove(index)"><mat-icon>add</mat-icon> Insert Above</button>
+                <button mat-menu-item (click)="insertBelow(index)"><mat-icon>add</mat-icon> Insert Below <mat-icon *ngIf="isChecked(index)" class="check-icon btn btn-primary">check_circle</mat-icon></button>
         <!-- Progress Bar -->
         <mat-progress-bar *ngIf="isEditForm && loadingStates[index]" mode="indeterminate"></mat-progress-bar>
 
@@ -145,14 +85,17 @@
           <app-markdown-editor
             [(ngModel)]="step.text"
             [preview]="previewStates[index]"
-            (previewChange)="previewStates[index] = $event">
-          </mat-card-content>
-          
+            (previewChange)="previewStates[index] = $event"></app-markdown-editor></<app-markdown-editor
+            [(ngModel)]="step.text"
+            [preview]="previewStates[index]"
+            (previewChange)="previewStates[index] = $event"></app-markdown-editor>>
+
           <app-recipe-ingredient-html
             *ngFor="let ing of step.ingredientReferences"
-            [markup]="getIngredientByRefId(ing.referenceId)">
+            [markup]="getIngredientByRefId(ing.referenceId)"></app-recipe-ingredient-html></<app-recipe-ingredient-html
+            *ngFor="let ing of step.ingredientReferences"
+            [markup]="getIngredientByRefId(ing.referenceId)"></app-recipe-ingredient-html>>
           </mat-card>
-        </div>
 
         <!-- View Mode Content -->
         <mat-card-content *ngIf="!isChecked(index) && !isEditForm" class="view-content card">
@@ -162,11 +105,14 @@
                 [value]="getStepIngredients(step)"
                 [scale]="scale"
                 [disableAmount]="recipe.settings?.disableAmount"
-                [isCookMode]="isCookMode">
-              </div>
-            </div>
+                [isCookMode]="isCookMode"></app-recipe-ingredients></<app-recipe-ingredients
+                [value]="getStepIngredients(step)"
+                [scale]="scale"
+                [disableAmount]="recipe.settings?.disableAmount"
+                [isCookMode]="isCookMode"></app-recipe-ingredients>></<app-recipe-ingredients
+                [value]="getStepIngredients(step)"
+                [scale]="scale"
+                [disableAmount]="recipe.settings?.disableAmount"
+                [isCookMode]="isCookMode"></app-recipe-ingredients>>>
 
-              <app-safe-markdown [source]="step.text"></app-safe-markdown>
-            
-        </mat-card-content>
-      </div>
+              <app-safe-markdown [source]="step.text"></app-safe-markdow></app-safe-markdown>

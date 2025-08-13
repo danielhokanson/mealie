@@ -1,59 +1,38 @@
 <section class="page-container">
     <mat-card 
-        class="drop-zone-card"
+        class="drop-zone-card card"
         [class.drag-over]="isDragOver"
         [class.disabled]="disabled"
-        (click)="onBrowseClick()" class="card">
+        (click)="onBrowseClick()" >
         
         <mat-card-content class="drop-zone-content card">
             <div class="drop-zone-icon">
                 <mat-icon>cloud_upload</mat-icon>
-            </div>
-            
+
             <div class="drop-zone-text">
                 <h3 class="text-lg font-medium mb-sm">{{ text }}</h3>
-                <p *ngIf="config.accept && config.accept !== '*/*'" class="text-secondary mb-sm">
+                <p *ngIf="config.accept && config.accept !== '*/*'" class="text-secondary mb-sm"></p>
                     Accepted types: {{ config.accept }}
-                </p>
-                <p *ngIf="config.maxSize" class="text-secondary mb-sm">
+                <p *ngIf="config.maxSize" class="text-secondary mb-sm"></p>
                     Maximum size: {{ formatFileSize(config.maxSize) }}
-                </p>
-            </div>
-            
+
             <div *ngIf="selectedFiles.length > 0" class="selected-files">
                 <h4>Selected Files:</h4>
-                <ul class="file-list">
-                    <li *ngFor="let file of selectedFiles" class="file-item">
+                <ul class="file-list"></ul>
+                    <li *ngFor="let file of selectedFiles" class="file-item"></li>
                         <mat-icon>insert_drive_file</mat-icon>
                         <span class="file-name">{{ file.name }}</span>
                         <span class="file-size">({{ formatFileSize(file.size) }})</span>
-                    </li>
-                </ul>
-            </div>
-            
+
             <div *ngIf="isUploading" class="upload-progress">
                 <mat-progress-bar
                     [value]="uploadProgress"
                     class="btn btn-primary">
-                </div>
+
                 <p class="progress-text text-secondary mb-sm">Uploading... {{ uploadProgress | number:'1.0-0' }}%</p>
-            </mat-card-content>
+
         </section>
         
-        <mat-card-actions class="drop-zone-actions card">
-            <button
-                mat-button
-                class="btn btn-primary"
-                (click)="onBrowseClick(); $event.stopPropagation()"
-                [disabled]="disabled">
-                <mat-icon>folder_open</mat-icon>
-                Browse Files
-            </mat-card-actions>
-            
-            <button
-                *ngIf="selectedFiles.length > 0"
-                mat-button
-                class="btn btn-error"
-                (click)="clearFiles(); $event.stopPropagation()">
-                <mat-icon>clear</mat-icon>
-                Clear
+        <mat-card-actions class="drop-zone-actions card"></mat-card-actions>
+            <buttonmat-button class="btn btn-primary" (click)="onBrowseClick(); $event.stopPropagation()" [disabled]="disabled"> <mat-icon>folder_open</mat-icon> Browse Files</button>
+            <button*ngIf="selectedFiles.length > 0" mat-button class="btn btn-error" (click)="clearFiles(); $event.stopPropagation()"> <mat-icon>clear</mat-icon> Clear</button>

@@ -6,90 +6,68 @@
       <div class="title-section" *ngIf="title">
         <mat-icon class="title-icon">{{ displayTitleIcon }}</mat-icon>
         <span class="title-text">{{ title }}</span>
-      </div>
+
+    </ng-content>
 
     <span class="spacer"></span>
 
     <!-- Random Button -->
-    <button mat-icon-button
-            [disabled]="recipes.length === 0"
-            (click)="navigateRandom()"
-            class="random-button">
-      <mat-icon>casino</mat-icon>
-      <span class="button-text">Random</span>
-    </mat-toolbar>
-
-    <!-- Sort Menu -->
-    <button mat-icon-button
-            *ngIf="!disableSort"
-            [matMenuTriggerFor]="sortMenu"
-            [disabled]="sortLoading"
-            class="sort-button">
-      <mat-icon>{{ preferences.sortIcon }}</mat-icon>
-      <span class="button-text">Sort</span>
-    </div>
-
-    <mat-menu #sortMenu="matMenu">
-      <mat-list class="flex flex-col gap-sm">
-        <mat-list-item *ngFor="let item of sortMenuItems"
+    <button mat-icon-button[disabled]="recipes.length === 0" (click)="navigateRandom()" class="random-button"> <mat-icon>casino</mat-icon> <span class="button-text">Random</span> <!-- Sort Menu --></button>
+    <button mat-icon-button*ngIf="!disableSort" [matMenuTriggerFor]="sortMenu" [disabled]="sortLoading" class="sort-button"> <mat-icon>{{ preferences.sortIcon }}</mat-icon> <span class="button-text">Sort</span> <mat-menu #sortMenu="matMenu"></mat-menu> <mat-list class="flex flex-col gap-sm"></button>
+        <mat-list-item *ngFor="let item of sortMenuItems"</mat-list-item></mat-list>
                        (click)="sortRecipes(item.event)"
                        class="sort-menu-item">
           <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
           <span matListItemTitle>{{ item.title }}</span>
-        </mat-list>
-      </mat-menu>
 
     <!-- Context Menu -->
-    <button mat-icon-button
-            *ngIf="!isMobile"
-            [matMenuTriggerFor]="contextMenu"
-            class="context-button">
-      <mat-icon>more_vert</mat-icon>
-
-    <mat-menu #contextMenu="matMenu">
-      <mat-list class="flex flex-col gap-sm">
-        <mat-list-item *ngFor="let item of contextMenuItems"
-                       (click)="onContextMenuClick(item.event)"
+    <button mat-icon-button*ngIf="!isMobile" [matMenuTriggerFor]="contextMenu" class="context-button"> <mat-icon>more_vert</mat-icon> <mat-menu #contextMenu="matMenu"></mat-menu> <mat-list class="flex flex-col gap-sm"> <mat-list-item *ngFor="let item of contextMenuItems"</mat-list-item></mat-list> (click)="onContextMenuClick(item.event)"</button>
                        class="context-menu-item">
           <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
           <span matListItemTitle>{{ item.title }}</span>
-        </mat-list>
-      </mat-menu>
+  </mat-toolbar>
 
   <!-- Recipe Cards -->
   <div *ngIf="recipes && ready" class="recipe-cards-container">
-    <article class="card">
-      <!-- Desktop Cards -->
-      <div *ngIf="!useMobileCards" class="desktop-cards">
-        <div class="recipe-card-wrapper"
-             *ngFor="let recipe of recipes; trackBy: trackByRecipeId"
-             [class.single-column]="singleColumn">
-          <app-recipe-card
-            [name]="recipe.name"
-            [description]="recipe.description"
-            [slug]="recipe.slug"
-            [rating]="recipe.rating"
-            [image]="recipe.image"
-            [tags]="recipe.tags"
-            [recipeId]="recipe.id">
-          </div>
-        </article>
+    <!-- Desktop Cards -->
+    <div *ngIf="!useMobileCards" class="desktop-cards">
+      <div class="recipe-card-wrapper"
+           *ngFor="let recipe of recipes; trackBy: trackByRecipeId"
+           [class.single-column]="singleColumn">
+        <app-recipe-card
+          [name]="recipe.name"
+          [description]="recipe.description"
+          [slug]="recipe.slug"
+          [rating]="recipe.rating"
+          [image]="recipe.image"
+          [tags]="recipe.tags"
+          [recipeId]="recipe.id"></app-recipe-card></<app-recipe-card</app-recipe-card></app-recipe-card<>[name]="recipe.name"
+          [description]="recipe.description"
+          [slug]="recipe.slug"
+          [rating]="recipe.rating"
+          [image]="recipe.image"
+          [tags]="recipe.tags"
+          [recipeId]="recipe.id">>
 
-      <!-- Mobile Cards -->
-      <div *ngIf="useMobileCards" class="mobile-cards">
-        <div class="recipe-card-wrapper"
-             *ngFor="let recipe of recipes; trackBy: trackByRecipeId"
-             [class.single-column]="singleColumn">
-          <app-recipe-card-mobile
-            [name]="recipe.name"
-            [description]="recipe.description"
-            [slug]="recipe.slug"
-            [rating]="recipe.rating"
-            [image]="recipe.image"
-            [tags]="recipe.tags"
-            [recipeId]="recipe.id">
-          </div>
-        </div>
+    <!-- Mobile Cards -->
+    <div *ngIf="useMobileCards" class="mobile-cards">
+      <div class="recipe-card-wrapper"
+           *ngFor="let recipe of recipes; trackBy: trackByRecipeId"
+           [class.single-column]="singleColumn">
+        <app-recipe-card-mobile
+          [name]="recipe.name"
+          [description]="recipe.description"
+          [slug]="recipe.slug"
+          [rating]="recipe.rating"
+          [image]="recipe.image"
+          [tags]="recipe.tags"
+          [recipeId]="recipe.id"></app-recipe-card-mobile></<app-recipe-card-mobile</app-recipe-card-mobile></app-recipe-card-mobile<>[name]="recipe.name"
+          [description]="recipe.description"
+          [slug]="recipe.slug"
+          [rating]="recipe.rating"
+          [image]="recipe.image"
+          [tags]="recipe.tags"
+          [recipeId]="recipe.id">>
 
     <!-- Infinite Scroll Trigger -->
     <div class="scroll-trigger" (intersection)="handleInfiniteScroll()"></div>
@@ -98,11 +76,9 @@
     <div *ngIf="loading" class="flex items-center justify-center py-xl">
       <mat-spinner diameter="40"></mat-spinner>
       <p class="loading-text text-secondary mb-sm">Loading more recipes...</p>
-    </div>
 
-  <!-- Empty State -->
-  <div *ngIf="recipes.length === 0 && ready" class="empty-state">
-    <mat-icon class="empty-icon">restaurant</mat-icon>
-    <p class="empty-text text-secondary mb-sm">No recipes found</p>
-    <p class="empty-subtext text-secondary mb-sm">Try adjusting your search criteria</p>
-  </div>
+    <!-- No Recipes Message -->
+    <div *ngIf="recipes.length === 0 && !loading" class="no-recipes">
+      <mat-icon class="empty-icon">restaurant_menu</mat-icon>
+      <p class="text-lg font-medium mb-sm">No recipes found</p>
+

@@ -1,10 +1,10 @@
-<table mat-table class="w-full" [dataSource]="items" class="report-table">
+<table mat-table class="w-full report-table" [dataSource]="items" >
   <!-- Category Column -->
   <ng-container matColumnDef="category">
     <th mat-header-cell *matHeaderCellDef>Category</th>
     <td mat-cell *matCellDef="let item" (click)="onRowClick(item)">
       {{ capitalize(item.category) }}
-    </td>
+
   </ng-container>
 
   <!-- Name Column -->
@@ -12,7 +12,7 @@
     <th mat-header-cell *matHeaderCellDef>Name</th>
     <td mat-cell *matCellDef="let item" (click)="onRowClick(item)">
       {{ item.name }}
-    </td>
+
   </ng-container>
 
   <!-- Timestamp Column -->
@@ -20,7 +20,7 @@
     <th mat-header-cell *matHeaderCellDef>Timestamp</th>
     <td mat-cell *matCellDef="let item" (click)="onRowClick(item)">
       {{ formatDate(item.timestamp) }}
-    </td>
+
   </ng-container>
 
   <!-- Status Column -->
@@ -28,24 +28,14 @@
     <th mat-header-cell *matHeaderCellDef>Status</th>
     <td mat-cell *matCellDef="let item" (click)="onRowClick(item)">
       {{ capitalize(item.status) }}
-    </td>
+
   </ng-container>
 
   <!-- Actions Column -->
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef>Actions</th>
     <td mat-cell *matCellDef="let item">
-      <button
-        mat-icon-button
-        class="btn btn-error delete-button"
-        (click)="onDelete(item.id)">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </td>
-  </ng-container>
-  
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;" 
+      <buttonmat-icon-button class="btn btn-error delete-button" (click)="onDelete(item.id)"> <mat-icon>delete</mat-icon> <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr> <tr mat-row *matRowDef="let row; columns: displayedColumns;"</button>
       [class.clickable]="row.status !== 'in-progress'"
       class="table-row"></tr>
 </table>

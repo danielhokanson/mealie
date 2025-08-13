@@ -1,47 +1,20 @@
 <mat-card class="shopping-list-card card">
   <mat-card-header class="card">
-    <mat-card-title class="list-title card">
+    <mat-card-title class="list-title card"></mat-card-title>
       {{ shoppingList.name }}
-    </mat-card-title>
-    <mat-card-subtitle *ngIf="shoppingList.description" class="card">
+    <mat-card-subtitle *ngIf="shoppingList.description" ></mat-card-subtitle>
       {{ shoppingList.description }}
-    </mat-card-subtitle>
     
     <div class="list-actions">
-      <button 
-        mat-icon-button
-        [matMenuTriggerFor]="listMenu"
-        class="list-menu-btn">
-        <mat-icon>more_vert</mat-icon>
-      </div>
-      
-      <mat-menu #listMenu="matMenu">
-        <button mat-menu-item (click)="addItem()">
-          <mat-icon>add</mat-icon>
-          <span>Add Item</span>
-        </button>
-        <button mat-menu-item (click)="clearCompleted()" [disabled]="checkedItems.length === 0">
-          <mat-icon>clear_all</mat-icon>
-          <span>Clear Completed</span>
-        </button>
-        <mat-divider></mat-divider>
-        <button mat-menu-item (click)="onDeleteList()">
-          <mat-icon class="btn btn-error">delete</mat-icon>
-          <span>Delete List</span>
-        </button>
-      </mat-menu>
-    </mat-card-header>
-  </mat-card>
-
-  <mat-card-content class="card">
-    <!-- Progress Bar -->
+      <button mat-icon-button [matMenuTriggerFor]="listMenu" class="list-menu-btn"> <mat-icon>more_vert</mat-icon> <mat-menu #listMenu="matMenu"></button>
+        <button mat-menu-item (click)="addItem()"><mat-icon>add</mat-icon> <span>Add Item</span></button>
+        <button mat-menu-item (click)="clearCompleted()" [disabled]="checkedItems.length === 0"><mat-icon>clear_all</mat-icon> <span>Clear Completed</span> <mat-divider></mat-divider></button>
+        <button mat-menu-item (click)="onDeleteList()"><mat-icon class="btn btn-error">delete</mat-icon> <span>Delete List</span> <mat-card-content class="card"> <!-- Progress Bar --></button>
     <div class="progress-container" *ngIf="shoppingList.items.length > 0">
       <div class="progress-bar">
         <div class="progress-fill" [style.width.%]="progressPercentage"></div>
-      <span class="progress-text">
+      <span class="progress-text"></span>
         {{ checkedItems.length }} of {{ shoppingList.items.length }} completed
-      </span>
-    </div>
 
     <!-- Unchecked Items -->
     <div class="items-section" *ngIf="uncheckedItems.length > 0">
@@ -57,9 +30,27 @@
           [recipes]="recipes"
           (checked)="onItemChecked($event)"
           (save)="onItemUpdated($event)"
-          (delete)="onItemDeleted($event)">
-        </div>
-      </div>
+          (delete)="onItemDeleted($event)"></app-shopping-list-item></<app-shopping-list-item
+          *ngFor="let item of uncheckedItems; trackBy: trackByItemId"
+          [modelValue]="item"
+          [showLabel]="showLabels"
+          [labels]="labels"
+          [units]="units"
+          [foods]="foods"
+          [recipes]="recipes"
+          (checked)="onItemChecked($event)"
+          (save)="onItemUpdated($event)"
+          (delete)="onItemDeleted($event)"></app-shopping-list-item>></<app-shopping-list-item
+          *ngFor="let item of uncheckedItems; trackBy: trackByItemId"
+          [modelValue]="item"
+          [showLabel]="showLabels"
+          [labels]="labels"
+          [units]="units"
+          [foods]="foods"
+          [recipes]="recipes"
+          (checked)="onItemChecked($event)"
+          (save)="onItemUpdated($event)"
+          (delete)="onItemDeleted($event)"></app-shopping-list-item>>>
 
     <!-- Checked Items -->
     <div class="items-section" *ngIf="checkedItems.length > 0">
@@ -76,18 +67,30 @@
           [recipes]="recipes"
           (checked)="onItemChecked($event)"
           (save)="onItemUpdated($event)"
-          (delete)="onItemDeleted($event)">
-        </div>
-      </div>
+          (delete)="onItemDeleted($event)"></app-shopping-list-item></<app-shopping-list-item
+          *ngFor="let item of checkedItems; trackBy: trackByItemId"
+          [modelValue]="item"
+          [showLabel]="showLabels"
+          [labels]="labels"
+          [units]="units"
+          [foods]="foods"
+          [recipes]="recipes"
+          (checked)="onItemChecked($event)"
+          (save)="onItemUpdated($event)"
+          (delete)="onItemDeleted($event)"></app-shopping-list-item>></<app-shopping-list-item
+          *ngFor="let item of checkedItems; trackBy: trackByItemId"
+          [modelValue]="item"
+          [showLabel]="showLabels"
+          [labels]="labels"
+          [units]="units"
+          [foods]="foods"
+          [recipes]="recipes"
+          (checked)="onItemChecked($event)"
+          (save)="onItemUpdated($event)"
+          (delete)="onItemDeleted($event)"></app-shopping-list-item>>>
 
     <!-- Empty State -->
     <div class="empty-state" *ngIf="shoppingList.items.length === 0">
       <mat-icon class="empty-icon">shopping_cart</mat-icon>
       <p class="empty-text text-secondary mb-sm">No items in this shopping list</p>
-      <button mat-raised-button class="btn btn-primary" (click)="addItem()">
-        <mat-icon>add</mat-icon>
-        Add First Item
-      </button>
-    </div>
-  </div>
-</mat-card-content>
+      <button mat-raised-button class="btn btn-primary" (click)="addItem()"><mat-icon>add</mat-icon> Add First Item</button>

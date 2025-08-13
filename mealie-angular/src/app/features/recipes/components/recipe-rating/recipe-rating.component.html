@@ -5,32 +5,14 @@
        (mouseenter)="isHovering = true"
        (mouseleave)="isHovering = false">
     <section class="page-container">
-      <button 
-        *ngFor="let star of [1,2,3,4,5]; let i = index"
-        type="button"
-        class="star-button"
-        [class.active]="(userRating || hoverRating) >= star"
-        [class.hover]="isHovering && hoverRating >= star"
-        [matTooltip]="'Rate ' + star + ' stars'"
-        (click)="updateRating(star)"
-        (mouseenter)="hoverRating = star"
-        (mouseleave)="hoverRating = 0">
+      <button *ngFor="let star of [1,2,3,4,5]; let i = index" type="button" class="star-button" [class.active]="(userRating || hoverRating) >= star" [class.hover]="isHovering && hoverRating >= star" [matTooltip]="'Rate ' + star + ' stars'" (click)="updateRating(star)" (mouseenter)="hoverRating = star" (mouseleave)="hoverRating = 0"></button>
         <mat-icon>{{ getStarIcon(star) }}</mat-icon>
       </section>
-    </div>
-    <button 
-      *ngIf="userRating"
-      type="button"
-      class="clear-rating"
-      mat-icon-button
-      [matTooltip]="'Clear rating'"
-      (click)="clearRating()">
-      <mat-icon>clear</mat-icon>
 
-  <!-- Group Rating (read-only) -->
+    <button *ngIf="userRating" type="button" class="clear-rating" mat-icon-button [matTooltip]="'Clear rating'" (click)="clearRating()"> <mat-icon>clear</mat-icon> <!-- Group Rating (read-only) --></button>
   <div *ngIf="!canRate || (!userRating && !isHovering && ratingsLoaded)" 
        class="rating-container group-rating">
-    <section class="page-container">
+    <section class="page-container"></section>
       <mat-icon 
         *ngFor="let star of [1,2,3,4,5]; let i = index"
         class="star-icon"
@@ -38,7 +20,5 @@
         [class.half]="groupRating >= star - 0.5 && groupRating < star">
         {{ getStarIcon(star) }}
 
-    </section>
-    <span *ngIf="groupRating > 0" class="rating-text">
+    <span *ngIf="groupRating > 0" class="rating-text"></span>
       {{ groupRating.toFixed(1) }}
-    </span>

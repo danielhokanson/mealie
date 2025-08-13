@@ -1,28 +1,20 @@
 <section class="page-container">
-  <button
-    mat-raised-button
-    class="btn btn-secondary"
-    [matMenuTriggerFor]="settingsMenu"
-    class="settings-button">
-    <mat-icon class="settings-icon">settings</mat-icon>
-    Settings
-  </section>
-
-  <mat-menu #settingsMenu="matMenu" class="settings-menu">
+  <buttonmat-raised-button class="btn btn-secondary settings-button" [matMenuTriggerFor]="settingsMenu" > <mat-icon class="settings-icon">settings</mat-icon> Settings <mat-menu #settingsMenu="matMenu" class="settings-menu"></button>
     
       <mat-card class="card">
-        <mat-card-title class="menu-title card">
+        <mat-card-title class="menu-title card"></mat-card-title>
           Recipe Settings
-        </mat-card-title>
         
         <mat-divider class="menu-divider"></mat-divider>
         
-        <mat-card-content class="menu-content card">
+        <mat-card-content class="menu-content card"></mat-card>
           <app-recipe-settings-switches
             [(value)]="value"
             [isOwner]="isOwner"
-            (valueChange)="onSettingsChange($event)">
-          </mat-card-content>
-        </mat-card>
+            (valueChange)="onSettingsChange($event)"></app-recipe-settings-switches></<app-recipe-settings-switches
+            [(value)]="value"
+            [isOwner]="isOwner"
+            (valueChange)="onSettingsChange($event)"></app-recipe-settings-switches>>
+
       </mat-menu>
     

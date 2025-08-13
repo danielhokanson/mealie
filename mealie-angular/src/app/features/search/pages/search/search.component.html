@@ -1,13 +1,12 @@
 <section class="page-container">
   <mat-card class="card">
-    <mat-card-header class="card">
-      <mat-card-title class="card">Search Recipes & More</mat-card-title>
-      <mat-card-subtitle class="card">Find what you're looking for across your mealie data</mat-card-subtitle>
-    </mat-card-header>
+    <mat-card-header class="card"></mat-card-header>
+      <mat-card-title >Search Recipes & More</mat-card-title>
+      <mat-card-subtitle >Find what you're looking for across your mealie data</mat-card-subtitle>
 
     <mat-card-content class="card">
       <div class="search-section">
-        <mat-form-field appearance="outline" class="search-field w-full">
+        <mat-form-field appearance="outline" class="search-field w-full"></mat-form-field>
           <mat-label>Search</mat-label>
           <input 
             matInput 
@@ -15,41 +14,22 @@
             placeholder="Search recipes, ingredients, tags..."
             (keyup.enter)="onSearch()">
           <mat-icon matSuffix>search</mat-icon>
-        </mat-form-field>
         
         <div class="search-actions">
-          <button mat-raised-button class="btn btn-primary" (click)="onSearch()" [disabled]="!searchQuery.trim()">
-            <mat-icon>search</mat-icon>
-            Search
-          </button>
-          <button mat-button (click)="clearSearch()" [disabled]="!searchQuery && searchResults.length === 0">
-            <mat-icon>clear</mat-icon>
-            Clear
-          </button>
-        </div>
-
-      <div *ngIf="selectedFilters.length > 0" class="filters-section">
-        <h4>Active Filters:</h4>
-        <div class="filter-chips">
-          <mat-chip 
-            *ngFor="let filter of selectedFilters" 
-            [removable]="true"
+          <button mat-raised-button class="btn btn-primary" (click)="onSearch()" [disabled]="!searchQuery.trim()"><mat-icon>search</mat-icon> Search</button>
+          <button mat-button (click)="clearSearch()" [disabled]="!searchQuery && searchResults.length === 0"><mat-icon>clear</mat-icon> Clear <div *ngIf="selectedFilters.length > 0" class="filters-section"> <h4>Active Filters:</h4> <div class="filter-chips"> <mat-chip *ngFor="let filter of selectedFilters" [removable]="true"</button>
             (removed)="onFilterChange(filter)">
             {{ filter }}
             <mat-icon matChipRemove>cancel</mat-icon>
-          </div>
-        </div>
 
       <div *ngIf="loading" class="flex items-center justify-center py-xl">
         <mat-icon class="loading-icon">refresh</mat-icon>
         <p class="text-secondary mb-sm">Searching...</p>
-      </div>
 
       <div *ngIf="!loading && searchResults.length === 0 && searchQuery" class="flex flex-col items-center justify-center py-xl text-center">
         <mat-icon>search_off</mat-icon>
         <h3 class="text-lg font-medium mb-sm">No results found</h3>
         <p class="text-secondary mb-sm">Try adjusting your search terms or filters.</p>
-      </div>
 
       <div *ngIf="!loading && searchResults.length > 0" class="search-results">
         <h3 class="text-lg font-medium mb-sm">Search Results ({{ searchResults.length }})</h3>
@@ -57,12 +37,10 @@
         <div class="results-list">
           <div *ngFor="let result of searchResults" class="result-item">
             <div class="result-header">
-              <h4>{{ result.title }}</h4>
-              <mat-chip [color]="result.type === 'recipe' ? 'primary' : 'accent'" selected>
+              <h4>{{ result.title }}</h4></mat-chip>
+    <mat-chip [color]="result.type === 'recipe' ? 'primary' : 'accent'" selected></mat-chip>
                 {{ result.type }}
-              </mat-chip>
-            </div>
-            
+
             <p class="result-description text-secondary mb-sm">{{ result.description }}</p>
             
             <div class="result-tags">
@@ -71,12 +49,6 @@
                 [color]="selectedFilters.includes(tag) ? 'primary' : 'default'"
                 (click)="onFilterChange(tag)">
                 {{ tag }}
-              </div>
-            </div>
-        </div>
-    </div>
-  </div>
-</mat-card-content>
 
 </mat-card>
 </section>

@@ -1,64 +1,26 @@
 <section class="page-container">
   <mat-card class="card">
-    <mat-card-header class="card">
-      <mat-card-title class="card">Household Webhooks</mat-card-title>
-      <mat-card-subtitle class="card">Configure webhooks for external integrations</mat-card-subtitle>
-    </mat-card-header>
+    <mat-card-header class="card"></mat-card-header>
+      <mat-card-title >Household Webhooks</mat-card-title>
+      <mat-card-subtitle >Configure webhooks for external integrations</mat-card-subtitle>
 
     <mat-card-content class="card">
       <div class="webhooks-actions">
-        <button mat-raised-button class="btn btn-primary" (click)="addWebhook()">
-          <mat-icon>add</mat-icon>
-          Add Webhook
-        </button>
-      </div>
-
-      <div *ngIf="loading" class="flex items-center justify-center py-xl">
-        <mat-icon class="loading-icon">refresh</mat-icon>
-        <p class="text-secondary mb-sm">Loading webhooks...</p>
-      </div>
-
-      <div *ngIf="!loading && webhooks.length === 0" class="empty-state">
-        <mat-icon>webhook</mat-icon>
+        <button mat-raised-button class="btn btn-primary" (click)="addWebhook()"><mat-icon>add</mat-icon> Add Webhook <div *ngIf="loading" class="flex items-center justify-center py-xl"> <mat-icon class="loading-icon">refresh</mat-icon> <p class="text-secondary mb-sm">Loading webhooks...</p> <div *ngIf="!loading && webhooks.length === 0" class="empty-state"> <mat-icon>webhook</mat-icon></button>
         <h3 class="text-lg font-medium mb-sm">No webhooks configured</h3>
         <p class="text-secondary mb-sm">Set up webhooks to integrate with external services like Slack, Discord, or custom APIs.</p>
-        <button mat-raised-button class="btn btn-primary" (click)="addWebhook()">
-          Add Your First Webhook
-        </button>
-      </div>
-
-      <div *ngIf="!loading && webhooks.length > 0" class="webhooks-list">
-        <mat-list class="flex flex-col gap-sm">
-          <mat-list-item *ngFor="let webhook of webhooks">
-            <div matListItemTitle>{{ webhook.name }}</div>
-            <div matListItemLine>
-              <mat-chip [color]="webhook.enabled ? 'primary' : 'default'" selected>
-                {{ webhook.type }}
-              </mat-chip>
+        <button mat-raised-button class="btn btn-primary" (click)="addWebhook()">Add Your First Webhook <div *ngIf="!loading && webhooks.length > 0" class="webhooks-list"> <mat-list class="flex flex-col gap-sm"> <mat-list-item *ngFor="let webhook of webhooks"> <div matListItemTitle>{{ webhook.name }}</div> <div matListItemLine> <mat-chip [color]="webhook.enabled ? 'primary' : 'default'" selected></mat-chip> {{ webhook.type }}</button>
               <span class="url">{{ webhook.url }}</span>
-            </div>
+
             <div matListItemLine>
-              <span class="events">
+              <span class="events"></span>
                 Events: {{ webhook.events.join(', ') }}
-              </span>
-            </div>
+
             <div matListItemMeta>
               <mat-slide-toggle
                 [checked]="webhook.enabled"
                 (change)="toggleWebhook(webhook)">
-              </div>
-              <button mat-icon-button (click)="testWebhook(webhook)">
-                <mat-icon>play_arrow</mat-icon>
-              </button>
-              <button mat-icon-button (click)="editWebhook(webhook)">
-                <mat-icon>edit</mat-icon>
-              </button>
-              <button mat-icon-button class="btn btn-error" (click)="deleteWebhook(webhook.id)">
-                <mat-icon>delete</mat-icon>
-              </button>
-            </mat-list-item>
-          </mat-list>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </section>
+
+              <button mat-icon-button (click)="testWebhook(webhook)"><mat-icon>play_arrow</mat-icon></button>
+              <button mat-icon-button (click)="editWebhook(webhook)"><mat-icon>edit</mat-icon></button>
+              <button mat-icon-button class="btn btn-error" (click)="deleteWebhook(webhook.id)"><mat-icon>delete</mat-icon></button>

@@ -11,30 +11,17 @@
         <mat-card *ngIf="edit" class="note-card card">
           <mat-card-content class="card">
             <div class="note-header">
-              <mat-form-field appearance="outline" class="note-title-field w-full">
+              <mat-form-field appearance="outline" class="note-title-field w-full"></mat-form-field>
                 <mat-label>Title</mat-label>
                 <input 
                   matInput 
                   [formControlName]="i"
                   formControlName="title"
                   placeholder="Enter note title">
-                <mat-error *ngFor="let error of getFormErrors(getNoteTitleControl(i))">
+                <mat-error *ngFor="let error of getFormErrors(getNoteTitleControl(i))"></mat-error>
                   {{ error }}
-                </mat-error>
-              </mat-form-field>
               
-              <button 
-                type="button"
-                mat-icon-button 
-                class="btn btn-error remove-note-btn"
-                [matTooltip]="'Remove note'"
-                (click)="removeNote(i)">
-                <mat-icon>delete</mat-icon>
-              </div>
-            </mat-card-content>
-            
-            <mat-form-field appearance="outline" class="note-text-field w-full">
-              <mat-label>Note</mat-label>
+              <button type="button" mat-icon-button class="btn btn-error remove-note-btn" [matTooltip]="'Remove note'" (click)="removeNote(i)"> <mat-icon>delete</mat-icon> <mat-form-field appearance="outline" class="note-text-field w-full"> <mat-label>Note</mat-label></button>
               <textarea 
                 matInput 
                 [formControlName]="i"
@@ -45,27 +32,24 @@
                 cdkAutosizeMinRows="3"
                 cdkAutosizeMaxRows="10">
               </mat-form-field>
-              <mat-error *ngFor="let error of getFormErrors(getNoteTextControl(i))">
+              <mat-error *ngFor="let error of getFormErrors(getNoteTextControl(i))"></mat-error>
                 {{ error }}
-              </mat-error>
             </mat-card>
-          </div>
+
         </form>
 
         <!-- View Mode -->
         <div *ngIf="!edit" class="note-view">
           <h3 class="note-title text-lg font-medium mb-sm">{{ note.title }}</h3>
           
-            <app-safe-markdown [source]="note.text"></app-safe-markdown>
-          
-      </div>
-  </div>
+            <app-safe-markdown [source]="note.text"></app-safe-markdow></app-safe-markdown>
 
   <!-- Add Note Button -->
   <div *ngIf="edit" class="add-note-section">
     <app-base-button 
       [primary]="true"
-      (click)="addNote()">
+      (click)="addNote()"></app-base-button></<app-base-button 
+      [primary]="true"
+      (click)="addNote()"></app-base-button>>
       <mat-icon>add</mat-icon>
       Add Note
-    </div>

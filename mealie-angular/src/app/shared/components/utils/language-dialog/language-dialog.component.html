@@ -1,8 +1,7 @@
 <section class="page-container">
-    <h2 mat-dialog-title class="dialog-title text-xl font-medium mb-md">
+    <h2 mat-dialog-title class="dialog-title text-xl font-medium mb-md"></h2>
         <mat-icon>language</mat-icon>
         Select Language
-    </h2>
 
     <mat-dialog-content class="dialog-content">
         <mat-list class="flex flex-col gap-sm">
@@ -13,29 +12,20 @@
                 class="language-item">
                 
                 <div matListItemIcon class="flag-icon">
-                    <span *ngIf="language.flag" class="flag-emoji">
+                    <span *ngIf="language.flag" class="flag-emoji"></span>
                         {{ getFlagEmoji(language.flag) }}
-                    </span>
                     <mat-icon *ngIf="!language.flag">language</mat-icon>
-                </div>
-                
+
                 <div matListItemTitle class="language-name">
                     {{ getLanguageDisplay(language) }}
-                </div>
-                
+
                 <div matListItemLine class="language-code">
                     {{ language.code.toUpperCase() }}
-                </div>
-                
-                <mat-icon *ngIf="language.code === currentLanguage" class="selected-icon">check</mat-icon>
-            </mat-list>
+
+                <mat-icon *ngIf="language.code === currentLanguage" class="selected-icon">check</mat-icon></mat-list-item>
+    </mat-list>
         </mat-dialog-content>
     </section>
 
-    <mat-dialog-actions class="dialog-actions">
-        <button
-            mat-button
-            (click)="onCancel()"
-            class="btn btn-secondary">
-            Cancel
-        </mat-dialog-actions>
+    <mat-dialog-actions class="dialog-actions"></mat-dialog-actions>
+        <buttonmat-button (click)="onCancel()" class="btn btn-secondary"> Cancel</button>

@@ -1,15 +1,6 @@
 <mat-menu #menu="matMenu">
   <ng-template matMenuTrigger>
-    <button
-      mat-raised-button
-      class="btn btn-primary"
-      [disabled]="disabled"
-      [class]="btnClass"
-      class="overflow-button">
-      
-      <mat-icon *ngIf="activeObj.icon" class="start-icon">
-        {{ activeObj.icon }}
-      
+    <buttonmat-raised-button class="btn btn-primary overflow-button" [disabled]="disabled" [class]="btnClass" > <mat-icon *ngIf="activeObj.icon" class="start-icon"> {{ activeObj.icon }}</button>
       {{ displayText }}
       
       <mat-icon class="end-icon">expand_more</mat-icon>
@@ -18,56 +9,26 @@
   <mat-list *ngIf="mode === MODES.MODEL" class="overflow-list">
     <ng-container *ngFor="let item of items; let index = index">
       <div *ngIf="!item.hide">
-        <button
-          mat-list-item
-          (click)="setValue(item)"
-          class="overflow-item">
-          <mat-icon *ngIf="item.icon" matListItemIcon>
-            {{ item.icon }}
-          <span matListItemTitle>{{ item.text }}</span>
-
-        <mat-divider *ngIf="item.divider" class="my-1"></mat-divider>
-      </mat-icon>
-    </div>
+        <buttonmat-list-item (click)="setValue(item)" class="overflow-item"> <mat-icon *ngIf="item.icon" matListItemIcon> {{ item.icon }} <span matListItemTitle>{{ item.text }}</span> <mat-divider *ngIf="item.divider" class="my-1"></mat-divider></mat-icon></button>
   </ng-container>
   
   <!-- Link Mode -->
   <mat-list *ngIf="mode === MODES.LINK" class="overflow-list">
     <ng-container *ngFor="let item of items; let index = index">
       <div *ngIf="!item.hide">
-        <button
-          mat-list-item
-          (click)="navigateTo(item)"
-          class="overflow-item">
-          <mat-icon *ngIf="item.icon" matListItemIcon>
-            {{ item.icon }}
-          <span matListItemTitle>{{ item.text }}</span>
-
-        <mat-divider *ngIf="item.divider" class="my-1"></mat-divider>
-      </mat-icon>
-    </div>
+        <buttonmat-list-item (click)="navigateTo(item)" class="overflow-item"> <mat-icon *ngIf="item.icon" matListItemIcon> {{ item.icon }} <span matListItemTitle>{{ item.text }}</span> <mat-divider *ngIf="item.divider" class="my-1"></mat-divider></mat-icon></button>
   </ng-container>
   
   <!-- Event Mode -->
   <mat-list *ngIf="mode === MODES.EVENT" class="overflow-list">
     <ng-container *ngFor="let item of items; let index = index">
       <div *ngIf="!item.hide">
-        <button
-          mat-list-item
-          (click)="onItemClick(item)"
-          class="overflow-item">
-          <mat-icon *ngIf="item.icon" matListItemIcon>
-            {{ item.icon }}
-          <span matListItemTitle>{{ item.text }}</span>
-
-        <mat-divider *ngIf="item.divider" class="my-1"></mat-divider>
-      </mat-icon>
-    </div>
+        <buttonmat-list-item (click)="onItemClick(item)" class="overflow-item"> <mat-icon *ngIf="item.icon" matListItemIcon> {{ item.icon }} <span matListItemTitle>{{ item.text }}</span> <mat-divider *ngIf="item.divider" class="my-1"></mat-divider></mat-icon></button>
   </ng-container>
 </mat-list>
 
 </mat-list>
 </mat-list>
-</mat-icon>
+
 </ng-template>
 </mat-menu>

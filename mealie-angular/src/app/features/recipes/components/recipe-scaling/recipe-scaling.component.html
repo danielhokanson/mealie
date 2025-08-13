@@ -3,7 +3,6 @@
   <div *ngIf="loading" class="flex items-center justify-center py-xl">
     <mat-spinner diameter="50"></mat-spinner>
     <p class="text-secondary mb-sm">Processing scaled recipe...</p>
-  </div>
 
   <!-- Scaling Content -->
   <div *ngIf="!loading && recipe" class="scaling-content">
@@ -11,7 +10,6 @@
     <div class="scaling-header">
       <h2 class="text-xl font-medium mb-md">Recipe Scaling</h2>
       <p class="text-secondary mb-sm">Scale {{ recipe.name }} to your desired serving size</p>
-    </div>
 
     <!-- Scaling Summary -->
     <div class="scaling-summary">
@@ -19,16 +17,14 @@
         <div class="summary-item">
           <span class="summary-label">Original Servings</span>
           <span class="summary-value">{{ getScalingSummary().originalServings }}</span>
-        </div>
+
         <div class="summary-item">
           <span class="summary-label">Target Servings</span>
           <span class="summary-value">{{ getScalingSummary().targetServings }}</span>
-        </div>
+
         <div class="summary-item">
           <span class="summary-label">Scaling Factor</span>
           <span class="summary-value">{{ getScalingSummary().factorText }}</span>
-        </div>
-    </div>
 
     <!-- Scaling Controls -->
     <div class="scaling-controls">
@@ -46,46 +42,22 @@
                 min="0.25"
                 max="100"
                 step="0.25">
-              <mat-error *ngIf="scalingForm.get('targetServings')?.invalid && scalingForm.get('targetServings')?.touched">
+              <mat-error *ngIf="scalingForm.get('targetServings')?.invalid && scalingForm.get('targetServings')?.touched"></mat-error>
                 {{ getErrorMessage('targetServings') }}
-              </mat-error>
             </mat-form-field>
-          </div>
 
         <div class="control-section">
           <h3 class="text-lg font-medium mb-sm">Quick Scaling Options</h3>
           <div class="scaling-options">
-            <button 
-              *ngFor="let option of scalingOptions"
-              mat-button 
-              [class.active]="scalingFactor === option.value"
-              (click)="onScalingOptionChange(option.value)"
-              class="scaling-option">
-              {{ option.label }}
-            </div>
-          </div>
-
-        <div class="control-section">
-          <h3 class="text-lg font-medium mb-sm">Advanced Options</h3>
-          <button 
-            mat-button 
-            class="btn btn-primary"
-            (click)="onToggleAdvanced()">
-            <mat-icon>{{ showAdvanced ? 'expand_less' : 'expand_more' }}</mat-icon>
-            {{ showAdvanced ? 'Hide' : 'Show' }} Advanced Options
-          </div>
-
-          <div *ngIf="showAdvanced" class="advanced-options">
-            <div class="option-group">
-              <h4>Rounding</h4>
+            <button *ngFor="let option of scalingOptions" mat-button [class.active]="scalingFactor === option.value" (click)="onScalingOptionChange(option.value)" class="scaling-option"> {{ option.label }} <div class="control-section"> <h3 class="text-lg font-medium mb-sm">Advanced Options</h3></button>
+          <button mat-button class="btn btn-primary" (click)="onToggleAdvanced()"> <mat-icon>{{ showAdvanced ? 'expand_less' : 'expand_more' }}</mat-icon> {{ showAdvanced ? 'Hide' : 'Show' }} Advanced Options <div *ngIf="showAdvanced" class="advanced-options"> <div class="option-group"> <h4>Rounding</h4></button>
               <div class="option-item">
                 <mat-checkbox 
                   [(ngModel)]="roundDecimals"
                   (change)="onToggleRounding()"
                   class="btn btn-primary">
                   Round ingredient quantities
-                </div>
-              </div>
+
               <div class="option-item" *ngIf="roundDecimals">
                 <label>Round to nearest:</label>
                 <mat-select 
@@ -95,8 +67,6 @@
                   <mat-option value="0.25">1/4</mat-option>
                   <mat-option value="0.5">1/2</mat-option>
                   <mat-option value="1">1</mat-option>
-                </div>
-              </div>
 
             <div class="option-group">
               <h4>Scaling Options</h4>
@@ -105,25 +75,20 @@
                   formControlName="scaleTime"
                   class="btn btn-primary">
                   Scale cooking time
-                </div>
-              </div>
+
               <div class="option-item">
                 <mat-checkbox 
                   formControlName="scaleTemperature"
                   class="btn btn-primary">
                   Scale temperature (experimental)
-                </div>
-              </div>
+
               <div class="option-item">
                 <mat-checkbox 
                   formControlName="scaleEquipment"
                   class="btn btn-primary">
                   Scale equipment size
-                </div>
+
               </form>
-          </div>
-      </div>
-    </div>
 
     <!-- Scaled Recipe Preview -->
     <div class="scaled-preview">
@@ -136,79 +101,44 @@
           <div class="meta-item">
             <mat-icon>people</mat-icon>
             <span>{{ getScalingSummary().targetServings }} servings</span>
-          </div>
+
           <div class="meta-item" *ngIf="recipe.prepTime">
             <mat-icon>schedule</mat-icon>
             <span>Prep: {{ getFormattedTime(getScaledTime(recipe.prepTime)) }}</span>
-          </div>
+
           <div class="meta-item" *ngIf="recipe.cookTime">
             <mat-icon>timer</mat-icon>
             <span>Cook: {{ getFormattedTime(getScaledTime(recipe.cookTime)) }}</span>
-          </div>
+
       </article>
 
       <!-- Scaled Ingredients -->
       <div class="scaled-ingredients">
         <h4>Ingredients</h4>
         <mat-list class="flex flex-col gap-sm">
-          <mat-list-item *ngFor="let ingredient of scaledIngredients" class="ingredient-item">
+          <mat-list-item *ngFor="let ingredient of scaledIngredients" class="ingredient-item"></mat-list-item></mat-list>
             
               <span class="ingredient-quantity">{{ getFormattedQuantity(ingredient.quantity) }}</span>
               <span class="ingredient-unit">{{ ingredient.unit }}</span>
               <span class="ingredient-name">{{ ingredient.food?.name || ingredient.note }}</span>
               <span class="ingredient-notes" *ngIf="ingredient.notes">({{ ingredient.notes }})</span>
-            
-          </mat-list-item>
-        </mat-list>
-      </div>
 
       <!-- Scaled Instructions -->
       <div class="scaled-instructions" *ngIf="recipe.instructions">
         <h4>Instructions</h4>
         <mat-list class="flex flex-col gap-sm">
-          <mat-list-item *ngFor="let instruction of recipe.instructions" class="instruction-item">
+          <mat-list-item *ngFor="let instruction of recipe.instructions" class="instruction-item"></mat-list-item></mat-list>
             
               <span class="instruction-number">{{ instruction.position }}.</span>
               <span class="instruction-text">{{ instruction.text }}</span>
-            
-          </mat-list-item>
-        </mat-list>
-      </div>
 
     <!-- Action Buttons -->
     <div class="action-buttons">
-      <button 
-        mat-raised-button 
-        class="btn btn-primary"
-        (click)="onSaveScaledRecipe()"
-        [disabled]="loading">
-        <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner>
-        <span *ngIf="!loading">
-          <mat-icon>save</mat-icon>
-          Save Scaled Recipe
-        </span>
-      </div>
-      <button 
-        mat-raised-button 
-        class="btn btn-secondary"
-        (click)="onPrintScaledRecipe()"
-        [disabled]="loading">
-        <mat-icon>print</mat-icon>
-        Print Scaled Recipe
-      </article>
-      <button 
-        mat-raised-button 
-        class="btn btn-primary"
-        (click)="onExportScaledRecipe()"
-        [disabled]="loading">
-        <mat-icon>download</mat-icon>
-        Export Scaled Recipe
-      </div>
-    </section>
-
+      <button mat-raised-button class="btn btn-primary" (click)="onSaveScaledRecipe()" [disabled]="loading"> <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner> <span *ngIf="!loading"></span> <mat-icon>save</mat-icon> Save Scaled Recipe</button>
+      <button mat-raised-button class="btn btn-secondary" (click)="onPrintScaledRecipe()" [disabled]="loading"> <mat-icon>print</mat-icon> Print Scaled Recipe</button>
+      <button mat-raised-button class="btn btn-primary" (click)="onExportScaledRecipe()" [disabled]="loading"> <mat-icon>download</mat-icon> Export Scaled Recipe</button>
   <!-- No Recipe State -->
   <div *ngIf="!loading && !recipe" class="no-recipe">
     <mat-icon class="no-recipe-icon">restaurant</mat-icon>
     <h3 class="text-lg font-medium mb-sm">No Recipe Selected</h3>
     <p class="text-secondary mb-sm">Please select a recipe to scale.</p>
-  </div>

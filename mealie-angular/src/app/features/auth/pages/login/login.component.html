@@ -1,9 +1,8 @@
 <section class="min-h-screen flex items-center justify-center p-md">
   <mat-card class="card w-full max-w-md">
-    <mat-card-header class="text-center mb-lg card">
+    <mat-card-header class="text-center mb-lg card"></mat-card-header>
       <mat-card-title class="text-2xl font-medium mb-sm card">Welcome Back</mat-card-title>
       <mat-card-subtitle class="text-secondary card">Sign in to your account</mat-card-subtitle>
-    </mat-card-header>
 
     <mat-card-content class="card">
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-md">
@@ -16,9 +15,8 @@
             placeholder="Enter your username"
             autocomplete="username">
           <mat-icon matPrefix>person</mat-icon>
-          <mat-error *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
+          <mat-error *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched"></mat-error>
             {{ getErrorMessage('username') }}
-          </mat-error>
         </mat-form-field>
 
         <!-- Password Field -->
@@ -31,45 +29,16 @@
             placeholder="Enter your password"
             autocomplete="current-password">
           <mat-icon matPrefix>lock</mat-icon>
-          <button 
-            mat-icon-button 
-            matSuffix 
-            type="button"
-            (click)="togglePasswordVisibility()"
-            [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'">
-            <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
-          </mat-form-field>
-          <mat-error *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
-            {{ getErrorMessage('password') }}
-          </mat-error>
+          <button mat-icon-button matSuffix type="button" (click)="togglePasswordVisibility()" [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'"> <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon> <mat-error *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"></mat-error> {{ getErrorMessage('password') }}</button>
         </form>
 
         <!-- Remember Me Checkbox -->
-        <mat-checkbox formControlName="rememberMe" class="mb-md">
+        <mat-checkbox formControlName="rememberMe" class="mb-md"></mat-checkbox>
           Remember me
-        </mat-checkbox>
 
         <!-- Submit Button -->
-        <button 
-          mat-raised-button 
-          type="submit"
-          class="btn btn-primary w-full py-md"
-          [disabled]="loading || loginForm.invalid">
-          <mat-spinner *ngIf="loading" diameter="20" class="mr-sm"></mat-spinner>
-          <span>{{ loading ? 'Signing in...' : 'Sign In' }}</span>
-        </mat-card-content>
-      </mat-card>
-    </section>
+        <button mat-raised-button type="submit" class="btn btn-primary w-full py-md" [disabled]="loading || loginForm.invalid"> <mat-spinner *ngIf="loading" diameter="20" class="mr-sm"></mat-spinner> <span>{{ loading ? 'Signing in...' : 'Sign In' }}</span></button>
 
-    <mat-card-actions class="flex flex-col gap-sm pt-md card">
-      <button 
-        mat-button 
-        (click)="onForgotPassword()"
-        class="w-full">
-        Forgot Password?
-      </mat-card-actions>
-      <button 
-        mat-button 
-        (click)="onRegister()"
-        class="w-full text-primary">
-        Don't have an account? Sign up
+    <mat-card-actions class="flex flex-col gap-sm pt-md card"></mat-card-actions>
+      <button mat-button (click)="onForgotPassword()" class="w-full"> Forgot Password?</button>
+      <button mat-button (click)="onRegister()" class="w-full text-primary"> Don't have an account? Sign up</button>

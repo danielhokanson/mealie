@@ -20,18 +20,8 @@
             <mat-icon matPrefix>search</mat-icon>
           </mat-form-field>
           
-          <button mat-icon-button
-                  (click)="closeDialog()"
-                  class="close-button">
-            <mat-icon>close</mat-icon>
-          </mat-toolbar>
-        </mat-card>
-
-        <!-- Search Results -->
-        <div class="search-results" [class.loading]="loading">
-          <div class="results-header">
+          <button mat-icon-button(click)="closeDialog()" class="close-button"> <mat-icon>close</mat-icon> <!-- Search Results --> <div class="search-results" [class.loading]="loading"> <div class="results-header"></button>
             <span class="results-count">Results</span>
-          </div>
 
           <section class="page-container">
             <app-recipe-card-mobile
@@ -45,15 +35,21 @@
               [tabindex]="index"
               class="arrow-nav"
               [class.selected]="selected && index === selectedIndex"
-              (click)="handleSelect(recipe)">
+              (click)="handleSelect(recipe)"></app-recipe-card-mobile></<app-recipe-card-mobile
+              *ngFor="let recipe of searchResults; let index = index"
+              [name]="recipe.name"
+              [description]="recipe.description"
+              [slug]="recipe.slug"
+              [rating]="recipe.rating"
+              [image]="recipe.image"
+              [recipeId]="recipe.id"
+              [tabindex]="index"
+              class="arrow-nav"
+              [class.selected]="selected && index === selectedIndex"
+              (click)="handleSelect(recipe)"></app-recipe-card-mobile>>
             </section>
 
             <div *ngIf="searchResults.length === 0 && !loading" class="flex flex-col items-center justify-center py-xl text-center">
               <mat-icon class="no-results-icon">search_off</mat-icon>
               <p class="no-results-text text-secondary mb-sm">No recipes found</p>
-            </div>
-        </div>
-      </div>
-    </div>
 
-</div>

@@ -6,14 +6,12 @@
             <mat-divider *ngIf="inputField.section" class="section-divider"></mat-divider>
             
             <!-- Section Title -->
-            <h3 *ngIf="inputField.section" class="section-title text-lg font-medium mb-sm">
+            <h3 *ngIf="inputField.section" class="section-title text-lg font-medium mb-sm"></h3>
                 {{ inputField.section }}
-            </h3>
             
             <!-- Section Details -->
-            <p *ngIf="inputField.sectionDetails" class="section-details text-secondary mb-sm">
+            <p *ngIf="inputField.sectionDetails" class="section-details text-secondary mb-sm"></p>
                 {{ inputField.sectionDetails }}
-            </p>
 
             <!-- Checkbox Field -->
             <mat-checkbox
@@ -24,7 +22,6 @@
                 (blur)="onFieldBlur()"
                 class="form-checkbox">
                 {{ inputField.label }}
-            </div>
 
             <!-- Text Field -->
             <mat-form-field
@@ -41,7 +38,6 @@
                     (ngModelChange)="onFieldChange(inputField.varName, $event)"
                     (blur)="onFieldBlur()">
                 <mat-hint *ngIf="inputField.hint">{{ inputField.hint }}</mat-hint>
-            </div>
 
             <!-- Text Area -->
             <mat-form-field
@@ -68,9 +64,8 @@
                     [disabled]="isFieldDisabled(inputField)"
                     (ngModelChange)="onFieldChange(inputField.varName, $event)"
                     (blur)="onFieldBlur()">
-                    <mat-option *ngFor="let option of inputField.options" [value]="option.value">
+                    <mat-option *ngFor="let option of inputField.options" [value]="option.value"></mat-option>
                         {{ option.label }}
-                    </mat-option>
                 <mat-hint *ngIf="inputField.hint">{{ inputField.hint }}</mat-hint>
 
             <!-- Multi Select Field -->
@@ -84,9 +79,8 @@
                     multiple
                     (ngModelChange)="onFieldChange(inputField.varName, $event)"
                     (blur)="onFieldBlur()">
-                    <mat-option *ngFor="let option of inputField.options" [value]="option.value">
+                    <mat-option *ngFor="let option of inputField.options" [value]="option.value"></mat-option>
                         {{ option.label }}
-                    </mat-option>
                 <mat-hint *ngIf="inputField.hint">{{ inputField.hint }}</mat-hint>
 
             <!-- Number Field -->
@@ -115,44 +109,37 @@
                     [disabled]="isFieldDisabled(inputField)"
                     (ngModelChange)="onFieldChange(inputField.varName, $event)"
                     (blur)="onFieldBlur()">
-                </div>
+
                 <span class="slider-value">{{ modelValue[inputField.varName] }}</span>
 
             <!-- Color Field -->
             <div *ngIf="inputField.type === fieldTypes.COLOR" class="flex items-center gap-md">
                 <label>{{ inputField.label }}</label>
-                <button
-                    mat-button
-                    [style.background-color]="modelValue[inputField.varName] || '#7417BE'"
-                    [disabled]="isFieldDisabled(inputField)"
-                    [matMenuTriggerFor]="colorMenu"
-                    class="color-button">
-                    {{ inputField.label }}
-                </div>
-                <mat-menu #colorMenu="matMenu">
-                    <div class="color-picker">
+                <buttonmat-button [style.background-color]="modelValue[inputField.varName] || '#7417BE'" [disabled]="isFieldDisabled(inputField)" [matMenuTriggerFor]="colorMenu" class="color-button"> {{ inputField.label }} <mat-menu #colorMenu="matMenu"></mat-menu> <div class="color-picker"></button>
                         <input
                             type="color"
                             [(ngModel)]="modelValue[inputField.varName]"
                             (ngModelChange)="onFieldChange(inputField.varName, $event)"
                             (blur)="onFieldBlur()"
                             class="color-input">
-                    </div>
-                </mat-menu>
 
             <!-- Object Field -->
             <div *ngIf="inputField.type === fieldTypes.OBJECT" class="border rounded-lg p-md">
                 <app-auto-form
                     [items]="inputField.items || []"
                     [color]="color"
-                    (blur)="onFieldBlur()">
-                </div>
-
+                    (blur)="onFieldBlur()"></app-auto-form></<app-auto-form
+                    [items]="inputField.items || []"
+                    [color]="color"
+                    (blur)="onFieldBlur()"></app-auto-form>></<app-auto-form
+                    [items]="inputField.items || []"
+                    [color]="color"
+                    (blur)="onFieldBlur()"></app-auto-form>>>
             <!-- List Field -->
             <div *ngIf="inputField.type === fieldTypes.LIST" class="flex flex-col gap-sm">
                 <label>{{ inputField.label }}</label>
                 <div *ngFor="let item of modelValue[inputField.varName]; let i = index; trackBy: trackByIndex" class="list-item">
-                    <mat-form-field class="list-input w-full">
+                    <mat-form-field class="list-input w-full"></mat-form-field>
                         <mat-label>Item {{ i + 1 }}</mat-label>
                         <input
                             matInput
@@ -160,25 +147,8 @@
                             [disabled]="isFieldDisabled(inputField)"
                             (ngModelChange)="onFieldChange(inputField.varName, modelValue[inputField.varName])"
                             (blur)="onFieldBlur()">
-                    </mat-form-field>
-                    <button
-                        mat-icon-button
-                        class="btn btn-error"
-                        (click)="removeByIndex(modelValue[inputField.varName], i)"
-                        class="remove-button">
-                        <mat-icon>delete</mat-icon>
-                    </div>
-                </div>
-                <button
-                    mat-button
-                    class="btn btn-primary"
-                    (click)="addListItem(inputField)"
-                    class="add-button">
-                    <mat-icon>add</mat-icon>
-                    Add Item
-
-            <!-- Date Field -->
-            <mat-form-field
+                    <buttonmat-icon-button class="btn btn-error remove-button" (click)="removeByIndex(modelValue[inputField.varName], i)" > <mat-icon>delete</mat-icon></button>
+                <buttonmat-button class="btn btn-primary add-button" (click)="addListItem(inputField)" > <mat-icon>add</mat-icon> Add Item <!-- Date Field --> <mat-form-field</button>
                 *ngIf="inputField.type === fieldTypes.DATE"
                 class="w-full">
                 <mat-label>{{ inputField.label }}</mat-label>

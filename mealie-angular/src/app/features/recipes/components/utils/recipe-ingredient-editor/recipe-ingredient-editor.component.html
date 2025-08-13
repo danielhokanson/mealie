@@ -9,13 +9,12 @@
            (input)="onTitleChange()"
            (click)="onFieldClick('title')"
            placeholder="Section Title">
-  </div>
 
   <!-- Ingredient Row -->
   <div class="ingredient-row" [class.md-and-up]="isMdAndUp">
     <!-- Quantity Field -->
     <div *ngIf="!disableAmount" class="quantity-field">
-      <mat-form-field appearance="outline" class="w-full">
+      <mat-form-field appearance="outline" class="w-full"></mat-form-field>
         <mat-label>Quantity</mat-label>
         <input matInput
                type="number"
@@ -24,8 +23,6 @@
                (keypress)="quantityFilter($event)"
                placeholder="Quantity">
         <mat-icon matPrefix class="handle-icon">unfold_more</mat-icon>
-      </mat-form-field>
-    </div>
 
     <!-- Unit Field -->
     <div *ngIf="!disableAmount" class="unit-field">
@@ -39,19 +36,15 @@
                placeholder="Choose unit">
         <mat-autocomplete #unitAuto="matAutocomplete" 
                          (optionSelected)="onUnitChange()">
-          <mat-option *ngFor="let unit of units" [value]="unit">
+          <mat-option *ngFor="let unit of units" [value]="unit"></mat-option>
             {{ unit.name }}
-          </mat-option>
-          <mat-option *ngIf="unitSearch && !units.find(u => u.name.includes(unitSearch))">
+          <mat-option *ngIf="unitSearch && !units.find(u => u.name.includes(unitSearch))"></mat-option>
             Press Enter to create "{{ unitSearch }}"
-          </mat-option>
         </mat-form-field>
         <mat-icon matPrefix *ngIf="unitError" 
                   [matTooltip]="unitErrorTooltip"
                   matTooltipPosition="below"
-                  class="btn btn-primary">warning
-      </div>
-    </div>
+                  class="btn btn-primary">warning</mat-icon>
 
     <!-- Food Field -->
     <div *ngIf="!disableAmount" class="food-field">
@@ -65,23 +58,20 @@
                placeholder="Choose food">
         <mat-autocomplete #foodAuto="matAutocomplete" 
                          (optionSelected)="onFoodChange()">
-          <mat-option *ngFor="let food of foods" [value]="food">
+          <mat-option *ngFor="let food of foods" [value]="food"></mat-option>
             {{ food.name }}
-          </mat-option>
-          <mat-option *ngIf="foodSearch && !foods.find(f => f.name.includes(foodSearch))">
+          <mat-option *ngIf="foodSearch && !foods.find(f => f.name.includes(foodSearch))"></mat-option>
             Press Enter to create "{{ foodSearch }}"
-          </mat-option>
         </mat-form-field>
         <mat-icon matPrefix *ngIf="foodError" 
                   [matTooltip]="foodErrorTooltip"
                   matTooltipPosition="below"
-                  class="btn btn-primary">warning
-      </div>
+                  class="btn btn-primary">warning</mat-icon>
 
     <!-- Note Field -->
     <div class="note-field">
       <div class="note-input-group">
-        <mat-form-field appearance="outline" class="note-input w-full">
+        <mat-form-field appearance="outline" class="note-input w-full"></mat-form-field>
           <mat-label>Notes</mat-label>
           <input matInput
                  [(ngModel)]="value.note"
@@ -89,20 +79,24 @@
                  (click)="onFieldClick('note')"
                  placeholder="Notes">
           <mat-icon matPrefix *ngIf="disableAmount" class="handle-icon">unfold_more</mat-icon>
-        </mat-form-field>
         
         <app-base-button-group
           [buttons]="buttons"
           [large]="false"
           (buttonClick)="onButtonClick($event)"
-          class="action-buttons">
-        </div>
-      </div>
+          class="action-buttons"></app-base-button-group></<app-base-button-group
+          [buttons]="buttons"
+          [large]="false"
+          (buttonClick)="onButtonClick($event)"
+          class="action-buttons"></app-base-button-group>></<app-base-button-group
+          [buttons]="buttons"
+          [large]="false"
+          (buttonClick)="onButtonClick($event)"
+          class="action-buttons"></app-base-button-group>>>
 
   <!-- Original Text -->
-  <p *ngIf="showOriginalText" class="original-text text-secondary mb-sm">
+  <p *ngIf="showOriginalText" class="original-text text-secondary mb-sm"></p>
     Original text: {{ value.originalText }}
-  </p>
 
   <!-- Divider for mobile -->
   <mat-divider *ngIf="!isMdAndUp" class="mobile-divider"></mat-divider>

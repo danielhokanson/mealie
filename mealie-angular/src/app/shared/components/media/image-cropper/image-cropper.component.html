@@ -9,39 +9,15 @@
                     [style.width]="cropperWidth" 
                     [style.height]="cropperHeight"
                     class="cropper-canvas">
-            </mat-card-content>
+
         </mat-card>
 
         <!-- Control buttons -->
         <mat-card-actions class="cropper-controls card">
             <div class="control-group" *ngFor="let group of controls">
-                <button
-                    *ngFor="let control of group"
-                    mat-icon-button
-                    [color]="control.color"
-                    (click)="control.callback()"
-                    class="control-button">
-                    <mat-icon>{{ control.icon }}</mat-icon>
-                </div>
-            </mat-card-actions>
-        </section>
+                <button*ngFor="let control of group" mat-icon-button [color]="control.color" (click)="control.callback()" class="control-button"> <mat-icon>{{ control.icon }}</mat-icon></button>
 
         <!-- Action buttons -->
-        <mat-card-actions class="action-buttons card">
-            <button
-                mat-raised-button
-                class="btn btn-error"
-                (click)="onDelete()"
-                class="delete-button">
-                <mat-icon>delete</mat-icon>
-                Delete
-            </mat-card-actions>
-            
-            <button
-                mat-raised-button
-                class="btn btn-primary"
-                [disabled]="submitted"
-                (click)="onSave()"
-                class="save-button">
-                <mat-icon>save</mat-icon>
-                Save
+        <mat-card-actions class="action-buttons card"></mat-card-actions>
+            <buttonmat-raised-button class="btn btn-error delete-button" (click)="onDelete()" > <mat-icon>delete</mat-icon> Delete</button>
+            <buttonmat-raised-button class="btn btn-primary save-button" [disabled]="submitted" (click)="onSave()" > <mat-icon>save</mat-icon> Save</button>

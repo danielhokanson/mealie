@@ -1,11 +1,2 @@
 <mat-toolbar class="app-toolbar">
-  <button
-    *ngIf="back"
-    mat-button
-    class="btn btn-primary back-button"
-    (click)="goBack()">
-    <mat-icon>arrow_back</mat-icon>
-    Back
-  </mat-toolbar>
-  
-  <ng-content></ng-content>
+  <button*ngIf="back" mat-button class="btn btn-primary back-button" (click)="goBack()"> <mat-icon>arrow_back</mat-icon> Back <ng-content></ng-content></button>

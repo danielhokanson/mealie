@@ -8,16 +8,7 @@
     (change)="onFileChanged($event)"
   >
   
-  <button
-    mat-button
-    [color]="color"
-    [disabled]="disabled"
-    [class.small]="small"
-    [class.text-button]="textBtn"
-    [class.elevated-button]="!textBtn"
-    (click)="onButtonClick()"
-    class="upload-button">
-    
+  <buttonmat-button [color]="color" [disabled]="disabled" [class.small]="small" [class.text-button]="textBtn" [class.elevated-button]="!textBtn" (click)="onButtonClick()" class="upload-button"></button>
     <mat-spinner
       *ngIf="isSelecting"
       diameter="20"

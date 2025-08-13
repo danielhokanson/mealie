@@ -6,73 +6,37 @@
           [checked]="modelValue.checked"
           (change)="onCheckedChange($event.checked)"
           class="item-checkbox">
-        </div>
-        
+
         <div 
           class="item-text"
           [class.strike-through]="modelValue.checked">
-          <span class="item-quantity" *ngIf="getQuantityDisplay()">
+          <span class="item-quantity" *ngIf="getQuantityDisplay()"></span>
             {{ getQuantityDisplay() }}
-          </span>
           <span class="item-name">{{ modelValue.name }}</span>
-          <span class="item-notes" *ngIf="modelValue.notes">
+          <span class="item-notes" *ngIf="modelValue.notes"></span>
             {{ modelValue.notes }}
-          </span>
-        </div>
-    </div>
-    
+
     <div class="item-spacer"></div>
     
     <div class="item-label" *ngIf="label && showLabel">
       <app-multi-purpose-label
         [label]="label"
-        size="small">
-      </div>
-    </div>
-    
+        size="small"></app-multi-purpose-label></<app-multi-purpose-label
+        [label]="label"
+        size="small"></app-multi-purpose-label>></<app-multi-purpose-label
+        [label]="label"
+        size="small"></app-multi-purpose-label>>>
+
     <div class="item-actions" *ngIf="!modelValue.checked">
       <div class="action-buttons">
-        <button 
-          *ngIf="recipeList.length > 0"
-          mat-icon-button
-          size="small"
-          class="recipe-toggle-btn"
-          [matTooltip]="'Toggle Recipes'"
-          (click)="displayRecipeRefs = !displayRecipeRefs">
-          <mat-icon>restaurant</mat-icon>
-        </div>
-        
-        <button 
-          *ngIf="!recipeList.length"
-          mat-icon-button
-          size="small"
-          class="dummy-btn"
-          disabled>
-        </div>
-        
-        <button 
-          mat-icon-button
-          size="small"
-          class="drag-handle"
-          [matMenuTriggerFor]="contextMenu">
-          <mat-icon>drag_indicator</mat-icon>
-        
-        <button 
-          mat-icon-button
-          size="small"
-          class="edit-btn"
-          (click)="toggleEdit(true)">
-          <mat-icon>edit</mat-icon>
-      
-      <mat-menu #contextMenu="matMenu">
-        <mat-list class="flex flex-col gap-sm">
-          <mat-list-item 
+        <button *ngIf="recipeList.length > 0" mat-icon-button size="small" class="recipe-toggle-btn" [matTooltip]="'Toggle Recipes'" (click)="displayRecipeRefs = !displayRecipeRefs"> <mat-icon>restaurant</mat-icon></button>
+        <button *ngIf="!recipeList.length" mat-icon-button size="small" class="dummy-btn" disabled></button>
+        <button mat-icon-button size="small" class="drag-handle" [matMenuTriggerFor]="contextMenu"> <mat-icon>drag_indicator</mat-icon></button>
+        <button mat-icon-button size="small" class="edit-btn" (click)="toggleEdit(true)"> <mat-icon>edit</mat-icon> <mat-menu #contextMenu="matMenu"></mat-menu> <mat-list class="flex flex-col gap-sm"> <mat-list-item</mat-list></button>
             *ngFor="let action of contextMenu"
             (click)="onContextHandler(action.event)"
             class="context-menu-item">
-            {{ action.text }}
-          </mat-list>
-        </mat-menu>
+            {{ action.text }}</mat-list-item>
   
   <!-- Recipe References -->
   <div 
@@ -82,15 +46,17 @@
       [recipes]="recipeList"
       [listItem]="modelValue"
       [small]="true"
-      [tile]="true">
-  
+      [tile]="true"></app-recipe-list></<app-recipe-list
+      [recipes]="recipeList"
+      [listItem]="modelValue"
+      [small]="true"
+      [tile]="true"></app-recipe-list>>
   <!-- Completion Info -->
   <div 
     *ngIf="modelValue.checked"
     class="completion-info">
-    <span class="completion-text">
+    <span class="completion-text"></span>
       Completed on {{ modelValue.updatedAt | date:'shortDate' }}
-    </span>
 
 <!-- Edit Mode -->
 <div *ngIf="edit" class="edit-mode">
@@ -101,5 +67,11 @@
     [foods]="foods"
     (save)="onSave()"
     (cancel)="onCancel()"
-    (delete)="delete.emit()">
-  </div>
+    (delete)="delete.emit()"></app-shopping-list-item-editor></<app-shopping-list-item-editor
+    [(modelValue)]="localListItem"
+    [labels]="labels"
+    [units]="units"
+    [foods]="foods"
+    (save)="onSave()"
+    (cancel)="onCancel()"
+    (delete)="delete.emit()"></app-shopping-list-item-editor>>

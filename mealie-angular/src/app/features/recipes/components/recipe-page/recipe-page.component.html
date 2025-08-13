@@ -5,40 +5,45 @@
       <article class="card">
         <h1 class="recipe-title text-2xl font-medium mb-md">{{ recipe.name }}</h1>
         <article class="card">
-          <span class="recipe-rating">
+          <span class="recipe-rating"></span>
             <mat-icon *ngFor="let star of [1,2,3,4,5]" 
                       [color]="star <= recipe.rating ? 'accent' : 'basic'">
               {{ star <= recipe.rating ? 'star' : 'star_border' }}
 
             <span class="rating-text">{{ recipe.rating }}/5</span>
-          </span>
-          <span class="recipe-servings">
+          <span class="recipe-servings"></span>
             <mat-icon>people</mat-icon>
             {{ recipe.servings }} servings
-          </span>
-          <span class="recipe-time">
+          <span class="recipe-time"></span>
             <mat-icon>schedule</mat-icon>
             {{ totalTime }} min
-          </span>
         </article>
       
-      <article class="card">
+      <article class="card"></article>
         <app-base-button 
           [edit]="true" 
           (click)="toggleEditMode()"
-          *ngIf="!isEditForm">
+          *ngIf="!isEditForm"></app-base-button></<app-base-button 
+          [edit]="true" 
+          (click)="toggleEditMode()"
+          *ngIf="!isEditForm"></app-base-button>>
           Edit
-        </article>
         <app-base-button 
           [save]="true" 
           (click)="onSave()"
-          *ngIf="isEditForm">
+          *ngIf="isEditForm"></app-base-button></<app-base-button 
+          [save]="true" 
+          (click)="onSave()"
+          *ngIf="isEditForm"></app-base-button>>
           Save
         </article>
         <app-base-button 
           [delete]="true" 
           (click)="onDelete()"
-          *ngIf="isEditForm">
+          *ngIf="isEditForm"></app-base-button></<app-base-button 
+          [delete]="true" 
+          (click)="onDelete()"
+          *ngIf="isEditForm"></app-base-button>>
           Delete
         </article>
       </mat-card>
@@ -46,12 +51,10 @@
     <!-- Recipe Image -->
     <div *ngIf="recipe.image" class="recipe-image-container">
       <img [src]="recipe.image" [alt]="recipe.name" class="recipe-image">
-    </div>
 
     <!-- Recipe Description -->
     <div *ngIf="recipe.description" class="recipe-description">
-      <app-safe-markdown [markdown]="recipe.description"></app-safe-markdown>
-    </div>
+      <app-safe-markdown [markdown]="recipe.description"></app-safe-markdow></app-safe-markdown>
 
     <!-- Recipe Scale -->
     <article class="card">
@@ -82,15 +85,16 @@
             <div class="ingredient-name">{{ ingredient.name }}</div>
             <div *ngIf="ingredient.notes" class="ingredient-notes">
               {{ ingredient.notes }}
-            </div>
-        </div>
-        
+
         <app-base-button 
           *ngIf="isEditForm"
           [create]="true" 
-          (click)="addIngredient()">
+          (click)="addIngredient()"></app-base-button></<app-base-button 
+          *ngIf="isEditForm"
+          [create]="true" 
+          (click)="addIngredient()"></app-base-button>>
           Add Ingredient
-        </div>
+
       </article>
 
       <mat-divider vertical class="recipe-divider"></mat-divider>
@@ -102,12 +106,14 @@
                class="instruction-item">
             <div class="instruction-number">{{ instruction.order }}</div>
             <div class="instruction-text">{{ instruction.text }}</div>
-        </div>
-        
+
         <app-base-button 
           *ngIf="isEditForm"
           [create]="true" 
-          (click)="addInstruction()">
+          (click)="addInstruction()"></app-base-button></<app-base-button 
+          *ngIf="isEditForm"
+          [create]="true" 
+          (click)="addInstruction()"></app-base-button>>
           Add Step
         </article>
       </article>
@@ -115,14 +121,10 @@
     <!-- Recipe Notes -->
     <div *ngIf="recipe.notes" class="recipe-notes">
       <h3 class="text-lg font-medium mb-sm">Notes</h3>
-      <app-safe-markdown [markdown]="recipe.notes"></app-safe-markdown>
-    </div>
+      <app-safe-markdown [markdown]="recipe.notes"></app-safe-markdow></app-safe-markdown>
 
     <!-- Recipe Tags -->
     <div *ngIf="recipe.tags.length > 0" class="recipe-tags">
-      <mat-chip-set>
-        <mat-chip *ngFor="let tag of recipe.tags" [color]="tag.color || 'primary'">
+      <mat-chip-set></mat-chip></mat-chip-set>
+    <mat-chip *ngFor="let tag of recipe.tags" [color]="tag.color || 'primary'"></mat-chip>
           {{ tag.name }}
-        </mat-chip>
-      </mat-chip-set>
-    </div>

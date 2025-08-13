@@ -8,16 +8,13 @@
           [style.max-height]="icon ? '90px' : 'auto'"
           [style.width]="icon ? 'auto' : '100%'">
           
-          <mat-icon *ngIf="icon" class="avatar-icon">
-            {{ icon }}
+          <mat-icon *ngIf="icon" class="avatar-icon">{{ icon }}</mat-icon>
 
           <div *ngIf="text" class="avatar-text">
-            {{ text }}
-          </div>
+            {{ text }}</mat-icon>
 
     <div *ngIf="hasAfterHeading" class="after-heading">
       <ng-content select="[slot=after-heading]"></ng-content>
-    </div>
 
     <ng-content></ng-content>
 
@@ -30,11 +27,5 @@
     <mat-divider></mat-divider>
     
       <ng-content select="[slot=bottom]"></ng-content>
-    
-</div>
 
-</div>
-</mat-icon>
-</div>
-</div>
 </mat-card>

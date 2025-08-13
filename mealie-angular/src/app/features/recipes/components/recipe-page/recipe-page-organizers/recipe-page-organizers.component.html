@@ -1,9 +1,8 @@
 <article class="card">
   <!-- Recipe Categories -->
   <mat-card *ngIf="recipe.recipeCategory.length  class="card"> 0 || isEditForm" class="organizer-card">
-    <mat-card-header class="card">
-      <mat-card-title class="card">Categories</mat-card-title>
-    </mat-card-header>
+    <mat-card-header class="card"></mat-card-header>
+      <mat-card-title >Categories</mat-card-title>
     
     <mat-divider></mat-divider>
     
@@ -13,20 +12,25 @@
         [(ngModel)]="recipe.recipeCategory"
         [returnObject]="true"
         [showAdd]="true"
-        selectorType="categories">
-      </mat-card-content>
-      
+        selectorType="categories"></app-recipe-organizer-selector></<app-recipe-organizer-selector
+        *ngIf="isEditForm"
+        [(ngModel)]="recipe.recipeCategory"
+        [returnObject]="true"
+        [showAdd]="true"
+        selectorType="categories"></app-recipe-organizer-selector>>
+
       <app-recipe-chips
         *ngIf="!isEditForm"
-        [items]="recipe.recipeCategory">
+        [items]="recipe.recipeCategory"></app-recipe-chips></<app-recipe-chips
+        *ngIf="!isEditForm"
+        [items]="recipe.recipeCategory"></app-recipe-chips>>
       </mat-card>
     </article>
 
   <!-- Recipe Tags -->
   <mat-card *ngIf="recipe.tags.length  class="card"> 0 || isEditForm" class="organizer-card">
-    <mat-card-header class="card">
-      <mat-card-title class="card">Tags</mat-card-title>
-    </mat-card-header>
+    <mat-card-header class="card"></mat-card-header>
+      <mat-card-title >Tags</mat-card-title>
     
     <mat-divider></mat-divider>
     
@@ -36,37 +40,46 @@
         [(ngModel)]="recipe.tags"
         [returnObject]="true"
         [showAdd]="true"
-        selectorType="tags">
-      </mat-card-content>
-      
+        selectorType="tags"></app-recipe-organizer-selector></<app-recipe-organizer-selector
+        *ngIf="isEditForm"
+        [(ngModel)]="recipe.tags"
+        [returnObject]="true"
+        [showAdd]="true"
+        selectorType="tags"></app-recipe-organizer-selector>>
+
       <app-recipe-chips
         *ngIf="!isEditForm"
         [items]="recipe.tags"
-        urlPrefix="tags">
+        urlPrefix="tags"></app-recipe-chips></<app-recipe-chips
+        *ngIf="!isEditForm"
+        [items]="recipe.tags"
+        urlPrefix="tags"></app-recipe-chips>>
       </mat-card>
 
   <!-- Recipe Tools -->
   <mat-card *ngIf="isEditForm" class="organizer-card card">
-    <mat-card-header class="card">
-      <mat-card-title class="card">Required Tools</mat-card-title>
-    </mat-card-header>
+    <mat-card-header class="card"></mat-card-header>
+      <mat-card-title >Required Tools</mat-card-title>
     
     <mat-divider></mat-divider>
     
-    <mat-card-content class="card">
+    <mat-card-content class="card"></mat-card>
       <app-recipe-organizer-selector
         [(ngModel)]="recipe.tools"
-        selectorType="tools">
-      </mat-card-content>
-    </mat-card>
+        selectorType="tools"></app-recipe-organizer-selector></<app-recipe-organizer-selector
+        [(ngModel)]="recipe.tools"
+        selectorType="tools"></app-recipe-organizer-selector>>
 
   <!-- Recipe Nutrition -->
   <app-recipe-nutrition
     *ngIf="recipe.settings?.showNutrition"
     [(ngModel)]="recipe.nutrition"
     [edit]="isEditForm"
-    class="nutrition-section">
-
+    class="nutrition-section"></app-recipe-nutrition></<app-recipe-nutrition
+    *ngIf="recipe.settings?.showNutrition"
+    [(ngModel)]="recipe.nutrition"
+    [edit]="isEditForm"
+    class="nutrition-section"></app-recipe-nutrition>>
   <!-- Recipe Assets -->
   <app-recipe-assets
     *ngIf="recipe.settings?.showAssets"
@@ -74,4 +87,10 @@
     [edit]="isEditForm"
     [slug]="recipe.slug"
     [recipeId]="recipe.id"
-    class="assets-section">
+    class="assets-section"></app-recipe-assets></<app-recipe-assets
+    *ngIf="recipe.settings?.showAssets"
+    [(ngModel)]="recipe.assets"
+    [edit]="isEditForm"
+    [slug]="recipe.slug"
+    [recipeId]="recipe.id"
+    class="assets-section"></app-recipe-assets>>

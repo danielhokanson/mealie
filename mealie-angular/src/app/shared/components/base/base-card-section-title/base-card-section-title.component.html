@@ -1,11 +1,8 @@
 <mat-card class="section-title-card card">
   
-    <mat-icon *ngIf="icon" [color]="color" class="title-icon">
-      {{ icon }}
+    <mat-icon *ngIf="icon" [color]="color" class="title-icon">{{ icon }}</mat-icon>
 
     <h3 class="section-title text-lg font-medium mb-sm">{{ title }}</h3>
   
-  <ng-content></ng-content>
-
-</mat-icon>
+  <ng-content></ng-content></mat-icon>
 </mat-card>

@@ -1,100 +1,82 @@
 <section class="page-container">
-  <article class="card">
+  <article class="card"></article>
     <h1 class="text-2xl font-medium mb-md">Create New Recipe</h1>
     <p class="text-secondary mb-sm">Fill in the details below to create your recipe</p>
-  </article>
 
   <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()" class="recipe-form">
     <!-- Basic Information -->
     <mat-card class="form-section card">
-      <mat-card-header class="card">
-        <mat-card-title class="card">Basic Information</mat-card-title>
-      </mat-card-header>
+      <mat-card-header class="card"></mat-card-header>
+        <mat-card-title >Basic Information</mat-card-title>
       <mat-card-content class="card">
         <div class="form-row">
-          <mat-form-field appearance="outline" class="w-full">
+          <mat-form-field appearance="outline" class="w-full"></mat-form-field>
             <mat-label>Recipe Name</mat-label>
             <input 
               matInput 
               formControlName="name"
               placeholder="Enter recipe name">
-            <mat-error *ngIf="recipeForm.get('name')?.invalid && recipeForm.get('name')?.touched">
+            <mat-error *ngIf="recipeForm.get('name')?.invalid && recipeForm.get('name')?.touched"></mat-error>
               {{ getErrorMessage('name') }}
-            </mat-error>
-          </mat-form-field>
-        </div>
 
         <div class="form-row">
-          <mat-form-field appearance="outline" class="w-full">
+          <mat-form-field appearance="outline" class="w-full"></mat-form-field>
             <mat-label>Description</mat-label>
             <textarea 
               matInput 
               formControlName="description"
               placeholder="Enter recipe description"
               rows="3">
-            </mat-form-field>
-          </div>
-        </mat-card-content>
 
         <div class="form-row time-inputs">
-          <mat-form-field appearance="outline" class="w-full">
+          <mat-form-field appearance="outline" class="w-full"></mat-form-field>
             <mat-label>Prep Time (minutes)</mat-label>
             <input 
               matInput 
               type="number"
               formControlName="prepTime"
               min="0">
-            <mat-error *ngIf="recipeForm.get('prepTime')?.invalid && recipeForm.get('prepTime')?.touched">
+            <mat-error *ngIf="recipeForm.get('prepTime')?.invalid && recipeForm.get('prepTime')?.touched"></mat-error>
               {{ getErrorMessage('prepTime') }}
-            </mat-error>
-          </mat-form-field>
 
-          <mat-form-field appearance="outline" class="w-full">
+          <mat-form-field appearance="outline" class="w-full"></mat-form-field>
             <mat-label>Cook Time (minutes)</mat-label>
             <input 
               matInput 
               type="number"
               formControlName="cookTime"
               min="0">
-            <mat-error *ngIf="recipeForm.get('cookTime')?.invalid && recipeForm.get('cookTime')?.touched">
+            <mat-error *ngIf="recipeForm.get('cookTime')?.invalid && recipeForm.get('cookTime')?.touched"></mat-error>
               {{ getErrorMessage('cookTime') }}
-            </mat-error>
-          </mat-form-field>
 
-          <mat-form-field appearance="outline" class="w-full">
+          <mat-form-field appearance="outline" class="w-full"></mat-form-field>
             <mat-label>Servings</mat-label>
             <input 
               matInput 
               type="number"
               formControlName="servings"
               min="1">
-            <mat-error *ngIf="recipeForm.get('servings')?.invalid && recipeForm.get('servings')?.touched">
+            <mat-error *ngIf="recipeForm.get('servings')?.invalid && recipeForm.get('servings')?.touched"></mat-error>
               {{ getErrorMessage('servings') }}
-            </mat-error>
-          </mat-form-field>
-        </div>
 
         <div class="form-row">
-          <mat-form-field appearance="outline" class="w-full">
+          <mat-form-field appearance="outline" class="w-full"></mat-form-field>
             <mat-label>Yield</mat-label>
             <input 
               matInput 
               formControlName="yield"
               placeholder="e.g., 2 loaves, 24 cookies">
-          </mat-form-field>
-        </div>
 
         <div class="time-summary">
           <p class="text-secondary mb-sm"><strong>Total Time:</strong> {{ getFormattedTime(getTotalTime()) }}</p>
-        </div>
+
       </mat-card>
     </form>
 
     <!-- Categories and Tags -->
     <mat-card class="form-section card">
-      <mat-card-header class="card">
-        <mat-card-title class="card">Categories & Tags</mat-card-title>
-      </mat-card-header>
+      <mat-card-header class="card"></mat-card-header>
+        <mat-card-title >Categories & Tags</mat-card-title>
       <mat-card-content class="card">
         <div class="categories-section">
           <h3 class="text-lg font-medium mb-sm">Categories</h3>
@@ -105,8 +87,6 @@
               (change)="onCategoryToggle(category.id)"
               [style.color]="category.color">
               {{ category.name }}
-            </div>
-          </div>
 
         <div class="tags-section">
           <h3 class="text-lg font-medium mb-sm">Tags</h3>
@@ -117,8 +97,6 @@
               (change)="onTagToggle(tag.id)"
               [style.color]="tag.color">
               {{ tag.name }}
-            </div>
-          </div>
 
         <div class="tools-section">
           <h3 class="text-lg font-medium mb-sm">Tools</h3>
@@ -128,8 +106,6 @@
               [checked]="selectedTools.includes(tool.id)"
               (change)="onToolToggle(tool.id)">
               {{ tool.name }}
-            </div>
-          </div>
 
         <div class="foods-section">
           <h3 class="text-lg font-medium mb-sm">Foods</h3>
@@ -139,17 +115,14 @@
               [checked]="selectedFoods.includes(food.id)"
               (change)="onFoodToggle(food.id)">
               {{ food.name }}
-            </div>
-          </div>
-      </mat-card-content>
+
     </mat-card>
 
     <!-- Ingredients -->
     <mat-card class="form-section card">
-      <mat-card-header class="card">
-        <mat-card-title class="card">Ingredients</mat-card-title>
-        <mat-card-subtitle class="card">Add all the ingredients needed for this recipe</mat-card-subtitle>
-      </mat-card-header>
+      <mat-card-header class="card"></mat-card-header>
+        <mat-card-title >Ingredients</mat-card-title>
+        <mat-card-subtitle >Add all the ingredients needed for this recipe</mat-card-subtitle>
       <mat-card-content class="card">
         <div formArrayName="ingredients" class="ingredients-list">
           <div 
@@ -158,7 +131,7 @@
             class="ingredient-item">
             
             <div class="ingredient-row">
-              <mat-form-field appearance="outline" class="quantity-field w-full">
+              <mat-form-field appearance="outline" class="quantity-field w-full"></mat-form-field>
                 <mat-label>Quantity</mat-label>
                 <input 
                   matInput 
@@ -166,74 +139,46 @@
                   formControlName="quantity"
                   min="0"
                   step="0.1">
-              </mat-form-field>
 
-              <mat-form-field appearance="outline" class="unit-field w-full">
+              <mat-form-field appearance="outline" class="unit-field w-full"></mat-form-field>
                 <mat-label>Unit</mat-label>
                 <input 
                   matInput 
                   formControlName="unit"
                   placeholder="e.g., cups, grams">
-              </mat-form-field>
 
-              <mat-form-field appearance="outline" class="food-field w-full">
+              <mat-form-field appearance="outline" class="food-field w-full"></mat-form-field>
                 <mat-label>Food/Ingredient</mat-label>
                 <input 
                   matInput 
                   formControlName="food"
                   placeholder="e.g., flour, chicken">
-              </mat-form-field>
 
-              <button 
-                mat-icon-button 
-                class="btn btn-error"
-                type="button"
-                (click)="removeIngredient(i)"
-                class="remove-button">
-                <mat-icon>delete</mat-icon>
-              </div>
-            </div>
-
-            <div class="ingredient-row">
-              <mat-form-field appearance="outline" class="title-field w-full">
+              <button mat-icon-button class="btn btn-error remove-button" type="button" (click)="removeIngredient(i)" > <mat-icon>delete</mat-icon> <div class="ingredient-row"> <mat-form-field appearance="outline" class="title-field w-full"></mat-form-field></button>
                 <mat-label>Title (optional)</mat-label>
                 <input 
                   matInput 
                   formControlName="title"
                   placeholder="e.g., All-purpose flour">
-              </mat-form-field>
 
-              <mat-form-field appearance="outline" class="note-field w-full">
+              <mat-form-field appearance="outline" class="note-field w-full"></mat-form-field>
                 <mat-label>Note (optional)</mat-label>
                 <input 
                   matInput 
                   formControlName="note"
                   placeholder="e.g., room temperature">
-              </mat-form-field>
 
-              <mat-checkbox formControlName="disableAmount">
+              <mat-checkbox formControlName="disableAmount"></mat-checkbox>
                 No amount needed
-              </mat-checkbox>
-            </div>
 
-          <button 
-            mat-raised-button 
-            class="btn btn-primary"
-            type="button"
-            (click)="addIngredient()"
-            class="add-button">
-            <mat-icon>add</mat-icon>
-            Add Ingredient
-          </mat-card-content>
-        </mat-card>
+          <button mat-raised-button class="btn btn-primary add-button" type="button" (click)="addIngredient()" > <mat-icon>add</mat-icon> Add Ingredient</button>
       </section>
 
     <!-- Instructions -->
     <mat-card class="form-section card">
-      <mat-card-header class="card">
-        <mat-card-title class="card">Instructions</mat-card-title>
-        <mat-card-subtitle class="card">Add step-by-step instructions for making this recipe</mat-card-subtitle>
-      </mat-card-header>
+      <mat-card-header class="card"></mat-card-header>
+        <mat-card-title >Instructions</mat-card-title>
+        <mat-card-subtitle >Add step-by-step instructions for making this recipe</mat-card-subtitle>
       <mat-card-content class="card">
         <div formArrayName="instructions" class="instructions-list">
           <div 
@@ -243,49 +188,17 @@
             
             <div class="instruction-row">
               <span class="step-number">{{ i + 1 }}.</span>
-              <mat-form-field appearance="outline" class="instruction-field w-full">
+              <mat-form-field appearance="outline" class="instruction-field w-full"></mat-form-field>
                 <mat-label>Instruction</mat-label>
                 <textarea 
                   matInput 
                   formControlName="text"
                   placeholder="Enter instruction step"
                   rows="2">
-                </mat-form-field>
-              </div>
-              <button 
-                mat-icon-button 
-                class="btn btn-error"
-                type="button"
-                (click)="removeInstruction(i)"
-                class="remove-button">
-                <mat-icon>delete</mat-icon>
-              </div>
-            </mat-card-content>
 
-          <button 
-            mat-raised-button 
-            class="btn btn-primary"
-            type="button"
-            (click)="addInstruction()"
-            class="add-button">
-            <mat-icon>add</mat-icon>
-            Add Instruction
-          </mat-card>
-
+              <button mat-icon-button class="btn btn-error remove-button" type="button" (click)="removeInstruction(i)" > <mat-icon>delete</mat-icon></button>
+          <button mat-raised-button class="btn btn-primary add-button" type="button" (click)="addInstruction()" > <mat-icon>add</mat-icon> Add Instruction</button>
     <!-- Form Actions -->
     <div class="flex justify-end gap-sm mt-lg">
-      <button 
-        mat-button 
-        type="button"
-        (click)="onCancel()"
-        class="btn btn-secondary">
-        Cancel
-      </div>
-      <button 
-        mat-raised-button 
-        class="btn btn-primary"
-        type="submit"
-        [disabled]="loading || recipeForm.invalid"
-        class="btn btn-primary">
-        <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner>
-        <span *ngIf="!loading">Create Recipe</span>
+      <button mat-button type="button" (click)="onCancel()" class="btn btn-secondary"> Cancel</button>
+      <button mat-raised-button class="btn btn-primary btn btn-primary" type="submit" [disabled]="loading || recipeForm.invalid" > <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner> <span *ngIf="!loading">Create Recipe</span></button>

@@ -19,14 +19,11 @@
     <div *ngIf="description && isHovering"
          class="absolute inset-0 bg-overlay flex items-end">
       <div class="p-md text-white">
-        <app-safe-markdown [markdown]="description || ''"></app-safe-markdown>
-      </div>
-  </div>
+        <app-safe-markdown [markdown]="description || ''"></app-safe-markdow></app-safe-markdown>
 
   <!-- Recipe Title -->
-  <mat-card-title class="px-md pt-md pb-sm card">
+  <mat-card-title class="px-md pt-md pb-sm card"></mat-card-title>
     <h3 class="text-lg font-medium m-0 text-primary mb-sm">{{ name }}</h3>
-  </mat-card-title>
 
   <!-- Recipe Actions -->
   <div class="px-md pb-md flex items-center gap-sm" *ngIf="showRecipeContent">
@@ -34,22 +31,31 @@
     <app-recipe-favorite-badge
       *ngIf="isOwnGroup"
       [recipeId]="recipeId"
-      [showAlways]="true">
-    </div>
-    
+      [showAlways]="true"></app-recipe-favorite-badge></<app-recipe-favorite-badge
+      *ngIf="isOwnGroup"
+      [recipeId]="recipeId"
+      [showAlways]="true"></app-recipe-favorite-badge>></<app-recipe-favorite-badge
+      *ngIf="isOwnGroup"
+      [recipeId]="recipeId"
+      [showAlways]="true"></app-recipe-favorite-badge>>>
     <!-- Recipe Rating -->
     <app-recipe-rating
       class="flex-1"
       [modelValue]="rating"
       [recipeId]="recipeId"
       [slug]="slug"
-      [small]="true">
-
+      [small]="true"></app-recipe-rating></<app-recipe-rating
+      class="flex-1"
+      [modelValue]="rating"
+      [recipeId]="recipeId"
+      [slug]="slug"
+      [small]="true"></app-recipe-rating>>
     <!-- Recipe Tags -->
     <app-recipe-chips
       [items]="tags"
-      urlPrefix="tags">
-
+      urlPrefix="tags"></app-recipe-chips></<app-recipe-chips
+      [items]="tags"
+      urlPrefix="tags"></app-recipe-chips>>
     <!-- Context Menu -->
     <app-recipe-context-menu
       *ngIf="isOwnGroup"
@@ -57,7 +63,12 @@
       [name]="name"
       [recipeId]="recipeId"
       [useItems]="contextMenuItems"
-      (delete)="onDelete($event)">
-
+      (delete)="onDelete($event)"></app-recipe-context-menu></<app-recipe-context-menu
+      *ngIf="isOwnGroup"
+      [slug]="slug"
+      [name]="name"
+      [recipeId]="recipeId"
+      [useItems]="contextMenuItems"
+      (delete)="onDelete($event)"></app-recipe-context-menu>>
   <!-- Additional Content Slot -->
   <ng-content></ng-content>

@@ -1,9 +1,8 @@
 <section class="page-container">
   <mat-card class="registry-card card">
-    <mat-card-header class="card">
-      <mat-card-title class="card">Create Account</mat-card-title>
-      <mat-card-subtitle class="card">Join Mealie to manage your recipes</mat-card-subtitle>
-    </mat-card-header>
+    <mat-card-header class="card"></mat-card-header>
+      <mat-card-title >Create Account</mat-card-title>
+      <mat-card-subtitle >Join Mealie to manage your recipes</mat-card-subtitle>
     
     <mat-card-content class="card">
       <form (ngSubmit)="onRegister()" #registryForm="ngForm">
@@ -11,7 +10,7 @@
         <div class="section">
           <h3 class="text-lg font-medium mb-sm">Account Details</h3>
           
-          <mat-form-field appearance="outline" class="full-width w-full">
+          <mat-form-field appearance="outline" class="full-width w-full"></mat-form-field>
             <mat-label>Full Name</mat-label>
             <input 
               matInput 
@@ -20,9 +19,8 @@
               required
               placeholder="Enter your full name">
             <mat-icon matPrefix>person</mat-icon>
-          </mat-form-field>
 
-          <mat-form-field appearance="outline" class="full-width w-full">
+          <mat-form-field appearance="outline" class="full-width w-full"></mat-form-field>
             <mat-label>Username</mat-label>
             <input 
               matInput 
@@ -31,7 +29,6 @@
               required
               placeholder="Choose a username">
             <mat-icon matPrefix>account_circle</mat-icon>
-          </mat-form-field>
 
           <mat-form-field appearance="outline" class="full-width w-full">
             <mat-label>Email</mat-label>
@@ -44,7 +41,6 @@
               placeholder="Enter your email address">
             <mat-icon matPrefix>email</mat-icon>
           </mat-form-field>
-        </div>
 
         <!-- Credentials -->
         <div class="section">
@@ -73,21 +69,18 @@
               placeholder="Confirm your password">
             <mat-icon matPrefix>lock_outline</mat-icon>
           </mat-form-field>
-        </div>
 
         <!-- Group Details -->
         <div class="section">
           <h3 class="text-lg font-medium mb-sm">Group Details</h3>
           
           <div class="group-type-selector">
-            <mat-checkbox [(ngModel)]="createGroup" name="createGroup">
+            <mat-checkbox [(ngModel)]="createGroup" name="createGroup"></mat-checkbox>
               Create a new group
-            </mat-checkbox>
-          </div>
 
           <!-- Create Group Form -->
           <div *ngIf="createGroup" class="group-form">
-            <mat-form-field appearance="outline" class="full-width w-full">
+            <mat-form-field appearance="outline" class="full-width w-full"></mat-form-field>
               <mat-label>Group Name</mat-label>
               <input 
                 matInput 
@@ -96,21 +89,17 @@
                 required
                 placeholder="Enter group name">
               <mat-icon matPrefix>group</mat-icon>
-            </mat-form-field>
 
             <div class="group-options">
-              <mat-checkbox [(ngModel)]="groupPrivate" name="groupPrivate">
+              <mat-checkbox [(ngModel)]="groupPrivate" name="groupPrivate"></mat-checkbox>
                 Private Group
-              </mat-checkbox>
 
-              <mat-checkbox [(ngModel)]="seedData" name="seedData">
+              <mat-checkbox [(ngModel)]="seedData" name="seedData"></mat-checkbox>
                 Include Sample Data
-              </mat-checkbox>
-            </div>
 
           <!-- Join Group Form -->
           <div *ngIf="!createGroup" class="group-form">
-            <mat-form-field appearance="outline" class="full-width w-full">
+            <mat-form-field appearance="outline" class="full-width w-full"></mat-form-field>
               <mat-label>Group Token</mat-label>
               <input 
                 matInput 
@@ -119,54 +108,20 @@
                 required
                 placeholder="Enter group token">
               <mat-icon matPrefix>vpn_key</mat-icon>
-            </mat-form-field>
-          </div>
 
         <!-- Advanced Options -->
         <div class="section">
           <div class="advanced-options">
-            <mat-checkbox [(ngModel)]="advanced" name="advanced">
+            <mat-checkbox [(ngModel)]="advanced" name="advanced"></mat-checkbox>
               Enable Advanced Features
-            </mat-checkbox>
-          </div>
 
         <!-- Error Message -->
         <div *ngIf="errorMessage" class="text-error mb-md">
           {{ errorMessage }}
-        </div>
 
         <!-- Action Buttons -->
         <section class="page-container">
-          <button 
-            mat-raised-button 
-            class="btn btn-primary" 
-            type="submit"
-            [disabled]="isLoading"
-            class="register-button">
-            <mat-icon *ngIf="!isLoading">person_add</mat-icon>
-            <mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner>
-            {{ isLoading ? 'Creating Account...' : 'Create Account' }}
-          </section>
+          <button mat-raised-button class="btn btn-primary register-button" type="submit" [disabled]="isLoading" > <mat-icon *ngIf="!isLoading">person_add</mat-icon> <mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner> {{ isLoading ? 'Creating Account...' : 'Create Account' }}</button>
           
-          <button 
-            mat-button 
-            type="button"
-            (click)="onCancel()"
-            class="btn btn-secondary">
-            Cancel
-          </div>
-        </div>
-      </div>
-
-      <div class="login-link">
-        <p class="text-secondary mb-sm">Already have an account? 
-          <button mat-button class="btn btn-secondary" (click)="navigateToLogin()">
-            Login here
-          </button>
-        </p>
-      </div>
-    </form>
-  </mat-card-content>
-</mat-card>
-
-</section>
+          <button mat-button type="button" (click)="onCancel()" class="btn btn-secondary"> Cancel <div class="login-link"> <p class="text-secondary mb-sm">Already have an account?</p></button>
+          <button mat-button class="btn btn-secondary" (click)="navigateToLogin()">Login here</button>

@@ -10,16 +10,15 @@
   tabindex="0">
   
   <mat-card 
-    class="card relative z-modal w-full mx-md"
+    class="card relative z-modal w-full mx-md card"
     [style.max-width]="dialogMaxWidth || '600px'"
     [class]="dialogClass"
-    (click)="$event.stopPropagation()" class="card">
+    (click)="$event.stopPropagation()" >
     
     <!-- Toolbar -->
-    <mat-toolbar class="flex items-center gap-sm mb-md -mx-lg -mt-lg rounded-t-lg">
+    <mat-toolbar class="flex items-center gap-sm mb-md -mx-lg -mt-lg rounded-t-lg"></mat-toolbar>
       <mat-icon *ngIf="icon">{{ icon }}</mat-icon>
       <span class="text-lg font-medium">{{ title }}</span>
-    </mat-toolbar>
     
     <!-- Progress bar -->
     <mat-progress-bar 
@@ -30,8 +29,7 @@
     <!-- Content -->
     <div class="py-md">
       <ng-content></ng-content>
-    </div>
-    
+
     <!-- Divider -->
     <mat-divider class="my-md"></mat-divider>
     
@@ -39,40 +37,38 @@
     <div class="flex items-center justify-end gap-sm">
       <ng-content select="[slot=card-actions]">
         <!-- Default actions -->
-        <button 
-          mat-button
-          class="btn btn-secondary"
-          (click)="onCancel()">
-          Cancel
-        </div>
-        
-        <div class="flex-1"></div>
-        
-        <ng-content select="[slot=custom-card-action]"></ng-content>
-        
+        <button mat-button class="btn btn-secondary" (click)="onCancel()"> Cancel <div class="flex-1"></div> <ng-content select="[slot=custom-card-action]"></ng-content></button>
         <app-base-button
           *ngIf="canDelete"
           [delete]="true"
           [secondary]="true"
-          (click)="onDelete()">
-        
+          (click)="onDelete()"></app-base-button></<app-base-button
+          *ngIf="canDelete"
+          [delete]="true"
+          [secondary]="true"
+          (click)="onDelete()"></app-base-button>>
         <app-base-button
           *ngIf="canConfirm"
           [color]="color"
           [disabled]="submitDisabled"
-          (click)="onConfirm()">
+          (click)="onConfirm()"></app-base-button></<app-base-button
+          *ngIf="canConfirm"
+          [color]="color"
+          [disabled]="submitDisabled"
+          (click)="onConfirm()"></app-base-button>>
           <mat-icon>check</mat-icon>
           Confirm
         
         <app-base-button
           *ngIf="canSubmit"
           [disabled]="submitDisabled || loading"
-          (click)="onSubmit()">
+          (click)="onSubmit()"></app-base-button></<app-base-button
+          *ngIf="canSubmit"
+          [disabled]="submitDisabled || loading"
+          (click)="onSubmit()"></app-base-button>>
           <mat-icon *ngIf="submitIcon">{{ submitIcon }}</mat-icon>
           {{ submitText }}
 
-    
     <!-- Below actions -->
     <div *ngIf="hasBelowActionsSlot" class="mt-md pt-md border-t">
       <ng-content select="[slot=below-actions]"></ng-content>
-    </div>

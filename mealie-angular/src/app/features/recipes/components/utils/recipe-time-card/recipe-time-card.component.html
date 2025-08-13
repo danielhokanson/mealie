@@ -6,9 +6,7 @@
       <div class="time-text">
         <span class="time-label">{{ totalTimeInfo.name }}</span>
         <span class="time-value">{{ totalTimeInfo.value }}</span>
-      </div>
-  </div>
-  
+
   <mat-divider *ngIf="totalTimeInfo && (prepTimeInfo || performTimeInfo)" class="time-divider"></mat-divider>
   
   <!-- Prep Time & Perform Time -->
@@ -19,8 +17,7 @@
         <div class="time-text">
           <span class="time-label">{{ prepTimeInfo.name }}</span>
           <span class="time-value">{{ prepTimeInfo.value }}</span>
-        </div>
-      
+
       <mat-divider *ngIf="prepTimeInfo && performTimeInfo" vertical class="time-divider-vertical"></mat-divider>
       
       <div *ngIf="performTimeInfo" class="time-card-item">
@@ -28,11 +25,4 @@
         <div class="time-text">
           <span class="time-label">{{ performTimeInfo.name }}</span>
           <span class="time-value">{{ performTimeInfo.value }}</span>
-        </div>
-    </div>
 
-</div>
-</div>
-</div>
-</div>
-</div>

@@ -13,14 +13,9 @@
 
     <div *ngIf="large" class="loader-text-large">
       <ng-content>
-        {{ (small || tiny) ? "" : waitingTextCalculated }}
+        {{ (small || tiny) ? "" : waitingTextCalculated }}</mat-icon>
 
-    </div>
-  </div>
-  
   <div *ngIf="!large" class="loader-text">
     <ng-content>
       {{ (small || tiny) ? "" : waitingTextCalculated }}
 
-  </div>
-</div>

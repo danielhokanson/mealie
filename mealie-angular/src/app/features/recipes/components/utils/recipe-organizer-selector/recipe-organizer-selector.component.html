@@ -1,32 +1,16 @@
 <div class="organizer-selector">
-  <mat-form-field class="full-width w-full">
+  <mat-form-field class="full-width w-full"></mat-form-field>
     <mat-label>{{ getSelectorLabel() }}</mat-label>
     <mat-select
       [(ngModel)]="selectedItems"
       (ngModelChange)="onSelectionChange($event)"
       multiple>
-      <mat-option *ngFor="let item of availableItems" [value]="item">
+      <mat-option *ngFor="let item of availableItems" [value]="item"></mat-option>
         {{ item.name }}
-      </mat-option>
-    </mat-form-field>
-  </div>
-  
+
   <div *ngIf="showAdd" class="add-section">
-    <mat-form-field class="add-input w-full">
+    <mat-form-field class="add-input w-full"></mat-form-field>
       <mat-label>Add New {{ getSelectorLabel() }}</mat-label>
       <input matInput [(ngModel)]="newItemName" (keyup.enter)="addNewItem()" />
-    </mat-form-field>
-    <button mat-raised-button class="btn btn-primary" (click)="addNewItem()" [disabled]="!newItemName">
-      <mat-icon>add</mat-icon>
-      Add
-    </button>
-  </div>
-  
-  <div class="selected-chips">
-    <mat-chip
-      *ngFor="let item of selectedItems"
-      [removable]="true"
-      (removed)="removeItem(item)">
-      {{ item.name }}
+    <button mat-raised-button class="btn btn-primary" (click)="addNewItem()" [disabled]="!newItemName"><mat-icon>add</mat-icon> Add <div class="selected-chips"> <mat-chip *ngFor="let item of selectedItems" [removable]="true" (removed)="removeItem(item)"> {{ item.name }}</button>
       <mat-icon matChipRemove>cancel</mat-icon>
-    </div>

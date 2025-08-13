@@ -1,17 +1,17 @@
-<section class="page-container">
+<div class="image-upload-container">
   <button
     mat-raised-button
-    class="btn btn-secondary"
+    color="accent"
     [matMenuTriggerFor]="imageMenu"
     class="upload-button">
     <mat-icon class="upload-icon">image</mat-icon>
     Image
-  </section>
+  </button>
 
   <mat-menu #imageMenu="matMenu" class="image-menu">
-    <mat-card class="menu-card card">
-      <mat-card-title class="menu-title card">
-        
+    <mat-card class="menu-card">
+      <mat-card-title class="menu-title">
+        <div class="title-content">
           <span>Recipe Image</span>
           <app-app-button-upload
             url="none"
@@ -20,13 +20,13 @@
             [post]="false"
             (uploaded)="uploadImage($event)"
             class="upload-component">
-          </mat-card-title>
-        
-      </mat-card>
+          </app-app-button-upload>
+        </div>
+      </mat-card-title>
       
-      <mat-card-content class="menu-content card">
+      <mat-card-content class="menu-content">
         <div class="url-section">
-          <mat-form-field appearance="outline" class="url-input w-full">
+          <mat-form-field appearance="outline" class="url-input">
             <mat-label>URL</mat-label>
             <input matInput
                    [(ngModel)]="url"
@@ -37,12 +37,15 @@
           </mat-form-field>
           
           <button mat-raised-button
-                  class="btn btn-primary"
+                  color="primary"
                   [loading]="loading"
                   [disabled]="isDisabled"
                   (click)="getImageFromURL()"
                   class="get-button">
             Get
-          </div>
-        </mat-card-content>
-      </mat-menu>
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </mat-menu>
+</div> 

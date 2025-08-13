@@ -1,6 +1,6 @@
-<section class="page-container">
-    <mat-card class="cropper-card card">
-        <mat-card-content class="card">
+<div class="image-cropper-container">
+    <mat-card class="cropper-card">
+        <mat-card-content>
             <!-- Hidden image for loading -->
             <img #cropperImage [src]="img" style="display: none;">
             
@@ -9,11 +9,11 @@
                     [style.width]="cropperWidth" 
                     [style.height]="cropperHeight"
                     class="cropper-canvas">
-            </mat-card-content>
-        </mat-card>
+            </canvas>
+        </mat-card-content>
 
         <!-- Control buttons -->
-        <mat-card-actions class="cropper-controls card">
+        <mat-card-actions class="cropper-controls">
             <div class="control-group" *ngFor="let group of controls">
                 <button
                     *ngFor="let control of group"
@@ -22,26 +22,30 @@
                     (click)="control.callback()"
                     class="control-button">
                     <mat-icon>{{ control.icon }}</mat-icon>
-                </div>
-            </mat-card-actions>
-        </section>
+                </button>
+            </div>
+        </mat-card-actions>
 
         <!-- Action buttons -->
-        <mat-card-actions class="action-buttons card">
+        <mat-card-actions class="action-buttons">
             <button
                 mat-raised-button
-                class="btn btn-error"
+                color="warn"
                 (click)="onDelete()"
                 class="delete-button">
                 <mat-icon>delete</mat-icon>
                 Delete
-            </mat-card-actions>
+            </button>
             
             <button
                 mat-raised-button
-                class="btn btn-primary"
+                color="primary"
                 [disabled]="submitted"
                 (click)="onSave()"
                 class="save-button">
                 <mat-icon>save</mat-icon>
                 Save
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</div> 

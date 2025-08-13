@@ -1,7 +1,7 @@
 <div class="registration-form">
-  <mat-card class="card">
-    <mat-card-header class="card">
-      <mat-card-title class="form-title card">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title class="form-title">
         <mat-icon class="title-icon">person</mat-icon>
         <span>Account Details</span>
       </mat-card-title>
@@ -9,11 +9,11 @@
 
     <mat-divider></mat-divider>
 
-    <mat-card-content class="card">
+    <mat-card-content>
       <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="form-content">
         
         <!-- Username Field -->
-        <mat-form-field appearance="outline" class="w-full">
+        <mat-form-field appearance="outline" class="form-field">
           <mat-label>Username</mat-label>
           <input 
             matInput 
@@ -28,7 +28,7 @@
         </mat-form-field>
 
         <!-- Full Name Field -->
-        <mat-form-field appearance="outline" class="w-full">
+        <mat-form-field appearance="outline" class="form-field">
           <mat-label>Full Name</mat-label>
           <input 
             matInput 
@@ -42,7 +42,7 @@
         </mat-form-field>
 
         <!-- Email Field -->
-        <mat-form-field appearance="outline" class="w-full">
+        <mat-form-field appearance="outline" class="form-field">
           <mat-label>Email</mat-label>
           <input 
             matInput 
@@ -58,7 +58,7 @@
         </mat-form-field>
 
         <!-- Password Field -->
-        <mat-form-field appearance="outline" class="w-full">
+        <mat-form-field appearance="outline" class="form-field">
           <mat-label>Password</mat-label>
           <input 
             matInput 
@@ -75,19 +75,19 @@
             [attr.aria-label]="'Hide password'"
             [attr.aria-pressed]="showPassword">
             <mat-icon>{{ getPasswordIcon() }}</mat-icon>
-          </mat-form-field>
+          </button>
           <mat-error *ngFor="let error of getFormErrors('password')">
             {{ error }}
           </mat-error>
-        </form>
+        </mat-form-field>
 
         <!-- Password Strength -->
         <app-user-password-strength 
           [password]="registrationForm.get('password')?.value">
-        </mat-card-content>
+        </app-user-password-strength>
 
         <!-- Confirm Password Field -->
-        <mat-form-field appearance="outline" class="w-full">
+        <mat-form-field appearance="outline" class="form-field">
           <mat-label>Confirm Password</mat-label>
           <input 
             matInput 
@@ -104,23 +104,26 @@
             [attr.aria-label]="'Hide password'"
             [attr.aria-pressed]="showConfirmPassword">
             <mat-icon>{{ getConfirmPasswordIcon() }}</mat-icon>
-          </mat-form-field>
+          </button>
           <mat-error *ngFor="let error of getFormErrors('confirmPassword')">
             {{ error }}
           </mat-error>
           <mat-error *ngIf="getPasswordMatchError()">
             {{ getPasswordMatchError() }}
           </mat-error>
-        </mat-card>
+        </mat-form-field>
 
         <!-- Advanced Options -->
         <div class="advanced-options">
           <mat-checkbox formControlName="advancedOptions" class="advanced-checkbox">
             Enable Advanced Content
           </mat-checkbox>
-          <p class="advanced-description text-secondary mb-sm">
+          <p class="advanced-description">
             Enable advanced features and content that may not be suitable for all users.
           </p>
         </div>
 
-      </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div> 

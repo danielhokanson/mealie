@@ -1,51 +1,51 @@
-<section class="page-container">
-  <header class="flex justify-between items-center mb-lg">
-    <h1 class="text-2xl font-medium">Shopping Lists</h1>
+<div class="shopping-lists-page">
+  <div class="page-header">
+    <h1>Shopping Lists</h1>
     <button 
       mat-raised-button 
-      class="btn btn-primary"
+      color="primary"
       (click)="createNewList()">
       <mat-icon>add</mat-icon>
       New List
-    </header>
-  </section>
+    </button>
+  </div>
 
   <!-- Loading State -->
-  <div *ngIf="loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md stagger-animation">
-    <app-skeleton-loader 
-      *ngFor="let item of [1,2,3,4,5,6]"
-      type="card">
-    </div>
+  <div *ngIf="loading" class="loading-container">
+    <mat-spinner diameter="40"></mat-spinner>
+    <p>Loading shopping lists...</p>
+  </div>
 
   <!-- Error State -->
-  <div *ngIf="error && !loading" class="flex flex-col items-center justify-center py-xl text-center">
-    <mat-icon class="text-6xl text-error mb-md">error</mat-icon>
-    <p class="text-secondary mb-md">{{ error }}</p>
+  <div *ngIf="error && !loading" class="error-container">
+    <mat-icon class="error-icon">error</mat-icon>
+    <p class="error-text">{{ error }}</p>
     <button 
       mat-raised-button 
-      class="btn btn-primary"
+      color="primary"
       (click)="loadData()">
       Retry
-    </div>
+    </button>
+  </div>
 
   <!-- Content -->
-  <main *ngIf="!loading && !error">
+  <div *ngIf="!loading && !error" class="content">
     <!-- Empty State -->
-    <div *ngIf="shoppingLists.length === 0" class="flex flex-col items-center justify-center py-xl text-center">
-      <mat-icon class="text-6xl text-tertiary mb-md">shopping_cart</mat-icon>
-      <h2 class="text-xl font-medium mb-sm">No Shopping Lists</h2>
-      <p class="text-secondary mb-md">Create your first shopping list to get started</p>
+    <div *ngIf="shoppingLists.length === 0" class="empty-state">
+      <mat-icon class="empty-icon">shopping_cart</mat-icon>
+      <h2>No Shopping Lists</h2>
+      <p>Create your first shopping list to get started</p>
       <button 
         mat-raised-button 
-        class="btn btn-primary"
+        color="primary"
         (click)="createNewList()">
         <mat-icon>add</mat-icon>
         Create First List
-      </div>
-    </main>
+      </button>
+    </div>
 
-    <!-- Shopping Lists Grid -->
-    <div *ngIf="shoppingLists.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md stagger-animation">
+    <!-- Shopping Lists -->
+    <div *ngIf="shoppingLists.length > 0" class="lists-container">
       <app-shopping-list
         *ngFor="let list of shoppingLists; trackBy: trackByListId"
         [shoppingList]="list"
@@ -58,4 +58,7 @@
         (itemUpdated)="onItemUpdated($event)"
         (itemDeleted)="onItemDeleted($event)"
         (listDeleted)="onListDeleted($event)">
-      </div>
+      </app-shopping-list>
+    </div>
+  </div>
+</div> 

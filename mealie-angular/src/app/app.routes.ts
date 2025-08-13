@@ -4,53 +4,43 @@ export const routes: Routes = [
     { path: '', redirectTo: '/recipes', pathMatch: 'full' },
     {
         path: 'recipes',
-        loadChildren: () => import('./features/recipes/recipes.routes').then(m => m.RECIPE_ROUTES),
-        data: { breadcrumb: 'Recipes' }
+        loadChildren: () => import('./features/recipes/recipes.routes').then(m => m.RECIPE_ROUTES)
     },
     {
         path: 'meal-plans',
-        loadChildren: () => import('./features/meal-plans/meal-plans.routes').then(m => m.MEAL_PLANS_ROUTES),
-        data: { breadcrumb: 'Meal Plans' }
+        loadChildren: () => import('./features/meal-plans/meal-plans.routes').then(m => m.MEAL_PLANS_ROUTES)
     },
     {
         path: 'search',
-        loadChildren: () => import('./features/search/search.routes').then(m => m.SEARCH_ROUTES),
-        data: { breadcrumb: 'Search' }
+        loadChildren: () => import('./features/search/search.routes').then(m => m.SEARCH_ROUTES)
     },
     {
         path: 'shopping-lists',
-        loadChildren: () => import('./features/shopping-lists/shopping-lists.routes').then(m => m.SHOPPING_LISTS_ROUTES),
-        data: { breadcrumb: 'Shopping Lists' }
+        loadChildren: () => import('./features/shopping-lists/shopping-lists.routes').then(m => m.SHOPPING_LISTS_ROUTES)
     },
     {
         path: 'settings',
-        loadChildren: () => import('./features/settings/settings.routes').then(m => m.SETTINGS_ROUTES),
-        data: { breadcrumb: 'Settings' }
+        loadChildren: () => import('./features/settings/settings.routes').then(m => m.SETTINGS_ROUTES)
     },
     {
         path: 'admin',
-        loadChildren: () => import('./features/admin/admin.routes').then(m => m.ADMIN_ROUTES),
-        data: { breadcrumb: 'Admin' }
+        loadChildren: () => import('./features/admin/admin.routes').then(m => m.ADMIN_ROUTES)
     },
     {
         path: 'group',
-        loadChildren: () => import('./features/group/group.routes').then(m => m.GROUP_ROUTES),
-        data: { breadcrumb: 'Group' }
+        loadChildren: () => import('./features/group/group.routes').then(m => m.GROUP_ROUTES)
     },
     {
         path: 'household',
-        loadChildren: () => import('./features/household/household.routes').then(m => m.HOUSEHOLD_ROUTES),
-        data: { breadcrumb: 'Household' }
+        loadChildren: () => import('./features/household/household.routes').then(m => m.HOUSEHOLD_ROUTES)
     },
     {
         path: 'user',
-        loadChildren: () => import('./features/user/user.routes').then(m => m.USER_ROUTES),
-        data: { breadcrumb: 'User' }
+        loadChildren: () => import('./features/user/user.routes').then(m => m.USER_ROUTES)
     },
     {
         path: 'auth',
-        loadChildren: () => import('./features/auth/auth.routes').then(m => m.AUTH_ROUTES),
-        data: { breadcrumb: 'Authentication' }
+        loadChildren: () => import('./features/auth/auth.routes').then(m => m.AUTH_ROUTES)
     },
     { path: '**', redirectTo: '/recipes' }
 ];

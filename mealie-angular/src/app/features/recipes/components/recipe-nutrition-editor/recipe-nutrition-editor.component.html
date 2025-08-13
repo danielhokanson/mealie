@@ -1,16 +1,16 @@
-<section class="page-container">
+<div class="recipe-nutrition-editor-container">
   <!-- Loading State -->
-  <div *ngIf="loading" class="flex items-center justify-center py-xl">
+  <div *ngIf="loading" class="loading-container">
     <mat-spinner diameter="50"></mat-spinner>
-    <p class="text-secondary mb-sm">Calculating nutrition...</p>
+    <p>Calculating nutrition...</p>
   </div>
 
   <!-- Nutrition Editor Content -->
   <div *ngIf="!loading && recipe" class="nutrition-content">
     <!-- Header -->
     <div class="nutrition-header">
-      <h2 class="text-xl font-medium mb-md">Nutrition Information</h2>
-      <p class="text-secondary mb-sm">Edit nutrition values for {{ recipe.name }}</p>
+      <h2>Nutrition Information</h2>
+      <p>Edit nutrition values for {{ recipe.name }}</p>
     </div>
 
     <!-- Controls -->
@@ -18,41 +18,43 @@
       <div class="control-group">
         <button 
           mat-raised-button 
-          class="btn btn-primary"
+          color="primary"
           (click)="onCalculateNutrition()"
           [disabled]="loading">
           <mat-icon>calculate</mat-icon>
           Calculate Nutrition
-        </div>
+        </button>
         <button 
           mat-raised-button 
-          class="btn btn-secondary"
+          color="accent"
           (click)="onAutoCalculate()"
           [class.active]="autoCalculate">
           <mat-icon>auto_fix_high</mat-icon>
           Auto Calculate
-        </div>
+        </button>
         <button 
           mat-raised-button 
-          class="btn btn-error"
+          color="warn"
           (click)="onResetNutrition()">
           <mat-icon>refresh</mat-icon>
           Reset
-        </div>
-      </section>
+        </button>
+      </div>
 
       <div class="control-group">
         <button 
           mat-button 
-          class="btn btn-primary"
+          color="primary"
           (click)="onToggleAdvanced()">
           <mat-icon>{{ showAdvanced ? 'expand_less' : 'expand_more' }}</mat-icon>
           {{ showAdvanced ? 'Hide' : 'Show' }} Advanced
-        </div>
+        </button>
+      </div>
+    </div>
 
     <!-- Nutrition Summary -->
     <div class="nutrition-summary">
-      <h3 class="text-lg font-medium mb-sm">Nutrition Summary</h3>
+      <h3>Nutrition Summary</h3>
       <div class="summary-grid">
         <div class="summary-item">
           <span class="summary-label">Calories</span>
@@ -78,20 +80,21 @@
           <span class="summary-label">Sugar</span>
           <span class="summary-value">{{ getNutritionSummary().totalSugar }}g</span>
         </div>
+      </div>
     </div>
 
     <!-- Nutrition Form -->
     <form [formGroup]="nutritionForm" class="nutrition-form">
       <!-- Basic Nutrition -->
       <div class="nutrition-section">
-        <h3 class="text-lg font-medium mb-sm">Basic Nutrition</h3>
+        <h3>Basic Nutrition</h3>
         <div class="nutrition-grid">
           <div 
             *ngFor="let field of nutritionFields.slice(0, 7)" 
             class="nutrition-field">
             <label class="field-label">{{ field.label }}</label>
             <div class="field-input">
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline">
                 <input 
                   matInput 
                   type="number"
@@ -112,9 +115,12 @@
                   [style.width.%]="getDailyValuePercentage(getFieldValue(field.key), field.key)"
                   [style.background-color]="getProgressColor(getDailyValuePercentage(getFieldValue(field.key), field.key))">
                 </div>
+              </div>
               <span class="progress-text">{{ getDailyValuePercentage(getFieldValue(field.key), field.key) }}% DV</span>
             </div>
+          </div>
         </div>
+      </div>
 
       <!-- Advanced Nutrition -->
       <mat-expansion-panel 
@@ -134,7 +140,7 @@
             class="nutrition-field">
             <label class="field-label">{{ field.label }}</label>
             <div class="field-input">
-              <mat-form-field appearance="outline" class="w-full">
+              <mat-form-field appearance="outline">
                 <input 
                   matInput 
                   type="number"
@@ -155,27 +161,31 @@
                   [style.width.%]="getDailyValuePercentage(getFieldValue(field.key), field.key)"
                   [style.background-color]="getProgressColor(getDailyValuePercentage(getFieldValue(field.key), field.key))">
                 </div>
+              </div>
               <span class="progress-text">{{ getDailyValuePercentage(getFieldValue(field.key), field.key) }}% DV</span>
             </div>
+          </div>
         </div>
-      </div>
+      </mat-expansion-panel>
 
       <!-- Form Actions -->
-      <div class="flex justify-end gap-sm mt-lg">
+      <div class="form-actions">
         <button 
           mat-raised-button 
-          class="btn btn-primary"
+          color="primary"
           (click)="onSaveNutrition()"
           [disabled]="loading || nutritionForm.invalid">
           <mat-spinner *ngIf="loading" diameter="20" class="spinner"></mat-spinner>
           <span *ngIf="!loading">Save Nutrition</span>
-        </div>
-      </form>
-    </div>
+        </button>
+      </div>
+    </form>
+  </div>
 
   <!-- No Recipe State -->
   <div *ngIf="!loading && !recipe" class="no-recipe">
     <mat-icon class="no-recipe-icon">restaurant</mat-icon>
-    <h3 class="text-lg font-medium mb-sm">No Recipe Selected</h3>
-    <p class="text-secondary mb-sm">Please select a recipe to edit its nutrition information.</p>
+    <h3>No Recipe Selected</h3>
+    <p>Please select a recipe to edit its nutrition information.</p>
   </div>
+</div> 

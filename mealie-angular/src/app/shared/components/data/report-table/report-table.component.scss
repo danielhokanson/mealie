@@ -1,6 +1,15 @@
-// Component styles - using utility classes in template
-// Only custom styles that can't be achieved with utilities should be added here
-
-:host {
-  display: block;
+.report-table {
+  width: 100%;
 }
+
+.table-row {
+  cursor: pointer;
+  
+  &.clickable:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+}
+
+.delete-button {
+  margin-left: 8px;
+} 

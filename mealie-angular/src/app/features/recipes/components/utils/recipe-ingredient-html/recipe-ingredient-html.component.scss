@@ -1,6 +1,14 @@
-// Component styles - using utility classes in template
-// Only custom styles that can't be achieved with utilities should be added here
-
 :host {
-  display: block;
+  display: inline;
 }
+
+::ng-deep {
+  strong {
+    font-weight: 600;
+  }
+
+  sup {
+    font-size: 0.8em;
+    vertical-align: super;
+  }
+} 

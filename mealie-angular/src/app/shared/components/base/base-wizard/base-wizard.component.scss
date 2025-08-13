@@ -1,6 +1,113 @@
-// Component styles - using utility classes in template
-// Only custom styles that can't be achieved with utilities should be added here
-
-:host {
-  display: block;
+.wizard-toolbar {
+  margin-bottom: 4rem;
+  display: flex;
+  justify-content: center;
 }
+
+.wizard-title {
+  font-size: 2rem;
+  font-weight: 300;
+  text-align: center;
+}
+
+.icon-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.icon-divider {
+  position: absolute;
+  width: 100%;
+}
+
+.icon-avatar {
+  position: relative;
+  z-index: 1;
+  padding: 1rem;
+}
+
+.icon-white {
+  fill: white;
+}
+
+.wizard-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  margin: 2rem 0;
+  min-height: 400px;
+}
+
+.wizard-progress {
+  margin: 0 1rem 1rem 1rem;
+}
+
+.progress-bar {
+  height: 10px;
+}
+
+.wizard-divider {
+  margin: 1rem;
+}
+
+.wizard-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.prev-button,
+.next-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.submitting {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.language-actions {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.language-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+// Material Design color classes
+.grey-darken-3 {
+  background-color: #424242;
+  color: white;
+}
+
+.success {
+  background-color: #4caf50;
+  color: white;
+}
+
+.info {
+  background-color: #2196f3;
+  color: white;
+} 

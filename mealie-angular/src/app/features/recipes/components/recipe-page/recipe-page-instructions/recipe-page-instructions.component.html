@@ -1,14 +1,14 @@
 <section class="recipe-instructions">
   <!-- Ingredient Link Dialog -->
   <div *ngIf="showLinkDialog" class="link-dialog-overlay">
-    <mat-card class="link-dialog card">
+    <mat-card class="link-dialog">
       <div class="dialog-header">
         <mat-icon>link</mat-icon>
-        <h2 class="text-xl font-medium mb-md">Ingredient Linker</h2>
+        <h2>Ingredient Linker</h2>
       </div>
       
-      <mat-card-content class="card">
-        <p class="text-secondary mb-sm">{{ activeText }}</p>
+      <mat-card-content>
+        <p>{{ activeText }}</p>
         <mat-divider></mat-divider>
         
         <div class="ingredient-checkboxes">
@@ -17,8 +17,8 @@
             [(ngModel)]="activeRefs"
             [value]="ing.referenceId">
             <app-recipe-ingredient-html [markup]="parseIngredientText(ing)"></app-recipe-ingredient-html>
-          </div>
-        </mat-card-content>
+          </mat-checkbox>
+        </div>
         
         <div *ngIf="usedIngredients.length > 0" class="used-ingredients">
           <h4>Linked to Other Step</h4>
@@ -27,29 +27,31 @@
             [(ngModel)]="activeRefs"
             [value]="ing.referenceId">
             <app-recipe-ingredient-html [markup]="parseIngredientText(ing)"></app-recipe-ingredient-html>
-          </div>
-        </mat-card>
-      </div>
+          </mat-checkbox>
+        </div>
+      </mat-card-content>
       
-      <mat-card-actions class="card">
+      <mat-card-actions>
         <button mat-button (click)="closeLinkDialog()">Cancel</button>
-        <button mat-button class="btn btn-primary" (click)="autoSetReferences()">Auto</button>
-        <button mat-raised-button class="btn btn-primary" (click)="setIngredientIds()">Save</button>
+        <button mat-button color="primary" (click)="autoSetReferences()">Auto</button>
+        <button mat-raised-button color="primary" (click)="setIngredientIds()">Save</button>
         <button *ngIf="availableNextStep" mat-button (click)="saveAndOpenNextLinkIngredients()">Next Step</button>
       </mat-card-actions>
-    </section>
+    </mat-card>
+  </div>
 
   <!-- Instructions Header -->
   <div class="instructions-header">
-    <h2 *ngIf="!isCookMode" class="instructions-title text-xl font-medium mb-md">Instructions</h2>
+    <h2 *ngIf="!isCookMode" class="instructions-title">Instructions</h2>
     <button
       *ngIf="!isEditForm && !isCookMode"
       mat-raised-button
-      class="btn btn-primary"
+      color="primary"
       (click)="toggleCookMode()">
       <mat-icon>restaurant</mat-icon>
       Cook Mode
-    </div>
+    </button>
+  </div>
 
   <!-- Instructions List -->
   <div cdkDropList (cdkDropListDropped)="onDrop($event)" class="instructions-list">
@@ -63,23 +65,24 @@
       <!-- Section Title -->
       <div *ngIf="step.title && showTitleEditor[step.id]" class="section-title">
         <div *ngIf="isEditForm" class="title-editor">
-          <mat-form-field class="w-full">
+          <mat-form-field>
             <input matInput [(ngModel)]="step.title" placeholder="Section Title">
           </mat-form-field>
         </div>
         <div *ngIf="!isEditForm" class="title-display">
           {{ step.title }}
         </div>
+      </div>
 
       <!-- Instruction Card -->
-      <mat-card class="instruction-card" (click)="toggleDisabled(index)" class="card">
-        <mat-card-header class="card">
-          
+      <mat-card class="instruction-card" (click)="toggleDisabled(index)">
+        <mat-card-header>
+          <div class="card-header-content">
             <div *ngIf="isEditForm" class="summary-editor">
-              <mat-form-field class="w-full">
+              <mat-form-field>
                 <input matInput [(ngModel)]="step.summary" [placeholder]="'Step ' + (index + 1)">
               </mat-form-field>
-            
+            </div>
             <div *ngIf="!isEditForm" class="summary-display">
               {{ step.summary || 'Step ' + (index + 1) }}
             </div>
@@ -133,7 +136,9 @@
               </mat-menu>
             </div>
             
-            <mat-icon *ngIf="isChecked(index)" class="check-icon btn btn-primary">check_circle</mat-icon>
+            <mat-icon *ngIf="isChecked(index)" class="check-icon" color="primary">
+              check_circle
+            </mat-icon>
           </div>
         </mat-card-header>
 
@@ -141,21 +146,21 @@
         <mat-progress-bar *ngIf="isEditForm && loadingStates[index]" mode="indeterminate"></mat-progress-bar>
 
         <!-- Edit Mode Content -->
-        <mat-card-content *ngIf="isEditForm" class="edit-content card">
+        <mat-card-content *ngIf="isEditForm" class="edit-content">
           <app-markdown-editor
             [(ngModel)]="step.text"
             [preview]="previewStates[index]"
             (previewChange)="previewStates[index] = $event">
-          </mat-card-content>
+          </app-markdown-editor>
           
           <app-recipe-ingredient-html
             *ngFor="let ing of step.ingredientReferences"
             [markup]="getIngredientByRefId(ing.referenceId)">
-          </mat-card>
-        </div>
+          </app-recipe-ingredient-html>
+        </mat-card-content>
 
         <!-- View Mode Content -->
-        <mat-card-content *ngIf="!isChecked(index) && !isEditForm" class="view-content card">
+        <mat-card-content *ngIf="!isChecked(index) && !isEditForm" class="view-content">
           <div class="content-layout">
             <div *ngIf="isCookMode && step.ingredientReferences?.length > 0" class="ingredients-panel">
               <app-recipe-ingredients
@@ -163,10 +168,15 @@
                 [scale]="scale"
                 [disableAmount]="recipe.settings?.disableAmount"
                 [isCookMode]="isCookMode">
-              </div>
+              </app-recipe-ingredients>
             </div>
-
-              <app-safe-markdown [source]="step.text"></app-safe-markdown>
             
+            <div class="markdown-content">
+              <app-safe-markdown [source]="step.text"></app-safe-markdown>
+            </div>
+          </div>
         </mat-card-content>
-      </div>
+      </mat-card>
+    </div>
+  </div>
+</section> 

@@ -1,6 +1,45 @@
-// Component styles - using utility classes in template
-// Only custom styles that can't be achieved with utilities should be added here
-
-:host {
-  display: block;
+.stats-card {
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+  
+  &.clickable:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+  }
 }
+
+.card-content {
+  display: flex;
+  align-items: flex-start;
+  padding: 12px;
+}
+
+.stats-avatar {
+  margin-right: 12px;
+  margin-top: 12px;
+  flex-shrink: 0;
+}
+
+.stats-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.stats-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.stats-title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  margin-bottom: 4px;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.stats-value {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: rgba(0, 0, 0, 0.6);
+} 

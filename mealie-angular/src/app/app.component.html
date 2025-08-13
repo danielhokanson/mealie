@@ -1,7 +1,4 @@
-<!-- Skip to main content for accessibility -->
-<a href="#main-content" class="skip-to-main">Skip to main content</a>
-
-<mat-sidenav-container class="sidenav-container" appKeyboardShortcuts>
+<mat-sidenav-container class="sidenav-container">
   <!-- Side Navigation -->
   <mat-sidenav 
     #drawer 
@@ -11,12 +8,9 @@
     [mode]="'side'"
     [opened]="sidenavOpened">
     
-    <mat-toolbar class="sidenav-header">
-      <span class="text-lg font-medium">Menu</span>
-    </mat-toolbar>
-    
-    <mat-nav-list class="flex-1">
-      <a mat-list-item routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item routerLink="/" routerLinkActive="active">
         <mat-icon matListItemIcon>restaurant</mat-icon>
         <span matListItemTitle>Recipes</span>
       </a>
@@ -33,40 +27,26 @@
         <span matListItemTitle>Settings</span>
       </a>
     </mat-nav-list>
-    
-    <!-- Theme Toggle at Bottom -->
-    <div class="theme-toggle-container border-t px-md py-md">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center gap-sm">
-          <mat-icon>{{ isDarkTheme ? 'dark_mode' : 'light_mode' }}</mat-icon>
-          <span class="text-sm">{{ isDarkTheme ? 'Dark' : 'Light' }} Theme</span>
-        </div>
-        <mat-slide-toggle 
-          [checked]="isDarkTheme" 
-          (change)="toggleTheme()"
-          class="btn btn-primary">
-        </div>
-      </div>
-  </mat-sidenav-container>
+  </mat-sidenav>
 
   <!-- Main Content -->
   <mat-sidenav-content class="sidenav-content">
     <!-- Top Toolbar -->
-    <mat-toolbar class="toolbar">
+    <mat-toolbar color="primary" class="toolbar">
       <button 
         type="button" 
         aria-label="Toggle sidenav" 
         mat-icon-button 
         (click)="toggleSidenav()">
         <mat-icon>menu</mat-icon>
-      </mat-toolbar>
+      </button>
       
-      <span class="toolbar-title font-medium">{{ title }}</span>
+      <span class="toolbar-title">{{ title }}</span>
       
-      <span class="flex-1"></span>
+      <span class="toolbar-spacer"></span>
       
       <!-- Search shortcut -->
-      <button mat-icon-button (click)="focusSearch()" matTooltip="Press '/' to search">
+      <button mat-icon-button (click)="focusSearch()" matTooltip="Press '/'">
         <mat-icon>search</mat-icon>
       </button>
       
@@ -100,21 +80,11 @@
           <span>Logout</span>
         </button>
       </mat-menu>
-    </mat-sidenav-content>
+    </mat-toolbar>
 
     <!-- Page Content -->
-    <main id="main-content" class="page-container">
-      <!-- Breadcrumb Navigation -->
-      <app-breadcrumb></app-breadcrumb>
-      
-      <!-- Offline Indicator -->
-      <app-offline-indicator></app-offline-indicator>
-      
-      <!-- Main Content with Animation -->
-      <div class="fade-in">
-        <router-outlet></router-outlet>
-      </div>
-      
-      <!-- Scroll to Top Button -->
-      <app-scroll-to-top></app-scroll-to-top>
-    </main>
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

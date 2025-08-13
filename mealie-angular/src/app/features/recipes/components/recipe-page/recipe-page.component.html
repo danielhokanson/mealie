@@ -1,15 +1,15 @@
-<article class="card">
-  <mat-card class="recipe-card card">
+<div class="recipe-page">
+  <mat-card class="recipe-card">
     <!-- Recipe Header -->
-    <article class="card">
-      <article class="card">
-        <h1 class="recipe-title text-2xl font-medium mb-md">{{ recipe.name }}</h1>
-        <article class="card">
+    <div class="recipe-header">
+      <div class="recipe-title-section">
+        <h1 class="recipe-title">{{ recipe.name }}</h1>
+        <div class="recipe-meta">
           <span class="recipe-rating">
             <mat-icon *ngFor="let star of [1,2,3,4,5]" 
                       [color]="star <= recipe.rating ? 'accent' : 'basic'">
               {{ star <= recipe.rating ? 'star' : 'star_border' }}
-
+            </mat-icon>
             <span class="rating-text">{{ recipe.rating }}/5</span>
           </span>
           <span class="recipe-servings">
@@ -20,28 +20,30 @@
             <mat-icon>schedule</mat-icon>
             {{ totalTime }} min
           </span>
-        </article>
+        </div>
+      </div>
       
-      <article class="card">
+      <div class="recipe-actions">
         <app-base-button 
           [edit]="true" 
           (click)="toggleEditMode()"
           *ngIf="!isEditForm">
           Edit
-        </article>
+        </app-base-button>
         <app-base-button 
           [save]="true" 
           (click)="onSave()"
           *ngIf="isEditForm">
           Save
-        </article>
+        </app-base-button>
         <app-base-button 
           [delete]="true" 
           (click)="onDelete()"
           *ngIf="isEditForm">
           Delete
-        </article>
-      </mat-card>
+        </app-base-button>
+      </div>
+    </div>
 
     <!-- Recipe Image -->
     <div *ngIf="recipe.image" class="recipe-image-container">
@@ -54,7 +56,7 @@
     </div>
 
     <!-- Recipe Scale -->
-    <article class="card">
+    <div class="recipe-scale">
       <label for="scale-input">Scale:</label>
       <input 
         id="scale-input"
@@ -66,23 +68,24 @@
         (input)="onScaleChange($event)"
         class="scale-slider">
       <span class="scale-text">{{ scale }}x</span>
-    </article>
+    </div>
 
     <!-- Recipe Content -->
-    
-      <article class="card">
-        <h2 class="text-xl font-medium mb-md">Ingredients</h2>
+    <div class="recipe-content">
+      <div class="recipe-ingredients">
+        <h2>Ingredients</h2>
         <div class="ingredients-list">
           <div *ngFor="let ingredient of scaledIngredients; trackBy: trackByIngredientId" 
                class="ingredient-item">
             <div class="ingredient-quantity">
               {{ ingredient.quantity }}
               <span *ngIf="ingredient.unit">{{ ingredient.unit }}</span>
-            
+            </div>
             <div class="ingredient-name">{{ ingredient.name }}</div>
             <div *ngIf="ingredient.notes" class="ingredient-notes">
               {{ ingredient.notes }}
             </div>
+          </div>
         </div>
         
         <app-base-button 
@@ -90,18 +93,19 @@
           [create]="true" 
           (click)="addIngredient()">
           Add Ingredient
-        </div>
-      </article>
+        </app-base-button>
+      </div>
 
       <mat-divider vertical class="recipe-divider"></mat-divider>
 
-      <article class="card">
-        <h2 class="text-xl font-medium mb-md">Instructions</h2>
+      <div class="recipe-instructions">
+        <h2>Instructions</h2>
         <div class="instructions-list">
           <div *ngFor="let instruction of recipe.instructionsList; trackBy: trackByInstructionId" 
                class="instruction-item">
             <div class="instruction-number">{{ instruction.order }}</div>
             <div class="instruction-text">{{ instruction.text }}</div>
+          </div>
         </div>
         
         <app-base-button 
@@ -109,12 +113,13 @@
           [create]="true" 
           (click)="addInstruction()">
           Add Step
-        </article>
-      </article>
+        </app-base-button>
+      </div>
+    </div>
 
     <!-- Recipe Notes -->
     <div *ngIf="recipe.notes" class="recipe-notes">
-      <h3 class="text-lg font-medium mb-sm">Notes</h3>
+      <h3>Notes</h3>
       <app-safe-markdown [markdown]="recipe.notes"></app-safe-markdown>
     </div>
 
@@ -126,3 +131,5 @@
         </mat-chip>
       </mat-chip-set>
     </div>
+  </mat-card>
+</div> 

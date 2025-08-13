@@ -2,20 +2,20 @@
   <!-- Title Field -->
   <mat-form-field *ngIf="value.title || showTitle" 
                   appearance="outline" 
-                  class="title-field w-full">
+                  class="title-field">
     <mat-label>Section Title</mat-label>
     <input matInput
            [(ngModel)]="value.title"
            (input)="onTitleChange()"
            (click)="onFieldClick('title')"
            placeholder="Section Title">
-  </div>
+  </mat-form-field>
 
   <!-- Ingredient Row -->
   <div class="ingredient-row" [class.md-and-up]="isMdAndUp">
     <!-- Quantity Field -->
     <div *ngIf="!disableAmount" class="quantity-field">
-      <mat-form-field appearance="outline" class="w-full">
+      <mat-form-field appearance="outline">
         <mat-label>Quantity</mat-label>
         <input matInput
                type="number"
@@ -29,7 +29,7 @@
 
     <!-- Unit Field -->
     <div *ngIf="!disableAmount" class="unit-field">
-      <mat-form-field appearance="outline" class="w-full">
+      <mat-form-field appearance="outline">
         <mat-label>Unit</mat-label>
         <input matInput
                [(ngModel)]="unitSearch"
@@ -45,17 +45,17 @@
           <mat-option *ngIf="unitSearch && !units.find(u => u.name.includes(unitSearch))">
             Press Enter to create "{{ unitSearch }}"
           </mat-option>
-        </mat-form-field>
+        </mat-autocomplete>
         <mat-icon matPrefix *ngIf="unitError" 
                   [matTooltip]="unitErrorTooltip"
                   matTooltipPosition="below"
-                  class="btn btn-primary">warning
-      </div>
+                  color="primary">warning</mat-icon>
+      </mat-form-field>
     </div>
 
     <!-- Food Field -->
     <div *ngIf="!disableAmount" class="food-field">
-      <mat-form-field appearance="outline" class="w-full">
+      <mat-form-field appearance="outline">
         <mat-label>Food</mat-label>
         <input matInput
                [(ngModel)]="foodSearch"
@@ -71,17 +71,18 @@
           <mat-option *ngIf="foodSearch && !foods.find(f => f.name.includes(foodSearch))">
             Press Enter to create "{{ foodSearch }}"
           </mat-option>
-        </mat-form-field>
+        </mat-autocomplete>
         <mat-icon matPrefix *ngIf="foodError" 
                   [matTooltip]="foodErrorTooltip"
                   matTooltipPosition="below"
-                  class="btn btn-primary">warning
-      </div>
+                  color="primary">warning</mat-icon>
+      </mat-form-field>
+    </div>
 
     <!-- Note Field -->
     <div class="note-field">
       <div class="note-input-group">
-        <mat-form-field appearance="outline" class="note-input w-full">
+        <mat-form-field appearance="outline" class="note-input">
           <mat-label>Notes</mat-label>
           <input matInput
                  [(ngModel)]="value.note"
@@ -96,13 +97,16 @@
           [large]="false"
           (buttonClick)="onButtonClick($event)"
           class="action-buttons">
-        </div>
+        </app-base-button-group>
       </div>
+    </div>
+  </div>
 
   <!-- Original Text -->
-  <p *ngIf="showOriginalText" class="original-text text-secondary mb-sm">
+  <p *ngIf="showOriginalText" class="original-text">
     Original text: {{ value.originalText }}
   </p>
 
   <!-- Divider for mobile -->
   <mat-divider *ngIf="!isMdAndUp" class="mobile-divider"></mat-divider>
+</div> 

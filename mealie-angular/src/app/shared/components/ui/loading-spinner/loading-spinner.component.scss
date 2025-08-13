@@ -1,6 +1,14 @@
-// Component styles - using utility classes in template
-// Only custom styles that can't be achieved with utilities should be added here
+.loading-spinner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 
-:host {
-  display: block;
-}
+  .loading-message {
+    margin-top: 16px;
+    color: var(--mat-text-color-secondary, #666);
+    font-size: 14px;
+    text-align: center;
+  }
+} 

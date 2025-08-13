@@ -1,6 +1,24 @@
-// Component styles - using utility classes in template
-// Only custom styles that can't be achieved with utilities should be added here
-
-:host {
-  display: block;
+.section-title-card {
+  margin-bottom: 1rem;
+  padding: 1rem;
 }
+
+.title-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 1rem;
+}
+
+.title-icon {
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin: 0;
+  color: rgba(0, 0, 0, 0.87);
+} 

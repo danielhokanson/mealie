@@ -1,6 +1,36 @@
-// Component styles - using utility classes in template
-// Only custom styles that can't be achieved with utilities should be added here
+.shopping-list-detail {
+  padding: 20px;
 
-:host {
-  display: block;
-}
+  .list-header {
+    text-align: center;
+    margin-bottom: 32px;
+
+    h1 {
+      font-size: 32px;
+      font-weight: 600;
+      margin: 0 0 8px 0;
+    }
+  }
+
+  .list-content {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 32px;
+
+    .main-content {
+      .items-section {
+        margin-bottom: 32px;
+      }
+    }
+
+    .sidebar {
+      .list-info {
+        margin-bottom: 24px;
+      }
+
+      .list-actions {
+        margin-bottom: 24px;
+      }
+    }
+  }
+} 

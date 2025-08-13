@@ -23,8 +23,6 @@ import { RecipeService } from '../../../../core/services/recipe.service';
 import { Recipe, RecipeSearchParams, RecipeCategory, RecipeTag, RecipeTool, RecipeFood } from '../../../../core/models/recipe.model';
 import { RecipeCardComponent } from '../../components/recipe-card/recipe-card.component';
 import { SearchFilterComponent } from '../../components/search-filter/search-filter.component';
-import { SkeletonLoaderComponent } from '../../../../shared/components/ui/skeleton-loader/skeleton-loader.component';
-import { ToastService } from '../../../../services/toast.service';
 
 @Component({
     selector: 'app-recipe-explorer',
@@ -50,8 +48,7 @@ import { ToastService } from '../../../../services/toast.service';
         MatTooltipModule,
         MatDividerModule,
         RecipeCardComponent,
-        SearchFilterComponent,
-        SkeletonLoaderComponent
+        SearchFilterComponent
     ],
     templateUrl: './recipe-explorer.component.html',
     styleUrls: ['./recipe-explorer.component.scss']
@@ -88,8 +85,7 @@ export class RecipeExplorerComponent implements OnInit, OnDestroy {
 
     constructor(
         private recipeService: RecipeService,
-        private router: Router,
-        private toastService: ToastService
+        private router: Router
     ) {
         this.setupSearchDebounce();
     }
@@ -209,14 +205,10 @@ export class RecipeExplorerComponent implements OnInit, OnDestroy {
                 this.recipes = response.items;
                 this.totalRecipes = response.total;
                 this.loading = false;
-                if (this.searchQuery) {
-                    this.toastService.success(`Found ${response.total} recipes`);
-                }
             },
             error: (error) => {
                 console.error('Error loading recipes:', error);
                 this.loading = false;
-                this.toastService.error('Failed to load recipes');
             }
         });
     }

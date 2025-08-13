@@ -12,8 +12,6 @@ import { ShoppingListItem } from '../../features/shopping-lists/components/shopp
 import { MultiPurposeLabel, IngredientUnit, IngredientFood } from '../../features/shopping-lists/components/shopping-list-item/shopping-list-item.component';
 import { RecipeSummary } from '../../features/recipes/components/recipe-list/recipe-list.component';
 import { ShoppingListService } from '../../services/shopping-list.service';
-import { SkeletonLoaderComponent } from '../../shared/components/ui/skeleton-loader/skeleton-loader.component';
-import { ToastService } from '../../services/toast.service';
 
 @Component({
     selector: 'app-shopping-lists',
@@ -24,8 +22,7 @@ import { ToastService } from '../../services/toast.service';
         MatButtonModule,
         MatIconModule,
         MatProgressSpinnerModule,
-        ShoppingListComponent,
-        SkeletonLoaderComponent
+        ShoppingListComponent
     ],
     templateUrl: './shopping-lists.component.html',
     styleUrls: ['./shopping-lists.component.scss']
@@ -42,8 +39,7 @@ export class ShoppingListsComponent implements OnInit {
 
     constructor(
         private shoppingListService: ShoppingListService,
-        private snackBar: MatSnackBar,
-        private toastService: ToastService
+        private snackBar: MatSnackBar
     ) { }
 
     ngOnInit(): void {

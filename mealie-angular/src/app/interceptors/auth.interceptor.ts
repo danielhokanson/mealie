@@ -1,17 +1,11 @@
-import { inject } from '@angular/core';
-import {
-    HttpRequest,
-    HttpHandlerFn,
-    HttpErrorResponse
-} from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
-import { Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+import { Injectable } from '@angular/core';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { AuthService } from '../core/services/auth.service';
 
-export function authInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn) {
-    const authService = inject(AuthService);
-    const router = inject(Router);
+export function authInterceptor(req: HttpRequest<unknown>, next: HttpHandler) {
+    const authService = new AuthService();
+    const router = new Router();
 
     const token = authService.getToken();
 

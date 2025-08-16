@@ -1,0 +1,50 @@
+<div class="household-mealplan-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Household Meal Plan</mat-card-title>
+      <mat-card-subtitle>Plan and organize meals for your household</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="date-selector">
+        <mat-form-field>
+          <mat-label>Select Date</mat-label>
+          <input matInput [matDatepicker]="picker" [value]="selectedDate" (dateChange)="onDateChange($event.value)">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="meal-plan-content">
+        <div *ngIf="mealPlan.length === 0" class="no-meals">
+          <p>No meals planned for this date.</p>
+          <button mat-raised-button color="primary" (click)="addMeal()">
+            <mat-icon>add</mat-icon>
+            Add Meal
+          </button>
+        </div>
+
+        <div *ngIf="mealPlan.length > 0" class="meals-list">
+          <mat-list>
+            <mat-list-item *ngFor="let meal of mealPlan">
+              <div matListItemTitle>{{ meal.name }}</div>
+              <div matListItemLine>{{ meal.type }}</div>
+              <div matListItemMeta>
+                <button mat-icon-button (click)="removeMeal(meal.id)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="addMeal()">
+        <mat-icon>add</mat-icon>
+        Add Meal
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

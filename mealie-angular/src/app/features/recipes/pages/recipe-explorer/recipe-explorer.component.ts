@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -16,6 +17,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDividerModule } from '@angular/material/divider';
 import { Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
 import { RecipeService } from '../../../../core/services/recipe.service';
 import { Recipe, RecipeSearchParams, RecipeCategory, RecipeTag, RecipeTool, RecipeFood } from '../../../../core/models/recipe.model';
@@ -44,6 +46,7 @@ import { SearchFilterComponent } from '../../components/search-filter/search-fil
         MatTableModule,
         MatSlideToggleModule,
         MatTooltipModule,
+        MatDividerModule,
         RecipeCardComponent,
         SearchFilterComponent
     ],
@@ -80,7 +83,10 @@ export class RecipeExplorerComponent implements OnInit, OnDestroy {
     private searchSubject = new Subject<string>();
     private destroy$ = new Subject<void>();
 
-    constructor(private recipeService: RecipeService) {
+    constructor(
+        private recipeService: RecipeService,
+        private router: Router
+    ) {
         this.setupSearchDebounce();
     }
 
@@ -99,9 +105,14 @@ export class RecipeExplorerComponent implements OnInit, OnDestroy {
         this.loadRecipes();
     }
 
-    onSearchQueryChange(query: string): void {
-        this.searchQuery = query;
-        this.searchSubject.next(query);
+    onSearchQueryChange(event: Event | string): void {
+        if (typeof event === 'string') {
+            this.searchQuery = event;
+        } else {
+            const target = event.target as HTMLInputElement;
+            this.searchQuery = target.value;
+        }
+        this.searchSubject.next(this.searchQuery);
     }
 
     onFilterChange(): void {
@@ -191,7 +202,7 @@ export class RecipeExplorerComponent implements OnInit, OnDestroy {
 
         this.recipeService.getRecipes(params).subscribe({
             next: (response) => {
-                this.recipes = response.recipes;
+                this.recipes = response.items;
                 this.totalRecipes = response.total;
                 this.loading = false;
             },
@@ -240,5 +251,9 @@ export class RecipeExplorerComponent implements OnInit, OnDestroy {
     removeFood(food: string): void {
         this.selectedFoods = this.selectedFoods.filter(f => f !== food);
         this.onFilterChange();
+    }
+
+    onCreateRecipe(): void {
+        this.router.navigate(['/recipes/create']);
     }
 } 

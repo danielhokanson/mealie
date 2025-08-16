@@ -109,73 +109,9 @@ export class UnitManagementComponent implements OnInit, OnDestroy {
                     console.error('Error loading units:', error);
                     this.snackBar.open('Error loading units', 'Close', { duration: 3000 });
                     this.loading = false;
-                    // Fallback to sample data for development
-                    setTimeout(() => {
-                        this.units = [
-                            {
-                                id: '1',
-                                name: 'Grams',
-                                abbreviation: 'g',
-                                description: 'Metric unit of mass',
-                                isBaseUnit: true,
-                                conversionFactor: 1,
-                                baseUnitId: null,
-                                usageCount: 45,
-                                createdAt: new Date('2024-01-01'),
-                                updatedAt: new Date('2024-01-15')
-                            },
-                            {
-                                id: '2',
-                                name: 'Kilograms',
-                                abbreviation: 'kg',
-                                description: 'Metric unit of mass (1000 grams)',
-                                isBaseUnit: false,
-                                conversionFactor: 1000,
-                                baseUnitId: '1',
-                                usageCount: 23,
-                                createdAt: new Date('2024-01-02'),
-                                updatedAt: new Date('2024-01-10')
-                            },
-                            {
-                                id: '3',
-                                name: 'Ounces',
-                                abbreviation: 'oz',
-                                description: 'Imperial unit of mass',
-                                isBaseUnit: false,
-                                conversionFactor: 28.3495,
-                                baseUnitId: '1',
-                                usageCount: 18,
-                                createdAt: new Date('2024-01-03'),
-                                updatedAt: new Date('2024-01-12')
-                            },
-                            {
-                                id: '4',
-                                name: 'Pounds',
-                                abbreviation: 'lb',
-                                description: 'Imperial unit of mass (16 ounces)',
-                                isBaseUnit: false,
-                                conversionFactor: 453.592,
-                                baseUnitId: '1',
-                                usageCount: 12,
-                                createdAt: new Date('2024-01-04'),
-                                updatedAt: new Date('2024-01-08')
-                            },
-                            {
-                                id: '5',
-                                name: 'Milliliters',
-                                abbreviation: 'ml',
-                                description: 'Metric unit of volume',
-                                isBaseUnit: true,
-                                conversionFactor: 1,
-                                baseUnitId: null,
-                                usageCount: 38,
-                                createdAt: new Date('2024-01-05'),
-                                updatedAt: new Date('2024-01-14')
-                            }
-                        ];
-                        this.filteredUnits = [...this.units];
-                        this.loading = false;
-                    }, 500);
+                    // Initialize with empty array for production
+                    this.units = [];
+                    this.filteredUnits = [];
                 }
             });
     }

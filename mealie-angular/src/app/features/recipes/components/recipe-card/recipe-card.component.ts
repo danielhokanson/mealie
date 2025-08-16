@@ -40,6 +40,7 @@ export interface RecipeTag {
     styleUrls: ['./recipe-card.component.scss']
 })
 export class RecipeCardComponent {
+    @Input() recipe?: any;
     @Input() name = '';
     @Input() slug = '';
     @Input() description?: string | null;

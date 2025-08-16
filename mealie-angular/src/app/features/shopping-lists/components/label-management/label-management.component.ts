@@ -106,57 +106,8 @@ export class LabelManagementComponent implements OnInit, OnDestroy {
                     console.error('Error loading labels:', error);
                     this.snackBar.open('Error loading labels', 'Close', { duration: 3000 });
                     this.loading = false;
-                    // Fallback to sample data for development
-                    setTimeout(() => {
-                        this.labels = [
-                            {
-                                id: '1',
-                                name: 'Urgent',
-                                color: '#f44336',
-                                description: 'High priority items that need immediate attention',
-                                usageCount: 15,
-                                createdAt: new Date('2024-01-01'),
-                                updatedAt: new Date('2024-01-15')
-                            },
-                            {
-                                id: '2',
-                                name: 'Organic',
-                                color: '#4caf50',
-                                description: 'Organic and natural products',
-                                usageCount: 8,
-                                createdAt: new Date('2024-01-02'),
-                                updatedAt: new Date('2024-01-10')
-                            },
-                            {
-                                id: '3',
-                                name: 'Sale',
-                                color: '#ff9800',
-                                description: 'Items on sale or with discounts',
-                                usageCount: 12,
-                                createdAt: new Date('2024-01-03'),
-                                updatedAt: new Date('2024-01-12')
-                            },
-                            {
-                                id: '4',
-                                name: 'Bulk',
-                                color: '#9c27b0',
-                                description: 'Items to buy in bulk',
-                                usageCount: 5,
-                                createdAt: new Date('2024-01-04'),
-                                updatedAt: new Date('2024-01-08')
-                            },
-                            {
-                                id: '5',
-                                name: 'Frozen',
-                                color: '#2196f3',
-                                description: 'Frozen food items',
-                                usageCount: 20,
-                                createdAt: new Date('2024-01-05'),
-                                updatedAt: new Date('2024-01-14')
-                            }
-                        ];
-                        this.loading = false;
-                    }, 500);
+                    // Initialize with empty array for production
+                    this.labels = [];
                 }
 
     onAddLabel(): void {

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiService } from './api.service';
-import { Household, User } from '../models/user.model';
+import { User } from '../models/user.model';
+import { Household } from '../models/household.model';
 import { PaginationData } from '../models/pagination.model';
 
 @Injectable({
@@ -61,8 +62,8 @@ export class HouseholdService {
     /**
      * Get household members
      */
-    getHouseholdMembers(page = 1, perPage = -1, params: any = {}): Observable<PaginationData<User>> {
-        return this.api.get<PaginationData<User>>('/households/members', {
+    getHouseholdMembers(householdId: string, page = 1, perPage = -1, params: any = {}): Observable<PaginationData<User>> {
+        return this.api.get<PaginationData<User>>(`/households/${householdId}/members`, {
             page,
             perPage,
             ...params
@@ -93,6 +94,27 @@ export class HouseholdService {
     }
 
     /**
+     * Invite member to household
+     */
+    inviteMember(householdId: string, memberData: any): Observable<any> {
+        return this.api.post<any>(`/households/${householdId}/invitations`, memberData);
+    }
+
+    /**
+     * Update member role in household
+     */
+    updateMemberRole(householdId: string, memberId: string, role: string): Observable<any> {
+        return this.api.put<any>(`/households/${householdId}/members/${memberId}/role`, { role });
+    }
+
+    /**
+     * Remove member from household
+     */
+    removeMemberFromHousehold(householdId: string, memberId: string): Observable<void> {
+        return this.api.delete<void>(`/households/${householdId}/members/${memberId}`);
+    }
+
+    /**
      * Get household preferences
      */
     getHouseholdPreferences(): Observable<any> {
@@ -114,9 +136,49 @@ export class HouseholdService {
     }
 
     /**
-     * Create household invitation token
+     * Create invitation
      */
     createInvitation(payload: any): Observable<any> {
         return this.api.post<any>('/households/invitations', payload);
+    }
+
+    exportHouseholdData(householdId: string): Observable<any> {
+        return this.api.get<any>(`/households/${householdId}/export`);
+    }
+
+    getWebhooks(): Observable<any[]> {
+        return this.api.get<any[]>('/households/webhooks');
+    }
+
+    createWebhook(webhook: any): Observable<any> {
+        return this.api.post<any>('/households/webhooks', webhook);
+    }
+
+    updateWebhook(webhookId: string, webhook: any): Observable<any> {
+        return this.api.put<any>(`/households/webhooks/${webhookId}`, webhook);
+    }
+
+    deleteWebhook(webhookId: string): Observable<void> {
+        return this.api.delete<void>(`/households/webhooks/${webhookId}`);
+    }
+
+    testWebhook(webhookId: string): Observable<any> {
+        return this.api.post<any>(`/households/webhooks/${webhookId}/test`, {});
+    }
+
+    getNotifiers(): Observable<any[]> {
+        return this.api.get<any[]>('/households/notifiers');
+    }
+
+    createNotifier(notifier: any): Observable<any> {
+        return this.api.post<any>('/households/notifiers', notifier);
+    }
+
+    updateNotifier(notifierId: string, notifier: any): Observable<any> {
+        return this.api.put<any>(`/households/notifiers/${notifierId}`, notifier);
+    }
+
+    deleteNotifier(notifierId: string): Observable<void> {
+        return this.api.delete<void>(`/households/notifiers/${notifierId}`);
     }
 }

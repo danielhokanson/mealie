@@ -21,6 +21,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { AuthService } from '../../../../core/services/auth.service';
 import { UserService } from '../../../../core/services/user.service';
 import { User, UserProfile, UserPreferences } from '../../../../core/models/user.model';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-user-profile',
@@ -57,9 +58,9 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     userPreferences: UserPreferences | null = null;
 
     // Forms
-    profileForm: FormGroup;
-    preferencesForm: FormGroup;
-    passwordForm: FormGroup;
+    profileForm!: FormGroup;
+    preferencesForm!: FormGroup;
+    passwordForm!: FormGroup;
 
     // Profile image
     selectedImage: File | null = null;
@@ -71,7 +72,8 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         private authService: AuthService,
         private userService: UserService,
         private snackBar: MatSnackBar,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private router: Router
     ) {
         this.initializeForms();
     }
@@ -107,7 +109,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         }, { validators: this.passwordMatchValidator });
     }
 
-    private loadUserData(): void {
+    public loadUserData(): void {
         this.loading = true;
         this.error = false;
 
@@ -139,23 +141,30 @@ export class UserProfileComponent implements OnInit, OnDestroy {
                 error: (error) => {
                     console.error('Error loading user profile:', error);
                     // Create default profile on error
+                    //TODO: Explain why we are doing this in the on error 
                     this.userProfile = {
                         id: this.currentUser!.id,
+                        username: this.currentUser!.username,
+                        fullName: this.currentUser!.fullName,
+                        email: this.currentUser!.email,
                         bio: '',
-                        location: '',
-                        website: '',
-                        phone: '',
-                        avatar: null,
-                        socialLinks: {
-                            twitter: '',
-                            instagram: '',
-                            facebook: ''
-                        },
+                        avatar: this.currentUser!.avatar,
+                        group: { id: '', name: '', slug: '', description: '', isPrivate: false, createdAt: new Date(), updatedAt: new Date(), users: [], households: [] },
+                        household: undefined,
                         preferences: {
+                            id: '',
+                            userId: this.currentUser!.id,
+                            theme: 'light',
+                            language: 'en',
+                            timezone: 'UTC',
+                            units: 'metric',
                             dietaryRestrictions: [],
+                            emailNotifications: true,
                             allergies: [],
                             cuisinePreferences: [],
-                            cookingSkill: 'beginner'
+                            cookingSkill: 'beginner',
+                            createdAt: new Date(),
+                            updatedAt: new Date()
                         }
                     };
                     this.populateForms();
@@ -175,21 +184,19 @@ export class UserProfileComponent implements OnInit, OnDestroy {
                     console.error('Error loading user preferences:', error);
                     // Create default preferences on error
                     this.userPreferences = {
+                        id: '',
+                        userId: this.currentUser!.id,
                         theme: 'light',
                         language: 'en',
                         timezone: 'UTC',
+                        units: 'metric',
+                        dietaryRestrictions: [],
                         emailNotifications: true,
-                        pushNotifications: false,
-                        recipeNotifications: true,
-                        shoppingListNotifications: true,
-                        weeklyReports: false,
-                        autoSave: true,
-                        showNutritionInfo: true,
-                        showIngredients: true,
-                        showInstructions: true,
-                        defaultServings: 4,
-                        defaultPrepTime: 30,
-                        defaultCookTime: 60
+                        allergies: [],
+                        cuisinePreferences: [],
+                        cookingSkill: 'beginner',
+                        createdAt: new Date(),
+                        updatedAt: new Date()
                     };
                     this.populateForms();
                 }
@@ -302,14 +309,46 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
     onDeleteAccount(): void {
         if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
-            // TODO: Implement account deletion
-            this.snackBar.open('Account deletion coming soon', 'Close', { duration: 3000 });
+            if (confirm('This will permanently delete all your data. Are you absolutely sure?')) {
+                this.loading = true;
+                this.userService.deleteAccount(this.userProfile!.id).subscribe({
+                    next: () => {
+                        this.snackBar.open('Account deleted successfully', 'Close', { duration: 3000 });
+                        this.authService.logout();
+                        this.router.navigate(['/']);
+                    },
+                    error: (error) => {
+                        console.error('Error deleting account:', error);
+                        this.snackBar.open('Failed to delete account', 'Close', { duration: 3000 });
+                        this.loading = false;
+                    }
+                });
+            }
         }
     }
 
     onExportData(): void {
-        // TODO: Implement data export
-        this.snackBar.open('Data export coming soon', 'Close', { duration: 3000 });
+        this.loading = true;
+        this.userService.exportUserData(this.userProfile!.id).subscribe({
+            next: (data) => {
+                // Create a blob and download the data
+                const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+                const url = window.URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `user-data-${this.userProfile!.username}-${new Date().toISOString()}.json`;
+                link.click();
+                window.URL.revokeObjectURL(url);
+                
+                this.snackBar.open('Data exported successfully', 'Close', { duration: 3000 });
+                this.loading = false;
+            },
+            error: (error) => {
+                console.error('Error exporting data:', error);
+                this.snackBar.open('Failed to export data', 'Close', { duration: 3000 });
+                this.loading = false;
+            }
+        });
     }
 
     getErrorMessage(fieldName: string): string {

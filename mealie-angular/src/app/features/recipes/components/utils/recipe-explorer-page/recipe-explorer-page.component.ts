@@ -175,39 +175,19 @@ export class RecipeExplorerPageComponent implements OnInit, OnDestroy {
 
     private async loadInitialData(): Promise<void> {
         // In a real app, you'd load data from services
+        // TODO: Implement API calls to load filter data
         // this.categories = await this.categoryService.getAll();
         // this.tags = await this.tagService.getAll();
         // this.tools = await this.toolService.getAll();
         // this.foods = await this.foodService.getAll();
         // this.households = await this.householdService.getAll();
 
-        // Mock data
-        this.categories = [
-            { id: '1', name: 'Desserts', slug: 'desserts', color: 'primary' },
-            { id: '2', name: 'Main Dishes', slug: 'main-dishes', color: 'accent' },
-            { id: '3', name: 'Appetizers', slug: 'appetizers', color: 'warn' }
-        ];
-
-        this.tags = [
-            { id: '1', name: 'Italian', slug: 'italian', color: 'primary' },
-            { id: '2', name: 'Quick', slug: 'quick', color: 'accent' },
-            { id: '3', name: 'Vegetarian', slug: 'vegetarian', color: 'warn' }
-        ];
-
-        this.tools = [
-            { id: '1', name: 'Blender', slug: 'blender' },
-            { id: '2', name: 'Oven', slug: 'oven' },
-            { id: '3', name: 'Stovetop', slug: 'stovetop' }
-        ];
-
-        this.foods = [
-            { id: '1', name: 'Chicken', slug: 'chicken' },
-            { id: '2', name: 'Pasta', slug: 'pasta' },
-            { id: '3', name: 'Cheese', slug: 'cheese' }
-        ];
-
+        // Initialize with empty arrays for production
+        this.categories = [];
+        this.tags = [];
+        this.tools = [];
+        this.foods = [];
         this.households = [
-            { id: '1', name: 'My Household', slug: 'my-household' }
         ];
 
         // Load initial recipes

@@ -78,20 +78,11 @@ export class RecipeIngredientEditorComponent implements ControlValueAccessor {
     unitSearch = '';
     foodSearch = '';
 
-    // Mock data - in a real app, these would come from services
-    foods: Food[] = [
-        { id: '1', name: 'Flour', pluralName: 'Flours' },
-        { id: '2', name: 'Sugar', pluralName: 'Sugars' },
-        { id: '3', name: 'Salt', pluralName: 'Salts' }
-    ];
+    // TODO: Load from API services
+    // These will be populated from the backend API
+    foods: Food[] = [];
 
-    units: Unit[] = [
-        { id: '1', name: 'cup' },
-        { id: '2', name: 'tablespoon' },
-        { id: '3', name: 'teaspoon' },
-        { id: '4', name: 'gram' },
-        { id: '5', name: 'ounce' }
-    ];
+    units: Unit[] = [];
 
     get contextMenuOptions(): any[] {
         const options = [

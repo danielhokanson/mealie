@@ -7,12 +7,20 @@ export const routes: Routes = [
         loadChildren: () => import('./features/recipes/recipes.routes').then(m => m.RECIPE_ROUTES)
     },
     {
+        path: 'meal-plans',
+        loadChildren: () => import('./features/meal-plans/meal-plans.routes').then(m => m.MEAL_PLANS_ROUTES)
+    },
+    {
         path: 'search',
         loadChildren: () => import('./features/search/search.routes').then(m => m.SEARCH_ROUTES)
     },
     {
         path: 'shopping-lists',
         loadChildren: () => import('./features/shopping-lists/shopping-lists.routes').then(m => m.SHOPPING_LISTS_ROUTES)
+    },
+    {
+        path: 'settings',
+        loadChildren: () => import('./features/settings/settings.routes').then(m => m.SETTINGS_ROUTES)
     },
     {
         path: 'admin',

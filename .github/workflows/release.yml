@@ -37,8 +37,8 @@ jobs:
     with:
       tag: ${{ github.event.release.tag_name }}
       tags: |
-          hkotel/mealie:latest
-          ghcr.io/${{ github.repository }}:latest
+        hkotel/mealie:latest
+        ghcr.io/${{ github.repository }}:latest
     secrets:
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
@@ -76,8 +76,7 @@ jobs:
           sed -i 's/:v[0-9]*.[0-9]*.[0-9]*/:v${{ env.VERSION_NUM }}/' docs/docs/documentation/getting-started/installation/installation-checklist.md
           sed -i 's/:v[0-9]*.[0-9]*.[0-9]*/:v${{ env.VERSION_NUM }}/' docs/docs/documentation/getting-started/installation/sqlite.md
           sed -i 's/:v[0-9]*.[0-9]*.[0-9]*/:v${{ env.VERSION_NUM }}/' docs/docs/documentation/getting-started/installation/postgres.md
-          sed -i 's/^version = "[^"]*"/version = "${{ env.VERSION_NUM }}"/' pyproject.toml
-          sed -i 's/^\s*"version": "[^"]*"/"version": "${{ env.VERSION_NUM }}"/' frontend/package.json
+          sed -i 's/^\s*"version": "[^"]*"/"version": "${{ env.VERSION_NUM }}"/' mealie-angular/package.json
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6

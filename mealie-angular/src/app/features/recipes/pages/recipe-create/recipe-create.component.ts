@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormArray, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -29,6 +29,7 @@ import { Recipe, RecipeIngredient, RecipeInstruction, RecipeCategory, RecipeTag,
     imports: [
         CommonModule,
         ReactiveFormsModule,
+        FormsModule,
         MatCardModule,
         MatButtonModule,
         MatIconModule,
@@ -50,7 +51,7 @@ import { Recipe, RecipeIngredient, RecipeInstruction, RecipeCategory, RecipeTag,
     styleUrls: ['./recipe-create.component.scss']
 })
 export class RecipeCreateComponent implements OnInit, OnDestroy {
-    recipeForm: FormGroup;
+    recipeForm!: FormGroup;
     loading = false;
     selectedTab = 0;
     categories: RecipeCategory[] = [];
@@ -61,6 +62,18 @@ export class RecipeCreateComponent implements OnInit, OnDestroy {
     selectedTags: string[] = [];
     selectedTools: string[] = [];
     selectedFoods: string[] = [];
+
+    // Add new item flags
+    showAddCategory = false;
+    showAddTag = false;
+    showAddTool = false;
+    showAddFood = false;
+
+    // New item models
+    newCategory = { name: '', color: '#ff9800' };
+    newTag = { name: '', color: '#4caf50' };
+    newTool = { name: '' };
+    newFood = { name: '' };
 
     private destroy$ = new Subject<void>();
 
@@ -94,78 +107,64 @@ export class RecipeCreateComponent implements OnInit, OnDestroy {
             instructions: this.fb.array([]),
             image: ['']
         });
+
+        // Add initial ingredient and instruction
+        this.addIngredient();
+        this.addInstruction();
     }
 
     private loadFormData(): void {
         // Load categories
-        this.recipeService.getCategories().pipe(
-            takeUntil(this.destroy$)
-        ).subscribe(categories => {
-            this.categories = categories;
+        this.recipeService.getCategories().pipe(takeUntil(this.destroy$)).subscribe({
+            next: (categories) => {
+                this.categories = categories;
+            },
+            error: (error) => {
+                console.error('Error loading categories:', error);
+            }
         });
 
         // Load tags
-        this.recipeService.getTags().pipe(
-            takeUntil(this.destroy$)
-        ).subscribe(tags => {
-            this.tags = tags;
+        this.recipeService.getTags().pipe(takeUntil(this.destroy$)).subscribe({
+            next: (tags) => {
+                this.tags = tags;
+            },
+            error: (error) => {
+                console.error('Error loading tags:', error);
+            }
         });
 
         // Load tools
-        this.recipeService.getTools().pipe(
-            takeUntil(this.destroy$)
-        ).subscribe(tools => {
-            this.tools = tools;
+        this.recipeService.getTools().pipe(takeUntil(this.destroy$)).subscribe({
+            next: (tools) => {
+                this.tools = tools;
+            },
+            error: (error) => {
+                console.error('Error loading tools:', error);
+            }
         });
 
         // Load foods
-        this.recipeService.getFoods().pipe(
-            takeUntil(this.destroy$)
-        ).subscribe(foods => {
-            this.foods = foods;
+        this.recipeService.getFoods().pipe(takeUntil(this.destroy$)).subscribe({
+            next: (foods) => {
+                this.foods = foods;
+            },
+            error: (error) => {
+                console.error('Error loading foods:', error);
+            }
         });
     }
 
-    get ingredients(): FormArray {
+    // Form getters
+    get ingredients() {
         return this.recipeForm.get('ingredients') as FormArray;
     }
 
-    get instructions(): FormArray {
+    get instructions() {
         return this.recipeForm.get('instructions') as FormArray;
     }
 
-    addIngredient(): void {
-        const ingredient = this.fb.group({
-            title: [''],
-            note: [''],
-            unit: [''],
-            food: [''],
-            quantity: [1, [Validators.required, Validators.min(0)]],
-            disableAmount: [false]
-        });
-        this.ingredients.push(ingredient);
-    }
-
-    removeIngredient(index: number): void {
-        this.ingredients.removeAt(index);
-    }
-
-    addInstruction(): void {
-        const instruction = this.fb.group({
-            text: ['', [Validators.required]],
-            position: [this.instructions.length]
-        });
-        this.instructions.push(instruction);
-    }
-
-    removeInstruction(index: number): void {
-        this.instructions.removeAt(index);
-        // Update positions
-        this.instructions.controls.forEach((control, i) => {
-            control.patchValue({ position: i });
-        });
-    }
-
+    // Category management
     onCategoryToggle(categoryId: string): void {
         const index = this.selectedCategories.indexOf(categoryId);
         if (index > -1) {
@@ -175,6 +174,28 @@ export class RecipeCreateComponent implements OnInit, OnDestroy {
         }
     }
 
+    addNewCategory(): void {
+        if (!this.newCategory.name.trim()) {
+            this.snackBar.open('Category name is required', 'Close', { duration: 3000 });
+            return;
+        }
+
+        const category: RecipeCategory = {
+            id: Date.now().toString(), // Temporary ID
+            name: this.newCategory.name.trim(),
+            color: this.newCategory.color,
+            slug: this.newCategory.name.toLowerCase().replace(/\s+/g, '-')
+        };
+
+        this.categories.push(category);
+        this.selectedCategories.push(category.id);
+        this.newCategory = { name: '', color: '#ff9800' };
+        this.showAddCategory = false;
+
+        this.snackBar.open('Category added successfully', 'Close', { duration: 3000 });
+    }
+
+    // Tag management
     onTagToggle(tagId: string): void {
         const index = this.selectedTags.indexOf(tagId);
         if (index > -1) {
@@ -184,6 +205,28 @@ export class RecipeCreateComponent implements OnInit, OnDestroy {
         }
     }
 
+    addNewTag(): void {
+        if (!this.newTag.name.trim()) {
+            this.snackBar.open('Tag name is required', 'Close', { duration: 3000 });
+            return;
+        }
+
+        const tag: RecipeTag = {
+            id: Date.now().toString(), // Temporary ID
+            name: this.newTag.name.trim(),
+            color: this.newTag.color,
+            slug: this.newTag.name.toLowerCase().replace(/\s+/g, '-')
+        };
+
+        this.tags.push(tag);
+        this.selectedTags.push(tag.id);
+        this.newTag = { name: '', color: '#4caf50' };
+        this.showAddTag = false;
+
+        this.snackBar.open('Tag added successfully', 'Close', { duration: 3000 });
+    }
+
+    // Tool management
     onToolToggle(toolId: string): void {
         const index = this.selectedTools.indexOf(toolId);
         if (index > -1) {
@@ -193,6 +236,27 @@ export class RecipeCreateComponent implements OnInit, OnDestroy {
         }
     }
 
+    addNewTool(): void {
+        if (!this.newTool.name.trim()) {
+            this.snackBar.open('Tool name is required', 'Close', { duration: 3000 });
+            return;
+        }
+
+        const tool: RecipeTool = {
+            id: Date.now().toString(), // Temporary ID
+            name: this.newTool.name.trim(),
+            slug: this.newTool.name.toLowerCase().replace(/\s+/g, '-')
+        };
+
+        this.tools.push(tool);
+        this.selectedTools.push(tool.id);
+        this.newTool = { name: '' };
+        this.showAddTool = false;
+
+        this.snackBar.open('Tool added successfully', 'Close', { duration: 3000 });
+    }
+
+    // Food management
     onFoodToggle(foodId: string): void {
         const index = this.selectedFoods.indexOf(foodId);
         if (index > -1) {
@@ -202,49 +266,176 @@ export class RecipeCreateComponent implements OnInit, OnDestroy {
         }
     }
 
+    addNewFood(): void {
+        if (!this.newFood.name.trim()) {
+            this.snackBar.open('Food name is required', 'Close', { duration: 3000 });
+            return;
+        }
+
+        const food: RecipeFood = {
+            id: Date.now().toString(), // Temporary ID
+            name: this.newFood.name.trim(),
+            slug: this.newFood.name.toLowerCase().replace(/\s+/g, '-')
+        };
+
+        this.foods.push(food);
+        this.selectedFoods.push(food.id);
+        this.newFood = { name: '' };
+        this.showAddFood = false;
+
+        this.snackBar.open('Food added successfully', 'Close', { duration: 3000 });
+    }
+
+    // Ingredient management
+    addIngredient(): void {
+        const ingredient = this.fb.group({
+            quantity: [1, [Validators.required, Validators.min(0)]],
+            unit: [''],
+            food: ['', [Validators.required]],
+            title: [''],
+            note: [''],
+            disableAmount: [false]
+        });
+
+        this.ingredients.push(ingredient);
+    }
+
+    removeIngredient(index: number): void {
+        if (this.ingredients.length > 1) {
+            this.ingredients.removeAt(index);
+        }
+    }
+
+    duplicateIngredient(index: number): void {
+        const ingredient = this.ingredients.at(index);
+        const duplicate = this.fb.group({
+            quantity: [ingredient.get('quantity')?.value],
+            unit: [ingredient.get('unit')?.value],
+            food: [ingredient.get('food')?.value],
+            title: [ingredient.get('title')?.value],
+            note: [ingredient.get('note')?.value],
+            disableAmount: [ingredient.get('disableAmount')?.value]
+        });
+
+        this.ingredients.insert(index + 1, duplicate);
+    }
+
+    moveIngredient(index: number, direction: 'up' | 'down'): void {
+        if (direction === 'up' && index > 0) {
+            const ingredient = this.ingredients.at(index);
+            this.ingredients.removeAt(index);
+            this.ingredients.insert(index - 1, ingredient);
+        } else if (direction === 'down' && index < this.ingredients.length - 1) {
+            const ingredient = this.ingredients.at(index);
+            this.ingredients.removeAt(index);
+            this.ingredients.insert(index + 1, ingredient);
+        }
+    }
+
+    // Instruction management
+    addInstruction(): void {
+        const instruction = this.fb.group({
+            text: ['', [Validators.required, Validators.minLength(10)]]
+        });
+
+        this.instructions.push(instruction);
+    }
+
+    removeInstruction(index: number): void {
+        if (this.instructions.length > 1) {
+            this.instructions.removeAt(index);
+        }
+    }
+
+    duplicateInstruction(index: number): void {
+        const instruction = this.instructions.at(index);
+        const duplicate = this.fb.group({
+            text: [instruction.get('text')?.value]
+        });
+
+        this.instructions.insert(index + 1, duplicate);
+    }
+
+    moveInstruction(index: number, direction: 'up' | 'down'): void {
+        if (direction === 'up' && index > 0) {
+            const instruction = this.instructions.at(index);
+            this.instructions.removeAt(index);
+            this.instructions.insert(index - 1, instruction);
+        } else if (direction === 'down' && index < this.instructions.length - 1) {
+            const instruction = this.instructions.at(index);
+            this.instructions.removeAt(index);
+            this.instructions.insert(index + 1, instruction);
+        }
+    }
+
+    insertInstruction(index: number): void {
+        const instruction = this.fb.group({
+            text: ['', [Validators.required, Validators.minLength(10)]]
+        });
+
+        this.instructions.insert(index, instruction);
+    }
+
+    // Utility methods
+    getTotalTime(): number {
+        const prepTime = this.recipeForm.get('prepTime')?.value || 0;
+        const cookTime = this.recipeForm.get('cookTime')?.value || 0;
+        return prepTime + cookTime;
+    }
+
+    getFormattedTime(minutes: number): string {
+        if (minutes < 60) {
+            return `${minutes}m`;
+        }
+        const hours = Math.floor(minutes / 60);
+        const remainingMinutes = minutes % 60;
+        if (remainingMinutes === 0) {
+            return `${hours}h`;
+        }
+        return `${hours}h ${remainingMinutes}m`;
+    }
+
+    getErrorMessage(fieldName: string): string {
+        const field = this.recipeForm.get(fieldName);
+        if (field?.hasError('required')) {
+            return `${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} is required`;
+        }
+        if (field?.hasError('minlength')) {
+            return `${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} must be at least ${field.errors?.['minlength'].requiredLength} characters`;
+        }
+        if (field?.hasError('min')) {
+            return `${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} must be at least ${field.errors?.['min'].min}`;
+        }
+        return 'Invalid input';
+    }
+
+    // Form submission
     onSubmit(): void {
         if (this.recipeForm.valid) {
             this.loading = true;
 
             const recipeData = {
                 ...this.recipeForm.value,
-                totalTime: this.recipeForm.value.prepTime + this.recipeForm.value.cookTime,
-                categoryIds: this.selectedCategories,
-                tagIds: this.selectedTags,
-                toolIds: this.selectedTools,
-                foodIds: this.selectedFoods,
-                ingredients: this.ingredients.value.map((ingredient: any, index: number) => ({
-                    ...ingredient,
-                    position: index
-                })),
-                instructions: this.instructions.value.map((instruction: any, index: number) => ({
-                    ...instruction,
-                    position: index
-                }))
+                categories: this.selectedCategories,
+                tags: this.selectedTags,
+                tools: this.selectedTools,
+                foods: this.selectedFoods
             };
 
-            this.recipeService.createRecipe(recipeData).subscribe({
+            this.recipeService.createRecipe(recipeData).pipe(takeUntil(this.destroy$)).subscribe({
                 next: (recipe) => {
-                    this.snackBar.open('Recipe created successfully!', 'Close', {
-                        duration: 3000
-                    });
+                    this.snackBar.open('Recipe created successfully!', 'Close', { duration: 5000 });
                     this.router.navigate(['/recipes', recipe.id]);
                 },
                 error: (error) => {
                     console.error('Error creating recipe:', error);
-                    this.snackBar.open('Failed to create recipe. Please try again.', 'Close', {
-                        duration: 5000
-                    });
+                    this.snackBar.open('Error creating recipe. Please try again.', 'Close', { duration: 5000 });
                     this.loading = false;
                 }
             });
         } else {
             this.markFormGroupTouched();
         }
-    }
-
-    onCancel(): void {
-        this.router.navigate(['/recipes']);
     }
 
     private markFormGroupTouched(): void {
@@ -254,33 +445,7 @@ export class RecipeCreateComponent implements OnInit, OnDestroy {
         });
     }
 
-    getErrorMessage(fieldName: string): string {
-        const field = this.recipeForm.get(fieldName);
-        if (field?.hasError('required')) {
-            return `${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} is required`;
-        }
-        if (field?.hasError('minlength')) {
-            return `${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} must be at least ${field?.errors?.['minlength'].requiredLength} characters`;
-        }
-        if (field?.hasError('min')) {
-            return `${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} must be at least ${field?.errors?.['min'].min}`;
-        }
-        return '';
-    }
-
-    getTotalTime(): number {
-        const prepTime = this.recipeForm.get('prepTime')?.value || 0;
-        const cookTime = this.recipeForm.get('cookTime')?.value || 0;
-        return prepTime + cookTime;
-    }
-
-    getFormattedTime(minutes: number): string {
-        const hours = Math.floor(minutes / 60);
-        const mins = minutes % 60;
-
-        if (hours > 0) {
-            return `${hours}h ${mins}m`;
-        }
-        return `${mins}m`;
+    onCancel(): void {
+        this.router.navigate(['/recipes']);
     }
 } 

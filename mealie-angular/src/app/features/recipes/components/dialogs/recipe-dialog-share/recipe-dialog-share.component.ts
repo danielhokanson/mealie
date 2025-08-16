@@ -140,28 +140,15 @@ export class RecipeDialogShareComponent implements OnInit, OnDestroy {
 
     async refreshTokens(): Promise<void> {
         try {
-            // In a real app, you'd call the backend API
+            // TODO: Implement API call to get share tokens
             // const response = await this.recipeService.getShareTokens(this.recipeId);
-
-            // Mock data
-            this.tokens = [
-                {
-                    id: '1',
-                    recipeId: this.recipeId,
-                    expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
-                    token: 'mock-token-1',
-                    createdAt: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString()
-                },
-                {
-                    id: '2',
-                    recipeId: this.recipeId,
-                    expiresAt: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString(),
-                    token: 'mock-token-2',
-                    createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString()
-                }
-            ];
+            // this.tokens = response.data;
+            
+            // Initialize with empty array for production
+            this.tokens = [];
         } catch (error) {
             console.error('Failed to refresh tokens:', error);
+            this.tokens = [];
         }
     }
 

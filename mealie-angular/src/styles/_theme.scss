@@ -1,31 +1,40 @@
-// Custom theme variables
-$dark-background: #303030;
-$dark-background-lighter: #424242;
-$dark-text-primary: #ffffff;
-$dark-text-secondary: #e0e0e0;
-$accent-color: #ff9800;
+// Custom theme variables using CSS custom properties
+$dark-background: var(--background-dark);
+$dark-background-lighter: var(--background-lighter);
+$dark-text-primary: var(--text-primary);
+$dark-text-secondary: var(--text-secondary);
+$accent-color: var(--primary-color);
 
 // Global dark theme overrides
 .mat-mdc-menu-panel {
-  background-color: $dark-background-lighter !important;
+  background: linear-gradient(135deg, var(--background-lighter) 0%, var(--background-dark) 100%) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--border-radius) !important;
+  box-shadow: var(--shadow-heavy) !important;
+  backdrop-filter: blur(10px) !important;
 
   .mat-mdc-menu-item {
-    color: $dark-text-primary !important;
+    color: var(--text-primary) !important;
+    border-radius: var(--border-radius-small) !important;
+    margin: 4px 8px !important;
+    transition: var(--transition-smooth) !important;
 
     .mat-icon {
-      color: $dark-text-primary !important;
+      color: var(--text-secondary) !important;
+      transition: color 0.3s ease !important;
     }
 
     &:hover {
-      background-color: rgba(255, 255, 255, 0.1) !important;
+      background: rgba(255, 152, 0, 0.1) !important;
+      transform: translateX(4px) !important;
     }
 
     &.active {
-      background-color: rgba(255, 152, 0, 0.2) !important;
-      color: $accent-color !important;
+      background: rgba(255, 152, 0, 0.2) !important;
+      color: var(--primary-color) !important;
 
       .mat-icon {
-        color: $accent-color !important;
+        color: var(--primary-color) !important;
       }
     }
   }
@@ -33,36 +42,46 @@ $accent-color: #ff9800;
 
 // Sidenav styles
 .mat-sidenav {
-  background-color: $dark-background-lighter !important;
+  background: linear-gradient(180deg, var(--background-lighter) 0%, var(--background-dark) 100%) !important;
+  border-right: 1px solid var(--border-color) !important;
+  box-shadow: 4px 0 16px rgba(0, 0, 0, 0.2) !important;
 
   .mat-toolbar {
-    background-color: $dark-background-lighter !important;
-    color: $dark-text-primary !important;
+    background: linear-gradient(135deg, var(--background-lighter) 0%, var(--background-dark) 100%) !important;
+    color: var(--text-primary) !important;
+    border-bottom: 2px solid rgba(255, 152, 0, 0.3) !important;
   }
 
   .mat-nav-list {
     .mat-list-item {
-      color: $dark-text-primary !important;
+      color: var(--text-primary) !important;
+      margin: 4px 16px !important;
+      border-radius: var(--border-radius-small) !important;
+      transition: var(--transition-smooth) !important;
 
       .mat-icon {
-        color: $dark-text-primary !important;
+        color: var(--text-secondary) !important;
+        margin-right: 16px !important;
+        transition: color 0.3s ease !important;
       }
 
       &:hover {
-        background-color: rgba(255, 255, 255, 0.1) !important;
-        color: $accent-color !important;
+        background: rgba(255, 152, 0, 0.1) !important;
+        color: var(--primary-color) !important;
+        transform: translateX(4px) !important;
 
         .mat-icon {
-          color: $accent-color !important;
+          color: var(--primary-color) !important;
         }
       }
 
       &.active {
-        background-color: rgba(255, 152, 0, 0.2) !important;
-        color: $accent-color !important;
+        background: rgba(255, 152, 0, 0.2) !important;
+        color: var(--primary-color) !important;
+        border-left: 4px solid var(--primary-color) !important;
 
         .mat-icon {
-          color: $accent-color !important;
+          color: var(--primary-color) !important;
         }
       }
     }
@@ -72,24 +91,36 @@ $accent-color: #ff9800;
 // Form field styles
 .mat-mdc-form-field {
   .mat-mdc-form-field-flex {
-    background-color: $dark-background-lighter !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-radius: var(--border-radius-small) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
   }
 
   .mat-mdc-text-field-wrapper {
-    background-color: $dark-background-lighter !important;
+    background: transparent !important;
   }
 
   .mat-mdc-form-field-label {
-    color: $dark-text-secondary !important;
+    color: var(--text-secondary) !important;
+    font-weight: 500 !important;
   }
 
   .mat-mdc-input-element {
-    color: $dark-text-primary !important;
+    color: var(--text-primary) !important;
+    font-weight: 500 !important;
   }
 
   .mat-mdc-form-field-icon-prefix,
   .mat-mdc-form-field-icon-suffix {
-    color: $dark-text-secondary !important;
+    color: var(--text-secondary) !important;
+  }
+
+  &.mat-focused {
+    .mat-mdc-form-field-flex {
+      border-color: var(--primary-color) !important;
+      box-shadow: 0 0 0 2px rgba(255, 152, 0, 0.2) !important;
+    }
   }
 }
 
@@ -97,53 +128,98 @@ $accent-color: #ff9800;
 .mat-mdc-button,
 .mat-mdc-raised-button,
 .mat-mdc-outlined-button {
+  border-radius: var(--border-radius-small) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.3px !important;
+  transition: var(--transition-smooth) !important;
+
   &:not([color="primary"]):not([color="accent"]):not([color="warn"]) {
-    color: $dark-text-primary !important;
+    color: var(--text-primary) !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: blur(10px) !important;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.2) !important;
+      border-color: rgba(255, 255, 255, 0.3) !important;
+      transform: translateY(-1px) !important;
+    }
   }
 
   &.mat-primary {
-    background-color: $accent-color !important;
-    color: $dark-text-primary !important;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%) !important;
+    color: var(--text-primary) !important;
+    box-shadow: var(--shadow-medium) !important;
+
+    &:hover {
+      transform: translateY(-2px) !important;
+      box-shadow: var(--shadow-heavy) !important;
+    }
   }
 
   &:disabled {
     color: rgba(255, 255, 255, 0.3) !important;
+    background: rgba(255, 255, 255, 0.05) !important;
   }
 }
 
 // Card styles
 .mat-mdc-card {
-  background-color: $dark-background-lighter !important;
-  color: $dark-text-primary !important;
+  background: linear-gradient(135deg, var(--background-lighter) 0%, var(--background-dark) 100%) !important;
+  color: var(--text-primary) !important;
+  border-radius: var(--border-radius) !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: var(--shadow-medium) !important;
+  transition: var(--transition-smooth) !important;
+
+  &:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: var(--shadow-heavy) !important;
+  }
 
   .mat-mdc-card-title {
-    color: $dark-text-primary !important;
+    color: var(--text-primary) !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.02em !important;
   }
 
   .mat-mdc-card-subtitle {
-    color: $dark-text-secondary !important;
+    color: var(--text-secondary) !important;
+    font-weight: 400 !important;
   }
 }
 
 // Dialog styles
 .mat-mdc-dialog-container {
-  background-color: $dark-background-lighter !important;
-  color: $dark-text-primary !important;
+  background: linear-gradient(135deg, var(--background-lighter) 0%, var(--background-dark) 100%) !important;
+  color: var(--text-primary) !important;
+  border-radius: var(--border-radius) !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: var(--shadow-heavy) !important;
+  backdrop-filter: blur(10px) !important;
 }
 
 // Select styles
 .mat-mdc-select-panel {
-  background-color: $dark-background-lighter !important;
+  background: linear-gradient(135deg, var(--background-lighter) 0%, var(--background-dark) 100%) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--border-radius) !important;
+  box-shadow: var(--shadow-heavy) !important;
+  backdrop-filter: blur(10px) !important;
 
   .mat-mdc-option {
-    color: $dark-text-primary !important;
+    color: var(--text-primary) !important;
+    border-radius: var(--border-radius-small) !important;
+    margin: 2px 8px !important;
+    transition: var(--transition-smooth) !important;
 
     &:hover {
-      background-color: rgba(255, 255, 255, 0.1) !important;
+      background: rgba(255, 152, 0, 0.1) !important;
     }
 
     &.mat-selected {
-      color: $accent-color !important;
+      color: var(--primary-color) !important;
+      background: rgba(255, 152, 0, 0.2) !important;
     }
   }
 }
@@ -151,20 +227,107 @@ $accent-color: #ff9800;
 // Checkbox styles
 .mat-mdc-checkbox {
   .mdc-checkbox__background {
-    background-color: $dark-background-lighter !important;
+    background: var(--background-lighter) !important;
+    border-radius: 4px !important;
   }
 
   .mdc-checkbox__native-control:enabled:not(:checked):not(:indeterminate):not([data-indeterminate=true])~.mdc-checkbox__background {
-    border-color: $dark-text-secondary !important;
+    border-color: var(--text-secondary) !important;
   }
 
   .mdc-form-field {
-    color: $dark-text-primary !important;
+    color: var(--text-primary) !important;
+  }
+
+  &.mat-checkbox-checked {
+    .mdc-checkbox__background {
+      background: var(--primary-color) !important;
+      border-color: var(--primary-color) !important;
+    }
   }
 }
 
 // Tooltip styles
 .mat-mdc-tooltip {
-  background-color: $dark-background-lighter !important;
-  color: $dark-text-primary !important;
+  background: linear-gradient(135deg, var(--background-lighter) 0%, var(--background-dark) 100%) !important;
+  color: var(--text-primary) !important;
+  border-radius: var(--border-radius-small) !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: var(--shadow-medium) !important;
+  backdrop-filter: blur(10px) !important;
+  font-weight: 500 !important;
+}
+
+// Chip styles
+.mat-mdc-chip {
+  background: rgba(255, 152, 0, 0.2) !important;
+  border: 1px solid rgba(255, 152, 0, 0.4) !important;
+  color: var(--text-primary) !important;
+  font-weight: 500 !important;
+  border-radius: 20px !important;
+  transition: var(--transition-smooth) !important;
+
+  &:hover {
+    background: rgba(255, 152, 0, 0.3) !important;
+    border-color: rgba(255, 152, 0, 0.6) !important;
+    transform: translateY(-1px) !important;
+  }
+}
+
+// Paginator styles
+.mat-mdc-paginator {
+  background: linear-gradient(135deg, var(--background-lighter) 0%, var(--background-dark) 100%) !important;
+  color: var(--text-primary) !important;
+  border-radius: var(--border-radius) !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: var(--shadow-medium) !important;
+  backdrop-filter: blur(10px) !important;
+
+  .mat-mdc-paginator-navigation-previous,
+  .mat-mdc-paginator-navigation-next,
+  .mat-mdc-paginator-navigation-first,
+  .mat-mdc-paginator-navigation-last {
+    color: var(--text-secondary) !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: var(--border-radius-small) !important;
+    transition: var(--transition-smooth) !important;
+
+    &:hover:not(:disabled) {
+      background: rgba(255, 255, 255, 0.2) !important;
+      border-color: rgba(255, 255, 255, 0.3) !important;
+      transform: translateY(-1px) !important;
+    }
+  }
+
+  .mat-mdc-paginator-page-size-select {
+    .mat-mdc-select-value {
+      color: var(--text-primary) !important;
+    }
+  }
+}
+
+// Progress spinner styles
+.mat-mdc-progress-spinner {
+  circle {
+    stroke: var(--primary-color) !important;
+  }
+}
+
+// Divider styles
+.mat-divider {
+  border-color: var(--border-color) !important;
+  opacity: 0.6 !important;
+}
+
+// List styles
+.mat-mdc-list {
+  .mat-mdc-list-item {
+    color: var(--text-primary) !important;
+    transition: var(--transition-smooth) !important;
+
+    &:hover {
+      background: rgba(255, 152, 0, 0.1) !important;
+    }
+  }
 }

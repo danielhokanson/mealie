@@ -21,6 +21,7 @@ import { FormsModule } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 import { RecipeService } from '../../../../core/services/recipe.service';
 import { Recipe, RecipeCategory, RecipeTag, RecipeTool, RecipeFood } from '../../../../core/models/recipe.model';
+import { PaginationData } from '../../../../core/models/pagination.model';
 
 @Component({
     selector: 'app-recipe-favorites',
@@ -69,7 +70,7 @@ export class RecipeFavoritesComponent implements OnInit, OnDestroy {
 
     constructor(
         private recipeService: RecipeService,
-        private router: Router,
+        public router: Router,
         private snackBar: MatSnackBar
     ) { }
 
@@ -83,18 +84,18 @@ export class RecipeFavoritesComponent implements OnInit, OnDestroy {
         this.destroy$.complete();
     }
 
-    private loadFavoriteRecipes(): void {
+    public loadFavoriteRecipes(): void {
         this.loading = true;
         this.error = false;
 
         this.recipeService.getFavoriteRecipes().pipe(
             takeUntil(this.destroy$)
         ).subscribe({
-            next: (recipes) => {
-                this.favoriteRecipes = recipes;
+            next: (response: PaginationData<Recipe>) => {
+                this.favoriteRecipes = response.items || [];
                 this.loading = false;
             },
-            error: (error) => {
+            error: (error: any) => {
                 console.error('Error loading favorite recipes:', error);
                 this.error = true;
                 this.loading = false;

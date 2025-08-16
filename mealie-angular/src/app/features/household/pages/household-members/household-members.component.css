@@ -1,0 +1,167 @@
+.household-members-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.loading-container {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+}
+
+.content-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.invite-section {
+    background: #f5f5f5;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.invite-section h3 {
+    margin: 0 0 16px 0;
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+}
+
+.invite-form {
+    width: 100%;
+}
+
+.form-row {
+    display: flex;
+    gap: 16px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+}
+
+.form-row mat-form-field {
+    flex: 1;
+    min-width: 200px;
+}
+
+.form-row button {
+    min-width: 120px;
+}
+
+.members-section h3 {
+    margin: 0 0 16px 0;
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+}
+
+.no-members, .no-household {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+    background: #f9f9f9;
+    border-radius: 8px;
+}
+
+.member-item {
+    border-bottom: 1px solid #e0e0e0;
+    padding: 16px 0;
+}
+
+.member-item:last-child {
+    border-bottom: none;
+}
+
+.member-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 16px;
+}
+
+.member-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatar-placeholder {
+    width: 100%;
+    height: 100%;
+    background: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 500;
+    color: #666;
+}
+
+.member-info {
+    flex: 1;
+    margin-right: 16px;
+}
+
+.member-name {
+    font-weight: 500;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 4px;
+}
+
+.member-email {
+    font-size: 14px;
+    color: #666;
+}
+
+.member-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.role-chip {
+    color: white;
+    font-weight: 500;
+}
+
+.action-buttons {
+    display: flex;
+    align-items: center;
+}
+
+.danger {
+    color: #f44336;
+}
+
+.danger mat-icon {
+    color: #f44336;
+}
+
+@media (max-width: 768px) {
+    .household-members-container {
+        padding: 16px;
+    }
+    
+    .form-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .form-row mat-form-field {
+        min-width: auto;
+    }
+    
+    .form-row button {
+        min-width: auto;
+    }
+    
+    .member-actions {
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 8px;
+    }
+}
+

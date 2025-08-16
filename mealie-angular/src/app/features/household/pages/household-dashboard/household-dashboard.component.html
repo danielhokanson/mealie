@@ -151,7 +151,7 @@
             <mat-list-item *ngFor="let member of members.slice(0, 5)" class="member-item">
               <mat-icon matListItemIcon>person</mat-icon>
               <div matListItemTitle>{{ member.fullName }}</div>
-              <div matListItemLine>@{{ member.username }}</div>
+              <div matListItemLine>{{ member.username }}</div>
               <div matListItemMeta>
                 <mat-chip [style.background-color]="getRoleColor(member.role)">
                   {{ member.role }}

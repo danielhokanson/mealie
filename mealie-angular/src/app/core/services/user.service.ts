@@ -68,9 +68,19 @@ export class UserService {
         return this.api.get<User>(`/users/${id}`);
     }
 
+    /**
+     * Get user by username
+     */
+    getUserByUsername(username: string): Observable<User> {
+        return this.api.get<User>(`/users/username/${username}`);
+    }
 
-
-
+    /**
+     * Get user by email
+     */
+    getUserByEmail(email: string): Observable<User> {
+        return this.api.get<User>(`/users/email/${email}`);
+    }
 
     /**
      * Reset user settings to defaults
@@ -80,9 +90,9 @@ export class UserService {
     }
 
     /**
-     * Export user data
+     * Export current user data
      */
-    exportUserData(): Observable<Blob> {
+    exportCurrentUserData(): Observable<Blob> {
         return this.api.get<Blob>('/users/export');
     }
 
@@ -120,13 +130,11 @@ export class UserService {
         return this.api.put<{ profile: any; preferences: any }>('/users/self/settings', settings);
     }
 
-    /**
-     * Change user password
-     */
-    changePassword(currentPassword: string, newPassword: string): Observable<void> {
-        return this.api.post<void>('/users/self/change-password', {
-            currentPassword,
-            newPassword
-        });
+    deleteAccount(userId: string): Observable<void> {
+        return this.api.delete<void>(`/users/${userId}`);
+    }
+
+    exportUserData(userId: string): Observable<any> {
+        return this.api.get<any>(`/users/${userId}/export`);
     }
 }

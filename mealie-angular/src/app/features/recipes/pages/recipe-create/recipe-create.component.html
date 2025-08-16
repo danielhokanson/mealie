@@ -13,7 +13,7 @@
       <mat-card-content>
         <div class="form-row">
           <mat-form-field appearance="outline" class="form-field">
-            <mat-label>Recipe Name</mat-label>
+            <mat-label>Recipe Name*</mat-label>
             <input 
               matInput 
               formControlName="name"
@@ -31,14 +31,14 @@
               matInput 
               formControlName="description"
               placeholder="Enter recipe description"
-              rows="3">
+              rows="4">
             </textarea>
           </mat-form-field>
         </div>
 
         <div class="form-row time-inputs">
           <mat-form-field appearance="outline" class="form-field">
-            <mat-label>Prep Time (minutes)</mat-label>
+            <mat-label>Prep Time (minutes)*</mat-label>
             <input 
               matInput 
               type="number"
@@ -50,7 +50,7 @@
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="form-field">
-            <mat-label>Cook Time (minutes)</mat-label>
+            <mat-label>Cook Time (minutes)*</mat-label>
             <input 
               matInput 
               type="number"
@@ -62,7 +62,7 @@
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="form-field">
-            <mat-label>Servings</mat-label>
+            <mat-label>Servings*</mat-label>
             <input 
               matInput 
               type="number"
@@ -94,6 +94,7 @@
     <mat-card class="form-section">
       <mat-card-header>
         <mat-card-title>Categories & Tags</mat-card-title>
+        <mat-card-subtitle>Organize your recipe with categories, tags, tools, and foods</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
         <div class="categories-section">
@@ -106,6 +107,34 @@
               [style.color]="category.color">
               {{ category.name }}
             </mat-checkbox>
+          </div>
+          
+          <!-- Add New Category -->
+          <div class="add-new-item" *ngIf="!showAddCategory">
+            <button 
+              mat-stroked-button 
+              color="primary"
+              (click)="showAddCategory = true">
+              <mat-icon>add</mat-icon>
+              Add New Category
+            </button>
+          </div>
+          
+          <div class="add-new-item" *ngIf="showAddCategory">
+            <div class="add-new-form">
+              <mat-form-field appearance="outline">
+                <mat-label>Category Name</mat-label>
+                <input matInput [(ngModel)]="newCategory.name" placeholder="e.g., Desserts">
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="color-field">
+                <mat-label>Color</mat-label>
+                <input matInput type="color" [(ngModel)]="newCategory.color" value="#ff9800">
+              </mat-form-field>
+            </div>
+            <div class="add-new-actions">
+              <button mat-button (click)="showAddCategory = false">Cancel</button>
+              <button mat-raised-button color="primary" (click)="addNewCategory()">Add Category</button>
+            </div>
           </div>
         </div>
 
@@ -120,6 +149,34 @@
               {{ tag.name }}
             </mat-checkbox>
           </div>
+          
+          <!-- Add New Tag -->
+          <div class="add-new-item" *ngIf="!showAddTag">
+            <button 
+              mat-stroked-button 
+              color="primary"
+              (click)="showAddTag = true">
+              <mat-icon>add</mat-icon>
+              Add New Tag
+            </button>
+          </div>
+          
+          <div class="add-new-item" *ngIf="showAddTag">
+            <div class="add-new-form">
+              <mat-form-field appearance="outline">
+                <mat-label>Tag Name</mat-label>
+                <input matInput [(ngModel)]="newTag.name" placeholder="e.g., Quick & Easy">
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="color-field">
+                <mat-label>Color</mat-label>
+                <input matInput type="color" [(ngModel)]="newTag.color" value="#4caf50">
+              </mat-form-field>
+            </div>
+            <div class="add-new-actions">
+              <button mat-button (click)="showAddTag = false">Cancel</button>
+              <button mat-raised-button color="primary" (click)="addNewTag()">Add Tag</button>
+            </div>
+          </div>
         </div>
 
         <div class="tools-section">
@@ -132,6 +189,30 @@
               {{ tool.name }}
             </mat-checkbox>
           </div>
+          
+          <!-- Add New Tool -->
+          <div class="add-new-item" *ngIf="!showAddTool">
+            <button 
+              mat-stroked-button 
+              color="primary"
+              (click)="showAddTool = true">
+              <mat-icon>add</mat-icon>
+              Add New Tool
+            </button>
+          </div>
+          
+          <div class="add-new-item" *ngIf="showAddTool">
+            <div class="add-new-form">
+              <mat-form-field appearance="outline">
+                <mat-label>Tool Name</mat-label>
+                <input matInput [(ngModel)]="newTool.name" placeholder="e.g., Stand Mixer">
+              </mat-form-field>
+            </div>
+            <div class="add-new-actions">
+              <button mat-button (click)="showAddTool = false">Cancel</button>
+              <button mat-raised-button color="primary" (click)="addNewTool()">Add Tool</button>
+            </div>
+          </div>
         </div>
 
         <div class="foods-section">
@@ -143,6 +224,30 @@
               (change)="onFoodToggle(food.id)">
               {{ food.name }}
             </mat-checkbox>
+          </div>
+          
+          <!-- Add New Food -->
+          <div class="add-new-item" *ngIf="!showAddFood">
+            <button 
+              mat-stroked-button 
+              color="primary"
+              (click)="showAddFood = true">
+              <mat-icon>add</mat-icon>
+              Add New Food
+            </button>
+          </div>
+          
+          <div class="add-new-item" *ngIf="showAddFood">
+            <div class="add-new-form">
+              <mat-form-field appearance="outline">
+                <mat-label>Food Name</mat-label>
+                <input matInput [(ngModel)]="newFood.name" placeholder="e.g., Chicken Breast">
+              </mat-form-field>
+            </div>
+            <div class="add-new-actions">
+              <button mat-button (click)="showAddFood = false">Cancel</button>
+              <button mat-raised-button color="primary" (click)="addNewFood()">Add Food</button>
+            </div>
           </div>
         </div>
       </mat-card-content>
@@ -181,11 +286,14 @@
               </mat-form-field>
 
               <mat-form-field appearance="outline" class="food-field">
-                <mat-label>Food/Ingredient</mat-label>
+                <mat-label>Food/Ingredient*</mat-label>
                 <input 
                   matInput 
                   formControlName="food"
                   placeholder="e.g., flour, chicken">
+                <mat-error *ngIf="ingredient.get('food')?.invalid && ingredient.get('food')?.touched">
+                  Food/Ingredient is required
+                </mat-error>
               </mat-form-field>
 
               <button 
@@ -193,7 +301,8 @@
                 color="warn"
                 type="button"
                 (click)="removeIngredient(i)"
-                class="remove-button">
+                class="remove-button"
+                matTooltip="Remove ingredient">
                 <mat-icon>delete</mat-icon>
               </button>
             </div>
@@ -215,9 +324,41 @@
                   placeholder="e.g., room temperature">
               </mat-form-field>
 
-              <mat-checkbox formControlName="disableAmount">
+              <mat-checkbox formControlName="disableAmount" class="disable-amount-checkbox">
                 No amount needed
               </mat-checkbox>
+            </div>
+
+            <div class="ingredient-actions">
+              <button 
+                mat-stroked-button 
+                color="accent"
+                type="button"
+                (click)="duplicateIngredient(i)"
+                matTooltip="Duplicate ingredient">
+                <mat-icon>content_copy</mat-icon>
+                Duplicate
+              </button>
+              <button 
+                mat-stroked-button 
+                color="warn"
+                type="button"
+                (click)="moveIngredient(i, 'up')"
+                [disabled]="i === 0"
+                matTooltip="Move up">
+                <mat-icon>keyboard_arrow_up</mat-icon>
+                Up
+              </button>
+              <button 
+                mat-stroked-button 
+                color="warn"
+                type="button"
+                (click)="moveIngredient(i, 'down')"
+                [disabled]="i === ingredients.length - 1"
+                matTooltip="Move down">
+                <mat-icon>keyboard_arrow_down</mat-icon>
+                Down
+              </button>
             </div>
           </div>
 
@@ -248,23 +389,70 @@
             class="instruction-item">
             
             <div class="instruction-row">
-              <span class="step-number">{{ i + 1 }}.</span>
+              <span class="step-number">{{ i + 1 }}</span>
               <mat-form-field appearance="outline" class="instruction-field">
-                <mat-label>Instruction</mat-label>
+                <mat-label>Instruction Step {{ i + 1 }}*</mat-label>
                 <textarea 
                   matInput 
                   formControlName="text"
-                  placeholder="Enter instruction step"
-                  rows="2">
+                  placeholder="Enter detailed instruction step. You can write multiple sentences and paragraphs here."
+                  rows="4"
+                  maxlength="1000">
                 </textarea>
+                <mat-hint align="end">{{ instruction.get('text')?.value?.length || 0 }}/1000</mat-hint>
+                <mat-error *ngIf="instruction.get('text')?.invalid && instruction.get('text')?.touched">
+                  Instruction text is required
+                </mat-error>
               </mat-form-field>
               <button 
                 mat-icon-button 
                 color="warn"
                 type="button"
                 (click)="removeInstruction(i)"
-                class="remove-button">
+                class="remove-button"
+                matTooltip="Remove instruction">
                 <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+
+            <div class="instruction-actions">
+              <button 
+                mat-stroked-button 
+                color="accent"
+                type="button"
+                (click)="duplicateInstruction(i)"
+                matTooltip="Duplicate instruction">
+                <mat-icon>content_copy</mat-icon>
+                Duplicate
+              </button>
+              <button 
+                mat-stroked-button 
+                color="warn"
+                type="button"
+                (click)="moveInstruction(i, 'up')"
+                [disabled]="i === 0"
+                matTooltip="Move up">
+                <mat-icon>keyboard_arrow_up</mat-icon>
+                Up
+              </button>
+              <button 
+                mat-stroked-button 
+                color="warn"
+                type="button"
+                (click)="moveInstruction(i, 'down')"
+                [disabled]="i === instructions.length - 1"
+                matTooltip="Move down">
+                <mat-icon>keyboard_arrow_down</mat-icon>
+                Down
+              </button>
+              <button 
+                mat-stroked-button 
+                color="primary"
+                type="button"
+                (click)="insertInstruction(i)"
+                matTooltip="Insert instruction above">
+                <mat-icon>add</mat-icon>
+                Insert Above
               </button>
             </div>
           </div>

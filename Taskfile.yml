@@ -1,262 +1,230 @@
 # https://taskfile.dev
 
 version: "3"
+
 vars:
-  GREETING: Hello, World!
+  GREETING: Hello, Mealie!
+
 env:
-  DEFAULT_GROUP: Home
-  DEFAULT_HOUSEHOLD: Family
-  PRODUCTION: false
-  API_PORT: 9000
-  API_DOCS: True
-  TOKEN_TIME: 256 # hours
-  # mailplit SMTP config
-  # start dev:services to use mailpit
-  SMTP_HOST: localhost
-  SMTP_PORT: 1025
-  SMTP_FROM_NAME: MealieDev
-  SMTP_FROM_EMAIL: mealie@example.com
-  SMTP_AUTH_STRATEGY: NONE
-  BASE_URL: http://localhost:3000
-  LANG: en-US
+  # .NET API Configuration
+  ASPNETCORE_ENVIRONMENT: Development
+  ASPNETCORE_URLS: http://localhost:5000
+  ConnectionStrings__DefaultConnection: Host=localhost;Database=mealie;Username=mealie;Password=mealie_password
+  JWT__SecretKey: development-secret-key-change-in-production
+  JWT__Issuer: MealieApi
+  JWT__Audience: MealieAngular
+  JWT__ExpirationMinutes: 60
+  
+  # Angular Configuration
+  API_URL: http://localhost:5000
+  NODE_ENV: development
 
 # loads .env file if it exists
 dotenv:
   - .env
   - .dev.env
+
 tasks:
-  docs:gen:
-    desc: runs the API documentation generator
-    cmds:
-      - poetry run python dev/code-generation/gen_docs_api.py
-
-  docs:
-    desc: runs the documentation server
-    dir: docs
-    deps:
-      - docs:gen
-    cmds:
-      - poetry run python -m mkdocs serve
-
-  setup:ui:
-    desc: setup frontend dependencies
-    dir: frontend
+  # Setup tasks
+  setup:angular:
+    desc: Setup Angular dependencies
+    dir: mealie-angular
     run: once
     cmds:
-      - yarn install
+      - npm ci
     sources:
       - package.json
-      - yarn.lock
+      - package-lock.json
     generates:
       - node_modules/**
 
-  setup:py:
-    desc: setup python dependencies
+  setup:dotnet:
+    desc: Restore .NET dependencies
+    dir: MealieApi
     run: once
     cmds:
-      - poetry install --with main,dev,postgres
-      - poetry run pre-commit install
+      - dotnet restore
     sources:
-      - poetry.lock
-      - pyproject.toml
-      - .pre-commit-config.yaml
+      - MealieApi.sln
+      - src/**/*.csproj
 
   setup:
-    desc: setup all dependencies
+    desc: Setup all dependencies
     deps:
-      - setup:ui
-      - setup:py
+      - setup:angular
+      - setup:dotnet
 
-  dev:generate:
-    desc: run code generators
-    cmds:
-      - poetry run python dev/code-generation/main.py {{ .CLI_ARGS }}
-      - task: py:format
-
+  # Development tasks
   dev:services:
-    desc: starts postgres and mailpit containers
+    desc: Starts PostgreSQL and other dev services
     dir: docker
     cmds:
       - docker compose -f docker-compose.dev.yml up
 
   dev:clean:
-    desc: cleans up dev environment !! removes all data files !!
-    vars:
-      DEV_DATA: ""
+    desc: Cleans up development environment
     cmds:
-      - rm -r ./dev/data/recipes/
-      - rm -r ./dev/data/users/
-      - rm -f ./dev/data/mealie*.db
-      - rm -f ./dev/data/mealie.log
-      - rm -f ./dev/data/.secret
+      - rm -rf mealie-angular/dist
+      - rm -rf mealie-angular/.angular
+      - rm -rf MealieApi/src/*/bin
+      - rm -rf MealieApi/src/*/obj
+      - rm -f dev/data/*.db
+      - rm -f dev/data/*.log
 
-  py:mypy:
-    desc: runs python type checking
-    cmds:
-      - poetry run mypy mealie
-
-  py:test:
-    desc: runs python tests (support args after '--')
-    cmds:
-      - poetry run pytest {{ .CLI_ARGS }}
-
-  py:format:
-    desc: runs python code formatter
-    cmds:
-      - poetry run ruff format .
-
-  py:lint:
-    desc: runs python linter
-    cmds:
-      - poetry run ruff check mealie
-
-  py:check:
-    desc: runs all linters, type checkers, and formatters
+  # Angular tasks
+  angular:dev:
+    desc: Runs Angular development server
+    dir: mealie-angular
     deps:
-      - py:format
-      - py:lint
-      - py:mypy
-      - py:test
-
-  py:coverage:
-    desc: runs python coverage and generates html report
+      - setup:angular
     cmds:
-      - poetry run pytest
-      - poetry run coverage report -m
-      - poetry run coveragepy-lcov
-      - poetry run coverage html
-      - open htmlcov/index.html
+      - npm run start
 
-  py:package:copy-frontend:
-    desc: copy the frontend files into the Python package
-    internal: true
+  angular:build:
+    desc: Builds Angular for production
+    dir: mealie-angular
     deps:
-      - ui:generate
+      - setup:angular
     cmds:
-      - rm -rf mealie/frontend
-      - cp -a frontend/dist mealie/frontend
+      - npm run build -- --configuration production
     sources:
-      - frontend/dist/**
+      - src/**
+      - angular.json
+      - tsconfig*.json
     generates:
-      - mealie/frontend/**
+      - dist/**
 
-  py:package:generate-requirements:
-    desc: Generate requirements file to pin all packages, effectively a "pip freeze" before installation begins
-    internal: true
+  angular:test:
+    desc: Runs Angular tests
+    dir: mealie-angular
+    deps:
+      - setup:angular
     cmds:
-      - poetry export -n --only=main --extras=pgsql --output=dist/requirements.txt
-      # Include mealie in the requirements, hashing the package that was just built to ensure it's the one installed
-      - echo "mealie[pgsql]=={{.MEALIE_VERSION}} \\" >> dist/requirements.txt
-      - poetry run pip hash dist/mealie-{{.MEALIE_VERSION}}-py3-none-any.whl | tail -n1 | tr -d '\n' >> dist/requirements.txt
-      - echo " \\" >> dist/requirements.txt
-      - poetry run pip hash dist/mealie-{{.MEALIE_VERSION}}.tar.gz | tail -n1 >> dist/requirements.txt
-    vars:
-      MEALIE_VERSION:
-         sh: poetry version --short
+      - npm run test -- --watch=false --browsers=ChromeHeadless
+
+  angular:lint:
+    desc: Runs Angular linter
+    dir: mealie-angular
+    deps:
+      - setup:angular
+    cmds:
+      - npm run lint
+
+  angular:check:
+    desc: Runs all Angular checks
+    deps:
+      - angular:lint
+      - angular:test
+
+  # .NET tasks
+  dotnet:dev:
+    desc: Runs .NET API in development mode
+    dir: MealieApi
+    deps:
+      - setup:dotnet
+    cmds:
+      - dotnet watch run --project src/MealieApi.WebApi
+
+  dotnet:build:
+    desc: Builds .NET API for production
+    dir: MealieApi
+    deps:
+      - setup:dotnet
+    cmds:
+      - dotnet build -c Release
     sources:
-      - poetry.lock
-      - pyproject.toml
-      - dist/mealie-*.whl
-      - dist/mealie-*.tar.gz
+      - src/**/*.cs
+      - src/**/*.csproj
     generates:
-      - dist/requirements.txt
+      - src/*/bin/Release/**
+      - src/*/obj/Release/**
 
-  py:package:deps-parallel:
-    desc: Run py:package dependencies in parallel
-    internal: true
+  dotnet:test:
+    desc: Runs .NET tests
+    dir: MealieApi
     deps:
-      - setup:py
-      - py:package:copy-frontend
-
-  py:package:deps:
-    desc: Dependencies of py:package, skippable by setting SKIP_PACKAGE_DEPS=true
-    internal: true
+      - setup:dotnet
     cmds:
-      - task: py:package:deps-parallel
-    status:
-      - '{{ .SKIP_PACKAGE_DEPS | default "false"}}'
+      - dotnet test
 
-  py:package:
-    desc: builds Python packages (sdist and wheel) in top-level dist directory
+  dotnet:format:
+    desc: Formats .NET code
+    dir: MealieApi
+    cmds:
+      - dotnet format
+
+  dotnet:check:
+    desc: Runs all .NET checks
     deps:
-      - py:package:deps
-    cmds:
-      - poetry build -n --output=dist
-      - task: py:package:generate-requirements
+      - dotnet:format
+      - dotnet:test
 
-  py:
-    desc: runs the backend server
+  dotnet:ef:migrate:
+    desc: Creates a new Entity Framework migration
+    dir: MealieApi
     cmds:
-      - poetry run python mealie/app.py
+      - dotnet ef migrations add {{.CLI_ARGS}} --project src/MealieApi.Infrastructure --startup-project src/MealieApi.WebApi
 
-  py:postgres:
-    desc: runs the backend server configured for containerized postgres
-    env:
-      DB_ENGINE: postgres
-      POSTGRES_USER: mealie
-      POSTGRES_PASSWORD: mealie
-      POSTGRES_SERVER: localhost
-      POSTGRES_PORT: 5432
-      POSTGRES_DB: mealie
+  dotnet:ef:update:
+    desc: Updates database with latest migrations
+    dir: MealieApi
     cmds:
-      - poetry run python mealie/app.py
+      - dotnet ef database update --project src/MealieApi.Infrastructure --startup-project src/MealieApi.WebApi
 
-  py:migrate:
-    desc: generates a new database migration file e.g. task py:migrate -- "add new column"
-    cmds:
-      - poetry run alembic --config mealie/alembic/alembic.ini revision --autogenerate -m "{{ .CLI_ARGS }}"
-      - task: py:format
-
-  ui:build:
-    desc: builds the frontend in frontend/dist
-    dir: frontend
-    cmds:
-      - yarn build
-
-  ui:generate:
-    desc: generates a static version of the frontend in frontend/dist
-    dir: frontend
+  # Combined tasks
+  dev:
+    desc: Runs both Angular and .NET in development mode
     deps:
-      - setup:ui
+      - setup
     cmds:
-      - yarn generate
+      - task: dotnet:dev
+      - task: angular:dev
 
-  ui:lint:
-    desc: runs the frontend linter
-    dir: frontend
-    cmds:
-      - yarn lint
-
-  ui:test:
-    desc: runs the frontend tests
-    dir: frontend
-    cmds:
-      - yarn test
-
-  ui:check:
-    desc: runs all frontend checks
+  build:
+    desc: Builds both Angular and .NET for production
     deps:
-      - ui:lint
-      - ui:test
+      - angular:build
+      - dotnet:build
 
-  ui:
-    desc: runs the frontend server
-    dir: frontend
-    cmds:
-      - yarn run dev --no-fork
-
-  docker:build-from-package:
-    desc: Builds the Docker image from the existing Python package in dist/
+  test:
+    desc: Runs all tests
     deps:
-       - py:package
-    cmds:
-       - docker build --tag mealie:dev --file docker/Dockerfile --build-arg COMMIT={{.GIT_COMMIT}} --build-context packages=dist .
-    vars:
-      GIT_COMMIT:
-        sh: git rev-parse HEAD
+      - angular:test
+      - dotnet:test
 
-  docker:prod:
-    desc: builds and runs the production docker image locally
+  check:
+    desc: Runs all checks
+    deps:
+      - angular:check
+      - dotnet:check
+
+  # Docker tasks
+  docker:build:
+    desc: Builds Docker image for production
+    cmds:
+      - docker build -t mealie:latest -f docker/Dockerfile .
+    sources:
+      - mealie-angular/**
+      - MealieApi/**
+      - docker/Dockerfile
+
+  docker:run:
+    desc: Runs production Docker container
     dir: docker
     cmds:
-      - docker compose -f docker-compose.yml -p mealie up -d --build
+      - docker compose up -d
+
+  docker:prod:
+    desc: Builds and runs production Docker image
+    deps:
+      - docker:build
+    cmds:
+      - task: docker:run
+
+  # Documentation tasks
+  docs:
+    desc: Serves documentation
+    dir: docs
+    cmds:
+      - echo "Documentation server would start here"
+      - echo "Please ensure docs are updated for Angular/.NET architecture"

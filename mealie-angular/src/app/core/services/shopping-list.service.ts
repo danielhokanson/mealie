@@ -29,6 +29,20 @@ export class ShoppingListService {
     }
 
     /**
+     * Get shopping list by ID (alias for getShoppingListById)
+     */
+    getShoppingList(id: string): Observable<ShoppingList> {
+        return this.getShoppingListById(id);
+    }
+
+    /**
+     * Get all shopping lists (alias for getAllShoppingLists)
+     */
+    getShoppingLists(): Observable<PaginationData<ShoppingList>> {
+        return this.getAllShoppingLists();
+    }
+
+    /**
      * Create a new shopping list
      */
     createShoppingList(shoppingList: Partial<ShoppingList>): Observable<ShoppingList> {
@@ -54,6 +68,13 @@ export class ShoppingListService {
      */
     addItemToShoppingList(listId: string, item: Partial<ShoppingListItem>): Observable<ShoppingListItem> {
         return this.api.post<ShoppingListItem>(`/shopping-lists/${listId}/items`, item);
+    }
+
+    /**
+     * Create shopping list item (alias for addItemToShoppingList)
+     */
+    createShoppingListItem(listId: string, item: Partial<ShoppingListItem>): Observable<ShoppingListItem> {
+        return this.addItemToShoppingList(listId, item);
     }
 
     /**

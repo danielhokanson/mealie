@@ -272,80 +272,77 @@ export class AdminSiteSettingsComponent implements OnInit, OnDestroy {
                 next: (settings) => {
                     this.originalSettings = settings;
                     this.settingsForm.patchValue(settings);
-                    this.hasUnsavedChanges = false;
+                    this.hasChanges = false;
                     this.loading = false;
                 },
                 error: (error) => {
                     console.error('Error loading settings:', error);
-                    this.snackBar.open('Error loading settings', 'Close', { duration: 3000 });
+                    this.snackBar.open('Failed to load settings. Please try again.', 'Close', { duration: 5000 });
                     this.loading = false;
-                    // Fallback to sample data for development
-                    setTimeout(() => {
-                        this.originalSettings = {
-                            general: {
-                                siteName: 'Mealie',
-                                siteDescription: 'A recipe management application',
-                                siteUrl: 'https://mealie.example.com',
-                                adminEmail: 'admin@example.com',
-                                timezone: 'UTC',
-                                language: 'en',
-                                dateFormat: 'MM/DD/YYYY',
-                                timeFormat: '12'
-                            },
-                            features: {
-                                enableRegistration: true,
-                                enablePublicRecipes: true,
-                                enableComments: true,
-                                enableRatings: true,
-                                enableSharing: true,
-                                enablePrinting: true,
-                                enableExport: true,
-                                enableImport: true,
-                                enableBackups: true,
-                                enableNotifications: true
-                            },
-                            security: {
-                                requireEmailVerification: true,
-                                requireAdminApproval: false,
-                                maxLoginAttempts: 5,
-                                sessionTimeout: 30,
-                                passwordMinLength: 8,
-                                enableTwoFactor: false,
-                                enableApiKeys: true
-                            },
-                            email: {
-                                smtpHost: 'smtp.gmail.com',
-                                smtpPort: 587,
-                                smtpUsername: 'noreply@example.com',
-                                smtpPassword: '',
-                                smtpUseTls: true,
-                                fromEmail: 'noreply@example.com',
-                                fromName: 'Mealie',
-                                enableEmailNotifications: true
-                            },
-                            storage: {
-                                maxFileSize: 10,
-                                allowedFileTypes: this.allowedFileTypes,
-                                storageProvider: 'local',
-                                s3Bucket: '',
-                                s3Region: '',
-                                s3AccessKey: '',
-                                s3SecretKey: ''
-                            },
-                            appearance: {
-                                theme: 'light',
-                                primaryColor: '#1976d2',
-                                accentColor: '#ff4081',
-                                enableDarkMode: false,
-                                logoUrl: '',
-                                faviconUrl: '',
-                                customCss: ''
-                            }
-                        };
-
-                        this.settingsForm.patchValue(this.originalSettings);
-                        this.loading = false;
-                    }, 500);
+                    // Initialize with default settings structure to prevent UI errors
+                    this.originalSettings = {
+                        general: {
+                            siteName: '',
+                            siteDescription: '',
+                            siteUrl: '',
+                            adminEmail: '',
+                            timezone: 'UTC',
+                            language: 'en',
+                            dateFormat: 'MM/DD/YYYY',
+                            timeFormat: '12h'
+                        },
+                        features: {
+                            enableRegistration: false,
+                            enablePublicRecipes: false,
+                            enableComments: false,
+                            enableRatings: false,
+                            enableSharing: false,
+                            enablePrinting: false,
+                            enableExport: false,
+                            enableImport: false,
+                            enableBackups: false,
+                            enableNotifications: false
+                        },
+                        email: {
+                            smtpHost: '',
+                            smtpPort: 587,
+                            smtpUsername: '',
+                            smtpPassword: '',
+                            smtpUseTls: true,
+                            fromEmail: '',
+                            fromName: '',
+                            enableEmailNotifications: false
+                        },
+                        security: {
+                            requireEmailVerification: false,
+                            requireAdminApproval: false,
+                            maxLoginAttempts: 5,
+                            sessionTimeout: 60,
+                            passwordMinLength: 8,
+                            enableTwoFactor: false,
+                            enableApiKeys: false
+                        },
+                        appearance: {
+                            theme: 'light',
+                            primaryColor: '#1976d2',
+                            accentColor: '#ff4081',
+                            enableDarkMode: false,
+                            logoUrl: '',
+                            faviconUrl: '',
+                            customCss: ''
+                        },
+                        storage: {
+                            maxFileSize: 10485760,
+                            allowedFileTypes: [],
+                            storageProvider: 'local',
+                            s3Bucket: '',
+                            s3Region: '',
+                            s3AccessKey: '',
+                            s3SecretKey: ''
+                        }
+                    } as SiteSettings;
+                    this.settingsForm.patchValue(this.originalSettings);
+                    this.initializeForm();
                 }
             });
     }
@@ -360,7 +357,7 @@ export class AdminSiteSettingsComponent implements OnInit, OnDestroy {
                 .subscribe({
                     next: (updatedSettings) => {
                         this.originalSettings = updatedSettings;
-                        this.hasUnsavedChanges = false;
+                        this.hasChanges = false;
                         this.saving = false;
                         this.snackBar.open('Settings saved successfully', 'Close', { duration: 3000 });
                     },

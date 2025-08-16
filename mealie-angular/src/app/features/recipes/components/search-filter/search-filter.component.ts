@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatRadioModule } from '@angular/material/radio';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 export interface FilterItem {
@@ -28,7 +29,8 @@ export interface FilterItem {
         MatButtonModule,
         MatIconModule,
         MatMenuModule,
-        MatChipsModule
+        MatChipsModule,
+        MatRadioModule
     ],
     providers: [
         {

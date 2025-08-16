@@ -11,7 +11,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
@@ -112,7 +112,8 @@ export class AdminMaintenanceComponent implements OnInit, OnDestroy {
     constructor(
         private fb: FormBuilder,
         private snackBar: MatSnackBar,
-        private adminService: AdminService
+        private adminService: AdminService,
+        private dialog: MatDialog
     ) { }
 
     ngOnInit(): void {
@@ -126,119 +127,57 @@ export class AdminMaintenanceComponent implements OnInit, OnDestroy {
     }
 
     private loadSystemHealth(): void {
-        this.loading = true;
-
-        this.adminService.getSystemHealth()
-            .pipe(takeUntil(this.destroy$))
-            .subscribe({
-                next: (health) => {
-                    this.systemHealth = health;
-                    this.loading = false;
-                },
-                error: (error) => {
-                    console.error('Error loading system health:', error);
-                    this.loading = false;
-                }
-            });
-
+        this.adminService.getSystemHealth().subscribe({
+            next: (health) => {
+                this.systemHealth = health;
+            },
+            error: (error) => {
+                console.error('Error loading system health:', error);
+                // Set default values on error
+                this.systemHealth = {
+                    database: {
+                        status: 'error',
+                        size: 0,
+                        connections: 0,
+                        performance: 0
+                    },
+                    storage: {
+                        status: 'error',
+                        used: 0,
+                        total: 0,
+                        performance: 0
+                    },
+                    memory: {
+                        status: 'error',
+                        used: 0,
+                        total: 0,
+                        performance: 0
+                    },
+                    cpu: {
+                        status: 'error',
+                        usage: 0,
+                        performance: 0
+                    }
+                };
+            }
+        });
     }
 
     private loadMaintenanceTasks(): void {
-        this.loading = true;
-
-        this.adminService.getMaintenanceTasks()
-            .pipe(takeUntil(this.destroy$))
-            .subscribe({
-                next: (tasks) => {
-                    this.maintenanceTasks = tasks;
-                    this.loading = false;
-                },
-                error: (error) => {
-                    console.error('Error loading maintenance tasks:', error);
-                    this.maintenanceTasks = [];
-                    this.loading = false;
-                }
-            });
-        /*
-        setTimeout(() => {
-            this.maintenanceTasks = [
-                {
-                    id: '1',
-                    name: 'Database Cleanup',
-                    description: 'Remove orphaned records and optimize database performance',
-                    type: 'cleanup',
-                    status: 'completed',
-                    progress: 100,
-                    estimatedTime: 300,
-                    lastRun: new Date('2024-01-15T10:30:00'),
-                    nextRun: new Date('2024-01-22T10:30:00'),
-                    canRun: true,
-                    requiresConfirmation: false
-                },
-                {
-                    id: '2',
-                    name: 'Storage Optimization',
-                    description: 'Compress images and remove unused files',
-                    type: 'optimization',
-                    status: 'pending',
-                    progress: 0,
-                    estimatedTime: 600,
-                    lastRun: new Date('2024-01-14T15:45:00'),
-                    nextRun: new Date('2024-01-21T15:45:00'),
-                    canRun: true,
-                    requiresConfirmation: true
-                },
-                {
-                    id: '3',
-                    name: 'System Update Check',
-                    description: 'Check for available system updates',
-                    type: 'update',
-                    status: 'completed',
-                    progress: 100,
-                    estimatedTime: 60,
-                    lastRun: new Date('2024-01-15T08:00:00'),
-                    nextRun: new Date('2024-01-16T08:00:00'),
-                    canRun: true,
-                    requiresConfirmation: false
-                },
-                {
-                    id: '4',
-                    name: 'Index Rebuild',
-                    description: 'Rebuild database indexes for better performance',
-                    type: 'optimization',
-                    status: 'pending',
-                    progress: 0,
-                    estimatedTime: 900,
-                    lastRun: new Date('2024-01-13T02:00:00'),
-                    nextRun: new Date('2024-01-20T02:00:00'),
-                    canRun: true,
-                    requiresConfirmation: true
-                },
-                {
-                    id: '5',
-                    name: 'Log Cleanup',
-                    description: 'Remove old log files and temporary data',
-                    type: 'cleanup',
-                    status: 'failed',
-                    progress: 0,
-                    estimatedTime: 120,
-                    lastRun: new Date('2024-01-15T12:00:00'),
-                    nextRun: new Date('2024-01-16T12:00:00'),
-                    canRun: true,
-                    requiresConfirmation: false
-                }
-            ];
-            this.loading = false;
-        }, 500);
+        this.adminService.getMaintenanceTasks().subscribe({
+            next: (tasks) => {
+                this.maintenanceTasks = tasks;
+            },
+            error: (error) => {
+                console.error('Error loading maintenance tasks:', error);
+                this.maintenanceTasks = [];
+            }
+        });
     }
 
     onRunTask(task: MaintenanceTask): void {
-        if (task.requiresConfirmation) {
-            this.selectedTask = task;
-            this.showConfirmDialog = true;
-        } else {
-            this.executeTask(task);
-        }
+        this.selectedTask = task;
+        this.showConfirmDialog = true;
     }
 
     onConfirmTask(): void {
@@ -257,60 +196,69 @@ export class AdminMaintenanceComponent implements OnInit, OnDestroy {
     private executeTask(task: MaintenanceTask): void {
         this.runningTask = task;
         this.taskProgress = 0;
-        this.loading = true;
-
-        // Update task status
-        const taskIndex = this.maintenanceTasks.findIndex(t => t.id === task.id);
-        if (taskIndex !== -1) {
-            this.maintenanceTasks[taskIndex].status = 'running';
-        }
+        task.status = 'running';
 
         // Simulate task execution
         const interval = setInterval(() => {
-            this.taskProgress += 5;
+            this.taskProgress += Math.random() * 20;
             if (this.taskProgress >= 100) {
-                clearInterval(interval);
-                this.loading = false;
-                this.taskProgress = 0;
-
-                // Update task status
-                if (taskIndex !== -1) {
-                    this.maintenanceTasks[taskIndex].status = 'completed';
-                    this.maintenanceTasks[taskIndex].progress = 100;
-                    this.maintenanceTasks[taskIndex].lastRun = new Date();
-                }
-
+                this.taskProgress = 100;
+                task.status = 'completed';
+                task.progress = 100;
                 this.runningTask = null;
-                this.snackBar.open(`${task.name} completed successfully`, 'Close', { duration: 3000 });
+                clearInterval(interval);
+                this.snackBar.open(`Task "${task.name}" completed successfully`, 'Close', { duration: 3000 });
             }
-        }, task.estimatedTime * 10); // Simulate progress based on estimated time
+        }, 1000);
     }
 
     onScheduleTask(task: MaintenanceTask): void {
-        // TODO: Implement task scheduling
-        this.snackBar.open(`${task.name} scheduled for next run`, 'Close', { duration: 3000 });
+        const schedule = prompt('Enter cron expression for scheduling (e.g., "0 2 * * *" for daily at 2 AM):');
+        if (schedule) {
+            this.adminService.runMaintenanceTask(task.id, { schedule }).subscribe({
+                next: () => {
+                    this.snackBar.open(`Task "${task.name}" scheduled successfully`, 'Close', { duration: 3000 });
+                    this.loadMaintenanceTasks();
+                },
+                error: (error) => {
+                    console.error('Error scheduling task:', error);
+                    this.snackBar.open(`Failed to schedule task "${task.name}"`, 'Close', { duration: 3000 });
+                }
+            });
+        }
     }
 
     onViewTaskDetails(task: MaintenanceTask): void {
-        // TODO: Implement task details view
-        this.snackBar.open(`Viewing details for ${task.name}`, 'Close', { duration: 2000 });
+        // For now, show task details in an alert
+        const details = `
+Task: ${task.name}
+Description: ${task.description}
+Type: ${task.type}
+Status: ${task.status}
+Progress: ${task.progress}%
+Estimated Time: ${task.estimatedTime} seconds
+Last Run: ${task.lastRun ? new Date(task.lastRun).toLocaleString() : 'Never'}
+        `;
+        alert(details);
     }
 
     onEmergencyMaintenance(): void {
-        if (confirm('Are you sure you want to run emergency maintenance? This may temporarily affect system performance.')) {
-            this.loading = true;
-
-            // TODO: Implement emergency maintenance
-            setTimeout(() => {
-                this.loading = false;
-                this.snackBar.open('Emergency maintenance completed', 'Close', { duration: 3000 });
-            }, 2000);
-        }
+        this.showConfirmDialog = true;
+        this.selectedTask = {
+            id: 'emergency',
+            name: 'Emergency Maintenance',
+            description: 'Perform emergency system maintenance',
+            type: 'repair',
+            status: 'pending',
+            progress: 0,
+            estimatedTime: 300,
+            canRun: true,
+            requiresConfirmation: true
+        } as MaintenanceTask;
     }
 
     onRefreshHealth(): void {
         this.loadSystemHealth();
-        this.snackBar.open('System health refreshed', 'Close', { duration: 2000 });
     }
 
     getHealthStatusColor(status: string | undefined): string {
@@ -469,4 +417,5 @@ export class AdminMaintenanceComponent implements OnInit, OnDestroy {
             return 'warning';
         }
     }
-} 
+}
+

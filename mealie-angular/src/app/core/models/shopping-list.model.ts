@@ -4,6 +4,7 @@ export interface ShoppingList {
     description?: string;
     groupId: string;
     householdId?: string;
+    isActive: boolean;
     createdAt: Date;
     updatedAt: Date;
     items: ShoppingListItem[];
@@ -19,6 +20,7 @@ export interface ShoppingListItem {
     checked: boolean;
     shoppingListId: string;
     labelId?: string;
+    labels: MultiPurposeLabel[];
     createdAt: Date;
     updatedAt: Date;
 }
